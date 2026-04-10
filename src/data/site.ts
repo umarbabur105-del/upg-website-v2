@@ -9,6 +9,7 @@ export const siteConfig = {
     { label: "Products", href: "/#products" },
     { label: "Industries", href: "/#industries" },
     { label: "About", href: "/about" },
+    { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
   ],
@@ -17,22 +18,22 @@ export const siteConfig = {
     {
       stat: "24hr",
       title: "Quote Turnaround",
-      description: "Standard quote requests targeted within 24 business hours",
+      description: "Targeted quote turnaround",
     },
     {
       stat: "100+",
       title: "Unit MOQ",
-      description: "Low minimum order quantities across all product lines",
+      description: "Minimum order quantity",
+    },
+    {
+      stat: "5",
+      title: "Product Families",
+      description: "Product families quoted",
     },
     {
       stat: "US & CA",
-      title: "Delivery",
-      description: "Landed delivery with DDP pricing available",
-    },
-    {
-      stat: "Free",
-      title: "Design Support",
-      description: "Artwork guidance and dielines included",
+      title: "Delivery Coverage",
+      description: "Delivery coverage",
     },
   ],
   industries: [
@@ -72,9 +73,15 @@ export const siteConfig = {
     },
     {
       step: 3,
-      title: "Approve & Produce",
+      title: "Review & Approve",
       description:
-        "Confirm artwork, approve proofs, and we manage production through to landed delivery.",
+        "Review your quote, confirm dimensions and artwork. We send a pre-production proof for sign-off before production begins.",
+    },
+    {
+      step: 4,
+      title: "Production & Delivery",
+      description:
+        "We manage production through to landed delivery. You get tracking updates and a final quality check before shipment.",
     },
   ],
   whyUpg: [

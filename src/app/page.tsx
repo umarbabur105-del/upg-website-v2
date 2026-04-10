@@ -14,24 +14,23 @@ export default function HomePage() {
       {/* 1. Hero */}
       <HeroSection />
 
-      {/* 2. Trust strip */}
-      <Section variant="cream">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {siteConfig.trustStrip.map((item) => (
-            <div key={item.title} className="text-center lg:text-left">
-              <span className="font-serif text-3xl font-bold text-gold">
-                {item.stat}
-              </span>
-              <h3 className="mt-1 font-sans text-sm font-semibold uppercase tracking-wide text-charcoal">
-                {item.title}
-              </h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-charcoal/60">
-                {item.description}
-              </p>
-            </div>
-          ))}
+      {/* 2. Stats strip */}
+      <section className="border-y border-gold/20 bg-cream px-6 py-10 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+            {siteConfig.trustStrip.map((item) => (
+              <div key={item.title} className="text-center">
+                <span className="font-serif text-4xl font-bold text-gold">
+                  {item.stat}
+                </span>
+                <p className="mt-1.5 text-xs font-medium uppercase tracking-widest text-charcoal/60">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* 3. Products grid */}
       <Section variant="surface" id="products">
@@ -54,7 +53,7 @@ export default function HomePage() {
           From first request to landed delivery — a clear path with no
           surprises.
         </SectionSubheading>
-        <div className="mt-16 grid gap-12 md:grid-cols-3">
+        <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {siteConfig.howItWorks.map((item) => (
             <div key={item.step}>
               <span className="font-serif text-5xl font-bold text-gold">

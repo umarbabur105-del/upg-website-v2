@@ -14,10 +14,13 @@ export interface Product {
   artworkRequirements: string;
   screeningNote: string;
   quoteCta: string;
+  /** Optional: path to a real product photo in /public. When set, shown instead of SVG illustration. */
+  photoSrc?: string;
 }
 
 export const products: Product[] = [
   {
+    // TODO: Replace with real product photo when available — photoSrc: "/images/products/corrugated-mailer-box.jpg"
     slug: "custom-mailer-boxes",
     name: "Corrugated Mailer Box",
     family: "Boxes",
@@ -45,6 +48,7 @@ export const products: Product[] = [
     quoteCta: "Get a quote for corrugated mailers",
   },
   {
+    // TODO: Replace with real product photo when available — photoSrc: "/images/products/magnetic-rigid-box.jpg"
     slug: "custom-rigid-boxes",
     name: "Magnetic Closure Rigid Box",
     family: "Boxes",
@@ -71,6 +75,7 @@ export const products: Product[] = [
     quoteCta: "Get a quote for magnetic rigid boxes",
   },
   {
+    // TODO: Replace with real product photo when available — photoSrc: "/images/products/standup-mylar-pouch.jpg"
     slug: "custom-mylar-bags",
     name: "Stand Up Mylar Pouch",
     family: "Mylar Bags",
@@ -98,6 +103,7 @@ export const products: Product[] = [
     quoteCta: "Get a quote for stand-up mylar pouches",
   },
   {
+    // TODO: Replace with real product photo when available — photoSrc: "/images/products/folding-carton.jpg"
     slug: "custom-folding-cartons",
     name: "Reverse Tuck End Folding Carton",
     family: "Boxes",
@@ -124,6 +130,7 @@ export const products: Product[] = [
     quoteCta: "Get a quote for folding cartons",
   },
   {
+    // TODO: Replace with real product photo when available — photoSrc: "/images/products/single-wall-paper-cup.jpg"
     slug: "custom-coffee-cups",
     name: "Single Wall Paper Cup",
     family: "Paper Cups",

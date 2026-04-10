@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Product } from "@/data/products";
 import { getRelatedProducts } from "@/data/products";
 import { Section, SectionHeading } from "@/components/section";
@@ -38,10 +39,23 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                 </Link>
               </div>
             </div>
-            {/* Product illustration */}
-            <div className="flex h-80 items-center justify-center rounded-sm bg-stone-50 p-8 lg:h-[440px]">
-              <ProductIllustration slug={product.slug} />
-            </div>
+            {/* Product visual — photo if available, SVG illustration fallback */}
+            {product.photoSrc ? (
+              <div className="relative h-80 overflow-hidden rounded-sm shadow-md lg:h-[440px]">
+                <Image
+                  src={product.photoSrc}
+                  alt={product.name}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            ) : (
+              <div className="flex h-80 items-center justify-center rounded-sm bg-stone-50 p-8 lg:h-[440px]">
+                <ProductIllustration slug={product.slug} />
+              </div>
+            )}
           </div>
         </div>
       </section>
