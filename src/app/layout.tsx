@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { AnnouncementBar } from "@/components/layout/announcement-bar";
+import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -19,12 +21,33 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://universalpackaginggroup.com"),
   title: {
     default: "Universal Packaging Group | Custom Packaging for Brands",
     template: "%s | UPG",
   },
   description:
     "Custom boxes, mylar bags, and paper cups for brands in the United States and Canada. Quote-led pricing, design support, and reliable production.",
+  openGraph: {
+    type: "website",
+    siteName: "Universal Packaging Group",
+    title: "Universal Packaging Group | Custom Packaging for Brands",
+    description:
+      "Custom boxes, mylar bags, and paper cups for brands in the United States and Canada. Quote-led pricing, design support, and reliable production.",
+    url: "https://universalpackaginggroup.com",
+  },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Universal Packaging Group",
+  alternateName: "UPG",
+  url: "https://universalpackaginggroup.com",
+  email: "quotes@universalpackaginggroup.com",
+  description:
+    "Custom boxes, mylar bags, and paper cups for brands in the United States and Canada.",
+  areaServed: ["US", "CA"],
 };
 
 export default function RootLayout({
@@ -34,12 +57,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </head>
       <body
         className={`${cormorant.variable} ${dmSans.variable} font-sans antialiased`}
       >
+        <AnnouncementBar />
         <Header />
         <main>{children}</main>
         <Footer />
+        <MobileCtaBar />
       </body>
     </html>
   );

@@ -8,11 +8,36 @@ export const metadata: Metadata = {
   title: "FAQ",
   description:
     "Frequently asked questions about UPG custom packaging — MOQs, quoting, design support, and more.",
+  alternates: { canonical: "https://universalpackaginggroup.com/faq" },
+  openGraph: {
+    type: "website",
+    title: "FAQ | UPG",
+    description:
+      "Frequently asked questions about UPG custom packaging — MOQs, quoting, design support, and more.",
+    url: "https://universalpackaginggroup.com/faq",
+  },
 };
 
 export default function FaqPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {/* Hero */}
       <section className="bg-olive px-6 pt-32 pb-20 lg:px-8 lg:pb-28">
         <div className="mx-auto max-w-3xl">

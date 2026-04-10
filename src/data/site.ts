@@ -5,9 +5,9 @@ export const siteConfig = {
     "Custom boxes, mylar bags, and paper cups for brands in the United States and Canada.",
   url: "https://universalpackaginggroup.com",
   email: "quotes@universalpackaginggroup.com",
-  phone: "+1 (888) 000-0000",
   navigation: [
     { label: "Products", href: "/#products" },
+    { label: "Industries", href: "/#industries" },
     { label: "About", href: "/about" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
@@ -15,20 +15,24 @@ export const siteConfig = {
   cta: { label: "Get a Quote", href: "/get-a-quote" },
   trustStrip: [
     {
-      title: "24-Hour Quotes",
-      description: "Standard quote requests targeted within 24 hours",
+      stat: "24hr",
+      title: "Quote Turnaround",
+      description: "Standard quote requests targeted within 24 business hours",
     },
     {
-      title: "Flexible MOQs",
-      description: "Low-to-mid minimum order quantities across product lines",
+      stat: "100+",
+      title: "Unit MOQ",
+      description: "Low minimum order quantities across all product lines",
     },
     {
-      title: "Landed Delivery",
-      description: "Delivery support for the United States and Canada",
+      stat: "US & CA",
+      title: "Delivery",
+      description: "Landed delivery with DDP pricing available",
     },
     {
+      stat: "Free",
       title: "Design Support",
-      description: "Artwork guidance, dielines, and print setup available",
+      description: "Artwork guidance and dielines included",
     },
   ],
   industries: [

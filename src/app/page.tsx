@@ -2,8 +2,10 @@ import { HeroSection } from "@/components/hero-section";
 import { Section, SectionHeading, SectionSubheading } from "@/components/section";
 import { ProductCard } from "@/components/product-card";
 import { CtaBanner } from "@/components/cta-banner";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
+import { faqItems } from "@/data/faq";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -17,10 +19,13 @@ export default function HomePage() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {siteConfig.trustStrip.map((item) => (
             <div key={item.title} className="text-center lg:text-left">
-              <h3 className="font-serif text-xl font-semibold text-charcoal">
+              <span className="font-serif text-3xl font-bold text-gold">
+                {item.stat}
+              </span>
+              <h3 className="mt-1 font-sans text-sm font-semibold uppercase tracking-wide text-charcoal">
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-charcoal/60">
+              <p className="mt-1.5 text-sm leading-relaxed text-charcoal/60">
                 {item.description}
               </p>
             </div>
@@ -91,7 +96,7 @@ export default function HomePage() {
       </Section>
 
       {/* 6. Industries */}
-      <Section variant="olive">
+      <Section variant="olive" id="industries">
         <SectionHeading className="text-offwhite">
           Industries We Serve
         </SectionHeading>
@@ -134,7 +139,28 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 7. CTA Banner */}
+      {/* 7. FAQ */}
+      <Section variant="surface">
+        <div className="mx-auto max-w-3xl">
+          <SectionHeading>Common Questions</SectionHeading>
+          <SectionSubheading>
+            Quick answers about ordering, MOQs, and working with UPG.
+          </SectionSubheading>
+          <div className="mt-10">
+            <FaqAccordion items={faqItems.slice(0, 6)} />
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/faq"
+              className="text-sm font-medium text-gold hover:text-gold-dark"
+            >
+              View all frequently asked questions →
+            </Link>
+          </div>
+        </div>
+      </Section>
+
+      {/* 8. CTA Banner */}
       <CtaBanner
         heading="Need a packaging partner who delivers with fewer surprises?"
         description="Start your project with UPG. Fast quotes, clear communication, and production follow-through."

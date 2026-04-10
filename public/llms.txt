@@ -1,0 +1,85 @@
+# Universal Packaging Group (UPG)
+## Machine-readable summary for AI crawlers
+
+> Custom packaging for brands that ship.
+
+---
+
+## About
+
+Universal Packaging Group (UPG) is a custom packaging sourcing company serving brands in the United States and Canada. UPG handles quote management, supplier coordination, production follow-through, and landed delivery for five core product families.
+
+Website: https://universalpackaginggroup.com
+Contact: quotes@universalpackaginggroup.com
+
+---
+
+## Products
+
+1. **Corrugated Mailer Box** (slug: custom-mailer-boxes)
+   - Family: Boxes
+   - MOQ: 500+ units
+   - Lead time: 10–15 business days
+   - Use cases: e-commerce shipping, subscription boxes, launch kits
+
+2. **Magnetic Closure Rigid Box** (slug: custom-rigid-boxes)
+   - Family: Boxes
+   - MOQ: 500+ units
+   - Lead time: 15–20 business days
+   - Use cases: luxury cosmetics, jewelry, gift packaging, PR kits
+
+3. **Stand Up Mylar Pouch** (slug: custom-mylar-bags)
+   - Family: Mylar Bags
+   - MOQ: 1,000+ units
+   - Lead time: 12–18 business days
+   - Use cases: supplements, dry goods, personal care refills
+
+4. **Reverse Tuck End Folding Carton** (slug: custom-folding-cartons)
+   - Family: Boxes
+   - MOQ: 1,000+ units
+   - Lead time: 10–14 business days
+   - Use cases: skincare, soap, retail packaging
+
+5. **Single Wall Paper Cup** (slug: custom-coffee-cups)
+   - Family: Paper Cups
+   - MOQ: 1,000+ units
+   - Lead time: 15–20 business days
+   - Use cases: cafes, events, beverage sampling, takeaway
+
+---
+
+## Industries Served
+
+- Beauty & Personal Care
+- E-commerce & Retail
+- Supplements & Specialty Food
+- Coffee & Beverage
+
+---
+
+## Quote Process
+
+1. Submit request at /get-a-quote — include product type, quantity, dimensions, materials, and shipping destination
+2. UPG reviews specs and sends detailed pricing within 24 business hours
+3. Approve artwork, confirm proofs, UPG manages production through to landed delivery
+
+---
+
+## Key Facts
+
+- Quote turnaround: 24 business hours (standard)
+- Minimum order quantity: from 100+ units depending on product
+- Delivery markets: United States and Canada (DDP pricing available)
+- Design support: included — artwork guidance, dielines, print setup
+- Pricing model: quote-led (no instant online pricing — custom specs require individual review)
+
+---
+
+## Site Structure
+
+- / — Homepage
+- /get-a-quote — Quote request form
+- /about — Company overview
+- /faq — Frequently asked questions
+- /contact — Contact information
+- /products/[slug] — Individual product pages (5 products)

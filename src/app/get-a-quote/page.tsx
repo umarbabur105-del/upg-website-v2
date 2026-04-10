@@ -6,6 +6,14 @@ export const metadata: Metadata = {
   title: "Get a Quote",
   description:
     "Request a custom packaging quote for boxes, mylar bags, or paper cups. Response targeted within 24 hours.",
+  alternates: { canonical: "https://universalpackaginggroup.com/get-a-quote" },
+  openGraph: {
+    type: "website",
+    title: "Get a Quote | UPG",
+    description:
+      "Request a custom packaging quote for boxes, mylar bags, or paper cups. Response targeted within 24 hours.",
+    url: "https://universalpackaginggroup.com/get-a-quote",
+  },
 };
 
 export default function GetAQuotePage() {

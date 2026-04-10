@@ -6,6 +6,14 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "UPG is a North America-facing custom packaging partner focused on clarity, not guesswork.",
+  alternates: { canonical: "https://universalpackaginggroup.com/about" },
+  openGraph: {
+    type: "website",
+    title: "About | UPG",
+    description:
+      "UPG is a North America-facing custom packaging partner focused on clarity, not guesswork.",
+    url: "https://universalpackaginggroup.com/about",
+  },
 };
 
 const whatMakesItWork = [

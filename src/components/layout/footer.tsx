@@ -86,10 +86,26 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-16 border-t border-offwhite/10 pt-8">
-          <p className="text-center text-xs text-offwhite/40">
-            &copy; {new Date().getFullYear()} Universal Packaging Group. All
-            rights reserved.
-          </p>
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+            <p className="text-xs text-offwhite/40">
+              &copy; {new Date().getFullYear()} Universal Packaging Group. All
+              rights reserved.
+            </p>
+            <div className="flex gap-6">
+              <Link
+                href="/privacy-policy"
+                className="text-xs text-offwhite/40 transition-colors hover:text-offwhite/70"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/terms"
+                className="text-xs text-offwhite/40 transition-colors hover:text-offwhite/70"
+              >
+                Terms of Use
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
