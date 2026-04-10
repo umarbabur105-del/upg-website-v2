@@ -95,7 +95,59 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 6. Industries */}
+      {/* 6. Social proof — TODO: replace placeholder testimonials with real customer quotes */}
+      <Section variant="surface">
+        <SectionHeading>What Brands Say</SectionHeading>
+        <SectionSubheading>
+          Feedback from brands that have sourced packaging through UPG.
+        </SectionSubheading>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {/* TODO: Replace with real testimonials from customers. Do not use fake names or companies. */}
+          {[
+            {
+              id: "PLACEHOLDER_TESTIMONIAL_1",
+              quote:
+                "PLACEHOLDER — replace with a real customer quote once available.",
+              name: "PLACEHOLDER_NAME",
+              role: "PLACEHOLDER_ROLE",
+              company: "PLACEHOLDER_COMPANY",
+            },
+            {
+              id: "PLACEHOLDER_TESTIMONIAL_2",
+              quote:
+                "PLACEHOLDER — replace with a real customer quote once available.",
+              name: "PLACEHOLDER_NAME",
+              role: "PLACEHOLDER_ROLE",
+              company: "PLACEHOLDER_COMPANY",
+            },
+            {
+              id: "PLACEHOLDER_TESTIMONIAL_3",
+              quote:
+                "PLACEHOLDER — replace with a real customer quote once available.",
+              name: "PLACEHOLDER_NAME",
+              role: "PLACEHOLDER_ROLE",
+              company: "PLACEHOLDER_COMPANY",
+            },
+          ].map((t) => (
+            <div
+              key={t.id}
+              className="flex flex-col justify-between rounded-sm border border-charcoal/8 bg-cream p-8"
+            >
+              <p className="text-sm leading-relaxed text-charcoal/70 italic">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div className="mt-6 border-t border-charcoal/8 pt-5">
+                <p className="text-sm font-semibold text-charcoal">{t.name}</p>
+                <p className="mt-0.5 text-xs text-charcoal/50">
+                  {t.role}, {t.company}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* 7. Industries */}
       <Section variant="olive" id="industries">
         <SectionHeading className="text-offwhite">
           Industries We Serve

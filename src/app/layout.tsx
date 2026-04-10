@@ -23,17 +23,17 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://universalpackaginggroup.com"),
   title: {
-    default: "Universal Packaging Group | Custom Packaging for Brands",
-    template: "%s | UPG",
+    default: "Custom Packaging for Brands — UPG",
+    template: "%s",
   },
   description:
-    "Custom boxes, mylar bags, and paper cups for brands in the United States and Canada. Quote-led pricing, design support, and reliable production.",
+    "Custom boxes, mylar bags, and paper cups for US and Canada brands. Fast quotes, free design support, low MOQs.",
   openGraph: {
     type: "website",
     siteName: "Universal Packaging Group",
-    title: "Universal Packaging Group | Custom Packaging for Brands",
+    title: "Custom Packaging for Brands — UPG",
     description:
-      "Custom boxes, mylar bags, and paper cups for brands in the United States and Canada. Quote-led pricing, design support, and reliable production.",
+      "Custom boxes, mylar bags, and paper cups for US and Canada brands. Fast quotes, free design support, low MOQs.",
     url: "https://universalpackaginggroup.com",
   },
 };

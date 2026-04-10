@@ -3,9 +3,9 @@ import { Section, SectionHeading, SectionSubheading } from "@/components/section
 import { QuoteForm } from "@/components/quote-form";
 
 export const metadata: Metadata = {
-  title: "Get a Quote",
+  title: "Get a Custom Packaging Quote — UPG",
   description:
-    "Request a custom packaging quote for boxes, mylar bags, or paper cups. Response targeted within 24 hours.",
+    "Request a custom quote for boxes, mylar bags, or paper cups. We respond within 24 business hours.",
   alternates: { canonical: "https://universalpackaginggroup.com/get-a-quote" },
   openGraph: {
     type: "website",
@@ -16,7 +16,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function GetAQuotePage() {
+interface PageProps {
+  searchParams: Promise<{ product?: string }>;
+}
+
+export default async function GetAQuotePage({ searchParams }: PageProps) {
+  const { product } = await searchParams;
+
   return (
     <>
       {/* Hero */}
@@ -35,7 +41,7 @@ export default function GetAQuotePage() {
       {/* Form */}
       <Section variant="surface">
         <div className="mx-auto max-w-3xl">
-          <QuoteForm />
+          <QuoteForm preselectedFamily={product} />
         </div>
       </Section>
     </>

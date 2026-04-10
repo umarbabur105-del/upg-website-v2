@@ -4,6 +4,7 @@ import { getRelatedProducts } from "@/data/products";
 import { Section, SectionHeading } from "@/components/section";
 import { ProductCard } from "@/components/product-card";
 import { CtaBanner } from "@/components/cta-banner";
+import { ProductIllustration } from "@/components/product-illustrations";
 
 interface ProductPageTemplateProps {
   product: Product;
@@ -37,11 +38,9 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                 </Link>
               </div>
             </div>
-            {/* Image placeholder */}
-            <div className="flex h-80 items-center justify-center rounded-sm bg-olive-muted/30 lg:h-96">
-              <span className="font-serif text-xl text-offwhite/40">
-                Product Image
-              </span>
+            {/* Product illustration */}
+            <div className="flex h-80 items-center justify-center rounded-sm bg-stone-50 p-8 lg:h-[440px]">
+              <ProductIllustration slug={product.slug} />
             </div>
           </div>
         </div>

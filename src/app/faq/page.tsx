@@ -5,9 +5,9 @@ import { CtaBanner } from "@/components/cta-banner";
 import { faqItems } from "@/data/faq";
 
 export const metadata: Metadata = {
-  title: "FAQ",
+  title: "FAQ — UPG Custom Packaging",
   description:
-    "Frequently asked questions about UPG custom packaging — MOQs, quoting, design support, and more.",
+    "Common questions about ordering custom packaging from UPG — MOQs, lead times, design help, and more.",
   alternates: { canonical: "https://universalpackaginggroup.com/faq" },
   openGraph: {
     type: "website",
