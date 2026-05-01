@@ -7,16 +7,10 @@ export async function POST(request: Request) {
     // Validate required fields
     const requiredFields = [
       "product_family",
-      "product_style",
       "quantity",
       "intended_end_use",
-      "shipping_country",
-      "shipping_state_or_province",
-      "target_delivery_timing",
-      "artwork_status",
       "name",
       "email",
-      "phone",
       "company",
     ];
 
@@ -31,15 +25,15 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Store in Supabase when ready
-    // For now, log and return success
-    console.log("Quote submission received:", {
-      product_family: data.product_family,
-      product_style: data.product_style,
-      quantity: data.quantity,
-      email: data.email,
-      company: data.company,
-    });
+    const submissionRecord = {
+      type: "quote_submission",
+      receivedAt: new Date().toISOString(),
+      userAgent: request.headers.get("user-agent"),
+      data,
+    };
+
+    // Temporary production-safe fallback until webhook or CRM delivery is configured.
+    console.log(JSON.stringify(submissionRecord));
 
     return NextResponse.json({
       success: true,

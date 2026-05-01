@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Section, SectionHeading, SectionSubheading } from "@/components/section";
 import { QuoteForm } from "@/components/quote-form";
+import { SectionHeading } from "@/components/section-heading";
 
 export const metadata: Metadata = {
-  title: "Get a Custom Packaging Quote — UPG",
+  title: "Get a Packaging Quote | UPG",
   description:
-    "Request a custom quote for boxes, mylar bags, or paper cups. We respond within 24 business hours.",
+    "Request a quote for rigid boxes, folding cartons, mailers, mylar pouches, or paper cups. We respond with a structured next step.",
   alternates: { canonical: "https://universalpackaginggroup.com/get-a-quote" },
   openGraph: {
     type: "website",
-    title: "Get a Quote | UPG",
+    title: "Get a Packaging Quote | UPG",
     description:
-      "Request a custom packaging quote for boxes, mylar bags, or paper cups. Response targeted within 24 hours.",
+      "Tell us about the product, quantity, and finish direction. We will come back with a structured quote response.",
     url: "https://universalpackaginggroup.com/get-a-quote",
   },
 };
@@ -25,25 +25,22 @@ export default async function GetAQuotePage({ searchParams }: PageProps) {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-olive px-6 pt-32 pb-16 lg:px-8 lg:pb-20">
-        <div className="mx-auto max-w-3xl">
-          <SectionHeading className="text-offwhite">
-            Get a Quote
-          </SectionHeading>
-          <SectionSubheading className="text-offwhite/60">
-            Tell us what you need and where it is shipping. We review structure,
-            printing, quantity, and end use before sending pricing.
-          </SectionSubheading>
+      <section className="bg-gradient-warm">
+        <div className="container-editorial pt-12 pb-8 md:pt-16 md:pb-10">
+          <SectionHeading
+            eyebrow="Get a quote"
+            title="Tell us about your packaging project."
+            intro="Fast start: product family, quantity, contact details, and a short note are enough. Shipping, artwork, and finish details can be added if you already have them."
+            className="max-w-4xl"
+          />
         </div>
       </section>
 
-      {/* Form */}
-      <Section variant="surface">
-        <div className="mx-auto max-w-3xl">
+      <section className="pt-6 pb-16 md:pt-8 md:pb-20">
+        <div className="container-editorial">
           <QuoteForm preselectedFamily={product} />
         </div>
-      </Section>
+      </section>
     </>
   );
 }

@@ -16,12 +16,15 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Store in Supabase / send email notification when ready
-    console.log("Contact message received:", {
-      name: data.name,
-      email: data.email,
-      message: data.message,
-    });
+    const submissionRecord = {
+      type: "contact_submission",
+      receivedAt: new Date().toISOString(),
+      userAgent: request.headers.get("user-agent"),
+      data,
+    };
+
+    // Temporary production-safe fallback until webhook or CRM delivery is configured.
+    console.log(JSON.stringify(submissionRecord));
 
     return NextResponse.json({
       success: true,

@@ -8,10 +8,10 @@ interface SectionProps {
 }
 
 const variantStyles = {
-  cream: "bg-cream text-charcoal",
-  olive: "bg-olive text-offwhite",
-  charcoal: "bg-charcoal text-offwhite",
-  surface: "bg-surface text-charcoal",
+  cream: "bg-cream text-foreground",
+  olive: "bg-gradient-moss text-primary-foreground",
+  charcoal: "bg-foreground text-cream",
+  surface: "bg-background text-foreground",
 };
 
 export function Section({
@@ -23,9 +23,9 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn("px-6 py-20 lg:px-8 lg:py-28", variantStyles[variant], className)}
+      className={cn("section-shell", variantStyles[variant], className)}
     >
-      <div className="mx-auto max-w-7xl">{children}</div>
+      <div className="container-editorial">{children}</div>
     </section>
   );
 }
@@ -40,7 +40,7 @@ export function SectionHeading({
   return (
     <h2
       className={cn(
-        "font-serif text-4xl font-semibold leading-tight tracking-tight lg:text-5xl",
+        "display-2 text-balance",
         className
       )}
     >
@@ -59,7 +59,7 @@ export function SectionSubheading({
   return (
     <p
       className={cn(
-        "mt-4 max-w-2xl text-lg leading-relaxed opacity-70",
+        "mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty",
         className
       )}
     >

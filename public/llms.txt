@@ -1,16 +1,25 @@
 # Universal Packaging Group (UPG)
 ## Machine-readable summary for AI crawlers
 
-> Custom packaging for brands that ship.
+> Premium custom packaging for beauty and product brands.
 
 ---
 
 ## About
 
-Universal Packaging Group (UPG) is a custom packaging sourcing company serving brands in the United States and Canada. UPG handles quote management, supplier coordination, production follow-through, and landed delivery for five core product families.
+Universal Packaging Group (UPG) is a quote-led custom packaging company serving brands in the United States and Canada. UPG handles quote management, packaging guidance, supplier coordination, production follow-through, and delivery planning across five day-one product formats.
 
 Website: https://universalpackaginggroup.com
 Contact: quotes@universalpackaginggroup.com
+
+---
+
+## Positioning
+
+- Cosmetics-first buying journey
+- All day-one product formats visible from launch
+- North America-facing quote-led packaging partner
+- Built for outreach, not instant checkout
 
 ---
 
@@ -18,42 +27,59 @@ Contact: quotes@universalpackaginggroup.com
 
 1. **Corrugated Mailer Box** (slug: custom-mailer-boxes)
    - Family: Boxes
-   - MOQ: 500+ units
-   - Lead time: 10–15 business days
-   - Use cases: e-commerce shipping, subscription boxes, launch kits
+   - MOQ: 250+ units
+   - Lead time: 12–16 business days
+   - Use cases: e-commerce shipping, subscription boxes, beauty launches, PR kits
 
 2. **Magnetic Closure Rigid Box** (slug: custom-rigid-boxes)
    - Family: Boxes
-   - MOQ: 500+ units
-   - Lead time: 15–20 business days
-   - Use cases: luxury cosmetics, jewelry, gift packaging, PR kits
+   - MOQ: 300+ units
+   - Lead time: 18–25 business days
+   - Use cases: luxury cosmetics, perfume, gift packaging, PR kits
 
 3. **Stand Up Mylar Pouch** (slug: custom-mylar-bags)
    - Family: Mylar Bags
    - MOQ: 1,000+ units
-   - Lead time: 12–18 business days
-   - Use cases: supplements, dry goods, personal care refills
+   - Lead time: 20–28 business days
+   - Use cases: supplements, coffee, dry goods, personal care refills
 
 4. **Reverse Tuck End Folding Carton** (slug: custom-folding-cartons)
    - Family: Boxes
-   - MOQ: 1,000+ units
-   - Lead time: 10–14 business days
-   - Use cases: skincare, soap, retail packaging
+   - MOQ: 500+ units
+   - Lead time: 12–18 business days
+   - Use cases: skincare, serums, lipstick, retail packaging
 
 5. **Single Wall Paper Cup** (slug: custom-coffee-cups)
    - Family: Paper Cups
    - MOQ: 1,000+ units
-   - Lead time: 15–20 business days
+   - Lead time: 15–22 business days
    - Use cases: cafes, events, beverage sampling, takeaway
 
 ---
 
 ## Industries Served
 
-- Beauty & Personal Care
+- Cosmetics & Beauty
 - E-commerce & Retail
 - Supplements & Specialty Food
 - Coffee & Beverage
+
+---
+
+## Cosmetics Hub
+
+Primary cosmetics route families:
+- /cosmetics
+- /cosmetics/skincare-boxes
+- /cosmetics/serum-boxes
+- /cosmetics/cream-boxes
+- /cosmetics/lotion-boxes
+- /cosmetics/lipstick-boxes
+- /cosmetics/lip-gloss-boxes
+- /cosmetics/mascara-boxes
+- /cosmetics/perfume-boxes
+- /cosmetics/cosmetic-subscription-boxes
+- /cosmetics/pr-boxes
 
 ---
 
@@ -67,8 +93,8 @@ Contact: quotes@universalpackaginggroup.com
 
 ## Key Facts
 
-- Quote turnaround: 24 business hours (standard)
-- Minimum order quantity: from 100+ units depending on product
+- Quote turnaround: 24 business hours (standard target)
+- Minimum order quantity: depends on product format and structure
 - Delivery markets: United States and Canada (DDP pricing available)
 - Design support: included — artwork guidance, dielines, print setup
 - Pricing model: quote-led (no instant online pricing — custom specs require individual review)
@@ -78,8 +104,13 @@ Contact: quotes@universalpackaginggroup.com
 ## Site Structure
 
 - / — Homepage
+- /products — Full day-one product directory
+- /cosmetics — Cosmetics packaging hub
+- /materials-finishes — Materials, finishes, and capability page
+- /samples — Sample and portfolio direction page
 - /get-a-quote — Quote request form
 - /about — Company overview
 - /faq — Frequently asked questions
 - /contact — Contact information
 - /products/[slug] — Individual product pages (5 products)
+- /cosmetics/[slug] — Cosmetic subcategory pages

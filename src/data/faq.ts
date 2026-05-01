@@ -7,46 +7,46 @@ export const faqItems: FaqItem[] = [
   {
     question: "What is your minimum order quantity?",
     answer:
-      "MOQ depends on the product type and structure. Core launch products usually start from 500 units for many box styles and 1,000 units for most pouches and cups.",
+      "MOQ depends on the format. Folding cartons usually start lower than rigid presentations, while pouches and cups generally need higher launch volumes. We can guide you to the most practical structure for your quantity.",
   },
   {
     question: "How fast can I get a quote?",
     answer:
-      "Standard quote requests are targeted for response within 24 hours. Complex custom projects may need follow-up questions before final pricing.",
+      "Standard quote requests are targeted for reply within 24 business hours. If anything is unclear, we follow up quickly rather than sending a vague estimate.",
   },
   {
-    question: "Do you help with packaging design?",
+    question: "Do you help with dielines and artwork?",
     answer:
-      "Yes. We can support structure guidance, dielines, print setup, and artwork review as part of the quote process.",
+      "Yes. We support dielines, structure guidance, and basic artwork review as part of the quoting process so you do not have to solve the packaging spec alone.",
   },
   {
     question: "Do you ship to the United States and Canada?",
     answer:
-      "Yes. UPG is set up to quote landed delivery support for both markets.",
+      "Yes. UPG is structured around US and Canada delivery and quotes with shipping practicality in mind.",
   },
   {
     question: "Can I order custom sizes?",
     answer:
-      "Yes. All core product lines support custom sizing, subject to structure and material limits.",
-  },
-  {
-    question: "Can I upload artwork with my quote request?",
-    answer:
-      "Yes. You can upload artwork files or request design help if your project is still in progress.",
+      "Yes. All core product families support custom sizing, subject to the structure, material limits, and project use case.",
   },
   {
     question: "Do you offer samples?",
     answer:
-      "Sample routes depend on the product type, timeline, and supplier. We can review sample options during quoting.",
+      "Sample routes depend on the product, timeline, and project stage. We can review physical sample options during quoting.",
   },
   {
-    question: "How do you handle food-contact projects?",
+    question: "Can you handle cosmetics packaging?",
     answer:
-      "Food-contact projects require intended end use details and supplier documentation review before approval.",
+      "Yes. Cosmetics is the primary category built into the current site architecture, including skincare, serum, lipstick, perfume, PR kits, and subscription packaging.",
   },
   {
     question: "Do you provide instant pricing online?",
     answer:
-      "No. Launch pricing is quote-led so we can match structure, printing, materials, and delivery needs accurately.",
+      "No. UPG is quote-led because the real price depends on structure, finish, quantity, materials, and the delivery path.",
+  },
+  {
+    question: "How do you handle food-contact projects?",
+    answer:
+      "Food-contact work still requires intended end-use review during quoting so the correct material path and supplier documentation can be confirmed.",
   },
 ];

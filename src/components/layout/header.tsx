@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/data/site";
 
-// TODO: Replace with real WhatsApp number before launch (format: country code + number, no + or spaces)
-const WHATSAPP_NUMBER = "PLACEHOLDER_ADD_NUMBER_HERE";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
+const WHATSAPP_URL = `https://wa.me/${siteConfig.whatsappNumber}`;
+const HAS_WHATSAPP = Boolean(siteConfig.whatsappNumber);
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -25,112 +24,121 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 8);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-9 z-40 w-full border-b border-olive-muted/20 bg-surface/95 backdrop-blur-md">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-serif text-2xl font-semibold tracking-wide text-charcoal">
-            {siteConfig.shortName}
-          </span>
-          <span className="hidden font-serif text-sm font-medium tracking-widest text-olive-muted sm:inline">
-            Universal Packaging Group
+    <header
+      className={`sticky top-9 z-40 w-full border-b transition-all duration-300 ${
+        scrolled
+          ? "border-border bg-background/88 backdrop-blur-md"
+          : "border-transparent bg-transparent"
+      }`}
+    >
+      <div className="container-editorial flex h-16 items-center justify-between md:h-20">
+        <Link href="/" className="group flex items-center gap-2">
+          <span className="font-serif text-xl tracking-tight text-foreground md:text-2xl">
+            Universal
+            <span className="text-gold"> Packaging</span>
           </span>
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {siteConfig.navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium tracking-wide text-charcoal/70 transition-colors hover:text-gold"
+              className="rounded-full px-3 py-2 text-sm text-muted-foreground hover:text-foreground"
             >
               {item.label}
             </Link>
           ))}
-          {/* WhatsApp contact — desktop shows icon + text */}
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-sm border border-charcoal/15 px-4 py-2 text-sm font-medium text-charcoal/70 transition-colors hover:border-gold/50 hover:text-gold"
-            aria-label="Chat with us on WhatsApp"
-          >
-            <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
-            <span>Chat with us</span>
-          </a>
+        </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          {HAS_WHATSAPP ? (
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+            >
+              <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
+              WhatsApp
+            </a>
+          ) : null}
           <Link
             href={siteConfig.cta.href}
-            className="rounded-sm bg-gold px-6 py-2.5 text-sm font-semibold text-charcoal transition-colors hover:bg-gold-dark"
+            className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
           >
             {siteConfig.cta.label}
           </Link>
-        </nav>
+        </div>
 
-        {/* Mobile: WhatsApp icon only */}
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex h-9 w-9 items-center justify-center rounded-sm border border-charcoal/15 text-charcoal/60 transition-colors hover:border-gold/50 hover:text-gold md:hidden"
-          aria-label="Chat with us on WhatsApp"
-        >
-          <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
-        </a>
-
-        {/* Mobile menu button */}
         <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex flex-col gap-1.5 md:hidden"
+          className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface lg:hidden"
+          onClick={() => setMobileOpen((open) => !open)}
           aria-label="Toggle menu"
         >
           <span
-            className={`h-0.5 w-6 bg-charcoal transition-transform ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
+            className={`absolute h-0.5 w-4 bg-foreground transition-transform ${
+              mobileOpen ? "rotate-45" : "-translate-y-1.5"
+            }`}
           />
           <span
-            className={`h-0.5 w-6 bg-charcoal transition-opacity ${mobileOpen ? "opacity-0" : ""}`}
+            className={`absolute h-0.5 w-4 bg-foreground transition-opacity ${
+              mobileOpen ? "opacity-0" : "opacity-100"
+            }`}
           />
           <span
-            className={`h-0.5 w-6 bg-charcoal transition-transform ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
+            className={`absolute h-0.5 w-4 bg-foreground transition-transform ${
+              mobileOpen ? "-rotate-45" : "translate-y-1.5"
+            }`}
           />
         </button>
       </div>
 
-      {/* Mobile nav */}
       {mobileOpen && (
-        <nav className="border-t border-olive-muted/20 bg-surface px-6 py-6 md:hidden">
-          <div className="flex flex-col gap-4">
+        <div className="border-t border-border bg-background lg:hidden">
+          <nav className="container-editorial flex flex-col gap-1 py-6">
             {siteConfig.navigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-base font-medium text-charcoal/70 transition-colors hover:text-gold"
+                className="py-3 text-base text-foreground/80 hover:text-foreground"
               >
                 {item.label}
               </Link>
             ))}
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center gap-2 text-base font-medium text-charcoal/70 transition-colors hover:text-gold"
-            >
-              <WhatsAppIcon className="h-5 w-5 text-[#25D366]" />
-              Chat with us on WhatsApp
-            </a>
-            <Link
-              href={siteConfig.cta.href}
-              onClick={() => setMobileOpen(false)}
-              className="mt-2 inline-block rounded-sm bg-gold px-6 py-3 text-center text-sm font-semibold text-charcoal transition-colors hover:bg-gold-dark"
-            >
-              {siteConfig.cta.label}
-            </Link>
-          </div>
-        </nav>
+            <div className="mt-4 border-t border-border pt-4">
+              {HAS_WHATSAPP ? (
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 py-3 text-sm text-foreground/80"
+                >
+                  <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
+                  Chat on WhatsApp
+                </a>
+              ) : null}
+              <Link
+                href={siteConfig.cta.href}
+                onClick={() => setMobileOpen(false)}
+                className="mt-3 block rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground"
+              >
+                {siteConfig.cta.label}
+              </Link>
+            </div>
+          </nav>
+        </div>
       )}
     </header>
   );

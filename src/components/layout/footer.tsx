@@ -1,56 +1,45 @@
 import Link from "next/link";
 import { siteConfig } from "@/data/site";
-import { products } from "@/data/products";
+
+const WHATSAPP_URL = `https://wa.me/${siteConfig.whatsappNumber}`;
+const HAS_WHATSAPP = Boolean(siteConfig.whatsappNumber);
 
 export function Footer() {
   return (
-    <footer className="bg-charcoal text-offwhite">
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+    <footer className="border-t border-border bg-cream">
+      <div className="container-editorial py-20">
         <div className="grid gap-12 md:grid-cols-4">
-          {/* Brand */}
           <div className="md:col-span-1">
-            <Link href="/" className="font-serif text-2xl font-semibold tracking-wide text-offwhite">
-              {siteConfig.shortName}
+            <Link href="/" className="font-serif text-2xl text-foreground">
+              Universal
+              <span className="text-gold"> Packaging</span>
             </Link>
-            <p className="mt-1 font-serif text-sm tracking-widest text-offwhite/60">
-              Universal Packaging Group
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-offwhite/60">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               {siteConfig.description}
             </p>
+            <div className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
+              <a href={`mailto:${siteConfig.email}`} className="hover:text-foreground">
+                {siteConfig.email}
+              </a>
+              {HAS_WHATSAPP ? (
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground"
+                >
+                  Chat on WhatsApp
+                </a>
+              ) : null}
+            </div>
           </div>
 
-          {/* Products */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-gold">
-              Products
-            </h4>
-            <ul className="mt-4 space-y-3">
-              {products.map((product) => (
-                <li key={product.slug}>
-                  <Link
-                    href={`/${product.slug}`}
-                    className="text-sm text-offwhite/60 transition-colors hover:text-gold"
-                  >
-                    {product.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-gold">
-              Company
-            </h4>
-            <ul className="mt-4 space-y-3">
-              {siteConfig.navigation.map((item) => (
+            <div className="eyebrow mb-4">Products</div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              {siteConfig.footerColumns.productLinks.map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-offwhite/60 transition-colors hover:text-gold"
-                  >
+                  <Link href={item.href} className="hover:text-foreground">
                     {item.label}
                   </Link>
                 </li>
@@ -58,53 +47,51 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-gold">
-              Get in Touch
-            </h4>
-            <ul className="mt-4 space-y-3">
-              <li>
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="text-sm text-offwhite/60 transition-colors hover:text-gold"
-                >
-                  {siteConfig.email}
-                </a>
-              </li>
+            <div className="eyebrow mb-4">Cosmetics</div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              {siteConfig.footerColumns.cosmeticsLinks.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="hover:text-foreground">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-            <div className="mt-8">
-              <Link
-                href="/get-a-quote"
-                className="inline-block rounded-sm border border-gold px-6 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-charcoal"
-              >
-                Request a Quote
-              </Link>
-            </div>
+          </div>
+
+          <div>
+            <div className="eyebrow mb-4">Company</div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              {[...siteConfig.navigation, ...siteConfig.utilityNavigation].map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="hover:text-foreground">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={siteConfig.cta.href}
+              className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
+            >
+              Request a Quote
+            </Link>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-16 border-t border-offwhite/10 pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-xs text-offwhite/40">
-              &copy; {new Date().getFullYear()} Universal Packaging Group. All
-              rights reserved.
-            </p>
-            <div className="flex gap-6">
-              <Link
-                href="/privacy-policy"
-                className="text-xs text-offwhite/40 transition-colors hover:text-offwhite/70"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-xs text-offwhite/40 transition-colors hover:text-offwhite/70"
-              >
-                Terms of Use
-              </Link>
-            </div>
+        <div className="mt-16 flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p>&copy; {new Date().getFullYear()} Universal Packaging Group. All rights reserved.</p>
+          <div className="flex gap-5">
+            <Link href="/about" className="hover:text-foreground">
+              About
+            </Link>
+            <Link href="/faq" className="hover:text-foreground">
+              FAQ
+            </Link>
+            <Link href="/contact" className="hover:text-foreground">
+              Contact
+            </Link>
           </div>
         </div>
       </div>

@@ -14,17 +14,17 @@ export function CtaBanner({
   ctaHref = "/get-a-quote",
 }: CtaBannerProps) {
   return (
-    <section className="bg-olive px-6 py-20 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-3xl text-center">
-        <h2 className="font-serif text-3xl font-semibold leading-tight text-offwhite md:text-4xl lg:text-5xl">
+    <section className="bg-gradient-moss">
+      <div className="container-editorial py-20 text-center md:py-28">
+        <h2 className="display-2 text-balance text-primary-foreground">
           {heading}
         </h2>
-        <p className="mt-4 text-lg leading-relaxed text-offwhite/70">
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-primary-foreground/72">
           {description}
         </p>
         <Link
           href={ctaHref}
-          className="mt-8 inline-block rounded-sm bg-gold px-10 py-4 text-sm font-semibold text-charcoal transition-colors hover:bg-gold-dark"
+          className="mt-8 inline-block rounded-full bg-gold px-10 py-4 text-sm font-semibold text-foreground hover:opacity-90"
         >
           {ctaText}
         </Link>

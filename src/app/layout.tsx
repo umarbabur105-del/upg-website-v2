@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
@@ -23,17 +23,17 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://universalpackaginggroup.com"),
   title: {
-    default: "Custom Packaging for Brands — UPG",
+    default: "Premium Custom Packaging for Beauty and Product Brands | UPG",
     template: "%s",
   },
   description:
-    "Custom boxes, mylar bags, and paper cups for US and Canada brands. Fast quotes, free design support, low MOQs.",
+    "Custom packaging for beauty and product brands in the United States and Canada. Explore mailer boxes, rigid boxes, folding cartons, mylar pouches, and paper cups.",
   openGraph: {
     type: "website",
     siteName: "Universal Packaging Group",
-    title: "Custom Packaging for Brands — UPG",
+    title: "Premium Custom Packaging for Beauty and Product Brands | UPG",
     description:
-      "Custom boxes, mylar bags, and paper cups for US and Canada brands. Fast quotes, free design support, low MOQs.",
+      "Cosmetics-first packaging with all day-one product formats visible from launch: rigid boxes, folding cartons, mailers, pouches, and cups.",
     url: "https://universalpackaginggroup.com",
   },
 };
@@ -46,7 +46,7 @@ const organizationSchema = {
   url: "https://universalpackaginggroup.com",
   email: "quotes@universalpackaginggroup.com",
   description:
-    "Custom boxes, mylar bags, and paper cups for brands in the United States and Canada.",
+    "Premium quote-led custom packaging for beauty and product brands in the United States and Canada.",
   areaServed: ["US", "CA"],
 };
 
@@ -63,9 +63,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
-      <body
-        className={`${cormorant.variable} ${dmSans.variable} font-sans antialiased`}
-      >
+      <body className={`${fraunces.variable} ${inter.variable} font-sans antialiased`}>
         <AnnouncementBar />
         <Header />
         <main>{children}</main>
