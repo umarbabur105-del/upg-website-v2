@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { QuoteCta } from "@/components/quote-cta";
 import { industries } from "@/data/catalog";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Industries We Serve | UPG",
+export const metadata: Metadata = createPageMetadata({
+  title: "Industries We Serve",
   description:
-    "UPG supports cosmetics, ecommerce, coffee and beverage, and selected specialty product categories with quote-led custom packaging.",
-  alternates: { canonical: "https://universalpackaginggroup.com/industries" },
-};
+    "UPG focuses on custom beauty and cosmetic packaging, with reviewed packaging routes for ecommerce, specialty products, coffee, and beverage brands.",
+  path: "/industries",
+  keywords: ["cosmetic packaging supplier", "ecommerce packaging", "beauty packaging"],
+});
 
 export default function IndustriesPage() {
   return (
@@ -18,12 +20,12 @@ export default function IndustriesPage() {
           <div className="max-w-4xl">
             <div className="eyebrow mb-5">Industries</div>
             <h1 className="display-1 text-balance">
-              Broad capability, with cosmetics as the strongest launch path.
+              Packaging routes shaped around the product and its market.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              The site is built around cosmetics first because that is the
-              clearest and strongest early positioning. But the product range and
-              structure logic can still support adjacent industries from day one.
+              Cosmetics and beauty are our primary focus. Adjacent categories are
+              reviewed against the product, intended use, material requirements,
+              quantity, and delivery destination before a route is recommended.
             </p>
           </div>
         </div>
@@ -58,8 +60,8 @@ export default function IndustriesPage() {
       </section>
 
       <QuoteCta
-        title="Need help choosing the right category page for outreach?"
-        intro="Cosmetics should be the strongest landing path, but the catalog still supports adjacent use cases. Start with a quote if you want us to point prospects to the right format."
+        title="Not sure which packaging route fits your product?"
+        intro="Tell us the product, intended use, quantity, and destination. We will review the structure and documentation needs before recommending a route."
       />
     </>
   );

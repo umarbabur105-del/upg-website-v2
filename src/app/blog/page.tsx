@@ -2,21 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts } from "@/data/blog-posts";
 import { CtaBanner } from "@/components/cta-banner";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Packaging Resources & Guides — UPG Blog",
+export const metadata: Metadata = createPageMetadata({
+  title: "Custom Packaging Guides & Resources",
   description:
-    "Practical guides on custom packaging — MOQ, materials, artwork prep, and choosing the right box for your brand.",
-  openGraph: {
-    title: "Packaging Resources & Guides — UPG Blog",
-    description:
-      "Practical guides on custom packaging — MOQ, materials, artwork prep, and choosing the right box for your brand.",
-    url: "https://universalpackaginggroup.com/blog",
-  },
-  alternates: {
-    canonical: "https://universalpackaginggroup.com/blog",
-  },
-};
+    "Practical custom packaging guides covering MOQs, materials, artwork preparation, cosmetic boxes, mailers, rigid boxes, and sourcing decisions.",
+  path: "/blog",
+  keywords: ["custom packaging guide", "packaging MOQ", "packaging artwork guide"],
+});
 
 function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString("en-US", {
@@ -95,7 +89,7 @@ export default function BlogPage() {
 
       <CtaBanner
         heading="Ready to start your packaging project?"
-        description="Tell us what you need and we will send detailed pricing within 24 hours."
+        description="Tell us what you need. We target an initial response within one business day and confirm pricing once the required specifications are clear."
         ctaText="Get a Quote"
         ctaHref="/get-a-quote"
       />

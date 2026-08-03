@@ -5,6 +5,7 @@ interface SectionHeadingProps {
   title: string;
   intro?: string;
   className?: string;
+  as?: "h1" | "h2";
 }
 
 export function SectionHeading({
@@ -12,11 +13,12 @@ export function SectionHeading({
   title,
   intro,
   className,
+  as: Heading = "h2",
 }: SectionHeadingProps) {
   return (
     <div className={cn("max-w-3xl", className)}>
       {eyebrow ? <div className="eyebrow mb-5">{eyebrow}</div> : null}
-      <h2 className="display-2 text-balance">{title}</h2>
+      <Heading className="display-2 text-balance">{title}</Heading>
       {intro ? (
         <p className="mt-5 text-lg leading-relaxed text-muted-foreground text-pretty">
           {intro}

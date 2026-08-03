@@ -4,13 +4,15 @@ import Link from "next/link";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { sampleHighlights } from "@/data/catalog";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Samples & Packaging Directions | UPG",
+export const metadata: Metadata = createPageMetadata({
+  title: "Custom Packaging Samples & Concept Directions",
   description:
-    "Visual sample directions for skincare packaging, PR kits, launch-led presentation, and cosmetics-first packaging references.",
-  alternates: { canonical: "https://universalpackaginggroup.com/samples" },
-};
+    "Explore concept directions for custom skincare boxes, PR kits, mailers, inserts, and premium cosmetic packaging finishes, plus physical sample options.",
+  path: "/samples",
+  keywords: ["custom packaging samples", "cosmetic packaging concepts", "PR box samples"],
+});
 
 const sampleCategories = [
   {
@@ -38,15 +40,14 @@ export default function SamplesPage() {
       <section className="bg-gradient-warm">
         <div className="container-editorial pt-16 pb-20 md:pt-24 md:pb-28">
           <div className="max-w-4xl">
-            <div className="eyebrow mb-5">Samples & portfolio direction</div>
+            <div className="eyebrow mb-5">Samples & concept directions</div>
             <h1 className="display-1 text-balance">
-              Visual references built for outreach, quoting, and early-stage trust.
+              Explore a packaging direction before production begins.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              These sample directions help prospects see the kind of finish,
-              insert, and presentation logic that can be built into a real
-              project. They are useful when your first touch comes from outreach,
-              not paid ads.
+              These concept images illustrate possible finish, insert, and
+              presentation directions. They are not represented as completed
+              client work. Physical sample routes are confirmed during quoting.
             </p>
           </div>
         </div>
@@ -67,7 +68,7 @@ export default function SamplesPage() {
                   />
                 </div>
                 <div className="p-6">
-                  <div className="eyebrow mb-3">{sample.category}</div>
+                  <div className="eyebrow mb-3">Concept direction · {sample.category}</div>
                   <h2 className="font-serif text-2xl text-foreground">
                     {sample.title}
                   </h2>
@@ -84,8 +85,8 @@ export default function SamplesPage() {
       <section className="section-shell bg-cream">
         <div className="container-editorial">
           <SectionHeading
-            eyebrow="Use these when selling"
-            title="How these references support social-first outreach."
+            eyebrow="Sample planning"
+            title="Match the sample path to the decision you need to make."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {sampleCategories.map((item) => (

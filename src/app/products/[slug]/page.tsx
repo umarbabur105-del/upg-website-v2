@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductPageTemplate } from "@/components/product-page-template";
 import { getProductBySlug, products } from "@/data/products";
+import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -17,21 +18,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!product) return {};
 
-  const title = `${product.name} | UPG`;
+  const title = `Custom ${product.name}`;
   const description = product.longSummary;
-  const url = `https://universalpackaginggroup.com/products/${slug}`;
-
-  return {
+  return createPageMetadata({
     title,
     description,
-    alternates: { canonical: url },
-    openGraph: {
-      type: "website",
-      title,
-      description,
-      url,
-    },
-  };
+    path: `/products/${slug}`,
+    keywords: [product.name, product.shortName, ...product.industries],
+  });
 }
 
 export default async function ProductPage({ params }: PageProps) {
@@ -42,7 +36,7 @@ export default async function ProductPage({ params }: PageProps) {
     notFound();
   }
 
-  const productUrl = `https://universalpackaginggroup.com/products/${slug}`;
+  const productUrl = `${SITE_URL}/products/${slug}`;
 
   const productSchema = {
     "@context": "https://schema.org",
@@ -51,11 +45,29 @@ export default async function ProductPage({ params }: PageProps) {
     description: product.summary,
     sku: product.sku,
     url: productUrl,
+    image: `${SITE_URL}${product.heroImage}`,
     brand: {
       "@type": "Brand",
       name: "Universal Packaging Group",
     },
     category: product.category,
+    material: product.materials,
+    audience: {
+      "@type": "BusinessAudience",
+      audienceType: product.industries.join(", "),
+    },
+    additionalProperty: [
+      {
+        "@type": "PropertyValue",
+        name: "Planning MOQ",
+        value: product.moq,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Typical production planning",
+        value: product.leadTime,
+      },
+    ],
   };
 
   const breadcrumbSchema = {
@@ -66,13 +78,13 @@ export default async function ProductPage({ params }: PageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://universalpackaginggroup.com",
+        item: SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Products",
-        item: "https://universalpackaginggroup.com/products",
+        item: `${SITE_URL}/products`,
       },
       {
         "@type": "ListItem",

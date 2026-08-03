@@ -33,19 +33,21 @@ export function Section({
 export function SectionHeading({
   children,
   className,
+  as: Heading = "h2",
 }: {
   children: React.ReactNode;
   className?: string;
+  as?: "h1" | "h2";
 }) {
   return (
-    <h2
+    <Heading
       className={cn(
         "display-2 text-balance",
         className
       )}
     >
       {children}
-    </h2>
+    </Heading>
   );
 }
 

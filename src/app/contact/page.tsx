@@ -3,20 +3,15 @@ import Link from "next/link";
 import { Section, SectionHeading, SectionSubheading } from "@/components/section";
 import { ContactForm } from "@/components/contact-form";
 import { siteConfig } from "@/data/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact UPG",
+export const metadata: Metadata = createPageMetadata({
+  title: "Contact Universal Packaging Group",
   description:
     "Get in touch with UPG for custom packaging guidance or to ask questions before submitting a quote.",
-  alternates: { canonical: "https://universalpackaginggroup.com/contact" },
-  openGraph: {
-    type: "website",
-    title: "Contact UPG",
-    description:
-      "Get in touch with UPG for custom packaging guidance or to ask questions before submitting a quote.",
-    url: "https://universalpackaginggroup.com/contact",
-  },
-};
+  path: "/contact",
+  keywords: ["contact UPG packaging", "custom packaging consultation"],
+});
 
 export default function ContactPage() {
   return (
@@ -24,13 +19,13 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="bg-olive px-6 pt-32 pb-20 lg:px-8 lg:pb-28">
         <div className="mx-auto max-w-3xl">
-          <SectionHeading className="text-offwhite">
+          <SectionHeading as="h1" className="text-offwhite">
             Get in touch
           </SectionHeading>
           <SectionSubheading className="text-offwhite/60">
             Have a question before submitting a quote? Want guidance on the right
             packaging for your product? Send us a message and we will get back to
-            you within 1 business day.
+            you. We target an initial response within one business day.
           </SectionSubheading>
         </div>
       </section>
@@ -55,7 +50,7 @@ export default function ContactPage() {
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-charcoal/60">
                 Send your question or project details to our quoting address.
-                We respond to all messages within 1 business day.
+                We target an initial response within one business day.
               </p>
               <a
                 href={`mailto:${siteConfig.email}`}

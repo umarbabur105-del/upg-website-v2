@@ -26,14 +26,19 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
               </p>
               <div className="mt-8 grid max-w-md grid-cols-2 gap-5 border-t border-border pt-6 text-sm">
                 <div>
-                  <div className="eyebrow mb-1">MOQ</div>
+                  <div className="eyebrow mb-1">Planning MOQ</div>
                   <div className="text-foreground">{product.moq}</div>
                 </div>
                 <div>
-                  <div className="eyebrow mb-1">Lead time</div>
+                  <div className="eyebrow mb-1">Production planning</div>
                   <div className="text-foreground">{product.leadTime}</div>
                 </div>
               </div>
+              <p className="mt-4 max-w-xl text-xs leading-relaxed text-muted-foreground">
+                MOQ and timing are planning ranges. Final values are confirmed
+                after dimensions, materials, finishes, proofing, and destination
+                are reviewed.
+              </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   href={`/get-a-quote?product=${encodeURIComponent(product.family)}`}
@@ -206,7 +211,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="Related products"
-              title="Other day-one formats worth comparing."
+              title="Other packaging formats worth comparing."
               intro="Most buyers evaluate a few structures before locking the spec."
             />
             <Link

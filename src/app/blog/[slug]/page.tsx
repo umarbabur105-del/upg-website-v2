@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog-posts";
+import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -16,19 +17,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = getBlogPostBySlug(slug);
   if (!post) return {};
 
-  return {
-    title: `${post.title} — UPG`,
+  return createPageMetadata({
+    title: post.title,
     description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      url: `https://universalpackaginggroup.com/blog/${slug}`,
-      type: "article",
-    },
-    alternates: {
-      canonical: `https://universalpackaginggroup.com/blog/${slug}`,
-    },
-  };
+    path: `/blog/${slug}`,
+    type: "article",
+    keywords: ["custom packaging guide", post.title],
+  });
 }
 
 function formatDate(dateStr: string): string {
@@ -163,8 +158,32 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = getBlogPostBySlug(slug);
   if (!post) notFound();
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    dateModified: post.date,
+    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+    author: {
+      "@type": "Organization",
+      name: "Universal Packaging Group",
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Universal Packaging Group",
+      url: SITE_URL,
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {/* Hero */}
       <section className="bg-olive px-6 pt-32 pb-20 lg:px-8">
         <div className="mx-auto max-w-3xl">
@@ -239,8 +258,8 @@ export default async function BlogPostPage({ params }: PageProps) {
             Ready to get started?
           </h2>
           <p className="mt-4 text-base leading-relaxed text-offwhite/70">
-            Tell us about your project and we will send detailed pricing within
-            24 hours.
+            Tell us about your project. We target an initial response within one
+            business day and confirm pricing after the required specifications are clear.
           </p>
           <Link
             href="/get-a-quote"

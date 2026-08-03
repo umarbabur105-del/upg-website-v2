@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Universal Packaging Group website
 
-## Getting Started
+Next.js website for Universal Packaging Group, including public quote/contact lead capture and a private Google Sheets CRM.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Copy `.env.example` to `.env.local` and provide the applicable values. Google authentication settings are server-only and must never use a `NEXT_PUBLIC_` variable.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Leads CRM
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Public submissions are validated, appended to the private `Leads` tab, and sent as email notifications through Resend.
+- Google Sheets authentication uses Vercel OIDC and Google Workload Identity Federation to impersonate a dedicated service account with short-lived tokens. No private service-account key is stored in Vercel or the repository.
+- Each submission includes a unique `submission_id`, timestamp, form source, contact details, project requirements, and campaign attribution.
+- Email and Google authentication start together; the row is appended with the final notification status once Resend responds.
+- A successful Sheet write or email notification is treated as an accepted submission so one provider outage does not discard the enquiry.
+- `/crm` redirects authorized Google Workspace users to the private Sheet. Drive sharing remains the access-control boundary.
+- CRM users can assign owners, set priority/status, schedule follow-ups, add internal notes, and review dashboard totals.
 
-## Learn More
+The `Leads` header row is the website integration contract. Do not rename, reorder, or delete its columns without updating `src/lib/google-sheets.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+## Verification
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npx tsc --noEmit
+npm run build
+npm audit
+git diff --check
+```

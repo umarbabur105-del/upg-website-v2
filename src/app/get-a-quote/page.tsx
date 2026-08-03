@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
 import { QuoteForm } from "@/components/quote-form";
 import { SectionHeading } from "@/components/section-heading";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Get a Packaging Quote | UPG",
+export const metadata: Metadata = createPageMetadata({
+  title: "Get a Custom Packaging Quote",
   description:
-    "Request a quote for rigid boxes, folding cartons, mailers, mylar pouches, or paper cups. We respond with a structured next step.",
-  alternates: { canonical: "https://universalpackaginggroup.com/get-a-quote" },
-  openGraph: {
-    type: "website",
-    title: "Get a Packaging Quote | UPG",
-    description:
-      "Tell us about the product, quantity, and finish direction. We will come back with a structured quote response.",
-    url: "https://universalpackaginggroup.com/get-a-quote",
-  },
-};
+    "Request a custom packaging quote for folding cartons, rigid boxes, mailers, inserts, pouches, or paper cups for delivery in the US or Canada.",
+  path: "/get-a-quote",
+  keywords: [
+    "custom packaging quote",
+    "cosmetic packaging quote",
+    "custom box quote",
+  ],
+});
 
 interface PageProps {
   searchParams: Promise<{ product?: string }>;
@@ -28,9 +27,10 @@ export default async function GetAQuotePage({ searchParams }: PageProps) {
       <section className="bg-gradient-warm">
         <div className="container-editorial pt-12 pb-8 md:pt-16 md:pb-10">
           <SectionHeading
+            as="h1"
             eyebrow="Get a quote"
             title="Tell us about your packaging project."
-            intro="Fast start: product family, quantity, contact details, and a short note are enough. Shipping, artwork, and finish details can be added if you already have them."
+            intro="Start with the product family, quantity, intended use, delivery country, and contact details. Dimensions, artwork, and finish details can be added when available."
             className="max-w-4xl"
           />
         </div>

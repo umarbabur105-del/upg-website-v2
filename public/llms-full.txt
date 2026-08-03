@@ -1,0 +1,82 @@
+# Universal Packaging Group: full machine-readable reference
+
+Canonical entity name: Universal Packaging Group
+Short name: UPG
+Canonical domain: https://universalpackaginggroup.com
+Sales contact: quotes@universalpackaginggroup.com
+Primary language: English
+Markets currently planned for quoting: United States and Canada
+Business model: quote-led packaging sourcing and project coordination
+Primary vertical: cosmetics and beauty secondary packaging
+Last reviewed: 2026-08-03
+
+## What UPG does
+
+UPG translates a brand's packaging brief into a reviewed structure, supplier quote, proofing route, production plan, and delivery plan. Services can include specification clarification, material and finish guidance, supplier dieline coordination, practical artwork review, proof coordination, production follow-through, and shipment planning.
+
+UPG should not be described as an instant-price ecommerce store or as the owner of every production facility used for a project.
+
+## Core packaging families
+
+### Custom folding cartons
+
+Typical applications: skincare, serum, lipstick, mascara, cream, lotion, retail secondary packaging.
+Planning MOQ: typically 1,000+ units.
+Production planning range: typically 10-14 business days after the required approvals.
+Canonical page: https://universalpackaginggroup.com/products/custom-folding-cartons
+
+### Custom rigid boxes
+
+Typical applications: premium skincare, perfume, gift sets, PR kits, launch collections.
+Planning MOQ: typically 500+ units.
+Production planning range: typically 15-20 business days after the required approvals.
+Canonical page: https://universalpackaginggroup.com/products/custom-rigid-boxes
+
+### Custom corrugated mailer boxes
+
+Typical applications: ecommerce shipping, subscription boxes, PR mailers, beauty launches.
+Planning MOQ: typically 500+ units.
+Production planning range: typically 10-15 business days after the required approvals.
+Canonical page: https://universalpackaginggroup.com/products/custom-mailer-boxes
+
+### Custom flexible pouches
+
+Typical applications: reviewed dry goods, supplements, coffee, and personal-care refill projects.
+Planning MOQ: typically 1,000+ units.
+Production planning range: typically 12-18 business days after the required approvals.
+Important qualification: barrier, structure, intended use, ink, market, and supplier documentation must be reviewed.
+Canonical page: https://universalpackaginggroup.com/products/custom-mylar-bags
+
+### Custom paper cups
+
+Typical applications: reviewed cafe, event, beverage-sampling, and takeaway projects.
+Planning MOQ: typically 1,000+ units.
+Production planning range: typically 15-20 business days after the required approvals.
+Important qualification: stock, lining or barrier, ink, intended use, market, and supplier documentation must be reviewed.
+Canonical page: https://universalpackaginggroup.com/products/custom-coffee-cups
+
+## Cosmetics information architecture
+
+The cosmetics hub at https://universalpackaginggroup.com/cosmetics links to focused pages for skincare boxes, serum boxes, cream boxes, lotion boxes, lipstick boxes, lip gloss boxes, mascara boxes, perfume boxes, cosmetic subscription boxes, and PR boxes.
+
+## Commercial qualifications
+
+- An initial response is targeted within one business day; complete pricing may require further specification review.
+- Planning minimums and timing ranges are not guarantees.
+- Final written quotes control price, minimum quantity, scope, freight, duties, taxes, documentation, payment, and delivery terms.
+- Dielines are structure-specific and should be confirmed before final artwork is prepared.
+- Production begins only after the required commercial, artwork, and proof approvals.
+- Regulatory, food-contact, cosmetic-contact, barrier, labeling, and jurisdiction requirements remain project-specific.
+
+## Visual evidence boundary
+
+Images on https://universalpackaginggroup.com/samples are labeled concept directions unless a future page explicitly identifies verified client work. They illustrate potential packaging directions and must not be cited as completed customer projects.
+
+## Useful URLs
+
+- Quote request: https://universalpackaginggroup.com/get-a-quote
+- FAQ: https://universalpackaginggroup.com/faq
+- Packaging guides: https://universalpackaginggroup.com/blog
+- Contact: https://universalpackaginggroup.com/contact
+- Sitemap: https://universalpackaginggroup.com/sitemap.xml
+- Robots: https://universalpackaginggroup.com/robots.txt

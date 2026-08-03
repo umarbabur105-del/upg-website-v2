@@ -85,6 +85,8 @@ export function Header() {
           className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface lg:hidden"
           onClick={() => setMobileOpen((open) => !open)}
           aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
         >
           <span
             className={`absolute h-0.5 w-4 bg-foreground transition-transform ${
@@ -105,7 +107,10 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-border bg-background lg:hidden">
+        <div
+          id="mobile-navigation"
+          className="border-t border-border bg-background lg:hidden"
+        >
           <nav className="container-editorial flex flex-col gap-1 py-6">
             {siteConfig.navigation.map((item) => (
               <Link
@@ -117,6 +122,18 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <div className="mt-3 grid grid-cols-2 gap-x-6 border-t border-border pt-4">
+              {siteConfig.utilityNavigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="py-2 text-sm text-muted-foreground hover:text-foreground"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
             <div className="mt-4 border-t border-border pt-4">
               {HAS_WHATSAPP ? (
                 <a

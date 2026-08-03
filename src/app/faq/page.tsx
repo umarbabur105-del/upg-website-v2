@@ -3,20 +3,20 @@ import { Section, SectionHeading, SectionSubheading } from "@/components/section
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CtaBanner } from "@/components/cta-banner";
 import { faqItems } from "@/data/faq";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "FAQ — UPG Custom Packaging",
+export const metadata: Metadata = createPageMetadata({
+  title: "Custom Packaging FAQ",
   description:
-    "Common questions about ordering custom packaging from UPG — MOQs, lead times, design help, and more.",
-  alternates: { canonical: "https://universalpackaginggroup.com/faq" },
-  openGraph: {
-    type: "website",
-    title: "FAQ | UPG",
-    description:
-      "Frequently asked questions about UPG custom packaging — MOQs, quoting, design support, and more.",
-    url: "https://universalpackaginggroup.com/faq",
-  },
-};
+    "Answers about UPG custom packaging quotes, planning MOQs, production timelines, dielines, samples, delivery, and intended-use review.",
+  path: "/faq",
+  keywords: [
+    "custom packaging FAQ",
+    "custom packaging MOQ",
+    "packaging production timeline",
+    "custom packaging samples",
+  ],
+});
 
 export default function FaqPage() {
   const faqSchema = {
@@ -41,7 +41,7 @@ export default function FaqPage() {
       {/* Hero */}
       <section className="bg-olive px-6 pt-32 pb-20 lg:px-8 lg:pb-28">
         <div className="mx-auto max-w-3xl">
-          <SectionHeading className="text-offwhite">
+          <SectionHeading as="h1" className="text-offwhite">
             Frequently Asked Questions
           </SectionHeading>
           <SectionSubheading className="text-offwhite/60">

@@ -1,53 +1,121 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
+import { LeadAttributionCapture } from "@/components/lead-attribution-capture";
+import { CORE_KEYWORDS, DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo";
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/inter";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://universalpackaginggroup.com"),
+  metadataBase: new URL(SITE_URL),
+  applicationName: "Universal Packaging Group",
+  authors: [{ name: "Universal Packaging Group", url: SITE_URL }],
+  creator: "Universal Packaging Group",
+  publisher: "Universal Packaging Group",
+  category: "Custom packaging",
+  keywords: CORE_KEYWORDS,
   title: {
-    default: "Premium Custom Packaging for Beauty and Product Brands | UPG",
-    template: "%s",
+    default: "Custom Cosmetic Packaging for Beauty Brands | UPG",
+    template: "%s | UPG",
   },
   description:
-    "Custom packaging for beauty and product brands in the United States and Canada. Explore mailer boxes, rigid boxes, folding cartons, mylar pouches, and paper cups.",
+    "Custom cosmetic packaging for beauty brands in the United States and Canada. Plan folding cartons, rigid boxes, PR kits, mailers, and inserts with guided quoting and production coordination.",
+  alternates: { canonical: SITE_URL },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     type: "website",
     siteName: "Universal Packaging Group",
-    title: "Premium Custom Packaging for Beauty and Product Brands | UPG",
+    locale: "en_US",
+    title: "Custom Cosmetic Packaging for Beauty Brands | UPG",
     description:
-      "Cosmetics-first packaging with all day-one product formats visible from launch: rigid boxes, folding cartons, mailers, pouches, and cups.",
-    url: "https://universalpackaginggroup.com",
+      "Guided custom packaging for skincare, cosmetics, PR launches, and growing product brands in the United States and Canada.",
+    url: SITE_URL,
+    images: [DEFAULT_OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Custom Cosmetic Packaging for Beauty Brands | UPG",
+    description:
+      "Folding cartons, rigid boxes, mailers, PR kits, and inserts with guided quoting and production coordination.",
+    images: [DEFAULT_OG_IMAGE.url],
   },
 };
 
-const organizationSchema = {
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Universal Packaging Group",
-  alternateName: "UPG",
-  url: "https://universalpackaginggroup.com",
-  email: "quotes@universalpackaginggroup.com",
-  description:
-    "Premium quote-led custom packaging for beauty and product brands in the United States and Canada.",
-  areaServed: ["US", "CA"],
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Universal Packaging Group",
+      alternateName: "UPG",
+      url: SITE_URL,
+      email: "quotes@universalpackaginggroup.com",
+      description:
+        "A quote-led custom packaging sourcing and project-coordination company for beauty and product brands in the United States and Canada.",
+      areaServed: [
+        { "@type": "Country", name: "United States" },
+        { "@type": "Country", name: "Canada" },
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: "quotes@universalpackaginggroup.com",
+        areaServed: ["US", "CA"],
+        availableLanguage: ["English"],
+      },
+      knowsAbout: [
+        "Custom cosmetic packaging",
+        "Folding cartons",
+        "Rigid boxes",
+        "Custom mailer boxes",
+        "PR packaging kits",
+        "Packaging inserts",
+        "Artwork and dieline review",
+        "Packaging production coordination",
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Custom packaging services",
+        itemListElement: [
+          "Custom folding cartons",
+          "Custom rigid boxes",
+          "Custom mailer boxes",
+          "Cosmetics PR kits",
+          "Custom packaging inserts",
+          "Custom pouches",
+          "Custom paper cups",
+        ].map((name) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name },
+        })),
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "Universal Packaging Group",
+      alternateName: "UPG Custom Packaging",
+      description:
+        "Custom cosmetic packaging guidance, quoting, and production coordination for brands in the United States and Canada.",
+      inLanguage: "en-US",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -60,10 +128,11 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={`${fraunces.variable} ${inter.variable} font-sans antialiased`}>
+      <body className="font-sans antialiased">
+        <LeadAttributionCapture />
         <AnnouncementBar />
         <Header />
         <main>{children}</main>

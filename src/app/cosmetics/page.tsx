@@ -10,19 +10,38 @@ import {
   sampleHighlights,
 } from "@/data/catalog";
 import { products } from "@/data/products";
+import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Cosmetics Packaging Hub | UPG",
+export const metadata: Metadata = createPageMetadata({
+  title: "Custom Cosmetic Packaging for Beauty Brands",
   description:
-    "Explore skincare, serum, lipstick, perfume, PR box, and subscription-box packaging built around cosmetics-first buying journeys.",
-  alternates: { canonical: "https://universalpackaginggroup.com/cosmetics" },
-  openGraph: {
-    type: "website",
-    title: "Cosmetics Packaging Hub | UPG",
-    description:
-      "A cosmetics-first packaging hub for skincare, serum, lipstick, perfume, PR, and subscription launches.",
-    url: "https://universalpackaginggroup.com/cosmetics",
+    "Plan custom cosmetic packaging for skincare, serum, lipstick, perfume, PR kits, and subscription launches. Compare structures, finishes, inserts, and quote requirements.",
+  path: "/cosmetics",
+  keywords: [
+    "cosmetic packaging boxes",
+    "skincare packaging boxes",
+    "beauty product packaging",
+    "custom PR boxes",
+  ],
+});
+
+const cosmeticsServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${SITE_URL}/cosmetics#service`,
+  name: "Custom cosmetic packaging sourcing and production coordination",
+  serviceType: "Custom cosmetic packaging",
+  provider: { "@id": `${SITE_URL}/#organization` },
+  areaServed: [
+    { "@type": "Country", name: "United States" },
+    { "@type": "Country", name: "Canada" },
+  ],
+  audience: {
+    "@type": "BusinessAudience",
+    audienceType: "Beauty, skincare, cosmetics, fragrance, and personal-care brands",
   },
+  description:
+    "Guidance, quoting, supplier coordination, proofing, and delivery planning for custom cosmetic cartons, rigid boxes, mailers, PR kits, and inserts.",
 };
 
 const productTypeRecs = [
@@ -60,18 +79,23 @@ export default function CosmeticsPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(cosmeticsServiceSchema) }}
+      />
       <section className="bg-gradient-warm">
         <div className="container-editorial pt-12 pb-14 md:pt-16 md:pb-18">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
-              <div className="eyebrow mb-5">Cosmetics packaging hub</div>
+              <div className="eyebrow mb-5">Custom cosmetic packaging</div>
               <h1 className="display-1 text-balance">
-                Packaging for beauty brands that take presentation seriously.
+                Cosmetic packaging built around the product inside.
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Whether you are launching your first skincare SKU or scaling a
-                hero serum, this hub is built around the structures, finishes,
-                and insert systems cosmetics buyers actually need.
+                Plan folding cartons, rigid presentation boxes, mailers, PR
+                kits, and inserts for skincare, serum, lipstick, and fragrance
+                launches. Every quote is reviewed against the product, quantity,
+                finish, intended use, and shipping destination.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
                 <Link

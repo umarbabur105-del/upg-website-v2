@@ -23,17 +23,17 @@ export default function HomePage() {
         <div className="container-editorial pt-12 pb-20 md:pt-20 md:pb-28">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
-              <div className="eyebrow mb-6">Custom Packaging • US & Canada</div>
+              <div className="eyebrow mb-6">Custom Cosmetic Packaging • US & Canada</div>
               <h1 className="display-1 text-balance">
-                Premium packaging
+                Custom packaging
                 <br />
-                for beauty brands
-                <span className="text-gold"> built to be opened.</span>
+                built around
+                <span className="text-gold"> your beauty product.</span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty md:text-xl">
-                Custom rigid boxes, folding cartons, mailers, mylar pouches, and
-                paper cups. Cosmetics leads the buying journey, but every
-                day-one format is visible from launch.
+                Plan folding cartons, rigid boxes, PR kits, mailers, and inserts
+                with guided quoting, artwork review, supplier coordination, and
+                delivery planning for the United States and Canada.
               </p>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
@@ -144,9 +144,9 @@ export default function HomePage() {
         <div className="container-editorial">
           <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="The product range"
-              title="Five formats, every one production-ready."
-              intro="Cosmetics is the primary buying journey, but every day-one format is visible from launch and ready to quote."
+              eyebrow="Packaging formats"
+              title="Five formats, one guided quote process."
+              intro="Cosmetic cartons, rigid boxes, and mailers are the primary focus. Pouches and paper cups are quoted after end-use and material-document review."
             />
             <Link
               href="/products"
@@ -217,7 +217,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="How it works"
               title="A quote-led process with fewer surprises."
-              intro="Built for fast outreach follow-up, consultative quoting, and structured production planning."
+              intro="Built around clear specifications, supplier review, documented proofing, and realistic production planning."
             />
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -240,9 +240,9 @@ export default function HomePage() {
         <div className="container-editorial">
           <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="Samples & portfolio"
-              title="Proof points you can actually send to prospects."
-              intro="Visual packaging references for skincare, gifting, PR kits, and launch-led presentation."
+              eyebrow="Concept directions"
+              title="See how structure, finish, and inserts work together."
+              intro="These concept visuals show possible directions for skincare, gifting, and PR packaging. Final specifications are developed for each project."
             />
             <Link
               href="/samples"
@@ -284,8 +284,8 @@ export default function HomePage() {
           <div className="mb-14">
             <SectionHeading
               eyebrow="Industries"
-              title="Day-one capability beyond cosmetics."
-              intro="Cosmetics leads the strategy, but the site still makes the full product range and adjacent use cases clear from launch."
+              title="Capabilities beyond cosmetics, reviewed by end use."
+              intro="Beauty packaging is the primary specialization. Adjacent ecommerce, beverage, and packaged-goods projects are assessed against structure and documentation requirements."
             />
           </div>
 
@@ -335,8 +335,8 @@ export default function HomePage() {
       </section>
 
       <QuoteCta
-        title="Need a packaging partner who can quote quickly and guide the spec?"
-        intro="Use the site as a starting point, then bring the project into a real quote conversation. We will help you choose the right format, finish, and next step."
+        title="Need help turning a packaging idea into a quote-ready specification?"
+        intro="Share the product, quantity, dimensions, intended use, and destination. We will review the structure and confirm the practical next step."
       />
     </>
   );

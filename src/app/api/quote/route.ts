@@ -1,14 +1,56 @@
 import { NextResponse } from "next/server";
 import { renderFieldRows, sendNotification } from "@/lib/mailer";
+import {
+  cleanAttribution,
+  cleanSubmissionId,
+  cleanText,
+  FormRequestError,
+  isHoneypotFilled,
+  isValidEmail,
+  parseFormRequest,
+} from "@/lib/form-validation";
+import {
+  appendLeadToGoogleSheet,
+  prepareGoogleSheetsAuth,
+} from "@/lib/google-sheets";
+
+const allowedFamilies = new Set(["Boxes", "Mylar Bags", "Paper Cups", "Not sure yet"]);
+const allowedCountries = new Set(["United States", "Canada"]);
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const input = await parseFormRequest(request);
+    if (isHoneypotFilled(input)) {
+      return NextResponse.json({ success: true, accepted: true });
+    }
 
-    const requiredFields = [
+    const attribution = cleanAttribution(input.attribution);
+    const submissionId = cleanSubmissionId(input.submission_id);
+    const data = {
+      product_family: cleanText(input.product_family, { max: 80, singleLine: true }),
+      product_style: cleanText(input.product_style, { max: 120, singleLine: true }),
+      quantity: cleanText(input.quantity, { max: 80, singleLine: true }),
+      intended_end_use: cleanText(input.intended_end_use, { max: 240, singleLine: true }),
+      shipping_country: cleanText(input.shipping_country, { max: 40, singleLine: true }),
+      shipping_state_or_province: cleanText(input.shipping_state_or_province, { max: 100, singleLine: true }),
+      target_delivery_timing: cleanText(input.target_delivery_timing, { max: 100, singleLine: true }),
+      artwork_status: cleanText(input.artwork_status, { max: 100, singleLine: true }),
+      name: cleanText(input.name, { max: 120, singleLine: true }),
+      email: cleanText(input.email, { max: 254, singleLine: true }).toLowerCase(),
+      phone: cleanText(input.phone, { max: 60, singleLine: true }),
+      company: cleanText(input.company, { max: 160, singleLine: true }),
+      website: cleanText(input.website, { max: 300, singleLine: true }),
+      dimensions: cleanText(input.dimensions, { max: 160, singleLine: true }),
+      material_preference: cleanText(input.material_preference, { max: 160, singleLine: true }),
+      finish_preference: cleanText(input.finish_preference, { max: 160, singleLine: true }),
+      notes: cleanText(input.notes, { max: 4_000 }),
+    };
+
+    const requiredFields: Array<keyof typeof data> = [
       "product_family",
       "quantity",
       "intended_end_use",
+      "shipping_country",
       "name",
       "email",
       "company",
@@ -25,14 +67,15 @@ export async function POST(request: Request) {
       );
     }
 
-    const submissionRecord = {
-      type: "quote_submission",
-      receivedAt: new Date().toISOString(),
-      userAgent: request.headers.get("user-agent"),
-      data,
-    };
-
-    console.log(JSON.stringify(submissionRecord));
+    if (!allowedFamilies.has(data.product_family)) {
+      return NextResponse.json({ error: "Invalid product family" }, { status: 400 });
+    }
+    if (!allowedCountries.has(data.shipping_country)) {
+      return NextResponse.json({ error: "Invalid shipping country" }, { status: 400 });
+    }
+    if (!isValidEmail(data.email)) {
+      return NextResponse.json({ error: "Enter a valid email address" }, { status: 400 });
+    }
 
     const subjectName = String(data.name).trim();
     const subjectCompany = String(data.company).trim();
@@ -70,14 +113,76 @@ export async function POST(request: Request) {
 
     const replyTo = String(data.email).trim() || undefined;
 
-    const mail = await sendNotification({ subject, html, text, replyTo });
+    const receivedAt = new Date();
+    const [sheetsAuth, mail] = await Promise.all([
+      prepareGoogleSheetsAuth(request),
+      sendNotification({ subject, html, text, replyTo }),
+    ]);
+    const saved = await appendLeadToGoogleSheet(
+      {
+        submissionId,
+        receivedAt,
+        source: "Quote Request",
+        notificationStatus: mail.delivered ? "Sent" : "Failed",
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        company: data.company,
+        website: data.website,
+        productFamily: data.product_family,
+        productStyle: data.product_style,
+        quantity: data.quantity,
+        intendedEndUse: data.intended_end_use,
+        shippingCountry: data.shipping_country,
+        shippingStateOrProvince: data.shipping_state_or_province,
+        targetDelivery: data.target_delivery_timing,
+        artworkStatus: data.artwork_status,
+        dimensions: data.dimensions,
+        materialPreference: data.material_preference,
+        finishPreference: data.finish_preference,
+        message: data.notes,
+        landingPage: attribution.landing_page,
+        referrer: attribution.referrer,
+        utmSource: attribution.utm_source,
+        utmMedium: attribution.utm_medium,
+        utmCampaign: attribution.utm_campaign,
+        utmContent: attribution.utm_content,
+        utmTerm: attribution.utm_term,
+      },
+      sheetsAuth
+    );
+
+    if (!saved.stored && !mail.delivered) {
+      console.error(JSON.stringify({
+        type: "quote_delivery_failed",
+        mailVia: mail.via,
+        sheetsReason: saved.reason,
+      }));
+      return NextResponse.json(
+        { error: "We could not deliver this request. Please email quotes@universalpackaginggroup.com." },
+        { status: 502 }
+      );
+    }
+
+    console.log(JSON.stringify({
+      type: "quote_accepted",
+      stored: saved.stored,
+      notified: mail.delivered,
+      receivedAt: new Date().toISOString(),
+    }));
 
     return NextResponse.json({
       success: true,
-      message: "Quote request received. We will respond within 24 hours.",
+      accepted: true,
+      message: "Quote request received. We target an initial response within one business day.",
+      stored: saved.stored,
       delivered: mail.delivered,
     });
-  } catch {
+  } catch (error) {
+    if (error instanceof FormRequestError) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    }
+    console.error(JSON.stringify({ type: "quote_route_error" }));
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 }

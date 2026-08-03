@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const heroMetrics = [
-  { label: "Quote in 24hrs" },
+  { label: "One-business-day response target" },
   { label: "US & Canada delivery" },
   { label: "100-unit MOQ" },
   { label: "Free design support" },

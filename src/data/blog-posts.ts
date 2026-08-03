@@ -108,7 +108,7 @@ A **dieline** is a flat, technical template showing the exact shape and fold lin
 
 Do not start designing until you have the correct dieline. Designing on a generic template and then trying to adapt it to the actual structure almost always results in misaligned artwork.
 
-At UPG, dielines are provided as part of the quoting process for your specific dimensions. If you are working with a designer, share the dieline file (usually an Adobe Illustrator .ai or .eps format) with them before design work begins.
+At UPG, supplier dielines are coordinated after the structure and dimensions are sufficiently defined. If you are working with a designer, wait for the project-specific dieline before finalizing panel artwork.
 
 ## Step 2 — Set Up Your File Correctly
 
@@ -141,7 +141,7 @@ If you do not have 3D mockup software, even a PDF showing each panel of your des
 - Outline all fonts
 - Submit as .ai or print-ready PDF
 
-If you have artwork in progress but are not sure whether it is ready, include it with your quote request and note its status. We review artwork as part of the quoting process and will flag any issues before production begins.
+If you have artwork in progress but are not sure whether it is ready, describe its status in your quote request. Practical artwork checks and supplier prepress review are coordinated before production, while final file approval remains part of the documented proofing process.
     `.trim(),
   },
 ];

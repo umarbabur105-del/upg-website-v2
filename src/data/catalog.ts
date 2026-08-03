@@ -38,11 +38,11 @@ export interface CosmeticSubcategory {
 }
 
 export const trustPoints: TrustPoint[] = [
-  { label: "Quote in 24 hours" },
-  { label: "Low MOQ path" },
-  { label: "US & Canada delivery" },
-  { label: "Design & dieline help" },
-  { label: "Production follow-through" },
+  { label: "One-business-day quote target" },
+  { label: "MOQ matched to structure" },
+  { label: "US & Canada delivery planning" },
+  { label: "Dieline & artwork guidance" },
+  { label: "Proofing & production coordination" },
 ];
 
 export const cosmeticsSolutions: CosmeticSolution[] = [

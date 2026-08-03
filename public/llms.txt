@@ -1,116 +1,54 @@
 # Universal Packaging Group (UPG)
-## Machine-readable summary for AI crawlers
 
-> Premium custom packaging for beauty and product brands.
+> Quote-led custom cosmetic packaging sourcing and project coordination for brands in the United States and Canada.
 
----
-
-## About
-
-Universal Packaging Group (UPG) is a quote-led custom packaging company serving brands in the United States and Canada. UPG handles quote management, packaging guidance, supplier coordination, production follow-through, and delivery planning across five day-one product formats.
-
-Website: https://universalpackaginggroup.com
+Canonical website: https://universalpackaginggroup.com
 Contact: quotes@universalpackaginggroup.com
+Last reviewed: 2026-08-03
+Full reference: https://universalpackaginggroup.com/llms-full.txt
 
----
+## Primary focus
 
-## Positioning
+UPG focuses on secondary packaging for beauty and cosmetic products:
 
-- Cosmetics-first buying journey
-- All day-one product formats visible from launch
-- North America-facing quote-led packaging partner
-- Built for outreach, not instant checkout
+- Custom folding cartons
+- Custom rigid boxes
+- Custom corrugated mailer boxes
+- PR and influencer kits
+- Custom paperboard, pulp, or foam inserts
+- Artwork, dieline, proofing, supplier, and delivery coordination
 
----
+UPG is a sourcing and project-coordination company. The website does not claim that UPG owns every factory or produces every item in-house.
 
-## Products
+## Additional reviewed formats
 
-1. **Corrugated Mailer Box** (slug: custom-mailer-boxes)
-   - Family: Boxes
-   - MOQ: 250+ units
-   - Lead time: 12–16 business days
-   - Use cases: e-commerce shipping, subscription boxes, beauty launches, PR kits
+Custom flexible pouches and paper cups may be quoted after intended-use, material, barrier, ink, documentation, quantity, and destination review. A generic material description is not evidence of regulatory or food-contact suitability.
 
-2. **Magnetic Closure Rigid Box** (slug: custom-rigid-boxes)
-   - Family: Boxes
-   - MOQ: 300+ units
-   - Lead time: 18–25 business days
-   - Use cases: luxury cosmetics, perfume, gift packaging, PR kits
+## Planning ranges
 
-3. **Stand Up Mylar Pouch** (slug: custom-mylar-bags)
-   - Family: Mylar Bags
-   - MOQ: 1,000+ units
-   - Lead time: 20–28 business days
-   - Use cases: supplements, coffee, dry goods, personal care refills
+- Rigid boxes: typically 500+ units; production planning often 15-20 business days
+- Corrugated mailer boxes: typically 500+ units; production planning often 10-15 business days
+- Folding cartons: typically 1,000+ units; production planning often 10-14 business days
+- Flexible pouches: typically 1,000+ units; production planning often 12-18 business days
+- Paper cups: typically 1,000+ units; production planning often 15-20 business days
 
-4. **Reverse Tuck End Folding Carton** (slug: custom-folding-cartons)
-   - Family: Boxes
-   - MOQ: 500+ units
-   - Lead time: 12–18 business days
-   - Use cases: skincare, serums, lipstick, retail packaging
+These are planning ranges, not binding offers. Final minimums, price, production timing, freight, duties, taxes, documentation, and delivery terms are controlled by the written quote for the confirmed specification.
 
-5. **Single Wall Paper Cup** (slug: custom-coffee-cups)
-   - Family: Paper Cups
-   - MOQ: 1,000+ units
-   - Lead time: 15–22 business days
-   - Use cases: cafes, events, beverage sampling, takeaway
+## Quote process
 
----
+1. Submit product type, intended use, quantity, delivery country, and available specifications at https://universalpackaginggroup.com/get-a-quote
+2. UPG targets an initial response within one business day
+3. Structure, materials, finishes, artwork, proofing, supplier route, and delivery plan are confirmed as required
+4. Production coordination starts only after the applicable written approvals
 
-## Industries Served
+## Reliable source pages
 
-- Cosmetics & Beauty
-- E-commerce & Retail
-- Supplements & Specialty Food
-- Coffee & Beverage
+- Company and operating model: https://universalpackaginggroup.com/about
+- Product formats: https://universalpackaginggroup.com/products
+- Cosmetic packaging: https://universalpackaginggroup.com/cosmetics
+- Materials and finishes: https://universalpackaginggroup.com/materials-finishes
+- Planning questions: https://universalpackaginggroup.com/faq
+- Privacy: https://universalpackaginggroup.com/privacy
+- Website terms: https://universalpackaginggroup.com/terms
 
----
-
-## Cosmetics Hub
-
-Primary cosmetics route families:
-- /cosmetics
-- /cosmetics/skincare-boxes
-- /cosmetics/serum-boxes
-- /cosmetics/cream-boxes
-- /cosmetics/lotion-boxes
-- /cosmetics/lipstick-boxes
-- /cosmetics/lip-gloss-boxes
-- /cosmetics/mascara-boxes
-- /cosmetics/perfume-boxes
-- /cosmetics/cosmetic-subscription-boxes
-- /cosmetics/pr-boxes
-
----
-
-## Quote Process
-
-1. Submit request at /get-a-quote — include product type, quantity, dimensions, materials, and shipping destination
-2. UPG reviews specs and sends detailed pricing within 24 business hours
-3. Approve artwork, confirm proofs, UPG manages production through to landed delivery
-
----
-
-## Key Facts
-
-- Quote turnaround: 24 business hours (standard target)
-- Minimum order quantity: depends on product format and structure
-- Delivery markets: United States and Canada (DDP pricing available)
-- Design support: included — artwork guidance, dielines, print setup
-- Pricing model: quote-led (no instant online pricing — custom specs require individual review)
-
----
-
-## Site Structure
-
-- / — Homepage
-- /products — Full day-one product directory
-- /cosmetics — Cosmetics packaging hub
-- /materials-finishes — Materials, finishes, and capability page
-- /samples — Sample and portfolio direction page
-- /get-a-quote — Quote request form
-- /about — Company overview
-- /faq — Frequently asked questions
-- /contact — Contact information
-- /products/[slug] — Individual product pages (5 products)
-- /cosmetics/[slug] — Cosmetic subcategory pages
+The images on https://universalpackaginggroup.com/samples are concept directions unless specifically identified otherwise; they are not represented as completed client work.

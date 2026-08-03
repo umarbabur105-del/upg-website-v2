@@ -48,8 +48,8 @@ export const products: Product[] = [
       "A premium magnetic-lid box that turns first impressions into shelf-worthy moments.",
     longSummary:
       "Heavy-grade chipboard wrapped in art paper, textured stocks, or specialty wraps. Built for beauty launches, PR mailers, gift sets, and premium collections where presentation is part of the product.",
-    moq: "300 units",
-    leadTime: "18–25 days",
+    moq: "Typically 500+ units",
+    leadTime: "Typically 15–20 business days",
     image: "/images/redesign/products/product-rigid.jpg",
     heroImage: "/images/redesign/products/product-rigid.jpg",
     materials: [
@@ -100,8 +100,8 @@ export const products: Product[] = [
       "The everyday workhorse of beauty packaging — refined, structural, and printable on every surface.",
     longSummary:
       "Lightweight folding cartons with a clean reverse-tuck closure. Ideal for skincare bottles, lip products, serums, and retail lines that need a premium print finish without moving into rigid-box cost.",
-    moq: "500 units",
-    leadTime: "12–18 days",
+    moq: "Typically 1,000+ units",
+    leadTime: "Typically 10–14 business days",
     image: "/images/redesign/products/product-carton.jpg",
     heroImage: "/images/redesign/products/product-carton.jpg",
     materials: ["SBS C1S 14–24pt", "Kraft 18–24pt", "Recycled board"],
@@ -148,8 +148,8 @@ export const products: Product[] = [
       "Branded mailers built for the unboxing — ship-ready, durable, and beautifully printed.",
     longSummary:
       "E-flute corrugated mailers with exterior and interior print options. Built for ecommerce shipping, influencer send-outs, cosmetic launches, and recurring subscription programs that need both protection and presentation.",
-    moq: "250 units",
-    leadTime: "12–16 days",
+    moq: "Typically 500+ units",
+    leadTime: "Typically 10–15 business days",
     image: "/images/redesign/products/product-mailer.jpg",
     heroImage: "/images/redesign/products/product-mailer.jpg",
     materials: ["E-flute corrugated", "F-flute corrugated", "White or kraft liner"],
@@ -189,8 +189,8 @@ export const products: Product[] = [
       "Premium barrier pouches with bold print real estate and strong shelf presence.",
     longSummary:
       "Multi-layer barrier film pouches with resealable zipper, tear notch, and stand-up gusset. Best for coffee, wellness, supplements, and select beauty refill formats where flexible packaging makes sense.",
-    moq: "1,000 units",
-    leadTime: "20–28 days",
+    moq: "Typically 1,000+ units",
+    leadTime: "Typically 12–18 business days",
     image: "/images/redesign/products/product-pouch.jpg",
     heroImage: "/images/redesign/products/product-pouch.jpg",
     materials: ["PET / VMPET / PE", "Kraft / PET / PE", "Matte PET"],
@@ -229,12 +229,16 @@ export const products: Product[] = [
     summary:
       "Custom-printed single-wall paper cups for cafes, specialty beverage brands, and events.",
     longSummary:
-      "Food-grade single-wall paper cups with custom print, standard size formats, and clean cylindrical presentation. A practical route for cafes, activations, and branded beverage service.",
-    moq: "1,000 units",
-    leadTime: "15–22 days",
+      "Custom-printed single-wall paper cups in standard size formats. Cup stock, lining, ink, and intended beverage use require supplier-document review before a project is approved.",
+    moq: "Typically 1,000+ units",
+    leadTime: "Typically 15–20 business days",
     image: "/images/redesign/products/product-cup.jpg",
     heroImage: "/images/redesign/products/product-cup.jpg",
-    materials: ["Food-grade SBS + lining", "PE lining", "Bio-PLA option on review"],
+    materials: [
+      "Cup stock subject to end-use review",
+      "PE lining options",
+      "Alternative barrier options on review",
+    ],
     prints: ["Flexo CMYK", "Pantone spot"],
     finishes: ["Matte", "Gloss"],
     sizes: "4 oz, 8 oz, 12 oz, 16 oz, and 20 oz standard formats.",
@@ -248,7 +252,7 @@ export const products: Product[] = [
     ],
     industries: ["Coffee & Beverage", "Hospitality", "Events"],
     materialOptions:
-      "Food-grade cup stock with supported lining or barrier options depending on the use case.",
+      "Cup stock, lining, and barrier options are confirmed only after intended-use and supplier-document review.",
     printOptions:
       "Exterior wrap print in standard color systems and Pantone-supported routes.",
     finishOptions:

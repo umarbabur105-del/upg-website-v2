@@ -9,6 +9,7 @@ import {
   getCosmeticsSubcategoryBySlug,
 } from "@/data/catalog";
 import { getProductBySlug } from "@/data/products";
+import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -26,21 +27,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!subcategory) return {};
 
-  const title = `${subcategory.title} | UPG Cosmetics Packaging`;
+  const title = `Custom ${subcategory.title}`;
   const description = subcategory.heroDescription;
-  const url = `https://universalpackaginggroup.com/cosmetics/${slug}`;
-
-  return {
+  return createPageMetadata({
     title,
     description,
-    alternates: { canonical: url },
-    openGraph: {
-      type: "website",
-      title,
-      description,
-      url,
-    },
-  };
+    path: `/cosmetics/${slug}`,
+    keywords: [
+      subcategory.title,
+      `${subcategory.title.toLowerCase()} wholesale`,
+      `${subcategory.title.toLowerCase()} custom packaging`,
+    ],
+  });
 }
 
 export default async function CosmeticSubcategoryPage({ params }: PageProps) {
@@ -58,8 +56,51 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
     }))
     .filter((item) => item.product);
 
+  const pageUrl = `${SITE_URL}/cosmetics/${slug}`;
+  const pageSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${pageUrl}#service`,
+        name: `Custom ${subcategory.title}`,
+        description: subcategory.heroDescription,
+        url: pageUrl,
+        provider: { "@id": `${SITE_URL}/#organization` },
+        areaServed: ["United States", "Canada"],
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: SITE_URL,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Cosmetic Packaging",
+            item: `${SITE_URL}/cosmetics`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: subcategory.title,
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+      />
       <section className="bg-gradient-warm">
         <div className="container-editorial pt-16 pb-20 md:pt-24 md:pb-28">
           <div className="max-w-4xl">

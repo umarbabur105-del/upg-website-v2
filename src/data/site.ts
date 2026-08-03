@@ -2,19 +2,19 @@ export const siteConfig = {
   name: "Universal Packaging Group",
   shortName: "UPG",
   description:
-    "Custom packaging for beauty and product brands that need premium presentation, faster quoting, and reliable follow-through.",
+    "Custom cosmetic packaging guidance, sourcing, and production coordination for beauty and product brands in the United States and Canada.",
   url: "https://universalpackaginggroup.com",
   email: "quotes@universalpackaginggroup.com",
   whatsappNumber: "",
   navigation: [
     { label: "Products", href: "/products" },
-    { label: "Cosmetics", href: "/cosmetics" },
-    { label: "Industries", href: "/industries" },
+    { label: "Cosmetic Packaging", href: "/cosmetics" },
     { label: "Materials & Finishes", href: "/materials-finishes" },
     { label: "Samples", href: "/samples" },
+    { label: "About", href: "/about" },
   ],
   utilityNavigation: [
-    { label: "About", href: "/about" },
+    { label: "Industries", href: "/industries" },
     { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },

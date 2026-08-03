@@ -2,41 +2,36 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Section, SectionHeading, SectionSubheading } from "@/components/section";
 import { CtaBanner } from "@/components/cta-banner";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About UPG — Custom Packaging Partner",
+export const metadata: Metadata = createPageMetadata({
+  title: "About Universal Packaging Group",
   description:
-    "UPG is a custom packaging partner for US and Canada brands. We handle sourcing, production, and delivery.",
-  alternates: { canonical: "https://universalpackaginggroup.com/about" },
-  openGraph: {
-    type: "website",
-    title: "About UPG — Custom Packaging Partner",
-    description:
-      "UPG is a custom packaging partner for US and Canada brands. We handle sourcing, production, and delivery.",
-    url: "https://universalpackaginggroup.com/about",
-  },
-};
+    "Learn how UPG helps beauty and product brands plan custom packaging, compare practical structures, review artwork, and coordinate supplier production and delivery.",
+  path: "/about",
+  keywords: ["custom packaging sourcing", "packaging production coordination"],
+});
 
 const differentiators = [
   {
     title: "Pricing built around your actual specs",
     description:
-      "No rate cards, no guesswork. Every quote is reviewed against your product type, quantity, material, and shipping destination before pricing is sent.",
+      "Every quote is reviewed against product type, dimensions, quantity, material, finish, intended use, and shipping destination before pricing is confirmed.",
   },
   {
-    title: "One process for boxes, pouches, and cups",
+    title: "One guided process from structure to quote",
     description:
-      "Whether you need corrugated mailers, mylar bags, or paper cups, everything moves through a single quote process. No bouncing between different suppliers.",
+      "You start with one project brief. UPG helps organize the structure, specification, artwork status, supplier path, and delivery requirements.",
   },
   {
     title: "Production coordination managed for you",
     description:
-      "UPG handles the supplier path — structure selection, proofing, production tracking, and landed delivery. You stay focused on your product.",
+      "After written quote and proof approval, UPG coordinates the selected supplier path, production updates, and delivery planning.",
   },
   {
     title: "Design support built into the process",
     description:
-      "Artwork guidance, dielines, and print setup included. You do not need a packaging expert on your team to get this right.",
+      "Dieline guidance and artwork review are coordinated according to the approved structure and supplier requirements.",
   },
 ];
 
@@ -44,16 +39,16 @@ const whoWeWorkWith = [
   "E-commerce brands shipping direct to customers",
   "Retail product companies needing shelf-ready packaging",
   "Beauty and personal care brands",
-  "Supplement and specialty food brands",
-  "Coffee shops, cafes, and beverage brands",
-  "Any brand that needs custom packaging without managing factories directly",
+  "Launch teams planning PR kits and influencer packaging",
+  "Selected packaged-goods and beverage projects after end-use review",
+  "Brands that want one accountable packaging coordination process",
 ];
 
 const whatToExpect = [
   { step: "01", label: "Submit your request", detail: "Product type, quantity, destination — we ask the right questions upfront." },
-  { step: "02", label: "Receive detailed pricing", detail: "Quote includes structure, materials, print options, lead time, and landed cost." },
+  { step: "02", label: "Receive a structured quote", detail: "The response defines the reviewed structure, material path, production estimate, and delivery basis." },
   { step: "03", label: "Approve artwork and proof", detail: "We guide you through dielines, artwork review, and pre-production sign-off." },
-  { step: "04", label: "Production and delivery", detail: "We track production through to landed delivery at your door." },
+  { step: "04", label: "Coordinate production and delivery", detail: "After approvals and payment, we coordinate production updates and the agreed delivery route." },
 ];
 
 export default function AboutPage() {
@@ -62,18 +57,19 @@ export default function AboutPage() {
       {/* Hero — brand statement */}
       <section className="bg-olive px-6 pt-32 pb-20 lg:px-8 lg:pb-28">
         <div className="mx-auto max-w-3xl">
-          <SectionHeading className="text-offwhite">
-            Custom packaging, handled from quote to delivery
+          <SectionHeading as="h1" className="text-offwhite">
+            Custom packaging guidance from brief to approved production
           </SectionHeading>
           <p className="mt-6 text-lg leading-relaxed text-offwhite/70">
-            UPG was built for brands that need custom packaging without the complexity of managing factories,
-            freight, and proofing separately. We handle the sourcing and production coordination —
-            you get clear pricing, design support, and delivery to your door.
+            Universal Packaging Group is a quote-led packaging sourcing and
+            project-coordination company. We help brands turn a product brief
+            into a reviewed structure, supplier quote, proofing path, and
+            delivery plan.
           </p>
           <p className="mt-4 text-lg leading-relaxed text-offwhite/60">
-            We serve brands in the United States and Canada across five product families:
-            corrugated mailer boxes, magnetic closure rigid boxes, stand-up mylar pouches,
-            folding cartons, and custom paper cups.
+            Beauty and cosmetic packaging is our primary focus, including
+            folding cartons, rigid boxes, branded mailers, PR kits, and inserts.
+            Pouches and paper cups require additional end-use and material review.
           </p>
           <div className="mt-10">
             <Link
@@ -90,7 +86,7 @@ export default function AboutPage() {
       <Section variant="cream">
         <SectionHeading>How We Work</SectionHeading>
         <SectionSubheading>
-          A few things that separate UPG from a generic supplier search.
+          A structured project process is more useful than an unverified list of factories.
         </SectionSubheading>
         <div className="mt-12 grid gap-8 md:grid-cols-2">
           {differentiators.map((item) => (
@@ -127,7 +123,7 @@ export default function AboutPage() {
       <Section variant="cream">
         <SectionHeading>Who We Work With</SectionHeading>
         <SectionSubheading>
-          UPG is set up for growing brands, not enterprise procurement teams.
+          UPG is designed for growing brands that need practical packaging guidance and coordinated execution.
         </SectionSubheading>
         <div className="mt-10 grid gap-3 md:grid-cols-2">
           {whoWeWorkWith.map((item) => (
@@ -149,7 +145,7 @@ export default function AboutPage() {
 
       <CtaBanner
         heading="Ready to get a quote?"
-        description="Tell us what you need and we will send pricing within 24 business hours."
+        description="Send the core project details. Our target is a structured first response within one business day."
         ctaText="Get a Quote"
         ctaHref="/get-a-quote"
       />

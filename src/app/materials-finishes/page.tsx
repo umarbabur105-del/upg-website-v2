@@ -3,15 +3,20 @@ import Image from "next/image";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { finishFeatures, materialsHighlights } from "@/data/catalog";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Materials & Finishes | UPG",
+export const metadata: Metadata = createPageMetadata({
+  title: "Custom Packaging Materials & Finishes",
   description:
-    "Explore paperboard, corrugated, rigid wraps, pouches, cup structures, and premium finishing options like foil, embossing, and spot UV.",
-  alternates: {
-    canonical: "https://universalpackaginggroup.com/materials-finishes",
-  },
-};
+    "Compare paperboard, corrugated, rigid wraps, flexible films, cup structures, foil stamping, embossing, lamination, and spot UV for custom packaging.",
+  path: "/materials-finishes",
+  keywords: [
+    "custom packaging materials",
+    "packaging finishes",
+    "foil stamped packaging",
+    "embossed cosmetic boxes",
+  ],
+});
 
 const materialGroups = [
   {
@@ -32,7 +37,11 @@ const materialGroups = [
   },
   {
     title: "Cup structures",
-    items: ["Food-grade cup stock", "Lining options", "Standard cup formats"],
+    items: [
+      "Cup stock selected by intended use",
+      "Barrier and lining options on review",
+      "Supplier documentation confirmed per project",
+    ],
   },
 ];
 
@@ -48,9 +57,9 @@ export default function MaterialsFinishesPage() {
                 Materials and finishes that make packaging feel considered.
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                This page is built as a decision-support resource. Use it to
-                understand the material families, wrap stocks, and finish options
-                most relevant to your launch.
+                Use this guide to understand common material families, wrap
+                stocks, and finishes. Final suitability depends on structure,
+                print process, intended use, testing, and supplier documentation.
               </p>
             </div>
             <div className="lg:col-span-6">

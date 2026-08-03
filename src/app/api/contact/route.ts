@@ -1,11 +1,37 @@
 import { NextResponse } from "next/server";
 import { renderFieldRows, sendNotification } from "@/lib/mailer";
+import {
+  cleanAttribution,
+  cleanSubmissionId,
+  cleanText,
+  FormRequestError,
+  isHoneypotFilled,
+  isValidEmail,
+  parseFormRequest,
+} from "@/lib/form-validation";
+import {
+  appendLeadToGoogleSheet,
+  prepareGoogleSheetsAuth,
+} from "@/lib/google-sheets";
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const input = await parseFormRequest(request, 12_000);
+    if (isHoneypotFilled(input)) {
+      return NextResponse.json({ success: true, accepted: true });
+    }
 
-    const requiredFields = ["name", "email", "message"];
+    const attribution = cleanAttribution(input.attribution);
+    const submissionId = cleanSubmissionId(input.submission_id);
+    const data = {
+      name: cleanText(input.name, { max: 120, singleLine: true }),
+      email: cleanText(input.email, { max: 254, singleLine: true }).toLowerCase(),
+      company: cleanText(input.company, { max: 160, singleLine: true }),
+      phone: cleanText(input.phone, { max: 60, singleLine: true }),
+      message: cleanText(input.message, { max: 4_000 }),
+    };
+
+    const requiredFields: Array<keyof typeof data> = ["name", "email", "message"];
     const missing = requiredFields.filter(
       (field) => !data[field] || String(data[field]).trim() === ""
     );
@@ -17,14 +43,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const submissionRecord = {
-      type: "contact_submission",
-      receivedAt: new Date().toISOString(),
-      userAgent: request.headers.get("user-agent"),
-      data,
-    };
-
-    console.log(JSON.stringify(submissionRecord));
+    if (!isValidEmail(data.email)) {
+      return NextResponse.json({ error: "Enter a valid email address" }, { status: 400 });
+    }
 
     const subjectName = String(data.name).trim();
     const subject = `[UPG Contact] ${subjectName}`;
@@ -48,14 +69,64 @@ export async function POST(request: Request) {
 
     const replyTo = String(data.email).trim() || undefined;
 
-    const mail = await sendNotification({ subject, html, text, replyTo });
+    const receivedAt = new Date();
+    const [sheetsAuth, mail] = await Promise.all([
+      prepareGoogleSheetsAuth(request),
+      sendNotification({ subject, html, text, replyTo }),
+    ]);
+    const saved = await appendLeadToGoogleSheet(
+      {
+        submissionId,
+        receivedAt,
+        source: "Contact Form",
+        notificationStatus: mail.delivered ? "Sent" : "Failed",
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        company: data.company,
+        message: data.message,
+        landingPage: attribution.landing_page,
+        referrer: attribution.referrer,
+        utmSource: attribution.utm_source,
+        utmMedium: attribution.utm_medium,
+        utmCampaign: attribution.utm_campaign,
+        utmContent: attribution.utm_content,
+        utmTerm: attribution.utm_term,
+      },
+      sheetsAuth
+    );
+
+    if (!saved.stored && !mail.delivered) {
+      console.error(JSON.stringify({
+        type: "contact_delivery_failed",
+        mailVia: mail.via,
+        sheetsReason: saved.reason,
+      }));
+      return NextResponse.json(
+        { error: "We could not deliver this message. Please email quotes@universalpackaginggroup.com." },
+        { status: 502 }
+      );
+    }
+
+    console.log(JSON.stringify({
+      type: "contact_accepted",
+      stored: saved.stored,
+      notified: mail.delivered,
+      receivedAt: new Date().toISOString(),
+    }));
 
     return NextResponse.json({
       success: true,
-      message: "Message received. We will get back to you within 1 business day.",
+      accepted: true,
+      message: "Message received. We target an initial response within one business day.",
+      stored: saved.stored,
       delivered: mail.delivered,
     });
-  } catch {
+  } catch (error) {
+    if (error instanceof FormRequestError) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    }
+    console.error(JSON.stringify({ type: "contact_route_error" }));
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 }

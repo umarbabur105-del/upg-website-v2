@@ -4,20 +4,19 @@ import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { products } from "@/data/products";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "All Day-One Packaging Products | UPG",
+export const metadata: Metadata = createPageMetadata({
+  title: "Custom Packaging Products",
   description:
-    "Explore UPG's five day-one packaging formats: custom mailer boxes, rigid boxes, folding cartons, mylar bags, and paper cups.",
-  alternates: { canonical: "https://universalpackaginggroup.com/products" },
-  openGraph: {
-    type: "website",
-    title: "All Day-One Packaging Products | UPG",
-    description:
-      "Five production-ready packaging formats with cosmetics as the primary buying journey.",
-    url: "https://universalpackaginggroup.com/products",
-  },
-};
+    "Compare custom folding cartons, rigid boxes, mailer boxes, mylar pouches, and paper cups. MOQ, timing, and material paths are confirmed after specification review.",
+  path: "/products",
+  keywords: [
+    "custom packaging products",
+    "custom packaging boxes",
+    "custom printed packaging",
+  ],
+});
 
 const groups = [
   {
@@ -41,12 +40,12 @@ export default function ProductsPage() {
         <div className="container-editorial pt-12 pb-8 md:pt-16 md:pb-10">
           <div className="max-w-4xl">
             <div className="eyebrow mb-5">The catalog</div>
-            <h1 className="display-1 text-balance">All of our day-one packaging.</h1>
+            <h1 className="display-1 text-balance">Custom packaging formats for product brands.</h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty">
-              Five production-ready formats spanning cartons, rigid
-              presentations, ecommerce mailers, flexible pouches, and
-              foodservice cups. Cosmetics is the primary strategic focus, but
-              every format is available from day one.
+              Compare cartons, rigid presentations, ecommerce mailers, flexible
+              pouches, and paper cups. Beauty packaging is our primary focus;
+              every project is reviewed for structure, material, intended use,
+              quantity, and destination before MOQ or timing is confirmed.
             </p>
           </div>
         </div>
@@ -67,7 +66,7 @@ export default function ProductsPage() {
                 <SectionHeading
                   eyebrow="Product group"
                   title={group.label}
-                  intro="Every product stays visible, but the buying path can still be guided by the use case."
+                  intro="Choose a starting format, then use the quote process to confirm structure, specifications, and production fit."
                 />
               </div>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

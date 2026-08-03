@@ -15,18 +15,15 @@ const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
 export async function sendNotification(payload: EmailPayload): Promise<MailerResult> {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM ?? "UPG Forms <noreply@eulogyhearth.com>";
-  const to = process.env.UPG_NOTIFY_TO ?? "umarbabur105@gmail.com";
+  const from = process.env.RESEND_FROM ?? "UPG Forms <quotes@universalpackaginggroup.com>";
+  const to = process.env.UPG_NOTIFY_TO ?? "umar@universalpackaginggroup.com";
 
   if (!apiKey) {
     console.log(
       JSON.stringify({
         type: "mailer_fallback_log",
         reason: "RESEND_API_KEY not set",
-        subject: payload.subject,
-        to,
-        replyTo: payload.replyTo ?? null,
-        textPreview: payload.text.slice(0, 400),
+        notificationConfigured: Boolean(to),
       })
     );
     return { delivered: false, via: "log", error: "RESEND_API_KEY not set" };
@@ -50,13 +47,10 @@ export async function sendNotification(payload: EmailPayload): Promise<MailerRes
     });
 
     if (!response.ok) {
-      const body = await response.text();
       console.error(
         JSON.stringify({
           type: "mailer_resend_error",
           status: response.status,
-          body: body.slice(0, 500),
-          subject: payload.subject,
         })
       );
       return { delivered: false, via: "resend", error: `Resend ${response.status}` };
@@ -69,7 +63,6 @@ export async function sendNotification(payload: EmailPayload): Promise<MailerRes
       JSON.stringify({
         type: "mailer_resend_exception",
         message,
-        subject: payload.subject,
       })
     );
     return { delivered: false, via: "resend", error: message };

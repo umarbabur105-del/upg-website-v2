@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { siteConfig } from "@/data/site";
+import { getLeadAttribution } from "@/lib/lead-attribution";
 
 const productStyles: Record<string, string[]> = {
   Boxes: [
@@ -30,9 +32,9 @@ const materialOptions: Record<string, string[]> = {
     "Not sure — recommend",
   ],
   "Paper Cups": [
-    "Food-grade cup stock",
-    "PE lined",
-    "Bio-PLA option on review",
+    "Cup stock selected by intended use",
+    "Barrier / lining option on review",
+    "Alternative coating on review",
     "Not sure — recommend",
   ],
   "Not sure yet": ["Not sure — recommend"],
@@ -96,16 +98,21 @@ interface QuoteFormProps {
 
 function Field({
   label,
+  htmlFor,
   required,
   children,
 }: {
   label: string;
+  htmlFor: string;
   required?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+      <label
+        htmlFor={htmlFor}
+        className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground"
+      >
         {label}
         {required ? <span className="text-gold"> *</span> : null}
       </label>
@@ -121,6 +128,9 @@ const textareaClass =
 
 export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
   const hasWhatsApp = Boolean(siteConfig.whatsappNumber);
+  const [submissionId] = useState(() => crypto.randomUUID());
+  const [formStartedAt] = useState(() => Date.now());
+  const [faxNumber, setFaxNumber] = useState("");
   const [form, setForm] = useState<FormState>({
     ...initialState,
     product_family:
@@ -149,12 +159,18 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          submission_id: submissionId,
+          form_started_at: formStartedAt,
+          fax_number: faxNumber,
+          attribution: getLeadAttribution(),
+        }),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok || data.accepted !== true) {
         throw new Error(data.error ?? "Quote submission failed");
       }
 
@@ -163,7 +179,7 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
       setError(
         submissionError instanceof Error
           ? submissionError.message
-          : "Something went wrong. Please try again or reach out on WhatsApp."
+          : `Something went wrong. Please try again or email ${siteConfig.email}.`
       );
     } finally {
       setSubmitting(false);
@@ -180,8 +196,8 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
           Thank you. Your quote request is in.
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-          We will review your request and come back with a structured response.
-          If the project is urgent, use the fastest contact path available on the site.
+          We will review your request and target an initial response within one
+          business day. Complete pricing follows once the required specifications are clear.
         </p>
         {hasWhatsApp ? (
           <a
@@ -199,19 +215,30 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-10 lg:grid-cols-12">
-      <div className="lg:col-span-4">
+      <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="quote-fax-number">Fax number</label>
+        <input
+          id="quote-fax-number"
+          name="fax_number"
+          tabIndex={-1}
+          autoComplete="off"
+          value={faxNumber}
+          onChange={(event) => setFaxNumber(event.target.value)}
+        />
+      </div>
+      <div className="hidden lg:col-span-4 lg:block">
         <div className="surface-card sticky top-28 p-8">
           <div className="eyebrow mb-4">Fast start</div>
           <p className="text-sm leading-relaxed text-foreground/82">
-            Start with the basics: product family, quantity, contact details,
-            and a short note. Shipping, artwork, and finish details are
-            optional and can be added after the first reply.
+            Start with the product family, quantity, intended use, delivery
+            country, and contact details. Artwork and finish details can be
+            added when available.
           </p>
 
           <div className="mt-8 border-t border-border pt-6">
             <div className="eyebrow mb-3">What happens next</div>
             <ol className="space-y-4 text-sm text-foreground/82">
-              <li>1. We review the request, usually the same day.</li>
+              <li>1. We review the request and target a reply within one business day.</li>
               <li>2. You get a structured commercial reply with the next step.</li>
               <li>3. Specs, dielines, and production details are refined after that.</li>
             </ol>
@@ -245,15 +272,18 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                 Start with the basics
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Enough for a useful first quote. The technical details can come after.
+                Enough for a useful first review. Technical details can follow.
               </p>
             </div>
-            <div className="eyebrow">Lighter first contact</div>
+            <div className="eyebrow">Essential project details</div>
           </div>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            <Field label="Product family" required>
+            <Field label="Product family" htmlFor="product_family" required>
               <select
+                id="product_family"
+                name="product_family"
+                required
                 value={form.product_family}
                 onChange={(event) => {
                   const nextFamily = event.target.value;
@@ -275,8 +305,10 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
               </select>
             </Field>
 
-            <Field label="Product style">
+            <Field label="Product style" htmlFor="product_style">
               <select
+                id="product_style"
+                name="product_style"
                 value={form.product_style}
                 onChange={(event) => update("product_style", event.target.value)}
                 className={inputClass}
@@ -292,8 +324,11 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
               </select>
             </Field>
 
-            <Field label="Quantity" required>
+            <Field label="Quantity" htmlFor="quantity" required>
               <input
+                id="quantity"
+                name="quantity"
+                required
                 value={form.quantity}
                 onChange={(event) => update("quantity", event.target.value)}
                 className={inputClass}
@@ -301,8 +336,11 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
               />
             </Field>
 
-            <Field label="Intended end use" required>
+            <Field label="Intended end use" htmlFor="intended_end_use" required>
               <input
+                id="intended_end_use"
+                name="intended_end_use"
+                required
                 value={form.intended_end_use}
                 onChange={(event) => update("intended_end_use", event.target.value)}
                 className={inputClass}
@@ -310,8 +348,31 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
               />
             </Field>
 
-            <Field label="Full name" required>
+            <Field label="Shipping country" htmlFor="shipping_country" required>
+              <select
+                id="shipping_country"
+                name="shipping_country"
+                required
+                value={form.shipping_country}
+                onChange={(event) => update("shipping_country", event.target.value)}
+                className={inputClass}
+                autoComplete="country-name"
+              >
+                <option value="">Select delivery country</option>
+                {shippingCountries.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+            </Field>
+
+            <Field label="Full name" htmlFor="name" required>
               <input
+                id="name"
+                name="name"
+                required
+                autoComplete="name"
                 value={form.name}
                 onChange={(event) => update("name", event.target.value)}
                 className={inputClass}
@@ -319,8 +380,12 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
               />
             </Field>
 
-            <Field label="Email" required>
+            <Field label="Email" htmlFor="email" required>
               <input
+                id="email"
+                name="email"
+                required
+                autoComplete="email"
                 value={form.email}
                 onChange={(event) => update("email", event.target.value)}
                 className={inputClass}
@@ -329,8 +394,12 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
               />
             </Field>
 
-            <Field label="Company" required>
+            <Field label="Company" htmlFor="company" required>
               <input
+                id="company"
+                name="company"
+                required
+                autoComplete="organization"
                 value={form.company}
                 onChange={(event) => update("company", event.target.value)}
                 className={inputClass}
@@ -338,8 +407,12 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
               />
             </Field>
 
-            <Field label="Phone / WhatsApp">
+            <Field label="Phone / WhatsApp" htmlFor="phone">
               <input
+                id="phone"
+                name="phone"
+                type="tel"
+                autoComplete="tel"
                 value={form.phone}
                 onChange={(event) => update("phone", event.target.value)}
                 className={inputClass}
@@ -348,8 +421,10 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
             </Field>
 
             <div className="sm:col-span-2">
-              <Field label="Project notes">
+              <Field label="Project notes" htmlFor="notes">
                 <textarea
+                  id="notes"
+                  name="notes"
                   value={form.notes}
                   onChange={(event) => update("notes", event.target.value)}
                   className={textareaClass}
@@ -375,6 +450,8 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
             <button
               type="button"
               onClick={() => setShowAdvanced((current) => !current)}
+              aria-expanded={showAdvanced}
+              aria-controls="optional-quote-details"
               className="rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold text-foreground hover:bg-stone"
             >
               {showAdvanced ? "Hide optional details" : "Add optional details"}
@@ -382,9 +459,11 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
           </div>
 
           {showAdvanced ? (
-            <div className="mt-8 grid gap-6 sm:grid-cols-2">
-              <Field label="Dimensions">
+            <div id="optional-quote-details" className="mt-8 grid gap-6 sm:grid-cols-2">
+              <Field label="Dimensions" htmlFor="dimensions">
                 <input
+                  id="dimensions"
+                  name="dimensions"
                   value={form.dimensions}
                   onChange={(event) => update("dimensions", event.target.value)}
                   className={inputClass}
@@ -392,8 +471,12 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                 />
               </Field>
 
-              <Field label="Website">
+              <Field label="Website" htmlFor="website">
                 <input
+                  id="website"
+                  name="website"
+                  type="url"
+                  autoComplete="url"
                   value={form.website}
                   onChange={(event) => update("website", event.target.value)}
                   className={inputClass}
@@ -401,8 +484,10 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                 />
               </Field>
 
-              <Field label="Material preference">
+              <Field label="Material preference" htmlFor="material_preference">
                 <select
+                  id="material_preference"
+                  name="material_preference"
                   value={form.material_preference}
                   onChange={(event) =>
                     update("material_preference", event.target.value)
@@ -418,8 +503,10 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                 </select>
               </Field>
 
-              <Field label="Finish preference">
+              <Field label="Finish preference" htmlFor="finish_preference">
                 <select
+                  id="finish_preference"
+                  name="finish_preference"
                   value={form.finish_preference}
                   onChange={(event) => update("finish_preference", event.target.value)}
                   className={inputClass}
@@ -433,8 +520,10 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                 </select>
               </Field>
 
-              <Field label="Artwork status">
+              <Field label="Artwork status" htmlFor="artwork_status">
                 <select
+                  id="artwork_status"
+                  name="artwork_status"
                   value={form.artwork_status}
                   onChange={(event) => update("artwork_status", event.target.value)}
                   className={inputClass}
@@ -447,25 +536,11 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                 </select>
               </Field>
 
-              <Field label="Shipping country">
-                <select
-                  value={form.shipping_country}
-                  onChange={(event) =>
-                    update("shipping_country", event.target.value)
-                  }
-                  className={inputClass}
-                >
-                  <option value="">Choose or skip</option>
-                  {shippingCountries.map((country) => (
-                    <option key={country} value={country}>
-                      {country}
-                    </option>
-                  ))}
-                </select>
-              </Field>
-
-              <Field label="State / Province">
+              <Field label="State / Province" htmlFor="shipping_state_or_province">
                 <input
+                  id="shipping_state_or_province"
+                  name="shipping_state_or_province"
+                  autoComplete="address-level1"
                   value={form.shipping_state_or_province}
                   onChange={(event) =>
                     update("shipping_state_or_province", event.target.value)
@@ -475,8 +550,10 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                 />
               </Field>
 
-              <Field label="Target delivery timing">
+              <Field label="Target delivery timing" htmlFor="target_delivery_timing">
                 <select
+                  id="target_delivery_timing"
+                  name="target_delivery_timing"
                   value={form.target_delivery_timing}
                   onChange={(event) =>
                     update("target_delivery_timing", event.target.value)
@@ -496,7 +573,7 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
         </div>
 
         {error ? (
-          <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <p role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
             {error}
           </p>
         ) : null}
@@ -505,7 +582,8 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
           <div>
             <div className="eyebrow mb-3">Submit</div>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Structured reply within one business day.
+              By submitting, you agree that UPG may use these details to respond
+              to this request. Read our <Link href="/privacy" className="underline">Privacy Policy</Link>.
             </p>
           </div>
           <button
