@@ -6,18 +6,21 @@ export const DEFAULT_OG_IMAGE = {
   url: `${SITE_URL}/images/redesign/hero/hero-cosmetics.jpg`,
   width: 1920,
   height: 1080,
-  alt: "Custom cosmetic packaging coordinated by Universal Packaging Group",
+  alt: "Custom boxes and flexible packaging by Universal Packaging Group",
 };
 
 export const CORE_KEYWORDS = [
-  "custom cosmetic packaging",
-  "custom beauty packaging",
+  "custom boxes",
+  "custom packaging",
+  "corrugated boxes",
+  "custom tuck boxes",
   "custom folding cartons",
-  "custom rigid boxes",
-  "custom mailer boxes",
-  "cosmetic packaging supplier",
-  "skincare packaging boxes",
-  "PR packaging boxes",
+  "custom corrugated mailer boxes",
+  "ear lock mailer boxes",
+  "custom magnetic boxes",
+  "custom collapsible magnetic boxes",
+  "custom mylar bags",
+  "custom cosmetic packaging",
 ];
 
 type PageMetadataInput = {

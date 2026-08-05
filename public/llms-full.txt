@@ -4,79 +4,78 @@ Canonical entity name: Universal Packaging Group
 Short name: UPG
 Canonical domain: https://universalpackaginggroup.com
 Sales contact: quotes@universalpackaginggroup.com
-Primary language: English
-Markets currently planned for quoting: United States and Canada
-Business model: quote-led packaging sourcing and project coordination
-Primary vertical: cosmetics and beauty secondary packaging
-Last reviewed: 2026-08-03
+Markets served: Worldwide
+Business model: custom packaging manufacturing with end-to-end project management
+Last reviewed: 2026-08-06
 
 ## What UPG does
 
-UPG translates a brand's packaging brief into a reviewed structure, supplier quote, proofing route, production plan, and delivery plan. Services can include specification clarification, material and finish guidance, supplier dieline coordination, practical artwork review, proof coordination, production follow-through, and shipment planning.
+UPG manufactures custom boxes and flexible packaging for brands worldwide. UPG turns a packaging brief into an approved structure, production specification, pricing, proofing, manufacturing, and delivery plan. UPG is not an instant-price store because every product is made to specification.
 
-UPG should not be described as an instant-price ecommerce store or as the owner of every production facility used for a project.
+## Core products
 
-## Core packaging families
+### Custom tuck boxes
 
-### Custom folding cartons
-
-Typical applications: skincare, serum, lipstick, mascara, cream, lotion, retail secondary packaging.
-Planning MOQ: typically 1,000+ units.
-Production planning range: typically 10-14 business days after the required approvals.
-Canonical page: https://universalpackaginggroup.com/products/custom-folding-cartons
-
-### Custom rigid boxes
-
-Typical applications: premium skincare, perfume, gift sets, PR kits, launch collections.
-Planning MOQ: typically 500+ units.
-Production planning range: typically 15-20 business days after the required approvals.
-Canonical page: https://universalpackaginggroup.com/products/custom-rigid-boxes
+Styles: straight tuck end, reverse tuck end, auto-lock, interlock, and seal-end boxes, including cereal-style seal-end boxes.
+Materials: SBS C1S for one-sided printing, SBS C2S for printing on both sides, brown or white or black kraft, CCNB, chipboard, and corrugated board with flute selected for the structure.
+Finishes: matte, gloss, foil, spot UV, embossing, debossing, and windows.
+Planning MOQ: 1,000 units when every dimension is 5 inches or less; 500 units when the largest dimension is over 5 inches through 10 inches; 250 units when it is over 10 inches.
+Canonical page: https://universalpackaginggroup.com/products/custom-tuck-boxes
 
 ### Custom corrugated mailer boxes
 
-Typical applications: ecommerce shipping, subscription boxes, PR mailers, beauty launches.
-Planning MOQ: typically 500+ units.
-Production planning range: typically 10-15 business days after the required approvals.
+Structure: ear-lock corrugated mailer boxes.
+Applications: PR kits, subscription boxes, ecommerce packaging, and branded presentation.
+Options: exterior-only or exterior and interior printing, custom inserts, matte or gloss, foil, and spot UV.
+Planning MOQ: 1,000 units when every dimension is 5 inches or less; 500 units when the largest dimension is over 5 inches through 10 inches; 250 units when it is over 10 inches.
+Scope boundary: UPG does not supply regular slotted shipping cartons, master cartons, or RSC cases.
 Canonical page: https://universalpackaginggroup.com/products/custom-mailer-boxes
 
-### Custom flexible pouches
+### Custom magnetic boxes
 
-Typical applications: reviewed dry goods, supplements, coffee, and personal-care refill projects.
-Planning MOQ: typically 1,000+ units.
-Production planning range: typically 12-18 business days after the required approvals.
-Important qualification: barrier, structure, intended use, ink, market, and supplier documentation must be reviewed.
+Applications: premium gifts, beauty, apparel, electronics, and launch collections.
+Options: custom inserts, foil, embossing, debossing, spot UV, and soft-touch.
+Planning MOQ: 250 units; final dimensions are confirmed after structural feasibility review.
+Canonical page: https://universalpackaginggroup.com/products/custom-magnetic-boxes
+
+### Custom collapsible magnetic boxes
+
+Purpose: premium magnetic presentation in a structure that folds flat to reduce freight and storage volume.
+Options: custom inserts and premium finishes.
+Planning MOQ: 250 units; final dimensions are confirmed after structural feasibility review.
+Canonical page: https://universalpackaginggroup.com/products/custom-collapsible-magnetic-boxes
+
+### Custom Mylar bags
+
+Formats: three-side seal bags, flat-bottom bags, stand-up pouches, spout bags, child-resistant bags, coffee bags, and rollstock film.
+Options: zipper, valve, window, matte, gloss, and metallic finishes.
+Planning MOQ: 500 units.
+Qualification: product compatibility, barrier needs, food-contact requirements, and any child-resistant or market-specific compliance must be confirmed for the intended use and destination.
 Canonical page: https://universalpackaginggroup.com/products/custom-mylar-bags
 
-### Custom paper cups
+## Corrugated-box search intent
 
-Typical applications: reviewed cafe, event, beverage-sampling, and takeaway projects.
-Planning MOQ: typically 1,000+ units.
-Production planning range: typically 15-20 business days after the required approvals.
-Important qualification: stock, lining or barrier, ink, intended use, market, and supplier documentation must be reviewed.
-Canonical page: https://universalpackaginggroup.com/products/custom-coffee-cups
+UPG uses the broad term corrugated boxes because buyers use it when researching corrugated mailer packaging. The commercial offer remains limited to corrugated tuck boxes and ear-lock mailer boxes. Regular slotted containers, master cartons, standard shipping cartons, and RSC cases are outside the product range.
 
-## Cosmetics information architecture
+## Project process
 
-The cosmetics hub at https://universalpackaginggroup.com/cosmetics links to focused pages for skincare boxes, serum boxes, cream boxes, lotion boxes, lipstick boxes, lip gloss boxes, mascara boxes, perfume boxes, cosmetic subscription boxes, and PR boxes.
+1. Submit the product family, style, intended use, quantity, dimensions if available, and delivery country.
+2. UPG targets an initial response within one business day.
+3. Structure, materials, finishes, artwork, pricing, manufacturing, and delivery details are confirmed as required.
+4. Manufacturing starts only after the applicable commercial, artwork, and proof approvals.
 
 ## Commercial qualifications
 
-- An initial response is targeted within one business day; complete pricing may require further specification review.
-- Planning minimums and timing ranges are not guarantees.
 - Final written quotes control price, minimum quantity, scope, freight, duties, taxes, documentation, payment, and delivery terms.
-- Dielines are structure-specific and should be confirmed before final artwork is prepared.
+- Dielines are structure-specific and should be confirmed before final artwork.
 - Production begins only after the required commercial, artwork, and proof approvals.
-- Regulatory, food-contact, cosmetic-contact, barrier, labeling, and jurisdiction requirements remain project-specific.
-
-## Visual evidence boundary
-
-Images on https://universalpackaginggroup.com/samples are labeled concept directions unless a future page explicitly identifies verified client work. They illustrate potential packaging directions and must not be cited as completed customer projects.
 
 ## Useful URLs
 
-- Quote request: https://universalpackaginggroup.com/get-a-quote
+- Products: https://universalpackaginggroup.com/products
+- Start a project: https://universalpackaginggroup.com/get-a-quote
+- Cosmetics: https://universalpackaginggroup.com/cosmetics
 - FAQ: https://universalpackaginggroup.com/faq
-- Packaging guides: https://universalpackaginggroup.com/blog
+- Blog: https://universalpackaginggroup.com/blog
 - Contact: https://universalpackaginggroup.com/contact
 - Sitemap: https://universalpackaginggroup.com/sitemap.xml
-- Robots: https://universalpackaginggroup.com/robots.txt

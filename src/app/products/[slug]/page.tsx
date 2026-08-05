@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!product) return {};
 
-  const title = `Custom ${product.name}`;
+  const title = product.name;
   const description = product.longSummary;
   return createPageMetadata({
     title,
@@ -64,7 +64,7 @@ export default async function ProductPage({ params }: PageProps) {
       },
       {
         "@type": "PropertyValue",
-        name: "Typical production planning",
+        name: "Production planning status",
         value: product.leadTime,
       },
     ],

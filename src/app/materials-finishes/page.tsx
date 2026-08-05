@@ -8,7 +8,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Custom Packaging Materials & Finishes",
   description:
-    "Compare paperboard, corrugated, rigid wraps, flexible films, cup structures, foil stamping, embossing, lamination, and spot UV for custom packaging.",
+    "Compare SBS, kraft, CCNB, chipboard, corrugated board, flexible films, foil, embossing, debossing, windows, and spot UV for custom packaging.",
   path: "/materials-finishes",
   keywords: [
     "custom packaging materials",
@@ -21,27 +21,19 @@ export const metadata: Metadata = createPageMetadata({
 const materialGroups = [
   {
     title: "Paperboard & cartons",
-    items: ["SBS C1S", "Kraft paperboard", "Recycled board", "Retail carton stocks"],
+    items: ["SBS C1S", "SBS C2S", "Brown, white, or black kraft", "CCNB", "Chipboard"],
   },
   {
     title: "Corrugated & mailers",
-    items: ["E-flute", "F-flute", "White liner", "Kraft liner"],
+    items: ["Flute selected for the structure", "Corrugated tuck boxes", "Ear-lock mailer boxes", "Custom inserts"],
   },
   {
     title: "Rigid structures",
     items: ["Chipboard cores", "Art paper wraps", "Textured wraps", "Premium specialty papers"],
   },
   {
-    title: "Flexible pouch films",
-    items: ["PET / VMPET / PE", "Kraft laminates", "Matte films", "Window structures on review"],
-  },
-  {
-    title: "Cup structures",
-    items: [
-      "Cup stock selected by intended use",
-      "Barrier and lining options on review",
-      "Supplier documentation confirmed per project",
-    ],
+    title: "Flexible packaging",
+    items: ["Mylar bags", "Pouches", "Coffee bags", "Spout bags", "Rollstock film"],
   },
 ];
 
@@ -54,12 +46,12 @@ export default function MaterialsFinishesPage() {
             <div className="lg:col-span-6">
               <div className="eyebrow mb-5">Capabilities</div>
               <h1 className="display-1 text-balance">
-                Materials and finishes that make packaging feel considered.
+                Materials and finishes selected for structure, print, and presentation.
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
                 Use this guide to understand common material families, wrap
                 stocks, and finishes. Final suitability depends on structure,
-                print process, intended use, testing, and supplier documentation.
+                print process, intended use, testing, and production documentation.
               </p>
             </div>
             <div className="lg:col-span-6">
@@ -84,7 +76,7 @@ export default function MaterialsFinishesPage() {
             <SectionHeading
               eyebrow="Material groups"
               title="Start with the right substrate."
-              intro="The wrong structure creates cost and quality problems later. This is the first commercial decision, not just a production detail."
+              intro="Material selection starts with the structure, intended use, print method, finish requirements, and product compatibility."
             />
           </div>
           <div className="grid gap-6 lg:col-span-8 md:grid-cols-2">
@@ -107,8 +99,8 @@ export default function MaterialsFinishesPage() {
           <div className="mb-12">
             <SectionHeading
               eyebrow="Finishes"
-              title="The detail that shifts packaging from functional to premium."
-              intro="These are the finish directions most likely to matter for cosmetics, gifting, PR, and launch-oriented presentation."
+              title="Finish options for visual and tactile detail."
+              intro="These options can be specified for cosmetics, gifting, PR, retail, and other presentation-led packaging."
             />
           </div>
           <div className="grid gap-6 md:grid-cols-3">
@@ -140,8 +132,8 @@ export default function MaterialsFinishesPage() {
       <section className="section-shell">
         <div className="container-editorial">
           <SectionHeading
-            eyebrow="Most-requested capability stack"
-            title="The premium options buyers ask about most."
+            eyebrow="Specialty options"
+            title="Print, finish, and structural details available by format."
           />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {materialsHighlights.map((item) => (
@@ -154,8 +146,8 @@ export default function MaterialsFinishesPage() {
       </section>
 
       <QuoteCta
-        title="Need help choosing the right finish stack?"
-        intro="Tell us the product type, target look, and quantity. We will guide you toward the most practical material and finish route."
+        title="Need help choosing materials and finishes?"
+        intro="Tell us the product type, target look, and quantity. We will recommend a material and finish combination for the proposed structure."
       />
     </>
   );

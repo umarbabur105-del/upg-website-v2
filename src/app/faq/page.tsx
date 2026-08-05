@@ -8,7 +8,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Custom Packaging FAQ",
   description:
-    "Answers about UPG custom packaging quotes, planning MOQs, production timelines, dielines, samples, delivery, and intended-use review.",
+    "Answers about UPG custom packaging, MOQs, manufacturing timelines, dielines, samples, pricing, and worldwide delivery.",
   path: "/faq",
   keywords: [
     "custom packaging FAQ",
@@ -45,7 +45,7 @@ export default function FaqPage() {
             Frequently Asked Questions
           </SectionHeading>
           <SectionSubheading className="text-offwhite/60">
-            Common questions about quoting, ordering, and working with UPG.
+            Common questions about custom packaging, manufacturing, ordering, and delivery.
           </SectionSubheading>
         </div>
       </section>

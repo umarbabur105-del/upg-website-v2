@@ -5,7 +5,6 @@ import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { FaqAccordion } from "@/components/faq-accordion";
 import {
-  cosmeticsSolutions,
   finishFeatures,
   howItWorksSteps,
   industries,
@@ -23,24 +22,22 @@ export default function HomePage() {
         <div className="container-editorial pt-12 pb-20 md:pt-20 md:pb-28">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
-              <div className="eyebrow mb-6">Custom Cosmetic Packaging • US & Canada</div>
+              <div className="eyebrow mb-6">Custom Packaging Manufacturer • Worldwide Delivery</div>
               <h1 className="display-1 text-balance">
-                Custom packaging
-                <br />
-                built around
-                <span className="text-gold"> your beauty product.</span>
+                Custom packaging manufactured around
+                <span className="text-gold"> your product.</span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty md:text-xl">
-                Plan folding cartons, rigid boxes, PR kits, mailers, and inserts
-                with guided quoting, artwork review, supplier coordination, and
-                delivery planning for the United States and Canada.
+                Custom tuck boxes, corrugated ear-lock mailer boxes, magnetic
+                boxes, collapsible magnetic boxes, and printed Mylar bags—made
+                to your specifications and delivered worldwide.
               </p>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/get-a-quote"
                   className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
                 >
-                  Get a Quote
+                  Start Your Project
                 </Link>
                 <Link
                   href="/products"
@@ -65,7 +62,7 @@ export default function HomePage() {
               <div className="relative aspect-[5/4] overflow-hidden shadow-lift">
                 <Image
                   src="/images/redesign/hero/hero-cosmetics.jpg"
-                  alt="Premium cosmetics packaging arrangement"
+                  alt="Custom boxes and flexible packaging for product brands"
                   fill
                   priority
                   className="object-cover"
@@ -73,10 +70,9 @@ export default function HomePage() {
                 />
               </div>
               <div className="absolute -bottom-6 -left-1 hidden max-w-xs border border-border bg-cream p-5 shadow-soft md:block">
-                <div className="eyebrow mb-2">Cosmetics-first</div>
+                <div className="eyebrow mb-2">Representative packaging concept</div>
                 <div className="font-serif text-lg leading-snug text-foreground">
-                  Engineered for skincare, serums, lipstick, perfume, and PR
-                  launches.
+                  Custom-built around your product, brand, and delivery needs.
                 </div>
               </div>
             </div>
@@ -97,56 +93,12 @@ export default function HomePage() {
       </section>
 
       <section className="section-shell">
-        <div className="container-editorial grid gap-12 lg:grid-cols-12 lg:gap-20">
-          <div className="lg:col-span-4">
-            <SectionHeading
-              eyebrow="Cosmetics-first"
-              title="Built around how beauty brands actually launch."
-              intro="From a single hero serum to a full PR seeding round, the strongest buying path is designed around cosmetics."
-            />
-            <div className="mt-8">
-              <Link
-                href="/cosmetics"
-                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-              >
-                Explore the cosmetics hub <span>→</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:col-span-8">
-            {cosmeticsSolutions.map((solution) => (
-              <Link
-                key={solution.href}
-                href={solution.href}
-                className="group block bg-surface p-7 hover:bg-cream"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="font-serif text-2xl text-foreground">
-                      {solution.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      {solution.note}
-                    </p>
-                  </div>
-                  <span className="text-muted-foreground transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell bg-stone">
         <div className="container-editorial">
           <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow="Packaging formats"
-              title="Five formats, one guided quote process."
-              intro="Cosmetic cartons, rigid boxes, and mailers are the primary focus. Pouches and paper cups are quoted after end-use and material-document review."
+              title="Five focused product families, manufactured around your brand."
+              intro="Explore tuck boxes, corrugated mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar bags."
             />
             <Link
               href="/products"
@@ -169,8 +121,8 @@ export default function HomePage() {
             <div className="lg:col-span-7">
               <SectionHeading
                 eyebrow="Capabilities"
-                title="The finish detail that separates a box from a brand."
-                intro="Foil, soft-touch, deboss, spot UV, custom inserts, and interior print. The details that make packaging feel premium and product-ready."
+              title="Details that turn packaging into a brand asset."
+              intro="Foil, soft-touch, embossing, debossing, spot UV, custom inserts, windows, and interior print—matched to the selected format."
               />
             </div>
             <div className="lg:col-span-5 lg:text-right">
@@ -216,8 +168,8 @@ export default function HomePage() {
           <div className="mb-14">
             <SectionHeading
               eyebrow="How it works"
-              title="A quote-led process with fewer surprises."
-              intro="Built around clear specifications, supplier review, documented proofing, and realistic production planning."
+              title="From packaging brief to finished production."
+              intro="Clear specifications, structural review, proofing, manufacturing, and delivery—managed as one connected process."
             />
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -242,7 +194,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="Concept directions"
               title="See how structure, finish, and inserts work together."
-              intro="These concept visuals show possible directions for skincare, gifting, and PR packaging. Final specifications are developed for each project."
+              intro="These concept visuals show possible directions for gifting and PR packaging. Final specifications are developed for each project."
             />
             <Link
               href="/samples"
@@ -265,7 +217,7 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="p-6">
-                  <div className="eyebrow mb-3">{sample.category}</div>
+                  <div className="eyebrow mb-3">Concept direction · {sample.category}</div>
                   <h3 className="font-serif text-2xl text-foreground">
                     {sample.title}
                   </h3>
@@ -284,8 +236,8 @@ export default function HomePage() {
           <div className="mb-14">
             <SectionHeading
               eyebrow="Industries"
-              title="Capabilities beyond cosmetics, reviewed by end use."
-              intro="Beauty packaging is the primary specialization. Adjacent ecommerce, beverage, and packaged-goods projects are assessed against structure and documentation requirements."
+              title="Custom packaging for products across industries."
+              intro="Our packaging formats support beauty, retail, ecommerce, gifting, food, beverage, supplements, and other consumer brands."
             />
           </div>
 
@@ -293,7 +245,7 @@ export default function HomePage() {
             {industries.map((industry) => (
               <div key={industry.slug} className="surface-card p-7">
                 <div className="eyebrow mb-3">
-                  {industry.slug === "cosmetic-packaging" ? "Primary focus" : "Secondary industry"}
+                  {industry.slug === "cosmetic-packaging" ? "Dedicated hub" : "Industry"}
                 </div>
                 <h3 className="font-serif text-2xl text-foreground">
                   {industry.name}
@@ -317,8 +269,8 @@ export default function HomePage() {
         <div className="container-editorial max-w-4xl">
           <SectionHeading
             eyebrow="Common questions"
-            title="Fast answers before you request a quote."
-            intro="Quick answers on MOQ, lead time, cosmetics packaging, samples, and how the process works."
+            title="Useful answers before you start your project."
+            intro="Quick answers on MOQ, product fit, samples, manufacturing, and delivery."
           />
           <div className="mt-10">
             <FaqAccordion items={faqItems.slice(0, 6)} />
@@ -335,8 +287,8 @@ export default function HomePage() {
       </section>
 
       <QuoteCta
-        title="Need help turning a packaging idea into a quote-ready specification?"
-        intro="Share the product, quantity, dimensions, intended use, and destination. We will review the structure and confirm the practical next step."
+        title="Ready to turn your packaging idea into production?"
+        intro="Share the product, quantity, dimensions, intended use, and destination. We will review the requirements and reply with the recommended structure, pricing, and production steps."
       />
     </>
   );

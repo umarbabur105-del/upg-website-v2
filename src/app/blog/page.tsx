@@ -7,7 +7,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Custom Packaging Guides & Resources",
   description:
-    "Practical custom packaging guides covering MOQs, materials, artwork preparation, cosmetic boxes, mailers, rigid boxes, and sourcing decisions.",
+    "Practical custom packaging guides covering MOQs, materials, artwork preparation, cosmetic boxes, mailers, rigid boxes, and manufacturing decisions.",
   path: "/blog",
   keywords: ["custom packaging guide", "packaging MOQ", "packaging artwork guide"],
 });
@@ -34,7 +34,7 @@ export default function BlogPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-offwhite/70">
             Practical guides on custom packaging — what to expect, how to
-            prepare, and how to make better sourcing decisions.
+            prepare, and how to make better packaging decisions.
           </p>
         </div>
       </section>
@@ -90,7 +90,7 @@ export default function BlogPage() {
       <CtaBanner
         heading="Ready to start your packaging project?"
         description="Tell us what you need. We target an initial response within one business day and confirm pricing once the required specifications are clear."
-        ctaText="Get a Quote"
+        ctaText="Start Your Project"
         ctaHref="/get-a-quote"
       />
     </>

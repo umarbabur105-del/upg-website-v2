@@ -33,7 +33,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <div>{product.moq}</div>
           </div>
           <div>
-            <div className="eyebrow mb-1">Lead time</div>
+            <div className="eyebrow mb-1">Production timing</div>
             <div>{product.leadTime}</div>
           </div>
         </div>

@@ -265,7 +265,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             href="/get-a-quote"
             className="mt-8 inline-block rounded-sm bg-gold px-8 py-3.5 text-sm font-semibold text-charcoal transition-colors hover:bg-gold-dark"
           >
-            Get a Quote →
+            Start Your Project →
           </Link>
         </div>
       </section>

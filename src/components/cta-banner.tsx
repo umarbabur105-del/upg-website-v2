@@ -9,8 +9,8 @@ interface CtaBannerProps {
 
 export function CtaBanner({
   heading = "Ready to start your packaging project?",
-  description = "Get a quote tailored to your product, quantity, and delivery needs.",
-  ctaText = "Get a Quote",
+  description = "Tell us what you need and we will develop the right packaging specification and manufacturing plan.",
+  ctaText = "Start Your Project",
   ctaHref = "/get-a-quote",
 }: CtaBannerProps) {
   return (

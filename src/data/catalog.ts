@@ -38,11 +38,11 @@ export interface CosmeticSubcategory {
 }
 
 export const trustPoints: TrustPoint[] = [
-  { label: "One-business-day quote target" },
-  { label: "MOQ matched to structure" },
-  { label: "US & Canada delivery planning" },
+  { label: "MOQs vary by product & size" },
+  { label: "Worldwide production & delivery" },
+  { label: "Custom sizes & structures" },
   { label: "Dieline & artwork guidance" },
-  { label: "Proofing & production coordination" },
+  { label: "Proofing & production follow-up" },
 ];
 
 export const cosmeticsSolutions: CosmeticSolution[] = [
@@ -124,39 +124,39 @@ export const sampleHighlights: SampleHighlight[] = [
 ];
 
 export const materialsHighlights = [
-  "Soft-touch matte and silk lamination",
-  "Foil stamp in gold, silver, copper, and custom spot colors",
+  "Matte, gloss, and soft-touch finishes",
+  "Foil stamping",
   "Embossing and debossing",
-  "Spot UV on matte stocks",
-  "Specialty papers, textured wraps, and premium art papers",
-  "EVA foam, paper pulp, and custom paperboard inserts",
-  "Interior print and inside-of-lid branding",
+  "Spot UV",
+  "Windows, zippers, and valves where the format supports them",
+  "Custom inserts",
+  "Interior and exterior printing",
 ];
 
 export const howItWorksSteps = [
   {
     number: "01",
-    title: "Submit your request",
+    title: "Share your project",
     description:
-      "Send your specs, dimensions, rough ideas, or even a reference photo. We can shape the project from partial information.",
+      "Send the product, quantity, dimensions, artwork, or a reference image. We can begin even when some details are still open.",
   },
   {
     number: "02",
-    title: "Receive your quote",
+    title: "Develop the specification",
     description:
-      "You get structured pricing, material options, finishing routes, and a realistic lead-time window.",
+      "We align the structure, materials, finishes, manufacturing plan, pricing, and delivery requirements around the product.",
   },
   {
     number: "03",
     title: "Review & approve",
     description:
-      "Dielines, mockups, and prepress details are checked before anything moves into production.",
+      "Dielines, artwork, mockups, samples, and prepress details are reviewed before production begins.",
   },
   {
     number: "04",
-    title: "Production & delivery",
+    title: "Manufacture & deliver",
     description:
-      "We manage production follow-through and keep the project moving through to shipment.",
+      "We manufacture the approved packaging, provide production updates, and arrange delivery under the confirmed project terms.",
   },
 ];
 
@@ -171,19 +171,19 @@ export const industries = [
     slug: "ecommerce-retail-packaging",
     name: "Ecommerce & Retail",
     description:
-      "Mailer boxes, cartons, and inserts built for shipping, display, and branded unboxing.",
+      "Corrugated mailer boxes, tuck boxes, and inserts built for branded unboxing and retail presentation.",
   },
   {
     slug: "supplements-specialty-food-packaging",
     name: "Supplements & Specialty Food",
     description:
-      "Pouches and cartons for structured packaged goods, with use-case review built into quoting.",
+      "Pouches and cartons for packaged goods, with material suitability and required documentation reviewed for the intended use and market.",
   },
   {
     slug: "coffee-beverage-packaging",
     name: "Coffee & Beverage",
     description:
-      "Paper cups and pouch formats for cafes, drink brands, and event-led packaging needs.",
+      "Coffee bags, spout bags, stand-up pouches, flat-bottom bags, and rollstock film.",
   },
 ];
 
@@ -191,66 +191,66 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "skincare-boxes",
     title: "Skincare Boxes",
-    heroTitle: "Skincare packaging built for shelf clarity and unboxing value.",
+    heroTitle: "Skincare packaging for clear retail presentation and branded unboxing.",
     heroDescription:
       "Refined cartons and premium rigid presentations for cleansers, moisturizers, masks, and treatment lines.",
     intro:
-      "Skincare packaging needs clean structure, finish discipline, and enough flexibility for jars, pumps, and bottle formats.",
+      "Skincare packaging needs a structure, panel layout, and finish plan suited to jars, pumps, and bottle formats.",
     recommended: [
       {
-        productSlug: "custom-folding-cartons",
-        note: "Primary carton format for most skincare lines.",
+        productSlug: "custom-tuck-boxes",
+        note: "Tuck-box option for individual skincare products.",
       },
       {
-        productSlug: "custom-rigid-boxes",
+        productSlug: "custom-magnetic-boxes",
         note: "Gift sets, launch kits, and premium hero products.",
       },
     ],
-    materials: ["SBS paperboard", "Specialty wraps", "Textured papers"],
-    finishes: ["Soft-touch matte", "Foil stamp", "Deboss", "Spot UV"],
-    inserts: ["Paper pulp", "EVA foam", "Paperboard fitments"],
+    materials: ["Materials confirmed from the selected product family"],
+    finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
+    inserts: ["Custom inserts where required"],
     idealFor: [
       "Moisturizer jars",
       "Treatment bottles",
       "Gift sets",
       "Skincare launches",
     ],
-    moqNote: "Cartons can usually start lower than rigid presentations depending on the final structure.",
-    leadTimeNote: "Lead time depends on finish complexity and whether inserts are required.",
+    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
-      "Artwork support includes dieline guidance, foil area review, and insert planning where needed.",
+      "Final artwork is prepared on the approved dieline for the selected structure.",
   },
   {
     slug: "serum-boxes",
     title: "Serum Boxes",
-    heroTitle: "Serum boxes for narrow formats, premium print, and bottle protection.",
+    heroTitle: "Serum boxes for narrow formats, refined print, and accurate bottle fit.",
     heroDescription:
-      "Tall, narrow cartons and premium presentation formats designed for droppers, treatment serums, and hero-product launches.",
+      "Tall, narrow cartons and rigid presentation formats for droppers, treatment serums, and featured-product launches.",
     intro:
       "Serum packaging often needs narrow structural tolerances, premium finish work, and insert guidance for fragile bottle formats.",
     recommended: [
       {
-        productSlug: "custom-folding-cartons",
-        note: "Most common format for single serum units.",
+        productSlug: "custom-tuck-boxes",
+        note: "Tuck-box option for single serum units.",
       },
       {
-        productSlug: "custom-rigid-boxes",
-        note: "Premium serum sets and hero SKU launches.",
+        productSlug: "custom-magnetic-boxes",
+        note: "Rigid presentation option for serum sets and featured-product launches.",
       },
     ],
-    materials: ["SBS C1S", "Premium wraps", "Specialty papers"],
-    finishes: ["Foil stamp", "Soft-touch", "Deboss"],
-    inserts: ["Paperboard collar", "EVA foam", "Pulp tray"],
+    materials: ["Materials confirmed from the selected product family"],
+    finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
+    inserts: ["Custom inserts where required"],
     idealFor: [
       "Dropper bottles",
       "Treatment serums",
       "Premium skincare",
       "Gift sets",
     ],
-    moqNote: "Single-unit serum cartons usually remain the fastest entry point.",
-    leadTimeNote: "Insert-led or rigid serum presentations add more production complexity.",
+    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
-      "Dieline fit and structural balance matter more than usual because serum bottles tend to be tall and narrow.",
+      "Final artwork is prepared on the approved dieline for the selected structure.",
   },
   {
     slug: "cream-boxes",
@@ -262,49 +262,49 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       "Cream and lotion packaging usually needs room for wider jar formats, pump components, and strong front-panel branding.",
     recommended: [
       {
-        productSlug: "custom-folding-cartons",
-        note: "Best for everyday retail packaging around jars and pumps.",
+        productSlug: "custom-tuck-boxes",
+        note: "Tuck-box option for individual jars and pumps.",
       },
       {
         productSlug: "custom-mailer-boxes",
-        note: "Useful when products ship as kits or ecommerce bundles.",
+        note: "Mailer option for kits and branded ecommerce bundles.",
       },
     ],
-    materials: ["SBS", "Kraft", "Corrugated support formats"],
-    finishes: ["Matte", "Soft-touch", "Spot UV", "Foil"],
-    inserts: ["Paperboard fitments", "Pulp tray", "Corrugated support"],
+    materials: ["Materials confirmed from the selected product family"],
+    finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
+    inserts: ["Custom inserts where required"],
     idealFor: ["Cream jars", "Body lotions", "Personal care kits", "Retail sets"],
-    moqNote: "Carton-led formats tend to be the most efficient for cream and lotion packaging.",
-    leadTimeNote: "Large-format cartons or kit-based packing can shift production timing.",
+    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
-      "Wide jar and pump dimensions should be finalized early so the carton fit does not need to be reopened later.",
+      "Final artwork is prepared on the approved dieline for the selected structure.",
   },
   {
     slug: "lotion-boxes",
     title: "Lotion Boxes",
-    heroTitle: "Lotion packaging that balances structure, branding, and shipping readiness.",
+    heroTitle: "Lotion packaging that balances structure, branding, and product fit.",
     heroDescription:
-      "Packaging formats for pumps, bottles, and retail-ready lotion lines across skincare and body care.",
+      "Printed packaging formats for pumps, bottles, and lotion lines across skincare and body care.",
     intro:
-      "Lotion boxes usually need slightly more structural depth and transport stability than narrow cosmetic cartons.",
+      "Lotion boxes often need more structural depth and a different product fit than narrow cosmetic cartons.",
     recommended: [
       {
-        productSlug: "custom-folding-cartons",
-        note: "Best for single retail lotion units.",
+        productSlug: "custom-tuck-boxes",
+        note: "Tuck-box option for individual retail lotion units.",
       },
       {
         productSlug: "custom-mailer-boxes",
-        note: "Useful for sample sets and ecommerce shipments.",
+        note: "Mailer option for sample sets and branded ecommerce bundles.",
       },
     ],
-    materials: ["SBS paperboard", "Kraft", "Corrugated mailer structures"],
-    finishes: ["Matte", "Gloss AQ", "Foil", "Spot UV"],
-    inserts: ["Paperboard collars", "Corrugated supports", "Pulp trays"],
+    materials: ["Materials confirmed from the selected product family"],
+    finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
+    inserts: ["Custom inserts where required"],
     idealFor: ["Pump bottles", "Body lotions", "Sample sets", "Retail bundles"],
-    moqNote: "Standard cartons are usually the fastest path to launch volume.",
-    leadTimeNote: "Lotion kits or shipped sets may require both carton and outer mailer review.",
+    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
-      "Product dimensions and pack-out method should be confirmed early if pumps or bundled kits are involved.",
+      "Final artwork is prepared on the approved dieline for the selected structure.",
   },
   {
     slug: "lipstick-boxes",
@@ -313,161 +313,161 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     heroDescription:
       "Cartons and premium set formats for lipstick, lip oil, lip balm, and other slim-format beauty products.",
     intro:
-      "Lip packaging usually relies on precise die lines, clean print registration, and visually strong finishes that still work at small scale.",
+      "Lip packaging needs an accurate dieline, balanced panel layout, and finishes suited to a small carton format.",
     recommended: [
       {
-        productSlug: "custom-folding-cartons",
-        note: "Standard route for individual lipstick units.",
+        productSlug: "custom-tuck-boxes",
+        note: "Tuck-box option for individual lipstick units.",
       },
       {
-        productSlug: "custom-rigid-boxes",
+        productSlug: "custom-magnetic-boxes",
         note: "Collector sets and premium collections.",
       },
     ],
-    materials: ["SBS paperboard", "Specialty wraps"],
-    finishes: ["Foil stamp", "Spot UV", "Soft-touch"],
-    inserts: ["Cardboard fitments", "EVA foam for set formats"],
+    materials: ["Materials confirmed from the selected product family"],
+    finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
+    inserts: ["Custom inserts where required"],
     idealFor: ["Lipstick", "Lip gloss", "Lip balm", "Mini sets"],
-    moqNote: "Single-unit lipstick cartons tend to be the most scalable launch format.",
-    leadTimeNote: "Set-based presentations or premium inserts can add complexity.",
+    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
-      "Small-format beauty packaging needs careful logo sizing, bleed control, and finish placement.",
+      "Final artwork is prepared on the approved dieline for the selected structure.",
   },
   {
     slug: "lip-gloss-boxes",
     title: "Lip Gloss Boxes",
-    heroTitle: "Lip gloss packaging that supports slim structures and glossy visual storytelling.",
+    heroTitle: "Lip gloss packaging for slim structures, product branding, and finish detail.",
     heroDescription:
       "Carton formats for lip gloss tubes and slim beauty packaging where finish detail matters.",
     intro:
       "Lip gloss packaging often overlaps with lipstick structure, but still needs its own layout and fit adjustments.",
     recommended: [
       {
-        productSlug: "custom-folding-cartons",
-        note: "Best for single gloss units and everyday retail packaging.",
+        productSlug: "custom-tuck-boxes",
+        note: "Tuck-box option for individual gloss units and retail lines.",
       },
       {
-        productSlug: "custom-rigid-boxes",
+        productSlug: "custom-magnetic-boxes",
         note: "For premium gloss duos or launch kits.",
       },
     ],
-    materials: ["SBS", "Specialty papers"],
-    finishes: ["Spot UV", "Foil", "Soft-touch"],
-    inserts: ["Cardboard fitments", "EVA foam"],
+    materials: ["Materials confirmed from the selected product family"],
+    finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
+    inserts: ["Custom inserts where required"],
     idealFor: ["Lip gloss tubes", "Beauty mini sets", "Retail gloss lines"],
-    moqNote: "Cartons remain the most practical starting format for lip gloss launches.",
-    leadTimeNote: "Premium set formats require additional insert review.",
+    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
-      "Gloss-specific branding often leans on small-format finish work, so layout precision matters.",
+      "Final artwork is prepared on the approved dieline for the selected structure.",
   },
   {
     slug: "mascara-boxes",
     title: "Mascara Boxes",
-    heroTitle: "Mascara cartons built for slim dimensions and precise print presentation.",
+    heroTitle: "Mascara cartons for slim dimensions, balanced panel layout, and finish detail.",
     heroDescription:
       "Structural cartons for slim tall beauty formats where fit, logo placement, and finish detail need control.",
     intro:
       "Mascara boxes often sit in the same structural family as lipstick and serum cartons but still need exact dimensions and panel balance.",
     recommended: [
       {
-        productSlug: "custom-folding-cartons",
-        note: "Most common route for mascara packaging.",
+        productSlug: "custom-tuck-boxes",
+        note: "Tuck-box option for individual mascara units.",
       },
     ],
-    materials: ["SBS paperboard", "Recycled board"],
-    finishes: ["Foil", "Soft-touch", "Spot UV"],
-    inserts: ["Paperboard support where needed"],
+    materials: ["Materials confirmed from the selected product family"],
+    finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
+    inserts: ["Custom inserts where required"],
     idealFor: ["Mascara tubes", "Slim cosmetic products", "Retail beauty lines"],
-    moqNote: "Mascara cartons usually stay efficient at carton-first MOQs.",
-    leadTimeNote: "Lead time is mostly driven by finishing and production volume.",
+    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
-      "Because these packs are slim, front-panel composition and logo scale should be reviewed carefully before proofing.",
+      "Final artwork is prepared on the approved dieline for the selected structure.",
   },
   {
     slug: "perfume-boxes",
     title: "Perfume Boxes",
     heroTitle: "Perfume packaging for fragrance launches, gifting, and premium presentation.",
     heroDescription:
-      "Substantial rigid structures and premium secondary packs designed to match the bottle and elevate the reveal.",
+      "Rigid structures and secondary cartons developed around the bottle dimensions, insert plan, and presentation requirements.",
     intro:
-      "Perfume packaging sits closer to luxury presentation than ordinary retail cartons, especially when inserts and specialty wraps are involved.",
+      "Perfume packaging may use a magnetic presentation box or a printed tuck carton, depending on the bottle, insert, quantity, and presentation requirements.",
     recommended: [
       {
-        productSlug: "custom-rigid-boxes",
-        note: "Best route for hero fragrance presentations.",
+        productSlug: "custom-magnetic-boxes",
+        note: "Rigid presentation option for hero fragrance products.",
       },
       {
-        productSlug: "custom-folding-cartons",
+        productSlug: "custom-tuck-boxes",
         note: "Useful for discovery sets or travel-size fragrance packaging.",
       },
     ],
-    materials: ["Chipboard", "Specialty wraps", "Premium papers"],
-    finishes: ["Foil", "Emboss", "Soft-touch", "Textured wraps"],
-    inserts: ["EVA foam", "Velvet fitments", "Custom bottle cradles"],
+    materials: ["Materials confirmed from the selected product family"],
+    finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
+    inserts: ["Custom inserts where required"],
     idealFor: ["Fragrance launches", "Premium bottles", "Discovery sets", "Gift formats"],
-    moqNote: "Rigid structures usually start higher than standard cartons but deliver a more premium outcome.",
-    leadTimeNote: "Insert-heavy rigid perfume packaging should be quoted with full structure detail up front.",
+    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
-      "Bottle dimensions, insert tolerances, and wrap material selections should be approved early in the process.",
+      "Final artwork is prepared on the approved dieline for the selected structure.",
   },
   {
     slug: "cosmetic-subscription-boxes",
     title: "Cosmetic Subscription Boxes",
-    heroTitle: "Subscription packaging built for recurring beauty drops and retention-driven unboxing.",
+    heroTitle: "Subscription packaging built for recurring beauty drops and consistent unboxing.",
     heroDescription:
-      "Mailer-led and premium recurring packaging systems for beauty brands shipping monthly, quarterly, or launch-based drops.",
+      "Mailer-led and premium recurring packaging systems for beauty brands delivering monthly, quarterly, or launch-based drops.",
     intro:
-      "Subscription formats need repeatability, shipping protection, and enough design room to make every drop feel branded.",
+      "Subscription formats need repeatability, product presentation, and enough design room to make every drop feel branded.",
     recommended: [
       {
         productSlug: "custom-mailer-boxes",
-        note: "Best for repeatable beauty subscription drops.",
+        note: "Mailer option for repeatable beauty subscription drops.",
       },
       {
-        productSlug: "custom-rigid-boxes",
+        productSlug: "custom-magnetic-boxes",
         note: "For premium seasonal editions or higher-ticket programs.",
       },
     ],
-    materials: ["Corrugated", "Premium wraps for special editions"],
-    finishes: ["Interior print", "Matte lamination", "Soft-touch"],
-    inserts: ["Pulp trays", "Custom paperboard fitments", "EVA for premium drops"],
+    materials: ["Materials confirmed from the selected product family"],
+    finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
+    inserts: ["Custom inserts where required"],
     idealFor: [
       "Monthly beauty boxes",
       "Quarterly gifting drops",
       "Retention programs",
       "PR-heavy subscription launches",
     ],
-    moqNote: "Corrugated mailers are usually the most efficient recurring-box entry point.",
-    leadTimeNote: "Premium seasonal editions and insert complexity can increase lead time.",
+    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
-      "Subscription programs benefit from planning the recurring structure first, then swapping graphics and inserts per campaign.",
+      "Final artwork is prepared on the approved dieline for the selected structure.",
   },
   {
     slug: "pr-boxes",
     title: "PR Boxes",
-    heroTitle: "PR boxes engineered for seeding, launches, and content-worthy unboxing.",
+    heroTitle: "PR boxes designed for seeding, launches, and branded unboxing.",
     heroDescription:
       "Custom rigid and mailer-led presentation systems for influencer drops, launch kits, and beauty send-outs.",
     intro:
-      "PR packaging should be photographed well, survive shipping, and still feel intentional when opened by creators or press.",
+      "PR packaging should present well on camera and hold the product in a structure developed for the planned product arrangement.",
     recommended: [
       {
-        productSlug: "custom-rigid-boxes",
-        note: "Best for premium press and influencer presentations.",
+        productSlug: "custom-magnetic-boxes",
+        note: "Rigid presentation option for press and influencer kits.",
       },
       {
         productSlug: "custom-mailer-boxes",
-        note: "More scalable route for larger seeding runs.",
+        note: "Mailer option for larger seeding runs.",
       },
     ],
-    materials: ["Rigid chipboard", "Corrugated mailer structures", "Premium wraps"],
-    finishes: ["Foil", "Soft-touch", "Interior print", "Custom inserts"],
-    inserts: ["EVA foam", "Pulp trays", "Custom cradles", "Paperboard supports"],
+    materials: ["Materials confirmed from the selected product family"],
+    finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
+    inserts: ["Custom inserts where required"],
     idealFor: ["Influencer seeding", "Launch kits", "Press mailers", "Gifted collections"],
-    moqNote: "Rigid PR sets can be done for premium smaller runs, while mailers scale better for volume.",
-    leadTimeNote: "PR boxes are often deadline-sensitive, so structure and contents should be clarified early.",
+    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
-      "Insert maps and product pack-out should be defined before final artwork to avoid late-stage changes.",
+      "Final artwork is prepared on the approved dieline for the selected structure.",
   },
 ];
 

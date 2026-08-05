@@ -15,7 +15,7 @@ import { createPageMetadata, SITE_URL } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Custom Cosmetic Packaging for Beauty Brands",
   description:
-    "Plan custom cosmetic packaging for skincare, serum, lipstick, perfume, PR kits, and subscription launches. Compare structures, finishes, inserts, and quote requirements.",
+    "Custom cosmetic packaging manufactured for skincare, serum, lipstick, perfume, PR kits, and subscription launches with worldwide delivery.",
   path: "/cosmetics",
   keywords: [
     "cosmetic packaging boxes",
@@ -29,30 +29,27 @@ const cosmeticsServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": `${SITE_URL}/cosmetics#service`,
-  name: "Custom cosmetic packaging sourcing and production coordination",
+  name: "Custom cosmetic packaging manufacturing",
   serviceType: "Custom cosmetic packaging",
   provider: { "@id": `${SITE_URL}/#organization` },
-  areaServed: [
-    { "@type": "Country", name: "United States" },
-    { "@type": "Country", name: "Canada" },
-  ],
+  areaServed: { "@type": "Place", name: "Worldwide" },
   audience: {
     "@type": "BusinessAudience",
     audienceType: "Beauty, skincare, cosmetics, fragrance, and personal-care brands",
   },
   description:
-    "Guidance, quoting, supplier coordination, proofing, and delivery planning for custom cosmetic cartons, rigid boxes, mailers, PR kits, and inserts.",
+    "Custom manufacturing, proofing, and worldwide delivery for cosmetic tuck boxes, magnetic boxes, corrugated mailers, PR kits, and inserts.",
 };
 
 const productTypeRecs = [
   {
     type: "Skincare bottles & jars",
-    structure: "Reverse tuck end carton",
+    structure: "Reverse tuck end box",
     finish: "Soft-touch + foil or deboss",
   },
   {
     type: "Serums & droppers",
-    structure: "Tall folding carton",
+    structure: "Tall tuck box",
     finish: "Foil stamp + insert support",
   },
   {
@@ -62,7 +59,7 @@ const productTypeRecs = [
   },
   {
     type: "Perfume bottles",
-    structure: "Magnetic rigid box",
+    structure: "Magnetic box",
     finish: "Wrap stock + emboss or foil",
   },
   {
@@ -74,7 +71,7 @@ const productTypeRecs = [
 
 export default function CosmeticsPage() {
   const cosmeticFriendlyProducts = products.filter((product) =>
-    ["Rigid", "Cartons", "Mailers"].includes(product.category)
+    ["Tuck Boxes", "Rigid Boxes", "Corrugated Mailers"].includes(product.category)
   );
 
   return (
@@ -92,17 +89,17 @@ export default function CosmeticsPage() {
                 Cosmetic packaging built around the product inside.
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Plan folding cartons, rigid presentation boxes, mailers, PR
+                Create tuck boxes, magnetic presentation boxes, corrugated mailers, PR
                 kits, and inserts for skincare, serum, lipstick, and fragrance
-                launches. Every quote is reviewed against the product, quantity,
-                finish, intended use, and shipping destination.
+                launches. Every project is developed around the product, quantity,
+                finish, intended use, and delivery destination.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
                 <Link
                   href="/get-a-quote"
                   className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
                 >
-                  Get a cosmetics quote
+                  Start Your Cosmetics Project
                 </Link>
                 <Link
                   href="/samples"
@@ -132,8 +129,8 @@ export default function CosmeticsPage() {
         <div className="container-editorial">
           <SectionHeading
             eyebrow="By product type"
-            title="Subcategories built for how beauty actually launches."
-            intro="Each subcategory points to the packaging structures, finishes, and insert routes that make the most sense for that product family."
+            title="Packaging by beauty product type."
+            intro="Each subcategory outlines packaging structures, finishes, and insert options that can be evaluated for that product family."
           />
           <div className="mt-12 grid auto-rows-fr gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {cosmeticsSubcategories.map((subcategory) => (
@@ -157,7 +154,7 @@ export default function CosmeticsPage() {
               <div>
                 <div className="eyebrow mb-4">Need guidance?</div>
                 <h3 className="font-serif text-2xl text-foreground">
-                  Not sure which cosmetic format fits best?
+                  Not sure which cosmetic format is right?
                 </h3>
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
                   Start with your SKU, quantity, and packaging goal. We can help
@@ -169,7 +166,7 @@ export default function CosmeticsPage() {
                   href="/get-a-quote"
                   className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
                 >
-                  Get a Quote
+                  Start Your Project
                 </Link>
                 <Link
                   href="/products"
@@ -189,7 +186,7 @@ export default function CosmeticsPage() {
             <SectionHeading
               eyebrow="Recommendations"
               title="Structures matched to product type."
-              intro="This is a starting point for discussions, not a rigid rulebook."
+              intro="These are starting recommendations. Final structure depends on product dimensions, quantity, intended use, and presentation requirements."
             />
           </div>
           <div className="lg:col-span-8">
@@ -229,8 +226,8 @@ export default function CosmeticsPage() {
           <div>
             <SectionHeading
               eyebrow="Materials & finishes"
-              title="A capability set tuned to beauty."
-              intro="The finishes and insert options here are the ones most likely to matter to cosmetic founders and product teams."
+              title="Materials, finishes, and inserts for beauty packaging."
+              intro="Available options depend on the selected structure, material, quantity, and artwork requirements."
             />
             <ul className="mt-8 space-y-3">
               {materialsHighlights.map((item) => (
@@ -254,7 +251,7 @@ export default function CosmeticsPage() {
         <div className="container-editorial">
           <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="Most-used by beauty"
+              eyebrow="Beauty packaging formats"
               title="Cosmetic-friendly product families."
             />
             <Link
@@ -273,8 +270,8 @@ export default function CosmeticsPage() {
       </section>
 
       <QuoteCta
-        title="Quote your cosmetics packaging."
-        intro="Tell us about the SKU, launch quantity, structure, and finish direction. We will come back with a practical next step."
+        title="Create custom packaging for your cosmetics line."
+        intro="Tell us about the SKU, quantity, structure, and finish direction. We will help define the specification, pricing, and production details."
       />
     </>
   );

@@ -10,142 +10,96 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "what-is-moq-custom-packaging",
     title: "What Is MOQ in Custom Packaging?",
-    date: "2026-03-15",
+    date: "2026-08-04",
     excerpt:
-      "MOQ stands for minimum order quantity — the lowest number of units a supplier will produce in a single run. Here is what it means for your packaging project and how to plan around it.",
+      "MOQ is the minimum quantity available for a packaging format. See UPG's planning minimums for tuck boxes, mailer boxes, magnetic boxes, and Mylar bags.",
     content: `
-MOQ stands for **minimum order quantity** — the smallest number of units a supplier will produce in a single production run. It is one of the first numbers you will encounter when sourcing custom packaging, and understanding it can save you from surprises in pricing and lead time.
+MOQ means **minimum order quantity**. It is the lowest quantity available for a confirmed packaging format and specification.
 
-## Why Does MOQ Exist?
+## UPG planning MOQs
 
-Custom packaging is manufactured in runs. Whether it is a corrugated box, a mylar pouch, or a paper cup, the supplier has setup costs — printing plates, die cuts, equipment configuration — that are spread across the total quantity. A run of 200 units carries nearly the same setup cost as a run of 2,000 units, which means very small orders are rarely economical for the factory.
+- **Tuck boxes:** 1,000 units when every finished dimension is 5 inches or less; 500 units over 5 inches through 10 inches; 250 units over 10 inches.
+- **Corrugated mailer boxes:** the same size-based minimums as tuck boxes.
+- **Magnetic boxes:** 250 units; final dimensions are confirmed after structural feasibility review.
+- **Collapsible magnetic boxes:** 250 units; final dimensions are confirmed after structural feasibility review.
+- **Mylar bags:** 500 units.
 
-MOQ is essentially the point at which the math works for both sides: the factory can run the job without losing money, and the brand gets a unit cost that makes sense.
+## Why dimensions matter
 
-## Typical MOQ Ranges by Product Type
+Tuck and ear-lock mailer projects move through three planning brackets. Share all finished dimensions in your project enquiry so the correct bracket can be confirmed before pricing.
 
-- **Folding cartons and mailer boxes:** MOQs commonly start between 500 and 1,000 units for standard structures with basic print. Premium finishes like soft-touch or foil stamping may push the minimum higher.
-- **Rigid boxes:** Because rigid boxes require more manual assembly, MOQs are typically higher — often starting at 500 units, sometimes more depending on complexity.
-- **Mylar pouches:** Stand-up pouches with gravure printing usually start at 1,000 units minimum due to the cylinder setup cost. Digital printing options can allow lower quantities but at a higher per-unit cost.
-- **Paper cups:** Single-wall cups are typically quoted from 1,000 units due to the specialized die-cutting and seaming equipment involved.
+## A simple way to start
 
-## MOQ vs. What You Actually Need
-
-If you need 300 units but the MOQ is 1,000, you have a few options. You can order the minimum and hold inventory. You can look for a supplier with lower MOQs (often at a higher per-unit price). Or you can time your order to coincide with a larger launch run.
-
-At UPG, we work with brands to find the right balance. In some cases, a slightly higher quantity costs only marginally more per unit while dramatically reducing the per-unit cost — which makes holding extra inventory worth it.
-
-## The Bottom Line
-
-MOQ is not a rigid wall — it is a starting point for a conversation. When you submit a quote request, include your target quantity honestly. If it is below typical MOQs, say so. A good packaging partner will tell you upfront whether it is feasible and what the pricing looks like at different quantity tiers.
+Choose the product family, add the quantity and dimensions you need, and explain what the packaging will hold. UPG will review the structure, confirm the applicable MOQ, and prepare project pricing.
     `.trim(),
   },
   {
     slug: "corrugated-vs-rigid-boxes",
-    title: "Corrugated vs. Rigid Boxes: Which Is Right for Your Brand?",
-    date: "2026-03-22",
+    title: "Corrugated Mailer vs. Magnetic Boxes: Which Fits Your Brand?",
+    date: "2026-08-04",
     excerpt:
-      "Corrugated and rigid boxes look different, cost differently, and serve different purposes. Here is a practical guide to choosing between them for your packaging project.",
+      "Compare branded corrugated mailer boxes with magnetic and collapsible magnetic boxes for PR kits, ecommerce, gifting, and premium presentation.",
     content: `
-Two of the most common custom box types brands ask about are **corrugated mailer boxes** and **rigid boxes**. They look completely different, behave differently in shipping, and have very different price points. Choosing the wrong one can mean overpaying for a product that ships flat or using a box that gets crushed in transit.
+The keyword **corrugated boxes** covers many buying intentions. UPG focuses its corrugated offer on ear-lock mailer boxes for branded presentation, PR kits, subscriptions, and ecommerce unboxing.
 
-## What Is a Corrugated Box?
+## Choose a corrugated mailer box when
 
-Corrugated boxes are made from two flat sheets of paper (liners) bonded to a wavy inner layer (the flute). This construction creates a lightweight, shock-absorbing structure that is strong enough for shipping without excessive material weight. The inside is typically plain kraft or white.
+- You want an ear-lock mailer structure.
+- The inside and outside presentation both matter.
+- The project is a PR kit, subscription program, or branded ecommerce experience.
+- You may need a custom insert.
 
-Common corrugated formats include:
-- **Mailer boxes** (tuck-top, used for e-commerce and subscription packaging)
-- **Regular slotted cartons (RSC)** (standard shipping boxes)
-- **Folding cartons** using SBS paperboard (thinner, for retail shelf packaging)
+UPG does not supply regular slotted shipping cartons, master cartons, or RSC cases.
 
-Corrugated is the workhorse of product shipping. It handles drops, stacking, and transit stress well.
+## Choose a magnetic box when
 
-## What Is a Rigid Box?
+- The box itself is part of the premium product experience.
+- The project is for gifting, beauty, apparel, electronics, or a launch collection.
+- You want a magnetic closure, custom insert, or specialty finish combination.
 
-Rigid boxes — sometimes called set-up boxes — are made from thick chipboard (usually 1.5mm to 3mm) wrapped in printed paper or fabric. They do not collapse or fold flat. The lid either lifts off or uses a magnetic closure. The result is a much more premium, substantial feel.
+## Choose a collapsible magnetic box when
 
-Rigid boxes are used for:
-- Luxury cosmetics and skincare
-- Jewelry and accessories
-- Electronics packaging
-- Gift sets and PR kits
+You want the premium presentation of a magnetic box with a structure that folds flat to reduce freight and storage volume.
 
-Because they cannot be flat-shipped, rigid boxes are bulkier and more expensive to freight than corrugated boxes.
+## How to choose
 
-## The Key Differences
-
-| | Corrugated Mailer | Rigid Box |
-|---|---|---|
-| **Typical MOQ** | 500+ units | 500+ units |
-| **Per-unit cost** | Lower | Higher |
-| **Shipping** | Ships flat, assembled by customer | Ships assembled, takes more space |
-| **Feel** | Practical, brandable | Premium, luxury |
-| **Best for** | E-commerce, subscription, DTC | Gifting, retail, premium product |
-
-## How to Choose
-
-If your product ships directly to consumers and the packaging will be thrown away after unboxing, corrugated is almost always the better choice — it is less expensive and lighter to ship. If your product sits on a retail shelf, gets gifted, or needs to make a strong first impression (a high-end skincare set, a jewelry brand), a rigid box will deliver that experience at a higher cost.
-
-Many brands use both: corrugated for their everyday shipping and rigid for a limited edition or gift version of the same product.
-
-If you are unsure, include your intended use case and budget range in your quote request — we will recommend the right structure based on your actual needs.
+Start with the experience you want the customer to have. Then share the product dimensions, quantity, and reference images so the structure and pricing can be developed around the real project.
     `.trim(),
   },
   {
     slug: "how-to-prepare-artwork-for-custom-packaging",
     title: "How to Prepare Artwork for Custom Packaging",
-    date: "2026-04-01",
+    date: "2026-08-04",
     excerpt:
-      "Getting your artwork ready before production starts can save weeks of back-and-forth. Here is exactly what suppliers need and how to prepare your files correctly.",
+      "A simple preparation checklist for artwork, references, dimensions, and structure approval before custom packaging production.",
     content: `
-One of the most common causes of production delays is artwork that is not print-ready. Files arrive in the wrong format, at the wrong resolution, with fonts not outlined, or without proper bleed. The result is days of back-and-forth between the brand, the designer, and the supplier before a single box gets made.
+Good packaging artwork starts with the correct structure. A tuck box, corrugated mailer, magnetic box, collapsible magnetic box, and Mylar bag each need their own approved template.
 
-Here is what you actually need to prepare and how to get it right the first time.
+## Confirm the structure first
 
-## Step 1 — Get the Dieline First
+Share the product type, finished dimensions, quantity, and intended use before final artwork is locked. UPG coordinates the applicable dieline after the structure is sufficiently defined.
 
-A **dieline** is a flat, technical template showing the exact shape and fold lines of your packaging. Every box style has its own dieline — a tuck-end carton looks completely different laid flat than a mailer box or a rigid box lid.
+## Send what you already have
 
-Do not start designing until you have the correct dieline. Designing on a generic template and then trying to adapt it to the actual structure almost always results in misaligned artwork.
+Useful starting files include:
 
-At UPG, supplier dielines are coordinated after the structure and dimensions are sufficiently defined. If you are working with a designer, wait for the project-specific dieline before finalizing panel artwork.
+- Brand artwork and logos
+- Packaging references or mockups
+- Product dimensions
+- Existing packaging files
+- Notes for foil, spot UV, embossing, debossing, windows, inserts, zippers, valves, or other selected features
 
-## Step 2 — Set Up Your File Correctly
+## Use the approved dieline
 
-When your designer opens the dieline, they should set up the artwork with these specs:
+Final artwork should be prepared on the approved project dieline. Keep structural lines and feature areas clear so the final review can match the intended pack.
 
-- **Format:** Adobe Illustrator (.ai) or print-ready PDF. Photoshop files are rarely accepted for final print.
-- **Color mode:** CMYK, not RGB. RGB is for screens. Printing is CMYK. Colors will shift significantly if you send an RGB file.
-- **Resolution:** 300 DPI minimum for any raster images (photos, textures). Vector elements (logos, text) are resolution-independent.
-- **Bleed:** Typically 0.125 inches (3mm) beyond the dieline edge. Bleed prevents white edges appearing on the printed piece if the cut shifts slightly.
-- **Safe zone:** Keep important text and logos at least 0.125 inches inside the dieline edge.
-- **Fonts:** Outline all fonts before saving the final file. This converts text to vector shapes so the printer does not need your exact font installed.
+## Ask before rebuilding files
 
-## Step 3 — Check Your Colors
-
-If brand color accuracy matters — a specific Pantone red, a precise navy blue — specify your PMS (Pantone Matching System) colors in addition to CMYK values. CMYK printing has a limited gamut and cannot reproduce every Pantone color exactly.
-
-For packaging printed in full color (process printing), CMYK is sufficient. For spot colors where precision matters, request PMS color matching and confirm with the supplier whether it is supported for your run size.
-
-## Step 4 — Submit with a Mockup
-
-Along with the print-ready file, include a 3D mockup or a visual reference showing what the finished packaging should look like. This gives the production team a reference point if they have any questions about intent.
-
-If you do not have 3D mockup software, even a PDF showing each panel of your design labeled (front, back, left, right, top, bottom) works as a clear reference.
-
-## The Short Version
-
-- Get the dieline before designing
-- Work in CMYK at 300 DPI
-- Include 3mm bleed on all edges
-- Outline all fonts
-- Submit as .ai or print-ready PDF
-
-If you have artwork in progress but are not sure whether it is ready, describe its status in your quote request. Practical artwork checks and supplier prepress review are coordinated before production, while final file approval remains part of the documented proofing process.
+If artwork is still in progress, state that in your project enquiry. It is better to confirm the structure before spending time adapting a design to the wrong template.
     `.trim(),
   },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find((p) => p.slug === slug);
+  return blogPosts.find((post) => post.slug === slug);
 }

@@ -44,8 +44,10 @@ export function Header() {
       <div className="container-editorial flex h-16 items-center justify-between md:h-20">
         <Link href="/" className="group flex items-center gap-2">
           <span className="font-serif text-xl tracking-tight text-foreground md:text-2xl">
-            Universal
-            <span className="text-gold"> Packaging</span>
+            <span className="sm:hidden">UPG</span>
+            <span className="hidden sm:inline">
+              Universal <span className="text-gold">Packaging Group</span>
+            </span>
           </span>
         </Link>
 

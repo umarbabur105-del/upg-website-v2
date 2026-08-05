@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     path: `/cosmetics/${slug}`,
     keywords: [
       subcategory.title,
-      `${subcategory.title.toLowerCase()} wholesale`,
+      `${subcategory.title.toLowerCase()} manufacturer`,
       `${subcategory.title.toLowerCase()} custom packaging`,
     ],
   });
@@ -67,7 +67,7 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
         description: subcategory.heroDescription,
         url: pageUrl,
         provider: { "@id": `${SITE_URL}/#organization` },
-        areaServed: ["United States", "Canada"],
+        areaServed: "Worldwide",
       },
       {
         "@type": "BreadcrumbList",
@@ -114,7 +114,7 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
                 href="/get-a-quote"
                 className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
               >
-                Get a Quote
+                Start Your Project
               </Link>
               <Link
                 href="/cosmetics"
@@ -131,7 +131,7 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
         <div className="container-editorial grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <SectionHeading
-              eyebrow="Best structures"
+              eyebrow="Recommended structures"
               title={`Recommended packaging for ${subcategory.title.toLowerCase()}.`}
               intro={subcategory.intro}
             />
@@ -140,7 +140,7 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
             {recommendedProducts.map((item) =>
               item.product ? (
                 <div key={item.product.slug} className="surface-card p-6">
-                  <div className="eyebrow mb-3">Recommended route</div>
+                  <div className="eyebrow mb-3">Recommended option</div>
                   <h3 className="font-serif text-2xl text-foreground">
                     {item.product.name}
                   </h3>
@@ -201,8 +201,8 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
         <div className="container-editorial grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <SectionHeading
-              eyebrow="Ideal for"
-              title="Where this subcategory fits best."
+              eyebrow="Common applications"
+              title="Common product applications."
             />
           </div>
           <div className="grid gap-4 lg:col-span-8 sm:grid-cols-2">
@@ -259,8 +259,8 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
       ) : null}
 
       <QuoteCta
-        title={`Ready to quote ${subcategory.title.toLowerCase()}?`}
-        intro="Tell us the SKU, quantity, and finish direction. We will point you to the right structure and next step."
+        title={`Ready to create ${subcategory.title.toLowerCase()}?`}
+        intro="Tell us the SKU, quantity, and finish direction. We will help define the structure, specification, pricing, and production details."
       />
     </>
   );

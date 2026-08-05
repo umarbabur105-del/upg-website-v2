@@ -7,7 +7,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "What is your minimum order quantity?",
     answer:
-      "Planning MOQs are typically 500+ units for rigid boxes and mailers, and 1,000+ units for folding cartons, pouches, and cups. Final minimums depend on size, material, print, finish, and supplier fit, so the written quote is the controlling figure.",
+      "Magnetic and collapsible magnetic boxes start at 250 units. Mylar bags start at 500. Tuck and mailer boxes start at 1,000 units when every dimension is 5 in or less, 500 units when the largest dimension is over 5 in through 10 in, and 250 units when it is over 10 in.",
   },
   {
     question: "How fast can I get a quote?",
@@ -17,36 +17,36 @@ export const faqItems: FaqItem[] = [
   {
     question: "Do you help with dielines and artwork?",
     answer:
-      "Yes. We coordinate structure guidance, supplier dielines, and practical artwork checks. Final print files and approvals remain subject to the confirmed structure, supplier requirements, and proofing process.",
+      "Yes. We coordinate structure guidance, production dielines, and basic artwork checks. Final print files and approvals follow the confirmed structure, manufacturing requirements, and proofing process.",
   },
   {
-    question: "Do you ship to the United States and Canada?",
+    question: "Do you ship custom packaging worldwide?",
     answer:
-      "Yes. UPG plans projects for delivery to the United States and Canada. Freight, duties, taxes, brokerage, and delivery terms are confirmed in the written quote rather than assumed.",
+      "Yes. UPG can arrange delivery to destinations worldwide. Freight service, duties, taxes, import requirements, documentation, and delivery terms are confirmed for each project and destination.",
   },
   {
     question: "Can I order custom sizes?",
     answer:
-      "Yes. All core product families support custom sizing, subject to the structure, material limits, and project use case.",
+      "Yes. Each core product family is made to a project-specific size, within confirmed structural and material limits.",
   },
   {
     question: "Do you offer samples?",
     answer:
-      "Sample routes may include a stock reference, material or print sample, white structural sample, or a production-quality sample. Availability, cost, and timing depend on the format and project stage and are confirmed during quoting.",
+      "Sample availability depends on the product, specification, and project stage. Tell us what you need to evaluate and we will confirm the available sample or pre-production option, cost, and timing.",
   },
   {
     question: "Can you handle cosmetics packaging?",
     answer:
-      "Yes. Cosmetics and beauty are UPG's primary focus, including folding cartons, rigid boxes, PR kits, mailers, and inserts for skincare, serum, lipstick, perfume, and subscription programs.",
+      "Yes. The cosmetics hub connects tuck boxes, magnetic boxes, collapsible magnetic boxes, corrugated mailers, and inserts to skincare, serum, lipstick, perfume, PR, and subscription projects.",
   },
   {
     question: "Do you provide instant pricing online?",
     answer:
-      "No. UPG is quote-led because the real price depends on structure, finish, quantity, materials, and the delivery path.",
+      "No. Custom packaging is manufactured to specification, so pricing depends on structure, size, material, print, finish, quantity, and delivery destination.",
   },
   {
-    question: "How do you handle food-contact projects?",
+    question: "Do you supply standard shipping or master cartons?",
     answer:
-      "Food-contact or ingestible-product projects require intended-use, market, barrier, material, ink, and supplier-documentation review before a suitable route can be confirmed. UPG does not treat a generic material label as proof of regulatory suitability.",
+      "No. UPG offers ear-lock corrugated mailer boxes for branded ecommerce, PR, subscription, and presentation projects. Regular slotted shipping cartons, master cartons, and RSC cases are outside our product range.",
   },
 ];

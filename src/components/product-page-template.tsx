@@ -35,9 +35,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                 </div>
               </div>
               <p className="mt-4 max-w-xl text-xs leading-relaxed text-muted-foreground">
-                MOQ and timing are planning ranges. Final values are confirmed
-                after dimensions, materials, finishes, proofing, and destination
-                are reviewed.
+                Final pricing and production timing are confirmed after dimensions,
+                materials, finishes, proofing, and destination are reviewed.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
@@ -76,15 +75,15 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           <div className="mb-14">
             <SectionHeading
               eyebrow="Overview"
-              title="Built for the right structure, not just the right keyword."
+              title="Built around the product, structure, and brand experience."
               intro={product.summary}
             />
           </div>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { label: "Best for", value: product.bestFor },
+              { label: "Common applications", value: product.bestFor },
               { label: "Size range", value: product.sizes },
-              { label: "Size flexibility", value: product.sizeFlexibility },
+              { label: "Custom sizing", value: product.sizeFlexibility },
               { label: "Material options", value: product.materialOptions },
               { label: "Print options", value: product.printOptions },
               { label: "Finish options", value: product.finishOptions },
@@ -100,13 +99,43 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
         </div>
       </section>
 
+      <section className="section-shell bg-stone">
+        <div className="container-editorial">
+          <div className="mb-10">
+            <SectionHeading
+              eyebrow="Product views"
+              title={`Explore ${product.shortName.toLowerCase()} in more detail.`}
+              intro="Representative product renderings show possible structures and configurations. Final construction, color, print, and finish are confirmed for each project."
+            />
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {product.galleryImages.map((image) => (
+              <figure key={image.src} className="overflow-hidden bg-surface shadow-soft">
+                <div className="relative aspect-[5/4] overflow-hidden">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-[1.02]"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
+                <figcaption className="border-t border-border px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+                  {image.alt}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-shell bg-cream">
         <div className="container-editorial grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="Industries"
-              title="Where this format performs best."
-              intro="Use-case alignment matters more than having the broadest possible catalog."
+              title="Industries and product applications."
+              intro="The right structure starts with how the packaging will be filled, presented, stored, and delivered."
             />
           </div>
           <div className="lg:col-span-8">
@@ -126,8 +155,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="Production details"
-              title="Materials, print, and finish paths."
-              intro="The exact route depends on the structure, quantity, and finish stack. This page gives the core launch options."
+              title="Materials, print, and finish options."
+              intro="The right combination depends on the structure, quantity, and finish requirements. This page shows the core available options."
             />
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8">
@@ -140,7 +169,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
               </ul>
             </div>
             <div className="surface-card p-6">
-              <div className="eyebrow mb-4">Print routes</div>
+              <div className="eyebrow mb-4">Print options</div>
               <ul className="space-y-3 text-sm leading-relaxed text-foreground/80">
                 {product.prints.map((item) => (
                   <li key={item}>{item}</li>
@@ -166,8 +195,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="Use cases"
-              title="How brands are most likely to use this format."
-              intro="This is where the structure becomes commercial, not just visual."
+              title="Common ways brands use this format."
+              intro="Each use case brings different structural, presentation, and delivery requirements."
             />
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
@@ -185,8 +214,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="Artwork & proofing"
-              title="What we need from you before this moves."
-              intro="The better the files and structure notes, the faster the quote and proof cycle."
+              title="What we need before production."
+              intro="Clear files and structure notes make specification, proofing, and production more efficient."
             />
           </div>
           <div className="grid gap-6 lg:col-span-8">
@@ -212,7 +241,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
             <SectionHeading
               eyebrow="Related products"
               title="Other packaging formats worth comparing."
-              intro="Most buyers evaluate a few structures before locking the spec."
+              intro="Compare related formats before confirming the final specification."
             />
             <Link
               href="/products"
@@ -230,8 +259,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
       </section>
 
       <QuoteCta
-        title={`Quote ${product.name.toLowerCase()} with real specs.`}
-        intro="Send the product type, quantity, dimensions, and where it needs to ship. We will come back with a structured commercial response."
+        title={`Start your ${product.name.toLowerCase()} project.`}
+        intro="Send the product type, quantity, dimensions, and delivery destination. We will develop the structure, specification, and pricing."
       />
     </>
   );

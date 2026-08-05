@@ -4,7 +4,7 @@ import { cosmeticsSubcategories } from "@/data/catalog";
 import { products } from "@/data/products";
 
 const BASE_URL = "https://universalpackaginggroup.com";
-const CONTENT_UPDATED_AT = new Date("2026-08-03T00:00:00.000Z");
+const CONTENT_UPDATED_AT = new Date("2026-08-06T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
