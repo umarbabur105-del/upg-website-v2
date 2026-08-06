@@ -23,24 +23,10 @@ export function AnalyticsRuntime() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    let shouldOpen = true;
-
-    try {
-      const storedChoice = window.localStorage.getItem(
-        ANALYTICS_CONSENT_STORAGE_KEY
-      );
-      shouldOpen = storedChoice !== "granted" && storedChoice !== "denied";
-    } catch {
-      shouldOpen = true;
-    }
-
-    const hydrationTimer = window.setTimeout(() => setIsOpen(shouldOpen), 0);
-
     const openPreferences = () => setIsOpen(true);
     window.addEventListener(ANALYTICS_CONSENT_EVENT, openPreferences);
 
     return () => {
-      window.clearTimeout(hydrationTimer);
       window.removeEventListener(ANALYTICS_CONSENT_EVENT, openPreferences);
     };
   }, []);

@@ -37,7 +37,7 @@ export default function PrivacyPage() {
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Analytics and consent choices</h2>
-            <p className="mt-3">We use Google Analytics to understand website visits, traffic sources, page interactions, contact-link use, and whether an enquiry was successfully submitted. We do not intentionally send names, email addresses, phone numbers, project notes, or other form contents to Google Analytics. Analytics storage is denied by default until you make a choice. Advertising storage, advertising user data, and advertising personalization remain disabled. You can review or change your choice at any time through the Cookie choices link in the website footer.</p>
+            <p className="mt-3">We use Google Analytics to understand website visits, traffic sources, page interactions, contact-link use, and whether an enquiry was successfully submitted. We do not intentionally send names, email addresses, phone numbers, project notes, or other form contents to Google Analytics. Analytics storage is enabled by default. Advertising storage, advertising user data, and advertising personalization remain disabled. You can opt out or change your choice at any time through the Privacy choices control in the website footer.</p>
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Your choices</h2>
