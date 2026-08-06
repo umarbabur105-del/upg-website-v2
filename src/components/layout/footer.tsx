@@ -19,7 +19,7 @@ export function Footer() {
               aria-label="Universal Packaging Group home"
               className="inline-flex"
             >
-              <Wordmark placement="footer" />
+              <Wordmark />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               {siteConfig.description}

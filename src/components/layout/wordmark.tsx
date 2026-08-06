@@ -1,41 +1,15 @@
-type WordmarkProps = {
-  placement?: "header" | "footer";
-};
-
-export function Wordmark({ placement = "header" }: WordmarkProps) {
-  const isFooter = placement === "footer";
-
+export function Wordmark() {
   return (
     <span className="inline-flex items-center" aria-hidden="true">
-      <span
-        className={`font-sans font-semibold leading-none tracking-[-0.065em] text-foreground ${
-          isFooter ? "text-[1.75rem]" : "text-[1.45rem]"
-        }`}
-      >
+      <span className="font-sans text-[1.45rem] font-semibold leading-none tracking-[-0.065em] text-foreground">
         UPG
       </span>
-      <span
-        className={`ml-3 hidden w-px shrink-0 bg-gold/55 sm:block ${
-          isFooter ? "h-9" : "h-8"
-        }`}
-      />
-      <span className="ml-3 hidden flex-col sm:flex">
-        <span
-          className={`font-sans font-semibold uppercase leading-none text-foreground ${
-            isFooter
-              ? "text-[0.72rem] tracking-[0.19em]"
-              : "text-[0.66rem] tracking-[0.18em]"
-          }`}
-        >
+      <span className="ml-3 h-8 w-px shrink-0 bg-gold/55" />
+      <span className="ml-3 flex flex-col">
+        <span className="font-sans text-[0.66rem] font-semibold tracking-[0.18em] text-foreground uppercase leading-none">
           Universal
         </span>
-        <span
-          className={`mt-1.5 font-sans font-semibold uppercase leading-none text-gold ${
-            isFooter
-              ? "text-[0.61rem] tracking-[0.16em]"
-              : "text-[0.56rem] tracking-[0.145em]"
-          }`}
-        >
+        <span className="mt-1.5 font-sans text-[0.56rem] font-semibold tracking-[0.145em] text-gold uppercase leading-none">
           Packaging Group
         </span>
       </span>

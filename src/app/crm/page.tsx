@@ -27,7 +27,7 @@ export default function CrmPage() {
   if (sheetUrl) redirect(sheetUrl);
 
   return (
-    <section className="min-h-[70vh] bg-gradient-warm px-6 py-24">
+    <section className="min-h-[70vh] bg-background px-6 py-24">
       <div className="mx-auto max-w-xl rounded-2xl border border-border bg-surface p-8 shadow-soft">
         <div className="eyebrow">Private workspace</div>
         <h1 className="mt-4 font-serif text-4xl text-foreground">UPG Leads CRM</h1>

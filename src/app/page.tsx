@@ -18,7 +18,7 @@ import { siteConfig } from "@/data/site";
 export default function HomePage() {
   return (
     <>
-      <section className="bg-gradient-warm overflow-hidden">
+      <section className="overflow-hidden bg-background">
         <div className="container-editorial pt-12 pb-20 md:pt-20 md:pb-28">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">

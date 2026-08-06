@@ -101,7 +101,7 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
       />
-      <section className="bg-gradient-warm">
+      <section className="bg-background">
         <div className="container-editorial pt-16 pb-20 md:pt-24 md:pb-28">
           <div className="max-w-4xl">
             <div className="eyebrow mb-5">Cosmetics subcategory</div>

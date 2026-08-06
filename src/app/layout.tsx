@@ -9,7 +9,6 @@ import { LeadAttributionCapture } from "@/components/lead-attribution-capture";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
 import { CORE_KEYWORDS, DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo";
-import "@fontsource-variable/fraunces";
 import "@fontsource-variable/inter";
 import "./globals.css";
 

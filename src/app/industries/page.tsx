@@ -15,7 +15,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function IndustriesPage() {
   return (
     <>
-      <section className="bg-gradient-warm">
+      <section className="bg-background">
         <div className="container-editorial pt-16 pb-20 md:pt-24 md:pb-28">
           <div className="max-w-4xl">
             <div className="eyebrow mb-5">Industries</div>
