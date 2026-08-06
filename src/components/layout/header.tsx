@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Wordmark } from "@/components/layout/wordmark";
 import { siteConfig } from "@/data/site";
 
@@ -24,23 +24,9 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 8);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
-    <header
-      className={`sticky top-9 z-40 w-full transition-all duration-300 ${
-        scrolled
-          ? "bg-background"
-          : "bg-transparent"
-      }`}
-    >
+    <header className="sticky top-9 z-40 w-full bg-background">
       <div className="container-editorial flex h-16 items-center justify-between md:h-20">
         <Link
           href="/"
