@@ -4,8 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/data/site";
 
-const WHATSAPP_URL = `https://wa.me/${siteConfig.whatsappNumber}`;
-const HAS_WHATSAPP = Boolean(siteConfig.whatsappNumber);
+const HAS_WHATSAPP = Boolean(siteConfig.whatsappUrl);
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -66,7 +65,7 @@ export function Header() {
         <div className="hidden items-center gap-3 lg:flex">
           {HAS_WHATSAPP ? (
             <a
-              href={WHATSAPP_URL}
+              href={siteConfig.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
@@ -139,7 +138,7 @@ export function Header() {
             <div className="mt-4 border-t border-border pt-4">
               {HAS_WHATSAPP ? (
                 <a
-                  href={WHATSAPP_URL}
+                  href={siteConfig.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 py-3 text-sm text-foreground/80"

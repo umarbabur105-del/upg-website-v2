@@ -147,7 +147,7 @@ const textareaClass =
   "w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none focus:border-moss";
 
 export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
-  const hasWhatsApp = Boolean(siteConfig.whatsappNumber);
+  const hasWhatsApp = Boolean(siteConfig.whatsappUrl);
   const [submissionId] = useState(() => crypto.randomUUID());
   const [formStartedAt] = useState(() => Date.now());
   const [faxNumber, setFaxNumber] = useState("");
@@ -230,7 +230,7 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
         </p>
         {hasWhatsApp ? (
           <a
-            href={`https://wa.me/${siteConfig.whatsappNumber}`}
+            href={siteConfig.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-8 inline-flex rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
@@ -277,7 +277,7 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
             <div className="mt-8 border-t border-border pt-6">
               <div className="eyebrow mb-3">Prefer to talk first?</div>
               <a
-                href={`https://wa.me/${siteConfig.whatsappNumber}`}
+                href={siteConfig.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-medium text-foreground hover:text-gold"

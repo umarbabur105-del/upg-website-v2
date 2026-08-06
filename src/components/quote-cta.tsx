@@ -12,7 +12,7 @@ export function QuoteCta({
   intro = "Share the product, quantity, and destination. We will help define the structure, specification, pricing, and manufacturing plan.",
   variant = "moss",
 }: QuoteCtaProps) {
-  const hasWhatsApp = Boolean(siteConfig.whatsappNumber);
+  const hasWhatsApp = Boolean(siteConfig.whatsappUrl);
   const sectionClass =
     variant === "moss"
       ? "bg-gradient-moss text-primary-foreground"
@@ -37,7 +37,7 @@ export function QuoteCta({
             </Link>
             {hasWhatsApp ? (
               <a
-                href={`https://wa.me/${siteConfig.whatsappNumber}`}
+                href={siteConfig.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`rounded-full border px-6 py-3 text-sm font-semibold ${
