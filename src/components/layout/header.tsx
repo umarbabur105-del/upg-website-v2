@@ -35,10 +35,10 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-9 z-40 w-full border-b transition-all duration-300 ${
+      className={`sticky top-9 z-40 w-full transition-all duration-300 ${
         scrolled
-          ? "border-transparent bg-background/88 backdrop-blur-md"
-          : "border-transparent bg-transparent"
+          ? "bg-background/88 backdrop-blur-md"
+          : "bg-transparent"
       }`}
     >
       <div className="container-editorial flex h-16 items-center justify-between md:h-20">
