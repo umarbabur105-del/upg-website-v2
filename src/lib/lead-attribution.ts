@@ -10,6 +10,15 @@ export type LeadAttribution = {
 
 const STORAGE_KEY = "upg_lead_attribution_v1";
 
+const AI_REFERRERS = [
+  { hosts: ["chatgpt.com", "chat.openai.com"], source: "chatgpt" },
+  { hosts: ["gemini.google.com"], source: "gemini" },
+  { hosts: ["perplexity.ai"], source: "perplexity" },
+  { hosts: ["claude.ai"], source: "claude" },
+  { hosts: ["copilot.microsoft.com"], source: "microsoft_copilot" },
+  { hosts: ["you.com"], source: "you_com" },
+] as const;
+
 function trim(value: string | null, max: number): string | undefined {
   const normalized = value?.trim();
   return normalized ? normalized.slice(0, max) : undefined;
@@ -26,14 +35,34 @@ function safeReferrer(value: string): string | undefined {
   }
 }
 
+function matchesHost(hostname: string, candidate: string) {
+  return hostname === candidate || hostname.endsWith(`.${candidate}`);
+}
+
+export function classifyAiReferrer(value: string): string | undefined {
+  if (!value) return undefined;
+
+  try {
+    const hostname = new URL(value).hostname.toLowerCase();
+    return AI_REFERRERS.find(({ hosts }) =>
+      hosts.some((candidate) => matchesHost(hostname, candidate))
+    )?.source;
+  } catch {
+    return undefined;
+  }
+}
+
 function readCurrentAttribution(): LeadAttribution {
   const params = new URLSearchParams(window.location.search);
+  const explicitSource = trim(params.get("utm_source"), 160);
+  const explicitMedium = trim(params.get("utm_medium"), 160);
+  const aiSource = explicitSource ? undefined : classifyAiReferrer(document.referrer);
 
   return {
     landing_page: trim(window.location.pathname, 300),
     referrer: safeReferrer(document.referrer),
-    utm_source: trim(params.get("utm_source"), 160),
-    utm_medium: trim(params.get("utm_medium"), 160),
+    utm_source: explicitSource ?? aiSource,
+    utm_medium: explicitMedium ?? (aiSource ? "ai_referral" : undefined),
     utm_campaign: trim(params.get("utm_campaign"), 200),
     utm_content: trim(params.get("utm_content"), 200),
     utm_term: trim(params.get("utm_term"), 200),

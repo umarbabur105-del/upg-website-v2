@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/data/site";
 
-export const SITE_URL = "https://universalpackaginggroup.com";
+export const SITE_URL = siteConfig.url;
 
 export const DEFAULT_OG_IMAGE = {
   url: `${SITE_URL}/images/redesign/hero/hero-cosmetics.jpg`,
@@ -51,7 +52,7 @@ export function createPageMetadata({
       description,
       url,
       siteName: "Universal Packaging Group",
-      locale: "en_US",
+      locale: siteConfig.language.replace("-", "_"),
       images: [DEFAULT_OG_IMAGE],
     },
     twitter: {

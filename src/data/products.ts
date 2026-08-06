@@ -21,6 +21,7 @@ export interface Product {
   bestFor: string;
   summary: string;
   longSummary: string;
+  metaDescription: string;
   moq: string;
   leadTime: string;
   image: string;
@@ -54,6 +55,8 @@ export const products: Product[] = [
       "Custom printed tuck boxes across the core folding-carton styles, materials, and premium finish options.",
     longSummary:
       "Choose straight tuck end, reverse tuck end, auto-lock, interlock, or seal-end boxes for products that need a printed retail carton. Cereal-style seal-end boxes are included in this family.",
+    metaDescription:
+      "Custom tuck boxes in straight tuck, reverse tuck, auto-lock, interlock, seal-end, and cereal-style formats, manufactured for brands worldwide.",
     moq: "250–1,000 units, based on finished size",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
@@ -122,6 +125,8 @@ export const products: Product[] = [
       "Ear-lock corrugated boxes built for branded unboxing, product presentation, and repeat programs.",
     longSummary:
       "Custom corrugated mailer boxes use an ear-lock structure for PR kits, subscription programs, ecommerce orders, and branded product presentation. Exterior printing, interior printing, custom inserts, and specialty finishes are available.",
+    metaDescription:
+      "Custom corrugated ear-lock mailer boxes for PR kits, subscriptions, ecommerce, and presentation, manufactured worldwide with size-based MOQs.",
     moq: "250–1,000 units, based on finished size",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
@@ -178,6 +183,8 @@ export const products: Product[] = [
       "Premium rigid boxes with a magnetic closure, custom inserts, and presentation-led finishes.",
     longSummary:
       "Custom magnetic boxes create a premium presentation for gifts, beauty products, apparel, electronics, and launch collections. The structure can be paired with custom inserts and premium finish options.",
+    metaDescription:
+      "Custom magnetic rigid boxes with premium finishes and inserts for brands worldwide. Minimum order 250 units; specifications are confirmed per project.",
     moq: "250 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
@@ -228,6 +235,8 @@ export const products: Product[] = [
       "A premium magnetic rigid box that folds flat to reduce freight and storage space.",
     longSummary:
       "Custom collapsible magnetic boxes deliver the premium presentation of a magnetic box while folding flat for more efficient freight and storage. Custom inserts and premium finishes are available.",
+    metaDescription:
+      "Custom collapsible magnetic boxes that fold flat for efficient storage and freight. Worldwide manufacturing with a 250-unit minimum order.",
     moq: "250 units",
     leadTime: "Confirmed after specification review",
     image:
@@ -280,6 +289,8 @@ export const products: Product[] = [
       "Custom printed flexible packaging across pouches, bags, and rollstock film formats.",
     longSummary:
       "Custom Mylar bags include three-side seal bags, flat-bottom bags, stand-up pouches, spout bags, child-resistant bags, coffee bags, and rollstock film. Depending on the format, options can include zippers, valves, windows, and matte, gloss, or metallic finishes.",
+    metaDescription:
+      "Custom Mylar bags in stand-up, flat-bottom, three-side-seal, spout, child-resistant, coffee, and rollstock formats. Minimum order 500 units.",
     moq: "500 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
@@ -331,4 +342,32 @@ export function getProductBySlug(slug: string): Product | undefined {
 
 export function getRelatedProducts(currentSlug: string, limit = 3): Product[] {
   return products.filter((product) => product.slug !== currentSlug).slice(0, limit);
+}
+
+export interface ProductFaq {
+  question: string;
+  answer: string;
+}
+
+export function getProductFaqs(product: Product): ProductFaq[] {
+  return [
+    {
+      question: `What is the minimum order for ${product.name}?`,
+      answer: product.sizes,
+    },
+    {
+      question: `What are ${product.name.toLowerCase()} best used for?`,
+      answer: `${product.bestFor}. ${product.longSummary}`,
+    },
+    {
+      question: `What information should I include in my ${product.shortName.toLowerCase()} enquiry?`,
+      answer:
+        `Share the intended use, quantity, dimensions if available, delivery country, artwork status, and any material or finish preferences. ${product.artworkRequirements}`,
+    },
+    {
+      question: `What must be confirmed before production?`,
+      answer:
+        `${product.screeningNote} Final pricing, production timing, and delivery terms are confirmed for the approved project specification.`,
+    },
+  ];
 }

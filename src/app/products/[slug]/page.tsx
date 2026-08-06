@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductPageTemplate } from "@/components/product-page-template";
-import { getProductBySlug, products } from "@/data/products";
+import { getProductBySlug, getProductFaqs, products } from "@/data/products";
+import { siteConfig } from "@/data/site";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 interface PageProps {
@@ -19,10 +20,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!product) return {};
 
   const title = product.name;
-  const description = product.longSummary;
   return createPageMetadata({
     title,
-    description,
+    description: product.metaDescription,
     path: `/products/${slug}`,
     keywords: [product.name, product.shortName, ...product.industries],
   });
@@ -37,6 +37,7 @@ export default async function ProductPage({ params }: PageProps) {
   }
 
   const productUrl = `${SITE_URL}/products/${slug}`;
+  const productFaqs = getProductFaqs(product);
 
   const productSchema = {
     "@context": "https://schema.org",
@@ -48,8 +49,9 @@ export default async function ProductPage({ params }: PageProps) {
     image: `${SITE_URL}${product.heroImage}`,
     brand: {
       "@type": "Brand",
-      name: "Universal Packaging Group",
+      name: siteConfig.name,
     },
+    manufacturer: { "@id": `${SITE_URL}/#organization` },
     category: product.category,
     material: product.materials,
     audience: {
@@ -67,7 +69,25 @@ export default async function ProductPage({ params }: PageProps) {
         name: "Production planning status",
         value: product.leadTime,
       },
+      {
+        "@type": "PropertyValue",
+        name: "Product scope and qualification",
+        value: product.screeningNote,
+      },
     ],
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: productFaqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 
   const breadcrumbSchema = {
@@ -104,6 +124,10 @@ export default async function ProductPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <ProductPageTemplate product={product} />
     </>

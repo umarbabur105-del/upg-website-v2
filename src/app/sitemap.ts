@@ -2,86 +2,87 @@ import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog-posts";
 import { cosmeticsSubcategories } from "@/data/catalog";
 import { products } from "@/data/products";
+import { siteConfig } from "@/data/site";
+import { SITE_URL } from "@/lib/seo";
 
-const BASE_URL = "https://universalpackaginggroup.com";
-const CONTENT_UPDATED_AT = new Date("2026-08-06T00:00:00.000Z");
+const CONTENT_UPDATED_AT = new Date(`${siteConfig.contentReviewedAt}T00:00:00.000Z`);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: BASE_URL,
+      url: SITE_URL,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${BASE_URL}/get-a-quote`,
+      url: `${SITE_URL}/get-a-quote`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/products`,
+      url: `${SITE_URL}/products`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "weekly",
       priority: 0.95,
     },
     {
-      url: `${BASE_URL}/cosmetics`,
+      url: `${SITE_URL}/cosmetics`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "weekly",
       priority: 0.95,
     },
     {
-      url: `${BASE_URL}/industries`,
+      url: `${SITE_URL}/industries`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/materials-finishes`,
+      url: `${SITE_URL}/materials-finishes`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "monthly",
       priority: 0.85,
     },
     {
-      url: `${BASE_URL}/samples`,
+      url: `${SITE_URL}/samples`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/about`,
+      url: `${SITE_URL}/about`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/blog`,
+      url: `${SITE_URL}/blog`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "weekly",
       priority: 0.78,
     },
     {
-      url: `${BASE_URL}/faq`,
+      url: `${SITE_URL}/faq`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/contact`,
+      url: `${SITE_URL}/contact`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
-      url: `${BASE_URL}/privacy`,
+      url: `${SITE_URL}/privacy`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "yearly",
       priority: 0.2,
     },
     {
-      url: `${BASE_URL}/terms`,
+      url: `${SITE_URL}/terms`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "yearly",
       priority: 0.2,
@@ -89,7 +90,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
-    url: `${BASE_URL}/products/${product.slug}`,
+    url: `${SITE_URL}/products/${product.slug}`,
     lastModified: CONTENT_UPDATED_AT,
     changeFrequency: "monthly" as const,
     priority: 0.8,
@@ -97,7 +98,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const cosmeticsRoutes: MetadataRoute.Sitemap = cosmeticsSubcategories.map(
     (subcategory) => ({
-      url: `${BASE_URL}/cosmetics/${subcategory.slug}`,
+      url: `${SITE_URL}/cosmetics/${subcategory.slug}`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "monthly" as const,
       priority: 0.82,
@@ -105,7 +106,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
+    url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: "monthly" as const,
     priority: 0.7,

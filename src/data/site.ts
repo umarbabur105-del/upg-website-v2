@@ -5,6 +5,19 @@ export const siteConfig = {
     "Custom boxes and flexible packaging manufactured for brands worldwide.",
   url: "https://universalpackaginggroup.com",
   email: "quotes@universalpackaginggroup.com",
+  language: "en-US",
+  market: "Worldwide",
+  contentReviewedAt: "2026-08-06",
+  businessModel:
+    "Custom packaging manufacturing with project-specific structure, specification, pricing, proofing, production, and delivery planning.",
+  pricingModel:
+    "Project-specific quotation based on structure, dimensions, material, print, finish, quantity, and delivery destination.",
+  responseTarget:
+    "UPG targets an initial response within one business day. Final pricing may require specification review.",
+  scopeBoundary:
+    "UPG supplies corrugated ear-lock mailer boxes, not regular slotted shipping cartons, master cartons, or RSC cases.",
+  imagePolicy:
+    "AI-generated packaging images are representative concepts, not completed customer work. Final construction, color, print, and finish are confirmed for each project.",
   whatsappNumber: "",
   navigation: [
     { label: "Products", href: "/products" },

@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Product } from "@/data/products";
-import { getRelatedProducts } from "@/data/products";
 import { ProductCard } from "@/components/product-card";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
+import {
+  getProductFaqs,
+  getRelatedProducts,
+  type Product,
+} from "@/data/products";
 
 interface ProductPageTemplateProps {
   product: Product;
@@ -12,6 +16,7 @@ interface ProductPageTemplateProps {
 
 export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
   const related = getRelatedProducts(product.slug);
+  const productFaqs = getProductFaqs(product);
 
   return (
     <>
@@ -236,6 +241,21 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
       </section>
 
       <section className="section-shell bg-cream">
+        <div className="container-editorial grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <SectionHeading
+              eyebrow="Product questions"
+              title={`Plan ${product.shortName.toLowerCase()} with clear facts.`}
+              intro="Concise answers cover the planning minimum, best-fit applications, quote inputs, and the checks required before production."
+            />
+          </div>
+          <div className="surface-card p-6 sm:p-8 lg:col-span-8 lg:p-10">
+            <FaqAccordion items={productFaqs} />
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell">
         <div className="container-editorial">
           <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
