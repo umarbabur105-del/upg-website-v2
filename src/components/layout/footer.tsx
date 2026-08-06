@@ -12,7 +12,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="font-serif text-2xl text-foreground">
               Universal
-              <span className="text-gold"> Packaging</span>
+              <span className="text-gold"> Packaging Group</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               {siteConfig.description}
@@ -75,7 +75,7 @@ export function Footer() {
               href={siteConfig.cta.href}
               className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
             >
-              Request a Quote
+              {siteConfig.cta.label}
             </Link>
           </div>
         </div>

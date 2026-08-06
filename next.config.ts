@@ -46,6 +46,36 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/products/custom-folding-cartons",
+        destination: "/products/custom-tuck-boxes",
+        permanent: true,
+      },
+      {
+        source: "/custom-folding-cartons",
+        destination: "/products/custom-tuck-boxes",
+        permanent: true,
+      },
+      {
+        source: "/products/custom-rigid-boxes",
+        destination: "/products/custom-magnetic-boxes",
+        permanent: true,
+      },
+      {
+        source: "/custom-rigid-boxes",
+        destination: "/products/custom-magnetic-boxes",
+        permanent: true,
+      },
+      {
+        source: "/products/custom-coffee-cups",
+        destination: "/products",
+        permanent: true,
+      },
+      {
+        source: "/custom-coffee-cups",
+        destination: "/products",
+        permanent: true,
+      },
+      {
         source: "/:path*",
         has: [{ type: "host", value: "www.universalpackaginggroup.com" }],
         destination: "https://universalpackaginggroup.com/:path*",

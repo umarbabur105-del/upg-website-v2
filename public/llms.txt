@@ -1,54 +1,38 @@
 # Universal Packaging Group (UPG)
 
-> Quote-led custom cosmetic packaging sourcing and project coordination for brands in the United States and Canada.
+> Custom boxes and flexible packaging manufactured for brands worldwide.
 
 Canonical website: https://universalpackaginggroup.com
 Contact: quotes@universalpackaginggroup.com
-Last reviewed: 2026-08-03
+Last reviewed: 2026-08-06
 Full reference: https://universalpackaginggroup.com/llms-full.txt
 
-## Primary focus
+## Core product range
 
-UPG focuses on secondary packaging for beauty and cosmetic products:
+- Custom tuck boxes: straight tuck end, reverse tuck end, auto-lock, interlock, and seal-end boxes
+- Custom corrugated mailer boxes: ear-lock mailers for PR kits, subscription, ecommerce, and branded presentation
+- Custom magnetic boxes
+- Custom collapsible magnetic boxes
+- Custom Mylar bags: three-side seal, flat-bottom, stand-up, spout, child-resistant, coffee bags, and rollstock film
 
-- Custom folding cartons
-- Custom rigid boxes
-- Custom corrugated mailer boxes
-- PR and influencer kits
-- Custom paperboard, pulp, or foam inserts
-- Artwork, dieline, proofing, supplier, and delivery coordination
+UPG offers corrugated boxes in tuck-box and ear-lock mailer formats. UPG does not supply regular slotted shipping cartons, master cartons, or RSC cases.
 
-UPG is a sourcing and project-coordination company. The website does not claim that UPG owns every factory or produces every item in-house.
+## MOQ
 
-## Additional reviewed formats
+- Tuck boxes and mailer boxes: 1,000 units when every dimension is 5 inches or less; 500 units when the largest dimension is over 5 inches through 10 inches; 250 units when it is over 10 inches
+- Magnetic boxes: 250 units
+- Collapsible magnetic boxes: 250 units
+- Mylar bags: 500 units
 
-Custom flexible pouches and paper cups may be quoted after intended-use, material, barrier, ink, documentation, quantity, and destination review. A generic material description is not evidence of regulatory or food-contact suitability.
-
-## Planning ranges
-
-- Rigid boxes: typically 500+ units; production planning often 15-20 business days
-- Corrugated mailer boxes: typically 500+ units; production planning often 10-15 business days
-- Folding cartons: typically 1,000+ units; production planning often 10-14 business days
-- Flexible pouches: typically 1,000+ units; production planning often 12-18 business days
-- Paper cups: typically 1,000+ units; production planning often 15-20 business days
-
-These are planning ranges, not binding offers. Final minimums, price, production timing, freight, duties, taxes, documentation, and delivery terms are controlled by the written quote for the confirmed specification.
-
-## Quote process
-
-1. Submit product type, intended use, quantity, delivery country, and available specifications at https://universalpackaginggroup.com/get-a-quote
-2. UPG targets an initial response within one business day
-3. Structure, materials, finishes, artwork, proofing, supplier route, and delivery plan are confirmed as required
-4. Production coordination starts only after the applicable written approvals
+Final dimensions remain subject to structural feasibility. Product compatibility, food-contact, child-resistant, barrier, and market-specific requirements must be confirmed where applicable. Final specifications, pricing, production timing, and delivery terms are confirmed for each project.
 
 ## Reliable source pages
 
-- Company and operating model: https://universalpackaginggroup.com/about
-- Product formats: https://universalpackaginggroup.com/products
-- Cosmetic packaging: https://universalpackaginggroup.com/cosmetics
+- Product catalog: https://universalpackaginggroup.com/products
+- Start a project: https://universalpackaginggroup.com/get-a-quote
+- Cosmetic packaging hub: https://universalpackaginggroup.com/cosmetics
 - Materials and finishes: https://universalpackaginggroup.com/materials-finishes
-- Planning questions: https://universalpackaginggroup.com/faq
-- Privacy: https://universalpackaginggroup.com/privacy
-- Website terms: https://universalpackaginggroup.com/terms
+- FAQ: https://universalpackaginggroup.com/faq
+- Company and operating model: https://universalpackaginggroup.com/about
 
-The images on https://universalpackaginggroup.com/samples are concept directions unless specifically identified otherwise; they are not represented as completed client work.
+Images on https://universalpackaginggroup.com/samples are concept directions unless specifically identified otherwise.

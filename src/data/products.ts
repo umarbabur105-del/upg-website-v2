@@ -1,10 +1,15 @@
-export type ProductFamily = "Boxes" | "Mylar Bags" | "Paper Cups";
+export type ProductFamily =
+  | "Tuck Boxes"
+  | "Mailer Boxes"
+  | "Magnetic Boxes"
+  | "Collapsible Magnetic Boxes"
+  | "Mylar Bags";
+
 export type ProductCategory =
-  | "Cartons"
-  | "Rigid"
-  | "Mailers"
-  | "Flexible"
-  | "Foodservice";
+  | "Tuck Boxes"
+  | "Corrugated Mailers"
+  | "Rigid Boxes"
+  | "Flexible Packaging";
 
 export interface Product {
   slug: string;
@@ -20,6 +25,7 @@ export interface Product {
   leadTime: string;
   image: string;
   heroImage: string;
+  galleryImages: Array<{ src: string; alt: string }>;
   materials: string[];
   prints: string[];
   finishes: string[];
@@ -37,231 +43,285 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    slug: "custom-rigid-boxes",
-    name: "Magnetic Closure Rigid Box",
-    shortName: "Rigid Box",
-    family: "Boxes",
-    category: "Rigid",
-    sku: "UPG-R001",
-    bestFor: "Cosmetics, PR kits, gifting",
+    slug: "custom-tuck-boxes",
+    name: "Custom Tuck Boxes",
+    shortName: "Tuck Boxes",
+    family: "Tuck Boxes",
+    category: "Tuck Boxes",
+    sku: "UPG-TUCK",
+    bestFor: "Retail products, cosmetics, food cartons, and everyday secondary packaging",
     summary:
-      "A premium magnetic-lid box that turns first impressions into shelf-worthy moments.",
+      "Custom printed tuck boxes across the core folding-carton styles, materials, and premium finish options.",
     longSummary:
-      "Heavy-grade chipboard wrapped in art paper, textured stocks, or specialty wraps. Built for beauty launches, PR mailers, gift sets, and premium collections where presentation is part of the product.",
-    moq: "Typically 500+ units",
-    leadTime: "Typically 15–20 business days",
-    image: "/images/redesign/products/product-rigid.jpg",
-    heroImage: "/images/redesign/products/product-rigid.jpg",
+      "Choose straight tuck end, reverse tuck end, auto-lock, interlock, or seal-end boxes for products that need a printed retail carton. Cereal-style seal-end boxes are included in this family.",
+    moq: "250–1,000 units, based on finished size",
+    leadTime: "Confirmed after specification review",
+    image: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
+    heroImage: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
+    galleryImages: [
+      {
+        src: "/images/generated/tuck-boxes/tuck-boxes-straight-reverse-v1.png",
+        alt: "Custom straight tuck and reverse tuck boxes",
+      },
+      {
+        src: "/images/generated/tuck-boxes/tuck-boxes-autolock-v1.png",
+        alt: "Custom auto-lock tuck box construction",
+      },
+      {
+        src: "/images/generated/tuck-boxes/tuck-boxes-seal-end-v1.png",
+        alt: "Custom seal-end folding carton box",
+      },
+    ],
     materials: [
-      "Chipboard 1200–2000gsm",
-      "Art paper wrap",
-      "Specialty textured papers",
-      "Linen and premium wraps",
+      "SBS C1S for one-sided printing",
+      "SBS C2S for printing on both sides",
+      "Brown, white, or black kraft",
+      "CCNB and chipboard",
+      "Corrugated board with flute selected for the structure",
     ],
-    prints: ["Offset CMYK", "Pantone spot", "White ink", "Interior print"],
+    prints: ["One-sided printing", "Printing on both sides", "Interior printing where the selected stock supports it"],
     finishes: [
-      "Soft-touch matte",
+      "Matte or gloss",
       "Foil stamping",
-      "Embossing",
-      "Debossing",
       "Spot UV",
+      "Embossing or debossing",
+      "Window",
     ],
-    sizes: "Fully custom — common formats range from 6×6×2 in to 12×9×4 in.",
+    sizes:
+      "Custom sizes. MOQ is 1,000 units when every finished dimension is 5 in or less, 500 units when the largest dimension is over 5 in through 10 in, and 250 units when it is over 10 in.",
     sizeFlexibility:
-      "Fully custom dimensions with magnetic closure, hinged lid, and insert planning.",
+      "The final minimum is confirmed from the finished dimensions and selected structure.",
     useCases: [
-      "Skincare gift sets",
-      "Perfume presentations",
-      "PR kits and seeding boxes",
-      "Premium cosmetic launches",
+      "Straight tuck end boxes",
+      "Reverse tuck end boxes",
+      "Auto-lock and interlock boxes",
+      "Seal-end and cereal-style boxes",
     ],
-    industries: ["Cosmetics", "Skincare", "Perfume", "Gifting", "Subscription"],
+    industries: ["Cosmetics", "Food & Beverage", "Supplements", "Retail", "Personal Care"],
     materialOptions:
-      "1.5–3mm chipboard with wrapped art paper, specialty paper, or textured stock.",
+      "SBS C1S or C2S, kraft in brown, white or black, CCNB, chipboard, and corrugated board.",
     printOptions:
-      "CMYK, Pantone spot colors, interior print, foil, embossing, and structured branding elements.",
+      "One-sided or two-sided printing is planned around the selected material and carton structure.",
     finishOptions:
-      "Soft-touch matte, foil, debossing, embossing, and spot UV depending on structure.",
+      "Matte, gloss, foil, spot UV, embossing, debossing, and window options are available.",
     artworkRequirements:
-      "AI or layered PDF preferred. Wrapped-panel layouts, insert plans, and foil areas should be reviewed before proofing.",
+      "Final artwork is prepared on the approved dieline. Share existing files or references with the project enquiry.",
     screeningNote:
-      "Magnet placement, inserts, and premium wraps should be treated as proof-sensitive items and confirmed before production.",
-    quoteCta: "Get a quote for magnetic rigid boxes",
-  },
-  {
-    slug: "custom-folding-cartons",
-    name: "Reverse Tuck End Folding Carton",
-    shortName: "Folding Carton",
-    family: "Boxes",
-    category: "Cartons",
-    sku: "UPG-F001",
-    bestFor: "Skincare, serums, lipstick, supplements",
-    summary:
-      "The everyday workhorse of beauty packaging — refined, structural, and printable on every surface.",
-    longSummary:
-      "Lightweight folding cartons with a clean reverse-tuck closure. Ideal for skincare bottles, lip products, serums, and retail lines that need a premium print finish without moving into rigid-box cost.",
-    moq: "Typically 1,000+ units",
-    leadTime: "Typically 10–14 business days",
-    image: "/images/redesign/products/product-carton.jpg",
-    heroImage: "/images/redesign/products/product-carton.jpg",
-    materials: ["SBS C1S 14–24pt", "Kraft 18–24pt", "Recycled board"],
-    prints: ["Offset CMYK", "Pantone spot", "Metallic inks", "Inside print"],
-    finishes: [
-      "Soft-touch",
-      "Matte",
-      "Gloss AQ",
-      "Foil stamp",
-      "Embossing",
-      "Spot UV",
-    ],
-    sizes: "Custom dielines — typical formats range from 1×1×3 in to 4×4×8 in.",
-    sizeFlexibility:
-      "Fully custom carton dielines sized for bottles, jars, lipstick, and secondary retail packaging.",
-    useCases: [
-      "Serum boxes",
-      "Lipstick cartons",
-      "Cream and lotion boxes",
-      "Retail-ready cosmetic packaging",
-    ],
-    industries: ["Skincare", "Cosmetics", "Supplements", "Specialty retail"],
-    materialOptions:
-      "SBS, CCNB, kraft paperboard, and recycled stocks matched to print and structure.",
-    printOptions:
-      "CMYK, Pantone, metallic inks, and interior print depending on the carton format.",
-    finishOptions:
-      "Soft-touch, matte, gloss AQ, foil, embossing, and spot UV on approved stocks.",
-    artworkRequirements:
-      "Layered AI or print-ready PDF preferred; include 0.125 inch bleed, outlined fonts, and linked images at 300 dpi.",
-    screeningNote:
-      "If the carton is being used around regulated or ingestible products, the intended end use still needs to be collected during quoting.",
-    quoteCta: "Get a quote for folding cartons",
+      "MOQ depends on finished size. Additional materials, calipers, and finishes can be reviewed for the specific project.",
+    quoteCta: "Start a tuck box project",
   },
   {
     slug: "custom-mailer-boxes",
-    name: "Corrugated Mailer Box",
-    shortName: "Mailer Box",
-    family: "Boxes",
-    category: "Mailers",
-    sku: "UPG-M001",
-    bestFor: "Ecommerce, subscription, beauty unboxing",
+    name: "Custom Corrugated Mailer Boxes",
+    shortName: "Mailer Boxes",
+    family: "Mailer Boxes",
+    category: "Corrugated Mailers",
+    sku: "UPG-MAILER",
+    bestFor: "PR kits, subscription boxes, ecommerce packaging, and branded presentation",
     summary:
-      "Branded mailers built for the unboxing — ship-ready, durable, and beautifully printed.",
+      "Ear-lock corrugated boxes built for branded unboxing, product presentation, and repeat programs.",
     longSummary:
-      "E-flute corrugated mailers with exterior and interior print options. Built for ecommerce shipping, influencer send-outs, cosmetic launches, and recurring subscription programs that need both protection and presentation.",
-    moq: "Typically 500+ units",
-    leadTime: "Typically 10–15 business days",
-    image: "/images/redesign/products/product-mailer.jpg",
-    heroImage: "/images/redesign/products/product-mailer.jpg",
-    materials: ["E-flute corrugated", "F-flute corrugated", "White or kraft liner"],
-    prints: ["Flexo", "Digital", "Offset litho-laminated", "Interior print"],
-    finishes: ["Matte lamination", "Interior print", "Tear strip add-on"],
-    sizes: "Standard 6×4×2 in to 18×12×6 in, fully custom.",
-    sizeFlexibility:
-      "Mailer dimensions can be fully customized for kits, subscription drops, or shipping protection needs.",
-    useCases: [
-      "Cosmetic subscription boxes",
-      "Beauty ecommerce shipping",
-      "Influencer mailers",
-      "PR send-outs and launch kits",
+      "Custom corrugated mailer boxes use an ear-lock structure for PR kits, subscription programs, ecommerce orders, and branded product presentation. Exterior printing, interior printing, custom inserts, and specialty finishes are available.",
+    moq: "250–1,000 units, based on finished size",
+    leadTime: "Confirmed after specification review",
+    image: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
+    heroImage: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
+    galleryImages: [
+      {
+        src: "/images/generated/mailer-boxes/mailer-boxes-inside-print-v1.png",
+        alt: "Corrugated ear-lock mailer box with inside print",
+      },
+      {
+        src: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
+        alt: "Corrugated ear-lock mailer box with custom insert",
+      },
+      {
+        src: "/images/generated/mailer-boxes/mailer-boxes-sizes-v1.png",
+        alt: "Custom corrugated mailer boxes in multiple sizes",
+      },
     ],
-    industries: ["Ecommerce", "Cosmetics", "Subscription", "Gifting"],
+    materials: ["Corrugated board", "Exterior printing", "Interior printing", "Custom inserts"],
+    prints: ["Exterior print", "Interior and exterior print"],
+    finishes: ["Matte or gloss", "Foil stamping", "Spot UV", "Custom inserts"],
+    sizes:
+      "Custom sizes. MOQ is 1,000 units when every finished dimension is 5 in or less, 500 units when the largest dimension is over 5 in through 10 in, and 250 units when it is over 10 in.",
+    sizeFlexibility:
+      "The final minimum is confirmed from the finished dimensions and ear-lock mailer structure.",
+    useCases: [
+      "PR and influencer kits",
+      "Subscription mailers",
+      "Branded ecommerce packaging",
+      "Product launch and presentation boxes",
+    ],
+    industries: ["Ecommerce", "Cosmetics", "Subscription", "Gifting", "Consumer Products"],
     materialOptions:
-      "E-flute and F-flute corrugated with white or kraft liners depending on print and transit needs.",
+      "Corrugated construction with print and insert options planned around the product and presentation goal.",
     printOptions:
-      "Flexo, digital, offset, and interior print routes depending on quantity and finish targets.",
+      "Exterior-only printing or exterior and interior printing for a branded unboxing experience.",
     finishOptions:
-      "Matte lamination, inside print, and tear-strip options where structure supports them.",
+      "Matte, gloss, foil, spot UV, and custom inserts are available for the approved structure.",
     artworkRequirements:
-      "AI or PDF preferred; dielines supplied for final layout and insert planning where needed.",
+      "Final artwork is prepared on the approved mailer dieline. Insert artwork is coordinated with the planned product arrangement.",
     screeningNote:
-      "Fragile or premium contents should include insert requirements or protection notes in the quote request.",
-    quoteCta: "Get a quote for corrugated mailers",
+      "UPG supplies ear-lock mailer boxes, not regular slotted shipping cartons, master cartons, or RSC cases.",
+    quoteCta: "Start a mailer box project",
+  },
+  {
+    slug: "custom-magnetic-boxes",
+    name: "Custom Magnetic Boxes",
+    shortName: "Magnetic Boxes",
+    family: "Magnetic Boxes",
+    category: "Rigid Boxes",
+    sku: "UPG-MAGNETIC",
+    bestFor: "Premium gifts, beauty, apparel, electronics, and launch collections",
+    summary:
+      "Premium rigid boxes with a magnetic closure, custom inserts, and presentation-led finishes.",
+    longSummary:
+      "Custom magnetic boxes create a premium presentation for gifts, beauty products, apparel, electronics, and launch collections. The structure can be paired with custom inserts and premium finish options.",
+    moq: "250 units",
+    leadTime: "Confirmed after specification review",
+    image: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
+    heroImage: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
+    galleryImages: [
+      {
+        src: "/images/generated/magnetic-boxes/magnetic-boxes-open-v1.png",
+        alt: "Open custom magnetic rigid presentation box",
+      },
+      {
+        src: "/images/generated/magnetic-boxes/magnetic-boxes-insert-v1.png",
+        alt: "Custom magnetic rigid box with fitted insert",
+      },
+      {
+        src: "/images/generated/magnetic-boxes/magnetic-boxes-sizes-v1.png",
+        alt: "Custom magnetic rigid boxes in multiple sizes",
+      },
+    ],
+    materials: ["Rigid box construction", "Custom inserts", "Printed or specialty wraps"],
+    prints: ["Exterior branding", "Interior branding", "Insert branding where required"],
+    finishes: ["Foil", "Embossing or debossing", "Spot UV", "Soft-touch"],
+    sizes: "250-unit MOQ; final dimensions are confirmed after structural feasibility review.",
+    sizeFlexibility:
+      "Dimensions, closure, and insert layout are developed around the product presentation.",
+    useCases: ["Premium gift boxes", "Beauty sets", "Apparel presentation", "Electronics packaging"],
+    industries: ["Gifting", "Beauty", "Apparel", "Electronics", "Luxury Retail"],
+    materialOptions:
+      "Rigid construction with wrap and insert options selected for the approved presentation.",
+    printOptions:
+      "Exterior, interior, and insert branding can be planned around the chosen structure.",
+    finishOptions:
+      "Foil, embossing, debossing, spot UV, soft-touch, and custom inserts are available.",
+    artworkRequirements:
+      "Final artwork is prepared on the approved wrapped-box and insert dielines.",
+    screeningNote:
+      "The magnetic closure and insert plan are confirmed before final artwork and production approval.",
+    quoteCta: "Start a magnetic box project",
+  },
+  {
+    slug: "custom-collapsible-magnetic-boxes",
+    name: "Custom Collapsible Magnetic Boxes",
+    shortName: "Collapsible Magnetic Boxes",
+    family: "Collapsible Magnetic Boxes",
+    category: "Rigid Boxes",
+    sku: "UPG-COLLAPSIBLE-MAGNETIC",
+    bestFor: "Premium gifting and branded presentation with lower freight and storage volume",
+    summary:
+      "A premium magnetic rigid box that folds flat to reduce freight and storage space.",
+    longSummary:
+      "Custom collapsible magnetic boxes deliver the premium presentation of a magnetic box while folding flat for more efficient freight and storage. Custom inserts and premium finishes are available.",
+    moq: "250 units",
+    leadTime: "Confirmed after specification review",
+    image:
+      "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-hero-v1.png",
+    heroImage:
+      "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-hero-v1.png",
+    galleryImages: [
+      {
+        src: "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-overhead-v1.png",
+        alt: "Overhead view of a collapsible magnetic box being assembled",
+      },
+      {
+        src: "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-corner-fold-v1.png",
+        alt: "Collapsible magnetic box corner-fold construction",
+      },
+      {
+        src: "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-side-v1.png",
+        alt: "Side view of a collapsible magnetic rigid box",
+      },
+    ],
+    materials: ["Collapsible rigid construction", "Magnetic closure", "Custom inserts"],
+    prints: ["Exterior branding", "Interior branding", "Insert branding where required"],
+    finishes: ["Foil", "Embossing or debossing", "Spot UV", "Soft-touch"],
+    sizes: "250-unit MOQ; final dimensions are confirmed after structural feasibility review.",
+    sizeFlexibility:
+      "Dimensions, folding structure, closure, and insert layout are developed around the product.",
+    useCases: ["Premium gift sets", "Beauty launches", "Apparel presentation", "Seasonal collections"],
+    industries: ["Gifting", "Beauty", "Apparel", "Luxury Retail", "Subscription"],
+    materialOptions:
+      "Collapsible rigid construction with wrap and insert options selected for the approved presentation.",
+    printOptions:
+      "Exterior, interior, and insert branding can be planned around the chosen structure.",
+    finishOptions:
+      "Foil, embossing, debossing, spot UV, soft-touch, and custom inserts are available.",
+    artworkRequirements:
+      "Final artwork is prepared on the approved collapsible-box and insert dielines.",
+    screeningNote:
+      "The folding method, magnetic closure, and insert plan are confirmed before final approval.",
+    quoteCta: "Start a collapsible box project",
   },
   {
     slug: "custom-mylar-bags",
-    name: "Stand Up Mylar Pouch",
-    shortName: "Mylar Pouch",
+    name: "Custom Mylar Bags",
+    shortName: "Mylar Bags",
     family: "Mylar Bags",
-    category: "Flexible",
-    sku: "UPG-P001",
-    bestFor: "Coffee, wellness, supplements, beauty refills",
+    category: "Flexible Packaging",
+    sku: "UPG-MYLAR",
+    bestFor: "Coffee, packaged food, supplements, liquid-product formats, child-resistant options, and flexible packaging",
     summary:
-      "Premium barrier pouches with bold print real estate and strong shelf presence.",
+      "Custom printed flexible packaging across pouches, bags, and rollstock film formats.",
     longSummary:
-      "Multi-layer barrier film pouches with resealable zipper, tear notch, and stand-up gusset. Best for coffee, wellness, supplements, and select beauty refill formats where flexible packaging makes sense.",
-    moq: "Typically 1,000+ units",
-    leadTime: "Typically 12–18 business days",
-    image: "/images/redesign/products/product-pouch.jpg",
-    heroImage: "/images/redesign/products/product-pouch.jpg",
-    materials: ["PET / VMPET / PE", "Kraft / PET / PE", "Matte PET"],
-    prints: ["Rotogravure", "Digital", "Up to 10 colors"],
-    finishes: ["Matte", "Soft-touch", "Spot gloss", "Window patch"],
-    sizes: "2 oz to 5 lb capacity with custom dimensions available.",
+      "Custom Mylar bags include three-side seal bags, flat-bottom bags, stand-up pouches, spout bags, child-resistant bags, coffee bags, and rollstock film. Depending on the format, options can include zippers, valves, windows, and matte, gloss, or metallic finishes.",
+    moq: "500 units",
+    leadTime: "Confirmed after specification review",
+    image: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
+    heroImage: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
+    galleryImages: [
+      {
+        src: "/images/generated/mylar-bags/mylar-bags-pouch-formats-v1.png",
+        alt: "Custom stand-up, three-side-seal, and child-resistant pouches",
+      },
+      {
+        src: "/images/generated/mylar-bags/mylar-bags-flat-bottom-v1.png",
+        alt: "Custom flat-bottom flexible packaging bags",
+      },
+      {
+        src: "/images/generated/mylar-bags/mylar-bags-spout-rollstock-v1.png",
+        alt: "Custom spout pouch and printed flexible rollstock film",
+      },
+    ],
+    materials: ["Flexible film structures", "Rollstock film", "Window options"],
+    prints: ["Custom printed bags", "Custom printed pouches", "Printed rollstock film"],
+    finishes: ["Matte", "Gloss", "Metallic", "Window", "Zipper", "Valve"],
+    sizes: "Custom sizes with a 500-unit MOQ.",
     sizeFlexibility:
-      "Custom pouch sizes, zipper placement, and tear-notch details depending on barrier structure.",
+      "Bag format, dimensions, closure, valve, spout, and rollstock requirements are reviewed per project.",
     useCases: [
-      "Coffee and tea packaging",
-      "Supplement and wellness pouches",
-      "Powders and dry goods",
-      "Beauty refill packs",
+      "Three-side seal and stand-up pouches",
+      "Flat-bottom and coffee bags",
+      "Spout and child-resistant bags",
+      "Rollstock film",
     ],
-    industries: ["Coffee & Beverage", "Wellness", "Supplements", "Beauty refills"],
+    industries: ["Coffee & Beverage", "Food", "Supplements", "Personal Care", "Consumer Products"],
     materialOptions:
-      "PET/VMPET/PE, kraft/PET/PE, matte films, and custom barrier structures on review.",
+      "Flexible-film structures are selected after the bag format and intended product use are reviewed.",
     printOptions:
-      "Rotogravure or digital-ready layouts depending on supplier path and quantity.",
+      "Custom print is available across approved bag, pouch, and rollstock formats.",
     finishOptions:
-      "Matte, soft-touch, spot gloss, and window options where the structure supports them.",
+      "Zippers, valves, windows, and matte, gloss, or metallic finishes can be specified where the selected format supports them.",
     artworkRequirements:
-      "AI or print-ready PDF preferred; seal areas, zipper placement, and window zones must be respected.",
+      "Final artwork is prepared on the approved bag or rollstock template with seal and feature areas marked.",
     screeningNote:
-      "Intended end use is mandatory. Food-contact or supplement projects need material review before approval.",
-    quoteCta: "Get a quote for stand-up mylar pouches",
-  },
-  {
-    slug: "custom-coffee-cups",
-    name: "Single Wall Paper Cup",
-    shortName: "Paper Cup",
-    family: "Paper Cups",
-    category: "Foodservice",
-    sku: "UPG-CUP001",
-    bestFor: "Coffee shops, specialty beverage, events",
-    summary:
-      "Custom-printed single-wall paper cups for cafes, specialty beverage brands, and events.",
-    longSummary:
-      "Custom-printed single-wall paper cups in standard size formats. Cup stock, lining, ink, and intended beverage use require supplier-document review before a project is approved.",
-    moq: "Typically 1,000+ units",
-    leadTime: "Typically 15–20 business days",
-    image: "/images/redesign/products/product-cup.jpg",
-    heroImage: "/images/redesign/products/product-cup.jpg",
-    materials: [
-      "Cup stock subject to end-use review",
-      "PE lining options",
-      "Alternative barrier options on review",
-    ],
-    prints: ["Flexo CMYK", "Pantone spot"],
-    finishes: ["Matte", "Gloss"],
-    sizes: "4 oz, 8 oz, 12 oz, 16 oz, and 20 oz standard formats.",
-    sizeFlexibility:
-      "Standard cup sizes plus selected custom review paths where supported by the supplier.",
-    useCases: [
-      "Cafe branding",
-      "Coffee launches",
-      "Brand activations",
-      "Events and pop-ups",
-    ],
-    industries: ["Coffee & Beverage", "Hospitality", "Events"],
-    materialOptions:
-      "Cup stock, lining, and barrier options are confirmed only after intended-use and supplier-document review.",
-    printOptions:
-      "Exterior wrap print in standard color systems and Pantone-supported routes.",
-    finishOptions:
-      "Finish selection is matched to the approved cup structure and print process.",
-    artworkRequirements:
-      "AI or print-ready PDF preferred; cup wrap template required before final file setup.",
-    screeningNote:
-      "Intended beverage use, temperature, and service environment should be confirmed before quoting.",
-    quoteCta: "Get a quote for paper cups",
+      "Product compatibility, barrier needs, food-contact requirements, and any child-resistant or market-specific compliance must be confirmed before the final specification is approved.",
+    quoteCta: "Start a Mylar bag project",
   },
 ];
 
@@ -269,9 +329,6 @@ export function getProductBySlug(slug: string): Product | undefined {
   return products.find((product) => product.slug === slug);
 }
 
-export function getRelatedProducts(
-  currentSlug: string,
-  limit = 3
-): Product[] {
+export function getRelatedProducts(currentSlug: string, limit = 3): Product[] {
   return products.filter((product) => product.slug !== currentSlug).slice(0, limit);
 }

@@ -7,9 +7,9 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Industries We Serve",
   description:
-    "UPG focuses on custom beauty and cosmetic packaging, with reviewed packaging routes for ecommerce, specialty products, coffee, and beverage brands.",
+    "Custom boxes and flexible packaging for beauty, ecommerce, retail, gifting, coffee, beverage, food, supplement, and consumer brands.",
   path: "/industries",
-  keywords: ["cosmetic packaging supplier", "ecommerce packaging", "beauty packaging"],
+  keywords: ["cosmetic packaging manufacturer", "ecommerce packaging", "corrugated boxes"],
 });
 
 export default function IndustriesPage() {
@@ -20,12 +20,12 @@ export default function IndustriesPage() {
           <div className="max-w-4xl">
             <div className="eyebrow mb-5">Industries</div>
             <h1 className="display-1 text-balance">
-              Packaging routes shaped around the product and its market.
+              Custom packaging made for your product and its market.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Cosmetics and beauty are our primary focus. Adjacent categories are
-              reviewed against the product, intended use, material requirements,
-              quantity, and delivery destination before a route is recommended.
+              Our five core product families serve beauty,
+              ecommerce, retail, gifting, food, beverage, supplements, and other
+              consumer brands. Product fit leads the recommendation.
             </p>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function IndustriesPage() {
             {industries.map((industry) => (
               <div key={industry.slug} className="surface-card p-7">
                 <div className="eyebrow mb-3">
-                  {industry.slug === "cosmetic-packaging" ? "Primary focus" : "Industry"}
+                  {industry.slug === "cosmetic-packaging" ? "Dedicated hub" : "Industry"}
                 </div>
                 <h2 className="font-serif text-2xl text-foreground">
                   {industry.name}
@@ -60,8 +60,8 @@ export default function IndustriesPage() {
       </section>
 
       <QuoteCta
-        title="Not sure which packaging route fits your product?"
-        intro="Tell us the product, intended use, quantity, and destination. We will review the structure and documentation needs before recommending a route."
+        title="Not sure which packaging format fits your product?"
+        intro="Tell us the product, intended use, quantity, and destination. We will review the requirements and recommend the right structure."
       />
     </>
   );

@@ -9,7 +9,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Custom Packaging Samples & Concept Directions",
   description:
-    "Explore concept directions for custom skincare boxes, PR kits, mailers, inserts, and premium cosmetic packaging finishes, plus physical sample options.",
+    "Explore representative concept directions for custom skincare boxes, PR kits, mailers, inserts, and cosmetic packaging finishes, plus physical sample availability.",
   path: "/samples",
   keywords: ["custom packaging samples", "cosmetic packaging concepts", "PR box samples"],
 });
@@ -18,12 +18,12 @@ const sampleCategories = [
   {
     title: "Skincare presentation",
     description:
-      "Presentation systems for jars, bottles, and routine-led skincare kits where the packaging still needs clean retail discipline.",
+      "Presentation concepts for jars, bottles, and multi-product skincare kits with clear product organization and retail branding.",
   },
   {
     title: "PR and influencer kits",
     description:
-      "Insert-led boxes and premium mailers designed for seeding, content, and campaign launches.",
+      "Insert-led boxes and presentation mailers for influencer outreach, content, and campaign launches.",
   },
   {
     title: "Gift and subscription directions",
@@ -47,7 +47,7 @@ export default function SamplesPage() {
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
               These concept images illustrate possible finish, insert, and
               presentation directions. They are not represented as completed
-              client work. Physical sample routes are confirmed during quoting.
+              client work. Physical sample options are confirmed for each project.
             </p>
           </div>
         </div>
@@ -85,8 +85,8 @@ export default function SamplesPage() {
       <section className="section-shell bg-cream">
         <div className="container-editorial">
           <SectionHeading
-            eyebrow="Sample planning"
-            title="Match the sample path to the decision you need to make."
+            eyebrow="Concepts by application"
+            title="Explore packaging directions by project type."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {sampleCategories.map((item) => (
@@ -112,8 +112,8 @@ export default function SamplesPage() {
       </section>
 
       <QuoteCta
-        title="Need a sample path or a quote-ready direction?"
-        intro="Use the quote form to tell us the product, finish target, and quantity. We will point you to the right next step."
+        title="Need to evaluate a concept or physical sample?"
+        intro="Tell us the product, finish target, quantity, and what you need to evaluate. We will confirm the available sample or pre-production option, cost, and timing."
       />
     </>
   );

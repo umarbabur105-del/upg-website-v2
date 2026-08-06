@@ -14,8 +14,15 @@ import {
   prepareGoogleSheetsAuth,
 } from "@/lib/google-sheets";
 
-const allowedFamilies = new Set(["Boxes", "Mylar Bags", "Paper Cups", "Not sure yet"]);
-const allowedCountries = new Set(["United States", "Canada"]);
+const allowedFamilies = new Set([
+  "Tuck Boxes",
+  "Mailer Boxes",
+  "Magnetic Boxes",
+  "Collapsible Magnetic Boxes",
+  "Mylar Bags",
+  "Not sure yet",
+]);
+const excludedMailerStyle = "Standard Shipping / Master Carton (not supplied)";
 
 export async function POST(request: Request) {
   try {
@@ -31,7 +38,7 @@ export async function POST(request: Request) {
       product_style: cleanText(input.product_style, { max: 120, singleLine: true }),
       quantity: cleanText(input.quantity, { max: 80, singleLine: true }),
       intended_end_use: cleanText(input.intended_end_use, { max: 240, singleLine: true }),
-      shipping_country: cleanText(input.shipping_country, { max: 40, singleLine: true }),
+      shipping_country: cleanText(input.shipping_country, { max: 80, singleLine: true }),
       shipping_state_or_province: cleanText(input.shipping_state_or_province, { max: 100, singleLine: true }),
       target_delivery_timing: cleanText(input.target_delivery_timing, { max: 100, singleLine: true }),
       artwork_status: cleanText(input.artwork_status, { max: 100, singleLine: true }),
@@ -48,6 +55,7 @@ export async function POST(request: Request) {
 
     const requiredFields: Array<keyof typeof data> = [
       "product_family",
+      "product_style",
       "quantity",
       "intended_end_use",
       "shipping_country",
@@ -70,8 +78,17 @@ export async function POST(request: Request) {
     if (!allowedFamilies.has(data.product_family)) {
       return NextResponse.json({ error: "Invalid product family" }, { status: 400 });
     }
-    if (!allowedCountries.has(data.shipping_country)) {
-      return NextResponse.json({ error: "Invalid shipping country" }, { status: 400 });
+    if (
+      data.product_family === "Mailer Boxes" &&
+      data.product_style === excludedMailerStyle
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "UPG does not supply standard shipping cartons, master cartons, or RSC cases. Choose an ear-lock mailer style to continue.",
+        },
+        { status: 422 }
+      );
     }
     if (!isValidEmail(data.email)) {
       return NextResponse.json({ error: "Enter a valid email address" }, { status: 400 });
@@ -80,7 +97,7 @@ export async function POST(request: Request) {
     const subjectName = String(data.name).trim();
     const subjectCompany = String(data.company).trim();
     const subjectFamily = String(data.product_family).trim();
-    const subject = `[UPG Quote] ${subjectName} — ${subjectCompany} — ${subjectFamily}`;
+    const subject = `[UPG Project] ${subjectName} — ${subjectCompany} — ${subjectFamily}`;
 
     const fields = renderFieldRows([
       { label: "Name", value: data.name },
@@ -92,9 +109,9 @@ export async function POST(request: Request) {
       { label: "Product style", value: data.product_style },
       { label: "Quantity", value: data.quantity },
       { label: "Intended end use", value: data.intended_end_use },
-      { label: "Shipping country", value: data.shipping_country },
-      { label: "State / province", value: data.shipping_state_or_province },
-      { label: "Target delivery", value: data.target_delivery_timing },
+      { label: "Delivery country / region", value: data.shipping_country },
+      { label: "State / province / region", value: data.shipping_state_or_province },
+      { label: "Preferred delivery timing", value: data.target_delivery_timing },
       { label: "Artwork status", value: data.artwork_status },
       { label: "Dimensions", value: data.dimensions },
       { label: "Material preference", value: data.material_preference },
@@ -103,13 +120,13 @@ export async function POST(request: Request) {
     ]);
 
     const html = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:640px;">
-  <h2 style="font-size:18px;color:#111;margin:0 0 4px;">New UPG Quote Request</h2>
+  <h2 style="font-size:18px;color:#111;margin:0 0 4px;">New UPG Project Enquiry</h2>
   <p style="font-size:13px;color:#666;margin:0 0 16px;">Received ${new Date().toUTCString()}</p>
   <table style="border-collapse:collapse;width:100%;border:1px solid #eee;">${fields.html}</table>
   <p style="font-size:12px;color:#999;margin:16px 0 0;">Reply directly to this email to respond to ${data.name}.</p>
 </div>`;
 
-    const text = `New UPG Quote Request\nReceived ${new Date().toUTCString()}\n\n${fields.text}\n`;
+    const text = `New UPG Project Enquiry\nReceived ${new Date().toUTCString()}\n\n${fields.text}\n`;
 
     const replyTo = String(data.email).trim() || undefined;
 
@@ -122,7 +139,7 @@ export async function POST(request: Request) {
       {
         submissionId,
         receivedAt,
-        source: "Quote Request",
+        source: "Project Enquiry",
         notificationStatus: mail.delivered ? "Sent" : "Failed",
         name: data.name,
         email: data.email,
@@ -174,7 +191,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       accepted: true,
-      message: "Quote request received. We target an initial response within one business day.",
+      message: "Project enquiry received. We target an initial response within one business day.",
       stored: saved.stored,
       delivered: mail.delivered,
     });

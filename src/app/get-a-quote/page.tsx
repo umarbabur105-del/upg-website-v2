@@ -6,12 +6,12 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Get a Custom Packaging Quote",
   description:
-    "Request a custom packaging quote for folding cartons, rigid boxes, mailers, inserts, pouches, or paper cups for delivery in the US or Canada.",
+    "Start a worldwide custom packaging project for tuck boxes, corrugated mailers, magnetic boxes, collapsible magnetic boxes, or Mylar bags.",
   path: "/get-a-quote",
   keywords: [
     "custom packaging quote",
-    "cosmetic packaging quote",
     "custom box quote",
+    "corrugated box quote",
   ],
 });
 
@@ -28,9 +28,9 @@ export default async function GetAQuotePage({ searchParams }: PageProps) {
         <div className="container-editorial pt-12 pb-8 md:pt-16 md:pb-10">
           <SectionHeading
             as="h1"
-            eyebrow="Get a quote"
-            title="Tell us about your packaging project."
-            intro="Start with the product family, quantity, intended use, delivery country, and contact details. Dimensions, artwork, and finish details can be added when available."
+            eyebrow="Project enquiry"
+            title="Tell us what you want to manufacture."
+            intro="Start with the product family, quantity, intended use, destination, and contact details. Dimensions, artwork, and finish details can be added when available."
             className="max-w-4xl"
           />
         </div>

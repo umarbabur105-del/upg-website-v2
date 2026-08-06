@@ -9,7 +9,7 @@ interface QuoteCtaProps {
 
 export function QuoteCta({
   title = "Tell us about your packaging project.",
-  intro = "Start with your product type, quantity, and a short note. Shipping, artwork, and finish details can be refined after the first reply.",
+  intro = "Share the product, quantity, and destination. We will help define the structure, specification, pricing, and manufacturing plan.",
   variant = "moss",
 }: QuoteCtaProps) {
   const hasWhatsApp = Boolean(siteConfig.whatsappNumber);
@@ -25,7 +25,7 @@ export function QuoteCta({
     <section className={sectionClass}>
       <div className="container-editorial py-20 md:py-28">
         <div className="max-w-3xl">
-          <div className="eyebrow mb-5 text-gold-soft">Get a Quote</div>
+          <div className="eyebrow mb-5 text-gold-soft">Start Your Project</div>
           <h2 className="display-2 text-balance">{title}</h2>
           <p className={`mt-5 text-lg leading-relaxed ${introClass}`}>{intro}</p>
           <div className="mt-8 flex flex-wrap gap-4">

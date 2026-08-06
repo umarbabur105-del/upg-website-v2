@@ -8,7 +8,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Contact Universal Packaging Group",
   description:
-    "Get in touch with UPG for custom packaging guidance or to ask questions before submitting a quote.",
+    "Contact UPG about custom boxes, flexible packaging, manufacturing, samples, and worldwide delivery.",
   path: "/contact",
   keywords: ["contact UPG packaging", "custom packaging consultation"],
 });
@@ -23,9 +23,9 @@ export default function ContactPage() {
             Get in touch
           </SectionHeading>
           <SectionSubheading className="text-offwhite/60">
-            Have a question before submitting a quote? Want guidance on the right
-            packaging for your product? Send us a message and we will get back to
-            you. We target an initial response within one business day.
+            Tell us about the product, packaging format, quantity, or destination.
+            We can help with structure, materials, artwork, manufacturing, and
+            worldwide delivery.
           </SectionSubheading>
         </div>
       </section>
@@ -49,7 +49,7 @@ export default function ContactPage() {
                 Prefer to email directly?
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-charcoal/60">
-                Send your question or project details to our quoting address.
+                Send your question or project details directly to our sales team.
                 We target an initial response within one business day.
               </p>
               <a
@@ -63,17 +63,17 @@ export default function ContactPage() {
             {/* Quote CTA */}
             <div className="rounded-sm border border-charcoal/5 bg-surface p-8">
               <h3 className="font-serif text-xl font-semibold text-charcoal">
-                Ready to get pricing?
+                Ready to start a project?
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-charcoal/60">
-                If you already know what you need — product type, quantity,
-                destination — the quote form is the fastest path to pricing.
+                If you know the product type, quantity, and destination, the
+                project form is the recommended way to begin specification and pricing.
               </p>
               <Link
                 href="/get-a-quote"
                 className="mt-5 inline-block rounded-sm bg-gold px-6 py-2.5 text-sm font-semibold text-charcoal transition-colors hover:bg-gold-dark"
               >
-                Go to Quote Form →
+                Start Your Project →
               </Link>
             </div>
           </div>

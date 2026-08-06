@@ -20,7 +20,7 @@ export function ContactForm() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !message.trim()) {
-      setError("Please fill in all fields.");
+      setError("Please complete the required fields.");
       return;
     }
     setSubmitting(true);
@@ -155,7 +155,7 @@ export function ContactForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={5}
-          placeholder="Tell us what you're working on or ask a question before submitting a quote."
+          placeholder="Tell us about your product, packaging needs, quantity, or destination."
           className={inputClass}
         />
       </div>

@@ -6,41 +6,58 @@ import { siteConfig } from "@/data/site";
 import { getLeadAttribution } from "@/lib/lead-attribution";
 
 const productStyles: Record<string, string[]> = {
-  Boxes: [
-    "Corrugated Mailer Box",
-    "Magnetic Closure Rigid Box",
-    "Reverse Tuck End Folding Carton",
-    "Custom / Other",
+  "Tuck Boxes": [
+    "Straight Tuck End",
+    "Reverse Tuck End",
+    "Auto-Lock Box",
+    "Interlock Box",
+    "Seal-End Box",
+    "Not sure — recommend",
   ],
-  "Mylar Bags": ["Stand Up Mylar Pouch", "Custom / Other"],
-  "Paper Cups": ["Single Wall Paper Cup", "Custom / Other"],
+  "Mailer Boxes": [
+    "Ear-Lock Mailer Box",
+    "PR / Presentation Mailer",
+    "Subscription Mailer",
+  ],
+  "Magnetic Boxes": ["Standard Magnetic Box", "Not sure — recommend"],
+  "Collapsible Magnetic Boxes": [
+    "Collapsible / Flat-Pack Magnetic Box",
+    "Not sure — recommend",
+  ],
+  "Mylar Bags": [
+    "Three-Side Seal Bag",
+    "Flat-Bottom Bag",
+    "Stand-Up Pouch",
+    "Spout Bag",
+    "Child-Resistant Bag",
+    "Coffee Bag",
+    "Rollstock Film",
+    "Not sure — recommend",
+  ],
   "Not sure yet": ["Recommend a structure for me"],
 };
 
 const materialOptions: Record<string, string[]> = {
-  Boxes: [
-    "SBS paperboard",
-    "Kraft paperboard",
+  "Tuck Boxes": [
+    "SBS C1S",
+    "SBS C2S",
+    "Brown kraft",
+    "White kraft",
+    "Black kraft",
+    "CCNB",
+    "Chipboard",
     "Corrugated",
-    "Rigid chipboard",
     "Not sure — recommend",
   ],
+  "Mailer Boxes": ["Corrugated", "Not sure — recommend"],
+  "Magnetic Boxes": ["Not sure — recommend"],
+  "Collapsible Magnetic Boxes": ["Not sure — recommend"],
   "Mylar Bags": [
-    "PET / VMPET / PE",
-    "Kraft / PET / PE",
-    "Matte film",
-    "Not sure — recommend",
-  ],
-  "Paper Cups": [
-    "Cup stock selected by intended use",
-    "Barrier / lining option on review",
-    "Alternative coating on review",
+    "Flexible film selected after product review",
     "Not sure — recommend",
   ],
   "Not sure yet": ["Not sure — recommend"],
 };
-
-const shippingCountries = ["United States", "Canada"];
 
 const finishOptions = [
   "Soft-touch matte",
@@ -49,8 +66,11 @@ const finishOptions = [
   "Spot UV",
   "Gloss",
   "Matte",
+  "Window",
   "Not sure — recommend",
 ];
+
+const excludedMailerStyle = "Standard Shipping / Master Carton (not supplied)";
 
 type FormState = {
   product_family: string;
@@ -143,6 +163,8 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
 
   const availableStyles = productStyles[form.product_family] ?? [];
   const availableMaterials = materialOptions[form.product_family] ?? [];
+  const isExcludedMailer =
+    form.product_family === "Mailer Boxes" && form.product_style === excludedMailerStyle;
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -150,6 +172,12 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    if (isExcludedMailer) {
+      setError(
+        "UPG does not supply standard shipping cartons, master cartons, or RSC cases. Please choose an ear-lock mailer style to continue."
+      );
+      return;
+    }
     setSubmitting(true);
     setError("");
 
@@ -171,7 +199,7 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
       const data = await response.json();
 
       if (!response.ok || data.accepted !== true) {
-        throw new Error(data.error ?? "Quote submission failed");
+        throw new Error(data.error ?? "Project enquiry submission failed");
       }
 
       setSubmitted(true);
@@ -193,11 +221,12 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
           <span className="text-2xl text-gold">✓</span>
         </div>
         <h2 className="mt-6 font-serif text-3xl text-foreground">
-          Thank you. Your quote request is in.
+          Thank you. Your project enquiry is in.
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
           We will review your request and target an initial response within one
-          business day. Complete pricing follows once the required specifications are clear.
+          business day. Structure, specifications, pricing, and production planning
+          follow as the required details are confirmed.
         </p>
         {hasWhatsApp ? (
           <a
@@ -228,7 +257,7 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
       </div>
       <div className="hidden lg:col-span-4 lg:block">
         <div className="surface-card sticky top-28 p-8">
-          <div className="eyebrow mb-4">Fast start</div>
+          <div className="eyebrow mb-4">Project details</div>
           <p className="text-sm leading-relaxed text-foreground/82">
             Start with the product family, quantity, intended use, delivery
             country, and contact details. Artwork and finish details can be
@@ -239,8 +268,8 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
             <div className="eyebrow mb-3">What happens next</div>
             <ol className="space-y-4 text-sm text-foreground/82">
               <li>1. We review the request and target a reply within one business day.</li>
-              <li>2. You get a structured commercial reply with the next step.</li>
-              <li>3. Specs, dielines, and production details are refined after that.</li>
+              <li>2. You receive an initial review of the information provided.</li>
+              <li>3. We confirm specifications, dielines, pricing, and production details.</li>
             </ol>
           </div>
 
@@ -305,16 +334,17 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
               </select>
             </Field>
 
-            <Field label="Product style" htmlFor="product_style">
+            <Field label="Product style" htmlFor="product_style" required>
               <select
                 id="product_style"
                 name="product_style"
+                required
                 value={form.product_style}
                 onChange={(event) => update("product_style", event.target.value)}
                 className={inputClass}
               >
                 <option value="">
-                  {form.product_family ? "Choose or skip" : "Select family first"}
+                  {form.product_family ? "Choose a style" : "Select family first"}
                 </option>
                 {availableStyles.map((style) => (
                   <option key={style} value={style}>
@@ -322,6 +352,12 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                   </option>
                 ))}
               </select>
+              {form.product_family === "Mailer Boxes" ? (
+                <p className={`text-xs leading-relaxed ${isExcludedMailer ? "text-red-700" : "text-muted-foreground"}`}>
+                  Mailer boxes only. Regular slotted shipping cartons, master cartons,
+                  and RSC cases are not supplied.
+                </p>
+              ) : null}
             </Field>
 
             <Field label="Quantity" htmlFor="quantity" required>
@@ -344,12 +380,12 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                 value={form.intended_end_use}
                 onChange={(event) => update("intended_end_use", event.target.value)}
                 className={inputClass}
-                placeholder="Skincare, PR kit, ecommerce shipper, etc."
+                placeholder="Skincare, PR kit, coffee, retail product, etc."
               />
             </Field>
 
-            <Field label="Shipping country" htmlFor="shipping_country" required>
-              <select
+            <Field label="Delivery country / region" htmlFor="shipping_country" required>
+              <input
                 id="shipping_country"
                 name="shipping_country"
                 required
@@ -357,14 +393,8 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                 onChange={(event) => update("shipping_country", event.target.value)}
                 className={inputClass}
                 autoComplete="country-name"
-              >
-                <option value="">Select delivery country</option>
-                {shippingCountries.map((country) => (
-                  <option key={country} value={country}>
-                    {country}
-                  </option>
-                ))}
-              </select>
+                placeholder="Country or region"
+              />
             </Field>
 
             <Field label="Full name" htmlFor="name" required>
@@ -441,7 +471,7 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
             <div>
               <div className="eyebrow mb-3">Optional details</div>
               <h2 className="font-serif text-3xl text-foreground">
-                Add shipping, artwork, and spec details.
+                Add delivery, artwork, and spec details.
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Helpful if you already have them. Leave this closed if you do not.
@@ -536,7 +566,7 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                 </select>
               </Field>
 
-              <Field label="State / Province" htmlFor="shipping_state_or_province">
+              <Field label="State / province / region" htmlFor="shipping_state_or_province">
                 <input
                   id="shipping_state_or_province"
                   name="shipping_state_or_province"
@@ -546,11 +576,11 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                     update("shipping_state_or_province", event.target.value)
                   }
                   className={inputClass}
-                  placeholder="California, Ontario, etc."
+                  placeholder="State, province, region, etc."
                 />
               </Field>
 
-              <Field label="Target delivery timing" htmlFor="target_delivery_timing">
+              <Field label="Preferred delivery timing" htmlFor="target_delivery_timing">
                 <select
                   id="target_delivery_timing"
                   name="target_delivery_timing"
@@ -588,10 +618,10 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
           </div>
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || isExcludedMailer}
             className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {submitting ? "Submitting..." : "Submit quote request"}
+            {submitting ? "Submitting..." : "Submit project enquiry"}
           </button>
         </div>
       </div>

@@ -65,7 +65,7 @@ export function MobileCtaBar() {
               HAS_WHATSAPP ? "flex-1" : "w-full"
             }`}
           >
-            Start Quote
+            {siteConfig.cta.label}
           </Link>
         </div>
       </div>

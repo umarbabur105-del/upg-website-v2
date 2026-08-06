@@ -7,9 +7,9 @@ import { products } from "@/data/products";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Custom Packaging Products",
+  title: "Custom Boxes & Flexible Packaging Products",
   description:
-    "Compare custom folding cartons, rigid boxes, mailer boxes, mylar pouches, and paper cups. MOQ, timing, and material paths are confirmed after specification review.",
+    "Compare custom tuck boxes, corrugated mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar bags with planning MOQs based on product and size.",
   path: "/products",
   keywords: [
     "custom packaging products",
@@ -20,16 +20,12 @@ export const metadata: Metadata = createPageMetadata({
 
 const groups = [
   {
-    label: "Cartons & rigid",
-    categories: ["Cartons", "Rigid"] as const,
+    label: "Tuck & rigid boxes",
+    categories: ["Tuck Boxes", "Rigid Boxes"] as const,
   },
   {
-    label: "Mailers & flexible",
-    categories: ["Mailers", "Flexible"] as const,
-  },
-  {
-    label: "Foodservice",
-    categories: ["Foodservice"] as const,
+    label: "Corrugated mailers & flexible packaging",
+    categories: ["Corrugated Mailers", "Flexible Packaging"] as const,
   },
 ];
 
@@ -42,10 +38,10 @@ export default function ProductsPage() {
             <div className="eyebrow mb-5">The catalog</div>
             <h1 className="display-1 text-balance">Custom packaging formats for product brands.</h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty">
-              Compare cartons, rigid presentations, ecommerce mailers, flexible
-              pouches, and paper cups. Beauty packaging is our primary focus;
-              every project is reviewed for structure, material, intended use,
-              quantity, and destination before MOQ or timing is confirmed.
+              Compare tuck boxes, magnetic presentation boxes, corrugated
+              mailer boxes, collapsible magnetic boxes, and Mylar bags. Every
+              project is manufactured around the required structure, material,
+              intended use, quantity, and destination.
             </p>
           </div>
         </div>
@@ -66,7 +62,7 @@ export default function ProductsPage() {
                 <SectionHeading
                   eyebrow="Product group"
                   title={group.label}
-                  intro="Choose a starting format, then use the quote process to confirm structure, specifications, and production fit."
+                  intro="Choose a starting format, then confirm the structure, specifications, artwork, and production fit with our team."
                 />
               </div>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -85,20 +81,20 @@ export default function ProductsPage() {
             <SectionHeading
               eyebrow="Need a recommendation?"
               title="Not sure which structure is right?"
-              intro="If you are deciding between cartons, rigid boxes, mailers, or a more premium kit presentation, start with a quote request and we will point you to the right path."
+              intro="If you are deciding between tuck boxes, corrugated mailers, magnetic boxes, or flexible packaging, share your product details and we will recommend the right format."
             />
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/cosmetics"
                 className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
               >
-                Start with cosmetics
+                Explore cosmetics
               </Link>
               <Link
                 href="/get-a-quote"
                 className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
               >
-                Get a Quote
+                Start Your Project
               </Link>
             </div>
           </div>

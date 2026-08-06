@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Universal Packaging Group",
   shortName: "UPG",
   description:
-    "Custom cosmetic packaging guidance, sourcing, and production coordination for beauty and product brands in the United States and Canada.",
+    "Custom boxes and flexible packaging manufactured for brands worldwide.",
   url: "https://universalpackaginggroup.com",
   email: "quotes@universalpackaginggroup.com",
   whatsappNumber: "",
@@ -19,14 +19,14 @@ export const siteConfig = {
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
   ],
-  cta: { label: "Get a Quote", href: "/get-a-quote" },
+  cta: { label: "Start Your Project", href: "/get-a-quote" },
   footerColumns: {
     productLinks: [
-      { label: "Custom Mailer Boxes", href: "/products/custom-mailer-boxes" },
-      { label: "Custom Rigid Boxes", href: "/products/custom-rigid-boxes" },
-      { label: "Custom Folding Cartons", href: "/products/custom-folding-cartons" },
+      { label: "Custom Tuck Boxes", href: "/products/custom-tuck-boxes" },
+      { label: "Corrugated Mailer Boxes", href: "/products/custom-mailer-boxes" },
+      { label: "Custom Magnetic Boxes", href: "/products/custom-magnetic-boxes" },
+      { label: "Collapsible Magnetic Boxes", href: "/products/custom-collapsible-magnetic-boxes" },
       { label: "Custom Mylar Bags", href: "/products/custom-mylar-bags" },
-      { label: "Custom Coffee Cups", href: "/products/custom-coffee-cups" },
     ],
     cosmeticsLinks: [
       { label: "Skincare Boxes", href: "/cosmetics/skincare-boxes" },
