@@ -5,8 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { siteConfig } from "@/data/site";
 
-const WHATSAPP_URL = `https://wa.me/${siteConfig.whatsappNumber}`;
-const HAS_WHATSAPP = Boolean(siteConfig.whatsappNumber);
+const HAS_WHATSAPP = Boolean(siteConfig.whatsappUrl);
 
 export function MobileCtaBar() {
   const pathname = usePathname();
@@ -51,7 +50,7 @@ export function MobileCtaBar() {
         <div className="flex gap-2">
           {HAS_WHATSAPP ? (
             <a
-              href={WHATSAPP_URL}
+              href={siteConfig.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 rounded-full border border-border bg-surface px-4 py-3 text-center text-sm font-semibold text-foreground"

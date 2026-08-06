@@ -66,6 +66,7 @@ const structuredData = {
       alternateName: siteConfig.shortName,
       url: SITE_URL,
       email: siteConfig.email,
+      telephone: siteConfig.phoneNumber,
       description:
         "A custom packaging manufacturer producing custom boxes and flexible packaging for brands worldwide.",
       areaServed: { "@type": "Place", name: siteConfig.market },
@@ -73,6 +74,8 @@ const structuredData = {
         "@type": "ContactPoint",
         contactType: "sales",
         email: siteConfig.email,
+        telephone: siteConfig.phoneNumber,
+        url: siteConfig.whatsappUrl,
         areaServed: siteConfig.market,
         availableLanguage: ["English"],
       },

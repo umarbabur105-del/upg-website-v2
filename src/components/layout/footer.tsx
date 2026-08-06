@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/data/site";
 
-const WHATSAPP_URL = `https://wa.me/${siteConfig.whatsappNumber}`;
-const HAS_WHATSAPP = Boolean(siteConfig.whatsappNumber);
+const HAS_WHATSAPP = Boolean(siteConfig.whatsappUrl);
 
 export function Footer() {
   return (
@@ -21,9 +20,12 @@ export function Footer() {
               <a href={`mailto:${siteConfig.email}`} className="hover:text-foreground">
                 {siteConfig.email}
               </a>
+              <a href={`tel:${siteConfig.phoneNumber}`} className="hover:text-foreground">
+                {siteConfig.phoneDisplay}
+              </a>
               {HAS_WHATSAPP ? (
                 <a
-                  href={WHATSAPP_URL}
+                  href={siteConfig.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-foreground"

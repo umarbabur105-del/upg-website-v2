@@ -46,9 +46,9 @@ export default function HomePage() {
                   View Products
                 </Link>
               </div>
-              {siteConfig.whatsappNumber ? (
+              {siteConfig.whatsappUrl ? (
                 <a
-                  href={`https://wa.me/${siteConfig.whatsappNumber}`}
+                  href={siteConfig.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"

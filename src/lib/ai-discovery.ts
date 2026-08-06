@@ -21,7 +21,9 @@ export function buildLlmsText() {
 > ${siteConfig.description}
 
 - Canonical website: ${siteConfig.url}
-- Sales contact: ${siteConfig.email}
+- Sales email: ${siteConfig.email}
+- Sales phone: ${siteConfig.phoneNumber}
+- WhatsApp: ${siteConfig.whatsappUrl}
 - Markets served: ${siteConfig.market}
 - Content reviewed: ${siteConfig.contentReviewedAt}
 - Full reference: ${siteConfig.url}/llms-full.txt
@@ -87,6 +89,8 @@ Canonical entity name: ${siteConfig.name}
 Short name: ${siteConfig.shortName}
 Canonical domain: ${siteConfig.url}
 Sales contact: ${siteConfig.email}
+Sales phone: ${siteConfig.phoneNumber}
+WhatsApp: ${siteConfig.whatsappUrl}
 Markets served: ${siteConfig.market}
 Business model: ${siteConfig.businessModel}
 Pricing model: ${siteConfig.pricingModel}
@@ -164,6 +168,9 @@ ${productLines}
 - Read product catalog: ${catalogUrl}
 - Start a project enquiry: ${quoteUrl}
 - Contact UPG: ${siteConfig.url}/contact
+- Email UPG: mailto:${siteConfig.email}
+- Call UPG: tel:${siteConfig.phoneNumber}
+- WhatsApp UPG: ${siteConfig.whatsappUrl}
 
 UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomous purchasing endpoint. Use the website enquiry flow for human-reviewed custom projects.
 `;
@@ -178,6 +185,8 @@ export function buildProductCatalog() {
       alternateName: siteConfig.shortName,
       url: siteConfig.url,
       email: siteConfig.email,
+      phone: siteConfig.phoneNumber,
+      whatsapp: siteConfig.whatsappUrl,
       market: siteConfig.market,
     },
     commercialModel: {

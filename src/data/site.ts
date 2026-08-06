@@ -5,6 +5,9 @@ export const siteConfig = {
     "Custom boxes and flexible packaging manufactured for brands worldwide.",
   url: "https://universalpackaginggroup.com",
   email: "quotes@universalpackaginggroup.com",
+  phoneNumber: "+17868858825",
+  phoneDisplay: "+1 786 885 8825",
+  whatsappUrl: "https://wa.me/17868858825",
   language: "en-US",
   market: "Worldwide",
   contentReviewedAt: "2026-08-06",
@@ -18,7 +21,6 @@ export const siteConfig = {
     "UPG supplies corrugated ear-lock mailer boxes, not regular slotted shipping cartons, master cartons, or RSC cases.",
   imagePolicy:
     "AI-generated packaging images are representative concepts, not completed customer work. Final construction, color, print, and finish are confirmed for each project.",
-  whatsappNumber: "",
   navigation: [
     { label: "Products", href: "/products" },
     { label: "Cosmetic Packaging", href: "/cosmetics" },

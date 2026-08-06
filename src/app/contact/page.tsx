@@ -43,21 +43,37 @@ export default function ContactPage() {
 
           {/* Right — direct contact + quote CTA */}
           <div className="space-y-8">
-            {/* Email */}
+            {/* Direct contact */}
             <div className="rounded-sm border border-charcoal/5 bg-surface p-8">
               <h3 className="font-serif text-xl font-semibold text-charcoal">
-                Prefer to email directly?
+                Contact our sales team directly
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-charcoal/60">
-                Send your question or project details directly to our sales team.
-                We target an initial response within one business day.
+                Email, call, or start a WhatsApp conversation. We target an
+                initial response within one business day.
               </p>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="mt-5 inline-block text-sm font-semibold text-gold hover:text-gold-dark"
-              >
-                {siteConfig.email} →
-              </a>
+              <div className="mt-5 flex flex-col items-start gap-3 text-sm font-semibold">
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="text-gold hover:text-gold-dark"
+                >
+                  {siteConfig.email} →
+                </a>
+                <a
+                  href={`tel:${siteConfig.phoneNumber}`}
+                  className="text-gold hover:text-gold-dark"
+                >
+                  {siteConfig.phoneDisplay} →
+                </a>
+                <a
+                  href={siteConfig.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-charcoal/10 px-5 py-2.5 text-charcoal hover:border-gold hover:text-gold-dark"
+                >
+                  Chat on WhatsApp
+                </a>
+              </div>
             </div>
 
             {/* Quote CTA */}
