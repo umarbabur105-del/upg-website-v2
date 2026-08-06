@@ -80,7 +80,7 @@ export default function CosmeticsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(cosmeticsServiceSchema) }}
       />
-      <section className="bg-gradient-warm">
+      <section className="bg-background">
         <div className="container-editorial pt-12 pb-14 md:pt-16 md:pb-18">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">

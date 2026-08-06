@@ -24,7 +24,7 @@ export default async function GetAQuotePage({ searchParams }: PageProps) {
 
   return (
     <>
-      <section className="bg-gradient-warm">
+      <section className="bg-background">
         <div className="container-editorial pt-12 pb-8 md:pt-16 md:pb-10">
           <SectionHeading
             as="h1"

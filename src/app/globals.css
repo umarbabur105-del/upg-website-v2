@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --font-fraunces: "Fraunces Variable";
-  --font-inter: "Inter Variable";
+  --font-inter: "Inter Variable", "Helvetica Neue", Arial, system-ui, sans-serif;
   --background: #f7f3eb;
   --foreground: #2a251e;
   --cream: #fbf8f1;
@@ -25,7 +24,7 @@
 }
 
 @theme inline {
-  --font-serif: var(--font-fraunces);
+  --font-serif: var(--font-inter);
   --font-sans: var(--font-inter);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -86,12 +85,6 @@ img {
   display: block;
 }
 
-.bg-gradient-warm {
-  background:
-    radial-gradient(circle at top right, rgba(176, 138, 70, 0.09), transparent 28%),
-    linear-gradient(180deg, var(--cream) 0%, var(--background) 100%);
-}
-
 .bg-gradient-moss {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 42%),
@@ -138,6 +131,10 @@ img {
   font-weight: 300;
   letter-spacing: -0.03em;
   line-height: 1.02;
+}
+
+.application-heading {
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 .section-shell {

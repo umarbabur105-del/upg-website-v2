@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/product-card";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
+import { mailerApplications } from "@/data/mailer-applications";
 import {
   getProductFaqs,
   getRelatedProducts,
@@ -17,10 +18,12 @@ interface ProductPageTemplateProps {
 export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
   const related = getRelatedProducts(product.slug);
   const productFaqs = getProductFaqs(product);
+  const applicationGuides =
+    product.slug === "custom-mailer-boxes" ? mailerApplications : [];
 
   return (
     <>
-      <section className="bg-gradient-warm">
+      <section className="bg-background">
         <div className="container-editorial pt-16 pb-20 md:pt-24 md:pb-28">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
@@ -213,6 +216,54 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           </div>
         </div>
       </section>
+
+      {applicationGuides.length > 0 ? (
+        <section className="section-shell bg-cream">
+          <div className="container-editorial">
+            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <SectionHeading
+                eyebrow="Application guides"
+                title="Explore the mailer by campaign and program."
+                intro="Choose the guide closest to your project for focused planning questions, approved MOQ guidance, and a clearer starting brief."
+              />
+              <Link
+                href="/get-a-quote?product=Mailer%20Boxes"
+                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                Start a mailer project <span>→</span>
+              </Link>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {applicationGuides.map((application, index) => (
+                <Link
+                  key={application.slug}
+                  href={`/applications/${application.slug}`}
+                  className="surface-card group flex min-h-64 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+                >
+                  <div className="mb-8 flex items-center justify-between">
+                    <span className="eyebrow">Guide</span>
+                    <span className="font-serif text-2xl text-gold">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-2xl text-foreground">
+                    {application.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {application.metaDescription}
+                  </p>
+                  <span className="mt-auto pt-6 text-sm text-foreground">
+                    Read guide{" "}
+                    <span className="inline-block transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-shell">
         <div className="container-editorial grid gap-12 lg:grid-cols-12">

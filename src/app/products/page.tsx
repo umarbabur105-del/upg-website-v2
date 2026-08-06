@@ -32,7 +32,7 @@ const groups = [
 export default function ProductsPage() {
   return (
     <>
-      <section className="bg-gradient-warm">
+      <section className="bg-background">
         <div className="container-editorial pt-12 pb-8 md:pt-16 md:pb-10">
           <div className="max-w-4xl">
             <div className="eyebrow mb-5">The catalog</div>

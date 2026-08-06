@@ -23,24 +23,10 @@ export function AnalyticsRuntime() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    let shouldOpen = true;
-
-    try {
-      const storedChoice = window.localStorage.getItem(
-        ANALYTICS_CONSENT_STORAGE_KEY
-      );
-      shouldOpen = storedChoice !== "granted" && storedChoice !== "denied";
-    } catch {
-      shouldOpen = true;
-    }
-
-    const hydrationTimer = window.setTimeout(() => setIsOpen(shouldOpen), 0);
-
     const openPreferences = () => setIsOpen(true);
     window.addEventListener(ANALYTICS_CONSENT_EVENT, openPreferences);
 
     return () => {
-      window.clearTimeout(hydrationTimer);
       window.removeEventListener(ANALYTICS_CONSENT_EVENT, openPreferences);
     };
   }, []);
@@ -91,43 +77,44 @@ export function AnalyticsRuntime() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-x-4 bottom-4 z-[70] mx-auto max-w-3xl">
+    <div className="fixed inset-x-3 bottom-3 z-[70] mx-auto max-w-2xl sm:inset-x-4 sm:bottom-4">
       <div
         role="dialog"
         aria-labelledby="analytics-consent-title"
         aria-describedby="analytics-consent-description"
-        className="rounded-2xl border border-border bg-surface/98 p-5 shadow-lift backdrop-blur-md md:flex md:items-center md:gap-6 md:p-6"
+        className="rounded-xl border border-border bg-surface/98 p-4 shadow-card backdrop-blur-md sm:flex sm:items-center sm:gap-5"
       >
         <div className="min-w-0 flex-1">
-          <div id="analytics-consent-title" className="font-serif text-xl text-foreground">
-            Help us improve the UPG website
+          <div
+            id="analytics-consent-title"
+            className="text-sm font-semibold text-foreground"
+          >
+            Optional website analytics
           </div>
           <p
             id="analytics-consent-description"
-            className="mt-2 text-sm leading-relaxed text-muted-foreground"
+            className="mt-1 text-xs leading-relaxed text-muted-foreground"
           >
-            We use Google Analytics to understand visits, traffic sources, and
-            successful enquiries. Advertising storage stays disabled. Read our{" "}
+            Allow analytics to help UPG improve your website experience.{" "}
             <Link href="/privacy" className="underline hover:text-foreground">
-              Privacy Policy
+              Privacy
             </Link>
-            .
           </p>
         </div>
-        <div className="mt-5 flex shrink-0 gap-3 md:mt-0">
+        <div className="mt-3 flex shrink-0 gap-2 sm:mt-0">
           <button
             type="button"
             onClick={() => saveChoice("denied")}
-            className="flex-1 rounded-full border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-foreground hover:bg-stone md:flex-none"
+            className="flex-1 rounded-full border border-border bg-surface px-4 py-2 text-xs font-semibold text-foreground hover:bg-stone sm:flex-none"
           >
-            Decline
+            No thanks
           </button>
           <button
             type="button"
             onClick={() => saveChoice("granted")}
-            className="flex-1 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-moss-deep md:flex-none"
+            className="flex-1 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:bg-moss-deep sm:flex-none"
           >
-            Allow analytics
+            Allow
           </button>
         </div>
       </div>
@@ -144,7 +131,7 @@ export function AnalyticsPreferencesButton({ enabled }: { enabled: boolean }) {
       onClick={() => window.dispatchEvent(new Event(ANALYTICS_CONSENT_EVENT))}
       className="hover:text-foreground"
     >
-      Cookie choices
+      Privacy choices
     </button>
   );
 }

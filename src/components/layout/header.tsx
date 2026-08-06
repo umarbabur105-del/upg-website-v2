@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Wordmark } from "@/components/layout/wordmark";
 import { siteConfig } from "@/data/site";
 
 const HAS_WHATSAPP = Boolean(siteConfig.whatsappUrl);
@@ -23,31 +24,16 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 8);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
-    <header
-      className={`sticky top-9 z-40 w-full border-b transition-all duration-300 ${
-        scrolled
-          ? "border-border bg-background/88 backdrop-blur-md"
-          : "border-transparent bg-transparent"
-      }`}
-    >
+    <header className="sticky top-9 z-40 w-full bg-background">
       <div className="container-editorial flex h-16 items-center justify-between md:h-20">
-        <Link href="/" className="group flex items-center gap-2">
-          <span className="font-serif text-xl tracking-tight text-foreground md:text-2xl">
-            <span className="sm:hidden">UPG</span>
-            <span className="hidden sm:inline">
-              Universal <span className="text-gold">Packaging Group</span>
-            </span>
-          </span>
+        <Link
+          href="/"
+          aria-label="Universal Packaging Group home"
+          className="group flex items-center"
+        >
+          <Wordmark />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">

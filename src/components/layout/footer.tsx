@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AnalyticsPreferencesButton } from "@/components/analytics-runtime";
+import { Wordmark } from "@/components/layout/wordmark";
 import { siteConfig } from "@/data/site";
 
 const HAS_WHATSAPP = Boolean(siteConfig.whatsappUrl);
@@ -13,9 +14,12 @@ export function Footer() {
       <div className="container-editorial py-20">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
-            <Link href="/" className="font-serif text-2xl text-foreground">
-              Universal
-              <span className="text-gold"> Packaging Group</span>
+            <Link
+              href="/"
+              aria-label="Universal Packaging Group home"
+              className="inline-flex"
+            >
+              <Wordmark />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               {siteConfig.description}

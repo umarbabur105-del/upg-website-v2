@@ -40,7 +40,7 @@ const materialGroups = [
 export default function MaterialsFinishesPage() {
   return (
     <>
-      <section className="bg-gradient-warm">
+      <section className="bg-background">
         <div className="container-editorial pt-16 pb-20 md:pt-24 md:pb-28">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
