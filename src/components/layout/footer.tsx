@@ -1,7 +1,11 @@
 import Link from "next/link";
+import { AnalyticsPreferencesButton } from "@/components/analytics-runtime";
 import { siteConfig } from "@/data/site";
 
 const HAS_WHATSAPP = Boolean(siteConfig.whatsappUrl);
+const ANALYTICS_ENABLED = /^G-[A-Z0-9]+$/.test(
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? ""
+);
 
 export function Footer() {
   return (
@@ -97,6 +101,7 @@ export function Footer() {
             <Link href="/privacy" className="hover:text-foreground">
               Privacy
             </Link>
+            <AnalyticsPreferencesButton enabled={ANALYTICS_ENABLED} />
             <Link href="/terms" className="hover:text-foreground">
               Terms
             </Link>

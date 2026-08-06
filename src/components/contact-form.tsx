@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { trackGenerateLead } from "@/lib/analytics";
 import { getLeadAttribution } from "@/lib/lead-attribution";
 
 export function ContactForm() {
@@ -45,6 +46,7 @@ export function ContactForm() {
       if (!res.ok || data.accepted !== true) {
         throw new Error(data.error ?? "Submission failed");
       }
+      trackGenerateLead("contact_form");
       setSubmitted(true);
     } catch (submissionError) {
       setError(

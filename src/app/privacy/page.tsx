@@ -36,6 +36,10 @@ export default function PrivacyPage() {
             <p className="mt-3">Website hosting, Google Workspace, email delivery, and related business-productivity providers may process information on our behalf. Submitted enquiries are stored in access-controlled business systems and used by authorized personnel for project handling. We retain information only as long as reasonably needed for pricing, project records, security, and legal requirements.</p>
           </div>
           <div>
+            <h2 className="font-serif text-2xl text-charcoal">Analytics and consent choices</h2>
+            <p className="mt-3">We use Google Analytics to understand website visits, traffic sources, page interactions, contact-link use, and whether an enquiry was successfully submitted. We do not intentionally send names, email addresses, phone numbers, project notes, or other form contents to Google Analytics. Analytics storage is denied by default until you make a choice. Advertising storage, advertising user data, and advertising personalization remain disabled. You can review or change your choice at any time through the Cookie choices link in the website footer.</p>
+          </div>
+          <div>
             <h2 className="font-serif text-2xl text-charcoal">Your choices</h2>
             <p className="mt-3">You may ask us to access, correct, or delete information associated with your request, subject to applicable legal and recordkeeping requirements. Email <a className="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
           </div>
