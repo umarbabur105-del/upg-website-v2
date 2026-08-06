@@ -16,6 +16,9 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+const applicationHeadingClassName =
+  "application-heading text-3xl font-medium leading-[1.08] tracking-[-0.035em] text-balance md:text-[2.75rem]";
+
 export function generateStaticParams() {
   return mailerApplications.map((application) => ({
     slug: application.slug,
@@ -140,7 +143,9 @@ export default async function MailerApplicationPage({ params }: PageProps) {
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-6">
               <div className="eyebrow mb-5">Mailer application guide</div>
-              <h1 className="display-1 text-balance">{application.heroTitle}</h1>
+              <h1 className="application-heading text-[clamp(2.5rem,4.5vw,4.25rem)] font-medium leading-[1.04] tracking-[-0.045em] text-balance">
+                {application.heroTitle}
+              </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
                 {application.heroDescription}
               </p>
@@ -184,7 +189,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
         <div className="container-editorial grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <div className="eyebrow mb-5">Quick answer</div>
-            <h2 className="font-serif text-3xl leading-tight text-balance md:text-5xl">
+            <h2 className={applicationHeadingClassName}>
               What buyers should know first.
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-foreground/82">
@@ -224,6 +229,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
               eyebrow="Best fit"
               title={`Where ${application.shortName.toLowerCase()} fit best.`}
               intro="Start with the campaign or program goal, then develop the mailer around the products, presentation, quantity, and destination."
+              headingClassName={applicationHeadingClassName}
             />
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -246,6 +252,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
               eyebrow="Planning priorities"
               title="Shape the brief before the artwork."
               intro="A clear product and presentation plan helps the structure, insert, and artwork move in the same direction."
+              headingClassName={applicationHeadingClassName}
             />
           </div>
           <div className="grid gap-6 lg:col-span-8">
@@ -270,6 +277,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
               eyebrow="Presentation options"
               title="Coordinate the box, print, and product arrangement."
               intro="These options are reviewed against the approved ear-lock structure, project quantity, and presentation goal."
+              headingClassName={applicationHeadingClassName}
             />
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
@@ -289,6 +297,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
               eyebrow="Project brief"
               title="What to send for a useful first review."
               intro="You do not need a finished specification to start. Share the facts and files already available, and UPG will review the next structural and commercial steps."
+              headingClassName={applicationHeadingClassName}
             />
           </div>
           <div className="surface-card p-6 md:p-8 lg:col-span-7">
@@ -313,7 +322,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
           <div className="grid gap-8 md:grid-cols-12 md:items-center">
             <div className="md:col-span-8">
               <div className="eyebrow mb-4 text-gold-soft">Product scope</div>
-              <h2 className="font-serif text-3xl leading-tight text-balance md:text-5xl">
+              <h2 className={applicationHeadingClassName}>
                 Ear-lock mailers, clearly qualified.
               </h2>
               <p className="mt-5 max-w-3xl text-base leading-relaxed text-primary-foreground/72">
@@ -341,6 +350,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
               eyebrow="Common questions"
               title={`Plan ${application.shortName.toLowerCase()} with clear facts.`}
               intro="These answers cover structure, minimum quantity, project inputs, and the boundaries that matter before production."
+              headingClassName={applicationHeadingClassName}
             />
             {application.relatedCosmeticsGuide ? (
               <Link
@@ -364,6 +374,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
               eyebrow="Related applications"
               title="Compare other ways to use an ear-lock mailer."
               intro="Each guide focuses on a different campaign, program, or presentation brief while staying within the same approved mailer product family."
+              headingClassName={applicationHeadingClassName}
             />
             <Link
               href="/products/custom-mailer-boxes"
