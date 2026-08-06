@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog-posts";
 import { cosmeticsSubcategories } from "@/data/catalog";
+import { mailerApplications } from "@/data/mailer-applications";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
 import { SITE_URL } from "@/lib/seo";
@@ -105,6 +106,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  const applicationRoutes: MetadataRoute.Sitemap = mailerApplications.map(
+    (application) => ({
+      url: `${SITE_URL}/applications/${application.slug}`,
+      lastModified: new Date(`${application.reviewedAt}T00:00:00.000Z`),
+      changeFrequency: "monthly" as const,
+      priority: 0.78,
+    })
+  );
+
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.date),
@@ -112,5 +122,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...productRoutes, ...cosmeticsRoutes, ...blogRoutes];
+  return [
+    ...staticRoutes,
+    ...productRoutes,
+    ...applicationRoutes,
+    ...cosmeticsRoutes,
+    ...blogRoutes,
+  ];
 }

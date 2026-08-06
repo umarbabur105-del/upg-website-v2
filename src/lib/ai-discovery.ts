@@ -1,3 +1,7 @@
+import {
+  mailerApplications,
+  type MailerApplication,
+} from "@/data/mailer-applications";
 import { products, type Product } from "@/data/products";
 import { siteConfig } from "@/data/site";
 
@@ -8,11 +12,22 @@ function productUrl(product: Product) {
   return `${siteConfig.url}/products/${product.slug}`;
 }
 
+function applicationUrl(application: MailerApplication) {
+  return `${siteConfig.url}/applications/${application.slug}`;
+}
+
 export function buildLlmsText() {
   const productLines = products
     .map(
       (product) =>
         `- [${product.name}](${productUrl(product)}): ${product.summary} Planning MOQ: ${product.moq}.`
+    )
+    .join("\n");
+
+  const applicationLines = mailerApplications
+    .map(
+      (application) =>
+        `- [${application.title}](${applicationUrl(application)}): ${application.quickAnswer}`
     )
     .join("\n");
 
@@ -34,6 +49,10 @@ export function buildLlmsText() {
 ## Approved product range
 
 ${productLines}
+
+## Corrugated mailer application guides
+
+${applicationLines}
 
 ## Commercial model
 
@@ -83,6 +102,23 @@ Qualification note: ${product.screeningNote}
     )
     .join("\n");
 
+  const applicationSections = mailerApplications
+    .map(
+      (application) => `### ${application.title}
+
+Canonical page: ${applicationUrl(application)}
+Parent product: ${siteConfig.url}/products/custom-mailer-boxes
+Quick answer: ${application.quickAnswer}
+Best for: ${application.bestFor.join("; ")}
+Planning priorities: ${application.planningPriorities
+        .map((item) => `${item.title}: ${item.description}`)
+        .join("; ")}
+Project inputs: ${application.projectInputs.join("; ")}
+Content reviewed: ${application.reviewedAt}
+`
+    )
+    .join("\n");
+
   return `# ${siteConfig.name}: full machine-readable reference
 
 Canonical entity name: ${siteConfig.name}
@@ -103,6 +139,11 @@ UPG manufactures custom boxes and flexible packaging for brands worldwide. UPG t
 ## Approved products
 
 ${productSections}
+## Corrugated mailer application guides
+
+These guides answer distinct buyer intents while remaining within UPG's approved corrugated ear-lock mailer product range.
+
+${applicationSections}
 ## Corrugated-box search intent
 
 UPG uses the broad term corrugated boxes because buyers use it when researching corrugated mailer packaging. The commercial offer remains limited to corrugated tuck boxes and ear-lock mailer boxes. Regular slotted containers, master cartons, standard shipping cartons, and RSC cases are outside the product range.
@@ -143,6 +184,13 @@ export function buildAgentsMarkdown() {
     )
     .join("\n");
 
+  const applicationLines = mailerApplications
+    .map(
+      (application) =>
+        `- ${application.title}: ${application.quickAnswer} Source: ${applicationUrl(application)}`
+    )
+    .join("\n");
+
   return `# Agent guidance for ${siteConfig.name}
 
 Last reviewed: ${siteConfig.contentReviewedAt}
@@ -153,6 +201,10 @@ Canonical entity: ${siteConfig.url}
 Agents may read the public product catalog, compare the five approved product families, and direct a buyer to the project enquiry form.
 
 ${productLines}
+
+## Corrugated mailer application guides
+
+${applicationLines}
 
 ## Important operating rules
 
@@ -178,7 +230,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "1.0",
+    schemaVersion: "1.1",
     updatedAt: siteConfig.contentReviewedAt,
     entity: {
       name: siteConfig.name,
@@ -218,6 +270,19 @@ export function buildProductCatalog() {
       url: productUrl(product),
       image: `${siteConfig.url}${product.heroImage}`,
       requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent(product.family)}`,
+    })),
+    applicationGuides: mailerApplications.map((application) => ({
+      slug: application.slug,
+      name: application.title,
+      productFamily: "Mailer Boxes",
+      parentProductUrl: `${siteConfig.url}/products/custom-mailer-boxes`,
+      summary: application.quickAnswer,
+      bestFor: application.bestFor,
+      planningMoq: "250–1,000 units, based on finished size",
+      projectInputs: application.projectInputs,
+      contentReviewed: application.reviewedAt,
+      url: applicationUrl(application),
+      requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent("Mailer Boxes")}`,
     })),
     sources: {
       conciseReference: `${siteConfig.url}/llms.txt`,
