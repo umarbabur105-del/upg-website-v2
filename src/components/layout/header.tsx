@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Wordmark } from "@/components/layout/wordmark";
 import { siteConfig } from "@/data/site";
 
 const HAS_WHATSAPP = Boolean(siteConfig.whatsappUrl);
@@ -41,14 +42,12 @@ export function Header() {
       }`}
     >
       <div className="container-editorial flex h-16 items-center justify-between md:h-20">
-        <Link href="/" className="group flex items-center gap-2">
-          <span className="font-sans text-lg font-medium tracking-[-0.04em] text-foreground md:text-xl">
-            <span className="font-semibold sm:hidden">UPG</span>
-            <span className="hidden sm:inline">
-              Universal{" "}
-              <span className="font-semibold text-gold">Packaging Group</span>
-            </span>
-          </span>
+        <Link
+          href="/"
+          aria-label="Universal Packaging Group home"
+          className="group flex items-center"
+        >
+          <Wordmark />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
