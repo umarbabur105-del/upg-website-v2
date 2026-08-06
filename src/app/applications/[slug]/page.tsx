@@ -118,7 +118,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
       />
 
-      <section className="bg-gradient-warm">
+      <section className="bg-background">
         <div className="container-editorial pt-10 pb-20 md:pt-14 md:pb-28">
           <nav
             aria-label="Breadcrumb"
