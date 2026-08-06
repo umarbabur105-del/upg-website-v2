@@ -2,7 +2,7 @@
 
 :root {
   --font-fraunces: "Fraunces Variable";
-  --font-inter: "Inter Variable";
+  --font-inter: "Inter Variable", "Helvetica Neue", Arial, system-ui, sans-serif;
   --background: #f7f3eb;
   --foreground: #2a251e;
   --cream: #fbf8f1;
