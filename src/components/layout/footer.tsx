@@ -13,9 +13,12 @@ export function Footer() {
       <div className="container-editorial py-20">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
-            <Link href="/" className="font-serif text-2xl text-foreground">
+            <Link
+              href="/"
+              className="font-sans text-xl font-medium tracking-[-0.04em] text-foreground"
+            >
               Universal
-              <span className="text-gold"> Packaging Group</span>
+              <span className="font-semibold text-gold"> Packaging Group</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               {siteConfig.description}
