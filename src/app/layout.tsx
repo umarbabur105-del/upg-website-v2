@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import { AnalyticsRuntime } from "@/components/analytics-runtime";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
@@ -10,6 +12,30 @@ import { CORE_KEYWORDS, DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo";
 import "@fontsource-variable/fraunces";
 import "@fontsource-variable/inter";
 import "./globals.css";
+
+const rawGaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? "";
+const gaMeasurementId = /^G-[A-Z0-9]+$/.test(rawGaMeasurementId)
+  ? rawGaMeasurementId
+  : undefined;
+
+const analyticsConsentBootstrap = `
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+  var upgAnalyticsChoice;
+  try {
+    upgAnalyticsChoice = window.localStorage.getItem("upg_analytics_consent_v1");
+  } catch (error) {
+    upgAnalyticsChoice = null;
+  }
+  window.gtag("consent", "default", {
+    analytics_storage: upgAnalyticsChoice === "granted" ? "granted" : "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    wait_for_update: 500
+  });
+  window.gtag("set", "ads_data_redaction", true);
+`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -128,6 +154,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {gaMeasurementId ? (
+          <script
+            id="google-analytics-consent-default"
+            dangerouslySetInnerHTML={{ __html: analyticsConsentBootstrap }}
+          />
+        ) : null}
         <link
           rel="alternate"
           type="text/plain"
@@ -152,6 +184,24 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <MobileCtaBar />
+        {gaMeasurementId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics-config" strategy="afterInteractive">
+              {`
+                window.gtag("js", new Date());
+                window.gtag("config", "${gaMeasurementId}", {
+                  allow_google_signals: false,
+                  allow_ad_personalization_signals: false
+                });
+              `}
+            </Script>
+            <AnalyticsRuntime />
+          </>
+        ) : null}
       </body>
     </html>
   );

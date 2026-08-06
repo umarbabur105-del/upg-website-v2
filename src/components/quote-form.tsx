@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { siteConfig } from "@/data/site";
+import { trackGenerateLead } from "@/lib/analytics";
 import { getLeadAttribution } from "@/lib/lead-attribution";
 
 const productStyles: Record<string, string[]> = {
@@ -202,6 +203,10 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
         throw new Error(data.error ?? "Project enquiry submission failed");
       }
 
+      trackGenerateLead("quote_form", {
+        product_family: form.product_family,
+        product_style: form.product_style,
+      });
       setSubmitted(true);
     } catch (submissionError) {
       setError(
