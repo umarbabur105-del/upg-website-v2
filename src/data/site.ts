@@ -8,6 +8,10 @@ export const siteConfig = {
   phoneNumber: "+17868858825",
   phoneDisplay: "+1 786 885 8825",
   whatsappUrl: "https://wa.me/17868858825",
+  merchantReturnPolicyUrl:
+    "https://universalpackaginggroup.com/shipping-returns",
+  merchantReturnPolicyId:
+    "https://universalpackaginggroup.com/shipping-returns#merchant-return-policy",
   language: "en-US",
   market: "Worldwide",
   contentReviewedAt: "2026-08-10",

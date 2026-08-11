@@ -47,6 +47,9 @@ function buildStructuredData(kit: SampleKit) {
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${siteConfig.url}/#organization` },
+      hasMerchantReturnPolicy: {
+        "@id": siteConfig.merchantReturnPolicyId,
+      },
       shippingDetails: kit.shippingCountries.map((country) => ({
         "@type": "OfferShippingDetails",
         shippingRate: {

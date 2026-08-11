@@ -104,6 +104,9 @@ const structuredData = {
         areaServed: siteConfig.market,
         availableLanguage: ["English"],
       },
+      hasMerchantReturnPolicy: {
+        "@id": siteConfig.merchantReturnPolicyId,
+      },
       knowsAbout: [
         "Custom boxes",
         "Custom tuck boxes",
@@ -133,6 +136,11 @@ const structuredData = {
           },
         })),
       },
+    },
+    {
+      "@type": "MerchantReturnPolicy",
+      "@id": siteConfig.merchantReturnPolicyId,
+      merchantReturnLink: siteConfig.merchantReturnPolicyUrl,
     },
     {
       "@type": "WebSite",
