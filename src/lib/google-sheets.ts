@@ -9,7 +9,12 @@ const REQUEST_TIMEOUT_MS = 6_000;
 export type LeadSheetInput = {
   submissionId: string;
   receivedAt: Date;
-  source: "Project Enquiry" | "Contact Form";
+  source:
+    | "Project Enquiry"
+    | "Contact Form"
+    | "Sample Request"
+    | "Box Sample Kit Order"
+    | "Mylar Bag Sample Kit Order";
   notificationStatus: "Sent" | "Failed";
   name: string;
   email: string;

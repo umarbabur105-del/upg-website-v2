@@ -10,11 +10,11 @@ export const siteConfig = {
   whatsappUrl: "https://wa.me/17868858825",
   language: "en-US",
   market: "Worldwide",
-  contentReviewedAt: "2026-08-06",
+  contentReviewedAt: "2026-08-10",
   businessModel:
     "Custom packaging manufacturing with project-specific structure, specification, pricing, proofing, production, and delivery planning.",
   pricingModel:
-    "Project-specific quotation based on structure, dimensions, material, print, finish, quantity, and delivery destination.",
+    "Custom production uses project-specific quotation based on structure, dimensions, material, print, finish, quantity, and delivery destination. The UPG Box Sample Kit and Mylar Bag Sample Kit are separate fixed-price products.",
   responseTarget:
     "UPG targets an initial response within one business day. Final pricing may require specification review.",
   scopeBoundary:

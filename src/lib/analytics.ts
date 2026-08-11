@@ -23,7 +23,7 @@ export function trackAnalyticsEvent(
 }
 
 export function trackGenerateLead(
-  formName: "quote_form" | "contact_form",
+  formName: "quote_form" | "contact_form" | "sample_request_form",
   parameters: AnalyticsEventParameters = {}
 ) {
   trackAnalyticsEvent("generate_lead", {
