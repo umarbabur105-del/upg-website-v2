@@ -123,10 +123,13 @@ const structuredData = {
         itemListElement: products.map((product) => ({
           "@type": "Offer",
           itemOffered: {
-            "@type": "Product",
+            "@type": "Service",
+            "@id": `${SITE_URL}/products/${product.slug}#service`,
             name: product.name,
-            sku: product.sku,
+            serviceType: `${product.name} manufacturing`,
             url: `${SITE_URL}/products/${product.slug}`,
+            provider: { "@id": `${SITE_URL}/#organization` },
+            areaServed: siteConfig.market,
           },
         })),
       },

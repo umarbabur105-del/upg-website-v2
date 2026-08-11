@@ -47,6 +47,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/privacy-policy",
+        destination: "/privacy",
+        permanent: true,
+      },
+      {
         source: "/products/custom-folding-cartons",
         destination: "/products/custom-tuck-boxes",
         permanent: true,
