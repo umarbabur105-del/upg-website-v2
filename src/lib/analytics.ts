@@ -2,7 +2,11 @@ export const ANALYTICS_CONSENT_STORAGE_KEY = "upg_analytics_consent_v1";
 export const ANALYTICS_CONSENT_EVENT = "upg:open-analytics-consent";
 
 type AnalyticsEventValue = string | number | boolean | undefined;
-type AnalyticsEventParameters = Record<string, AnalyticsEventValue>;
+type AnalyticsEventItem = Record<string, AnalyticsEventValue>;
+type AnalyticsEventParameters = Record<
+  string,
+  AnalyticsEventValue | AnalyticsEventItem[]
+>;
 
 declare global {
   interface Window {

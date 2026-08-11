@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+health_script="${UPG_GOOGLE_API_HEALTH_SCRIPT:-$HOME/.config/gcloud/upg-automation/api_health.py}"
+
+if [ ! -x "$health_script" ]; then
+  echo "UPG Google API health script is unavailable: $health_script" >&2
+  exit 1
+fi
+
+exec "$health_script"

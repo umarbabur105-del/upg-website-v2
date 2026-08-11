@@ -16,8 +16,17 @@ export function SampleKitPurchaseTracker({
       transaction_id: transactionId,
       currency: kit.currency,
       value: kit.price,
-      item_id: kit.sku,
-      item_name: kit.name,
+      items: [
+        {
+          item_id: kit.sku,
+          item_name: kit.name,
+          item_brand: "UPG",
+          item_category:
+            kit.kind === "box" ? "Box Sample Kit" : "Mylar Bag Sample Kit",
+          price: kit.price,
+          quantity: 1,
+        },
+      ],
     });
   }, [transactionId, kit]);
 

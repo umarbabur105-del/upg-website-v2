@@ -23,6 +23,16 @@ Copy `.env.example` to `.env.local` and provide the applicable values. Google au
 
 The `Leads` header row is the website integration contract. Do not rename, reorder, or delete its columns without updating `src/lib/google-sheets.ts`.
 
+## Google operations
+
+See [`docs/google-api-inventory.md`](docs/google-api-inventory.md) for the Google Cloud project, authentication boundaries, connected resources, enabled APIs, and current verification evidence. See [`docs/google-merchant-expansion-plan.md`](docs/google-merchant-expansion-plan.md) for the audited Merchant Center state, policy boundaries, five-family sample-product plan, conversion connection, and release gates.
+
+Run the owner-local read-only API health check with:
+
+```bash
+./scripts/google-api-health
+```
+
 ## Verification
 
 ```bash
