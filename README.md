@@ -27,10 +27,18 @@ The `Leads` header row is the website integration contract. Do not rename, reord
 
 See [`docs/google-api-inventory.md`](docs/google-api-inventory.md) for the Google Cloud project, authentication boundaries, connected resources, enabled APIs, and current verification evidence. See [`docs/google-merchant-expansion-plan.md`](docs/google-merchant-expansion-plan.md) for the audited Merchant Center state, policy boundaries, five-family sample-product plan, conversion connection, and release gates.
 
+See [`docs/ai-discovery-operations.md`](docs/ai-discovery-operations.md) for AI crawler controls, crawl-reliability evidence, Bing/Copilot setup, IndexNow operations, and the ChatGPT commerce boundary.
+
 Run the owner-local read-only API health check with:
 
 ```bash
 ./scripts/google-api-health
+```
+
+After a production content change is live, notify IndexNow for the changed canonical URLs:
+
+```bash
+npm run indexnow:submit -- --url /products/custom-tuck-boxes
 ```
 
 ## Verification
