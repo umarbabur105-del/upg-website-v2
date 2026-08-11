@@ -39,26 +39,28 @@ export default async function ProductPage({ params }: PageProps) {
   const productUrl = `${SITE_URL}/products/${slug}`;
   const productFaqs = getProductFaqs(product);
 
-  const productSchema = {
+  const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": "Product",
+    "@type": "Service",
+    "@id": `${productUrl}#service`,
     name: product.name,
     description: product.summary,
-    sku: product.sku,
     url: productUrl,
     image: `${SITE_URL}${product.heroImage}`,
-    brand: {
-      "@type": "Brand",
-      name: siteConfig.name,
-    },
-    manufacturer: { "@id": `${SITE_URL}/#organization` },
+    serviceType: `${product.name} manufacturing`,
+    provider: { "@id": `${SITE_URL}/#organization` },
+    areaServed: siteConfig.market,
     category: product.category,
-    material: product.materials,
     audience: {
       "@type": "BusinessAudience",
       audienceType: product.industries.join(", "),
     },
     additionalProperty: [
+      {
+        "@type": "PropertyValue",
+        name: "Available materials",
+        value: product.materials.join(", "),
+      },
       {
         "@type": "PropertyValue",
         name: "Planning MOQ",
@@ -119,7 +121,7 @@ export default async function ProductPage({ params }: PageProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <script
         type="application/ld+json"
