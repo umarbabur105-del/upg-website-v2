@@ -3,6 +3,7 @@ import {
   type MailerApplication,
 } from "@/data/mailer-applications";
 import { products, type Product } from "@/data/products";
+import { boxSampleKit, sampleKits } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
 
 const quoteUrl = `${siteConfig.url}/get-a-quote`;
@@ -14,6 +15,25 @@ function productUrl(product: Product) {
 
 function applicationUrl(application: MailerApplication) {
   return `${siteConfig.url}/applications/${application.slug}`;
+}
+
+function sampleKitCatalogEntry(kit: (typeof sampleKits)[number]) {
+  return {
+    id: kit.merchantId,
+    sku: kit.sku,
+    name: kit.name,
+    description: kit.description,
+    assortment: kit.selectionNote,
+    productBoundary: kit.productBoundary,
+    price: kit.price,
+    currency: kit.currency,
+    availability: kit.availability,
+    shippingCountries: kit.shippingCountries,
+    shipping: kit.shippingLabel,
+    productionOrderCredit: kit.creditText,
+    url: kit.url,
+    image: `${siteConfig.url}${kit.image}`,
+  };
 }
 
 export function buildLlmsText() {
@@ -31,6 +51,13 @@ export function buildLlmsText() {
     )
     .join("\n");
 
+  const sampleKitLines = sampleKits
+    .map(
+      (kit) =>
+        `- [${kit.name}](${kit.url}): ${kit.price.toFixed(2)} ${kit.currency}; ${kit.shippingLabel}; ${kit.selectionNote} ${kit.productBoundary}`
+    )
+    .join("\n");
+
   return `# ${siteConfig.name} (${siteConfig.shortName})
 
 > ${siteConfig.description}
@@ -44,6 +71,7 @@ export function buildLlmsText() {
 - Full reference: ${siteConfig.url}/llms-full.txt
 - Product catalog JSON: ${catalogUrl}
 - Product catalog TSV: ${siteConfig.url}/feeds/products.tsv
+- Google Merchant Sample Kit feed: ${siteConfig.url}/feeds/google-merchant.tsv
 - Agent guidance: ${siteConfig.url}/agents.md
 
 ## Approved product range
@@ -60,6 +88,12 @@ ${siteConfig.businessModel}
 ${siteConfig.pricingModel}
 ${siteConfig.responseTarget}
 
+## Fixed-price sample kits
+
+${sampleKitLines}
+
+Each kit is purchased separately. The full $19.99 price of the purchased kit is credited toward the buyer's first UPG custom packaging production order.
+
 ## Scope boundary
 
 ${siteConfig.scopeBoundary}
@@ -72,6 +106,9 @@ Final dimensions remain subject to structural feasibility. Product compatibility
 - Start a project: ${quoteUrl}
 - Cosmetic packaging hub: ${siteConfig.url}/cosmetics
 - Materials and finishes: ${siteConfig.url}/materials-finishes
+- Sample Kit hub: ${siteConfig.url}/samples
+${sampleKits.map((kit) => `- ${kit.name}: ${kit.url}`).join("\n")}
+- Sample Kit shipping and returns: ${siteConfig.url}/shipping-returns
 - FAQ: ${siteConfig.url}/faq
 - Company and operating model: ${siteConfig.url}/about
 
@@ -119,6 +156,21 @@ Content reviewed: ${application.reviewedAt}
     )
     .join("\n");
 
+  const sampleKitSections = sampleKits
+    .map(
+      (kit) => `### ${kit.name}
+
+Canonical page: ${kit.url}
+SKU: ${kit.sku}
+Price: ${kit.price.toFixed(2)} ${kit.currency}
+Shipping: ${kit.shippingLabel}
+Credit: ${kit.creditText}
+Assortment: ${kit.selectionNote}
+Product boundary: ${kit.productBoundary}
+`
+    )
+    .join("\n");
+
   return `# ${siteConfig.name}: full machine-readable reference
 
 Canonical entity name: ${siteConfig.name}
@@ -134,7 +186,13 @@ Content reviewed: ${siteConfig.contentReviewedAt}
 
 ## What UPG does
 
-UPG manufactures custom boxes and flexible packaging for brands worldwide. UPG turns a packaging brief into an approved structure, production specification, pricing, proofing, manufacturing, and delivery plan. UPG is not an instant-price store because every product is made to specification.
+UPG manufactures custom boxes and flexible packaging for brands worldwide. UPG turns a packaging brief into an approved structure, production specification, pricing, proofing, manufacturing, and delivery plan. Custom production is not an instant-price store because every production project is made to specification. The UPG Box Sample Kit and Mylar Bag Sample Kit are separate fixed-price products.
+
+## Fixed-price sample kits
+
+${sampleKitSections}
+The two kits are purchased separately. Box and flexible-packaging samples are not combined.
+Free sample requests are reviewed manually and do not guarantee shipment.
 
 ## Approved products
 
@@ -167,6 +225,7 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Concise reference: ${siteConfig.url}/llms.txt
 - Product catalog JSON: ${catalogUrl}
 - Product catalog TSV: ${siteConfig.url}/feeds/products.tsv
+- Google Merchant Sample Kit feed: ${siteConfig.url}/feeds/google-merchant.tsv
 - Agent guidance: ${siteConfig.url}/agents.md
 - Sitemap: ${siteConfig.url}/sitemap.xml
 
@@ -191,6 +250,13 @@ export function buildAgentsMarkdown() {
     )
     .join("\n");
 
+  const sampleKitLines = sampleKits
+    .map(
+      (kit) =>
+        `- ${kit.name}: $${kit.price.toFixed(2)}, ${kit.shippingLabel}. ${kit.selectionNote} ${kit.productBoundary} Source: ${kit.url}`
+    )
+    .join("\n");
+
   return `# Agent guidance for ${siteConfig.name}
 
 Last reviewed: ${siteConfig.contentReviewedAt}
@@ -209,7 +275,10 @@ ${applicationLines}
 ## Important operating rules
 
 - UPG serves brands worldwide.
-- UPG manufactures made-to-spec packaging and does not publish instant project pricing.
+- UPG manufactures made-to-spec packaging and does not publish instant custom-production pricing.
+- UPG offers two separate $19.99 fixed-price products: the Box Sample Kit and Mylar Bag Sample Kit. They are not combined.
+- Fixed-price sample-kit details:
+${sampleKitLines}
 - ${siteConfig.scopeBoundary}
 - Do not present AI-generated concept imagery as completed customer work.
 - Do not state that a quote, order, sample, payment, or production slot has been created unless the website explicitly confirms the completed action.
@@ -220,6 +289,7 @@ ${applicationLines}
 - Read product catalog: ${catalogUrl}
 - Start a project enquiry: ${quoteUrl}
 - Contact UPG: ${siteConfig.url}/contact
+- Compare and buy sample kits or request a sample review: ${siteConfig.url}/samples
 - Email UPG: mailto:${siteConfig.email}
 - Call UPG: tel:${siteConfig.phoneNumber}
 - WhatsApp UPG: ${siteConfig.whatsappUrl}
@@ -230,7 +300,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "1.1",
+    schemaVersion: "1.4",
     updatedAt: siteConfig.contentReviewedAt,
     entity: {
       name: siteConfig.name,
@@ -247,6 +317,10 @@ export function buildProductCatalog() {
       responseTarget: siteConfig.responseTarget,
       requestQuoteUrl: quoteUrl,
     },
+    boxSampleKit: {
+      ...sampleKitCatalogEntry(boxSampleKit),
+    },
+    sampleKits: sampleKits.map(sampleKitCatalogEntry),
     scopeBoundary: siteConfig.scopeBoundary,
     imagePolicy: siteConfig.imagePolicy,
     products: products.map((product) => ({
@@ -289,6 +363,7 @@ export function buildProductCatalog() {
       fullReference: `${siteConfig.url}/llms-full.txt`,
       agentGuidance: `${siteConfig.url}/agents.md`,
       sitemap: `${siteConfig.url}/sitemap.xml`,
+      googleMerchantFeed: `${siteConfig.url}/feeds/google-merchant.tsv`,
     },
   };
 }

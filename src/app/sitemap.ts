@@ -53,6 +53,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${SITE_URL}/samples/box-sample-kit`,
+      lastModified: CONTENT_UPDATED_AT,
+      changeFrequency: "monthly",
+      priority: 0.82,
+    },
+    {
+      url: `${SITE_URL}/samples/mylar-bag-sample-kit`,
+      lastModified: CONTENT_UPDATED_AT,
+      changeFrequency: "monthly",
+      priority: 0.82,
+    },
+    {
       url: `${SITE_URL}/about`,
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "monthly",
@@ -87,6 +99,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "yearly",
       priority: 0.2,
+    },
+    {
+      url: `${SITE_URL}/shipping-returns`,
+      lastModified: CONTENT_UPDATED_AT,
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
   ];
 

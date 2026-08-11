@@ -25,7 +25,7 @@ export default function PrivacyPage() {
         <div className="mx-auto max-w-3xl space-y-8 text-sm leading-7 text-charcoal/75">
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Information we collect</h2>
-            <p className="mt-3">When you contact us or submit a project enquiry, we collect the information you provide, such as your name, business contact details, company, packaging requirements, intended use, quantity, and delivery location. When you submit a form, we may also retain the landing page, referring page, and campaign parameters associated with that request so we can understand how the enquiry reached us. Standard hosting logs may record technical information needed for security and operation.</p>
+            <p className="mt-3">When you contact us, submit a project enquiry, request a sample, or purchase a sample kit, we collect the information you provide, such as your name, business contact details, company, packaging requirements, intended use, quantity, delivery location, and order reference. Payment details are collected and processed by our payment provider; UPG does not intentionally store full payment-card numbers. When you submit a form, we may also retain the landing page, referring page, and campaign parameters associated with that request so we can understand how the enquiry reached us. Standard hosting logs may record technical information needed for security and operation.</p>
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">How we use it</h2>
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Service providers and retention</h2>
-            <p className="mt-3">Website hosting, Google Workspace, email delivery, and related business-productivity providers may process information on our behalf. Submitted enquiries are stored in access-controlled business systems and used by authorized personnel for project handling. We retain information only as long as reasonably needed for pricing, project records, security, and legal requirements.</p>
+            <p className="mt-3">Website hosting, Google Workspace, Stripe, email delivery, and related business-productivity providers may process information on our behalf. Submitted enquiries and sample order records are stored in access-controlled business systems and used by authorized personnel for project handling and fulfillment. We retain information only as long as reasonably needed for pricing, order and project records, security, and legal requirements.</p>
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Analytics and consent choices</h2>

@@ -29,6 +29,10 @@ export default function TermsPage() {
             <p className="mt-3">Only an accepted written quote or agreement controls price, scope, minimum quantity, production timing, freight, duties, taxes, testing, documentation, payment terms, and delivery terms. Changes to specifications may change price and timing.</p>
           </div>
           <div>
+            <h2 className="font-serif text-2xl text-charcoal">Fixed-price sample kits</h2>
+            <p className="mt-3">The UPG Box Sample Kit and Mylar Bag Sample Kit are separate fixed-price physical products governed by their individual product-page descriptions, checkout information, and published Sample Kit Shipping & Returns policy. Box and flexible-packaging samples are not combined into one kit. Purchasing a kit does not create or price a custom production order. The published kit-price credit applies when the customer places a first custom packaging production order with UPG.</p>
+          </div>
+          <div>
             <h2 className="font-serif text-2xl text-charcoal">Artwork and intended use</h2>
             <p className="mt-3">You are responsible for having rights to submitted artwork and content and for providing accurate intended-use information. Regulatory, food-contact, cosmetic-contact, barrier, labeling, and market requirements must be confirmed for the specific product and jurisdiction.</p>
           </div>

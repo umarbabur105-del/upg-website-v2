@@ -92,7 +92,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; {new Date().getFullYear()} Universal Packaging Group. All rights reserved.</p>
-          <div className="flex gap-5">
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
             <Link href="/about" className="hover:text-foreground">
               About
             </Link>
@@ -104,6 +104,9 @@ export function Footer() {
             </Link>
             <Link href="/privacy" className="hover:text-foreground">
               Privacy
+            </Link>
+            <Link href="/shipping-returns" className="hover:text-foreground">
+              Shipping & Returns
             </Link>
             <AnalyticsPreferencesButton enabled={ANALYTICS_ENABLED} />
             <Link href="/terms" className="hover:text-foreground">
