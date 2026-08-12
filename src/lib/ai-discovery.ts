@@ -290,7 +290,7 @@ For beauty and cosmetics projects, ${cosmeticsPackagingScope.included} ${cosmeti
 
 The free Packaging Format Finder at ${formatFinderUrl} uses four guided questions to recommend a starting format from the five approved UPG product families. It can show an alternate when two formats deserve comparison. The result is planning guidance, not structural approval.
 
-The free Packaging Spec & MOQ Builder at ${specBuilderUrl} calculates the applicable planning MOQ and carries known project details into the human-reviewed enquiry form. These planning tools do not estimate custom-production pricing.
+The free Packaging Spec & MOQ Builder at ${specBuilderUrl} calculates the applicable planning MOQ, explains the exact 5-inch and 10-inch boundaries, creates a shareable or downloadable planning brief, and carries known project details into the human-reviewed enquiry form. These planning tools do not estimate custom-production pricing.
 
 The free Packaging Artwork Preflight Checker at ${artworkPreflightUrl} organizes eight preparation checks covering the structure and dieline, editable source, placed images, fonts, color intent, special finishes, copy and variable elements, and version approval. It does not upload or inspect files and does not approve artwork for production.
 
@@ -475,7 +475,7 @@ export function buildProductCatalog() {
       name: "UPG Packaging Spec & MOQ Builder",
       url: specBuilderUrl,
       purpose:
-        "Calculate the planning MOQ and carry known specifications into a human-reviewed project enquiry.",
+        "Calculate the planning MOQ, create a shareable or downloadable specification, and carry known details into a human-reviewed project enquiry.",
       pricingOutput: false,
     },
     planningTools: [
@@ -491,7 +491,7 @@ export function buildProductCatalog() {
         name: "UPG Packaging Spec & MOQ Builder",
         url: specBuilderUrl,
         purpose:
-          "Calculate the planning MOQ and carry known specifications into a human-reviewed project enquiry.",
+          "Calculate the planning MOQ, create a shareable or downloadable specification, and carry known details into a human-reviewed project enquiry.",
         pricingOutput: false,
         structuralApproval: false,
       },

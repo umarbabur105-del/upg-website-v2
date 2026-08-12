@@ -142,7 +142,8 @@ Weekly decision metrics:
 - Phase 2 first commercial cluster: implemented with 12 visible industry and product-application guides.
 - Demand evidence: Search Console baseline and Teal public-coverage proxy recorded in `docs/keyword-demand-map.md`.
 - Exact monthly volume: pending a real Google Ads account, developer token, customer ID, and OAuth `adwords` scope. The Google Ads API service itself is enabled.
-- Phase 3 prospecting: 50 prospects and approval-gated outreach drafts recorded in `docs/backlink-prospects.csv` and `docs/backlink-outreach-drafts.md`; no outreach sent.
+- Phase 3 authority asset: the Packaging Spec & MOQ Builder now creates shareable, downloadable, and print-ready planning briefs, shows exact 5-inch and 10-inch boundary examples, measures brief completeness, and carries specifications into the enquiry form.
+- Phase 3 prospecting: 50 prospects and approval-gated outreach drafts recorded in `docs/backlink-prospects.csv`, `docs/backlink-outreach-drafts.md`, and `docs/backlink-personalized-drafts.md`; no outreach sent.
 - Measurement: aggregate-only Search Console, GA4, and CRM report available through `npm run report:organic`.
 
 ### Phase 1 — Product-style lead cluster

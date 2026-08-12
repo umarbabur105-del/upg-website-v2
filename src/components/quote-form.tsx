@@ -58,6 +58,7 @@ export interface QuoteFormPrefill {
   productStyle?: string;
   quantity?: string;
   intendedEndUse?: string;
+  shippingCountry?: string;
   dimensions?: string;
   materialPreference?: string;
   finishPreference?: string;
@@ -122,6 +123,7 @@ export function QuoteForm({ prefill }: QuoteFormProps) {
     product_style: validPrefillStyle,
     quantity: prefill?.quantity ?? "",
     intended_end_use: prefill?.intendedEndUse ?? "",
+    shipping_country: prefill?.shippingCountry ?? "",
     dimensions: prefill?.dimensions ?? "",
     material_preference: prefill?.materialPreference ?? "",
     finish_preference: prefill?.finishPreference ?? "",
