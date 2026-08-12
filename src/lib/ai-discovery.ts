@@ -8,6 +8,7 @@ import { siteConfig } from "@/data/site";
 
 const quoteUrl = `${siteConfig.url}/get-a-quote`;
 const catalogUrl = `${siteConfig.url}/product-catalog.json`;
+const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
 
 function productUrl(product: Product) {
   return `${siteConfig.url}/products/${product.slug}`;
@@ -73,6 +74,7 @@ export function buildLlmsText() {
 - Product catalog TSV: ${siteConfig.url}/feeds/products.tsv
 - Google Merchant Sample Kit feed: ${siteConfig.url}/feeds/google-merchant.tsv
 - Agent guidance: ${siteConfig.url}/agents.md
+- Packaging Spec & MOQ Builder: ${specBuilderUrl}
 
 ## Approved product range
 
@@ -103,6 +105,7 @@ Final dimensions remain subject to structural feasibility. Product compatibility
 ## Reliable source pages
 
 - Product catalog: ${siteConfig.url}/products
+- Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Start a project: ${quoteUrl}
 - Cosmetic packaging hub: ${siteConfig.url}/cosmetics
 - Materials and finishes: ${siteConfig.url}/materials-finishes
@@ -188,6 +191,8 @@ Content reviewed: ${siteConfig.contentReviewedAt}
 
 UPG manufactures custom boxes and flexible packaging for brands worldwide. UPG turns a packaging brief into an approved structure, production specification, pricing, proofing, manufacturing, and delivery plan. Custom production is not an instant-price store because every production project is made to specification. The UPG Box Sample Kit and Mylar Bag Sample Kit are separate fixed-price products.
 
+The free Packaging Spec & MOQ Builder at ${specBuilderUrl} compares the five approved product families, calculates the applicable planning MOQ, and carries known project details into the human-reviewed enquiry form. It does not estimate custom-production pricing.
+
 ## Fixed-price sample kits
 
 ${sampleKitSections}
@@ -208,7 +213,7 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 
 ## Project process
 
-1. Submit the product family, style, intended use, quantity, dimensions if available, and delivery country at ${quoteUrl}.
+1. Build a planning specification at ${specBuilderUrl}, or submit the known product details directly at ${quoteUrl}.
 2. ${siteConfig.responseTarget}
 3. Structure, materials, finishes, artwork, pricing, manufacturing, and delivery details are confirmed as required.
 4. Manufacturing starts only after the applicable commercial, artwork, and proof approvals.
@@ -227,6 +232,7 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Product catalog TSV: ${siteConfig.url}/feeds/products.tsv
 - Google Merchant Sample Kit feed: ${siteConfig.url}/feeds/google-merchant.tsv
 - Agent guidance: ${siteConfig.url}/agents.md
+- Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Sitemap: ${siteConfig.url}/sitemap.xml
 
 ## Image policy
@@ -264,7 +270,7 @@ Canonical entity: ${siteConfig.url}
 
 ## Supported discovery
 
-Agents may read the public product catalog, compare the five approved product families, and direct a buyer to the project enquiry form.
+Agents may read the public product catalog, compare the five approved product families, direct a buyer to the Packaging Spec & MOQ Builder, and then continue to the project enquiry form.
 
 ${productLines}
 
@@ -287,6 +293,7 @@ ${sampleKitLines}
 ## Public actions
 
 - Read product catalog: ${catalogUrl}
+- Build a packaging specification and check the planning MOQ: ${specBuilderUrl}
 - Start a project enquiry: ${quoteUrl}
 - Contact UPG: ${siteConfig.url}/contact
 - Compare and buy sample kits or request a sample review: ${siteConfig.url}/samples
@@ -300,7 +307,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "1.4",
+    schemaVersion: "1.5",
     updatedAt: siteConfig.contentReviewedAt,
     entity: {
       name: siteConfig.name,
@@ -316,6 +323,13 @@ export function buildProductCatalog() {
       pricing: siteConfig.pricingModel,
       responseTarget: siteConfig.responseTarget,
       requestQuoteUrl: quoteUrl,
+    },
+    planningTool: {
+      name: "UPG Packaging Spec & MOQ Builder",
+      url: specBuilderUrl,
+      purpose:
+        "Compare approved product families, calculate the planning MOQ, and carry known specifications into a human-reviewed project enquiry.",
+      pricingOutput: false,
     },
     boxSampleKit: {
       ...sampleKitCatalogEntry(boxSampleKit),
@@ -362,6 +376,7 @@ export function buildProductCatalog() {
       conciseReference: `${siteConfig.url}/llms.txt`,
       fullReference: `${siteConfig.url}/llms-full.txt`,
       agentGuidance: `${siteConfig.url}/agents.md`,
+      packagingSpecBuilder: specBuilderUrl,
       sitemap: `${siteConfig.url}/sitemap.xml`,
       googleMerchantFeed: `${siteConfig.url}/feeds/google-merchant.tsv`,
     },

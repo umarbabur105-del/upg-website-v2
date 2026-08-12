@@ -85,6 +85,12 @@ export default function ProductsPage() {
             />
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
+                href="/tools/packaging-spec-builder"
+                className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
+              >
+                Build Your Specification
+              </Link>
+              <Link
                 href="/cosmetics"
                 className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
               >
@@ -92,7 +98,7 @@ export default function ProductsPage() {
               </Link>
               <Link
                 href="/get-a-quote"
-                className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
+                className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
               >
                 Start Your Project
               </Link>
