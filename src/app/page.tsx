@@ -46,10 +46,10 @@ export default function HomePage() {
                   View Products
                 </Link>
                 <Link
-                  href="/tools/packaging-spec-builder"
+                  href="/tools"
                   className="rounded-full border border-border bg-cream px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
                 >
-                  Check MOQ &amp; Build a Spec
+                  Use Packaging Tools
                 </Link>
               </div>
               {siteConfig.whatsappUrl ? (
@@ -106,12 +106,20 @@ export default function HomePage() {
               title="Five focused product families, manufactured around your brand."
               intro="Explore tuck boxes, corrugated mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar bags."
             />
-            <Link
-              href="/products"
-              className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-            >
-              See all products <span>→</span>
-            </Link>
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
+              <Link
+                href="/tools/packaging-format-finder"
+                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                Find the right format <span>→</span>
+              </Link>
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                See all products <span>→</span>
+              </Link>
+            </div>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
