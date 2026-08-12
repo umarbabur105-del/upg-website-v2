@@ -35,12 +35,13 @@ const tools = [
     number: "02",
     title: "Packaging Spec & MOQ Builder",
     description:
-      "Choose the product family, add dimensions and known requirements, check the approved planning MOQ, and carry the specification into a project enquiry.",
+      "Choose the product family, add dimensions and known requirements, check the approved planning MOQ, then share, download, print, or carry the specification into a project enquiry.",
     href: "/tools/packaging-spec-builder",
     cta: "Build a specification",
     details: [
       "Exact size-based MOQ rules",
       "Inch, centimeter, and millimeter support",
+      "Shareable and downloadable planning brief",
       "Quote-form specification handoff",
     ],
   },

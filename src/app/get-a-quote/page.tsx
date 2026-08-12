@@ -30,6 +30,7 @@ export default async function GetAQuotePage({ searchParams }: PageProps) {
     productStyle: readParam("style"),
     quantity: readParam("quantity"),
     intendedEndUse: readParam("use"),
+    shippingCountry: readParam("destination"),
     dimensions: readParam("dimensions"),
     materialPreference: readParam("material"),
     finishPreference: readParam("finishes"),

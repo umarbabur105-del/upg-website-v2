@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
-import { PackagingSpecBuilder } from "@/components/packaging-spec-builder";
+import {
+  PackagingSpecBuilder,
+  type PackagingSpecBuilderInitialValues,
+} from "@/components/packaging-spec-builder";
 import { SectionHeading } from "@/components/section-heading";
-import { productFamilies } from "@/data/packaging-spec";
+import {
+  finishOptions,
+  materialOptions,
+  productFamilies,
+  productStyles,
+  type MeasurementUnit,
+} from "@/data/packaging-spec";
 import type { ProductFamily } from "@/data/products";
 import { SITE_URL, createPageMetadata } from "@/lib/seo";
 
@@ -49,6 +58,11 @@ const faqItems = [
     answer:
       "No. UPG supplies corrugated ear-lock mailer boxes for branded presentation, PR kits, subscriptions, and ecommerce packaging. Regular slotted shipping cartons, master cartons, and RSC cases are outside the product range.",
   },
+  {
+    question: "Can I share or download the packaging specification?",
+    answer:
+      "Yes. The builder can copy a shareable plan link, download a plain-text specification, or open a print-ready version that can be saved as a PDF. The shared link contains the current planning fields, so anyone with the link can read them. Do not include confidential information.",
+  },
 ];
 
 const structuredData = {
@@ -71,6 +85,8 @@ const structuredData = {
         "Size-based MOQ calculation",
         "Inch, centimeter, and millimeter support",
         "Material and finish planning",
+        "Shareable specification links",
+        "Downloadable and print-ready specification output",
         "Specification handoff to project enquiry",
       ],
     },
@@ -133,16 +149,99 @@ const moqRows = [
   },
 ];
 
+const boundaryExamples = [
+  {
+    size: "5 × 4 × 2 in",
+    result: "1,000 units",
+    reason: "Every finished dimension is 5 inches or less.",
+  },
+  {
+    size: "5.01 × 4 × 2 in",
+    result: "500 units",
+    reason: "The largest finished dimension is now over 5 inches.",
+  },
+  {
+    size: "10 × 8 × 3 in",
+    result: "500 units",
+    reason: "Exactly 10 inches stays inside the 500-unit boundary.",
+  },
+  {
+    size: "10.01 × 8 × 3 in",
+    result: "250 units",
+    reason: "The largest finished dimension is now over 10 inches.",
+  },
+];
+
 interface PageProps {
-  searchParams: Promise<{ product?: string | string[] }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export default async function PackagingSpecBuilderPage({ searchParams }: PageProps) {
   const params = await searchParams;
-  const requestedFamily = Array.isArray(params.product) ? params.product[0] : params.product;
+  const readParam = (key: string, limit = 160) => {
+    const value = params[key];
+    return (Array.isArray(value) ? value[0] : value)?.slice(0, limit).trim();
+  };
+  const readParams = (key: string, limit = 160) => {
+    const value = params[key];
+    const values = Array.isArray(value) ? value : value ? [value] : [];
+    return values.map((item) => item.slice(0, limit).trim()).filter(Boolean);
+  };
+  const positiveNumberParam = (key: string) => {
+    const value = readParam(key, 24);
+    if (!value) return undefined;
+    const parsed = Number(value);
+    return Number.isFinite(parsed) && parsed > 0 ? value : undefined;
+  };
+  const positiveIntegerParam = (key: string) => {
+    const value = readParam(key, 24);
+    if (!value) return undefined;
+    const parsed = Number(value);
+    return Number.isInteger(parsed) && parsed > 0 ? value : undefined;
+  };
+  const requestedFamily = readParam("product");
   const initialFamily = productFamilies.includes(requestedFamily as ProductFamily)
     ? (requestedFamily as ProductFamily)
     : undefined;
+  const requestedUnit = readParam("unit", 4);
+  const initialUnit = (["in", "cm", "mm"] as MeasurementUnit[]).includes(
+    requestedUnit as MeasurementUnit
+  )
+    ? (requestedUnit as MeasurementUnit)
+    : "in";
+  const requestedStyle = readParam("style");
+  const initialStyle =
+    initialFamily && requestedStyle && productStyles[initialFamily].includes(requestedStyle)
+      ? requestedStyle
+      : undefined;
+  const requestedMaterial = readParam("material");
+  const initialMaterial =
+    initialFamily &&
+    requestedMaterial &&
+    materialOptions[initialFamily].includes(requestedMaterial)
+      ? requestedMaterial
+      : undefined;
+  const allowedFinishes = finishOptions.filter(
+    (finish) => finish !== "Not sure — recommend"
+  );
+  const initialFinishes = readParams("finish").filter((finish) =>
+    allowedFinishes.includes(finish as (typeof allowedFinishes)[number])
+  );
+  const initialValues: PackagingSpecBuilderInitialValues = {
+    family: initialFamily,
+    style: initialStyle,
+    dimensions: {
+      length: positiveNumberParam("length"),
+      width: positiveNumberParam("width"),
+      height: positiveNumberParam("height"),
+    },
+    unit: initialUnit,
+    quantity: positiveIntegerParam("quantity"),
+    material: initialMaterial,
+    finishes: initialFinishes,
+    intendedUse: readParam("use"),
+    destination: readParam("destination"),
+  };
 
   return (
     <>
@@ -186,7 +285,39 @@ export default async function PackagingSpecBuilderPage({ searchParams }: PagePro
 
       <section className="pb-20 md:pb-28">
         <div className="container-editorial">
-          <PackagingSpecBuilder initialFamily={initialFamily} />
+          <PackagingSpecBuilder initialFamily={initialFamily} initialValues={initialValues} />
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div className="container-editorial grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <SectionHeading
+              eyebrow="Exact boundary examples"
+              title="What happens at 5 and 10 inches?"
+              intro="For tuck boxes and corrugated ear-lock mailers, the largest finished dimension controls the planning MOQ. These examples make the exact boundaries unambiguous."
+            />
+          </div>
+          <div className="overflow-x-auto border border-border bg-surface lg:col-span-8">
+            <table className="w-full min-w-[620px] border-collapse text-left text-sm">
+              <thead className="bg-moss text-primary-foreground">
+                <tr>
+                  <th className="px-5 py-4 font-semibold">Finished size example</th>
+                  <th className="px-5 py-4 font-semibold">Planning MOQ</th>
+                  <th className="px-5 py-4 font-semibold">Boundary logic</th>
+                </tr>
+              </thead>
+              <tbody>
+                {boundaryExamples.map((example) => (
+                  <tr key={example.size} className="border-t border-border first:border-t-0">
+                    <td className="px-5 py-4 font-semibold text-foreground">{example.size}</td>
+                    <td className="px-5 py-4 text-foreground">{example.result}</td>
+                    <td className="px-5 py-4 text-muted-foreground">{example.reason}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 

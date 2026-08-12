@@ -4,6 +4,8 @@ Last reviewed: 2026-08-13
 
 These are approval-gated drafts. They must be personalized from the prospect's current editorial or membership rules. Do not send them in bulk, request an optimized anchor, offer payment for a ranking link, or claim results UPG cannot prove.
 
+Five researched, publication-specific drafts and human-author briefs are maintained in `docs/backlink-personalized-drafts.md`. They remain unsent until Umar approves each exact email.
+
 ## Draft 1: useful tool for a packaging resource
 
 Subject: Free packaging planning resource for [AUDIENCE]

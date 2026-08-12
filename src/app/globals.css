@@ -171,3 +171,28 @@ img {
 .text-pretty {
   text-wrap: pretty;
 }
+
+.print-spec-sheet {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-spec-sheet,
+  .print-spec-sheet * {
+    visibility: visible;
+  }
+
+  .print-spec-sheet {
+    background: white;
+    color: #2a251e;
+    display: block;
+    inset: 0;
+    padding: 0.65in;
+    position: absolute;
+    width: 100%;
+  }
+}

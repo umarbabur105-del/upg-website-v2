@@ -72,18 +72,41 @@ function FieldLabel({ htmlFor, children }: { htmlFor: string; children: React.Re
 
 interface PackagingSpecBuilderProps {
   initialFamily?: ProductFamily;
+  initialValues?: PackagingSpecBuilderInitialValues;
 }
 
-export function PackagingSpecBuilder({ initialFamily }: PackagingSpecBuilderProps) {
-  const [family, setFamily] = useState<ProductFamily | "">(initialFamily ?? "");
-  const [style, setStyle] = useState("");
-  const [dimensions, setDimensions] = useState<DimensionFields>(emptyDimensions);
-  const [unit, setUnit] = useState<MeasurementUnit>("in");
-  const [quantity, setQuantity] = useState("");
-  const [material, setMaterial] = useState("");
-  const [finishes, setFinishes] = useState<string[]>([]);
-  const [intendedUse, setIntendedUse] = useState("");
-  const [copied, setCopied] = useState(false);
+export interface PackagingSpecBuilderInitialValues {
+  family?: ProductFamily;
+  style?: string;
+  dimensions?: Partial<DimensionFields>;
+  unit?: MeasurementUnit;
+  quantity?: string;
+  material?: string;
+  finishes?: string[];
+  intendedUse?: string;
+  destination?: string;
+}
+
+export function PackagingSpecBuilder({
+  initialFamily,
+  initialValues,
+}: PackagingSpecBuilderProps) {
+  const [family, setFamily] = useState<ProductFamily | "">(
+    initialValues?.family ?? initialFamily ?? ""
+  );
+  const [style, setStyle] = useState(initialValues?.style ?? "");
+  const [dimensions, setDimensions] = useState<DimensionFields>({
+    ...emptyDimensions,
+    ...initialValues?.dimensions,
+  });
+  const [unit, setUnit] = useState<MeasurementUnit>(initialValues?.unit ?? "in");
+  const [quantity, setQuantity] = useState(initialValues?.quantity ?? "");
+  const [material, setMaterial] = useState(initialValues?.material ?? "");
+  const [finishes, setFinishes] = useState<string[]>(initialValues?.finishes ?? []);
+  const [intendedUse, setIntendedUse] = useState(initialValues?.intendedUse ?? "");
+  const [destination, setDestination] = useState(initialValues?.destination ?? "");
+  const [copiedSummary, setCopiedSummary] = useState<string | null>(null);
+  const [copiedShareHref, setCopiedShareHref] = useState<string | null>(null);
 
   const selectedProduct = products.find((product) => product.family === family);
   const parsedDimensions = parseFinishedDimensions(dimensions);
@@ -97,6 +120,20 @@ export function PackagingSpecBuilder({ initialFamily }: PackagingSpecBuilderProp
   const availableStyles = family ? productStyles[family] : [];
   const availableMaterials = family ? materialOptions[family] : [];
   const dimensionsRequired = family === "Tuck Boxes" || family === "Mailer Boxes";
+  const coreBriefItems = [
+    { label: "Product family", complete: Boolean(family) },
+    {
+      label: dimensionsRequired ? "Finished dimensions" : "Size review",
+      complete: dimensionsRequired ? Boolean(parsedDimensions) : Boolean(family),
+    },
+    { label: "Planning quantity", complete: Boolean(plannedQuantity) },
+    { label: "Intended use", complete: Boolean(intendedUse.trim()) },
+    { label: "Delivery destination", complete: Boolean(destination.trim()) },
+  ];
+  const completedCoreItems = coreBriefItems.filter((item) => item.complete).length;
+  const completenessPercent = Math.round(
+    (completedCoreItems / coreBriefItems.length) * 100
+  );
 
   const summary = useMemo(() => {
     const lines = [
@@ -109,10 +146,11 @@ export function PackagingSpecBuilder({ initialFamily }: PackagingSpecBuilderProp
       `Material: ${material || "Not selected"}`,
       `Finishes: ${finishes.length ? finishes.join(", ") : "Not selected"}`,
       `Intended use: ${intendedUse.trim() || "Not provided"}`,
+      `Delivery destination: ${destination.trim() || "Not provided"}`,
       "Final structure, specifications, pricing, production timing, and delivery terms require UPG review.",
     ];
     return lines.join("\n");
-  }, [family, style, formattedDimensions, plannedQuantity, moq, material, finishes, intendedUse]);
+  }, [family, style, formattedDimensions, plannedQuantity, moq, material, finishes, intendedUse, destination]);
 
   const quoteHref = useMemo(() => {
     const params = new URLSearchParams();
@@ -120,6 +158,7 @@ export function PackagingSpecBuilder({ initialFamily }: PackagingSpecBuilderProp
     if (style) params.set("style", style);
     if (plannedQuantity) params.set("quantity", `${plannedQuantity} units`);
     if (intendedUse.trim()) params.set("use", intendedUse.trim());
+    if (destination.trim()) params.set("destination", destination.trim());
     if (formattedDimensions) params.set("dimensions", formattedDimensions);
     if (material) params.set("material", material);
     if (finishes.length) params.set("finishes", finishes.join(", "));
@@ -128,14 +167,29 @@ export function PackagingSpecBuilder({ initialFamily }: PackagingSpecBuilderProp
       `Prepared with the UPG Packaging Spec & MOQ Builder. Planning MOQ: ${moq.units ? moq.label : "pending finished dimensions"}.`
     );
     return `/get-a-quote?${params.toString()}`;
-  }, [family, style, plannedQuantity, intendedUse, formattedDimensions, material, finishes, moq]);
+  }, [family, style, plannedQuantity, intendedUse, destination, formattedDimensions, material, finishes, moq]);
+
+  const shareHref = useMemo(() => {
+    const params = new URLSearchParams();
+    if (family) params.set("product", family);
+    if (style) params.set("style", style);
+    if (dimensions.length) params.set("length", dimensions.length);
+    if (dimensions.width) params.set("width", dimensions.width);
+    if (dimensions.height) params.set("height", dimensions.height);
+    params.set("unit", unit);
+    if (quantity) params.set("quantity", quantity);
+    if (material) params.set("material", material);
+    finishes.forEach((finish) => params.append("finish", finish));
+    if (intendedUse.trim()) params.set("use", intendedUse.trim());
+    if (destination.trim()) params.set("destination", destination.trim());
+    return `/tools/packaging-spec-builder?${params.toString()}`;
+  }, [family, style, dimensions, unit, quantity, material, finishes, intendedUse, destination]);
 
   function chooseFamily(nextFamily: ProductFamily) {
     setFamily(nextFamily);
     setStyle("");
     setMaterial("");
     setFinishes([]);
-    setCopied(false);
   }
 
   function toggleFinish(finish: string) {
@@ -144,20 +198,61 @@ export function PackagingSpecBuilder({ initialFamily }: PackagingSpecBuilderProp
         ? current.filter((item) => item !== finish)
         : [...current, finish]
     );
-    setCopied(false);
   }
 
   async function copySpecification() {
     try {
       await navigator.clipboard.writeText(summary);
-      setCopied(true);
+      setCopiedSummary(summary);
       trackAnalyticsEvent("packaging_spec_copy", {
         product_family: family || "not_selected",
         planning_moq: moq.units ?? "pending",
       });
     } catch {
-      setCopied(false);
+      setCopiedSummary(null);
     }
+  }
+
+  async function copyShareLink() {
+    try {
+      await navigator.clipboard.writeText(`${window.location.origin}${shareHref}`);
+      setCopiedShareHref(shareHref);
+      trackAnalyticsEvent("packaging_spec_share_link", {
+        product_family: family || "not_selected",
+        planning_moq: moq.units ?? "pending",
+        core_brief_percent: completenessPercent,
+      });
+    } catch {
+      setCopiedShareHref(null);
+    }
+  }
+
+  function downloadSpecification() {
+    const blob = new Blob([`${summary}\n`], { type: "text/plain;charset=utf-8" });
+    const downloadUrl = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    const fileFamily = (family || "packaging")
+      .toLowerCase()
+      .replaceAll(/[^a-z0-9]+/g, "-")
+      .replaceAll(/^-|-$/g, "");
+    anchor.href = downloadUrl;
+    anchor.download = `upg-${fileFamily}-specification.txt`;
+    anchor.click();
+    URL.revokeObjectURL(downloadUrl);
+    trackAnalyticsEvent("packaging_spec_download", {
+      product_family: family || "not_selected",
+      planning_moq: moq.units ?? "pending",
+      core_brief_percent: completenessPercent,
+    });
+  }
+
+  function printSpecification() {
+    trackAnalyticsEvent("packaging_spec_print", {
+      product_family: family || "not_selected",
+      planning_moq: moq.units ?? "pending",
+      core_brief_percent: completenessPercent,
+    });
+    window.print();
   }
 
   function trackQuoteHandoff() {
@@ -330,6 +425,18 @@ export function PackagingSpecBuilder({ initialFamily }: PackagingSpecBuilderProp
               />
             </div>
 
+            <div className="space-y-2 sm:col-span-2">
+              <FieldLabel htmlFor="builder-destination">Delivery country or region</FieldLabel>
+              <input
+                id="builder-destination"
+                value={destination}
+                onChange={(event) => setDestination(event.target.value)}
+                className={inputClass}
+                placeholder="Country or region"
+                autoComplete="country-name"
+              />
+            </div>
+
             <fieldset className="sm:col-span-2">
               <legend className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
                 Finish interests — optional
@@ -375,6 +482,38 @@ export function PackagingSpecBuilder({ initialFamily }: PackagingSpecBuilderProp
             <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{moq.note}</p>
           </div>
 
+          <div className="mt-4 rounded-2xl border border-border p-5">
+            <div className="flex items-center justify-between gap-4">
+              <div className="eyebrow">Core brief completeness</div>
+              <div className="text-sm font-semibold text-foreground">
+                {completedCoreItems}/{coreBriefItems.length}
+              </div>
+            </div>
+            <div
+              className="mt-3 h-2 overflow-hidden rounded-full bg-stone"
+              role="progressbar"
+              aria-label="Core brief completeness"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={completenessPercent}
+            >
+              <div
+                className="h-full rounded-full bg-moss transition-[width] duration-300"
+                style={{ width: `${completenessPercent}%` }}
+              />
+            </div>
+            <ul className="mt-4 grid gap-2 text-xs text-muted-foreground">
+              {coreBriefItems.map((item) => (
+                <li key={item.label} className="flex items-center gap-2">
+                  <span aria-hidden="true" className={item.complete ? "text-moss" : "text-gold"}>
+                    {item.complete ? "✓" : "○"}
+                  </span>
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {plannedQuantity && moq.units ? (
             <div
               className={`mt-4 rounded-xl border px-4 py-3 text-sm leading-relaxed ${
@@ -406,6 +545,10 @@ export function PackagingSpecBuilder({ initialFamily }: PackagingSpecBuilderProp
               <dt className="text-xs uppercase tracking-[0.12em] text-muted-foreground">Finishes</dt>
               <dd className="mt-1 text-foreground">{finishes.length ? finishes.join(", ") : "Open for review"}</dd>
             </div>
+            <div className="border-t border-border pt-4">
+              <dt className="text-xs uppercase tracking-[0.12em] text-muted-foreground">Destination</dt>
+              <dd className="mt-1 text-foreground">{destination.trim() || "Not provided"}</dd>
+            </div>
           </dl>
 
           <p className="mt-7 text-xs leading-relaxed text-muted-foreground">
@@ -425,11 +568,51 @@ export function PackagingSpecBuilder({ initialFamily }: PackagingSpecBuilderProp
               onClick={copySpecification}
               className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
             >
-              {copied ? "Specification copied" : "Copy specification"}
+              {copiedSummary === summary ? "Specification copied" : "Copy specification"}
             </button>
+            <button
+              type="button"
+              onClick={copyShareLink}
+              className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
+            >
+              {copiedShareHref === shareHref ? "Share link copied" : "Copy shareable plan link"}
+            </button>
+            <p className="text-center text-xs leading-relaxed text-muted-foreground">
+              The link contains the current planning fields. Anyone with the link can read them, so do not add confidential information.
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={downloadSpecification}
+                className="rounded-full border border-border bg-surface px-4 py-3 text-sm font-semibold text-foreground hover:bg-stone"
+              >
+                Download .txt
+              </button>
+              <button
+                type="button"
+                onClick={printSpecification}
+                className="rounded-full border border-border bg-surface px-4 py-3 text-sm font-semibold text-foreground hover:bg-stone"
+              >
+                Print / Save PDF
+              </button>
+            </div>
           </div>
         </div>
       </aside>
+
+      <section className="print-spec-sheet" aria-label="Printable packaging specification">
+        <div className="border-b-2 border-moss pb-6">
+          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">UPG</div>
+          <h1 className="mt-3 text-4xl font-semibold text-foreground">Packaging specification</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Prepared with the Universal Packaging Group Spec &amp; MOQ Builder
+          </p>
+        </div>
+        <pre className="mt-8 whitespace-pre-wrap font-sans text-sm leading-7 text-foreground">{summary}</pre>
+        <div className="mt-10 border-t border-border pt-5 text-xs leading-6 text-muted-foreground">
+          universalpackaginggroup.com • quotes@universalpackaginggroup.com • +1 786 885 8825
+        </div>
+      </section>
     </div>
   );
 }
