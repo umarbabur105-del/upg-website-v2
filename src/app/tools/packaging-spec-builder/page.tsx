@@ -162,6 +162,12 @@ export default async function PackagingSpecBuilderPage({ searchParams }: PagePro
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
               This tool does not estimate price. Custom packaging pricing is confirmed after structure, dimensions, material, print, finishes, quantity, and destination are reviewed together.
             </p>
+            <Link
+              href="/tools/packaging-format-finder"
+              className="mt-6 inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+            >
+              Not sure which product family to choose? Use the Format Finder →
+            </Link>
           </div>
         </div>
       </section>

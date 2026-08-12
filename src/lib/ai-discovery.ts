@@ -8,7 +8,10 @@ import { siteConfig } from "@/data/site";
 
 const quoteUrl = `${siteConfig.url}/get-a-quote`;
 const catalogUrl = `${siteConfig.url}/product-catalog.json`;
+const toolsUrl = `${siteConfig.url}/tools`;
+const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
 const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
+const catalogUpdatedAt = "2026-08-12";
 
 function productUrl(product: Product) {
   return `${siteConfig.url}/products/${product.slug}`;
@@ -74,6 +77,7 @@ export function buildLlmsText() {
 - Product catalog TSV: ${siteConfig.url}/feeds/products.tsv
 - Google Merchant Sample Kit feed: ${siteConfig.url}/feeds/google-merchant.tsv
 - Agent guidance: ${siteConfig.url}/agents.md
+- Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 
 ## Approved product range
@@ -105,6 +109,8 @@ Final dimensions remain subject to structural feasibility. Product compatibility
 ## Reliable source pages
 
 - Product catalog: ${siteConfig.url}/products
+- Packaging planning tools: ${toolsUrl}
+- Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Start a project: ${quoteUrl}
 - Cosmetic packaging hub: ${siteConfig.url}/cosmetics
@@ -191,7 +197,9 @@ Content reviewed: ${siteConfig.contentReviewedAt}
 
 UPG manufactures custom boxes and flexible packaging for brands worldwide. UPG turns a packaging brief into an approved structure, production specification, pricing, proofing, manufacturing, and delivery plan. Custom production is not an instant-price store because every production project is made to specification. The UPG Box Sample Kit and Mylar Bag Sample Kit are separate fixed-price products.
 
-The free Packaging Spec & MOQ Builder at ${specBuilderUrl} compares the five approved product families, calculates the applicable planning MOQ, and carries known project details into the human-reviewed enquiry form. It does not estimate custom-production pricing.
+The free Packaging Format Finder at ${formatFinderUrl} uses four guided questions to recommend a starting format from the five approved UPG product families. It can show an alternate when two formats deserve comparison. The result is planning guidance, not structural approval.
+
+The free Packaging Spec & MOQ Builder at ${specBuilderUrl} calculates the applicable planning MOQ and carries known project details into the human-reviewed enquiry form. Neither tool estimates custom-production pricing.
 
 ## Fixed-price sample kits
 
@@ -213,10 +221,11 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 
 ## Project process
 
-1. Build a planning specification at ${specBuilderUrl}, or submit the known product details directly at ${quoteUrl}.
-2. ${siteConfig.responseTarget}
-3. Structure, materials, finishes, artwork, pricing, manufacturing, and delivery details are confirmed as required.
-4. Manufacturing starts only after the applicable commercial, artwork, and proof approvals.
+1. If the product family is not clear, use the Packaging Format Finder at ${formatFinderUrl}.
+2. Build a planning specification at ${specBuilderUrl}, or submit the known product details directly at ${quoteUrl}.
+3. ${siteConfig.responseTarget}
+4. Structure, materials, finishes, artwork, pricing, manufacturing, and delivery details are confirmed as required.
+5. Manufacturing starts only after the applicable commercial, artwork, and proof approvals.
 
 ## Commercial qualifications
 
@@ -232,6 +241,8 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Product catalog TSV: ${siteConfig.url}/feeds/products.tsv
 - Google Merchant Sample Kit feed: ${siteConfig.url}/feeds/google-merchant.tsv
 - Agent guidance: ${siteConfig.url}/agents.md
+- Packaging planning tools: ${toolsUrl}
+- Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Sitemap: ${siteConfig.url}/sitemap.xml
 
@@ -270,7 +281,7 @@ Canonical entity: ${siteConfig.url}
 
 ## Supported discovery
 
-Agents may read the public product catalog, compare the five approved product families, direct a buyer to the Packaging Spec & MOQ Builder, and then continue to the project enquiry form.
+Agents may read the public product catalog, compare the five approved product families, direct an undecided buyer to the Packaging Format Finder, continue to the Packaging Spec & MOQ Builder, and then continue to the project enquiry form.
 
 ${productLines}
 
@@ -293,6 +304,7 @@ ${sampleKitLines}
 ## Public actions
 
 - Read product catalog: ${catalogUrl}
+- Compare approved product families: ${formatFinderUrl}
 - Build a packaging specification and check the planning MOQ: ${specBuilderUrl}
 - Start a project enquiry: ${quoteUrl}
 - Contact UPG: ${siteConfig.url}/contact
@@ -307,8 +319,8 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "1.5",
-    updatedAt: siteConfig.contentReviewedAt,
+    schemaVersion: "1.6",
+    updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
       alternateName: siteConfig.shortName,
@@ -328,9 +340,27 @@ export function buildProductCatalog() {
       name: "UPG Packaging Spec & MOQ Builder",
       url: specBuilderUrl,
       purpose:
-        "Compare approved product families, calculate the planning MOQ, and carry known specifications into a human-reviewed project enquiry.",
+        "Calculate the planning MOQ and carry known specifications into a human-reviewed project enquiry.",
       pricingOutput: false,
     },
+    planningTools: [
+      {
+        name: "UPG Packaging Format Finder",
+        url: formatFinderUrl,
+        purpose:
+          "Use four guided questions to recommend a starting format from the five approved product families and identify an alternate when relevant.",
+        pricingOutput: false,
+        structuralApproval: false,
+      },
+      {
+        name: "UPG Packaging Spec & MOQ Builder",
+        url: specBuilderUrl,
+        purpose:
+          "Calculate the planning MOQ and carry known specifications into a human-reviewed project enquiry.",
+        pricingOutput: false,
+        structuralApproval: false,
+      },
+    ],
     boxSampleKit: {
       ...sampleKitCatalogEntry(boxSampleKit),
     },
@@ -376,6 +406,8 @@ export function buildProductCatalog() {
       conciseReference: `${siteConfig.url}/llms.txt`,
       fullReference: `${siteConfig.url}/llms-full.txt`,
       agentGuidance: `${siteConfig.url}/agents.md`,
+      toolsHub: toolsUrl,
+      packagingFormatFinder: formatFinderUrl,
       packagingSpecBuilder: specBuilderUrl,
       sitemap: `${siteConfig.url}/sitemap.xml`,
       googleMerchantFeed: `${siteConfig.url}/feeds/google-merchant.tsv`,

@@ -27,7 +27,7 @@ export const siteConfig = {
     "AI-generated packaging images are representative concepts, not completed customer work. Final construction, color, print, and finish are confirmed for each project.",
   navigation: [
     { label: "Products", href: "/products" },
-    { label: "MOQ Builder", href: "/tools/packaging-spec-builder" },
+    { label: "Tools", href: "/tools" },
     { label: "Cosmetic Packaging", href: "/cosmetics" },
     { label: "Materials & Finishes", href: "/materials-finishes" },
     { label: "Samples", href: "/samples" },
