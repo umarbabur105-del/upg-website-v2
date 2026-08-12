@@ -85,8 +85,14 @@ export default function ProductsPage() {
             />
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
-                href="/tools/packaging-format-finder"
+                href="/packaging-styles"
                 className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
+              >
+                Browse Packaging Styles
+              </Link>
+              <Link
+                href="/tools/packaging-format-finder"
+                className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
               >
                 Find the Right Format
               </Link>

@@ -2,12 +2,14 @@ import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog-posts";
 import { cosmeticsSubcategories } from "@/data/catalog";
 import { mailerApplications } from "@/data/mailer-applications";
+import { productStyleGuides } from "@/data/product-styles";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
 import { SITE_URL } from "@/lib/seo";
 
 const CONTENT_UPDATED_AT = new Date(`${siteConfig.contentReviewedAt}T00:00:00.000Z`);
 const COSMETICS_UPDATED_AT = new Date("2026-08-13T00:00:00.000Z");
+const STYLE_LIBRARY_UPDATED_AT = new Date("2026-08-13T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -28,6 +30,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: CONTENT_UPDATED_AT,
       changeFrequency: "weekly",
       priority: 0.95,
+    },
+    {
+      url: `${SITE_URL}/packaging-styles`,
+      lastModified: STYLE_LIBRARY_UPDATED_AT,
+      changeFrequency: "weekly",
+      priority: 0.92,
     },
     {
       url: `${SITE_URL}/tools`,
@@ -158,6 +166,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  const productStyleRoutes: MetadataRoute.Sitemap = productStyleGuides.map(
+    (guide) => ({
+      url: `${SITE_URL}/packaging-styles/${guide.slug}`,
+      lastModified: new Date(`${guide.reviewedAt}T00:00:00.000Z`),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })
+  );
+
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.date),
@@ -168,6 +185,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...productRoutes,
+    ...productStyleRoutes,
     ...applicationRoutes,
     ...cosmeticsRoutes,
     ...blogRoutes,
