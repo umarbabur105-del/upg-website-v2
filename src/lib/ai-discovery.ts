@@ -3,6 +3,10 @@ import {
   type MailerApplication,
 } from "@/data/mailer-applications";
 import { cosmeticsPackagingScope } from "@/data/catalog";
+import {
+  productStyleGuides,
+  type ProductStyleGuide,
+} from "@/data/product-styles";
 import { products, type Product } from "@/data/products";
 import { boxSampleKit, sampleKits } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
@@ -10,6 +14,7 @@ import { siteConfig } from "@/data/site";
 const quoteUrl = `${siteConfig.url}/get-a-quote`;
 const catalogUrl = `${siteConfig.url}/product-catalog.json`;
 const toolsUrl = `${siteConfig.url}/tools`;
+const styleLibraryUrl = `${siteConfig.url}/packaging-styles`;
 const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
 const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
 const artworkPreflightUrl = `${siteConfig.url}/tools/packaging-artwork-preflight`;
@@ -17,6 +22,10 @@ const catalogUpdatedAt = "2026-08-13";
 
 function productUrl(product: Product) {
   return `${siteConfig.url}/products/${product.slug}`;
+}
+
+function styleUrl(guide: ProductStyleGuide) {
+  return `${styleLibraryUrl}/${guide.slug}`;
 }
 
 function applicationUrl(application: MailerApplication) {
@@ -57,6 +66,13 @@ export function buildLlmsText() {
     )
     .join("\n");
 
+  const styleLines = productStyleGuides
+    .map(
+      (guide) =>
+        `- [${guide.name}](${styleUrl(guide)}): ${guide.quickAnswer}`
+    )
+    .join("\n");
+
   const sampleKitLines = sampleKits
     .map(
       (kit) =>
@@ -82,10 +98,15 @@ export function buildLlmsText() {
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
+- Packaging Style Library: ${styleLibraryUrl}
 
 ## Approved product range
 
 ${productLines}
+
+## Available tuck box and Mylar bag styles
+
+${styleLines}
 
 ## Corrugated mailer application guides
 
@@ -114,6 +135,7 @@ Final dimensions remain subject to structural feasibility. Product compatibility
 ## Reliable source pages
 
 - Product catalog: ${siteConfig.url}/products
+- Packaging style library: ${styleLibraryUrl}
 - Packaging planning tools: ${toolsUrl}
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
@@ -171,6 +193,23 @@ Content reviewed: ${application.reviewedAt}
     )
     .join("\n");
 
+  const styleSections = productStyleGuides
+    .map(
+      (guide) => `### ${guide.name}
+
+Canonical page: ${styleUrl(guide)}
+Parent product: ${siteConfig.url}/products/${guide.parentProductSlug}
+Product family: ${guide.family}
+Search terms: ${guide.searchTerms.join("; ")}
+Quick answer: ${guide.quickAnswer}
+Selection note: ${guide.selectionNote}
+Project inputs: ${guide.projectInputs.join("; ")}
+Compliance or compatibility note: ${guide.complianceNote ?? "Final structure and specification require project review."}
+Content reviewed: ${guide.reviewedAt}
+`
+    )
+    .join("\n");
+
   const sampleKitSections = sampleKits
     .map(
       (kit) => `### ${kit.name}
@@ -220,6 +259,11 @@ Free sample requests are reviewed manually and do not guarantee shipment.
 ## Approved products
 
 ${productSections}
+## Available tuck box and Mylar bag styles
+
+These pages cover real formats inside UPG's current product range. They are visible, browseable pages with format-specific planning inputs and do not represent fixed-price Merchant products.
+
+${styleSections}
 ## Corrugated mailer application guides
 
 These guides answer distinct buyer intents while remaining within UPG's approved corrugated ear-lock mailer product range.
@@ -256,6 +300,7 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
+- Packaging Style Library: ${styleLibraryUrl}
 - Cosmetics outer-packaging hub: ${siteConfig.url}/cosmetics
 - Sitemap: ${siteConfig.url}/sitemap.xml
 
@@ -280,6 +325,13 @@ export function buildAgentsMarkdown() {
     )
     .join("\n");
 
+  const styleLines = productStyleGuides
+    .map(
+      (guide) =>
+        `- ${guide.name}: ${guide.quickAnswer} Source: ${styleUrl(guide)}`
+    )
+    .join("\n");
+
   const sampleKitLines = sampleKits
     .map(
       (kit) =>
@@ -297,6 +349,10 @@ Canonical entity: ${siteConfig.url}
 Agents may read the public product catalog, compare the five approved product families, direct an undecided buyer to the Packaging Format Finder, continue to the Packaging Spec & MOQ Builder, organize artwork preparation with the Packaging Artwork Preflight Checker, and then continue to the project enquiry form.
 
 ${productLines}
+
+## Available tuck box and Mylar bag styles
+
+${styleLines}
 
 ## Corrugated mailer application guides
 
@@ -318,6 +374,7 @@ ${sampleKitLines}
 ## Public actions
 
 - Read product catalog: ${catalogUrl}
+- Browse real packaging styles: ${styleLibraryUrl}
 - Compare approved product families: ${formatFinderUrl}
 - Build a packaging specification and check the planning MOQ: ${specBuilderUrl}
 - Check packaging artwork preparation status: ${artworkPreflightUrl}
@@ -335,7 +392,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "1.8",
+    schemaVersion: "1.9",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -415,6 +472,22 @@ export function buildProductCatalog() {
       image: `${siteConfig.url}${product.heroImage}`,
       requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent(product.family)}`,
     })),
+    productStyleGuides: productStyleGuides.map((guide) => ({
+      slug: guide.slug,
+      name: guide.name,
+      productFamily: guide.family,
+      parentProductUrl: `${siteConfig.url}/products/${guide.parentProductSlug}`,
+      summary: guide.quickAnswer,
+      searchTerms: guide.searchTerms,
+      selectionNote: guide.selectionNote,
+      projectInputs: guide.projectInputs,
+      complianceOrCompatibilityNote: guide.complianceNote ?? null,
+      contentReviewed: guide.reviewedAt,
+      url: styleUrl(guide),
+      requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent(
+        guide.family
+      )}&builder_note=${encodeURIComponent(`Packaging style: ${guide.shortName}.`)}`,
+    })),
     applicationGuides: mailerApplications.map((application) => ({
       slug: application.slug,
       name: application.title,
@@ -433,6 +506,7 @@ export function buildProductCatalog() {
       fullReference: `${siteConfig.url}/llms-full.txt`,
       agentGuidance: `${siteConfig.url}/agents.md`,
       toolsHub: toolsUrl,
+      packagingStyleLibrary: styleLibraryUrl,
       packagingFormatFinder: formatFinderUrl,
       packagingSpecBuilder: specBuilderUrl,
       packagingArtworkPreflight: artworkPreflightUrl,

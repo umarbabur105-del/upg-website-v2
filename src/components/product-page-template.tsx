@@ -5,6 +5,7 @@ import { FaqAccordion } from "@/components/faq-accordion";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { mailerApplications } from "@/data/mailer-applications";
+import { getProductStylesByParent } from "@/data/product-styles";
 import {
   getProductFaqs,
   getRelatedProducts,
@@ -18,6 +19,7 @@ interface ProductPageTemplateProps {
 export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
   const related = getRelatedProducts(product.slug);
   const productFaqs = getProductFaqs(product);
+  const styleGuides = getProductStylesByParent(product.slug);
   const applicationGuides =
     product.slug === "custom-mailer-boxes" ? mailerApplications : [];
 
@@ -216,6 +218,51 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           </div>
         </div>
       </section>
+
+      {styleGuides.length > 0 ? (
+        <section className="section-shell bg-cream">
+          <div className="container-editorial">
+            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <SectionHeading
+                eyebrow="Available styles"
+                title={`Explore real ${product.shortName.toLowerCase()} formats.`}
+                intro="Each guide covers one available format, the approved planning MOQ, the project inputs needed before pricing, and a prefilled quote path."
+              />
+              <Link
+                href="/packaging-styles"
+                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                Browse the style library <span>→</span>
+              </Link>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {styleGuides.map((guide, index) => (
+                <Link
+                  key={guide.slug}
+                  href={`/packaging-styles/${guide.slug}`}
+                  className="surface-card group flex min-h-60 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="eyebrow">{guide.category}</span>
+                    <span className="font-serif text-2xl text-gold">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="mt-6 font-serif text-2xl text-foreground">
+                    {guide.shortName}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {guide.selectionNote}
+                  </p>
+                  <span className="mt-auto pt-6 text-sm text-foreground">
+                    Review this format →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {applicationGuides.length > 0 ? (
         <section className="section-shell bg-cream">
