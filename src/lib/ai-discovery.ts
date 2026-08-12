@@ -11,7 +11,8 @@ const catalogUrl = `${siteConfig.url}/product-catalog.json`;
 const toolsUrl = `${siteConfig.url}/tools`;
 const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
 const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
-const catalogUpdatedAt = "2026-08-12";
+const artworkPreflightUrl = `${siteConfig.url}/tools/packaging-artwork-preflight`;
+const catalogUpdatedAt = "2026-08-13";
 
 function productUrl(product: Product) {
   return `${siteConfig.url}/products/${product.slug}`;
@@ -79,6 +80,7 @@ export function buildLlmsText() {
 - Agent guidance: ${siteConfig.url}/agents.md
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
+- Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 
 ## Approved product range
 
@@ -112,6 +114,7 @@ Final dimensions remain subject to structural feasibility. Product compatibility
 - Packaging planning tools: ${toolsUrl}
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
+- Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 - Start a project: ${quoteUrl}
 - Cosmetic packaging hub: ${siteConfig.url}/cosmetics
 - Materials and finishes: ${siteConfig.url}/materials-finishes
@@ -199,7 +202,9 @@ UPG manufactures custom boxes and flexible packaging for brands worldwide. UPG t
 
 The free Packaging Format Finder at ${formatFinderUrl} uses four guided questions to recommend a starting format from the five approved UPG product families. It can show an alternate when two formats deserve comparison. The result is planning guidance, not structural approval.
 
-The free Packaging Spec & MOQ Builder at ${specBuilderUrl} calculates the applicable planning MOQ and carries known project details into the human-reviewed enquiry form. Neither tool estimates custom-production pricing.
+The free Packaging Spec & MOQ Builder at ${specBuilderUrl} calculates the applicable planning MOQ and carries known project details into the human-reviewed enquiry form. These planning tools do not estimate custom-production pricing.
+
+The free Packaging Artwork Preflight Checker at ${artworkPreflightUrl} organizes eight preparation checks covering the structure and dieline, editable source, placed images, fonts, color intent, special finishes, copy and variable elements, and version approval. It does not upload or inspect files and does not approve artwork for production.
 
 ## Fixed-price sample kits
 
@@ -223,9 +228,10 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 
 1. If the product family is not clear, use the Packaging Format Finder at ${formatFinderUrl}.
 2. Build a planning specification at ${specBuilderUrl}, or submit the known product details directly at ${quoteUrl}.
-3. ${siteConfig.responseTarget}
-4. Structure, materials, finishes, artwork, pricing, manufacturing, and delivery details are confirmed as required.
-5. Manufacturing starts only after the applicable commercial, artwork, and proof approvals.
+3. Organize artwork readiness at ${artworkPreflightUrl} when artwork exists.
+4. ${siteConfig.responseTarget}
+5. Structure, materials, finishes, artwork, pricing, manufacturing, and delivery details are confirmed as required.
+6. Manufacturing starts only after the applicable commercial, artwork, and proof approvals.
 
 ## Commercial qualifications
 
@@ -244,6 +250,7 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Packaging planning tools: ${toolsUrl}
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
+- Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 - Sitemap: ${siteConfig.url}/sitemap.xml
 
 ## Image policy
@@ -281,7 +288,7 @@ Canonical entity: ${siteConfig.url}
 
 ## Supported discovery
 
-Agents may read the public product catalog, compare the five approved product families, direct an undecided buyer to the Packaging Format Finder, continue to the Packaging Spec & MOQ Builder, and then continue to the project enquiry form.
+Agents may read the public product catalog, compare the five approved product families, direct an undecided buyer to the Packaging Format Finder, continue to the Packaging Spec & MOQ Builder, organize artwork preparation with the Packaging Artwork Preflight Checker, and then continue to the project enquiry form.
 
 ${productLines}
 
@@ -306,6 +313,7 @@ ${sampleKitLines}
 - Read product catalog: ${catalogUrl}
 - Compare approved product families: ${formatFinderUrl}
 - Build a packaging specification and check the planning MOQ: ${specBuilderUrl}
+- Check packaging artwork preparation status: ${artworkPreflightUrl}
 - Start a project enquiry: ${quoteUrl}
 - Contact UPG: ${siteConfig.url}/contact
 - Compare and buy sample kits or request a sample review: ${siteConfig.url}/samples
@@ -319,7 +327,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "1.6",
+    schemaVersion: "1.7",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -359,6 +367,15 @@ export function buildProductCatalog() {
           "Calculate the planning MOQ and carry known specifications into a human-reviewed project enquiry.",
         pricingOutput: false,
         structuralApproval: false,
+      },
+      {
+        name: "UPG Packaging Artwork Preflight Checker",
+        url: artworkPreflightUrl,
+        purpose:
+          "Organize eight packaging artwork preparation checks and carry confirmed and open items into a human-reviewed project enquiry.",
+        fileUpload: false,
+        automatedArtworkApproval: false,
+        productionApproval: false,
       },
     ],
     boxSampleKit: {
@@ -409,6 +426,7 @@ export function buildProductCatalog() {
       toolsHub: toolsUrl,
       packagingFormatFinder: formatFinderUrl,
       packagingSpecBuilder: specBuilderUrl,
+      packagingArtworkPreflight: artworkPreflightUrl,
       sitemap: `${siteConfig.url}/sitemap.xml`,
       googleMerchantFeed: `${siteConfig.url}/feeds/google-merchant.tsv`,
     },

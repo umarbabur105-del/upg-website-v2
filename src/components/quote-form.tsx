@@ -61,6 +61,7 @@ export interface QuoteFormPrefill {
   dimensions?: string;
   materialPreference?: string;
   finishPreference?: string;
+  artworkStatus?: string;
   notes?: string;
 }
 
@@ -124,13 +125,15 @@ export function QuoteForm({ prefill }: QuoteFormProps) {
     dimensions: prefill?.dimensions ?? "",
     material_preference: prefill?.materialPreference ?? "",
     finish_preference: prefill?.finishPreference ?? "",
+    artwork_status: prefill?.artworkStatus ?? "",
     notes: prefill?.notes ?? "",
   });
   const [showAdvanced, setShowAdvanced] = useState(
     Boolean(
       prefill?.dimensions ||
         prefill?.materialPreference ||
-        prefill?.finishPreference
+        prefill?.finishPreference ||
+        prefill?.artworkStatus
     )
   );
   const [submitting, setSubmitting] = useState(false);
@@ -549,8 +552,10 @@ export function QuoteForm({ prefill }: QuoteFormProps) {
                   className={inputClass}
                 >
                   <option value="">Choose or skip</option>
-                  <option value="Ready to upload">Ready to upload</option>
+                  <option value="Ready for UPG review">Ready for UPG review</option>
                   <option value="Needs dieline">Need a dieline</option>
+                  <option value="Needs artwork preparation">Needs artwork preparation</option>
+                  <option value="Artwork in progress">Artwork in progress</option>
                   <option value="Needs design help">Need design help</option>
                   <option value="Still in concept stage">Still in concept stage</option>
                 </select>

@@ -6,13 +6,14 @@ import { SITE_URL, createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Free Custom Packaging Planning Tools",
   description:
-    "Use UPG's free Packaging Format Finder and Packaging Spec & MOQ Builder to choose a starting format, check the planning minimum, and prepare a project brief.",
+    "Use UPG's free Format Finder, Spec & MOQ Builder, and Artwork Preflight Checker to choose a format, prepare the project, and organize artwork readiness.",
   path: "/tools",
   keywords: [
     "custom packaging tools",
     "packaging format finder",
     "packaging MOQ calculator",
     "packaging specification tool",
+    "packaging artwork preflight checker",
   ],
 });
 
@@ -43,6 +44,19 @@ const tools = [
       "Quote-form specification handoff",
     ],
   },
+  {
+    number: "03",
+    title: "Packaging Artwork Preflight Checker",
+    description:
+      "Work through eight preparation checks for the dieline, editable source, images, fonts, color intent, special finishes, copy, and version control before UPG review.",
+    href: "/tools/packaging-artwork-preflight",
+    cta: "Check artwork readiness",
+    details: [
+      "Foundation and production-detail checks",
+      "Open-item preparation summary",
+      "No artwork upload or automated approval",
+    ],
+  },
 ];
 
 const structuredData = {
@@ -54,7 +68,7 @@ const structuredData = {
       name: "UPG Custom Packaging Planning Tools",
       url: `${SITE_URL}/tools`,
       description:
-        "Free planning tools for choosing a custom packaging format, checking the applicable MOQ, and preparing a project specification.",
+        "Free planning tools for choosing a custom packaging format, checking the applicable MOQ, preparing a project specification, and organizing artwork readiness.",
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@id": `${SITE_URL}/#organization` },
     },
@@ -109,7 +123,7 @@ export default function ToolsPage() {
       </section>
 
       <section className="pb-20 md:pb-28">
-        <div className="container-editorial grid gap-6 lg:grid-cols-2">
+        <div className="container-editorial grid gap-6 lg:grid-cols-3">
           {tools.map((tool) => (
             <article key={tool.href} className="surface-card flex flex-col p-7 md:p-10">
               <div className="font-serif text-5xl text-gold">{tool.number}</div>
