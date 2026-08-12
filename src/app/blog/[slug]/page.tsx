@@ -226,6 +226,26 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="mx-auto max-w-3xl">
           <div className="prose-custom">{renderContent(post.content)}</div>
 
+          {post.slug === "how-to-prepare-artwork-for-custom-packaging" ? (
+            <div className="mt-10 border border-charcoal/10 bg-cream p-6 md:p-8">
+              <div className="text-xs font-semibold uppercase tracking-widest text-gold">
+                Free preparation tool
+              </div>
+              <h2 className="mt-3 font-serif text-2xl font-semibold text-charcoal">
+                Turn the guide into an artwork readiness summary.
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-charcoal/70">
+                Work through eight preparation checks and carry confirmed and open items into your UPG project enquiry. No artwork file is uploaded or automatically approved.
+              </p>
+              <Link
+                href="/tools/packaging-artwork-preflight"
+                className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
+              >
+                Check artwork readiness
+              </Link>
+            </div>
+          ) : null}
+
           {/* Back link */}
           <div className="mt-16 border-t border-charcoal/10 pt-8">
             <Link

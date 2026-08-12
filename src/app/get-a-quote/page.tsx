@@ -33,7 +33,8 @@ export default async function GetAQuotePage({ searchParams }: PageProps) {
     dimensions: readParam("dimensions"),
     materialPreference: readParam("material"),
     finishPreference: readParam("finishes"),
-    notes: readParam("builder_note"),
+    artworkStatus: readParam("artwork"),
+    notes: readParam("preflight_note") ?? readParam("builder_note"),
   };
 
   return (
