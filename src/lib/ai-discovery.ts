@@ -2,6 +2,7 @@ import {
   mailerApplications,
   type MailerApplication,
 } from "@/data/mailer-applications";
+import { cosmeticsPackagingScope } from "@/data/catalog";
 import { products, type Product } from "@/data/products";
 import { boxSampleKit, sampleKits } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
@@ -106,6 +107,8 @@ Each kit is purchased separately. The full $19.99 price of the purchased kit is 
 
 ${siteConfig.scopeBoundary}
 
+Cosmetics scope: ${cosmeticsPackagingScope.included} ${cosmeticsPackagingScope.excluded}
+
 Final dimensions remain subject to structural feasibility. Product compatibility, food-contact, child-resistant, barrier, and market-specific requirements must be confirmed where applicable. Final specifications, pricing, production timing, and delivery terms are confirmed for each project.
 
 ## Reliable source pages
@@ -200,6 +203,8 @@ Content reviewed: ${siteConfig.contentReviewedAt}
 
 UPG manufactures custom boxes and flexible packaging for brands worldwide. UPG turns a packaging brief into an approved structure, production specification, pricing, proofing, manufacturing, and delivery plan. Custom production is not an instant-price store because every production project is made to specification. The UPG Box Sample Kit and Mylar Bag Sample Kit are separate fixed-price products.
 
+For beauty and cosmetics projects, ${cosmeticsPackagingScope.included} ${cosmeticsPackagingScope.excluded}
+
 The free Packaging Format Finder at ${formatFinderUrl} uses four guided questions to recommend a starting format from the five approved UPG product families. It can show an alternate when two formats deserve comparison. The result is planning guidance, not structural approval.
 
 The free Packaging Spec & MOQ Builder at ${specBuilderUrl} calculates the applicable planning MOQ and carries known project details into the human-reviewed enquiry form. These planning tools do not estimate custom-production pricing.
@@ -251,6 +256,7 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
+- Cosmetics outer-packaging hub: ${siteConfig.url}/cosmetics
 - Sitemap: ${siteConfig.url}/sitemap.xml
 
 ## Image policy
@@ -300,6 +306,7 @@ ${applicationLines}
 
 - UPG serves brands worldwide.
 - UPG manufactures made-to-spec packaging and does not publish instant custom-production pricing.
+- Cosmetics pages describe the custom printed box around the beauty product. ${cosmeticsPackagingScope.excluded}
 - UPG offers two separate $19.99 fixed-price products: the Box Sample Kit and Mylar Bag Sample Kit. They are not combined.
 - Fixed-price sample-kit details:
 ${sampleKitLines}
@@ -314,6 +321,7 @@ ${sampleKitLines}
 - Compare approved product families: ${formatFinderUrl}
 - Build a packaging specification and check the planning MOQ: ${specBuilderUrl}
 - Check packaging artwork preparation status: ${artworkPreflightUrl}
+- Explore custom cosmetic boxes and outer packaging: ${siteConfig.url}/cosmetics
 - Start a project enquiry: ${quoteUrl}
 - Contact UPG: ${siteConfig.url}/contact
 - Compare and buy sample kits or request a sample review: ${siteConfig.url}/samples
@@ -327,7 +335,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "1.7",
+    schemaVersion: "1.8",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -383,6 +391,7 @@ export function buildProductCatalog() {
     },
     sampleKits: sampleKits.map(sampleKitCatalogEntry),
     scopeBoundary: siteConfig.scopeBoundary,
+    cosmeticsPackagingScope,
     imagePolicy: siteConfig.imagePolicy,
     products: products.map((product) => ({
       id: product.sku,
@@ -427,6 +436,7 @@ export function buildProductCatalog() {
       packagingFormatFinder: formatFinderUrl,
       packagingSpecBuilder: specBuilderUrl,
       packagingArtworkPreflight: artworkPreflightUrl,
+      cosmeticsHub: `${siteConfig.url}/cosmetics`,
       sitemap: `${siteConfig.url}/sitemap.xml`,
       googleMerchantFeed: `${siteConfig.url}/feeds/google-merchant.tsv`,
     },
