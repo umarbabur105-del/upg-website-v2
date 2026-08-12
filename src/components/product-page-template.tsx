@@ -54,10 +54,10 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                   {product.quoteCta}
                 </Link>
                 <Link
-                  href="/products"
+                  href={`/tools/packaging-spec-builder?product=${encodeURIComponent(product.family)}`}
                   className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
                 >
-                  View all products
+                  Check MOQ &amp; Build a Spec
                 </Link>
               </div>
             </div>

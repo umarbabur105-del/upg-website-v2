@@ -45,6 +45,12 @@ export default function HomePage() {
                 >
                   View Products
                 </Link>
+                <Link
+                  href="/tools/packaging-spec-builder"
+                  className="rounded-full border border-border bg-cream px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
+                >
+                  Check MOQ &amp; Build a Spec
+                </Link>
               </div>
               {siteConfig.whatsappUrl ? (
                 <a

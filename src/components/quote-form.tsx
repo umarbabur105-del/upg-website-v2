@@ -3,73 +3,13 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { siteConfig } from "@/data/site";
+import {
+  finishOptions,
+  materialOptions,
+  productStyles,
+} from "@/data/packaging-spec";
 import { trackGenerateLead } from "@/lib/analytics";
 import { getLeadAttribution } from "@/lib/lead-attribution";
-
-const productStyles: Record<string, string[]> = {
-  "Tuck Boxes": [
-    "Straight Tuck End",
-    "Reverse Tuck End",
-    "Auto-Lock Box",
-    "Interlock Box",
-    "Seal-End Box",
-    "Not sure — recommend",
-  ],
-  "Mailer Boxes": [
-    "Ear-Lock Mailer Box",
-    "PR / Presentation Mailer",
-    "Subscription Mailer",
-  ],
-  "Magnetic Boxes": ["Standard Magnetic Box", "Not sure — recommend"],
-  "Collapsible Magnetic Boxes": [
-    "Collapsible / Flat-Pack Magnetic Box",
-    "Not sure — recommend",
-  ],
-  "Mylar Bags": [
-    "Three-Side Seal Bag",
-    "Flat-Bottom Bag",
-    "Stand-Up Pouch",
-    "Spout Bag",
-    "Child-Resistant Bag",
-    "Coffee Bag",
-    "Rollstock Film",
-    "Not sure — recommend",
-  ],
-  "Not sure yet": ["Recommend a structure for me"],
-};
-
-const materialOptions: Record<string, string[]> = {
-  "Tuck Boxes": [
-    "SBS C1S",
-    "SBS C2S",
-    "Brown kraft",
-    "White kraft",
-    "Black kraft",
-    "CCNB",
-    "Chipboard",
-    "Corrugated",
-    "Not sure — recommend",
-  ],
-  "Mailer Boxes": ["Corrugated", "Not sure — recommend"],
-  "Magnetic Boxes": ["Not sure — recommend"],
-  "Collapsible Magnetic Boxes": ["Not sure — recommend"],
-  "Mylar Bags": [
-    "Flexible film selected after product review",
-    "Not sure — recommend",
-  ],
-  "Not sure yet": ["Not sure — recommend"],
-};
-
-const finishOptions = [
-  "Soft-touch matte",
-  "Foil stamping",
-  "Embossing / Debossing",
-  "Spot UV",
-  "Gloss",
-  "Matte",
-  "Window",
-  "Not sure — recommend",
-];
 
 const excludedMailerStyle = "Standard Shipping / Master Carton (not supplied)";
 
@@ -113,8 +53,19 @@ const initialState: FormState = {
   notes: "",
 };
 
+export interface QuoteFormPrefill {
+  productFamily?: string;
+  productStyle?: string;
+  quantity?: string;
+  intendedEndUse?: string;
+  dimensions?: string;
+  materialPreference?: string;
+  finishPreference?: string;
+  notes?: string;
+}
+
 interface QuoteFormProps {
-  preselectedFamily?: string;
+  prefill?: QuoteFormPrefill;
 }
 
 function Field({
@@ -147,23 +98,52 @@ const inputClass =
 const textareaClass =
   "w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none focus:border-moss";
 
-export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
+export function QuoteForm({ prefill }: QuoteFormProps) {
   const hasWhatsApp = Boolean(siteConfig.whatsappUrl);
+  const validPrefillFamily =
+    prefill?.productFamily && prefill.productFamily in productStyles
+      ? prefill.productFamily
+      : "";
+  const validPrefillStyle =
+    validPrefillFamily &&
+    prefill?.productStyle &&
+    productStyles[validPrefillFamily as keyof typeof productStyles].includes(
+      prefill.productStyle
+    )
+      ? prefill.productStyle
+      : "";
   const [submissionId] = useState(() => crypto.randomUUID());
   const [formStartedAt] = useState(() => Date.now());
   const [faxNumber, setFaxNumber] = useState("");
   const [form, setForm] = useState<FormState>({
     ...initialState,
-    product_family:
-      preselectedFamily && productStyles[preselectedFamily] ? preselectedFamily : "",
+    product_family: validPrefillFamily,
+    product_style: validPrefillStyle,
+    quantity: prefill?.quantity ?? "",
+    intended_end_use: prefill?.intendedEndUse ?? "",
+    dimensions: prefill?.dimensions ?? "",
+    material_preference: prefill?.materialPreference ?? "",
+    finish_preference: prefill?.finishPreference ?? "",
+    notes: prefill?.notes ?? "",
   });
-  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(
+    Boolean(
+      prefill?.dimensions ||
+        prefill?.materialPreference ||
+        prefill?.finishPreference
+    )
+  );
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  const availableStyles = productStyles[form.product_family] ?? [];
-  const availableMaterials = materialOptions[form.product_family] ?? [];
+  const availableStyles =
+    productStyles[form.product_family as keyof typeof productStyles] ?? [];
+  const availableMaterials =
+    materialOptions[form.product_family as keyof typeof materialOptions] ?? [];
+  const hasCustomPrefilledFinish =
+    Boolean(form.finish_preference) &&
+    !finishOptions.some((finish) => finish === form.finish_preference);
   const isExcludedMailer =
     form.product_family === "Mailer Boxes" && form.product_style === excludedMailerStyle;
 
@@ -547,6 +527,11 @@ export function QuoteForm({ preselectedFamily }: QuoteFormProps) {
                   className={inputClass}
                 >
                   <option value="">Choose or skip</option>
+                  {hasCustomPrefilledFinish ? (
+                    <option value={form.finish_preference}>
+                      {form.finish_preference}
+                    </option>
+                  ) : null}
                   {finishOptions.map((finish) => (
                     <option key={finish} value={finish}>
                       {finish}
