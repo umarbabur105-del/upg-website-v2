@@ -5,6 +5,7 @@ import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import {
+  cosmeticsPackagingScope,
   cosmeticsSubcategories,
   getCosmeticsSubcategoryBySlug,
 } from "@/data/catalog";
@@ -27,16 +28,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!subcategory) return {};
 
-  const title = `Custom ${subcategory.title}`;
-  const description = subcategory.heroDescription;
+  const title = `Custom ${subcategory.title} | Printed Outer Packaging`;
+  const description = `${subcategory.heroDescription} UPG manufactures the custom printed box, not cosmetic containers, formulas, filling, or fulfillment.`;
   return createPageMetadata({
     title,
     description,
     path: `/cosmetics/${slug}`,
     keywords: [
-      subcategory.title,
-      `${subcategory.title.toLowerCase()} manufacturer`,
-      `${subcategory.title.toLowerCase()} custom packaging`,
+      `custom ${subcategory.title.toLowerCase()}`,
+      `printed ${subcategory.title.toLowerCase()}`,
+      `${subcategory.title.toLowerCase()} outer packaging`,
     ],
   });
 }
@@ -57,14 +58,18 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
     .filter((item) => item.product);
 
   const pageUrl = `${SITE_URL}/cosmetics/${slug}`;
+  const quoteHref = `/get-a-quote?product=${encodeURIComponent(
+    subcategory.quoteFamily
+  )}&builder_note=${encodeURIComponent(`Cosmetics project: ${subcategory.title}.`)}`;
   const pageSchema = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Service",
         "@id": `${pageUrl}#service`,
-        name: `Custom ${subcategory.title}`,
-        description: subcategory.heroDescription,
+        name: `Custom printed ${subcategory.title}`,
+        serviceType: "Custom printed cosmetic boxes and outer packaging",
+        description: `${subcategory.heroDescription} ${cosmeticsPackagingScope.excluded}`,
         url: pageUrl,
         provider: { "@id": `${SITE_URL}/#organization` },
         areaServed: "Worldwide",
@@ -104,14 +109,14 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
       <section className="bg-background">
         <div className="container-editorial pt-16 pb-20 md:pt-24 md:pb-28">
           <div className="max-w-4xl">
-            <div className="eyebrow mb-5">Cosmetics subcategory</div>
+            <div className="eyebrow mb-5">Custom printed outer packaging</div>
             <h1 className="display-1 text-balance">{subcategory.heroTitle}</h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
               {subcategory.heroDescription}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
-                href="/get-a-quote"
+                href={quoteHref}
                 className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
               >
                 Start Your Project
@@ -127,12 +132,32 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
         </div>
       </section>
 
+      <section className="border-y border-border bg-cream">
+        <div className="container-editorial grid gap-6 py-8 md:grid-cols-[1fr_auto] md:items-center md:py-10">
+          <div className="max-w-4xl">
+            <div className="eyebrow mb-3">Product boundary</div>
+            <h2 className="font-serif text-2xl text-foreground">
+              UPG manufactures the box—not the cosmetic component inside it.
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {cosmeticsPackagingScope.included} {cosmeticsPackagingScope.excluded}
+            </p>
+          </div>
+          <Link
+            href="/tools/packaging-format-finder"
+            className="inline-flex justify-self-start border-b border-foreground/20 pb-0.5 text-sm text-foreground md:justify-self-end"
+          >
+            Compare UPG formats →
+          </Link>
+        </div>
+      </section>
+
       <section className="section-shell">
         <div className="container-editorial grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <SectionHeading
-              eyebrow="Recommended structures"
-              title={`Recommended packaging for ${subcategory.title.toLowerCase()}.`}
+              eyebrow="Recommended outer structures"
+              title={`Recommended box formats for ${subcategory.title.toLowerCase()}.`}
               intro={subcategory.intro}
             />
           </div>
@@ -202,7 +227,7 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
           <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="Common applications"
-              title="Common product applications."
+              title="Products these boxes can be developed around."
             />
           </div>
           <div className="grid gap-4 lg:col-span-8 sm:grid-cols-2">
@@ -259,8 +284,9 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
       ) : null}
 
       <QuoteCta
-        title={`Ready to create ${subcategory.title.toLowerCase()}?`}
-        intro="Tell us the SKU, quantity, and finish direction. We will help define the structure, specification, pricing, and production details."
+        title={`Ready to create custom ${subcategory.title.toLowerCase()}?`}
+        intro="Tell us the finished product dimensions, quantity, and finish direction. UPG will help define the outer-box structure, specification, pricing, and production details."
+        href={quoteHref}
       />
     </>
   );

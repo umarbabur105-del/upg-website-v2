@@ -5,12 +5,14 @@ interface QuoteCtaProps {
   title?: string;
   intro?: string;
   variant?: "moss" | "cream";
+  href?: string;
 }
 
 export function QuoteCta({
   title = "Tell us about your packaging project.",
   intro = "Share the product, quantity, and destination. We will help define the structure, specification, pricing, and manufacturing plan.",
   variant = "moss",
+  href = siteConfig.cta.href,
 }: QuoteCtaProps) {
   const hasWhatsApp = Boolean(siteConfig.whatsappUrl);
   const sectionClass =
@@ -30,7 +32,7 @@ export function QuoteCta({
           <p className={`mt-5 text-lg leading-relaxed ${introClass}`}>{intro}</p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              href={siteConfig.cta.href}
+              href={href}
               className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-foreground hover:opacity-90"
             >
               {siteConfig.cta.label}

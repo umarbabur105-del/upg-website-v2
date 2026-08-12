@@ -7,6 +7,7 @@ import { siteConfig } from "@/data/site";
 import { SITE_URL } from "@/lib/seo";
 
 const CONTENT_UPDATED_AT = new Date(`${siteConfig.contentReviewedAt}T00:00:00.000Z`);
+const COSMETICS_UPDATED_AT = new Date("2026-08-13T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -54,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/cosmetics`,
-      lastModified: CONTENT_UPDATED_AT,
+      lastModified: COSMETICS_UPDATED_AT,
       changeFrequency: "weekly",
       priority: 0.95,
     },
@@ -142,7 +143,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const cosmeticsRoutes: MetadataRoute.Sitemap = cosmeticsSubcategories.map(
     (subcategory) => ({
       url: `${SITE_URL}/cosmetics/${subcategory.slug}`,
-      lastModified: CONTENT_UPDATED_AT,
+      lastModified: COSMETICS_UPDATED_AT,
       changeFrequency: "monthly" as const,
       priority: 0.82,
     })

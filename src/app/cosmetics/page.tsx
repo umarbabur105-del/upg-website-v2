@@ -5,6 +5,7 @@ import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import {
+  cosmeticsPackagingScope,
   cosmeticsSubcategories,
   materialsHighlights,
   sampleHighlights,
@@ -13,14 +14,15 @@ import { products } from "@/data/products";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Custom Cosmetic Packaging for Beauty Brands",
+  title: "Custom Cosmetic Boxes & Outer Packaging for Beauty Brands",
   description:
-    "Custom cosmetic packaging manufactured for skincare, serum, lipstick, perfume, PR kits, and subscription launches with worldwide delivery.",
+    "Custom printed cosmetic boxes, outer cartons, magnetic boxes, and corrugated ear-lock mailers for beauty brands worldwide. Containers, filling, and fulfillment are not supplied.",
   path: "/cosmetics",
   keywords: [
-    "cosmetic packaging boxes",
-    "skincare packaging boxes",
-    "beauty product packaging",
+    "custom cosmetic boxes",
+    "printed cosmetic cartons",
+    "skincare boxes",
+    "beauty outer packaging",
     "custom PR boxes",
   ],
 });
@@ -29,8 +31,8 @@ const cosmeticsServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": `${SITE_URL}/cosmetics#service`,
-  name: "Custom cosmetic packaging manufacturing",
-  serviceType: "Custom cosmetic packaging",
+  name: "Custom cosmetic boxes and outer packaging manufacturing",
+  serviceType: "Custom printed cosmetic boxes and secondary packaging",
   provider: { "@id": `${SITE_URL}/#organization` },
   areaServed: { "@type": "Place", name: "Worldwide" },
   audience: {
@@ -38,27 +40,27 @@ const cosmeticsServiceSchema = {
     audienceType: "Beauty, skincare, cosmetics, fragrance, and personal-care brands",
   },
   description:
-    "Custom manufacturing, proofing, and worldwide delivery for cosmetic tuck boxes, magnetic boxes, corrugated mailers, PR kits, and inserts.",
+    `${cosmeticsPackagingScope.included} ${cosmeticsPackagingScope.excluded}`,
 };
 
 const productTypeRecs = [
   {
-    type: "Skincare bottles & jars",
+    type: "Outer boxes for skincare bottles & jars",
     structure: "Reverse tuck end box",
     finish: "Soft-touch + foil or deboss",
   },
   {
-    type: "Serums & droppers",
+    type: "Outer boxes for serums & droppers",
     structure: "Tall tuck box",
     finish: "Foil stamp + insert support",
   },
   {
-    type: "Lipstick & lip products",
+    type: "Outer boxes for lipstick & lip products",
     structure: "Slim carton or premium set",
     finish: "Spot UV + foil",
   },
   {
-    type: "Perfume bottles",
+    type: "Outer boxes for perfume bottles",
     structure: "Magnetic box",
     finish: "Wrap stock + emboss or foil",
   },
@@ -84,15 +86,16 @@ export default function CosmeticsPage() {
         <div className="container-editorial pt-12 pb-14 md:pt-16 md:pb-18">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
-              <div className="eyebrow mb-5">Custom cosmetic packaging</div>
+              <div className="eyebrow mb-5">Custom printed outer packaging</div>
               <h1 className="display-1 text-balance">
-                Cosmetic packaging built around the product inside.
+                Custom cosmetic boxes built around the product inside.
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Create tuck boxes, magnetic presentation boxes, corrugated mailers, PR
-                kits, and inserts for skincare, serum, lipstick, and fragrance
-                launches. Every project is developed around the product, quantity,
-                finish, intended use, and delivery destination.
+                UPG manufactures tuck boxes, magnetic presentation boxes,
+                collapsible magnetic boxes, corrugated ear-lock mailers, PR kits,
+                and inserts for skincare, serum, lipstick, and fragrance launches.
+                Every box is developed around the customer&apos;s finished beauty
+                product, quantity, finish, intended use, and delivery destination.
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
                 <Link
@@ -125,12 +128,46 @@ export default function CosmeticsPage() {
         </div>
       </section>
 
+      <section className="border-y border-border bg-cream">
+        <div className="container-editorial grid gap-8 py-10 md:grid-cols-2 md:py-12">
+          <div>
+            <div className="eyebrow mb-3">What UPG manufactures</div>
+            <h2 className="font-serif text-2xl text-foreground">
+              The custom printed box around your beauty product.
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {cosmeticsPackagingScope.included}
+            </p>
+          </div>
+          <div>
+            <div className="eyebrow mb-3">Outside this offer</div>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {cosmeticsPackagingScope.excluded}
+            </p>
+            <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+              <Link
+                href="/products"
+                className="border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                View approved product families →
+              </Link>
+              <Link
+                href="/tools/packaging-format-finder"
+                className="border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                Find a packaging format →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="pt-10 pb-16 md:pt-14 md:pb-20">
         <div className="container-editorial">
           <SectionHeading
-            eyebrow="By product type"
-            title="Packaging by beauty product type."
-            intro="Each subcategory outlines packaging structures, finishes, and insert options that can be evaluated for that product family."
+            eyebrow="Outer packaging by product type"
+            title="Choose the box that surrounds the beauty product."
+            intro="Each subcategory maps a beauty product to UPG's relevant tuck, magnetic, collapsible magnetic, or ear-lock mailer formats."
           />
           <div className="mt-12 grid auto-rows-fr gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {cosmeticsSubcategories.map((subcategory) => (
@@ -157,16 +194,17 @@ export default function CosmeticsPage() {
                   Not sure which cosmetic format is right?
                 </h3>
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                  Start with your SKU, quantity, and packaging goal. We can help
-                  you choose the right structure before the spec is fully locked.
+                  Start with the finished product dimensions, quantity, and
+                  presentation goal. The Format Finder can identify the closest UPG
+                  box family before the specification is locked.
                 </p>
               </div>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/get-a-quote"
+                  href="/tools/packaging-format-finder"
                   className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
                 >
-                  Start Your Project
+                  Use the Format Finder
                 </Link>
                 <Link
                   href="/products"
@@ -270,8 +308,8 @@ export default function CosmeticsPage() {
       </section>
 
       <QuoteCta
-        title="Create custom packaging for your cosmetics line."
-        intro="Tell us about the SKU, quantity, structure, and finish direction. We will help define the specification, pricing, and production details."
+        title="Create the custom printed boxes for your cosmetics line."
+        intro="Tell us about the finished beauty product, quantity, box structure, and finish direction. UPG will help define the outer-packaging specification, pricing, and production details."
       />
     </>
   );

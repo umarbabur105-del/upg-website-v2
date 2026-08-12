@@ -24,6 +24,11 @@ export interface SampleHighlight {
 export interface CosmeticSubcategory {
   slug: string;
   title: string;
+  quoteFamily:
+    | "Tuck Boxes"
+    | "Mailer Boxes"
+    | "Magnetic Boxes"
+    | "Collapsible Magnetic Boxes";
   intro: string;
   heroTitle: string;
   heroDescription: string;
@@ -37,6 +42,13 @@ export interface CosmeticSubcategory {
   artworkNote: string;
 }
 
+export const cosmeticsPackagingScope = {
+  included:
+    "UPG manufactures the custom printed outer packaging around a beauty product: tuck boxes, magnetic boxes, collapsible magnetic boxes, corrugated ear-lock mailers, and inserts.",
+  excluded:
+    "UPG does not supply cosmetic bottles, jars, tubes, lipstick mechanisms, applicators, formulas, product filling, or campaign fulfillment.",
+} as const;
+
 export const trustPoints: TrustPoint[] = [
   { label: "MOQs vary by product & size" },
   { label: "Worldwide production & delivery" },
@@ -49,22 +61,22 @@ export const cosmeticsSolutions: CosmeticSolution[] = [
   {
     title: "Skincare boxes",
     href: "/cosmetics/skincare-boxes",
-    note: "Cleansers, creams, masks, and treatment lines",
+    note: "Outer cartons and presentation boxes for skincare products",
   },
   {
     title: "Serum boxes",
     href: "/cosmetics/serum-boxes",
-    note: "Dropper bottles and premium treatment formats",
+    note: "Outer boxes for dropper bottles and treatment formats",
   },
   {
     title: "Cream & lotion boxes",
     href: "/cosmetics/cream-boxes",
-    note: "Cartons and sets for jars, pumps, and tubs",
+    note: "Outer cartons and sets developed around jars, pumps, and tubs",
   },
   {
-    title: "Lipstick & lip packaging",
+    title: "Lipstick boxes",
     href: "/cosmetics/lipstick-boxes",
-    note: "Slim cartons, sets, and shelf-facing details",
+    note: "Slim outer cartons, presentation sets, and shelf-facing details",
   },
   {
     title: "Perfume boxes",
@@ -165,7 +177,7 @@ export const industries = [
     slug: "cosmetic-packaging",
     name: "Cosmetic Packaging",
     description:
-      "Cartons, rigid boxes, PR kits, and premium finishes for skincare, serum, lipstick, and perfume brands.",
+      "Printed outer cartons, rigid boxes, and PR kits for skincare, serum, lipstick, and perfume brands.",
   },
   {
     slug: "ecommerce-retail-packaging",
@@ -191,9 +203,10 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "skincare-boxes",
     title: "Skincare Boxes",
-    heroTitle: "Skincare packaging for clear retail presentation and branded unboxing.",
+    quoteFamily: "Tuck Boxes",
+    heroTitle: "Custom skincare boxes for retail presentation and branded unboxing.",
     heroDescription:
-      "Refined cartons and premium rigid presentations for cleansers, moisturizers, masks, and treatment lines.",
+      "Custom printed outer cartons and premium rigid presentations for cleansers, moisturizers, masks, and treatment lines.",
     intro:
       "Skincare packaging needs a structure, panel layout, and finish plan suited to jars, pumps, and bottle formats.",
     recommended: [
@@ -223,11 +236,12 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "serum-boxes",
     title: "Serum Boxes",
-    heroTitle: "Serum boxes for narrow formats, refined print, and accurate bottle fit.",
+    quoteFamily: "Tuck Boxes",
+    heroTitle: "Custom serum boxes for narrow formats, refined print, and product fit.",
     heroDescription:
-      "Tall, narrow cartons and rigid presentation formats for droppers, treatment serums, and featured-product launches.",
+      "Tall, narrow outer cartons and rigid presentation boxes for droppers, treatment serums, and featured-product launches.",
     intro:
-      "Serum packaging often needs narrow structural tolerances, premium finish work, and insert guidance for fragile bottle formats.",
+      "Serum boxes often need a narrow structure, a controlled panel layout, and insert guidance around the finished bottle format.",
     recommended: [
       {
         productSlug: "custom-tuck-boxes",
@@ -255,7 +269,8 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "cream-boxes",
     title: "Cream Boxes",
-    heroTitle: "Cream and lotion cartons designed for jars, pumps, and shelf presence.",
+    quoteFamily: "Tuck Boxes",
+    heroTitle: "Custom cream and lotion boxes for jars, pumps, and shelf presentation.",
     heroDescription:
       "Versatile carton formats and premium secondary packaging for cream jars, body lotions, and personal care products.",
     intro:
@@ -282,9 +297,10 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "lotion-boxes",
     title: "Lotion Boxes",
-    heroTitle: "Lotion packaging that balances structure, branding, and product fit.",
+    quoteFamily: "Tuck Boxes",
+    heroTitle: "Custom lotion boxes that balance structure, branding, and product fit.",
     heroDescription:
-      "Printed packaging formats for pumps, bottles, and lotion lines across skincare and body care.",
+      "Custom printed outer boxes developed around pumps, bottles, and lotion products across skincare and body care.",
     intro:
       "Lotion boxes often need more structural depth and a different product fit than narrow cosmetic cartons.",
     recommended: [
@@ -309,11 +325,12 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "lipstick-boxes",
     title: "Lipstick Boxes",
-    heroTitle: "Slim lipstick packaging built to read on shelf and on camera.",
+    quoteFamily: "Tuck Boxes",
+    heroTitle: "Custom lipstick boxes built to read on shelf and on camera.",
     heroDescription:
-      "Cartons and premium set formats for lipstick, lip oil, lip balm, and other slim-format beauty products.",
+      "Custom printed outer cartons and premium presentation boxes for lipstick, lip oil, lip balm, and other slim-format beauty products.",
     intro:
-      "Lip packaging needs an accurate dieline, balanced panel layout, and finishes suited to a small carton format.",
+      "Lipstick boxes need an accurate dieline, balanced panel layout, and finishes suited to a small carton format.",
     recommended: [
       {
         productSlug: "custom-tuck-boxes",
@@ -336,11 +353,12 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "lip-gloss-boxes",
     title: "Lip Gloss Boxes",
-    heroTitle: "Lip gloss packaging for slim structures, product branding, and finish detail.",
+    quoteFamily: "Tuck Boxes",
+    heroTitle: "Custom lip gloss boxes for slim structures and finish detail.",
     heroDescription:
-      "Carton formats for lip gloss tubes and slim beauty packaging where finish detail matters.",
+      "Custom printed outer cartons for lip gloss tubes and other slim beauty products where finish detail matters.",
     intro:
-      "Lip gloss packaging often overlaps with lipstick structure, but still needs its own layout and fit adjustments.",
+      "Lip gloss boxes often overlap with lipstick-box structures but still need their own layout and product-fit review.",
     recommended: [
       {
         productSlug: "custom-tuck-boxes",
@@ -363,9 +381,10 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "mascara-boxes",
     title: "Mascara Boxes",
+    quoteFamily: "Tuck Boxes",
     heroTitle: "Mascara cartons for slim dimensions, balanced panel layout, and finish detail.",
     heroDescription:
-      "Structural cartons for slim tall beauty formats where fit, logo placement, and finish detail need control.",
+      "Custom printed outer cartons for slim, tall beauty products where fit, logo placement, and finish detail need control.",
     intro:
       "Mascara boxes often sit in the same structural family as lipstick and serum cartons but still need exact dimensions and panel balance.",
     recommended: [
@@ -386,7 +405,8 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "perfume-boxes",
     title: "Perfume Boxes",
-    heroTitle: "Perfume packaging for fragrance launches, gifting, and premium presentation.",
+    quoteFamily: "Magnetic Boxes",
+    heroTitle: "Custom perfume boxes for fragrance launches, gifting, and premium presentation.",
     heroDescription:
       "Rigid structures and secondary cartons developed around the bottle dimensions, insert plan, and presentation requirements.",
     intro:
@@ -413,6 +433,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "cosmetic-subscription-boxes",
     title: "Cosmetic Subscription Boxes",
+    quoteFamily: "Mailer Boxes",
     heroTitle: "Subscription packaging built for recurring beauty drops and consistent unboxing.",
     heroDescription:
       "Mailer-led and premium recurring packaging systems for beauty brands delivering monthly, quarterly, or launch-based drops.",
@@ -445,6 +466,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "pr-boxes",
     title: "PR Boxes",
+    quoteFamily: "Magnetic Boxes",
     heroTitle: "PR boxes designed for seeding, launches, and branded unboxing.",
     heroDescription:
       "Custom rigid and mailer-led presentation systems for influencer drops, launch kits, and beauty send-outs.",
