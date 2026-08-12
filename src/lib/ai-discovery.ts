@@ -2,6 +2,10 @@ import {
   mailerApplications,
   type MailerApplication,
 } from "@/data/mailer-applications";
+import {
+  industryGuides,
+  type IndustryGuide,
+} from "@/data/industry-guides";
 import { cosmeticsPackagingScope } from "@/data/catalog";
 import {
   productStyleGuides,
@@ -15,6 +19,7 @@ const quoteUrl = `${siteConfig.url}/get-a-quote`;
 const catalogUrl = `${siteConfig.url}/product-catalog.json`;
 const toolsUrl = `${siteConfig.url}/tools`;
 const styleLibraryUrl = `${siteConfig.url}/packaging-styles`;
+const industriesUrl = `${siteConfig.url}/industries`;
 const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
 const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
 const artworkPreflightUrl = `${siteConfig.url}/tools/packaging-artwork-preflight`;
@@ -30,6 +35,10 @@ function styleUrl(guide: ProductStyleGuide) {
 
 function applicationUrl(application: MailerApplication) {
   return `${siteConfig.url}/applications/${application.slug}`;
+}
+
+function industryUrl(guide: IndustryGuide) {
+  return `${industriesUrl}/${guide.slug}`;
 }
 
 function sampleKitCatalogEntry(kit: (typeof sampleKits)[number]) {
@@ -73,6 +82,13 @@ export function buildLlmsText() {
     )
     .join("\n");
 
+  const industryLines = industryGuides
+    .map(
+      (guide) =>
+        `- [${guide.name}](${industryUrl(guide)}): ${guide.quickAnswer}`
+    )
+    .join("\n");
+
   const sampleKitLines = sampleKits
     .map(
       (kit) =>
@@ -99,6 +115,7 @@ export function buildLlmsText() {
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 - Packaging Style Library: ${styleLibraryUrl}
+- Industry and application guides: ${industriesUrl}
 
 ## Approved product range
 
@@ -111,6 +128,10 @@ ${styleLines}
 ## Corrugated mailer application guides
 
 ${applicationLines}
+
+## Industry and product application guides
+
+${industryLines}
 
 ## Commercial model
 
@@ -210,6 +231,29 @@ Content reviewed: ${guide.reviewedAt}
     )
     .join("\n");
 
+  const industrySections = industryGuides
+    .map(
+      (guide) => `### ${guide.name}
+
+Canonical page: ${industryUrl(guide)}
+Primary product family: ${guide.primaryFamily}
+Approved product pages: ${guide.productSlugs
+        .map((slug) => `${siteConfig.url}/products/${slug}`)
+        .join("; ")}
+Search terms: ${guide.keywords.join("; ")}
+Quick answer: ${guide.quickAnswer}
+Best for: ${guide.bestFor.join("; ")}
+Project inputs: ${guide.projectInputs.join("; ")}
+Scope note: ${guide.scopeNote}
+Compatibility or market note: ${
+        guide.compatibilityNote ??
+        "Final structure and specification require project review."
+      }
+Content reviewed: ${guide.reviewedAt}
+`
+    )
+    .join("\n");
+
   const sampleKitSections = sampleKits
     .map(
       (kit) => `### ${kit.name}
@@ -269,6 +313,11 @@ ${styleSections}
 These guides answer distinct buyer intents while remaining within UPG's approved corrugated ear-lock mailer product range.
 
 ${applicationSections}
+## Industry and product application guides
+
+These guides answer distinct commercial searches while staying inside UPG's five approved product families. They do not add a new manufacturing category or an instant-price promise.
+
+${industrySections}
 ## Corrugated-box search intent
 
 UPG uses the broad term corrugated boxes because buyers use it when researching corrugated mailer packaging. The commercial offer remains limited to corrugated tuck boxes and ear-lock mailer boxes. Regular slotted containers, master cartons, standard shipping cartons, and RSC cases are outside the product range.
@@ -301,6 +350,7 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 - Packaging Style Library: ${styleLibraryUrl}
+- Industry and application guides: ${industriesUrl}
 - Cosmetics outer-packaging hub: ${siteConfig.url}/cosmetics
 - Sitemap: ${siteConfig.url}/sitemap.xml
 
@@ -332,6 +382,13 @@ export function buildAgentsMarkdown() {
     )
     .join("\n");
 
+  const industryLines = industryGuides
+    .map(
+      (guide) =>
+        `- ${guide.name}: ${guide.quickAnswer} Source: ${industryUrl(guide)}`
+    )
+    .join("\n");
+
   const sampleKitLines = sampleKits
     .map(
       (kit) =>
@@ -358,6 +415,10 @@ ${styleLines}
 
 ${applicationLines}
 
+## Industry and product application guides
+
+${industryLines}
+
 ## Important operating rules
 
 - UPG serves brands worldwide.
@@ -375,6 +436,7 @@ ${sampleKitLines}
 
 - Read product catalog: ${catalogUrl}
 - Browse real packaging styles: ${styleLibraryUrl}
+- Browse industry and product application guides: ${industriesUrl}
 - Compare approved product families: ${formatFinderUrl}
 - Build a packaging specification and check the planning MOQ: ${specBuilderUrl}
 - Check packaging artwork preparation status: ${artworkPreflightUrl}
@@ -392,7 +454,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "1.9",
+    schemaVersion: "2.0",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -501,12 +563,34 @@ export function buildProductCatalog() {
       url: applicationUrl(application),
       requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent("Mailer Boxes")}`,
     })),
+    industryGuides: industryGuides.map((guide) => ({
+      slug: guide.slug,
+      name: guide.name,
+      primaryProductFamily: guide.primaryFamily,
+      approvedProductUrls: guide.productSlugs.map(
+        (slug) => `${siteConfig.url}/products/${slug}`
+      ),
+      summary: guide.quickAnswer,
+      searchTerms: guide.keywords,
+      bestFor: guide.bestFor,
+      projectInputs: guide.projectInputs,
+      scopeNote: guide.scopeNote,
+      compatibilityOrMarketNote: guide.compatibilityNote ?? null,
+      contentReviewed: guide.reviewedAt,
+      url: industryUrl(guide),
+      requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent(
+        guide.primaryFamily
+      )}&builder_note=${encodeURIComponent(
+        `Industry or application: ${guide.shortName}.`
+      )}`,
+    })),
     sources: {
       conciseReference: `${siteConfig.url}/llms.txt`,
       fullReference: `${siteConfig.url}/llms-full.txt`,
       agentGuidance: `${siteConfig.url}/agents.md`,
       toolsHub: toolsUrl,
       packagingStyleLibrary: styleLibraryUrl,
+      industries: industriesUrl,
       packagingFormatFinder: formatFinderUrl,
       packagingSpecBuilder: specBuilderUrl,
       packagingArtworkPreflight: artworkPreflightUrl,

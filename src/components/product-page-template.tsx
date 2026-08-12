@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/product-card";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
+import { getIndustryGuidesByProduct } from "@/data/industry-guides";
 import { mailerApplications } from "@/data/mailer-applications";
 import { getProductStylesByParent } from "@/data/product-styles";
 import {
@@ -20,6 +21,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
   const related = getRelatedProducts(product.slug);
   const productFaqs = getProductFaqs(product);
   const styleGuides = getProductStylesByParent(product.slug);
+  const industryGuides = getIndustryGuidesByProduct(product.slug);
   const applicationGuides =
     product.slug === "custom-mailer-boxes" ? mailerApplications : [];
 
@@ -298,6 +300,54 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                     {application.metaDescription}
+                  </p>
+                  <span className="mt-auto pt-6 text-sm text-foreground">
+                    Read guide{" "}
+                    <span className="inline-block transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {industryGuides.length > 0 ? (
+        <section className="section-shell bg-stone">
+          <div className="container-editorial">
+            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <SectionHeading
+                eyebrow="Industry and product guides"
+                title={`Explore ${product.shortName.toLowerCase()} by buyer intent.`}
+                intro="Each page starts from a real product or industry brief, keeps technical approval inside project review, and carries the selected application into the enquiry form."
+              />
+              <Link
+                href="/industries"
+                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                Browse all guides <span>→</span>
+              </Link>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {industryGuides.map((guide, index) => (
+                <Link
+                  key={guide.slug}
+                  href={`/industries/${guide.slug}`}
+                  className="surface-card group flex min-h-64 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="eyebrow">Application guide</span>
+                    <span className="font-serif text-2xl text-gold">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="mt-6 font-serif text-2xl text-foreground">
+                    {guide.shortName}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {guide.metaDescription}
                   </p>
                   <span className="mt-auto pt-6 text-sm text-foreground">
                     Read guide{" "}

@@ -136,6 +136,15 @@ Weekly decision metrics:
 
 ## Release sequence
 
+### Current implementation status — 2026-08-13
+
+- Phase 1 style cluster: implemented with 12 visible style pages.
+- Phase 2 first commercial cluster: implemented with 12 visible industry and product-application guides.
+- Demand evidence: Search Console baseline and Teal public-coverage proxy recorded in `docs/keyword-demand-map.md`.
+- Exact monthly volume: pending a real Google Ads account, developer token, customer ID, and OAuth `adwords` scope. The Google Ads API service itself is enabled.
+- Phase 3 prospecting: 50 prospects and approval-gated outreach drafts recorded in `docs/backlink-prospects.csv` and `docs/backlink-outreach-drafts.md`; no outreach sent.
+- Measurement: aggregate-only Search Console, GA4, and CRM report available through `npm run report:organic`.
+
 ### Phase 1 — Product-style lead cluster
 
 - Publish the 12 approved style pages and the Style Library.

@@ -1,0 +1,103 @@
+# UPG Keyword Demand and Competitor Gap Map
+
+Last reviewed: 2026-08-13
+
+## Evidence boundary
+
+This map does not invent monthly search volume. It combines three currently verifiable signals:
+
+1. UPG Search Console query evidence from 2026-05-01 through 2026-08-10.
+2. Public Teal Packaging sitemap coverage captured on 2026-08-13.
+3. Commercial intent and exact fit with UPG's five approved product families.
+
+Google Ads API is now enabled on the `upg-leads-crm` Cloud project. Exact Keyword Planner historical metrics remain blocked because the signed-in Google account does not yet have a Google Ads account, developer token, customer ID, or OAuth `adwords` scope. The monthly-volume field must remain pending until that access exists.
+
+## Current UPG search baseline
+
+Search Console query clusters, 2026-05-01 to 2026-08-10:
+
+| Query cluster | Clicks | Impressions | Weighted position |
+| --- | ---: | ---: | ---: |
+| Lipstick and lip-stick packaging | 0 | 226 | 63.5 |
+| Serum packaging | 0 | 20 | 75.2 |
+| Cosmetic or beauty packaging | 0 | 18 | 74.4 |
+| Influencer, seeding, or PR-box intent | 0 | 7 | 58.9 |
+| Mailer or ear-lock intent | 0 | 3 | 72.3 |
+| Tuck, Mylar, cereal, supplement, soap, candle, apparel, jewelry, electronics, retail, beverage, or gift intent | 0 | 0 | No measured evidence yet |
+
+The current evidence says UPG is being discovered, but its commercial non-brand visibility is still too low to generate dependable clicks. New pages need indexing, internal links, useful backlinks, and enough time to accumulate search evidence.
+
+## Competitor coverage proxy
+
+Teal public-URL matches are a competitor-coverage proxy, not monthly search volume and not proof that every Teal page ranks or converts.
+
+| Cluster | Teal public URL matches | UPG action | Priority |
+| --- | ---: | --- | --- |
+| Corrugated and other mailer terms | 168 | Strengthen existing mailer product and four application guides; keep standard shipping cartons outside UPG scope | P0 |
+| Gift terms | 136 | Publish the magnetic and collapsible magnetic luxury-gift guide | P0 |
+| Food terms | 122 | Publish the reviewed Mylar food-pouch guide; never infer food-contact or compatibility approval | P0 |
+| Mylar terms | 80 | Strengthen the existing Mylar family and style library | P0 |
+| Candle terms | 71 | Publish tuck-versus-magnetic candle packaging guidance | P0 |
+| Subscription terms | 67 | Strengthen the existing subscription mailer guide | P1 |
+| Retail terms | 65 | Publish the retail tuck-box guide | P0 |
+| Soap terms | 61 | Publish the soap tuck-box guide | P0 |
+| Coffee terms | 55 | Strengthen the existing coffee-bag style page before adding another overlapping page | P1 |
+| Cosmetic terms | 55 | Improve the existing cosmetics cluster rather than duplicate it | P0 |
+| Rigid terms | 54 | Strengthen magnetic and collapsible product/category relationships | P0 |
+| Tuck terms | 34 | Strengthen the existing five tuck-style guides | P0 |
+| Pouch terms | 28 | Publish food, supplement, and beverage application guides | P0 |
+| Beverage terms | 28 | Publish the beverage-pouch guide with compatibility review | P1 |
+| Supplement terms | 21 | Publish separate outer-carton and flexible-pouch guides | P0 |
+| Jewelry terms | 21 | Publish the magnetic presentation guide | P1 |
+| Cereal terms | 18 | Publish the cereal-style seal-end guide | P0 |
+| Skincare terms | 17 | Improve the existing cosmetics guide rather than duplicate it | P1 |
+| Apparel terms | 13 | Publish the magnetic/collapsible presentation guide | P1 |
+| Magnetic terms | 9 | Strengthen both magnetic product pages and application links | P0 |
+| Electronics terms | 9 | Publish the presentation-box guide with protection boundaries | P1 |
+| Influencer terms | 7 | Strengthen the existing influencer-kit guide | P0 |
+| PR-box terms | 5 | Strengthen the existing PR-box guide | P0 |
+
+## Page decision score
+
+The release queue uses a 100-point score:
+
+- Buyer intent: 30 points
+- Exact UPG product fit: 30 points
+- Competitor coverage evidence: 20 points
+- Approved product and content readiness: 20 points
+
+| Target | Score | Decision |
+| --- | ---: | --- |
+| `/industries/custom-retail-boxes` | 94 | Publish |
+| `/industries/custom-food-pouches` | 93 | Publish with compatibility boundary |
+| `/industries/custom-luxury-gift-boxes` | 92 | Publish |
+| `/industries/custom-candle-boxes` | 91 | Publish |
+| `/industries/custom-soap-boxes` | 90 | Publish |
+| `/industries/custom-supplement-boxes` | 89 | Publish with outer-carton boundary |
+| `/industries/custom-supplement-pouches` | 88 | Publish with compatibility boundary |
+| `/industries/custom-cereal-boxes` | 88 | Publish as cereal-style seal-end carton |
+| `/industries/custom-jewelry-boxes` | 85 | Publish as presentation packaging |
+| `/industries/custom-beverage-pouches` | 84 | Publish with contents/process review |
+| `/industries/custom-apparel-boxes` | 83 | Publish as presentation packaging |
+| `/industries/custom-electronics-boxes` | 81 | Publish with protection/testing boundary |
+| Another coffee-bag page | 58 | Do not publish; strengthen the existing style page |
+| More cosmetics keyword variants | 55 | Do not publish as thin duplicates; improve current pages from Search Console evidence |
+| Shipping-carton, master-carton, or RSC pages | 0 | Never publish inside current UPG offer |
+
+## Monthly volume completion path
+
+When a Google Ads account is available:
+
+1. Obtain the developer token from a Google Ads manager account.
+2. Add OAuth scope `https://www.googleapis.com/auth/adwords` to the UPG automation credential.
+3. Configure the Ads customer ID and, where required, manager login customer ID.
+4. Call `KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics` for the seed file in `docs/google-keyword-planner-seeds.csv`.
+5. Record US, Canada, UK, and selected European markets separately instead of blending them into one misleading number.
+6. Re-score the queue using average monthly searches, competition, and bid ranges without treating ad competition as organic-ranking difficulty.
+
+Official references:
+
+- <https://developers.google.com/google-ads/api/docs/keyword-planning/generate-historical-metrics>
+- <https://developers.google.com/google-ads/api/docs/api-policy/developer-token>
+- <https://developers.google.com/google-ads/api/docs/api-policy/access-levels>
+- <https://support.google.com/google-ads/answer/7337243>
