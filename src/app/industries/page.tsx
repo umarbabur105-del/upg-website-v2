@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { QuoteCta } from "@/components/quote-cta";
-import { industries } from "@/data/catalog";
+import { industryGuides } from "@/data/industry-guides";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Industries We Serve",
   description:
-    "Custom boxes and flexible packaging for beauty, ecommerce, retail, gifting, coffee, beverage, food, supplement, and consumer brands.",
+    "Browse custom packaging guides for cereal, supplements, soap, candles, retail, apparel, jewelry, electronics, food, beverage, gifting, and cosmetics.",
   path: "/industries",
-  keywords: ["cosmetic packaging manufacturer", "ecommerce packaging", "corrugated boxes"],
+  keywords: [
+    "custom packaging by industry",
+    "custom product packaging",
+    "custom retail boxes",
+    "custom food pouches",
+  ],
 });
 
 export default function IndustriesPage() {
@@ -23,9 +28,9 @@ export default function IndustriesPage() {
               Custom packaging made for your product and its market.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Our five core product families serve beauty,
-              ecommerce, retail, gifting, food, beverage, supplements, and other
-              consumer brands. Product fit leads the recommendation.
+              Explore buyer-focused guides across UPG&apos;s five approved product
+              families. Every page leads back to a real packaging format, clear
+              project inputs, and a human-reviewed quote.
             </p>
           </div>
         </div>
@@ -33,27 +38,44 @@ export default function IndustriesPage() {
 
       <section className="section-shell">
         <div className="container-editorial">
-          <div className="grid gap-6 md:grid-cols-2">
-            {industries.map((industry) => (
-              <div key={industry.slug} className="surface-card p-7">
-                <div className="eyebrow mb-3">
-                  {industry.slug === "cosmetic-packaging" ? "Dedicated hub" : "Industry"}
-                </div>
+          <div className="mb-6 surface-card p-7 md:p-9">
+            <div className="eyebrow mb-3">Dedicated category hub</div>
+            <h2 className="font-serif text-3xl text-foreground">
+              Cosmetic boxes and outer packaging
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+              Explore the established beauty cluster for skincare, serum, cream,
+              lipstick, mascara, perfume, PR kits, and cosmetic subscription boxes.
+            </p>
+            <Link
+              href="/cosmetics"
+              className="mt-6 inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+            >
+              Browse cosmetic packaging guides <span>→</span>
+            </Link>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {industryGuides.map((guide) => (
+              <Link
+                key={guide.slug}
+                href={`/industries/${guide.slug}`}
+                className="surface-card group flex min-h-72 flex-col p-7 hover:-translate-y-1 hover:shadow-card"
+              >
+                <div className="eyebrow mb-3">Application guide</div>
                 <h2 className="font-serif text-2xl text-foreground">
-                  {industry.name}
+                  {guide.shortName}
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {industry.description}
+                  {guide.metaDescription}
                 </p>
-                <div className="mt-6">
-                  <Link
-                    href={industry.slug === "cosmetic-packaging" ? "/cosmetics" : "/products"}
-                    className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-                  >
-                    Explore <span>→</span>
-                  </Link>
+                <div className="mt-auto pt-6 text-xs text-muted-foreground">
+                  Primary family: {guide.primaryFamily}
                 </div>
-              </div>
+                <span className="mt-3 text-sm text-foreground">
+                  Read guide <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </Link>
             ))}
           </div>
         </div>
