@@ -1,6 +1,6 @@
 # Google API Inventory
 
-Last verified: 2026-08-11
+Last verified: 2026-08-21
 
 This inventory describes the Google access used to operate the UPG website and its connected business tools. It intentionally contains no credential values, refresh tokens, client secrets, or API key strings.
 
@@ -60,24 +60,28 @@ Its key string exists only in `~/.config/gcloud/upg-automation/web_data_api_key.
 | Merchant Center | Account `5837241168` (`Universal Packaging Group`) |
 | Google Analytics | Account `403775469`; GA4 property `548846712`; measurement ID `G-G1L3B11JX5` |
 | Search Console | `sc-domain:universalpackaginggroup.com` |
-| Google Sheets CRM | `UPG Leads CRM`; tabs: Dashboard, Leads, Activity Log, Lists, Guide |
+| Google Sheets CRM | `UPG Leads CRM`; tabs: Dashboard, Leads, Activity Log, Lists, Guide, Organic Weekly, Backlink Outreach |
 
 ## Enabled and verified APIs
 
-| API | Service name | 2026-08-11 proof |
+| API | Service name | 2026-08-21 proof |
 | --- | --- | --- |
-| Merchant API | `merchantapi.googleapis.com` | Project registered to Merchant account; account read succeeded; 2 processed products returned; GA4 property `548846712` linked as an active conversion source |
-| Search Console API | `searchconsole.googleapis.com` | Domain property returned with `siteOwner` permission |
-| Google Analytics Data API | `analyticsdata.googleapis.com` | GA4 report read succeeded |
+| Merchant API | `merchantapi.googleapis.com` | Project registered to Merchant account; account read succeeded; 2 processed products returned and both are approved for Free Listings in all 32 configured countries; GA4 property `548846712` is linked as an active conversion source |
+| Search Console API | `searchconsole.googleapis.com` | Domain property returned with `siteOwner` permission; URL Inspection reported all 67 live sitemap URLs submitted and indexed, with successful fetches and robots access |
+| Google Analytics Data API | `analyticsdata.googleapis.com` | GA4 channel and event-funnel reports read succeeded; the aggregate report now includes form starts, submitted leads, checkout starts, purchases, and tool handoffs |
 | Google Analytics Admin API | `analyticsadmin.googleapis.com` | Target account and property both returned |
 | Google Drive API | `drive.googleapis.com` | Workspace account and CRM spreadsheet search succeeded |
 | Gmail API | `gmail.googleapis.com` | Workspace mailbox profile read succeeded |
-| Google Sheets API | `sheets.googleapis.com` | CRM title and all five tabs returned |
-| PageSpeed Insights API | `pagespeedonline.googleapis.com` | Credential verified; latest mobile Lighthouse request succeeded with a snapshot score of 97; earlier checks included an 84 and intermittent target/network timeouts |
+| Google Sheets API | `sheets.googleapis.com` | CRM title and all seven tabs returned |
+| PageSpeed Insights API | `pagespeedonline.googleapis.com` | Credential accepted and the 2026-08-21 mobile diagnostic completed with a performance score of 83. Earlier successful snapshots included 84 and 97. |
 | Chrome UX Report API | `chromeuxreport.googleapis.com` | Authenticated API-key request reached CrUX; Google returned `data not found` for the UPG origin |
 | API Keys API | `apikeys.googleapis.com` | Restricted PageSpeed/CrUX key created and recovered through API |
 
 The CrUX `data not found` response means the origin does not currently meet Google's field-data availability threshold. It is not an authentication or API-connection failure.
+
+Merchant BusinessInfo also returned the configured customer-service URL, email, and phone. Its separate business `phone` is absent and `phoneVerificationState` is `UNVERIFIED`; Google documents that field as output-only, so that final verification remains a Merchant Center UI task rather than an API write.
+
+The desktop OAuth refresh token required interactive reauthentication on 2026-08-21 after Google returned `invalid_grant` with an `invalid_rapt` reauthentication reason. The credential was renewed through the existing local OAuth flow, and the subsequent core health check passed for Cloud, Merchant, Search Console, Analytics, Drive, Gmail, and Sheets.
 
 ## Health check
 

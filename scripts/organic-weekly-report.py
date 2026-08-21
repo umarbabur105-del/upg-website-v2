@@ -43,6 +43,23 @@ AI_SOURCES = (
     "you.com",
 )
 SEARCH_SOURCES = ("google.", "bing.", "search.yahoo.", "duckduckgo.")
+FUNNEL_EVENT_NAMES = (
+    "form_start",
+    "generate_lead",
+    "begin_checkout",
+    "purchase",
+)
+TOOL_EVENT_NAMES = (
+    "packaging_format_finder_result",
+    "packaging_format_finder_handoff",
+    "packaging_artwork_preflight_result",
+    "packaging_artwork_preflight_handoff",
+    "packaging_spec_copy",
+    "packaging_spec_share_link",
+    "packaging_spec_download",
+    "packaging_spec_print",
+    "packaging_spec_quote_handoff",
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -221,6 +238,43 @@ def ga4_report(token: str, start_date: date, end_date: date) -> dict[str, Any]:
             "active_users": metrics[1],
             "key_events": metrics[2],
         }
+
+    tracked_event_names = (*FUNNEL_EVENT_NAMES, *TOOL_EVENT_NAMES)
+    event_payload = request_json(
+        f"https://analyticsdata.googleapis.com/v1beta/properties/{GA4_PROPERTY_ID}:runReport",
+        token,
+        method="POST",
+        body={
+            "dateRanges": [
+                {"startDate": start_date.isoformat(), "endDate": end_date.isoformat()}
+            ],
+            "dimensions": [{"name": "eventName"}],
+            "metrics": [{"name": "eventCount"}, {"name": "totalUsers"}],
+            "dimensionFilter": {
+                "filter": {
+                    "fieldName": "eventName",
+                    "inListFilter": {
+                        "values": list(tracked_event_names),
+                        "caseSensitive": True,
+                    },
+                }
+            },
+            "limit": str(len(tracked_event_names)),
+        },
+    )
+    events = {
+        event_name: {"event_count": 0.0, "total_users": 0.0}
+        for event_name in tracked_event_names
+    }
+    for row in event_payload.get("rows", []):
+        event_name = row["dimensionValues"][0]["value"]
+        metrics = [float(value["value"]) for value in row["metricValues"]]
+        if event_name in events:
+            events[event_name] = {
+                "event_count": metrics[0],
+                "total_users": metrics[1],
+            }
+
     return {
         "sessions": round(sum(item["sessions"] for item in channels.values()), 2),
         "active_users": round(
@@ -237,7 +291,12 @@ def ga4_report(token: str, start_date: date, end_date: date) -> dict[str, Any]:
             channels.get("Referral", {}).get("sessions", 0), 2
         ),
         "channels": channels,
+        "events": events,
     }
+
+
+def ga4_event_count(report: dict[str, Any], event_name: str) -> float:
+    return float(report["ga4"]["events"].get(event_name, {}).get("event_count", 0))
 
 
 def google_serial_to_date(value: str) -> date | None:
@@ -351,6 +410,10 @@ def markdown_report(report: dict[str, Any]) -> str:
         f"- Non-brand clicks: {comparisons['non_brand_clicks']['current']} (previous {comparisons['non_brand_clicks']['previous']})",
         f"- Organic Search sessions: {comparisons['organic_search_sessions']['current']} (previous {comparisons['organic_search_sessions']['previous']})",
         f"- Organic Shopping sessions: {comparisons['organic_shopping_sessions']['current']} (previous {comparisons['organic_shopping_sessions']['previous']})",
+        f"- Lead form starts: {comparisons['form_starts']['current']} (previous {comparisons['form_starts']['previous']})",
+        f"- Successful lead submissions: {comparisons['generated_leads']['current']} (previous {comparisons['generated_leads']['previous']})",
+        f"- Sample-kit checkout starts: {comparisons['checkout_starts']['current']} (previous {comparisons['checkout_starts']['previous']})",
+        f"- Sample-kit purchases: {comparisons['purchases']['current']} (previous {comparisons['purchases']['previous']})",
         f"- Qualified website leads: {comparisons['qualified_leads']['current']} (previous {comparisons['qualified_leads']['previous']})",
         f"- Won website leads: {comparisons['won_leads']['current']} (previous {comparisons['won_leads']['previous']})",
         "",
@@ -362,6 +425,20 @@ def markdown_report(report: dict[str, Any]) -> str:
         lines.extend(f"- {source}: {count}" for source, count in acquisition.items())
     else:
         lines.append("- No non-spam website leads in this period.")
+    lines.extend(["", "## On-site tool engagement", ""])
+    tool_events = current["ga4"]["events"]
+    measured_tool_events = [
+        (event_name, tool_events[event_name]["event_count"])
+        for event_name in TOOL_EVENT_NAMES
+        if tool_events[event_name]["event_count"]
+    ]
+    if measured_tool_events:
+        lines.extend(
+            f"- {event_name}: {event_count}"
+            for event_name, event_count in measured_tool_events
+        )
+    else:
+        lines.append("- No measured tool events in this period.")
     lines.extend(["", "## Top non-brand Search Console queries", ""])
     queries = current["search_console"]["top_non_brand_queries"]
     if queries:
@@ -449,6 +526,22 @@ def main() -> None:
             "organic_shopping_sessions": compare(
                 current["ga4"]["organic_shopping_sessions"],
                 previous["ga4"]["organic_shopping_sessions"],
+            ),
+            "form_starts": compare(
+                ga4_event_count(current, "form_start"),
+                ga4_event_count(previous, "form_start"),
+            ),
+            "generated_leads": compare(
+                ga4_event_count(current, "generate_lead"),
+                ga4_event_count(previous, "generate_lead"),
+            ),
+            "checkout_starts": compare(
+                ga4_event_count(current, "begin_checkout"),
+                ga4_event_count(previous, "begin_checkout"),
+            ),
+            "purchases": compare(
+                ga4_event_count(current, "purchase"),
+                ga4_event_count(previous, "purchase"),
             ),
             "qualified_leads": compare(
                 current["crm"]["qualified_or_later"],

@@ -1,6 +1,6 @@
 # AI Discovery and Citation Operations
 
-Last checked: 2026-08-12
+Last checked: 2026-08-21
 
 This document separates crawler access, search indexing, AI citations, and product-feed eligibility. None of these systems guarantees inclusion, ranking, citation, or a lead.
 
@@ -77,9 +77,9 @@ Completed on 2026-08-12:
 
 Next checks:
 
-1. After release, verify that Bingbot can fetch the five product-family pages, both sample-kit pages, and the IndexNow ownership key.
-2. Run the first IndexNow submission only after the ownership key and changed URLs are live.
-3. Re-check URL Inspection, Site Explorer, Search Performance, Backlinks, Recommendations, and AI Performance after Bing processes the release.
+1. Bingbot received HTTP 200 from the live homepage and the ownership key returned HTTP 200 on 2026-08-21.
+2. All 67 canonical live-sitemap URLs were accepted by IndexNow with HTTP 200 on 2026-08-21.
+3. Re-check URL Inspection, Site Explorer, Search Performance, Backlinks, Recommendations, and AI Performance after Bing processes the submission.
 4. Use the cited-page and grounding-query reports to choose content improvements when Bing exposes a sufficient sample.
 
 ## ChatGPT product discovery
@@ -92,8 +92,8 @@ Official reference: [OpenAI Agentic Commerce onboarding](https://developers.open
 
 ## Remaining citation work
 
-1. Build the UPG Packaging Spec and MOQ Builder.
-2. Add expert-reviewed, answer-first technical pages using UPG-approved product knowledge.
-3. Publish original structure diagrams, comparison tables, and downloadable specification templates.
-4. Earn third-party citations through packaging designers, branding agencies, ecommerce consultants, and relevant industry resources.
+1. The UPG Packaging Spec and MOQ Builder is live; measure its copy, download, share, print, and quote-handoff events before expanding it.
+2. Add expert-reviewed, answer-first technical pages using UPG-approved product knowledge and measured query gaps.
+3. Publish original structure diagrams, comparison tables, and downloadable specification templates after product-structure approval.
+4. Third-party citation outreach is paused by owner instruction; preserve the researched queue without sending or submitting anything.
 5. Maintain a fixed monthly prompt set for ChatGPT, Claude, Perplexity, Copilot, and Google AI; record mentions, citations, cited URLs, accuracy, referrals, and qualified leads.

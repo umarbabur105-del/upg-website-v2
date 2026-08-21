@@ -1,6 +1,6 @@
 # UPG Organic Lead Engine
 
-Last reviewed: 2026-08-13
+Last reviewed: 2026-08-21
 
 ## Business objective
 
@@ -143,8 +143,21 @@ Weekly decision metrics:
 - Demand evidence: Search Console baseline and Teal public-coverage proxy recorded in `docs/keyword-demand-map.md`.
 - Exact monthly volume: pending a real Google Ads account, developer token, customer ID, and OAuth `adwords` scope. The Google Ads API service itself is enabled.
 - Phase 3 authority asset: the Packaging Spec & MOQ Builder now creates shareable, downloadable, and print-ready planning briefs, shows exact 5-inch and 10-inch boundary examples, measures brief completeness, and carries specifications into the enquiry form.
-- Phase 3 prospecting: 50 prospects and approval-gated outreach drafts recorded in `docs/backlink-prospects.csv`, `docs/backlink-outreach-drafts.md`, and `docs/backlink-personalized-drafts.md`; no outreach sent.
-- Measurement: aggregate-only Search Console, GA4, and CRM report available through `npm run report:organic`.
+- Phase 3 prospecting: 50 prospects and approval-gated outreach drafts recorded in `docs/backlink-prospects.csv`, `docs/backlink-outreach-drafts.md`, and `docs/backlink-personalized-drafts.md`; two individually approved editorial emails were sent on 2026-08-21. Further outreach is paused by owner instruction.
+- Measurement: aggregate-only Search Console, GA4, and CRM report available through `npm run report:organic`; it now includes form starts, successful lead submissions, sample-kit checkout starts, purchases, and authority-tool events.
+
+### Current acquisition evidence — 2026-08-21
+
+- Google operator OAuth was reauthorized after an `invalid_rapt` reauthentication failure; all core Google API probes passed afterwards.
+- Search Console URL Inspection reports all 67 live sitemap URLs as submitted and indexed, with indexing allowed, robots allowed, and successful page fetches.
+- The latest 30-day report contains 427 Search Console impressions, 292 non-brand impressions, 6 total clicks, 0 non-brand clicks, and 4 GA4 Organic Search sessions.
+- Non-brand impressions increased from 140 to 292 versus the previous comparison period, but the current visibility has not yet produced a dependable non-brand click flow.
+- The CRM contains 3 genuine leads in the period, all still New: 2 AI referrals and 1 direct or unattributed. Qualified and won counts remain 0.
+- Both Merchant sample kits are approved for Free Listings in all 32 configured countries, but Merchant performance reports contain no impressions, clicks, or conversions for 2026-08-11 through 2026-08-20.
+- Redacted production diagnostics identified the sample-kit checkout failure: Stripe rejected the embedded Checkout `ui_mode`. Hosted Checkout is now live; both sample-kit SKUs return HTTP 200, redirect to `checkout.stripe.com`, and show US$19.99 after adaptive pricing was disabled. No payment was attempted, so webhook, CRM/order capture, confirmation email, and GA4 `purchase` still require one separately approved controlled purchase.
+- Backlink distribution has started: 50 researched prospects, 13 still marked ready for a personalized pitch, and 2 individually approved editorial emails sent and awaiting response (FDPP and Packaging World). Further outreach is on hold.
+
+The immediate constraints are non-brand click-through, authority, and end-to-end purchase proof; crawlability, sitemap indexing, and checkout-session creation are currently healthy. While outreach is paused, the active lane is measurement, query-led content improvement, and conversion-path verification.
 
 ### Phase 1 — Product-style lead cluster
 

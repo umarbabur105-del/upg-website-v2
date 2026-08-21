@@ -1,10 +1,10 @@
 # Google Merchant Audit and Expansion Plan
 
-Last verified: 2026-08-11
+Last verified: 2026-08-21
 
 This document defines the safe operating model for Universal Packaging Group in Google Merchant Center. It separates directly purchasable sample products from custom production work that requires a project-specific quotation.
 
-No Merchant product, feed, account, checkout, or production website setting was changed during this audit.
+No Merchant product, feed, or account setting was changed during this audit. The production sample-kit checkout was repaired after live diagnostics identified a Stripe compatibility error.
 
 ## Decision
 
@@ -37,21 +37,21 @@ Official references:
 | Target markets | United States, Canada, United Kingdom, and 29 supported European countries |
 | Shipping | USD 0; 0–1 handling day plus 3–6 transit days |
 | Account-level issues | None returned by the Merchant API at audit time |
-| Product status | Both products pending initial free-listings review |
-| Performance data | No impressions or clicks returned while products are pending |
+| Product status | Both products approved for Free Listings in all 32 configured countries; no item-level issue returned |
+| Performance data | No impressions, clicks, or conversions returned for 2026-08-11 through 2026-08-20 |
 | Conversion sources | GA4 property `548846712` linked and `ACTIVE` |
 | Claimed website | `https://universalpackaginggroup.com` |
-| Customer service details | Email and support URL not configured in Merchant Center |
-| Business phone | Present but not verified in Merchant Center |
+| Customer service details | Support URL, `quotes@universalpackaginggroup.com`, and `+1 786 885 8825` are configured |
+| Business phone | Separate account-level phone is absent and the verification state is `UNVERIFIED` |
 
-The current product issue is `pending_initial_policy_review_free_listings`, not a confirmed price or policy rejection. Google states that initial processing can take up to three business days.
+The initial Free Listings review is complete. The Merchant API now returns all 32 configured countries under `approvedCountries` for both products and returns no item-level issue. Approval confirms eligibility; it does not guarantee impressions, clicks, or leads.
 
 ## Current product audit
 
 | Merchant product | Submitted offer | Result |
 | --- | --- | --- |
-| `upg-box-sample-kit-001` — UPG Custom Box Sample Kit | USD 19.99, in stock, shipping included | Feed, landing page, initial-HTML Product/Offer schema, and Stripe checkout use the same price and availability. The broad box-kit title is appropriate while exact box styles may vary. |
-| `upg-mylar-bag-sample-kit-001` — UPG Mylar Bag Sample Kit | USD 19.99, in stock, shipping included | Feed, landing page, initial-HTML Product/Offer schema, and Stripe checkout use the same price and availability. The five included flexible-packaging formats are explicitly defined. |
+| `upg-box-sample-kit-001` — UPG Custom Box Sample Kit | USD 19.99, in stock, shipping included | Approved for Free Listings in all 32 configured countries. Feed, landing page, initial-HTML Product/Offer schema, and Stripe checkout use the same price and availability. |
+| `upg-mylar-bag-sample-kit-001` — UPG Mylar Bag Sample Kit | USD 19.99, in stock, shipping included | Approved for Free Listings in all 32 configured countries. Feed, landing page, initial-HTML Product/Offer schema, and Stripe checkout use the same price and availability. |
 
 Both products are physical paid sample kits. They are not quote placeholders, custom-order deposits, or partial prices. The full USD 19.99 is also credited toward a later UPG production order, but the customer receives the sample kit even if no production order follows.
 
@@ -69,11 +69,12 @@ Both products are physical paid sample kits. They are not quote placeholders, cu
 
 | Priority | Risk | Required action |
 | --- | --- | --- |
-| P0 | Initial review is not complete. Editing products during review can introduce a new review cycle or obscure the current result. | Keep the two products unchanged until review completes, then capture the exact final product statuses and issues through the Merchant API. |
-| P1 | Repeated audit requests from the operator environment observed roughly 20–21 seconds of server wait before the first byte, despite a Vercel cache hit. PageSpeed also produced intermittent document-request failures. A later authenticated PageSpeed run succeeded with a mobile score of 97, so the slow operator path is not proof of worldwide latency. | Monitor PageSpeed and Merchant fetches, then re-test from independent regions before expanding the feed. Treat repeated Google-side fetch failures as a release blocker. |
+| P0 | Both products are approved but Merchant performance reports still return no impressions, clicks, or conversions. Approval alone does not create distribution. | Keep the compliant offers stable, monitor fetch and performance data, and improve only accurate titles, images, taxonomy, and supporting authority after a measured baseline exists. |
+| P0 | Checkout-session creation is repaired, but fulfillment is not yet proven end to end. Redacted production diagnostics showed Stripe rejected the embedded Checkout `ui_mode`; hosted Checkout now returns HTTP 200 for both sample-kit SKUs, redirects to `checkout.stripe.com`, and displays the submitted US$19.99 after adaptive pricing was disabled. No payment was attempted or created. | Complete one separately approved controlled purchase and verify payment, webhook processing, CRM/order capture, confirmation email, and GA4 `purchase` before treating fulfillment as production-proven. |
+| P1 | Repeated audit requests from the operator environment observed roughly 20–21 seconds of server wait before the first byte, despite a Vercel cache hit. PageSpeed also produced intermittent document-request failures. The latest authenticated PageSpeed run succeeded with a mobile score of 83, so the slow operator path is not proof of worldwide latency. | Monitor PageSpeed and Merchant fetches, then re-test from independent regions before expanding the feed. Treat repeated Google-side fetch failures as a release blocker. |
 | P1 | The GA4 `purchase` event previously sent transaction, currency, value, SKU, and name but not the recommended ecommerce `items` array. | The standard `items` payload is implemented and has passed TypeScript, ESLint, and production-build verification. Verify the released event with a real or test purchase before product-level conversion reporting is considered proven. |
 | P1 | Current Merchant images are AI-generated representations. A product image must accurately represent what is shipped, and visual mismatch can reduce approval confidence and conversion quality. | Use real photographs of the completed physical kits as soon as fulfillment-ready samples exist. Until then, keep landing-page disclosures and do not promise unguaranteed contents. |
-| P2 | Merchant customer-service email/support URL are empty and the business phone is unverified. | Complete and verify these account details through the Merchant API or Merchant Center after approval. |
+| P2 | Customer-service contacts are complete, but the separate account-level business phone remains absent/unverified. Merchant API v1 exposes that phone as output-only and does not accept it in the update mask. | Complete phone verification in Merchant Center UI when convenient; this is not a feed or product-approval blocker. |
 | P2 | Google's automatic category placed the box kit under `Office Supplies`; the Mylar kit has no automatic level-one category yet. | Do not change taxonomy during initial review. After approval, test the nearest accurate taxonomy only if it improves classification without attracting master-carton enquiries. |
 
 ## Five-family Merchant expansion
@@ -144,7 +145,7 @@ The API link is complete. Remaining verification after the local analytics chang
 
 No family-specific Merchant product should be submitted until every gate is green:
 
-1. Current two-product initial review has completed.
+1. Current two-product initial review has completed. **Green as of 2026-08-21.**
 2. Crawl and landing-page response reliability has been independently verified.
 3. Exact physical kit contents and fixed price have UPG approval.
 4. Product image has visual approval and accurately represents the shipped sample.
