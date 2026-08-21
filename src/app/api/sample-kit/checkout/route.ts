@@ -128,6 +128,9 @@ export async function POST(request: Request) {
       automatic_tax: {
         enabled: process.env.STRIPE_AUTOMATIC_TAX === "true",
       },
+      adaptive_pricing: {
+        enabled: false,
+      },
       invoice_creation: { enabled: true },
       line_items: [
         {
