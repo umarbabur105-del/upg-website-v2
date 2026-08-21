@@ -89,6 +89,7 @@ export async function recordPaidSampleKitOrder({
             ? `UPG STRIPE TEST MODE\nNo real payment. Do not fulfil.\n\n${fields.text}\n`
             : `Paid ${kit.name} Order\nPayment confirmed.\n\n${fields.text}\n`,
           replyTo: email || undefined,
+          idempotencyKey: `sample-kit-order/${testMode ? "test" : "live"}/${session.id}`,
         }),
   ]);
 

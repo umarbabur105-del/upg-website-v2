@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { getSampleKitBySku } from "@/data/sample-kit";
 import { recordPaidSampleKitOrder } from "@/lib/sample-kit-orders";
@@ -9,6 +9,7 @@ import {
 } from "@/lib/stripe";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const supportedEvents = new Set([
   "checkout.session.completed",
@@ -91,18 +92,6 @@ export async function POST(request: Request) {
       testMode,
     });
 
-    if (
-      result.sheetStored !== sheetAlreadyStored ||
-      result.emailSent !== emailAlreadySent
-    ) {
-      await stripe.checkout.sessions.update(session.id, {
-        metadata: {
-          upg_sheet_stored: String(result.sheetStored),
-          upg_email_sent: String(result.emailSent),
-        },
-      });
-    }
-
     if (!result.sheetStored || !result.emailSent) {
       console.error(JSON.stringify({
         type: "sample_order_partial_processing",
@@ -111,6 +100,27 @@ export async function POST(request: Request) {
         emailSent: result.emailSent,
       }));
       return NextResponse.json({ error: "Order processing incomplete" }, { status: 500 });
+    }
+
+    if (
+      result.sheetStored !== sheetAlreadyStored ||
+      result.emailSent !== emailAlreadySent
+    ) {
+      after(async () => {
+        try {
+          await stripe.checkout.sessions.update(session.id, {
+            metadata: {
+              upg_sheet_stored: String(result.sheetStored),
+              upg_email_sent: String(result.emailSent),
+            },
+          });
+        } catch {
+          console.error(JSON.stringify({
+            type: "sample_order_metadata_update_failed",
+            testMode,
+          }));
+        }
+      });
     }
 
     return NextResponse.json({ received: true, processed: true, testMode });

@@ -3,6 +3,7 @@ type EmailPayload = {
   html: string;
   text: string;
   replyTo?: string;
+  idempotencyKey?: string;
 };
 
 type MailerResult = {
@@ -35,6 +36,9 @@ export async function sendNotification(payload: EmailPayload): Promise<MailerRes
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
+        ...(payload.idempotencyKey
+          ? { "Idempotency-Key": payload.idempotencyKey }
+          : {}),
       },
       body: JSON.stringify({
         from,

@@ -154,10 +154,10 @@ Weekly decision metrics:
 - Non-brand impressions increased from 140 to 292 versus the previous comparison period, but the current visibility has not yet produced a dependable non-brand click flow.
 - The CRM contains 3 genuine leads in the period, all still New: 2 AI referrals and 1 direct or unattributed. Qualified and won counts remain 0.
 - Both Merchant sample kits are approved for Free Listings in all 32 configured countries, but Merchant performance reports contain no impressions, clicks, or conversions for 2026-08-11 through 2026-08-20.
-- Redacted production diagnostics identified the sample-kit checkout failure: Stripe rejected the embedded Checkout `ui_mode`. Hosted Checkout is now live; both sample-kit SKUs return HTTP 200, redirect to `checkout.stripe.com`, and show US$19.99 after adaptive pricing was disabled. No payment was attempted, so webhook, CRM/order capture, confirmation email, and GA4 `purchase` still require one separately approved controlled purchase.
+- The protected Stripe sandbox lane is proven end to end without charging real money: a US$19.99 test payment completed with `livemode=false`, the webhook recovered to HTTP 200, CRM stored the record as `Stripe Test Order` / `Spam` / `System Test`, and the clearly labeled no-real-payment notification reached the UPG inbox. Live payment and physical fulfillment remain approval-gated. Sandbox analytics uses `stripe_test_purchase`, not the real `purchase` event; GA4 receipt still needs confirmation after reporting latency.
 - Backlink distribution has started: 50 researched prospects, 13 still marked ready for a personalized pitch, and 2 individually approved editorial emails sent and awaiting response (FDPP and Packaging World). Further outreach is on hold.
 
-The immediate constraints are non-brand click-through, authority, and end-to-end purchase proof; crawlability, sitemap indexing, and checkout-session creation are currently healthy. While outreach is paused, the active lane is measurement, query-led content improvement, and conversion-path verification.
+The immediate constraints are non-brand click-through, authority, and live physical-fulfillment readiness; crawlability, sitemap indexing, checkout-session creation, and the protected sandbox payment pipeline are healthy. While outreach is paused, the active lane is measurement, query-led content improvement, and conversion-path verification.
 
 ### Phase 1 — Product-style lead cluster
 
