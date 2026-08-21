@@ -49,6 +49,7 @@ function safeStripeErrorDetails(error: unknown) {
   const candidate = error as {
     type?: unknown;
     code?: unknown;
+    param?: unknown;
     statusCode?: unknown;
     requestId?: unknown;
   };
@@ -59,6 +60,8 @@ function safeStripeErrorDetails(error: unknown) {
       typeof candidate.type === "string" ? candidate.type.slice(0, 80) : undefined,
     stripeCode:
       typeof candidate.code === "string" ? candidate.code.slice(0, 80) : undefined,
+    stripeParam:
+      typeof candidate.param === "string" ? candidate.param.slice(0, 120) : undefined,
     stripeStatusCode:
       typeof candidate.statusCode === "number" ? candidate.statusCode : undefined,
     stripeRequestId:
