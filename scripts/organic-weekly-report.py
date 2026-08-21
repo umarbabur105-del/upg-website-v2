@@ -190,6 +190,52 @@ def search_console_report(
             }
         )
 
+    page_totals: dict[str, dict[str, float]] = {}
+    for row in non_brand:
+        page = urllib.parse.urlsplit(row["keys"][1]).path or "/"
+        current = page_totals.setdefault(
+            page, {"clicks": 0.0, "impressions": 0.0, "position_sum": 0.0}
+        )
+        impressions = float(row.get("impressions", 0))
+        current["clicks"] += float(row.get("clicks", 0))
+        current["impressions"] += impressions
+        current["position_sum"] += float(row.get("position", 0)) * impressions
+
+    top_pages = []
+    for page, values in sorted(
+        page_totals.items(), key=lambda item: -item[1]["impressions"]
+    )[:10]:
+        impressions = values["impressions"]
+        top_pages.append(
+            {
+                "page": page,
+                "clicks": round(values["clicks"], 2),
+                "impressions": round(impressions, 2),
+                "average_position": (
+                    round(values["position_sum"] / impressions, 1)
+                    if impressions
+                    else None
+                ),
+            }
+        )
+
+    top_query_pages = [
+        {
+            "query": row["keys"][0],
+            "page": urllib.parse.urlsplit(row["keys"][1]).path or "/",
+            "clicks": round(float(row.get("clicks", 0)), 2),
+            "impressions": round(float(row.get("impressions", 0)), 2),
+            "average_position": round(float(row.get("position", 0)), 1),
+        }
+        for row in sorted(
+            non_brand,
+            key=lambda item: (
+                -float(item.get("impressions", 0)),
+                float(item.get("position", 0)),
+            ),
+        )[:15]
+    ]
+
     return {
         "clicks": round(sum(float(row.get("clicks", 0)) for row in rows), 2),
         "impressions": round(
@@ -208,6 +254,8 @@ def search_console_report(
             and values["position_sum"] / values["impressions"] <= 20
         ),
         "top_non_brand_queries": top_queries,
+        "top_non_brand_pages": top_pages,
+        "top_non_brand_query_pages": top_query_pages,
     }
 
 
@@ -448,6 +496,24 @@ def markdown_report(report: dict[str, Any]) -> str:
         )
     else:
         lines.append("- No non-brand query evidence in this period.")
+    lines.extend(["", "## Top non-brand landing pages", ""])
+    pages = current["search_console"]["top_non_brand_pages"]
+    if pages:
+        lines.extend(
+            f"- {item['page']}: {item['impressions']} impressions, {item['clicks']} clicks, position {item['average_position']}"
+            for item in pages
+        )
+    else:
+        lines.append("- No non-brand landing-page evidence in this period.")
+    lines.extend(["", "## Top non-brand query-to-page pairs", ""])
+    query_pages = current["search_console"]["top_non_brand_query_pages"]
+    if query_pages:
+        lines.extend(
+            f"- {item['query']} -> {item['page']}: {item['impressions']} impressions, {item['clicks']} clicks, position {item['average_position']}"
+            for item in query_pages
+        )
+    else:
+        lines.append("- No non-brand query-to-page evidence in this period.")
     lines.extend(
         [
             "",

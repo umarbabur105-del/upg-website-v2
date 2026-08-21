@@ -144,9 +144,6 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
             <p className="mt-7 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
               {guide.quickAnswer}
             </p>
-            <p className="mt-4 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-              Common search terms: {guide.searchTerms.join(", ")}.
-            </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <Link
                 href={quoteHref}
