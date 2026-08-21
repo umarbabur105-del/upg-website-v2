@@ -48,6 +48,11 @@ export default async function MailerApplicationPage({ params }: PageProps) {
   }
 
   const pageUrl = `${SITE_URL}/applications/${application.slug}`;
+  const quoteHref = `/get-a-quote?product=${encodeURIComponent(
+    "Mailer Boxes"
+  )}&builder_note=${encodeURIComponent(
+    `Mailer application: ${application.shortName}.`
+  )}`;
   const relatedApplications = mailerApplications
     .filter((item) => item.slug !== application.slug)
     .slice(0, 3);
@@ -151,7 +156,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/get-a-quote?product=Mailer%20Boxes"
+                  href={quoteHref}
                   className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
                 >
                   Start a mailer project
@@ -184,6 +189,22 @@ export default async function MailerApplicationPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {application.scopeCallout ? (
+        <section className="border-y border-border bg-cream">
+          <div className="container-editorial grid gap-4 py-8 md:grid-cols-[0.8fr_1.2fr] md:items-start md:gap-10 md:py-10">
+            <div>
+              <div className="eyebrow mb-3">Scope check</div>
+              <h2 className="font-serif text-2xl text-foreground">
+                {application.scopeCallout.title}
+              </h2>
+            </div>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {application.scopeCallout.description}
+            </p>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-shell">
         <div className="container-editorial grid gap-10 lg:grid-cols-12 lg:gap-16">
@@ -407,6 +428,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
       <QuoteCta
         title={`Start your ${application.projectName} project.`}
         intro="Share the product dimensions, quantity, intended arrangement, delivery country, and target date. UPG will review the structure, specification, pricing, and production plan."
+        href={quoteHref}
       />
     </>
   );

@@ -25,7 +25,7 @@ export default function HomePage() {
               <div className="eyebrow mb-6">Custom Packaging Manufacturer • Worldwide Delivery</div>
               <h1 className="display-1 text-balance">
                 Custom packaging manufactured around
-                <span className="text-gold"> your product.</span>
+                <span className="text-gold-dark"> your product.</span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty md:text-xl">
                 Custom tuck boxes, corrugated ear-lock mailer boxes, magnetic

@@ -134,6 +134,22 @@ Weekly decision metrics:
 6. Referring domains and links earned by tools or original resources
 7. Quotes and won orders attributed to organic search, AI referrals, Merchant, and direct traffic
 
+The aggregate report also exposes two operating views:
+
+- zero-click commercial-packaging query-to-page opportunities at average position 50 or better, scored from observed impressions and ranking proximity while suppressing known shipping-carton and master-carton noise;
+- privacy-safe lead, qualified, and won counts grouped by landing page, without printing customer identity or project notes.
+
+After a page is materially changed, compare it over a full 28-day Search Console window before rewriting it again. New pages should not be judged from same-day or same-week rankings.
+
+Run the rendered-page quality gate after every production build:
+
+```bash
+npm run build
+npm run audit:seo
+```
+
+The gate checks rendered pages for required and unique titles and descriptions, title and description length limits, H1s, canonical URLs, and JSON-LD.
+
 ## Release sequence
 
 ### Current implementation status — 2026-08-13

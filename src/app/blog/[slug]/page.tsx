@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!post) return {};
 
   return createPageMetadata({
-    title: post.title,
+    title: post.metaTitle ?? post.title,
     description: post.excerpt,
     path: `/blog/${slug}`,
     type: "article",

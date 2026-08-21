@@ -11,7 +11,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Custom Packaging Sample Kits",
   description:
-    "Choose a UPG Box Sample Kit or Mylar Bag Sample Kit. Each costs $19.99 with shipping included, estimated delivery in 3–7 business days, and full credit toward a first production order.",
+    "Separate UPG Box or Mylar Bag Sample Kits cost $19.99 USD with shipping included, 3–7 business-day delivery, and credit toward a first production order.",
   path: "/samples",
   keywords: [
     "custom packaging sample kits",

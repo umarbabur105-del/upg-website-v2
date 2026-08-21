@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import time
 import urllib.error
 import urllib.parse
@@ -33,6 +34,17 @@ LEADS_SHEET_ID = os.getenv(
     "UPG_LEADS_SPREADSHEET_ID", "1nIMeqtTF9mv0gYxbI83GbgTatY0WdnSlfm3d009hxqQ"
 )
 BRAND_TERMS = ("universal packaging", "universal package", "upg")
+COMMERCIAL_PACKAGING_PATTERN = re.compile(
+    r"\b(?:packaging|boxes?|mailers?|cartons?|pouches?|mylar|bags?|roll[\s-]?stock|tuck|magnetic)\b",
+    re.IGNORECASE,
+)
+OUT_OF_SCOPE_QUERY_TERMS = (
+    "gaylord",
+    "master carton",
+    "shipping carton",
+    "rsc box",
+    "rsc carton",
+)
 AI_SOURCES = (
     "chatgpt",
     "openai",
@@ -143,6 +155,19 @@ def is_brand_query(query: str) -> bool:
     return any(term in lowered for term in BRAND_TERMS)
 
 
+def search_opportunity_score(impressions: float, position: float) -> float:
+    """Prioritize proven visibility that is closest to the first results pages."""
+    position_weight = max(0.05, (51 - min(position, 50)) / 50)
+    return impressions * position_weight
+
+
+def is_commercial_packaging_query(query: str) -> bool:
+    lowered = query.casefold()
+    return bool(COMMERCIAL_PACKAGING_PATTERN.search(query)) and not any(
+        term in lowered for term in OUT_OF_SCOPE_QUERY_TERMS
+    )
+
+
 def search_console_report(
     token: str, start_date: date, end_date: date
 ) -> dict[str, Any]:
@@ -236,6 +261,43 @@ def search_console_report(
         )[:15]
     ]
 
+    zero_click_opportunities = []
+    for row in non_brand:
+        clicks = float(row.get("clicks", 0))
+        impressions = float(row.get("impressions", 0))
+        position = float(row.get("position", 0))
+        if (
+            clicks
+            or not impressions
+            or position > 50
+            or not is_commercial_packaging_query(row["keys"][0])
+        ):
+            continue
+        zero_click_opportunities.append(
+            {
+                "query": row["keys"][0],
+                "page": urllib.parse.urlsplit(row["keys"][1]).path or "/",
+                "impressions": round(impressions, 2),
+                "average_position": round(position, 1),
+                "opportunity_score": round(
+                    search_opportunity_score(impressions, position), 2
+                ),
+            }
+        )
+    zero_click_opportunities.sort(
+        key=lambda item: (
+            -item["opportunity_score"],
+            -item["impressions"],
+            item["average_position"],
+        )
+    )
+
+    zero_click_pages = [
+        item
+        for item in top_pages
+        if item["impressions"] and not item["clicks"]
+    ]
+
     return {
         "clicks": round(sum(float(row.get("clicks", 0)) for row in rows), 2),
         "impressions": round(
@@ -256,6 +318,8 @@ def search_console_report(
         "top_non_brand_queries": top_queries,
         "top_non_brand_pages": top_pages,
         "top_non_brand_query_pages": top_query_pages,
+        "zero_click_opportunities": zero_click_opportunities[:10],
+        "zero_click_pages": zero_click_pages,
     }
 
 
@@ -417,6 +481,49 @@ def crm_report(rows: list[dict[str, str]], start_date: date, end_date: date) -> 
     )
     won = sum(count for status, count in statuses.items() if status.casefold() == "won")
 
+    landing_page_groups: dict[str, list[dict[str, str]]] = {}
+    for row in real_rows:
+        raw_landing_page = row.get("Landing Page", "").strip()
+        if raw_landing_page:
+            parsed = urllib.parse.urlsplit(raw_landing_page)
+            landing_page = parsed.path or "/"
+        else:
+            landing_page = "Unattributed"
+        landing_page_groups.setdefault(landing_page, []).append(row)
+
+    landing_page_outcomes = []
+    for landing_page, landing_rows in landing_page_groups.items():
+        landing_statuses = Counter(
+            row.get("Status") or "Unspecified" for row in landing_rows
+        )
+        landing_qualified = sum(
+            count
+            for status, count in landing_statuses.items()
+            if status.casefold() in {"qualified", "quoted", "won"}
+        )
+        landing_won = sum(
+            count
+            for status, count in landing_statuses.items()
+            if status.casefold() == "won"
+        )
+        landing_page_outcomes.append(
+            {
+                "landing_page": landing_page,
+                "leads": len(landing_rows),
+                "qualified_or_later": landing_qualified,
+                "won": landing_won,
+                "qualified_rate": round(landing_qualified / len(landing_rows), 4),
+                "statuses": dict(sorted(landing_statuses.items())),
+            }
+        )
+    landing_page_outcomes.sort(
+        key=lambda item: (
+            -item["qualified_or_later"],
+            -item["leads"],
+            item["landing_page"],
+        )
+    )
+
     return {
         "leads": len(real_rows),
         "qualified_or_later": qualified,
@@ -425,6 +532,7 @@ def crm_report(rows: list[dict[str, str]], start_date: date, end_date: date) -> 
         "acquisition": dict(sorted(acquisition.items())),
         "statuses": dict(sorted(statuses.items())),
         "product_families": dict(products.most_common()),
+        "landing_page_outcomes": landing_page_outcomes,
         "excluded_spam_or_verification": len(period_rows) - len(real_rows),
     }
 
@@ -456,6 +564,7 @@ def markdown_report(report: dict[str, Any]) -> str:
         f"- Search impressions: {comparisons['search_impressions']['current']} (previous {comparisons['search_impressions']['previous']})",
         f"- Non-brand search impressions: {comparisons['non_brand_impressions']['current']} (previous {comparisons['non_brand_impressions']['previous']})",
         f"- Non-brand clicks: {comparisons['non_brand_clicks']['current']} (previous {comparisons['non_brand_clicks']['previous']})",
+        f"- Non-brand queries in positions 1–20: {current['search_console']['queries_in_positions_1_20']}",
         f"- Organic Search sessions: {comparisons['organic_search_sessions']['current']} (previous {comparisons['organic_search_sessions']['previous']})",
         f"- Organic Shopping sessions: {comparisons['organic_shopping_sessions']['current']} (previous {comparisons['organic_shopping_sessions']['previous']})",
         f"- Lead form starts: {comparisons['form_starts']['current']} (previous {comparisons['form_starts']['previous']})",
@@ -473,6 +582,15 @@ def markdown_report(report: dict[str, Any]) -> str:
         lines.extend(f"- {source}: {count}" for source, count in acquisition.items())
     else:
         lines.append("- No non-spam website leads in this period.")
+    lines.extend(["", "## Lead outcomes by landing page", ""])
+    landing_page_outcomes = current["crm"]["landing_page_outcomes"]
+    if landing_page_outcomes:
+        lines.extend(
+            f"- {item['landing_page']}: {item['leads']} leads, {item['qualified_or_later']} qualified or later, {item['won']} won"
+            for item in landing_page_outcomes
+        )
+    else:
+        lines.append("- No non-spam landing-page outcomes in this period.")
     lines.extend(["", "## On-site tool engagement", ""])
     tool_events = current["ga4"]["events"]
     measured_tool_events = [
@@ -514,6 +632,25 @@ def markdown_report(report: dict[str, Any]) -> str:
         )
     else:
         lines.append("- No non-brand query-to-page evidence in this period.")
+    lines.extend(["", "## Search opportunities", ""])
+    opportunities = current["search_console"]["zero_click_opportunities"]
+    if opportunities:
+        lines.append(
+            "Zero-click commercial-packaging query-to-page pairs at position 50 or better, scored by impressions and ranking proximity:"
+        )
+        lines.extend(
+            f"- {item['query']} -> {item['page']}: {item['impressions']} impressions, position {item['average_position']}, opportunity score {item['opportunity_score']}"
+            for item in opportunities
+        )
+    else:
+        lines.append("- No zero-click query-to-page opportunities at position 50 or better.")
+    zero_click_pages = current["search_console"]["zero_click_pages"]
+    if zero_click_pages:
+        lines.extend(["", "Pages with measured non-brand visibility but no clicks:"])
+        lines.extend(
+            f"- {item['page']}: {item['impressions']} impressions, position {item['average_position']}"
+            for item in zero_click_pages
+        )
     lines.extend(
         [
             "",

@@ -43,6 +43,12 @@ export interface CosmeticSubcategory {
   moqNote: string;
   leadTimeNote: string;
   artworkNote: string;
+  decisionGuidance?: Array<{
+    title: string;
+    description: string;
+    href?: string;
+    linkLabel?: string;
+  }>;
   faqs?: Array<{ question: string; answer: string }>;
   relatedSlugs?: string[];
   reviewedAt?: string;
@@ -371,9 +377,9 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "lipstick-boxes",
     title: "Lipstick Boxes",
-    metaTitle: "Custom Lipstick Boxes & Printed Packaging",
+    metaTitle: "Custom Lipstick Boxes & Printed Outer Packaging",
     metaDescription:
-      "Custom printed lipstick boxes and outer packaging for lipstick, lip balm, lip oil, and beauty sets. Worldwide manufacturing with size-based MOQs.",
+      "Custom printed lipstick boxes and outer cartons for lipstick, lip balm, lip oil, and beauty sets, manufactured for brands worldwide.",
     quoteFamily: "Tuck Boxes",
     heroTitle: "Custom lipstick boxes and printed lipstick packaging.",
     heroDescription:
@@ -406,6 +412,34 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    decisionGuidance: [
+      {
+        title: "Start with the finished product",
+        description:
+          "Share the finished lipstick, lip balm, lip oil, or related product dimensions. The outer carton and any insert are planned around the real product rather than a generic beauty-box size.",
+      },
+      {
+        title: "Choose an individual carton or a presentation set",
+        description:
+          "A tuck box is the starting format for an individual retail unit. A magnetic presentation box can be reviewed for a collection or multi-product set after the arrangement is confirmed.",
+        href: "/products/custom-tuck-boxes",
+        linkLabel: "Review custom tuck boxes",
+      },
+      {
+        title: "Match the board to the print plan",
+        description:
+          "SBS C1S supports one-side printing and SBS C2S supports printing on both sides. Brown, white, or black kraft, CCNB, chipboard, and corrugated board are also available for approved tuck structures.",
+        href: "/materials-finishes",
+        linkLabel: "Compare materials and finishes",
+      },
+      {
+        title: "Lock the structure before final artwork",
+        description:
+          "Logo placement, copy, foil, spot UV, embossing, and debossing should be prepared on the approved dieline for the selected structure.",
+        href: "/tools/packaging-artwork-preflight",
+        linkLabel: "Check artwork readiness",
+      },
+    ],
     faqs: [
       {
         question: "What does UPG manufacture for lipstick packaging?",
@@ -519,6 +553,9 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "cosmetic-subscription-boxes",
     title: "Cosmetic Subscription Boxes",
+    metaTitle: "Custom Beauty Subscription Boxes",
+    metaDescription:
+      "Custom beauty subscription boxes for recurring product drops, seasonal collections, and branded unboxing programs worldwide.",
     quoteFamily: "Mailer Boxes",
     heroTitle: "Subscription packaging built for recurring beauty drops and consistent unboxing.",
     heroDescription:

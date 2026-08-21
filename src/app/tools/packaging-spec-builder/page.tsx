@@ -20,9 +20,9 @@ const toolPath = "/tools/packaging-spec-builder";
 const toolUrl = `${SITE_URL}${toolPath}`;
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Packaging Spec & MOQ Builder",
+  title: "Custom Packaging Specification Builder",
   description:
-    "Build a planning specification and check the UPG minimum order for custom tuck boxes, corrugated mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar bags.",
+    "Prepare a custom packaging brief with dimensions, material, finish, quantity, and the applicable UPG planning MOQ.",
   path: toolPath,
   keywords: [
     "packaging specification builder",
@@ -71,7 +71,7 @@ const structuredData = {
     {
       "@type": "WebApplication",
       "@id": `${toolUrl}#tool`,
-      name: "UPG Packaging Spec & MOQ Builder",
+      name: "UPG Custom Packaging Specification Builder",
       url: toolUrl,
       description:
         "A free planning tool for selecting a UPG packaging family, preparing known specifications, and checking the applicable planning MOQ.",
@@ -113,7 +113,7 @@ const structuredData = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Packaging Spec & MOQ Builder",
+          name: "Custom Packaging Specification Builder",
           item: toolUrl,
         },
       ],
@@ -254,7 +254,7 @@ export default async function PackagingSpecBuilderPage({ searchParams }: PagePro
         <div className="container-editorial pt-12 pb-12 md:pt-20 md:pb-16">
           <div className="max-w-5xl">
             <div className="eyebrow mb-5">Free packaging planning tool</div>
-            <h1 className="display-1 text-balance">Build your packaging specification and check the MOQ.</h1>
+            <h1 className="display-1 text-balance">Build a clearer custom packaging brief.</h1>
             <p className="mt-7 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
               Compare UPG&apos;s five packaging families, add the details you already know, and carry a clear planning specification into your project enquiry.
             </p>

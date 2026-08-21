@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     `Custom ${subcategory.title} | Printed Outer Packaging`;
   const description =
     subcategory.metaDescription ??
-    `${subcategory.heroDescription} UPG manufactures the custom printed box, not cosmetic containers, formulas, filling, or fulfillment.`;
+    subcategory.heroDescription;
   return createPageMetadata({
     title,
     description,
@@ -187,6 +187,43 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
                 <li>Delivery country and target date</li>
               </ul>
             </aside>
+          </div>
+        </section>
+      ) : null}
+
+      {subcategory.decisionGuidance ? (
+        <section className="section-shell bg-stone">
+          <div className="container-editorial">
+            <div className="mb-10 max-w-3xl">
+              <SectionHeading
+                eyebrow="Buying decisions"
+                title={`Plan ${subcategory.title.toLowerCase()} around the real product.`}
+                intro="These decisions help define the first useful packaging brief without treating a custom structure like a stock box."
+              />
+            </div>
+            <div className="grid gap-5 md:grid-cols-2">
+              {subcategory.decisionGuidance.map((item, index) => (
+                <article key={item.title} className="surface-card p-6 md:p-8">
+                  <div className="eyebrow mb-4">
+                    Decision {String(index + 1).padStart(2, "0")}
+                  </div>
+                  <h3 className="font-serif text-2xl text-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </p>
+                  {item.href && item.linkLabel ? (
+                    <Link
+                      href={item.href}
+                      className="mt-5 inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+                    >
+                      {item.linkLabel} <span>→</span>
+                    </Link>
+                  ) : null}
+                </article>
+              ))}
+            </div>
           </div>
         </section>
       ) : null}

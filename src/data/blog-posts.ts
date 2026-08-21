@@ -1,6 +1,7 @@
 export interface BlogPost {
   slug: string;
   title: string;
+  metaTitle?: string;
   date: string;
   excerpt: string;
   content: string;
@@ -36,6 +37,7 @@ Choose the product family, add the quantity and dimensions you need, and explain
   {
     slug: "corrugated-vs-rigid-boxes",
     title: "Corrugated Mailer vs. Magnetic Boxes: Which Fits Your Brand?",
+    metaTitle: "Corrugated Mailer vs. Magnetic Boxes",
     date: "2026-08-04",
     excerpt:
       "Compare branded corrugated mailer boxes with magnetic and collapsible magnetic boxes for PR kits, ecommerce, gifting, and premium presentation.",

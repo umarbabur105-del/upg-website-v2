@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "audit:seo": "node scripts/seo-quality-audit.mjs",
     "indexnow:submit": "node scripts/indexnow-submit.mjs",
     "report:organic": "python3 scripts/organic-weekly-report.py --format markdown"
   },

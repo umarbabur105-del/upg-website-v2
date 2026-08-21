@@ -9,7 +9,7 @@ export function Wordmark() {
         <span className="font-sans text-[0.66rem] font-semibold tracking-[0.18em] text-foreground uppercase leading-none">
           Universal
         </span>
-        <span className="mt-1.5 font-sans text-[0.56rem] font-semibold tracking-[0.145em] text-gold uppercase leading-none">
+        <span className="mt-1.5 font-sans text-[0.56rem] font-semibold tracking-[0.145em] text-gold-dark uppercase leading-none">
           Packaging Group
         </span>
       </span>

@@ -13,7 +13,7 @@ const toolUrl = `${SITE_URL}${toolPath}`;
 export const metadata: Metadata = createPageMetadata({
   title: "Packaging Artwork Preflight Checker",
   description:
-    "Use an eight-point packaging artwork readiness checklist for dielines, source files, images, fonts, color intent, finishes, copy, and version control before UPG review.",
+    "Check dielines, source files, images, fonts, color intent, finishes, copy, and version control before packaging artwork review.",
   path: toolPath,
   keywords: [
     "packaging artwork preflight checklist",

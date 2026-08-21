@@ -30,7 +30,7 @@ export function Header() {
       <div className="container-editorial flex h-16 items-center justify-between md:h-20">
         <Link
           href="/"
-          aria-label="Universal Packaging Group home"
+          aria-label="UPG Universal Packaging Group home"
           className="group flex items-center"
         >
           <Wordmark />

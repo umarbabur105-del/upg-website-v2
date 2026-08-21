@@ -14,9 +14,9 @@ import { products } from "@/data/products";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Custom Cosmetic Boxes & Outer Packaging for Beauty Brands",
+  title: "Custom Cosmetic Boxes & Beauty Packaging",
   description:
-    "Custom printed cosmetic boxes, outer cartons, magnetic boxes, and corrugated ear-lock mailers for beauty brands worldwide. Containers, filling, and fulfillment are not supplied.",
+    "Custom printed cosmetic boxes, outer cartons, magnetic presentation boxes, and corrugated mailers manufactured for beauty brands worldwide.",
   path: "/cosmetics",
   keywords: [
     "custom cosmetic boxes",
@@ -27,21 +27,85 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
-const cosmeticsServiceSchema = {
+const cosmeticsPageSchema = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "@id": `${SITE_URL}/cosmetics#service`,
-  name: "Custom cosmetic boxes and outer packaging manufacturing",
-  serviceType: "Custom printed cosmetic boxes and secondary packaging",
-  provider: { "@id": `${SITE_URL}/#organization` },
-  areaServed: { "@type": "Place", name: "Worldwide" },
-  audience: {
-    "@type": "BusinessAudience",
-    audienceType: "Beauty, skincare, cosmetics, fragrance, and personal-care brands",
-  },
-  description:
-    `${cosmeticsPackagingScope.included} ${cosmeticsPackagingScope.excluded}`,
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": `${SITE_URL}/cosmetics#webpage`,
+      url: `${SITE_URL}/cosmetics`,
+      name: "Custom Cosmetic Boxes & Beauty Packaging",
+      description:
+        "Custom printed outer packaging for beauty, skincare, cosmetics, fragrance, and personal-care brands worldwide.",
+      mainEntity: { "@id": `${SITE_URL}/cosmetics#services` },
+    },
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}/cosmetics#service`,
+      name: "Custom cosmetic boxes and outer packaging manufacturing",
+      serviceType: "Custom printed cosmetic boxes and secondary packaging",
+      provider: { "@id": `${SITE_URL}/#organization` },
+      areaServed: { "@type": "Place", name: "Worldwide" },
+      audience: {
+        "@type": "BusinessAudience",
+        audienceType:
+          "Beauty, skincare, cosmetics, fragrance, and personal-care brands",
+      },
+      description:
+        `${cosmeticsPackagingScope.included} ${cosmeticsPackagingScope.excluded}`,
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${SITE_URL}/cosmetics#services`,
+      itemListElement: cosmeticsSubcategories.map((subcategory, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: subcategory.title,
+        url: `${SITE_URL}/cosmetics/${subcategory.slug}`,
+      })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Cosmetic Packaging",
+          item: `${SITE_URL}/cosmetics`,
+        },
+      ],
+    },
+  ],
 };
+
+const cosmeticsBuyingPaths = [
+  {
+    title: "Lipstick outer boxes",
+    href: "/cosmetics/lipstick-boxes",
+    note: "Plan individual tuck cartons or premium presentation sets around the finished lip product.",
+  },
+  {
+    title: "Serum outer boxes",
+    href: "/cosmetics/serum-boxes",
+    note: "Develop narrow tuck cartons or presentation boxes around bottles, droppers, and treatment sets.",
+  },
+  {
+    title: "Influencer mailer boxes",
+    href: "/applications/influencer-kits",
+    note: "Build ear-lock corrugated mailers and inserts for creator seeding and launch campaigns.",
+  },
+  {
+    title: "Custom tuck boxes",
+    href: "/products/custom-tuck-boxes",
+    note: "Review the parent carton family, approved materials, print options, finishes, and size-based MOQs.",
+  },
+] as const;
 
 const productTypeRecs = [
   {
@@ -80,7 +144,7 @@ export default function CosmeticsPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(cosmeticsServiceSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(cosmeticsPageSchema) }}
       />
       <section className="bg-background">
         <div className="container-editorial pt-12 pb-14 md:pt-16 md:pb-18">
@@ -88,7 +152,7 @@ export default function CosmeticsPage() {
             <div className="lg:col-span-6">
               <div className="eyebrow mb-5">Custom printed outer packaging</div>
               <h1 className="display-1 text-balance">
-                Custom cosmetic boxes built around the product inside.
+                Custom cosmetic boxes and outer packaging for beauty products.
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
                 UPG manufactures tuck boxes, magnetic presentation boxes,
@@ -125,6 +189,34 @@ export default function CosmeticsPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div className="container-editorial grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
+            <div className="eyebrow mb-5">Quick answer</div>
+            <h2 className="font-serif text-3xl leading-tight text-foreground md:text-4xl">
+              UPG manufactures the printed box around the cosmetic product.
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-foreground/82">
+              Beauty packaging can begin with a tuck carton for an individual
+              retail product, a magnetic box for a premium set, or an ear-lock
+              corrugated mailer for PR, creator, subscription, and ecommerce
+              presentation. The final structure is reviewed from the finished
+              product dimensions, quantity, artwork, intended use, and delivery
+              destination.
+            </p>
+          </div>
+          <aside className="surface-card p-6 md:p-8 lg:col-span-5">
+            <div className="eyebrow mb-4">Start with these details</div>
+            <ul className="space-y-4 text-sm leading-relaxed text-foreground/85">
+              <li>Finished product dimensions and product count</li>
+              <li>Required packaging quantity</li>
+              <li>Retail, gifting, PR, subscription, or ecommerce use</li>
+              <li>Artwork status, reference images, and delivery country</li>
+            </ul>
+          </aside>
         </div>
       </section>
 
@@ -246,6 +338,40 @@ export default function CosmeticsPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div className="container-editorial">
+          <div className="mb-10 max-w-3xl">
+            <SectionHeading
+              eyebrow="Popular buying paths"
+              title="Move from the beauty product to the right packaging brief."
+              intro="Use the closest product or campaign path, then carry the selected structure into a project enquiry."
+            />
+          </div>
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {cosmeticsBuyingPaths.map((path) => (
+              <Link
+                key={path.href}
+                href={path.href}
+                className="surface-card group block p-6 hover:-translate-y-1 hover:shadow-card"
+              >
+                <h3 className="font-serif text-2xl text-foreground">
+                  {path.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {path.note}
+                </p>
+                <span className="mt-6 inline-flex items-center gap-1 text-sm text-foreground">
+                  Review path{" "}
+                  <span className="transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

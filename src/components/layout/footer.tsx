@@ -16,7 +16,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <Link
               href="/"
-              aria-label="Universal Packaging Group home"
+              aria-label="UPG Universal Packaging Group home"
               className="inline-flex"
             >
               <Wordmark />
