@@ -242,10 +242,15 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "serum-boxes",
     title: "Serum Boxes",
+    metaTitle: "Custom Serum Boxes & Printed Serum Packaging",
+    metaDescription:
+      "Custom printed serum boxes and outer packaging for dropper bottles, treatment serums, skincare sets, and product launches. Manufactured worldwide.",
     quoteFamily: "Tuck Boxes",
-    heroTitle: "Custom serum boxes for narrow formats, refined print, and product fit.",
+    heroTitle: "Custom serum boxes and printed serum packaging.",
     heroDescription:
       "Tall, narrow outer cartons and rigid presentation boxes for droppers, treatment serums, and featured-product launches.",
+    quickAnswer:
+      "UPG manufactures the custom printed outer box around serum bottles, droppers, and related skincare products. Individual products can use a tuck carton, while serum sets and featured-product launches can be reviewed in a magnetic presentation box. Structure, print, finish, and inserts are confirmed from the product dimensions, quantity, artwork, intended use, and delivery country.",
     intro:
       "Serum boxes often need a narrow structure, a controlled panel layout, and insert guidance around the finished bottle format.",
     recommended: [
@@ -258,7 +263,12 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
         note: "Rigid presentation option for serum sets and featured-product launches.",
       },
     ],
-    materials: ["Materials confirmed from the selected product family"],
+    materials: [
+      "SBS C1S or C2S for tuck cartons",
+      "Brown, white, or black kraft for tuck cartons",
+      "CCNB or chipboard for tuck cartons",
+      "Corrugated board where the approved tuck structure requires it",
+    ],
     finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
     inserts: ["Custom inserts where required"],
     idealFor: [
@@ -267,10 +277,40 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       "Premium skincare",
       "Gift sets",
     ],
-    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    moqNote:
+      "For tuck boxes: 1,000 units when every finished dimension is 5 inches or less; 500 units when the largest dimension is over 5 inches through exactly 10 inches; and 250 units when the largest dimension is over 10 inches. Magnetic boxes start at 250 units.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    faqs: [
+      {
+        question: "What does UPG manufacture for serum packaging?",
+        answer:
+          "UPG manufactures custom printed outer boxes for serum bottles, droppers, treatment products, and related skincare sets. Bottles, droppers, formulas, filling, and fulfillment are outside this offer.",
+      },
+      {
+        question: "Which box formats can be considered for serum products?",
+        answer:
+          "A custom tuck box can be developed for an individual serum bottle. Magnetic presentation boxes can be reviewed for serum sets or featured-product launches after the product arrangement and dimensions are confirmed.",
+      },
+      {
+        question: "What is the minimum order for custom serum boxes?",
+        answer:
+          "For tuck boxes, the planning MOQ is 1,000 units when every finished dimension is 5 inches or less, 500 units when the largest dimension is over 5 inches through exactly 10 inches, and 250 units when the largest dimension is over 10 inches. Magnetic boxes have a 250-unit planning MOQ.",
+      },
+      {
+        question: "What should I send for a serum box quote?",
+        answer:
+          "Share the bottle or product dimensions, required quantity, intended box format, delivery country, and any available artwork or reference images. Final specifications, pricing, and production timing are confirmed after review.",
+      },
+      {
+        question: "Can UPG deliver custom serum boxes worldwide?",
+        answer:
+          "Yes. UPG works with brands worldwide. Delivery destination and transport requirements are reviewed as part of the project before final pricing and timing are confirmed.",
+      },
+    ],
+    relatedSlugs: ["skincare-boxes", "cream-boxes", "perfume-boxes"],
+    reviewedAt: "2026-08-21",
   },
   {
     slug: "cream-boxes",
