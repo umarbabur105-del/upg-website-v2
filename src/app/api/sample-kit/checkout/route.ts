@@ -41,6 +41,33 @@ function isAllowedCheckoutOrigin(request: Request, origin: string) {
   }
 }
 
+function safeStripeErrorDetails(error: unknown) {
+  if (!error || typeof error !== "object") {
+    return { type: "sample_checkout_session_error" };
+  }
+
+  const candidate = error as {
+    type?: unknown;
+    code?: unknown;
+    statusCode?: unknown;
+    requestId?: unknown;
+  };
+
+  return {
+    type: "sample_checkout_session_error",
+    stripeType:
+      typeof candidate.type === "string" ? candidate.type.slice(0, 80) : undefined,
+    stripeCode:
+      typeof candidate.code === "string" ? candidate.code.slice(0, 80) : undefined,
+    stripeStatusCode:
+      typeof candidate.statusCode === "number" ? candidate.statusCode : undefined,
+    stripeRequestId:
+      typeof candidate.requestId === "string"
+        ? candidate.requestId.slice(0, 120)
+        : undefined,
+  };
+}
+
 export async function POST(request: Request) {
   try {
     const requestOrigin = request.headers.get("origin");
@@ -152,7 +179,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: error.status });
     }
 
-    console.error(JSON.stringify({ type: "sample_checkout_session_error" }));
+    // Deliberately omit the error message, request payload, and customer data.
+    // Stripe's non-sensitive type/code/request ID are enough to diagnose a
+    // configuration or account-mode problem from production logs.
+    console.error(JSON.stringify(safeStripeErrorDetails(error)));
     return NextResponse.json(
       { error: "Checkout is temporarily unavailable. Please request a sample below." },
       { status: 502 }
