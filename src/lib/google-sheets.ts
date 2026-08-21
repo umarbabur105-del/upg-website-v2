@@ -14,7 +14,11 @@ export type LeadSheetInput = {
     | "Contact Form"
     | "Sample Request"
     | "Box Sample Kit Order"
-    | "Mylar Bag Sample Kit Order";
+    | "Mylar Bag Sample Kit Order"
+    | "Stripe Test Order";
+  status?: "New" | "Spam";
+  priority?: "Normal" | "Low";
+  owner?: "Umar" | "System Test";
   notificationStatus: "Sent" | "Failed";
   name: string;
   email: string;
@@ -197,9 +201,9 @@ function buildLeadRow(input: LeadSheetInput) {
     input.submissionId,
     timestamp,
     input.source,
-    "New",
-    "Normal",
-    "Umar",
+    input.status ?? "New",
+    input.priority ?? "Normal",
+    input.owner ?? "Umar",
     "",
     input.name,
     input.email,

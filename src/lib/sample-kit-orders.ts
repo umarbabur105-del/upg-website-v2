@@ -34,12 +34,14 @@ export async function recordPaidSampleKitOrder({
   request,
   sheetAlreadyStored,
   emailAlreadySent,
+  testMode,
 }: {
   session: Stripe.Checkout.Session;
   kit: SampleKit;
   request: Request;
   sheetAlreadyStored: boolean;
   emailAlreadySent: boolean;
+  testMode: boolean;
 }) {
   const customer = session.customer_details;
   const shipping = session.collected_information?.shipping_details;
@@ -50,6 +52,7 @@ export async function recordPaidSampleKitOrder({
   const amount = formatAmount(session.amount_total, session.currency);
   const fields = renderFieldRows([
     { label: "Order", value: session.id },
+    { label: "Mode", value: testMode ? "Stripe test mode — no real charge" : "Live" },
     { label: "Payment status", value: session.payment_status },
     { label: "Amount", value: amount },
     { label: "Product", value: kit.name },
@@ -74,13 +77,17 @@ export async function recordPaidSampleKitOrder({
     emailAlreadySent
       ? Promise.resolve(null)
       : sendNotification({
-          subject: `[UPG Paid ${kit.shortName}] ${name} — ${session.id}`,
+          subject: testMode
+            ? `[UPG TEST — NO REAL PAYMENT] ${kit.shortName} — ${session.id}`
+            : `[UPG Paid ${kit.shortName}] ${name} — ${session.id}`,
           html: `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:640px;">
-  <h2 style="font-size:18px;color:#111;margin:0 0 4px;">Paid ${kit.name} Order</h2>
-  <p style="font-size:13px;color:#666;margin:0 0 16px;">Payment is confirmed. Prepare the kit and use the Stripe order as the fulfillment record.</p>
+  <h2 style="font-size:18px;color:#111;margin:0 0 4px;">${testMode ? "Test payment completed" : `Paid ${kit.name} Order`}</h2>
+  <p style="font-size:13px;color:#666;margin:0 0 16px;">${testMode ? "TEST MODE ONLY. No money was charged and no kit should be fulfilled." : "Payment is confirmed. Prepare the kit and use the Stripe order as the fulfillment record."}</p>
   <table style="border-collapse:collapse;width:100%;border:1px solid #eee;">${fields.html}</table>
 </div>`,
-          text: `Paid ${kit.name} Order\nPayment confirmed.\n\n${fields.text}\n`,
+          text: testMode
+            ? `UPG STRIPE TEST MODE\nNo real payment. Do not fulfil.\n\n${fields.text}\n`
+            : `Paid ${kit.name} Order\nPayment confirmed.\n\n${fields.text}\n`,
           replyTo: email || undefined,
         }),
   ]);
@@ -94,7 +101,10 @@ export async function recordPaidSampleKitOrder({
       {
         submissionId: session.id,
         receivedAt: new Date(session.created * 1_000),
-        source: kit.crm.source,
+        source: testMode ? "Stripe Test Order" : kit.crm.source,
+        status: testMode ? "Spam" : "New",
+        priority: testMode ? "Low" : "Normal",
+        owner: testMode ? "System Test" : "Umar",
         notificationStatus: emailSent ? "Sent" : "Failed",
         name,
         email,
@@ -107,7 +117,9 @@ export async function recordPaidSampleKitOrder({
         shippingStateOrProvince: shipping?.address.state ?? "",
         materialPreference: kit.crm.materialPreference,
         finishPreference: kit.crm.finishPreference,
-        message: `Paid ${amount}. ${kit.name}. Stripe order: ${session.id}.\nShipping address:\n${shippingAddress}`,
+        message: testMode
+          ? `TEST MODE — NO REAL PAYMENT OR FULFILLMENT. Simulated ${amount}. ${kit.name}. Stripe test session: ${session.id}.\nShipping address:\n${shippingAddress}`
+          : `Paid ${amount}. ${kit.name}. Stripe order: ${session.id}.\nShipping address:\n${shippingAddress}`,
         landingPage: session.metadata?.landing_page || kit.path,
         referrer: session.metadata?.referrer || null,
         utmSource: session.metadata?.utm_source || null,

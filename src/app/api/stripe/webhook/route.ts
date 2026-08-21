@@ -2,7 +2,11 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { getSampleKitBySku } from "@/data/sample-kit";
 import { recordPaidSampleKitOrder } from "@/lib/sample-kit-orders";
-import { getStripeClient, getStripeWebhookSecret } from "@/lib/stripe";
+import {
+  getStripeClient,
+  getStripeWebhookSecret,
+  type StripeMode,
+} from "@/lib/stripe";
 
 export const dynamic = "force-dynamic";
 
@@ -12,27 +16,40 @@ const supportedEvents = new Set([
 ]);
 
 export async function POST(request: Request) {
-  const stripe = getStripeClient();
-  const webhookSecret = getStripeWebhookSecret();
   const signature = request.headers.get("stripe-signature");
-
-  if (!stripe || !webhookSecret) {
-    console.error(JSON.stringify({ type: "stripe_webhook_not_configured" }));
-    return NextResponse.json({ error: "Webhook not configured" }, { status: 503 });
-  }
 
   if (!signature) {
     return NextResponse.json({ error: "Missing signature" }, { status: 400 });
   }
 
-  let event: Stripe.Event;
-  try {
-    const rawBody = await request.text();
-    event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret);
-  } catch {
+  const rawBody = await request.text();
+  let verified:
+    | { event: Stripe.Event; mode: StripeMode; stripe: Stripe }
+    | undefined;
+
+  for (const mode of ["live", "test"] as const) {
+    const stripe = getStripeClient(mode);
+    const webhookSecret = getStripeWebhookSecret(mode);
+    if (!stripe || !webhookSecret) continue;
+
+    try {
+      const event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret);
+      if (event.livemode === (mode === "live")) {
+        verified = { event, mode, stripe };
+        break;
+      }
+    } catch {
+      // Try the other independently configured signing secret.
+    }
+  }
+
+  if (!verified) {
     console.error(JSON.stringify({ type: "stripe_webhook_signature_failed" }));
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
+
+  const { event, mode, stripe } = verified;
+  const testMode = mode === "test";
 
   if (!supportedEvents.has(event.type)) {
     return NextResponse.json({ received: true });
@@ -42,6 +59,10 @@ export async function POST(request: Request) {
   const incomingKit = getSampleKitBySku(incomingSession.metadata?.sku ?? "");
   if (!incomingKit || incomingSession.metadata?.order_type !== incomingKit.orderType) {
     return NextResponse.json({ received: true });
+  }
+
+  if (testMode !== (incomingSession.metadata?.upg_test_mode === "true")) {
+    return NextResponse.json({ received: true, ignored: true });
   }
 
   if (incomingSession.payment_status !== "paid") {
@@ -67,6 +88,7 @@ export async function POST(request: Request) {
       request,
       sheetAlreadyStored,
       emailAlreadySent,
+      testMode,
     });
 
     if (
@@ -84,15 +106,19 @@ export async function POST(request: Request) {
     if (!result.sheetStored || !result.emailSent) {
       console.error(JSON.stringify({
         type: "sample_order_partial_processing",
+        testMode,
         sheetStored: result.sheetStored,
         emailSent: result.emailSent,
       }));
       return NextResponse.json({ error: "Order processing incomplete" }, { status: 500 });
     }
 
-    return NextResponse.json({ received: true, processed: true });
+    return NextResponse.json({ received: true, processed: true, testMode });
   } catch {
-    console.error(JSON.stringify({ type: "sample_order_webhook_processing_failed" }));
+    console.error(JSON.stringify({
+      type: "sample_order_webhook_processing_failed",
+      testMode,
+    }));
     return NextResponse.json({ error: "Order processing failed" }, { status: 500 });
   }
 }

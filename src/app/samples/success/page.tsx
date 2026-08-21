@@ -17,14 +17,17 @@ export default async function SampleKitSuccessPage({
   searchParams: Promise<{ session_id?: string }>;
 }) {
   const { session_id: sessionId } = await searchParams;
-  const stripe = getStripeClient();
   let paid = false;
+  let testMode = false;
   let email = "";
   let kit: SampleKit | undefined;
 
-  if (stripe && sessionId && /^cs_(test_|live_)?[A-Za-z0-9]+$/.test(sessionId)) {
+  if (sessionId && /^cs_(test_|live_)?[A-Za-z0-9]+$/.test(sessionId)) {
     try {
-      const session = await stripe.checkout.sessions.retrieve(sessionId);
+      testMode = sessionId.startsWith("cs_test_");
+      const sessionStripe = getStripeClient(testMode ? "test" : "live");
+      if (!sessionStripe) throw new Error("Stripe mode not configured");
+      const session = await sessionStripe.checkout.sessions.retrieve(sessionId);
       kit = getSampleKitBySku(session.metadata?.sku ?? "");
       paid =
         session.payment_status === "paid" &&
@@ -45,11 +48,17 @@ export default async function SampleKitSuccessPage({
           </div>
           <div className="eyebrow mt-6">Sample Kit order</div>
           <h1 className="mt-3 font-serif text-4xl text-foreground md:text-5xl">
-            {paid ? "Payment received." : "Payment status needs review."}
+            {paid
+              ? testMode
+                ? "Test payment received."
+                : "Payment received."
+              : "Payment status needs review."}
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
             {paid
-              ? `Your ${kit?.name} order is confirmed. UPG will prepare the listed finished samples and use the shipping address provided during checkout.`
+              ? testMode
+                ? "Stripe test mode completed successfully. No money was charged and no sample kit will be fulfilled."
+                : `Your ${kit?.name} order is confirmed. UPG will prepare the listed finished samples and use the shipping address provided during checkout.`
               : "We could not verify a completed Sample Kit payment from this link. No new payment is required until UPG confirms the order status."}
           </p>
           {paid && email ? (
@@ -72,7 +81,11 @@ export default async function SampleKitSuccessPage({
             </Link>
           </div>
           {paid && sessionId && kit ? (
-            <SampleKitPurchaseTracker transactionId={sessionId} kit={kit} />
+            <SampleKitPurchaseTracker
+              transactionId={sessionId}
+              kit={kit}
+              testMode={testMode}
+            />
           ) : null}
         </div>
       </div>

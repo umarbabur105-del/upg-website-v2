@@ -7,12 +7,14 @@ import { trackAnalyticsEvent } from "@/lib/analytics";
 export function SampleKitPurchaseTracker({
   transactionId,
   kit,
+  testMode = false,
 }: {
   transactionId: string;
   kit: SampleKit;
+  testMode?: boolean;
 }) {
   useEffect(() => {
-    trackAnalyticsEvent("purchase", {
+    trackAnalyticsEvent(testMode ? "stripe_test_purchase" : "purchase", {
       transaction_id: transactionId,
       currency: kit.currency,
       value: kit.price,
@@ -27,8 +29,9 @@ export function SampleKitPurchaseTracker({
           quantity: 1,
         },
       ],
+      test_mode: testMode,
     });
-  }, [transactionId, kit]);
+  }, [transactionId, kit, testMode]);
 
   return null;
 }

@@ -7,7 +7,11 @@ import {
   FormRequestError,
   parseFormRequest,
 } from "@/lib/form-validation";
-import { getStripeClient } from "@/lib/stripe";
+import {
+  getStripeClient,
+  hasValidStripeTestAccessToken,
+  type StripeMode,
+} from "@/lib/stripe";
 
 export const dynamic = "force-dynamic";
 
@@ -78,6 +82,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid checkout origin" }, { status: 403 });
     }
 
+    const suppliedTestToken = request.headers.get("x-upg-stripe-test-token");
+    const testModeRequested = suppliedTestToken !== null;
+    const stripeMode: StripeMode = testModeRequested ? "test" : "live";
+    if (testModeRequested && !hasValidStripeTestAccessToken(suppliedTestToken)) {
+      return NextResponse.json({ error: "Invalid test-mode access" }, { status: 403 });
+    }
+
     const input = await parseFormRequest(request, 2_000);
     const sku = cleanText(input.sku, { max: 80, singleLine: true });
     const attribution = cleanAttribution(input.attribution);
@@ -86,18 +97,21 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid sample kit" }, { status: 400 });
     }
 
-    const stripe = getStripeClient();
+    const stripe = getStripeClient(stripeMode);
     if (!stripe) {
       return NextResponse.json(
         {
           error:
-            "Secure checkout is not connected yet. Please request a free sample review below.",
+            stripeMode === "test"
+              ? "Stripe test mode is not configured."
+              : "Secure checkout is not connected yet. Please request a free sample review below.",
         },
         { status: 503 }
       );
     }
 
     const returnOrigin = checkoutReturnOrigin(request);
+    const testMode = stripeMode === "test";
     const orderReference = crypto.randomUUID();
     const attributionMetadata = Object.fromEntries(
       Object.entries(attribution).filter(
@@ -126,7 +140,7 @@ export async function POST(request: Request) {
         },
       ],
       automatic_tax: {
-        enabled: process.env.STRIPE_AUTOMATIC_TAX === "true",
+        enabled: !testMode && process.env.STRIPE_AUTOMATIC_TAX === "true",
       },
       adaptive_pricing: {
         enabled: false,
@@ -156,6 +170,7 @@ export async function POST(request: Request) {
         sku: kit.sku,
         merchant_id: kit.merchantId,
         kit_credit_cents: String(kit.priceCents),
+        upg_test_mode: String(testMode),
         ...attributionMetadata,
       },
       payment_intent_data: {
@@ -163,6 +178,7 @@ export async function POST(request: Request) {
           order_type: kit.orderType,
           sku: kit.sku,
           order_reference: orderReference,
+          upg_test_mode: String(testMode),
         },
       },
       custom_text: {
@@ -179,7 +195,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Checkout could not be created" }, { status: 502 });
     }
 
-    return NextResponse.json({ checkoutUrl: session.url });
+    return NextResponse.json({ checkoutUrl: session.url, mode: stripeMode });
   } catch (error) {
     if (error instanceof FormRequestError) {
       return NextResponse.json({ error: error.message }, { status: error.status });
