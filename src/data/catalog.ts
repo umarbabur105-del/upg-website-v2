@@ -24,6 +24,8 @@ export interface SampleHighlight {
 export interface CosmeticSubcategory {
   slug: string;
   title: string;
+  metaTitle?: string;
+  metaDescription?: string;
   quoteFamily:
     | "Tuck Boxes"
     | "Mailer Boxes"
@@ -32,6 +34,7 @@ export interface CosmeticSubcategory {
   intro: string;
   heroTitle: string;
   heroDescription: string;
+  quickAnswer?: string;
   recommended: { productSlug: string; note: string }[];
   materials: string[];
   finishes: string[];
@@ -40,6 +43,9 @@ export interface CosmeticSubcategory {
   moqNote: string;
   leadTimeNote: string;
   artworkNote: string;
+  faqs?: Array<{ question: string; answer: string }>;
+  relatedSlugs?: string[];
+  reviewedAt?: string;
 }
 
 export const cosmeticsPackagingScope = {
@@ -325,10 +331,15 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "lipstick-boxes",
     title: "Lipstick Boxes",
+    metaTitle: "Custom Lipstick Boxes & Printed Packaging",
+    metaDescription:
+      "Custom printed lipstick boxes and outer packaging for lipstick, lip balm, lip oil, and beauty sets. Worldwide manufacturing with size-based MOQs.",
     quoteFamily: "Tuck Boxes",
-    heroTitle: "Custom lipstick boxes built to read on shelf and on camera.",
+    heroTitle: "Custom lipstick boxes and printed lipstick packaging.",
     heroDescription:
       "Custom printed outer cartons and premium presentation boxes for lipstick, lip oil, lip balm, and other slim-format beauty products.",
+    quickAnswer:
+      "UPG manufactures the custom printed outer box around lipstick, lip balm, lip oil, and related slim beauty products. Individual products can use a tuck carton, while premium collections can be reviewed in a magnetic presentation box. Structure, print, finish, and inserts are confirmed from the product dimensions, quantity, artwork, intended use, and delivery country.",
     intro:
       "Lipstick boxes need an accurate dieline, balanced panel layout, and finishes suited to a small carton format.",
     recommended: [
@@ -341,14 +352,49 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
         note: "Collector sets and premium collections.",
       },
     ],
-    materials: ["Materials confirmed from the selected product family"],
+    materials: [
+      "SBS C1S or C2S for tuck cartons",
+      "Brown, white, or black kraft for tuck cartons",
+      "CCNB or chipboard for tuck cartons",
+      "Corrugated board where the approved tuck structure requires it",
+    ],
     finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
     inserts: ["Custom inserts where required"],
     idealFor: ["Lipstick", "Lip gloss", "Lip balm", "Mini sets"],
-    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    moqNote:
+      "For tuck boxes: 1,000 units when every finished dimension is 5 inches or less; 500 units when the largest dimension is over 5 inches through exactly 10 inches; and 250 units when the largest dimension is over 10 inches. Magnetic boxes start at 250 units.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    faqs: [
+      {
+        question: "What does UPG manufacture for lipstick packaging?",
+        answer:
+          "UPG manufactures custom printed outer boxes for lipstick, lip balm, lip oil, lip gloss, and related slim beauty products. Cosmetic mechanisms, formulas, filling, and fulfillment are outside this offer.",
+      },
+      {
+        question: "Which box formats can be considered for lipstick products?",
+        answer:
+          "A custom tuck box can be developed for an individual lipstick product. Magnetic presentation boxes can be reviewed for premium collections or multi-product sets after the product arrangement and dimensions are confirmed.",
+      },
+      {
+        question: "What is the minimum order for custom lipstick boxes?",
+        answer:
+          "For tuck boxes, the planning MOQ is 1,000 units when every finished dimension is 5 inches or less, 500 units when the largest dimension is over 5 inches through exactly 10 inches, and 250 units when the largest dimension is over 10 inches. Magnetic boxes have a 250-unit planning MOQ.",
+      },
+      {
+        question: "What should I send for a lipstick box quote?",
+        answer:
+          "Share the product dimensions, required quantity, intended box format, delivery country, and any available artwork or reference images. Final specifications, pricing, and production timing are confirmed after review.",
+      },
+      {
+        question: "Can UPG deliver custom lipstick boxes worldwide?",
+        answer:
+          "Yes. UPG works with brands worldwide. Delivery destination and transport requirements are reviewed as part of the project before final pricing and timing are confirmed.",
+      },
+    ],
+    relatedSlugs: ["lip-gloss-boxes", "mascara-boxes", "cosmetic-subscription-boxes"],
+    reviewedAt: "2026-08-21",
   },
   {
     slug: "lip-gloss-boxes",

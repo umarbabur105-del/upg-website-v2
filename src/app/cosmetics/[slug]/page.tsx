@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
@@ -28,8 +29,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!subcategory) return {};
 
-  const title = `Custom ${subcategory.title} | Printed Outer Packaging`;
-  const description = `${subcategory.heroDescription} UPG manufactures the custom printed box, not cosmetic containers, formulas, filling, or fulfillment.`;
+  const title =
+    subcategory.metaTitle ??
+    `Custom ${subcategory.title} | Printed Outer Packaging`;
+  const description =
+    subcategory.metaDescription ??
+    `${subcategory.heroDescription} UPG manufactures the custom printed box, not cosmetic containers, formulas, filling, or fulfillment.`;
   return createPageMetadata({
     title,
     description,
@@ -56,6 +61,9 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
       product: getProductBySlug(item.productSlug),
     }))
     .filter((item) => item.product);
+  const relatedGuides = (subcategory.relatedSlugs ?? [])
+    .map((relatedSlug) => getCosmeticsSubcategoryBySlug(relatedSlug))
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   const pageUrl = `${SITE_URL}/cosmetics/${slug}`;
   const quoteHref = `/get-a-quote?product=${encodeURIComponent(
@@ -64,6 +72,17 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
   const pageSchema = {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: subcategory.metaTitle ?? `Custom ${subcategory.title}`,
+        description: subcategory.metaDescription ?? subcategory.heroDescription,
+        ...(subcategory.reviewedAt
+          ? { dateModified: subcategory.reviewedAt }
+          : {}),
+        mainEntity: { "@id": `${pageUrl}#service` },
+      },
       {
         "@type": "Service",
         "@id": `${pageUrl}#service`,
@@ -74,6 +93,21 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
         provider: { "@id": `${SITE_URL}/#organization` },
         areaServed: "Worldwide",
       },
+      ...(subcategory.faqs
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: subcategory.faqs.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: item.answer,
+                },
+              })),
+            },
+          ]
+        : []),
       {
         "@type": "BreadcrumbList",
         itemListElement: [
@@ -131,6 +165,31 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {subcategory.quickAnswer ? (
+        <section className="section-shell">
+          <div className="container-editorial grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <div className="eyebrow mb-5">Quick answer</div>
+              <h2 className="font-serif text-3xl leading-tight text-foreground md:text-4xl">
+                What buyers should know first.
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-foreground/82">
+                {subcategory.quickAnswer}
+              </p>
+            </div>
+            <aside className="surface-card p-6 md:p-8 lg:col-span-5">
+              <div className="eyebrow mb-4">What to send</div>
+              <ul className="space-y-4 text-sm leading-relaxed text-foreground/85">
+                <li>Product dimensions and required quantity</li>
+                <li>Preferred box format or a reference image</li>
+                <li>Artwork files or current brand direction</li>
+                <li>Delivery country and target date</li>
+              </ul>
+            </aside>
+          </div>
+        </section>
+      ) : null}
 
       <section className="border-y border-border bg-cream">
         <div className="container-editorial grid gap-6 py-8 md:grid-cols-[1fr_auto] md:items-center md:py-10">
@@ -262,6 +321,57 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {subcategory.faqs ? (
+        <section className="section-shell bg-cream">
+          <div className="container-editorial grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <SectionHeading
+                eyebrow="Common questions"
+                title={`Plan ${subcategory.title.toLowerCase()} with clear facts.`}
+                intro="These answers cover product scope, available formats, planning minimums, quote inputs, and worldwide delivery."
+              />
+            </div>
+            <div className="surface-card p-6 sm:p-8 lg:col-span-8 lg:p-10">
+              <FaqAccordion items={subcategory.faqs} />
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {relatedGuides.length > 0 ? (
+        <section className="section-shell">
+          <div className="container-editorial">
+            <div className="mb-10">
+              <SectionHeading
+                eyebrow="Related cosmetic packaging"
+                title="Compare adjacent beauty-packaging briefs."
+                intro="Use the guide closest to the finished product or project format, then confirm the final structure during specification review."
+              />
+            </div>
+            <div className="grid gap-5 md:grid-cols-3">
+              {relatedGuides.map((guide) => (
+                <Link
+                  key={guide.slug}
+                  href={`/cosmetics/${guide.slug}`}
+                  className="surface-card group block p-6 hover:-translate-y-1 hover:shadow-card"
+                >
+                  <div className="eyebrow mb-4">Cosmetic packaging guide</div>
+                  <h3 className="font-serif text-2xl text-foreground">
+                    Custom {guide.title.toLowerCase()}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {guide.intro}
+                  </p>
+                  <span className="mt-6 inline-flex items-center gap-1 text-sm text-foreground">
+                    Read guide <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {recommendedProducts.length > 0 ? (
         <section className="section-shell">

@@ -153,7 +153,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const cosmeticsRoutes: MetadataRoute.Sitemap = cosmeticsSubcategories.map(
     (subcategory) => ({
       url: `${SITE_URL}/cosmetics/${subcategory.slug}`,
-      lastModified: COSMETICS_UPDATED_AT,
+      lastModified: subcategory.reviewedAt
+        ? new Date(`${subcategory.reviewedAt}T00:00:00.000Z`)
+        : COSMETICS_UPDATED_AT,
       changeFrequency: "monthly" as const,
       priority: 0.82,
     })

@@ -108,15 +108,17 @@ export const mailerApplications: MailerApplication[] = [
   },
   {
     slug: "influencer-kits",
-    title: "Custom Influencer Boxes and Kits",
-    shortName: "Influencer Kits",
-    projectName: "influencer kit",
-    heroTitle: "Custom influencer kits for creator seeding and social launches.",
+    title: "Custom Influencer Mailer Boxes & PR Kits",
+    shortName: "Influencer Mailer Boxes",
+    projectName: "influencer mailer box",
+    heroTitle: "Custom influencer mailer boxes for creator seeding and social launches.",
     heroDescription:
-      "Create a branded ear-lock corrugated mailer for creator seeding, campaign drops, and multi-product influencer kits. UPG manufactures each project around the approved product arrangement, artwork, quantity, and destination.",
+      "Create branded influencer mailer boxes for creator seeding, campaign drops, and multi-product PR kits. UPG manufactures each ear-lock corrugated mailer around the approved product arrangement, artwork, quantity, and destination.",
     metaDescription:
-      "Custom influencer boxes and creator PR kits for seeding campaigns, launch drops, and branded product presentation, manufactured for brands worldwide.",
+      "Custom influencer mailer boxes and creator PR kits for seeding campaigns, launch drops, and branded product presentation. Manufactured worldwide.",
     keywords: [
+      "custom influencer mailer boxes",
+      "influencer mailer boxes",
       "custom influencer boxes",
       "influencer PR kits",
       "creator seeding boxes",
@@ -128,7 +130,7 @@ export const mailerApplications: MailerApplication[] = [
       alt: "Representative custom influencer kit concept with a fitted product insert",
     },
     quickAnswer:
-      "A custom influencer kit is an ear-lock corrugated presentation mailer designed for creator seeding, campaign launches, or branded social outreach. It can organize one or several products with coordinated print and a custom insert after the packout is reviewed.",
+      "An influencer mailer box is an ear-lock corrugated presentation box made for creator seeding, campaign launches, or branded social outreach. It can organize one or several products with coordinated print and a custom insert after the product arrangement is reviewed.",
     bestFor: [
       "Creator seeding and influencer outreach",
       "Campaign drops and launch announcements",
@@ -167,9 +169,14 @@ export const mailerApplications: MailerApplication[] = [
     ],
     faqs: [
       {
-        question: "What is the difference between an influencer kit and a general PR box?",
+        question: "What is an influencer mailer box?",
         answer:
-          "An influencer kit is planned specifically for creator seeding or social campaign outreach, often around a defined product mix and content moment. A general PR box may be used more broadly for press, editorial, event, or media presentations.",
+          "It is a branded ear-lock corrugated presentation box created for sending products to creators as part of a seeding campaign, launch, or social outreach project. The structure, print, and insert are developed around the approved kit contents.",
+      },
+      {
+        question: "What is the difference between an influencer mailer box and a general PR box?",
+        answer:
+          "An influencer mailer box is planned specifically for creator seeding or social campaign outreach, often around a defined product mix and content moment. A general PR box may be used more broadly for press, editorial, event, or media presentations.",
       },
       {
         question: "Can an influencer kit hold several products?",
@@ -191,7 +198,7 @@ export const mailerApplications: MailerApplication[] = [
       label: "Explore the beauty-specific PR box guide",
       href: "/cosmetics/pr-boxes",
     },
-    reviewedAt: "2026-08-06",
+    reviewedAt: "2026-08-21",
   },
   {
     slug: "custom-subscription-boxes",
