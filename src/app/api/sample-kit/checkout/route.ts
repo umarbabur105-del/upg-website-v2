@@ -106,7 +106,6 @@ export async function POST(request: Request) {
     );
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      ui_mode: "embedded",
       customer_creation: "always",
       client_reference_id: orderReference,
       phone_number_collection: { enabled: true },
@@ -169,14 +168,15 @@ export async function POST(request: Request) {
             "The full kit price is credited toward your first UPG custom packaging production order.",
         },
       },
-      return_url: `${returnOrigin}/samples/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${returnOrigin}/samples/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${returnOrigin}${kit.path}?checkout=cancelled`,
     });
 
-    if (!session.client_secret) {
+    if (!session.url) {
       return NextResponse.json({ error: "Checkout could not be created" }, { status: 502 });
     }
 
-    return NextResponse.json({ clientSecret: session.client_secret });
+    return NextResponse.json({ checkoutUrl: session.url });
   } catch (error) {
     if (error instanceof FormRequestError) {
       return NextResponse.json({ error: error.message }, { status: error.status });

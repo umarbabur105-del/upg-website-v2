@@ -70,14 +70,14 @@ export default async function SampleKitCheckoutPage({
           <div className="mb-6">
             <div className="eyebrow">Payment & delivery</div>
             <h2 className="mt-3 font-serif text-4xl text-foreground md:text-5xl">
-              Complete your order on UPG.
+              Review your kit, then continue securely.
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              Enter the delivery and payment details below. Payment information
-              is handled securely by Stripe and is not stored by UPG.
+              Stripe collects the delivery and payment details on its secure
+              hosted checkout. Payment information is not stored by UPG.
             </p>
           </div>
-          <div className="min-h-[480px] border border-border bg-surface p-4 shadow-soft md:p-6">
+          <div className="border border-border bg-surface p-4 shadow-soft md:p-6">
             <EmbeddedSampleKitCheckout kit={kit} />
           </div>
         </div>
