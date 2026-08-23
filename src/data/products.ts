@@ -22,6 +22,7 @@ export interface Product {
   summary: string;
   longSummary: string;
   metaDescription: string;
+  searchTerms?: string[];
   moq: string;
   leadTime: string;
   image: string;
@@ -286,11 +287,17 @@ export const products: Product[] = [
     sku: "UPG-MYLAR",
     bestFor: "Coffee, packaged food, supplements, liquid-product formats, child-resistant options, and flexible packaging",
     summary:
-      "Custom printed flexible packaging across pouches, bags, and rollstock film formats.",
+      "Custom printed Mylar bags, pouches, and rollstock film across UPG's current flexible-packaging formats.",
     longSummary:
-      "Custom Mylar bags include three-side seal bags, flat-bottom bags, stand-up pouches, spout bags, child-resistant bags, coffee bags, and rollstock film. Depending on the format, options can include zippers, valves, windows, and matte, gloss, or metallic finishes.",
+      "Custom printed Mylar bags include three-side seal bags, flat-bottom bags, stand-up pouches, spout bags, child-resistant bags, coffee bags, and printed rollstock film. Depending on the format, options can include zippers, valves, windows, and matte, gloss, or metallic finishes.",
     metaDescription:
-      "Custom Mylar bags in stand-up, flat-bottom, three-side-seal, spout, child-resistant, coffee, and rollstock formats. Minimum order 500 units.",
+      "Custom printed Mylar bags, pouches, and rollstock film in stand-up, flat-bottom, three-side-seal, spout, child-resistant, and coffee formats. MOQ 500.",
+    searchTerms: [
+      "custom printed Mylar bags",
+      "custom printed pouches",
+      "printed rollstock film",
+      "flexible packaging rollstock",
+    ],
     moq: "500 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",

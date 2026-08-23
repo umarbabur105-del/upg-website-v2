@@ -14,6 +14,17 @@ export interface ProductStyleGuide {
   selectionNote: string;
   projectInputs: string[];
   relatedSlugs: string[];
+  buyerGuide?: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    options: Array<{
+      title: string;
+      description: string;
+      href: string;
+      linkLabel: string;
+    }>;
+  };
   complianceNote?: string;
   reviewedAt: string;
 }
@@ -306,12 +317,19 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Mylar Bags",
     category: "Mylar bag format",
     metaDescription:
-      "Plan custom printed rollstock film with UPG's 500-unit MOQ guidance and project-specific machine, web, repeat, film, print, and compatibility review.",
-    searchTerms: ["custom printed rollstock film", "printed film on roll", "flexible packaging rollstock"],
+      "Custom printed rollstock film and roll stock packaging with 500-unit MOQ guidance, plus project review of machine, web, repeat, film, print, and fit.",
+    searchTerms: [
+      "custom printed rollstock film",
+      "custom printed roll stock",
+      "roll stock film",
+      "printed film on roll",
+      "flexible packaging rollstock",
+      "roll stock packaging",
+    ],
     quickAnswer:
-      "Printed rollstock film is available within UPG's custom flexible-packaging range. Machine and web requirements, repeat, film structure, print, seals, product compatibility, and order quantity are confirmed for the project.",
+      "Custom printed rollstock film—also searched as roll stock film or printed film on roll—is available within UPG's flexible-packaging range. Machine and web requirements, repeat, film structure, print, seals, product compatibility, and order quantity are confirmed for the project.",
     selectionNote:
-      "Rollstock cannot be specified from finished-pack dimensions alone. Share the filling and sealing equipment information available from the packing operation.",
+      "Choose this path when the enquiry is for printed film on roll rather than a finished pouch. Rollstock cannot be specified from finished-pack dimensions alone, so share the filling and sealing equipment information available from the packing operation.",
     projectInputs: [
       "Product contents and intended market",
       "Packing-machine, web, repeat, and sealing information available",
@@ -319,6 +337,28 @@ export const productStyleGuides: ProductStyleGuide[] = [
       "Barrier, food-contact, compatibility, and documentation requirements",
     ],
     relatedSlugs: ["three-side-seal-bags", "stand-up-pouches", "coffee-bags"],
+    buyerGuide: {
+      eyebrow: "Rollstock or finished pouch?",
+      title: "Start with the format your packing plan requires.",
+      intro:
+        "Rollstock and finished pouches belong to the same flexible-packaging family, but they need different project inputs. Choose the path that matches what you intend to source.",
+      options: [
+        {
+          title: "Custom printed rollstock film",
+          description:
+            "Use this route for printed film on roll. Share the packing-machine, web, repeat, and sealing information available so UPG can review the project.",
+          href: "/get-a-quote?product=Mylar%20Bags&builder_note=Packaging%20format%3A%20Printed%20Rollstock%20Film.",
+          linkLabel: "Start a rollstock enquiry",
+        },
+        {
+          title: "Finished bags and pouches",
+          description:
+            "Use the Mylar bag range when the project needs a finished stand-up, flat-bottom, three-side-seal, spout, coffee, or child-resistant format.",
+          href: "/products/custom-mylar-bags",
+          linkLabel: "Compare finished pouch formats",
+        },
+      ],
+    },
     complianceNote:
       "Machine compatibility, film structure, seals, product compatibility, and market requirements must be confirmed before approval.",
     reviewedAt,

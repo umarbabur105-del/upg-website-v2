@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { SampleKitCheckout } from "@/components/sample-kit-checkout";
 import { SampleRequestForm } from "@/components/sample-request-form";
 import {
@@ -9,9 +10,31 @@ import {
 } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
 
+function getSampleKitFaqs(kit: SampleKit) {
+  return [
+    {
+      question: `What is included in the ${kit.shortName}?`,
+      answer: `${kit.selectionNote} ${kit.productBoundary}`,
+    },
+    {
+      question: `How much does the ${kit.shortName} cost?`,
+      answer: `The kit costs $${kit.price.toFixed(2)} USD with shipping included to ${sampleKitShippingRegionLabel}. ${kit.creditText}`,
+    },
+    {
+      question: `How long does ${kit.shortName.toLowerCase()} delivery take?`,
+      answer: `Estimated delivery is ${sampleKitDeliveryEstimate} to an eligible checkout destination.`,
+    },
+    {
+      question: "Does the sample kit define my final production specification?",
+      answer:
+        "No. The samples support physical comparison and planning. Final structure, dimensions, material, print, finish, quantity, pricing, proofing, and delivery are confirmed for the production project.",
+    },
+  ];
+}
+
 function buildStructuredData(kit: SampleKit) {
-  return {
-    "@context": "https://schema.org",
+  const faqItems = getSampleKitFaqs(kit);
+  const product = {
     "@type": "Product",
     "@id": `${kit.url}#product`,
     name: kit.name,
@@ -79,9 +102,60 @@ function buildStructuredData(kit: SampleKit) {
       })),
     },
   };
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${kit.url}#webpage`,
+        url: kit.url,
+        name: kit.name,
+        description: kit.description,
+        mainEntity: { "@id": `${kit.url}#product` },
+      },
+      product,
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteConfig.url,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Packaging Samples",
+            item: `${siteConfig.url}/samples`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: kit.shortName,
+            item: kit.url,
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+    ],
+  };
 }
 
 export function SampleKitProductPage({ kit }: { kit: SampleKit }) {
+  const faqItems = getSampleKitFaqs(kit);
+  const quoteProduct = kit.kind === "box" ? "Tuck Boxes" : "Mylar Bags";
   const steps = [
     {
       number: "01",
@@ -112,6 +186,18 @@ export function SampleKitProductPage({ kit }: { kit: SampleKit }) {
       <section className="bg-cream">
         <div className="container-editorial grid gap-12 py-14 md:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
           <div>
+            <nav
+              aria-label="Breadcrumb"
+              className="mb-8 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+            >
+              <Link href="/samples" className="hover:text-foreground">
+                Packaging samples
+              </Link>
+              <span aria-hidden="true">/</span>
+              <span aria-current="page" className="text-foreground">
+                {kit.shortName}
+              </span>
+            </nav>
             <div className="eyebrow mb-5">{kit.heroEyebrow}</div>
             <h1 className="text-balance font-serif text-[clamp(3rem,5vw,5rem)] font-light leading-[0.98] tracking-[-0.035em]">
               {kit.heroTitle}
@@ -210,7 +296,7 @@ export function SampleKitProductPage({ kit }: { kit: SampleKit }) {
             <div className="divide-y divide-border border-y border-border">
               {steps.map((step) => (
                 <div key={step.number} className="grid gap-4 py-7 sm:grid-cols-[4rem_1fr]">
-                  <div className="text-sm font-semibold text-gold">{step.number}</div>
+                  <div className="text-sm font-semibold text-gold-dark">{step.number}</div>
                   <div>
                     <h3 className="font-serif text-2xl text-foreground">{step.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -220,6 +306,54 @@ export function SampleKitProductPage({ kit }: { kit: SampleKit }) {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell bg-background">
+        <div className="container-editorial">
+          <div className="max-w-3xl">
+            <div className="eyebrow mb-4">Production paths</div>
+            <h2 className="display-2 text-balance">
+              Move from samples to the relevant custom packaging format.
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+              Use the physical samples for comparison, then open the production
+              family or format closest to your project before requesting pricing.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {kit.relatedProductionLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="surface-card group flex min-h-52 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+              >
+                <h3 className="font-serif text-2xl text-foreground">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
+                <span className="mt-auto pt-6 text-sm text-foreground">
+                  Review production options →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell bg-cream">
+        <div className="container-editorial grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <div className="eyebrow mb-4">Sample kit questions</div>
+            <h2 className="display-2 text-balance">Know exactly what you are ordering.</h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              The kit is a fixed-price physical product. Custom production is a
+              separate, project-specific process.
+            </p>
+          </div>
+          <div className="surface-card p-6 sm:p-8 lg:col-span-8 lg:p-10">
+            <FaqAccordion items={faqItems} />
           </div>
         </div>
       </section>
@@ -259,7 +393,9 @@ export function SampleKitProductPage({ kit }: { kit: SampleKit }) {
             delivery destination. UPG will build the project-specific quote.
           </p>
           <Link
-            href="/get-a-quote"
+            href={`/get-a-quote?product=${encodeURIComponent(quoteProduct)}&builder_note=${encodeURIComponent(
+              `Sample kit reviewed: ${kit.shortName}.`
+            )}`}
             className="mt-8 inline-flex rounded-full bg-cream px-7 py-3.5 text-sm font-semibold text-foreground hover:bg-stone"
           >
             Start Your Project

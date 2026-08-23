@@ -81,6 +81,11 @@ export type SampleKit = {
     title: string;
     description: string;
   }[];
+  relatedProductionLinks: readonly {
+    title: string;
+    description: string;
+    href: string;
+  }[];
   crm: {
     source: "Box Sample Kit Order" | "Mylar Bag Sample Kit Order";
     productFamily: string;
@@ -100,7 +105,7 @@ export const boxSampleKit: SampleKit = {
   name: "UPG Custom Box Sample Kit",
   shortName: "Box Sample Kit",
   description:
-    "A curated set of finished UPG-branded custom boxes for comparing structures, board construction, print surfaces, and specialty finishes before production.",
+    "A curated custom box sample pack with finished UPG-branded boxes for comparing structures, board construction, print surfaces, and specialty finishes before production.",
   price: 19.99,
   priceCents: 1_999,
   currency: "USD",
@@ -125,7 +130,7 @@ export const boxSampleKit: SampleKit = {
     "Business & Industrial > Custom Packaging > Finished Box Samples",
   merchantLabel: "box_sample_kit",
   heroEyebrow: "Finished custom box samples",
-  heroTitle: "Compare finished boxes before production.",
+  heroTitle: "Custom Box Sample Kit: compare finished boxes.",
   heroDescription:
     "Order a dedicated Box Sample Kit containing finished UPG-branded box samples. Compare structures, board construction, print, and specialty finishes before planning custom production.",
   contentsEyebrow: "Box samples only",
@@ -147,6 +152,26 @@ export const boxSampleKit: SampleKit = {
       title: "Print & finishes",
       description:
         "Review selected examples of spot UV, embossing, debossing, foil, soft-touch lamination, holographic accents, and other finishes.",
+    },
+  ],
+  relatedProductionLinks: [
+    {
+      title: "Custom tuck boxes",
+      description:
+        "Explore straight tuck, reverse tuck, auto-lock, interlock, and seal-end carton formats.",
+      href: "/products/custom-tuck-boxes",
+    },
+    {
+      title: "Corrugated mailer boxes",
+      description:
+        "Plan branded ear-lock mailers for PR kits, subscriptions, ecommerce, and presentation.",
+      href: "/products/custom-mailer-boxes",
+    },
+    {
+      title: "Magnetic boxes",
+      description:
+        "Compare premium magnetic and collapsible magnetic box production paths.",
+      href: "/products/custom-magnetic-boxes",
     },
   ],
   crm: {
@@ -171,7 +196,7 @@ export const mylarBagSampleKit: SampleKit = {
   name: "UPG Mylar Bag Sample Kit",
   shortName: "Mylar Bag Sample Kit",
   description:
-    "A curated set of five finished UPG-branded flexible-packaging samples for comparing pouch formats, seals, gussets, closures, print surfaces, and rollstock before production.",
+    "A flexible packaging sample kit with five finished UPG-branded Mylar bag and rollstock formats for comparing structures, seals, closures, and print surfaces before production.",
   price: 19.99,
   priceCents: 1_999,
   currency: "USD",
@@ -196,7 +221,7 @@ export const mylarBagSampleKit: SampleKit = {
     "Business & Industrial > Custom Packaging > Finished Flexible Packaging Samples",
   merchantLabel: "mylar_bag_sample_kit",
   heroEyebrow: "Finished flexible-packaging samples",
-  heroTitle: "Compare five Mylar bag formats before production.",
+  heroTitle: "Mylar Bag Sample Kit: compare five finished formats.",
   heroDescription:
     "Order a dedicated Mylar Bag Sample Kit containing five finished UPG-branded formats. Compare pouch structures, seals, gussets, closures, print surfaces, and rollstock before planning custom production.",
   contentsEyebrow: "Flexible packaging only",
@@ -218,6 +243,26 @@ export const mylarBagSampleKit: SampleKit = {
       title: "Printed film-on-roll",
       description:
         "Inspect one printed rollstock sample alongside the finished pouches to compare the print surface and production format.",
+    },
+  ],
+  relatedProductionLinks: [
+    {
+      title: "Custom Mylar bags",
+      description:
+        "Compare UPG's finished bag, pouch, coffee, child-resistant, spout, and rollstock formats.",
+      href: "/products/custom-mylar-bags",
+    },
+    {
+      title: "Printed rollstock film",
+      description:
+        "Review the project inputs needed for custom printed rollstock and film-on-roll enquiries.",
+      href: "/packaging-styles/printed-rollstock-film",
+    },
+    {
+      title: "Stand-up pouches",
+      description:
+        "Plan a finished stand-up pouch project with the correct dimensions, features, and review inputs.",
+      href: "/packaging-styles/stand-up-pouches",
     },
   ],
   crm: {

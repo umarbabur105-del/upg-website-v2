@@ -1,20 +1,23 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { SampleRequestForm } from "@/components/sample-request-form";
 import {
   sampleKits,
   sampleKitShippingRegionLabel,
 } from "@/data/sample-kit";
-import { createPageMetadata } from "@/lib/seo";
+import { SITE_URL, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Custom Packaging Sample Kits",
+  title: "Packaging Sample Kits: Box & Mylar Samples",
   description:
-    "Separate UPG Box or Mylar Bag Sample Kits cost $19.99 USD with shipping included, 3–7 business-day delivery, and credit toward a first production order.",
+    "Compare separate custom box and Mylar bag sample kits for $19.99 each, with shipping included, 3–7 business-day delivery, and full production-order credit.",
   path: "/samples",
   keywords: [
     "custom packaging sample kits",
+    "sample packaging",
+    "packaging samples",
     "box sample kit",
     "mylar bag sample kit",
     "finished packaging samples",
@@ -22,14 +25,96 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
+const sampleFaqs = [
+  {
+    question: "What packaging samples can I order from UPG?",
+    answer:
+      "UPG offers two separate fixed-price products: a Box Sample Kit with finished custom box samples and a Mylar Bag Sample Kit with five finished flexible-packaging formats.",
+  },
+  {
+    question: "Are box samples and Mylar bag samples in the same kit?",
+    answer:
+      "No. Box samples and Mylar bag samples are sold in separate kits so the physical assortment stays relevant to the packaging family being evaluated.",
+  },
+  {
+    question: "How much does each packaging sample kit cost?",
+    answer:
+      `Each kit costs $19.99 USD with shipping included to ${sampleKitShippingRegionLabel}. The full kit price is credited toward the first UPG custom packaging production order.`,
+  },
+  {
+    question: "How long does sample-kit delivery take?",
+    answer:
+      "Estimated delivery is 3–7 business days to an eligible checkout destination.",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": `${SITE_URL}/samples#page`,
+      url: `${SITE_URL}/samples`,
+      name: "UPG Packaging Sample Kits",
+      description:
+        "Separate finished-box and flexible-packaging sample kits available from UPG.",
+      mainEntity: { "@id": `${SITE_URL}/samples#sample-kits` },
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${SITE_URL}/samples#sample-kits`,
+      numberOfItems: sampleKits.length,
+      itemListElement: sampleKits.map((kit, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: kit.name,
+        url: kit.url,
+      })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Packaging Samples",
+          item: `${SITE_URL}/samples`,
+        },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: sampleFaqs.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
+
 export default function SamplesPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       <section className="bg-cream">
         <div className="container-editorial py-16 text-center md:py-24">
           <div className="eyebrow mb-5">Two focused sample kits</div>
           <h1 className="mx-auto max-w-5xl text-balance font-serif text-[clamp(3rem,6vw,5.5rem)] font-light leading-[0.98] tracking-[-0.035em]">
-            Evaluate finished packaging before production.
+            Custom packaging sample kits for boxes and Mylar bags.
           </h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
             Choose the product family you need to evaluate. Box samples and Mylar
@@ -98,6 +183,22 @@ export default function SamplesPage() {
           the purchased kit is credited toward your first UPG custom packaging
           production order. Shipping is included to {sampleKitShippingRegionLabel}.
           Custom production is specified and quoted separately.
+        </div>
+      </section>
+
+      <section className="section-shell bg-stone">
+        <div className="container-editorial grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <div className="eyebrow mb-4">Packaging sample questions</div>
+            <h2 className="display-2 text-balance">Choose the correct physical sample kit.</h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+              These answers keep the paid kits, free project review, and custom
+              production process clearly separated.
+            </p>
+          </div>
+          <div className="surface-card p-6 sm:p-8 lg:col-span-8 lg:p-10">
+            <FaqAccordion items={sampleFaqs} />
+          </div>
         </div>
       </section>
 

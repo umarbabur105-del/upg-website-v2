@@ -4,12 +4,14 @@ import { mylarBagSampleKit } from "@/data/sample-kit";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Mylar Bag Sample Kit",
+  title: "Mylar Bag & Flexible Packaging Sample Kit",
   description:
-    "Order the $19.99 UPG Mylar Bag Sample Kit with five finished flexible-packaging formats, shipping included, and estimated delivery in 3–7 business days.",
+    "Order five Mylar bag and flexible packaging samples for $19.99 with shipping included, 3–7 business-day delivery, and full first-production-order credit.",
   path: mylarBagSampleKit.path,
   keywords: [
     "mylar bag sample kit",
+    "mylar bag samples",
+    "flexible packaging samples",
     "custom pouch samples",
     "flexible packaging sample kit",
     "stand up pouch samples",

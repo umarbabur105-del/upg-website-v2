@@ -24,7 +24,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description: product.metaDescription,
     path: `/products/${slug}`,
-    keywords: [product.name, product.shortName, ...product.industries],
+    keywords: [
+      product.name,
+      product.shortName,
+      ...product.industries,
+      ...(product.searchTerms ?? []),
+    ],
   });
 }
 

@@ -23,6 +23,18 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
 
   const related = getRelatedProductStyles(guide);
   const pageUrl = `${SITE_URL}/packaging-styles/${guide.slug}`;
+  const sampleKit =
+    guide.family === "Mylar Bags"
+      ? {
+          href: "/samples/mylar-bag-sample-kit",
+          label: "Compare the Mylar Bag Sample Kit",
+          note: "The focused flexible-packaging kit includes finished pouch formats and one printed film-on-roll sample.",
+        }
+      : {
+          href: "/samples/box-sample-kit",
+          label: "Compare the Box Sample Kit",
+          note: "The focused box kit includes finished custom box samples rather than loose material swatches.",
+        };
   const quoteHref = `/get-a-quote?product=${encodeURIComponent(
     guide.family
   )}&builder_note=${encodeURIComponent(`Packaging style: ${guide.shortName}.`)}`;
@@ -50,6 +62,15 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
     faqItems.push({
       question: "What compatibility or compliance check is required?",
       answer: guide.complianceNote,
+    });
+  }
+
+  if (guide.buyerGuide) {
+    faqItems.push({
+      question: "Should I request rollstock film or a finished pouch?",
+      answer: `${guide.buyerGuide.intro} ${guide.buyerGuide.options
+        .map((option) => `${option.title}: ${option.description}`)
+        .join(" ")}`,
     });
   }
 
@@ -170,7 +191,7 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
             ["Pricing", "Project-specific written quote"],
           ].map(([label, value]) => (
             <div key={label} className="bg-moss px-6 py-7">
-              <div className="text-[10px] font-semibold tracking-[0.14em] text-primary-foreground/65 uppercase">
+              <div className="text-[10px] font-semibold tracking-[0.14em] text-primary-foreground/80 uppercase">
                 {label}
               </div>
               <div className="mt-2 text-sm leading-relaxed">{value}</div>
@@ -213,9 +234,50 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
             >
               Check MOQ and build the specification →
             </Link>
+            <div className="mt-7 border-t border-border pt-6">
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {sampleKit.note}
+              </p>
+              <Link
+                href={sampleKit.href}
+                className="mt-4 inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                {sampleKit.label} →
+              </Link>
+            </div>
           </aside>
         </div>
       </section>
+
+      {guide.buyerGuide ? (
+        <section className="section-shell bg-cream">
+          <div className="container-editorial">
+            <SectionHeading
+              eyebrow={guide.buyerGuide.eyebrow}
+              title={guide.buyerGuide.title}
+              intro={guide.buyerGuide.intro}
+            />
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {guide.buyerGuide.options.map((option) => (
+                <article key={option.title} className="surface-card flex flex-col p-7 md:p-9">
+                  <h2 className="font-serif text-3xl text-foreground">
+                    {option.title}
+                  </h2>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    {option.description}
+                  </p>
+                  <Link
+                    href={option.href}
+                    className="mt-auto inline-flex pt-7 text-sm font-semibold text-foreground"
+                  >
+                    {option.linkLabel} →
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-shell bg-stone">
         <div className="container-editorial">
