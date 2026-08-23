@@ -24,6 +24,10 @@ export interface Product {
   metaDescription: string;
   searchTerms?: string[];
   reviewedAt?: string;
+  buyerDecisionFaq?: {
+    question: string;
+    answer: string;
+  };
   styleDecisionGuide?: {
     eyebrow: string;
     title: string;
@@ -175,11 +179,27 @@ export const products: Product[] = [
     sku: "UPG-MAILER",
     bestFor: "PR kits, subscription boxes, ecommerce packaging, and branded presentation",
     summary:
-      "Ear-lock corrugated boxes built for branded unboxing, product presentation, and repeat programs.",
+      "Custom printed corrugated ear-lock mailer boxes for branded unboxing, product presentation, and repeat programs.",
     longSummary:
-      "Custom corrugated mailer boxes use an ear-lock structure for PR kits, subscription programs, ecommerce orders, and branded product presentation. Exterior printing, interior printing, custom inserts, and specialty finishes are available.",
+      "UPG's custom corrugated mailer boxes use an ear-lock structure for PR kits, influencer campaigns, subscription programs, ecommerce presentation, and branded product launches. Exterior printing, interior printing, custom inserts, and specialty finishes are available.",
     metaDescription:
-      "Custom corrugated ear-lock mailer boxes for PR kits, subscriptions, ecommerce, and presentation, manufactured worldwide with size-based MOQs.",
+      "Custom printed corrugated mailer boxes and ear-lock boxes for PR kits, subscriptions, ecommerce and branded presentation. Worldwide delivery.",
+    searchTerms: [
+      "custom corrugated mailer boxes",
+      "custom mailer boxes",
+      "custom printed mailer boxes",
+      "ear lock mailer boxes",
+      "corrugated boxes",
+      "custom PR boxes",
+      "custom subscription boxes",
+      "branded ecommerce mailer boxes",
+    ],
+    reviewedAt: "2026-08-23",
+    buyerDecisionFaq: {
+      question: "Which corrugated mailer box path should I use?",
+      answer:
+        "Use the PR box guide for launches, press, media kits, events, or broad brand presentations; the influencer guide for creator seeding; the subscription guide for recurring assortments; and the ecommerce guide for branded online-order presentation. Every path stays inside UPG's custom ear-lock corrugated mailer offer. Standard shipping cartons, master cartons, and RSC cases are not supplied.",
+    },
     moq: "250–1,000 units, based on finished size",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
@@ -437,6 +457,10 @@ export function getProductFaqs(product: Product): ProductFaq[] {
         .map((group) => `${group.title}: ${group.description}`)
         .join(" ")}`,
     });
+  }
+
+  if (product.buyerDecisionFaq) {
+    faqs.push(product.buyerDecisionFaq);
   }
 
   return faqs;

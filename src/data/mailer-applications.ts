@@ -7,6 +7,20 @@ export interface MailerApplication {
   heroDescription: string;
   metaDescription: string;
   keywords: string[];
+  selectionNote: string;
+  quoteStyle?: string;
+  decisionGuide?: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    faqQuestion: string;
+    options: Array<{
+      title: string;
+      description: string;
+      href: string;
+      linkLabel: string;
+    }>;
+  };
   image: { src: string; alt: string };
   quickAnswer: string;
   bestFor: string[];
@@ -29,14 +43,49 @@ export const mailerApplications: MailerApplication[] = [
     heroDescription:
       "Plan an ear-lock corrugated PR box around the products, message, and opening sequence. UPG manufactures custom PR boxes for brands worldwide with exterior and interior print, custom inserts, and selected finish options.",
     metaDescription:
-      "Custom corrugated PR boxes for product launches, media kits, gifting, and presentation. Worldwide manufacturing with size-based minimum orders.",
+      "Custom printed corrugated PR boxes and ear-lock presentation mailers for launches, media kits and branded gifting. Worldwide delivery.",
     keywords: [
       "custom PR boxes",
+      "custom printed PR boxes",
+      "branded PR boxes",
       "PR box packaging",
       "custom media kit boxes",
       "product launch boxes",
       "corrugated PR mailer boxes",
     ],
+    selectionNote:
+      "Choose this route for launches, press, editorial, media kits, events, or broad branded gifting and presentation.",
+    quoteStyle: "PR / Presentation Mailer",
+    decisionGuide: {
+      eyebrow: "PR or influencer mailer?",
+      title: "Choose the program before the insert is finalized.",
+      intro:
+        "Both routes use UPG's custom ear-lock corrugated mailer offer. A PR box can serve press, editorial, events, media kits, or broad launch presentation, while an influencer mailer starts from a creator-seeding campaign.",
+      faqQuestion: "Should I choose a PR box or an influencer mailer?",
+      options: [
+        {
+          title: "PR box",
+          description:
+            "Use this path for a launch, media kit, press or editorial presentation, event, or branded gifting program.",
+          href: "/get-a-quote?product=Mailer%20Boxes&style=PR%20%2F%20Presentation%20Mailer&builder_note=Mailer%20application%3A%20PR%20Boxes.",
+          linkLabel: "Start a PR box enquiry",
+        },
+        {
+          title: "Influencer mailer",
+          description:
+            "Review the influencer guide when creator seeding, campaign drops, or social outreach define the program.",
+          href: "/applications/influencer-kits",
+          linkLabel: "Compare influencer mailers",
+        },
+        {
+          title: "Full mailer range",
+          description:
+            "Compare PR, influencer, subscription, and ecommerce applications inside the same ear-lock corrugated mailer family.",
+          href: "/products/custom-mailer-boxes",
+          linkLabel: "Compare all mailer paths",
+        },
+      ],
+    },
     image: {
       src: "/images/generated/mailer-boxes/mailer-boxes-inside-print-v1.png",
       alt: "Representative custom PR mailer box concept with interior printing",
@@ -105,7 +154,7 @@ export const mailerApplications: MailerApplication[] = [
       label: "Explore the beauty-specific PR box guide",
       href: "/cosmetics/pr-boxes",
     },
-    reviewedAt: "2026-08-06",
+    reviewedAt: "2026-08-23",
   },
   {
     slug: "influencer-kits",
@@ -126,6 +175,8 @@ export const mailerApplications: MailerApplication[] = [
       "custom PR boxes for influencers",
       "branded influencer packaging",
     ],
+    selectionNote:
+      "Choose this route when creator seeding, campaign drops, or branded social outreach define the program.",
     image: {
       src: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
       alt: "Representative custom influencer kit concept with a fitted product insert",
@@ -215,14 +266,49 @@ export const mailerApplications: MailerApplication[] = [
     heroDescription:
       "Plan a custom ear-lock corrugated subscription box for recurring assortments, membership programs, and repeat product deliveries. UPG manufactures the approved structure with exterior or interior branding and custom insert options.",
     metaDescription:
-      "Custom corrugated subscription boxes for recurring assortments and branded programs. Worldwide manufacturing with size-based minimum orders.",
+      "Custom printed corrugated subscription boxes and ear-lock mailers for recurring assortments and branded programs. Worldwide delivery.",
     keywords: [
       "custom subscription boxes",
+      "custom printed subscription boxes",
+      "subscription mailer boxes",
       "branded subscription box packaging",
       "corrugated subscription mailer boxes",
       "custom monthly subscription boxes",
       "subscription packaging manufacturer",
     ],
+    selectionNote:
+      "Choose this route for recurring assortments, memberships, discovery programs, or repeat branded deliveries.",
+    quoteStyle: "Subscription Mailer",
+    decisionGuide: {
+      eyebrow: "Subscription or ecommerce mailer?",
+      title: "Separate the recurring program from a general online-order brief.",
+      intro:
+        "Both routes use UPG's custom ear-lock corrugated mailer offer. A subscription mailer starts from a recurring assortment or membership program, while an ecommerce mailer starts from branded online-order presentation and unboxing.",
+      faqQuestion: "Should I choose a subscription box or an ecommerce mailer?",
+      options: [
+        {
+          title: "Subscription mailer",
+          description:
+            "Use this path for a recurring assortment, membership, discovery program, or repeat branded delivery cycle.",
+          href: "/get-a-quote?product=Mailer%20Boxes&style=Subscription%20Mailer&builder_note=Mailer%20application%3A%20Subscription%20Boxes.",
+          linkLabel: "Start a subscription enquiry",
+        },
+        {
+          title: "Ecommerce mailer",
+          description:
+            "Review the ecommerce guide when branded presentation for online orders is the main project brief.",
+          href: "/applications/branded-ecommerce-mailer-boxes",
+          linkLabel: "Compare ecommerce mailers",
+        },
+        {
+          title: "Full mailer range",
+          description:
+            "Compare PR, influencer, subscription, and ecommerce applications without leaving the ear-lock mailer family.",
+          href: "/products/custom-mailer-boxes",
+          linkLabel: "Compare all mailer paths",
+        },
+      ],
+    },
     image: {
       src: "/images/generated/mailer-boxes/mailer-boxes-sizes-v1.png",
       alt: "Representative custom subscription mailer box concepts in multiple sizes",
@@ -291,7 +377,7 @@ export const mailerApplications: MailerApplication[] = [
       label: "Explore the beauty-specific subscription guide",
       href: "/cosmetics/cosmetic-subscription-boxes",
     },
-    reviewedAt: "2026-08-06",
+    reviewedAt: "2026-08-23",
   },
   {
     slug: "branded-ecommerce-mailer-boxes",
@@ -302,14 +388,47 @@ export const mailerApplications: MailerApplication[] = [
     heroDescription:
       "Create a custom ear-lock corrugated mailer for branded ecommerce presentation and product unboxing. UPG manufactures the approved mailer with exterior or interior print, custom inserts, and selected finish options for brands worldwide.",
     metaDescription:
-      "Branded ecommerce mailer boxes with custom print and insert options. Ear-lock corrugated presentation packaging manufactured for brands worldwide.",
+      "Custom printed ecommerce mailer boxes with interior print and insert options. Ear-lock corrugated presentation packaging with worldwide delivery.",
     keywords: [
       "branded ecommerce mailer boxes",
+      "custom ecommerce mailer boxes",
       "custom ecommerce packaging boxes",
-      "custom corrugated mailer boxes",
       "ecommerce unboxing packaging",
       "printed ecommerce mailer boxes",
     ],
+    selectionNote:
+      "Choose this route when branded online-order presentation and the unboxing experience define the project.",
+    quoteStyle: "Ear-Lock Mailer Box",
+    decisionGuide: {
+      eyebrow: "Ecommerce or subscription mailer?",
+      title: "Choose the buying program before the presentation is planned.",
+      intro:
+        "Both routes use UPG's custom ear-lock corrugated mailer offer. An ecommerce mailer starts from branded online-order presentation, while a subscription mailer starts from a recurring assortment or membership program.",
+      faqQuestion: "Should I choose an ecommerce mailer or a subscription box?",
+      options: [
+        {
+          title: "Ecommerce mailer",
+          description:
+            "Use this path when branded presentation and unboxing for online orders are the main project goals.",
+          href: "/get-a-quote?product=Mailer%20Boxes&style=Ear-Lock%20Mailer%20Box&builder_note=Mailer%20application%3A%20Ecommerce%20Mailers.",
+          linkLabel: "Start an ecommerce enquiry",
+        },
+        {
+          title: "Subscription mailer",
+          description:
+            "Review the subscription guide when a recurring assortment, membership, or repeat program defines the brief.",
+          href: "/applications/custom-subscription-boxes",
+          linkLabel: "Compare subscription mailers",
+        },
+        {
+          title: "Full mailer range",
+          description:
+            "Compare PR, influencer, subscription, and ecommerce applications inside the approved ear-lock mailer offer.",
+          href: "/products/custom-mailer-boxes",
+          linkLabel: "Compare all mailer paths",
+        },
+      ],
+    },
     image: {
       src: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
       alt: "Representative branded ecommerce ear-lock mailer box concept",
@@ -374,7 +493,7 @@ export const mailerApplications: MailerApplication[] = [
           "No. The UPG offer is a custom ear-lock corrugated mailer for branded presentation. Standard shipping cartons, master cartons, and RSC cases are outside the product range.",
       },
     ],
-    reviewedAt: "2026-08-06",
+    reviewedAt: "2026-08-23",
   },
 ];
 

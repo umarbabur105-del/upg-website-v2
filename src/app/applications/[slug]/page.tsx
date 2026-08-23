@@ -48,14 +48,27 @@ export default async function MailerApplicationPage({ params }: PageProps) {
   }
 
   const pageUrl = `${SITE_URL}/applications/${application.slug}`;
-  const quoteHref = `/get-a-quote?product=${encodeURIComponent(
-    "Mailer Boxes"
-  )}&builder_note=${encodeURIComponent(
+  const quoteHref = `/get-a-quote?product=${encodeURIComponent("Mailer Boxes")}${
+    application.quoteStyle
+      ? `&style=${encodeURIComponent(application.quoteStyle)}`
+      : ""
+  }&builder_note=${encodeURIComponent(
     `Mailer application: ${application.shortName}.`
   )}`;
   const relatedApplications = mailerApplications
     .filter((item) => item.slug !== application.slug)
     .slice(0, 3);
+  const applicationFaqs = application.decisionGuide
+    ? [
+        ...application.faqs,
+        {
+          question: application.decisionGuide.faqQuestion,
+          answer: `${application.decisionGuide.intro} ${application.decisionGuide.options
+            .map((option) => `${option.title}: ${option.description}`)
+            .join(" ")}`,
+        },
+      ]
+    : application.faqs;
 
   const pageSchema = {
     "@context": "https://schema.org",
@@ -104,7 +117,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
       },
       {
         "@type": "FAQPage",
-        mainEntity: application.faqs.map((item) => ({
+        mainEntity: applicationFaqs.map((item) => ({
           "@type": "Question",
           name: item.question,
           acceptedAnswer: {
@@ -206,6 +219,39 @@ export default async function MailerApplicationPage({ params }: PageProps) {
         </section>
       ) : null}
 
+      {application.decisionGuide ? (
+        <section className="section-shell bg-cream">
+          <div className="container-editorial">
+            <SectionHeading
+              eyebrow={application.decisionGuide.eyebrow}
+              title={application.decisionGuide.title}
+              intro={application.decisionGuide.intro}
+              headingClassName={applicationHeadingClassName}
+            />
+            <div className="mt-10 grid gap-6 lg:grid-cols-3">
+              {application.decisionGuide.options.map((option) => (
+                <article key={option.title} className="surface-card flex flex-col p-7 md:p-8">
+                  <h2 className="font-serif text-3xl text-foreground">
+                    {option.title}
+                  </h2>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    {option.description}
+                  </p>
+                  <Link
+                    href={option.href}
+                    className="mt-auto pt-7 text-sm text-foreground"
+                  >
+                    <span className="border-b border-foreground/20 pb-0.5">
+                      {option.linkLabel} →
+                    </span>
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <section className="section-shell">
         <div className="container-editorial grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
@@ -248,7 +294,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
           <div className="mb-12">
             <SectionHeading
               eyebrow="Best fit"
-              title={`Where ${application.shortName.toLowerCase()} fit best.`}
+              title={`${application.shortName}: where this application fits.`}
               intro="Start with the campaign or program goal, then develop the mailer around the products, presentation, quantity, and destination."
               headingClassName={applicationHeadingClassName}
             />
@@ -369,7 +415,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
           <div className="lg:col-span-4">
             <SectionHeading
               eyebrow="Common questions"
-              title={`Plan ${application.shortName.toLowerCase()} with clear facts.`}
+              title={`Plan ${application.shortName} with clear facts.`}
               intro="These answers cover structure, minimum quantity, project inputs, and the boundaries that matter before production."
               headingClassName={applicationHeadingClassName}
             />
@@ -383,7 +429,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
             ) : null}
           </div>
           <div className="surface-card p-6 sm:p-8 lg:col-span-8 lg:p-10">
-            <FaqAccordion items={application.faqs} />
+            <FaqAccordion items={applicationFaqs} />
           </div>
         </div>
       </section>

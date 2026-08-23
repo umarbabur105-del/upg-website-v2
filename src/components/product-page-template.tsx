@@ -336,12 +336,12 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           <div className="container-editorial">
             <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <SectionHeading
-                eyebrow="Application guides"
-                title="Explore the mailer by campaign and program."
-                intro="Choose the guide closest to your project for focused planning questions, approved MOQ guidance, and a clearer starting brief."
+                eyebrow="Corrugated mailer applications"
+                title="Choose the mailer path that matches the program."
+                intro="All four guides stay inside UPG's custom ear-lock corrugated mailer offer. Choose the closest program first; the final structure, insert, print, quantity, and destination remain subject to project review."
               />
               <Link
-                href="/get-a-quote?product=Mailer%20Boxes"
+                href="/get-a-quote?product=Mailer%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Please%20review%20the%20program%20and%20recommend%20the%20right%20ear-lock%20mailer%20path."
                 className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
               >
                 Start a mailer project <span>→</span>
@@ -364,10 +364,10 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                     {application.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {application.metaDescription}
+                    {application.selectionNote}
                   </p>
                   <span className="mt-auto pt-6 text-sm text-foreground">
-                    Read guide{" "}
+                    Compare this application{" "}
                     <span className="inline-block transition-transform group-hover:translate-x-1">
                       →
                     </span>
