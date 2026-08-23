@@ -68,7 +68,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-tuck-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Mailer%20Boxes.",
-      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "The project starts with one product and its outer carton",
         "A tuck, auto-lock, interlock, or seal-end structure is the intended route",
@@ -83,7 +83,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mailer-boxes",
       quoteHref:
         "/get-a-quote?product=Mailer%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Mailer%20Boxes.",
-      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "The project is a branded unboxing or presentation program",
         "Several products or a custom insert may need to be planned together",
@@ -194,7 +194,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-magnetic-boxes",
       quoteHref:
         "/get-a-quote?product=Magnetic%20Boxes&style=Standard%20Magnetic%20Box&builder_note=Comparison%20path%3A%20Magnetic%20vs%20Collapsible%20Magnetic%20Boxes.",
-      planningMoq: "250 units",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "An assembled rigid magnetic box is the intended presentation",
         "The project is planned around a fixed structure and insert layout",
@@ -209,7 +209,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-collapsible-magnetic-boxes",
       quoteHref:
         "/get-a-quote?product=Collapsible%20Magnetic%20Boxes&style=Collapsible%20%2F%20Flat-Pack%20Magnetic%20Box&builder_note=Comparison%20path%3A%20Magnetic%20vs%20Collapsible%20Magnetic%20Boxes.",
-      planningMoq: "250 units",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "Flat packing before assembly is a project priority",
         "Freight and pre-assembly storage volume need to be considered",
@@ -239,8 +239,8 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning MOQ",
-        first: "250 units",
-        second: "250 units",
+        first: "From 250 units",
+        second: "From 250 units",
       },
     ],
     decisionQuestions: [
@@ -319,7 +319,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-tuck-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Magnetic%20Boxes.",
-      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "The project needs an individual folded outer carton",
         "A tuck, auto-lock, interlock, or seal-end style is the intended route",
@@ -334,7 +334,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-magnetic-boxes",
       quoteHref:
         "/get-a-quote?product=Magnetic%20Boxes&style=Standard%20Magnetic%20Box&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Magnetic%20Boxes.",
-      planningMoq: "250 units",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "Premium presentation is the primary packaging goal",
         "The project is a gift, set, or launch collection",
@@ -445,7 +445,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mailer-boxes",
       quoteHref:
         "/get-a-quote?product=Mailer%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Mailer%20Boxes%20vs%20Magnetic%20Boxes.",
-      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "The project is a PR, influencer, subscription, ecommerce, or launch program",
         "A corrugated ear-lock opening and branded unboxing are required",
@@ -460,7 +460,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-magnetic-boxes",
       quoteHref:
         "/get-a-quote?product=Magnetic%20Boxes&style=Standard%20Magnetic%20Box&builder_note=Comparison%20path%3A%20Mailer%20Boxes%20vs%20Magnetic%20Boxes.",
-      planningMoq: "250 units",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "A rigid premium presentation is the intended structure",
         "The magnetic closure is part of the opening experience",
@@ -486,7 +486,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       {
         criterion: "Planning MOQ",
         first: "1,000 at 5 in or less; 500 over 5 through 10 in; 250 over 10 in",
-        second: "250 units",
+        second: "From 250 units",
       },
       {
         criterion: "Scope boundary",
@@ -572,7 +572,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/straight-tuck-end-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Straight%20Tuck%20End&builder_note=Comparison%20path%3A%20Straight%20Tuck%20vs%20Reverse%20Tuck.",
-      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "Straight tuck end is the intended starting structure",
         "The opening direction and panel plan match the approved product brief",
@@ -587,7 +587,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/reverse-tuck-end-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Reverse%20Tuck%20End&builder_note=Comparison%20path%3A%20Straight%20Tuck%20vs%20Reverse%20Tuck.",
-      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "Reverse tuck end is the intended starting structure",
         "The alternate flap orientation fits the approved product and panel brief",
@@ -698,7 +698,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/stand-up-pouches",
       quoteHref:
         "/get-a-quote?product=Mylar%20Bags&style=Stand-Up%20Pouch&builder_note=Comparison%20path%3A%20Stand-Up%20Pouches%20vs%20Flat-Bottom%20Bags.",
-      planningMoq: "500 units",
+      planningMoq: "From 500 units",
       chooseWhen: [
         "Stand-up pouch is the intended finished format",
         "Target fill and filled dimensions are available for review",
@@ -713,7 +713,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/flat-bottom-bags",
       quoteHref:
         "/get-a-quote?product=Mylar%20Bags&style=Flat-Bottom%20Bag&builder_note=Comparison%20path%3A%20Stand-Up%20Pouches%20vs%20Flat-Bottom%20Bags.",
-      planningMoq: "500 units",
+      planningMoq: "From 500 units",
       chooseWhen: [
         "Flat-bottom bag is the intended finished format",
         "The filled shape and product arrangement support that route",
@@ -738,8 +738,8 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning MOQ",
-        first: "500 units",
-        second: "500 units",
+        first: "From 500 units",
+        second: "From 500 units",
       },
       {
         criterion: "Required approval",
@@ -824,7 +824,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/printed-rollstock-film",
       quoteHref:
         "/get-a-quote?product=Mylar%20Bags&style=Rollstock%20Film&builder_note=Comparison%20path%3A%20Rollstock%20Film%20vs%20Finished%20Pouches.",
-      planningMoq: "500-unit UPG flexible-packaging planning minimum",
+      planningMoq: "From 500 units",
       chooseWhen: [
         "The enquiry is for printed film on roll",
         "Packing-machine, web, repeat, and sealing information is available",
@@ -839,7 +839,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mylar-bags",
       quoteHref:
         "/get-a-quote?product=Mylar%20Bags&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Rollstock%20Film%20vs%20Finished%20Pouches.",
-      planningMoq: "500 units",
+      planningMoq: "From 500 units",
       chooseWhen: [
         "The project needs a finished pouch rather than film on roll",
         "Finished dimensions, target fill, closure, and features can be reviewed",
@@ -864,7 +864,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning minimum",
-        first: "500-unit UPG flexible-packaging planning minimum; final rollstock specification requires review",
+        first: "From 500 units; final rollstock specification requires review",
         second: "500 finished units",
       },
       {
@@ -949,7 +949,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mailer-boxes",
       quoteHref:
         "/get-a-quote?product=Mailer%20Boxes&style=Ear-Lock%20Mailer%20Box&builder_note=Comparison%20path%3A%20Corrugated%20Mailer%20Boxes%20vs%20Shipping%20Cartons.%20Project%20is%20for%20an%20ear-lock%20presentation%20mailer.",
-      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
+      planningMoq: "From 250 units",
       chooseWhen: [
         "The required product is a corrugated ear-lock mailer",
         "Branded presentation or unboxing is part of the brief",

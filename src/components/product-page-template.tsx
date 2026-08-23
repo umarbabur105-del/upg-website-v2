@@ -157,6 +157,48 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
               ))}
             </div>
           </div>
+
+          {product.moqTiers ? (
+            <div className="mt-10 border-t border-border pt-8">
+              <div className="max-w-2xl">
+                <div className="eyebrow mb-3">MOQ details</div>
+                <h2 className="text-2xl font-semibold text-foreground">
+                  Minimum order by finished size
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  The minimum is selected from the largest finished box dimension.
+                  Exact 5 in sizes use the first tier; exact 10 in sizes use the
+                  second tier.
+                </p>
+              </div>
+              <div className="mt-6 overflow-hidden border border-border bg-surface">
+                <table className="w-full text-left text-sm">
+                  <thead className="bg-cream text-foreground">
+                    <tr>
+                      <th scope="col" className="px-5 py-3 font-semibold">
+                        Largest finished dimension
+                      </th>
+                      <th scope="col" className="px-5 py-3 font-semibold">
+                        Planning MOQ
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {product.moqTiers.map((tier) => (
+                      <tr key={tier.size} className="border-t border-border">
+                        <td className="px-5 py-4 text-muted-foreground">
+                          {tier.size}
+                        </td>
+                        <td className="px-5 py-4 font-semibold text-foreground">
+                          {tier.minimum}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 

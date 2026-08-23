@@ -41,6 +41,10 @@ export interface Product {
     }>;
   };
   moq: string;
+  moqTiers?: Array<{
+    size: string;
+    minimum: string;
+  }>;
   leadTime: string;
   image: string;
   heroImage: string;
@@ -114,7 +118,21 @@ export const products: Product[] = [
         },
       ],
     },
-    moq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
+    moq: "From 250 units",
+    moqTiers: [
+      {
+        size: "Up to and including 5 in",
+        minimum: "1,000 units",
+      },
+      {
+        size: "Over 5 in, up to and including 10 in",
+        minimum: "500 units",
+      },
+      {
+        size: "Over 10 in",
+        minimum: "250 units",
+      },
+    ],
     leadTime: "Confirmed after specification review",
     image: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
     heroImage: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
@@ -148,7 +166,7 @@ export const products: Product[] = [
       "Window",
     ],
     sizes:
-      "Custom sizes. MOQ is 1,000 units when every finished dimension is 5 in or less, 500 units when the largest dimension is over 5 in through 10 in, and 250 units when it is over 10 in.",
+      "Custom sizes. The planning MOQ is based on the largest finished dimension; see the size table on this page.",
     sizeFlexibility:
       "The final minimum is confirmed from the finished dimensions and selected structure.",
     useCases: [
@@ -200,7 +218,21 @@ export const products: Product[] = [
       answer:
         "Use the PR box guide for launches, press, media kits, events, or broad brand presentations; the influencer guide for creator seeding; the subscription guide for recurring assortments; and the ecommerce guide for branded online-order presentation. Every path stays inside UPG's custom ear-lock corrugated mailer offer. Standard shipping cartons, master cartons, and RSC cases are not supplied.",
     },
-    moq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
+    moq: "From 250 units",
+    moqTiers: [
+      {
+        size: "Up to and including 5 in",
+        minimum: "1,000 units",
+      },
+      {
+        size: "Over 5 in, up to and including 10 in",
+        minimum: "500 units",
+      },
+      {
+        size: "Over 10 in",
+        minimum: "250 units",
+      },
+    ],
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
     heroImage: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
@@ -222,7 +254,7 @@ export const products: Product[] = [
     prints: ["Exterior print", "Interior and exterior print"],
     finishes: ["Matte or gloss", "Foil stamping", "Spot UV", "Custom inserts"],
     sizes:
-      "Custom sizes. MOQ is 1,000 units when every finished dimension is 5 in or less, 500 units when the largest dimension is over 5 in through 10 in, and 250 units when it is over 10 in.",
+      "Custom sizes. The planning MOQ is based on the largest finished dimension; see the size table on this page.",
     sizeFlexibility:
       "The final minimum is confirmed from the finished dimensions and ear-lock mailer structure.",
     useCases: [
@@ -271,7 +303,7 @@ export const products: Product[] = [
       answer:
         "A standard magnetic box uses an assembled rigid presentation structure. A collapsible magnetic box folds flat before assembly for more efficient freight and storage. Compare both routes from the product arrangement, dimensions, insert, quantity, finish, destination, and preferred packing method before the structure is approved.",
     },
-    moq: "250 units",
+    moq: "From 250 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
     heroImage: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
@@ -336,7 +368,7 @@ export const products: Product[] = [
       answer:
         "Compare the collapsible route when a premium magnetic presentation is required and the box should ship or store flat before assembly. Compare a standard magnetic box when an assembled rigid presentation structure is preferred. Final suitability depends on the dimensions, product arrangement, insert, finish, quantity, destination, and packing method.",
     },
-    moq: "250 units",
+    moq: "From 250 units",
     leadTime: "Confirmed after specification review",
     image:
       "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-hero-v1.png",
@@ -406,7 +438,7 @@ export const products: Product[] = [
       answer:
         "Choose a finished pouch route when the required format is a stand-up, flat-bottom, three-side-seal, spout, coffee, or child-resistant bag. Choose printed rollstock when the packing plan requires custom film on roll. Film structure, product compatibility, machine, web, repeat, sealing, quantity, print, and destination details require project review.",
     },
-    moq: "500 units",
+    moq: "From 500 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
     heroImage: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
@@ -468,7 +500,11 @@ export function getProductFaqs(product: Product): ProductFaq[] {
   const faqs = [
     {
       question: `What is the minimum order for ${product.name}?`,
-      answer: product.sizes,
+      answer: product.moqTiers
+        ? `${product.moq}. The planning MOQ is based on the largest finished dimension: ${product.moqTiers
+            .map((tier) => `${tier.size}: ${tier.minimum}`)
+            .join("; ")}.`
+        : product.sizes,
     },
     {
       question: `What are ${product.name.toLowerCase()} best used for?`,
