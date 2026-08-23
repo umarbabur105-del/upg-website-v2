@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
-import { ProductCard } from "@/components/product-card";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { getComparisonGuidesByProduct } from "@/data/comparison-guides";
@@ -19,6 +18,11 @@ import {
 interface ProductPageTemplateProps {
   product: Product;
 }
+
+const disclosureClass =
+  "group scroll-mt-24 border border-border bg-surface px-5 py-1 sm:px-6";
+const summaryClass =
+  "flex cursor-pointer list-none items-center justify-between gap-5 py-5 marker:content-none";
 
 export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
   const related = getRelatedProducts(product.slug);
@@ -41,46 +45,46 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
   return (
     <>
       <section className="bg-background">
-        <div className="container-editorial pt-16 pb-20 md:pt-24 md:pb-28">
+        <div className="container-editorial py-10 md:py-14 lg:py-16">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
               <div className="eyebrow mb-5">{product.category}</div>
-              <h1 className="display-1 text-balance">{product.name}</h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              <h1 className="text-5xl leading-[0.98] font-light tracking-[-0.035em] text-balance sm:text-6xl lg:text-7xl">
+                {product.name}
+              </h1>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                 {product.longSummary}
               </p>
-              <div className="mt-8 grid max-w-md grid-cols-2 gap-5 border-t border-border pt-6 text-sm">
+
+              <div className="mt-7 grid max-w-2xl gap-5 border-y border-border py-5 text-sm sm:grid-cols-2">
                 <div>
                   <div className="eyebrow mb-1">Planning MOQ</div>
                   <div className="text-foreground">{product.moq}</div>
                 </div>
                 <div>
-                  <div className="eyebrow mb-1">Production planning</div>
-                  <div className="text-foreground">{product.leadTime}</div>
+                  <div className="eyebrow mb-1">Best for</div>
+                  <div className="text-foreground">{product.bestFor}</div>
                 </div>
               </div>
-              <p className="mt-4 max-w-xl text-xs leading-relaxed text-muted-foreground">
-                Final pricing and production timing are confirmed after dimensions,
-                materials, finishes, proofing, and destination are reviewed.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-4">
+
+              <div className="mt-7 flex flex-wrap gap-3">
                 <Link
                   href={`/get-a-quote?product=${encodeURIComponent(product.family)}`}
                   className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
                 >
-                  {product.quoteCta}
+                  Get a Quote
                 </Link>
                 <Link
-                  href={`/tools/packaging-spec-builder?product=${encodeURIComponent(product.family)}`}
+                  href="#product-options"
                   className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
                 >
-                  Check MOQ &amp; Build a Spec
+                  See Options
                 </Link>
               </div>
             </div>
 
             <div className="lg:col-span-6">
-              <div className="relative aspect-[5/4] overflow-hidden shadow-lift">
+              <div className="relative aspect-[5/4] overflow-hidden border border-border bg-stone shadow-soft">
                 <Image
                   src={product.heroImage}
                   alt={product.name}
@@ -95,55 +99,90 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
         </div>
       </section>
 
-      {intentRoute ? <OrganicIntentBridge route={intentRoute} /> : null}
+      <section className="border-y border-border bg-cream">
+        <div className="container-editorial grid gap-6 py-6 sm:grid-cols-3">
+          <div>
+            <div className="eyebrow mb-2">Custom made</div>
+            <p className="text-sm text-foreground">Sizes and specifications reviewed per project</p>
+          </div>
+          <div>
+            <div className="eyebrow mb-2">Worldwide</div>
+            <p className="text-sm text-foreground">Production and delivery planning</p>
+          </div>
+          <div>
+            <div className="eyebrow mb-2">You can start early</div>
+            <p className="text-sm text-foreground">Incomplete briefs are welcome</p>
+          </div>
+        </div>
+      </section>
 
-      <section className="section-shell">
+      <section id="product-options" className="scroll-mt-24 py-16 md:py-20">
         <div className="container-editorial">
-          <div className="mb-14">
+          <div className="mb-10">
             <SectionHeading
-              eyebrow="Overview"
-              title="Built around the product, structure, and brand experience."
+              eyebrow="Product options"
+              title="What can be customized."
               intro={product.summary}
+              headingClassName="text-4xl font-light tracking-[-0.03em] text-balance md:text-5xl"
             />
           </div>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2">
             {[
-              { label: "Common applications", value: product.bestFor },
-              { label: "Size range", value: product.sizes },
-              { label: "Custom sizing", value: product.sizeFlexibility },
-              { label: "Material options", value: product.materialOptions },
-              { label: "Print options", value: product.printOptions },
-              { label: "Finish options", value: product.finishOptions },
+              { label: "Structure and size", value: product.sizes },
+              { label: "Materials", value: product.materialOptions },
+              { label: "Printing", value: product.printOptions },
+              { label: "Finishes", value: product.finishOptions },
             ].map((item) => (
-              <div key={item.label} className="surface-card p-6">
-                <div className="eyebrow mb-3">{item.label}</div>
-                <p className="text-sm leading-relaxed text-foreground/82">
+              <div key={item.label} className="border-t border-border pt-5">
+                <h2 className="text-lg font-semibold text-foreground">
+                  {item.label}
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {item.value}
                 </p>
               </div>
             ))}
           </div>
+
+          <div className="mt-10 border-t border-border pt-6">
+            <div className="eyebrow mb-4">Common uses</div>
+            <div className="flex flex-wrap gap-2">
+              {product.useCases.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-border bg-surface px-3 py-2 text-xs text-foreground/80"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="section-shell bg-stone">
+      <section className="border-y border-border bg-cream py-14 md:py-16">
         <div className="container-editorial">
-          <div className="mb-10">
-            <SectionHeading
-              eyebrow="Product views"
-              title={`Explore ${product.shortName.toLowerCase()} in more detail.`}
-              intro="Representative product renderings show possible structures and configurations. Final construction, color, print, and finish are confirmed for each project."
-            />
+          <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div className="eyebrow mb-3">Product views</div>
+              <h2 className="text-3xl font-light tracking-[-0.025em] text-foreground sm:text-4xl">
+                See the format from more than one angle.
+              </h2>
+            </div>
+            <p className="max-w-xl text-xs leading-relaxed text-muted-foreground">
+              Representative concepts. Final construction, color, print, and
+              finish are confirmed for each project.
+            </p>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-3">
             {product.galleryImages.map((image) => (
-              <figure key={image.src} className="overflow-hidden bg-surface shadow-soft">
+              <figure key={image.src} className="overflow-hidden border border-border bg-surface">
                 <div className="relative aspect-[5/4] overflow-hidden">
                   <Image
                     src={image.src}
                     alt={image.alt}
                     fill
-                    className="object-cover transition-transform duration-500 hover:scale-[1.02]"
+                    className="object-cover"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
@@ -156,391 +195,226 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
         </div>
       </section>
 
-      <section className="section-shell bg-cream">
-        <div className="container-editorial grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <SectionHeading
-              eyebrow="Industries"
-              title="Industries and product applications."
-              intro="The right structure starts with how the packaging will be filled, presented, stored, and delivered."
-            />
-          </div>
-          <div className="lg:col-span-8">
-            <div className="grid gap-4 sm:grid-cols-2">
-              {product.industries.map((industry) => (
-                <div key={industry} className="surface-card p-5 text-sm text-foreground">
-                  {industry}
+      <section className="py-16 md:py-20">
+        <div className="container-editorial max-w-5xl">
+          <SectionHeading
+            eyebrow="More guidance, when you need it"
+            title="Open only the details relevant to your project."
+            intro="Structure guides, applications, comparisons, and artwork notes stay available without blocking the quote path."
+            headingClassName="text-4xl font-light tracking-[-0.03em] text-balance md:text-5xl"
+          />
+
+          <div className="mt-9 space-y-3">
+            {product.styleDecisionGuide ? (
+              <details id="style-decision-guide" className={disclosureClass}>
+                <summary className={summaryClass}>
+                  <div>
+                    <div className="eyebrow mb-2">Structure selection</div>
+                    <h2 className="text-xl font-semibold text-foreground">
+                      {product.styleDecisionGuide.title}
+                    </h2>
+                  </div>
+                  <span className="text-2xl text-gold-dark transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="max-w-3xl pb-5 text-sm leading-relaxed text-muted-foreground">
+                  {product.styleDecisionGuide.intro}
+                </p>
+                <div className="grid gap-5 border-t border-border py-6 md:grid-cols-3">
+                  {styleDecisionGroups.map((group) => (
+                    <div key={group.title}>
+                      <h3 className="text-lg font-semibold text-foreground">
+                        {group.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {group.description}
+                      </p>
+                      <div className="mt-3 flex flex-col items-start gap-2">
+                        {group.styles.map((style) => (
+                          <Link
+                            key={style.slug}
+                            href={`/packaging-styles/${style.slug}`}
+                            className="border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+                          >
+                            {style.shortName} →
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell">
-        <div className="container-editorial grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <SectionHeading
-              eyebrow="Production details"
-              title="Materials, print, and finish options."
-              intro="The right combination depends on the structure, quantity, and finish requirements. This page shows the core available options."
-            />
-          </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8">
-            <div className="surface-card p-6">
-              <div className="eyebrow mb-4">Materials</div>
-              <ul className="space-y-3 text-sm leading-relaxed text-foreground/80">
-                {product.materials.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="surface-card p-6">
-              <div className="eyebrow mb-4">Print options</div>
-              <ul className="space-y-3 text-sm leading-relaxed text-foreground/80">
-                {product.prints.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="surface-card p-6 sm:col-span-2">
-              <div className="eyebrow mb-4">Finishes</div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {product.finishes.map((item) => (
-                  <div key={item} className="border border-border bg-cream px-4 py-3 text-sm text-foreground">
-                    {item}
+              </details>
+            ) : styleGuides.length > 0 ? (
+              <details id="available-styles" className={disclosureClass}>
+                <summary className={summaryClass}>
+                  <div>
+                    <div className="eyebrow mb-2">Available formats</div>
+                    <h2 className="text-xl font-semibold text-foreground">
+                      View {product.shortName.toLowerCase()} styles
+                    </h2>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                  <span className="text-2xl text-gold-dark transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <div className="grid gap-3 border-t border-border py-6 sm:grid-cols-2">
+                  {styleGuides.map((guide) => (
+                    <Link
+                      key={guide.slug}
+                      href={`/packaging-styles/${guide.slug}`}
+                      className="border-b border-border py-3 text-sm text-foreground"
+                    >
+                      {guide.shortName} →
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            ) : null}
 
-      <section className="section-shell bg-stone">
-        <div className="container-editorial grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <SectionHeading
-              eyebrow="Use cases"
-              title="Common ways brands use this format."
-              intro="Each use case brings different structural, presentation, and delivery requirements."
-            />
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
-            {product.useCases.map((item) => (
-              <div key={item} className="surface-card p-5 text-sm text-foreground">
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            {applicationGuides.length > 0 ? (
+              <details className={disclosureClass}>
+                <summary className={summaryClass}>
+                  <div>
+                    <div className="eyebrow mb-2">Applications</div>
+                    <h2 className="text-xl font-semibold text-foreground">
+                      PR, influencer, subscription, and ecommerce mailers
+                    </h2>
+                  </div>
+                  <span className="text-2xl text-gold-dark transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <div className="grid gap-3 border-t border-border py-6 sm:grid-cols-2">
+                  {applicationGuides.map((application) => (
+                    <Link
+                      key={application.slug}
+                      href={`/applications/${application.slug}`}
+                      className="border-b border-border py-3 text-sm text-foreground"
+                    >
+                      {application.title} →
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            ) : null}
 
-      {product.styleDecisionGuide ? (
-        <section id="style-decision-guide" className="section-shell scroll-mt-28">
-          <div className="container-editorial">
-            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <SectionHeading
-                eyebrow={product.styleDecisionGuide.eyebrow}
-                title={product.styleDecisionGuide.title}
-                intro={product.styleDecisionGuide.intro}
-              />
-              <div className="flex flex-wrap gap-x-5 gap-y-3">
-                <Link
-                  href="/packaging-styles"
-                  className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-                >
-                  Browse the style library <span>→</span>
-                </Link>
-                <Link
-                  href={`/get-a-quote?product=${encodeURIComponent(
-                    product.family
-                  )}&style=${encodeURIComponent(
-                    "Not sure — recommend"
-                  )}&builder_note=${encodeURIComponent(
-                    product.styleDecisionGuide.quoteNote
-                  )}`}
-                  className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-                >
-                  Ask UPG to review the structure <span>→</span>
-                </Link>
-              </div>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-3">
-              {styleDecisionGroups.map((group) => (
-                <article key={group.title} className="surface-card flex flex-col p-7 md:p-8">
-                  <h2 className="font-serif text-3xl text-foreground">
-                    {group.title}
+            {comparisonGuides.length > 0 ? (
+              <details className={disclosureClass}>
+                <summary className={summaryClass}>
+                  <div>
+                    <div className="eyebrow mb-2">Comparisons</div>
+                    <h2 className="text-xl font-semibold text-foreground">
+                      Compare with the closest packaging alternatives
+                    </h2>
+                  </div>
+                  <span className="text-2xl text-gold-dark transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <div className="grid gap-3 border-t border-border py-6 sm:grid-cols-2">
+                  {comparisonGuides.map((guide) => (
+                    <Link
+                      key={guide.slug}
+                      href={`/compare/${guide.slug}`}
+                      className="border-b border-border py-3 text-sm text-foreground"
+                    >
+                      {guide.name} →
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            ) : null}
+
+            {industryGuides.length > 0 ? (
+              <details className={disclosureClass}>
+                <summary className={summaryClass}>
+                  <div>
+                    <div className="eyebrow mb-2">Industry uses</div>
+                    <h2 className="text-xl font-semibold text-foreground">
+                      Packaging guides by product and industry
+                    </h2>
+                  </div>
+                  <span className="text-2xl text-gold-dark transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <div className="grid gap-3 border-t border-border py-6 sm:grid-cols-2">
+                  {industryGuides.map((guide) => (
+                    <Link
+                      key={guide.slug}
+                      href={`/industries/${guide.slug}`}
+                      className="border-b border-border py-3 text-sm text-foreground"
+                    >
+                      {guide.shortName} →
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            ) : null}
+
+            <details className={disclosureClass}>
+              <summary className={summaryClass}>
+                <div>
+                  <div className="eyebrow mb-2">Artwork and production</div>
+                  <h2 className="text-xl font-semibold text-foreground">
+                    Files and details needed before manufacturing
                   </h2>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    {group.description}
+                </div>
+                <span className="text-2xl text-gold-dark transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <div className="grid gap-5 border-t border-border py-6 sm:grid-cols-2">
+                <div>
+                  <h3 className="text-base font-semibold text-foreground">Artwork</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {product.artworkRequirements}
                   </p>
-                  <div className="mt-auto flex flex-wrap gap-x-5 gap-y-3 pt-7">
-                    {group.styles.map((style) => (
-                      <Link
-                        key={style.slug}
-                        href={`/packaging-styles/${style.slug}`}
-                        className="border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-                      >
-                        Review {style.shortName} →
-                      </Link>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {styleGuides.length > 0 && !product.styleDecisionGuide ? (
-        <section id="available-styles" className="section-shell scroll-mt-28 bg-cream">
-          <div className="container-editorial">
-            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <SectionHeading
-                eyebrow="Available styles"
-                title={`Explore real ${product.shortName.toLowerCase()} formats.`}
-                intro="Each guide covers one available format, the approved planning MOQ, the project inputs needed before pricing, and a prefilled quote path."
-              />
-              <Link
-                href="/packaging-styles"
-                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-              >
-                Browse the style library <span>→</span>
-              </Link>
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {styleGuides.map((guide, index) => (
-                <Link
-                  key={guide.slug}
-                  href={`/packaging-styles/${guide.slug}`}
-                  className="surface-card group flex min-h-60 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="eyebrow">{guide.category}</span>
-                    <span className="font-serif text-2xl text-gold">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="mt-6 font-serif text-2xl text-foreground">
-                    {guide.shortName}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {guide.selectionNote}
+                </div>
+                <div>
+                  <h3 className="text-base font-semibold text-foreground">Project review</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {product.screeningNote}
                   </p>
-                  <span className="mt-auto pt-6 text-sm text-foreground">
-                    Review this format →
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {applicationGuides.length > 0 ? (
-        <section className="section-shell bg-cream">
-          <div className="container-editorial">
-            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <SectionHeading
-                eyebrow="Corrugated mailer applications"
-                title="Choose the mailer path that matches the program."
-                intro="All four guides stay inside UPG's custom ear-lock corrugated mailer offer. Choose the closest program first; the final structure, insert, print, quantity, and destination remain subject to project review."
-              />
-              <Link
-                href="/get-a-quote?product=Mailer%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Please%20review%20the%20program%20and%20recommend%20the%20right%20ear-lock%20mailer%20path."
-                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-              >
-                Start a mailer project <span>→</span>
-              </Link>
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {applicationGuides.map((application, index) => (
-                <Link
-                  key={application.slug}
-                  href={`/applications/${application.slug}`}
-                  className="surface-card group flex min-h-64 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
-                >
-                  <div className="mb-8 flex items-center justify-between">
-                    <span className="eyebrow">Guide</span>
-                    <span className="font-serif text-2xl text-gold">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-2xl text-foreground">
-                    {application.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {application.selectionNote}
-                  </p>
-                  <span className="mt-auto pt-6 text-sm text-foreground">
-                    Compare this application{" "}
-                    <span className="inline-block transition-transform group-hover:translate-x-1">
-                      →
-                    </span>
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {comparisonGuides.length > 0 ? (
-        <section className="section-shell">
-          <div className="container-editorial">
-            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <SectionHeading
-                eyebrow="Buyer decision guides"
-                title={`Compare ${product.shortName.toLowerCase()} with the closest alternatives.`}
-                intro="These pages answer distinct format-selection searches and carry the selected route into a prefilled project enquiry."
-              />
-              <Link
-                href="/compare"
-                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-              >
-                Browse all comparisons <span>→</span>
-              </Link>
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {comparisonGuides.map((guide) => (
-                <Link
-                  key={guide.slug}
-                  href={`/compare/${guide.slug}`}
-                  className="surface-card group flex min-h-60 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
-                >
-                  <span className="eyebrow">Compare</span>
-                  <h3 className="mt-6 font-serif text-2xl text-foreground">
-                    {guide.name}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {guide.metaDescription}
-                  </p>
-                  <span className="mt-auto pt-6 text-sm text-foreground">
-                    Review the buying decision →
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {industryGuides.length > 0 ? (
-        <section className="section-shell bg-stone">
-          <div className="container-editorial">
-            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <SectionHeading
-                eyebrow="Industry and product guides"
-                title={`Explore ${product.shortName.toLowerCase()} by buyer intent.`}
-                intro="Each page starts from a real product or industry brief, keeps technical approval inside project review, and carries the selected application into the enquiry form."
-              />
-              <Link
-                href="/industries"
-                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-              >
-                Browse all guides <span>→</span>
-              </Link>
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {industryGuides.map((guide, index) => (
-                <Link
-                  key={guide.slug}
-                  href={`/industries/${guide.slug}`}
-                  className="surface-card group flex min-h-64 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="eyebrow">Application guide</span>
-                    <span className="font-serif text-2xl text-gold">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="mt-6 font-serif text-2xl text-foreground">
-                    {guide.shortName}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {guide.metaDescription}
-                  </p>
-                  <span className="mt-auto pt-6 text-sm text-foreground">
-                    Read guide{" "}
-                    <span className="inline-block transition-transform group-hover:translate-x-1">
-                      →
-                    </span>
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      <section className="section-shell">
-        <div className="container-editorial grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <SectionHeading
-              eyebrow="Artwork & proofing"
-              title="What we need before production."
-              intro="Clear files and structure notes make specification, proofing, and production more efficient."
-            />
-          </div>
-          <div className="grid gap-6 lg:col-span-8">
-            <div className="surface-card p-6">
-              <div className="eyebrow mb-3">Artwork requirements</div>
-              <p className="text-sm leading-relaxed text-foreground/82">
-                {product.artworkRequirements}
-              </p>
-            </div>
-            <div className="surface-card p-6">
-              <div className="eyebrow mb-3">Important note</div>
-              <p className="text-sm leading-relaxed text-foreground/82">
-                {product.screeningNote}
-              </p>
-            </div>
+                </div>
+              </div>
+            </details>
           </div>
         </div>
       </section>
 
-      <section className="section-shell bg-cream">
-        <div className="container-editorial grid gap-12 lg:grid-cols-12 lg:gap-16">
+      {intentRoute ? <OrganicIntentBridge route={intentRoute} compact /> : null}
+
+      <section className="py-16 md:py-20">
+        <div className="container-editorial grid gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-4">
             <SectionHeading
-              eyebrow="Product questions"
+              eyebrow="Common questions"
               title={`Plan ${product.shortName.toLowerCase()} with clear facts.`}
-              intro="Concise answers cover the planning minimum, best-fit applications, quote inputs, and the checks required before production."
+              intro="Quick answers cover minimum quantities, product fit, and the information needed for a quote."
+              headingClassName="text-4xl font-light tracking-[-0.03em] text-balance"
             />
           </div>
-          <div className="surface-card p-6 sm:p-8 lg:col-span-8 lg:p-10">
+          <div className="surface-card p-6 sm:p-8 lg:col-span-8">
             <FaqAccordion items={productFaqs} />
           </div>
         </div>
       </section>
 
-      <section className="section-shell">
-        <div className="container-editorial">
-          <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <SectionHeading
-              eyebrow="Related products"
-              title="Other packaging formats worth comparing."
-              intro="Compare related formats before confirming the final specification."
-            />
-            <Link
-              href="/products"
-              className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-            >
-              See all products <span>→</span>
-            </Link>
+      <section className="border-t border-border bg-cream py-8">
+        <div className="container-editorial flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div className="eyebrow mb-2">Other packaging formats</div>
+            <div className="flex flex-wrap gap-x-5 gap-y-2">
+              {related.map((relatedProduct) => (
+                <Link
+                  key={relatedProduct.slug}
+                  href={`/products/${relatedProduct.slug}`}
+                  className="border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+                >
+                  {relatedProduct.shortName}
+                </Link>
+              ))}
+            </div>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {related.map((relatedProduct) => (
-              <ProductCard key={relatedProduct.slug} product={relatedProduct} />
-            ))}
-          </div>
+          <Link href="/products" className="text-sm text-foreground">
+            View all five products →
+          </Link>
         </div>
       </section>
 
       <QuoteCta
-        title={`Start your ${product.name.toLowerCase()} project.`}
-        intro="Send the product type, quantity, dimensions, and delivery destination. We will develop the structure, specification, and pricing."
+        title={`Request a quote for ${product.name.toLowerCase()}.`}
+        intro="Start with the product family, quantity, and your contact details. Technical specifications can follow after the first review."
         href={`/get-a-quote?product=${encodeURIComponent(product.family)}`}
       />
     </>

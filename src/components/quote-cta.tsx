@@ -27,7 +27,7 @@ export function QuoteCta({
     <section className={sectionClass}>
       <div className="container-editorial py-20 md:py-28">
         <div className="max-w-3xl">
-          <div className="eyebrow mb-5 text-gold-soft">Start Your Project</div>
+          <div className="eyebrow mb-5 text-gold-soft">Get a custom quote</div>
           <h2 className="display-2 text-balance">{title}</h2>
           <p className={`mt-5 text-lg leading-relaxed ${introClass}`}>{intro}</p>
           <div className="mt-8 flex flex-wrap gap-4">

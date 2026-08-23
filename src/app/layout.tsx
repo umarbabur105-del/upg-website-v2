@@ -3,7 +3,6 @@ import Script from "next/script";
 import { AnalyticsRuntime } from "@/components/analytics-runtime";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { LeadAttributionCapture } from "@/components/lead-attribution-capture";
 import { products } from "@/data/products";
@@ -189,7 +188,6 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <LeadAttributionCapture />
-        <AnnouncementBar />
         <Header />
         <main>{children}</main>
         <Footer />

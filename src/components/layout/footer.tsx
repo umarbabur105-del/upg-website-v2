@@ -45,7 +45,7 @@ export function Footer() {
           </div>
 
           <div>
-            <div className="eyebrow mb-4">Products</div>
+            <div className="eyebrow mb-4">Products &amp; guides</div>
             <ul className="space-y-3 text-sm text-muted-foreground">
               {siteConfig.footerColumns.productLinks.map((item) => (
                 <li key={item.href}>
@@ -73,7 +73,7 @@ export function Footer() {
           <div>
             <div className="eyebrow mb-4">Company</div>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              {[...siteConfig.navigation, ...siteConfig.utilityNavigation].map((item) => (
+              {siteConfig.utilityNavigation.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="hover:text-foreground">
                     {item.label}

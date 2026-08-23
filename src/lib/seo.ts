@@ -4,10 +4,10 @@ import { siteConfig } from "@/data/site";
 export const SITE_URL = siteConfig.url;
 
 export const DEFAULT_OG_IMAGE = {
-  url: `${SITE_URL}/images/redesign/hero/hero-cosmetics.jpg`,
-  width: 1920,
-  height: 1080,
-  alt: "Custom boxes and flexible packaging by Universal Packaging Group",
+  url: `${SITE_URL}/images/generated/mailer-boxes/mailer-boxes-hero-v1.png`,
+  width: 1402,
+  height: 1122,
+  alt: "Custom corrugated ear-lock mailer boxes by Universal Packaging Group",
 };
 
 export const CORE_KEYWORDS = [

@@ -19,7 +19,13 @@ function resolveOptionUrl(route: OrganicIntentRoute, href?: string) {
   return href;
 }
 
-export function OrganicIntentBridge({ route }: { route: OrganicIntentRoute }) {
+export function OrganicIntentBridge({
+  route,
+  compact = false,
+}: {
+  route: OrganicIntentRoute;
+  compact?: boolean;
+}) {
   const gridClassName =
     route.options.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3";
   const structuredData = {
@@ -40,6 +46,66 @@ export function OrganicIntentBridge({ route }: { route: OrganicIntentRoute }) {
       };
     }),
   };
+
+  if (compact) {
+    return (
+      <section
+        id="buyer-intent-routes"
+        className="scroll-mt-24 border-y border-border bg-cream py-7"
+      >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <div className="container-editorial">
+          <details className="group">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-2 text-left marker:content-none">
+              <div>
+                <div className="eyebrow mb-2">Need help choosing?</div>
+                <h2 className="text-2xl font-semibold text-foreground">
+                  {route.title}
+                </h2>
+              </div>
+              <span className="text-2xl text-gold-dark transition-transform group-open:rotate-45">
+                +
+              </span>
+            </summary>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+              {route.intro}
+            </p>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {route.options.map((option) => (
+                <article key={option.title} className="border-t border-border pt-4">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="eyebrow">{option.label}</span>
+                    <span
+                      className={`inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold ${statusClassNames[option.status]}`}
+                    >
+                      {option.status}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 text-lg font-semibold text-foreground">
+                    {option.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {option.description}
+                  </p>
+                  {option.href && option.linkLabel ? (
+                    <Link
+                      href={option.href}
+                      className="mt-3 inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+                    >
+                      {option.linkLabel} →
+                    </Link>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          </details>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

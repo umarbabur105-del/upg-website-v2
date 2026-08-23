@@ -1,56 +1,81 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
-import { FaqAccordion } from "@/components/faq-accordion";
-import {
-  finishFeatures,
-  howItWorksSteps,
-  industries,
-  sampleHighlights,
-  trustPoints,
-} from "@/data/catalog";
-import { faqItems } from "@/data/faq";
-import { comparisonGuides } from "@/data/comparison-guides";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
 
+const buyerProof = [
+  { value: "5", label: "focused product families" },
+  { value: "250+", label: "units on qualifying box projects" },
+  { value: "Worldwide", label: "production and delivery" },
+  { value: "1 business day", label: "target for an initial reply" },
+];
+
+const simpleProcess = [
+  {
+    number: "01",
+    title: "Share the basics",
+    description:
+      "Tell us the packaging family, quantity, and how to reach you. References and technical details can follow.",
+  },
+  {
+    number: "02",
+    title: "Confirm the project",
+    description:
+      "We review the structure, dimensions, material, print, finish, pricing, and delivery requirements with you.",
+  },
+  {
+    number: "03",
+    title: "Approve and produce",
+    description:
+      "Dielines, artwork, proofing, manufacturing, and delivery move forward after the project details are approved.",
+  },
+];
+
+const finishHighlights = [
+  "Interior and exterior printing",
+  "Foil stamping",
+  "Spot UV",
+  "Embossing and debossing",
+  "Custom inserts",
+  "Matte, gloss, and soft-touch finishes",
+];
+
 export default function HomePage() {
+  const featuredMailer = products.find(
+    (product) => product.slug === "custom-mailer-boxes"
+  );
+
   return (
     <>
       <section className="overflow-hidden bg-background">
-        <div className="container-editorial pt-12 pb-20 md:pt-20 md:pb-28">
+        <div className="container-editorial py-10 md:py-14 lg:py-16">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
-              <div className="eyebrow mb-6">Custom Packaging Manufacturer • Worldwide Delivery</div>
-              <h1 className="display-1 text-balance">
-                Custom packaging manufactured around
-                <span className="text-gold-dark"> your product.</span>
+              <div className="eyebrow mb-5">
+                Custom packaging manufacturer • Worldwide delivery
+              </div>
+              <h1 className="max-w-3xl text-5xl leading-[0.98] font-light tracking-[-0.035em] text-balance sm:text-6xl lg:text-7xl">
+                Custom boxes and Mylar bags, made to your specifications.
               </h1>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty md:text-xl">
-                Custom tuck boxes, corrugated ear-lock mailer boxes, magnetic
-                boxes, collapsible magnetic boxes, and printed Mylar bags—made
-                to your specifications and delivered worldwide.
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg">
+                Tuck boxes, corrugated ear-lock mailer boxes, magnetic boxes,
+                collapsible magnetic boxes, and printed Mylar bags for brands
+                worldwide.
               </p>
-              <div className="mt-10 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/get-a-quote"
                   className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
                 >
-                  Start Your Project
+                  Get a Quote
                 </Link>
                 <Link
-                  href="/products"
+                  href="#products"
                   className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
                 >
-                  View Products
-                </Link>
-                <Link
-                  href="/tools"
-                  className="rounded-full border border-border bg-cream px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
-                >
-                  Use Packaging Tools
+                  View 5 Products
                 </Link>
               </div>
               {siteConfig.whatsappUrl ? (
@@ -58,185 +83,134 @@ export default function HomePage() {
                   href={siteConfig.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+                  className="mt-5 inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
                 >
-                  Or start a conversation on WhatsApp
+                  Prefer a quick conversation? WhatsApp UPG →
                 </a>
               ) : null}
             </div>
 
-            <div className="relative lg:col-span-6">
-              <div className="relative aspect-[5/4] overflow-hidden shadow-lift">
-                <Image
-                  src="/images/redesign/hero/hero-cosmetics.jpg"
-                  alt="Custom boxes and flexible packaging for product brands"
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-1 hidden max-w-xs border border-border bg-cream p-5 shadow-soft md:block">
-                <div className="eyebrow mb-2">Representative packaging concept</div>
-                <div className="font-serif text-lg leading-snug text-foreground">
-                  Custom-built around your product, brand, and delivery needs.
+            {featuredMailer ? (
+              <Link
+                href={`/products/${featuredMailer.slug}`}
+                className="group relative overflow-hidden border border-border bg-surface shadow-soft lg:col-span-6"
+              >
+                <div className="relative aspect-[6/5] overflow-hidden">
+                  <Image
+                    src={featuredMailer.heroImage}
+                    alt="Custom corrugated ear-lock mailer boxes"
+                    fill
+                    priority
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
-              </div>
-            </div>
+                <div className="flex items-center justify-between gap-5 border-t border-border px-5 py-4">
+                  <div>
+                    <div className="eyebrow mb-1">Featured format</div>
+                    <div className="text-sm font-medium text-foreground">
+                      Corrugated ear-lock mailer boxes
+                    </div>
+                  </div>
+                  <span className="text-sm text-foreground">View →</span>
+                </div>
+              </Link>
+            ) : null}
           </div>
         </div>
       </section>
 
       <section className="border-y border-border bg-cream">
-        <div className="container-editorial py-7">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-5 md:gap-4">
-            {trustPoints.map((point) => (
-              <div key={point.label} className="text-sm text-foreground">
-                {point.label}
+        <div className="container-editorial grid grid-cols-2 gap-x-6 gap-y-7 py-7 lg:grid-cols-4">
+          {buyerProof.map((item) => (
+            <div key={item.label}>
+              <div className="text-lg font-semibold text-foreground">{item.value}</div>
+              <div className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                {item.label}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell">
-        <div className="container-editorial">
-          <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <SectionHeading
-              eyebrow="Packaging formats"
-              title="Five focused product families, manufactured around your brand."
-              intro="Explore tuck boxes, corrugated mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar bags."
-            />
-            <div className="flex flex-wrap gap-x-6 gap-y-3">
-              <Link
-                href="/tools/packaging-format-finder"
-                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-              >
-                Find the right format <span>→</span>
-              </Link>
-              <Link
-                href="/products"
-                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-              >
-                See all products <span>→</span>
-              </Link>
             </div>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
-          </div>
+          ))}
         </div>
       </section>
 
-      <section className="section-shell bg-cream">
+      <section id="products" className="scroll-mt-24 py-16 md:py-20">
         <div className="container-editorial">
-          <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="Packaging buying decisions"
-              title="Compare the structures buyers most often confuse."
-              intro="Use side-by-side guides to choose the product family or format before final artwork and custom pricing begin."
+              eyebrow="What we manufacture"
+              title="Choose your packaging format."
+              intro="Start with the closest product family. If you are not sure, select ‘Not sure yet’ when requesting a quote."
+              headingClassName="text-4xl font-light tracking-[-0.03em] text-balance md:text-5xl"
             />
             <Link
-              href="/compare"
-              className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              href="/products"
+              className="inline-flex w-fit border-b border-foreground/20 pb-0.5 text-sm text-foreground"
             >
-              Browse all comparisons <span>→</span>
+              Compare all product details →
             </Link>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {comparisonGuides.slice(0, 4).map((guide, index) => (
-              <Link
-                key={guide.slug}
-                href={`/compare/${guide.slug}`}
-                className="surface-card group flex min-h-64 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="eyebrow">Compare</span>
-                  <span className="font-serif text-2xl text-gold">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <h2 className="mt-6 font-serif text-2xl text-foreground">
-                  {guide.name}
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {guide.metaDescription}
-                </p>
-                <span className="mt-auto pt-6 text-sm text-foreground">
-                  Compare the two paths →
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="section-shell">
-        <div className="container-editorial">
-          <div className="mb-14 grid gap-12 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <SectionHeading
-                eyebrow="Capabilities"
-                title="Details that turn packaging into a brand asset."
-                intro="Foil, soft-touch, embossing, debossing, spot UV, custom inserts, windows, and interior print—matched to the selected format."
-              />
-            </div>
-            <div className="lg:col-span-5 lg:text-right">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            {products.map((product) => (
               <Link
-                href="/materials-finishes"
-                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+                key={product.slug}
+                href={`/products/${product.slug}`}
+                className="group overflow-hidden border border-border bg-surface hover:-translate-y-0.5 hover:shadow-card"
               >
-                Browse materials & finishes <span>→</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {finishFeatures.map((finish) => (
-              <div key={finish.title} className="group">
-                <div className="relative aspect-[5/4] overflow-hidden bg-stone">
+                <div className="relative aspect-square overflow-hidden bg-stone">
                   <Image
-                    src={finish.image}
-                    alt={finish.title}
+                    src={product.image}
+                    alt={product.name}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                   />
                 </div>
-                <div className="mt-4 flex items-center justify-between gap-4">
-                  <div>
-                    <h3 className="font-serif text-xl text-foreground">
-                      {finish.title}
-                    </h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {finish.description}
-                    </p>
+                <div className="p-5">
+                  <h2 className="text-xl font-medium leading-tight text-foreground">
+                    {product.shortName}
+                  </h2>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {product.bestFor}
+                  </p>
+                  <div className="mt-4 border-t border-border pt-4 text-xs text-foreground/80">
+                    <span className="font-semibold">MOQ:</span> {product.moq}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-shell bg-cream">
-        <div className="container-editorial">
-          <div className="mb-14">
+      <section className="border-y border-border bg-cream py-16 md:py-20">
+        <div className="container-editorial grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
             <SectionHeading
-              eyebrow="How it works"
-              title="From packaging brief to finished production."
-              intro="Clear specifications, structural review, proofing, manufacturing, and delivery—managed as one connected process."
+              eyebrow="A clear manufacturing process"
+              title="Enough information to start. Expert review before production."
+              intro="You do not need a finished specification to contact UPG. Start with what you know, and we will identify what needs to be confirmed."
+              headingClassName="text-4xl font-light tracking-[-0.03em] text-balance md:text-5xl"
             />
+            <div className="mt-8 flex flex-wrap gap-2">
+              {finishHighlights.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-border bg-surface px-3 py-2 text-xs text-foreground/80"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {howItWorksSteps.map((step) => (
-              <div key={step.number}>
-                <div className="font-serif text-5xl text-gold">{step.number}</div>
-                <h3 className="mt-4 font-serif text-2xl text-foreground">
+
+          <div className="grid gap-6 lg:col-span-7 lg:grid-cols-3">
+            {simpleProcess.map((step) => (
+              <div key={step.number} className="border-t border-border pt-5">
+                <div className="text-sm font-semibold text-gold-dark">{step.number}</div>
+                <h2 className="mt-3 text-xl font-semibold text-foreground">
                   {step.title}
-                </h3>
+                </h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {step.description}
                 </p>
@@ -246,107 +220,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell">
-        <div className="container-editorial">
-          <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <SectionHeading
-              eyebrow="Concept directions"
-              title="See how structure, finish, and inserts work together."
-              intro="These concept visuals show possible directions for gifting and PR packaging. Final specifications are developed for each project."
-            />
-            <Link
-              href="/samples"
-              className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-            >
-              View samples <span>→</span>
-            </Link>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {sampleHighlights.map((sample) => (
-              <div key={sample.title} className="overflow-hidden border border-border bg-surface">
-                <div className="relative aspect-[4/3]">
-                  <Image
-                    src={sample.image}
-                    alt={sample.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="eyebrow mb-3">Concept direction · {sample.category}</div>
-                  <h3 className="font-serif text-2xl text-foreground">
-                    {sample.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {sample.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell bg-stone">
-        <div className="container-editorial">
-          <div className="mb-14">
-            <SectionHeading
-              eyebrow="Industries"
-              title="Custom packaging for products across industries."
-              intro="Our packaging formats support beauty, retail, ecommerce, gifting, food, beverage, supplements, and other consumer brands."
-            />
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {industries.map((industry) => (
-              <div key={industry.slug} className="surface-card p-7">
-                <div className="eyebrow mb-3">
-                  {industry.slug === "cosmetic-packaging" ? "Dedicated hub" : "Industry"}
-                </div>
-                <h3 className="font-serif text-2xl text-foreground">
-                  {industry.name}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {industry.description}
-                </p>
-                <Link
-                  href={industry.slug === "cosmetic-packaging" ? "/cosmetics" : "/industries"}
-                  className="mt-5 inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-                >
-                  Explore <span>→</span>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell">
-        <div className="container-editorial max-w-4xl">
-          <SectionHeading
-            eyebrow="Common questions"
-            title="Useful answers before you start your project."
-            intro="Quick answers on MOQ, product fit, samples, manufacturing, and delivery."
-          />
-          <div className="mt-10">
-            <FaqAccordion items={faqItems.slice(0, 6)} />
-          </div>
-          <div className="mt-8">
-            <Link
-              href="/faq"
-              className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-            >
-              View all frequently asked questions <span>→</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
       <QuoteCta
-        title="Ready to turn your packaging idea into production?"
-        intro="Share the product, quantity, dimensions, intended use, and destination. We will review the requirements and reply with the recommended structure, pricing, and production steps."
+        title="Tell us what you need. We will take it from there."
+        intro="Send the product family, quantity, and your contact details. Technical specifications can follow after the first review."
       />
     </>
   );

@@ -41,18 +41,19 @@ export default async function GetAQuotePage({ searchParams }: PageProps) {
   return (
     <>
       <section className="bg-background">
-        <div className="container-editorial pt-12 pb-8 md:pt-16 md:pb-10">
+        <div className="container-editorial pt-9 pb-5 md:pt-11 md:pb-6">
           <SectionHeading
             as="h1"
-            eyebrow="Project enquiry"
-            title="Tell us what you want to manufacture."
-            intro="Start with the product family, quantity, intended use, destination, and contact details. Dimensions, artwork, and finish details can be added when available."
-            className="max-w-4xl"
+            eyebrow="Custom packaging quote"
+            title="Get a custom packaging quote."
+            intro="Product family, quantity, and contact details are enough to start. Technical specifications can follow."
+            className="mx-auto max-w-4xl text-center"
+            headingClassName="text-4xl font-light tracking-[-0.03em] text-balance sm:text-5xl"
           />
         </div>
       </section>
 
-      <section className="pt-6 pb-16 md:pt-8 md:pb-20">
+      <section className="pt-4 pb-16 md:pt-5 md:pb-20">
         <div className="container-editorial">
           <QuoteForm prefill={prefill} />
         </div>

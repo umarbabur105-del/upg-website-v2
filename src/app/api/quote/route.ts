@@ -55,10 +55,7 @@ export async function POST(request: Request) {
 
     const requiredFields: Array<keyof typeof data> = [
       "product_family",
-      "product_style",
       "quantity",
-      "intended_end_use",
-      "shipping_country",
       "name",
       "email",
       "company",
