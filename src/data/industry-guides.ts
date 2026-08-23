@@ -30,6 +30,7 @@ export const industryGuides: IndustryGuide[] = [
     shortName: "Cereal Boxes",
     primaryFamily: "Tuck Boxes",
     productSlugs: ["custom-tuck-boxes"],
+    formatSlugs: ["seal-end-boxes"],
     heroTitle: "Custom cereal boxes developed as printed seal-end cartons.",
     heroDescription:
       "Plan a cereal-style outer carton around the finished size, quantity, board direction, artwork, packing method, and destination. UPG includes cereal-style seal-end boxes within its custom tuck box range.",
@@ -81,7 +82,7 @@ export const industryGuides: IndustryGuide[] = [
       "This guide covers custom printed cereal-style outer cartons within UPG's tuck box range.",
     compatibilityNote:
       "The intended contents, liner or inner pack, packing process, and market requirements must be reviewed before the final carton specification is approved.",
-    reviewedAt,
+    reviewedAt: "2026-08-23",
   },
   {
     slug: "custom-supplement-boxes",
@@ -435,6 +436,13 @@ export const industryGuides: IndustryGuide[] = [
     shortName: "Retail Product Boxes",
     primaryFamily: "Tuck Boxes",
     productSlugs: ["custom-tuck-boxes"],
+    formatSlugs: [
+      "straight-tuck-end-boxes",
+      "reverse-tuck-end-boxes",
+      "auto-lock-bottom-boxes",
+      "interlock-boxes",
+      "seal-end-boxes",
+    ],
     heroTitle: "Custom retail boxes planned around the product and shelf presentation.",
     heroDescription:
       "Select an approved tuck-box structure around the product dimensions, packing process, panel layout, quantity, printing, finishes, and destination.",
@@ -484,7 +492,7 @@ export const industryGuides: IndustryGuide[] = [
     ],
     scopeNote:
       "This guide covers custom printed retail outer cartons within UPG's tuck box range.",
-    reviewedAt,
+    reviewedAt: "2026-08-23",
   },
   {
     slug: "custom-food-pouches",

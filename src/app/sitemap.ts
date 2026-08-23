@@ -11,7 +11,6 @@ import { SITE_URL } from "@/lib/seo";
 const CONTENT_UPDATED_AT = new Date(`${siteConfig.contentReviewedAt}T00:00:00.000Z`);
 const COSMETICS_UPDATED_AT = new Date("2026-08-13T00:00:00.000Z");
 const STYLE_LIBRARY_UPDATED_AT = new Date("2026-08-13T00:00:00.000Z");
-const INDUSTRY_GUIDES_UPDATED_AT = new Date("2026-08-13T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -145,7 +144,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${SITE_URL}/products/${product.slug}`,
-    lastModified: CONTENT_UPDATED_AT,
+    lastModified: product.reviewedAt
+      ? new Date(`${product.reviewedAt}T00:00:00.000Z`)
+      : CONTENT_UPDATED_AT,
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
@@ -172,7 +173,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const industryRoutes: MetadataRoute.Sitemap = industryGuides.map((guide) => ({
     url: `${SITE_URL}/industries/${guide.slug}`,
-    lastModified: INDUSTRY_GUIDES_UPDATED_AT,
+    lastModified: new Date(`${guide.reviewedAt}T00:00:00.000Z`),
     changeFrequency: "monthly" as const,
     priority: 0.82,
   }));

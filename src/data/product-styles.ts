@@ -57,7 +57,37 @@ export const productStyleGuides: ProductStyleGuide[] = [
       "Artwork files, an existing dieline, or a reference box when available",
     ],
     relatedSlugs: ["reverse-tuck-end-boxes", "auto-lock-bottom-boxes", "seal-end-boxes"],
-    reviewedAt,
+    buyerGuide: {
+      eyebrow: "Straight or reverse tuck?",
+      title: "Compare the opening direction before final artwork.",
+      intro:
+        "Straight tuck end and reverse tuck end are both current UPG folding-carton structures. Compare flap orientation and panel layout, then confirm the final structure from the product and packing brief.",
+      faqQuestion: "Should I choose straight tuck end or reverse tuck end?",
+      options: [
+        {
+          title: "Straight tuck end",
+          description:
+            "Use this route when straight tuck end is the intended starting structure and share the product dimensions, filling method, board, print, finishes, and destination.",
+          href: "/get-a-quote?product=Tuck%20Boxes&style=Straight%20Tuck%20End&builder_note=Packaging%20style%3A%20Straight%20Tuck%20End.",
+          linkLabel: "Start a straight tuck enquiry",
+        },
+        {
+          title: "Reverse tuck end",
+          description:
+            "Review the reverse tuck end route before artwork is placed when the alternate flap orientation or panel layout is still being compared.",
+          href: "/packaging-styles/reverse-tuck-end-boxes",
+          linkLabel: "Compare reverse tuck end",
+        },
+        {
+          title: "Full tuck box range",
+          description:
+            "Compare straight tuck, reverse tuck, auto-lock, interlock, and seal-end structures when the style is not yet settled.",
+          href: "/products/custom-tuck-boxes",
+          linkLabel: "Compare all tuck box styles",
+        },
+      ],
+    },
+    reviewedAt: "2026-08-23",
   },
   {
     slug: "reverse-tuck-end-boxes",
@@ -82,7 +112,37 @@ export const productStyleGuides: ProductStyleGuide[] = [
       "Artwork files, an existing dieline, or a reference structure when available",
     ],
     relatedSlugs: ["straight-tuck-end-boxes", "interlock-boxes", "auto-lock-bottom-boxes"],
-    reviewedAt,
+    buyerGuide: {
+      eyebrow: "Reverse or straight tuck?",
+      title: "Compare the alternate tuck direction before final artwork.",
+      intro:
+        "Reverse tuck end and straight tuck end are both current UPG folding-carton structures. Compare flap orientation and panel layout, then confirm the final structure from the product and packing brief.",
+      faqQuestion: "Should I choose reverse tuck end or straight tuck end?",
+      options: [
+        {
+          title: "Reverse tuck end",
+          description:
+            "Use this route when reverse tuck end is the intended starting structure and share the product dimensions, opening direction, board, print, finishes, and destination.",
+          href: "/get-a-quote?product=Tuck%20Boxes&style=Reverse%20Tuck%20End&builder_note=Packaging%20style%3A%20Reverse%20Tuck%20End.",
+          linkLabel: "Start a reverse tuck enquiry",
+        },
+        {
+          title: "Straight tuck end",
+          description:
+            "Review the straight tuck end route before artwork is placed when the alternate flap orientation or panel layout is still being compared.",
+          href: "/packaging-styles/straight-tuck-end-boxes",
+          linkLabel: "Compare straight tuck end",
+        },
+        {
+          title: "Full tuck box range",
+          description:
+            "Compare straight tuck, reverse tuck, auto-lock, interlock, and seal-end structures when the style is not yet settled.",
+          href: "/products/custom-tuck-boxes",
+          linkLabel: "Compare all tuck box styles",
+        },
+      ],
+    },
+    reviewedAt: "2026-08-23",
   },
   {
     slug: "auto-lock-bottom-boxes",

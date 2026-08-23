@@ -23,6 +23,19 @@ export interface Product {
   longSummary: string;
   metaDescription: string;
   searchTerms?: string[];
+  reviewedAt?: string;
+  styleDecisionGuide?: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    faqQuestion: string;
+    quoteNote: string;
+    groups: Array<{
+      title: string;
+      description: string;
+      styleSlugs: string[];
+    }>;
+  };
   moq: string;
   leadTime: string;
   image: string;
@@ -53,11 +66,50 @@ export const products: Product[] = [
     sku: "UPG-TUCK",
     bestFor: "Retail products, cosmetics, food cartons, and everyday secondary packaging",
     summary:
-      "Custom printed tuck boxes across the core folding-carton styles, materials, and premium finish options.",
+      "Custom printed tuck boxes and folding cartons across the core structures, materials, and premium finish options.",
     longSummary:
-      "Choose straight tuck end, reverse tuck end, auto-lock, interlock, or seal-end boxes for products that need a printed retail carton. Cereal-style seal-end boxes are included in this family.",
+      "Custom tuck boxes are printed folding cartons available in straight tuck end, reverse tuck end, auto-lock, interlock, and seal-end structures. Cereal-style seal-end boxes are included in this family.",
     metaDescription:
-      "Custom tuck boxes in straight tuck, reverse tuck, auto-lock, interlock, seal-end, and cereal-style formats, manufactured for brands worldwide.",
+      "Custom printed tuck boxes and folding cartons in straight tuck, reverse tuck, auto-lock, interlock, seal-end and cereal-style formats. Worldwide delivery.",
+    searchTerms: [
+      "custom tuck boxes",
+      "custom printed tuck boxes",
+      "custom folding cartons",
+      "custom tuck boxes wholesale",
+      "straight tuck end boxes",
+      "reverse tuck end boxes",
+      "auto-lock bottom boxes",
+      "seal end boxes",
+    ],
+    reviewedAt: "2026-08-23",
+    styleDecisionGuide: {
+      eyebrow: "Tuck box structure comparison",
+      title: "Compare five real structures before final artwork begins.",
+      intro:
+        "Use the style name as the start of the brief. UPG confirms the final structure after the product, dimensions, packing method, board, artwork, quantity, and destination have been reviewed.",
+      faqQuestion: "Which custom tuck box style should I compare first?",
+      quoteNote: "Please review and recommend the tuck box structure.",
+      groups: [
+        {
+          title: "Straight or reverse tuck end",
+          description:
+            "Start here when opening direction and panel layout are the main comparison. Final flap orientation is confirmed before artwork is placed on the approved dieline.",
+          styleSlugs: ["straight-tuck-end-boxes", "reverse-tuck-end-boxes"],
+        },
+        {
+          title: "Auto-lock or interlock brief",
+          description:
+            "Start here when one of these locking structures is already in the brief. Share product dimensions and weight, packing method, or a reference structure for review.",
+          styleSlugs: ["auto-lock-bottom-boxes", "interlock-boxes"],
+        },
+        {
+          title: "Seal-end or cereal-style brief",
+          description:
+            "Start here for a cereal-style carton or another seal-end enquiry. Share the intended format and how the carton will be filled and sealed.",
+          styleSlugs: ["seal-end-boxes"],
+        },
+      ],
+    },
     moq: "250–1,000 units, based on finished size",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
@@ -357,7 +409,7 @@ export interface ProductFaq {
 }
 
 export function getProductFaqs(product: Product): ProductFaq[] {
-  return [
+  const faqs = [
     {
       question: `What is the minimum order for ${product.name}?`,
       answer: product.sizes,
@@ -377,4 +429,15 @@ export function getProductFaqs(product: Product): ProductFaq[] {
         `${product.screeningNote} Final pricing, production timing, and delivery terms are confirmed for the approved project specification.`,
     },
   ];
+
+  if (product.styleDecisionGuide) {
+    faqs.push({
+      question: product.styleDecisionGuide.faqQuestion,
+      answer: `${product.styleDecisionGuide.intro} ${product.styleDecisionGuide.groups
+        .map((group) => `${group.title}: ${group.description}`)
+        .join(" ")}`,
+    });
+  }
+
+  return faqs;
 }

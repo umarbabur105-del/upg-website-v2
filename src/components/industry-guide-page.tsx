@@ -267,7 +267,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
             <SectionHeading
               eyebrow="Relevant formats"
               title={`Compare real formats for ${guide.shortName.toLowerCase()}.`}
-              intro="These links lead to formats inside UPG's current Mylar bag range. They are buying paths, not automatic suitability claims; the final specification remains subject to project review."
+              intro={`These links lead to formats inside UPG's current ${guide.primaryFamily.toLowerCase()} offer. They are buying paths, not automatic suitability claims; the final specification remains subject to project review.`}
             />
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {formatGuides.map((format) => (

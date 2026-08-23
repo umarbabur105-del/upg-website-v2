@@ -21,6 +21,14 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
   const related = getRelatedProducts(product.slug);
   const productFaqs = getProductFaqs(product);
   const styleGuides = getProductStylesByParent(product.slug);
+  const styleDecisionGroups = (product.styleDecisionGuide?.groups ?? []).map(
+    (group) => ({
+      ...group,
+      styles: group.styleSlugs
+        .map((slug) => styleGuides.find((guide) => guide.slug === slug))
+        .filter((guide) => guide !== undefined),
+    })
+  );
   const industryGuides = getIndustryGuidesByProduct(product.slug);
   const applicationGuides =
     product.slug === "custom-mailer-boxes" ? mailerApplications : [];
@@ -221,7 +229,64 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
         </div>
       </section>
 
-      {styleGuides.length > 0 ? (
+      {product.styleDecisionGuide ? (
+        <section className="section-shell">
+          <div className="container-editorial">
+            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <SectionHeading
+                eyebrow={product.styleDecisionGuide.eyebrow}
+                title={product.styleDecisionGuide.title}
+                intro={product.styleDecisionGuide.intro}
+              />
+              <div className="flex flex-wrap gap-x-5 gap-y-3">
+                <Link
+                  href="/packaging-styles"
+                  className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+                >
+                  Browse the style library <span>→</span>
+                </Link>
+                <Link
+                  href={`/get-a-quote?product=${encodeURIComponent(
+                    product.family
+                  )}&style=${encodeURIComponent(
+                    "Not sure — recommend"
+                  )}&builder_note=${encodeURIComponent(
+                    product.styleDecisionGuide.quoteNote
+                  )}`}
+                  className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+                >
+                  Ask UPG to review the structure <span>→</span>
+                </Link>
+              </div>
+            </div>
+            <div className="grid gap-6 lg:grid-cols-3">
+              {styleDecisionGroups.map((group) => (
+                <article key={group.title} className="surface-card flex flex-col p-7 md:p-8">
+                  <h2 className="font-serif text-3xl text-foreground">
+                    {group.title}
+                  </h2>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    {group.description}
+                  </p>
+                  <div className="mt-auto flex flex-wrap gap-x-5 gap-y-3 pt-7">
+                    {group.styles.map((style) => (
+                      <Link
+                        key={style.slug}
+                        href={`/packaging-styles/${style.slug}`}
+                        className="border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+                      >
+                        Review {style.shortName} →
+                      </Link>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {styleGuides.length > 0 && !product.styleDecisionGuide ? (
         <section className="section-shell bg-cream">
           <div className="container-editorial">
             <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -429,6 +494,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
       <QuoteCta
         title={`Start your ${product.name.toLowerCase()} project.`}
         intro="Send the product type, quantity, dimensions, and delivery destination. We will develop the structure, specification, and pricing."
+        href={`/get-a-quote?product=${encodeURIComponent(product.family)}`}
       />
     </>
   );
