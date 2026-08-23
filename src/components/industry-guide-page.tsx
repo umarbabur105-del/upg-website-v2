@@ -7,6 +7,7 @@ import {
   industryGuides,
   type IndustryGuide,
 } from "@/data/industry-guides";
+import { getProductStyleGuide } from "@/data/product-styles";
 import { getProductBySlug } from "@/data/products";
 import { siteConfig } from "@/data/site";
 import { SITE_URL } from "@/lib/seo";
@@ -19,6 +20,9 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
   const products = guide.productSlugs
     .map((slug) => getProductBySlug(slug))
     .filter((product) => product !== undefined);
+  const formatGuides = (guide.formatSlugs ?? [])
+    .map((slug) => getProductStyleGuide(slug))
+    .filter((format) => format !== undefined);
   const related = industryGuides
     .filter(
       (candidate) =>
@@ -60,6 +64,15 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
     faqItems.push({
       question: "What compatibility or market check is required?",
       answer: guide.compatibilityNote,
+    });
+  }
+
+  if (formatGuides.length > 0) {
+    faqItems.push({
+      question: `Which packaging formats should I compare for ${guide.shortName.toLowerCase()}?`,
+      answer: `${formatGuides
+        .map((format) => format.shortName)
+        .join(", ")} are relevant starting formats in UPG's current range. The product, filling process, dimensions, closure, compatibility requirements, quantity, and destination still determine the final specification.`,
     });
   }
 
@@ -195,7 +208,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
             ["Markets served", siteConfig.market],
           ].map(([label, value]) => (
             <div key={label} className="bg-moss px-6 py-7">
-              <div className="text-[10px] font-semibold tracking-[0.14em] text-primary-foreground/65 uppercase">
+              <div className="text-[10px] font-semibold tracking-[0.14em] text-primary-foreground/80 uppercase">
                 {label}
               </div>
               <div className="mt-2 text-sm leading-relaxed">{value}</div>
@@ -247,6 +260,38 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
           </aside>
         </div>
       </section>
+
+      {formatGuides.length > 0 ? (
+        <section className="section-shell bg-cream">
+          <div className="container-editorial">
+            <SectionHeading
+              eyebrow="Relevant formats"
+              title={`Compare real formats for ${guide.shortName.toLowerCase()}.`}
+              intro="These links lead to formats inside UPG's current Mylar bag range. They are buying paths, not automatic suitability claims; the final specification remains subject to project review."
+            />
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {formatGuides.map((format) => (
+                <Link
+                  key={format.slug}
+                  href={`/packaging-styles/${format.slug}`}
+                  className="surface-card group flex min-h-56 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+                >
+                  <span className="eyebrow">{format.category}</span>
+                  <h2 className="mt-5 font-serif text-2xl text-foreground">
+                    {format.shortName}
+                  </h2>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {format.selectionNote}
+                  </p>
+                  <span className="mt-auto pt-6 text-sm text-foreground">
+                    Review format and quote inputs →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-shell bg-stone">
         <div className="container-editorial">

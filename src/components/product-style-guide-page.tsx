@@ -37,7 +37,9 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
         };
   const quoteHref = `/get-a-quote?product=${encodeURIComponent(
     guide.family
-  )}&builder_note=${encodeURIComponent(`Packaging style: ${guide.shortName}.`)}`;
+  )}&style=${encodeURIComponent(guide.quoteStyle)}&builder_note=${encodeURIComponent(
+    `Packaging style: ${guide.shortName}.`
+  )}`;
   const faqItems = [
     {
       question: `What is the planning MOQ for ${guide.shortName.toLowerCase()}?`,
@@ -67,7 +69,7 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
 
   if (guide.buyerGuide) {
     faqItems.push({
-      question: "Should I request rollstock film or a finished pouch?",
+      question: guide.buyerGuide.faqQuestion,
       answer: `${guide.buyerGuide.intro} ${guide.buyerGuide.options
         .map((option) => `${option.title}: ${option.description}`)
         .join(" ")}`,
@@ -229,7 +231,7 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
             <Link
               href={`/tools/packaging-spec-builder?product=${encodeURIComponent(
                 guide.family
-              )}`}
+              )}&style=${encodeURIComponent(guide.quoteStyle)}`}
               className="mt-7 inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
             >
               Check MOQ and build the specification →
@@ -257,7 +259,11 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
               title={guide.buyerGuide.title}
               intro={guide.buyerGuide.intro}
             />
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <div
+              className={`mt-10 grid gap-6 md:grid-cols-2 ${
+                guide.buyerGuide.options.length > 2 ? "lg:grid-cols-3" : ""
+              }`}
+            >
               {guide.buyerGuide.options.map((option) => (
                 <article key={option.title} className="surface-card flex flex-col p-7 md:p-9">
                   <h2 className="font-serif text-3xl text-foreground">

@@ -6,6 +6,7 @@ export interface IndustryGuide {
   shortName: string;
   primaryFamily: ProductFamily;
   productSlugs: string[];
+  formatSlugs?: string[];
   heroTitle: string;
   heroDescription: string;
   metaDescription: string;
@@ -491,6 +492,14 @@ export const industryGuides: IndustryGuide[] = [
     shortName: "Food Pouches",
     primaryFamily: "Mylar Bags",
     productSlugs: ["custom-mylar-bags"],
+    formatSlugs: [
+      "stand-up-pouches",
+      "flat-bottom-bags",
+      "three-side-seal-bags",
+      "spout-pouches",
+      "coffee-bags",
+      "printed-rollstock-film",
+    ],
     heroTitle: "Custom food pouches selected around the product and intended market.",
     heroDescription:
       "Compare stand-up, flat-bottom, three-side seal, spout, and rollstock formats while keeping film structure, compatibility, filling, quantity, and market requirements subject to project review.",
@@ -543,7 +552,7 @@ export const industryGuides: IndustryGuide[] = [
       "This guide covers custom printed flexible packaging. Product formulation, filling, shelf-life validation, and market approval are not automatic parts of the packaging quote.",
     compatibilityNote:
       "Film structure, contents, process, barrier, food-contact, storage, and destination-market requirements must be confirmed before approval.",
-    reviewedAt,
+    reviewedAt: "2026-08-23",
   },
   {
     slug: "custom-supplement-pouches",
@@ -551,6 +560,13 @@ export const industryGuides: IndustryGuide[] = [
     shortName: "Supplement Pouches",
     primaryFamily: "Mylar Bags",
     productSlugs: ["custom-mylar-bags"],
+    formatSlugs: [
+      "stand-up-pouches",
+      "flat-bottom-bags",
+      "three-side-seal-bags",
+      "child-resistant-bags",
+      "printed-rollstock-film",
+    ],
     heroTitle: "Custom supplement pouches planned around the contents and fill format.",
     heroDescription:
       "Compare approved flexible formats around the contents, target fill, closure, film and barrier brief, artwork, quantity, intended market, and destination.",
@@ -603,7 +619,7 @@ export const industryGuides: IndustryGuide[] = [
       "This guide covers custom printed flexible packaging. Supplement production, filling, regulatory copy creation, and market approval are outside the standard offer.",
     compatibilityNote:
       "Film structure, contents, filling process, barrier, storage, and market requirements must be confirmed before approval.",
-    reviewedAt,
+    reviewedAt: "2026-08-23",
   },
   {
     slug: "custom-beverage-pouches",

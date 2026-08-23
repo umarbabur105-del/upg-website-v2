@@ -4,6 +4,7 @@ export interface ProductStyleGuide {
   slug: string;
   name: string;
   shortName: string;
+  quoteStyle: string;
   family: ProductFamily;
   parentProductSlug: string;
   parentProductName: string;
@@ -18,6 +19,7 @@ export interface ProductStyleGuide {
     eyebrow: string;
     title: string;
     intro: string;
+    faqQuestion: string;
     options: Array<{
       title: string;
       description: string;
@@ -36,6 +38,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "straight-tuck-end-boxes",
     name: "Custom Straight Tuck End Boxes",
     shortName: "Straight Tuck End Boxes",
+    quoteStyle: "Straight Tuck End",
     family: "Tuck Boxes",
     parentProductSlug: "custom-tuck-boxes",
     parentProductName: "Custom Tuck Boxes",
@@ -60,6 +63,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "reverse-tuck-end-boxes",
     name: "Custom Reverse Tuck End Boxes",
     shortName: "Reverse Tuck End Boxes",
+    quoteStyle: "Reverse Tuck End",
     family: "Tuck Boxes",
     parentProductSlug: "custom-tuck-boxes",
     parentProductName: "Custom Tuck Boxes",
@@ -84,6 +88,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "auto-lock-bottom-boxes",
     name: "Custom Auto-Lock Bottom Boxes",
     shortName: "Auto-Lock Bottom Boxes",
+    quoteStyle: "Auto-Lock Box",
     family: "Tuck Boxes",
     parentProductSlug: "custom-tuck-boxes",
     parentProductName: "Custom Tuck Boxes",
@@ -108,6 +113,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "interlock-boxes",
     name: "Custom Interlock Boxes",
     shortName: "Interlock Boxes",
+    quoteStyle: "Interlock Box",
     family: "Tuck Boxes",
     parentProductSlug: "custom-tuck-boxes",
     parentProductName: "Custom Tuck Boxes",
@@ -132,6 +138,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "seal-end-boxes",
     name: "Custom Seal End Boxes",
     shortName: "Seal End Boxes",
+    quoteStyle: "Seal-End Box",
     family: "Tuck Boxes",
     parentProductSlug: "custom-tuck-boxes",
     parentProductName: "Custom Tuck Boxes",
@@ -156,6 +163,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "stand-up-pouches",
     name: "Custom Stand-Up Pouches",
     shortName: "Stand-Up Pouches",
+    quoteStyle: "Stand-Up Pouch",
     family: "Mylar Bags",
     parentProductSlug: "custom-mylar-bags",
     parentProductName: "Custom Mylar Bags",
@@ -182,6 +190,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "flat-bottom-bags",
     name: "Custom Flat Bottom Bags",
     shortName: "Flat Bottom Bags",
+    quoteStyle: "Flat-Bottom Bag",
     family: "Mylar Bags",
     parentProductSlug: "custom-mylar-bags",
     parentProductName: "Custom Mylar Bags",
@@ -208,6 +217,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "three-side-seal-bags",
     name: "Custom Three-Side Seal Bags",
     shortName: "Three-Side Seal Bags",
+    quoteStyle: "Three-Side Seal Bag",
     family: "Mylar Bags",
     parentProductSlug: "custom-mylar-bags",
     parentProductName: "Custom Mylar Bags",
@@ -234,6 +244,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "spout-pouches",
     name: "Custom Spout Pouches",
     shortName: "Spout Pouches",
+    quoteStyle: "Spout Bag",
     family: "Mylar Bags",
     parentProductSlug: "custom-mylar-bags",
     parentProductName: "Custom Mylar Bags",
@@ -260,6 +271,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "child-resistant-bags",
     name: "Custom Child-Resistant Bags",
     shortName: "Child-Resistant Bags",
+    quoteStyle: "Child-Resistant Bag — requirements reviewed per project",
     family: "Mylar Bags",
     parentProductSlug: "custom-mylar-bags",
     parentProductName: "Custom Mylar Bags",
@@ -286,6 +298,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     slug: "coffee-bags",
     name: "Custom Coffee Bags",
     shortName: "Coffee Bags",
+    quoteStyle: "Coffee Bag",
     family: "Mylar Bags",
     parentProductSlug: "custom-mylar-bags",
     parentProductName: "Custom Mylar Bags",
@@ -304,14 +317,45 @@ export const productStyleGuides: ProductStyleGuide[] = [
       "Required quantity, destination, and food-contact documentation needs",
     ],
     relatedSlugs: ["flat-bottom-bags", "stand-up-pouches", "printed-rollstock-film"],
+    buyerGuide: {
+      eyebrow: "Coffee bag buying path",
+      title: "Move from coffee-packaging intent to the right project brief.",
+      intro:
+        "Use the dedicated coffee route when the project is specifically for coffee packaging. Use the broader food-pouch or Mylar paths when the product, format, or filling brief still needs comparison.",
+      faqQuestion: "Where should I start a custom coffee packaging enquiry?",
+      options: [
+        {
+          title: "Custom coffee bags",
+          description:
+            "Start here for a coffee-specific project. Share the coffee format, target fill, preferred bag structure, valve or zipper needs, quantity, intended market, and destination.",
+          href: "/get-a-quote?product=Mylar%20Bags&style=Coffee%20Bag&builder_note=Packaging%20style%3A%20Coffee%20Bag.",
+          linkLabel: "Start a coffee bag enquiry",
+        },
+        {
+          title: "Custom food pouches",
+          description:
+            "Use the food-pouch guide when the contents, filling process, closure, or broader format decision needs to be reviewed before a bag style is selected.",
+          href: "/industries/custom-food-pouches",
+          linkLabel: "Review the food-pouch brief",
+        },
+        {
+          title: "Full Mylar bag range",
+          description:
+            "Compare all current finished pouch and printed rollstock formats when the project is not limited to a coffee bag.",
+          href: "/products/custom-mylar-bags",
+          linkLabel: "Compare Mylar formats",
+        },
+      ],
+    },
     complianceNote:
       "Film structure, valve selection, product compatibility, and food-contact requirements must be confirmed before approval.",
-    reviewedAt,
+    reviewedAt: "2026-08-23",
   },
   {
     slug: "printed-rollstock-film",
     name: "Custom Printed Rollstock Film",
     shortName: "Printed Rollstock Film",
+    quoteStyle: "Rollstock Film",
     family: "Mylar Bags",
     parentProductSlug: "custom-mylar-bags",
     parentProductName: "Custom Mylar Bags",
@@ -342,12 +386,13 @@ export const productStyleGuides: ProductStyleGuide[] = [
       title: "Start with the format your packing plan requires.",
       intro:
         "Rollstock and finished pouches belong to the same flexible-packaging family, but they need different project inputs. Choose the path that matches what you intend to source.",
+      faqQuestion: "Should I request rollstock film or a finished pouch?",
       options: [
         {
           title: "Custom printed rollstock film",
           description:
             "Use this route for printed film on roll. Share the packing-machine, web, repeat, and sealing information available so UPG can review the project.",
-          href: "/get-a-quote?product=Mylar%20Bags&builder_note=Packaging%20format%3A%20Printed%20Rollstock%20Film.",
+          href: "/get-a-quote?product=Mylar%20Bags&style=Rollstock%20Film&builder_note=Packaging%20format%3A%20Printed%20Rollstock%20Film.",
           linkLabel: "Start a rollstock enquiry",
         },
         {
