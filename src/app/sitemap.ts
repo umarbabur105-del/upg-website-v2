@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog-posts";
+import { comparisonGuides } from "@/data/comparison-guides";
 import { cosmeticsSubcategories } from "@/data/catalog";
 import { industryGuides } from "@/data/industry-guides";
 import { mailerApplications } from "@/data/mailer-applications";
@@ -35,6 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${SITE_URL}/packaging-styles`,
       lastModified: STYLE_LIBRARY_UPDATED_AT,
+      changeFrequency: "weekly",
+      priority: 0.92,
+    },
+    {
+      url: `${SITE_URL}/compare`,
+      lastModified: new Date("2026-08-23T00:00:00.000Z"),
       changeFrequency: "weekly",
       priority: 0.92,
     },
@@ -187,6 +194,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  const comparisonRoutes: MetadataRoute.Sitemap = comparisonGuides.map(
+    (guide) => ({
+      url: `${SITE_URL}/compare/${guide.slug}`,
+      lastModified: new Date(`${guide.reviewedAt}T00:00:00.000Z`),
+      changeFrequency: "monthly" as const,
+      priority: 0.84,
+    })
+  );
+
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.date),
@@ -198,6 +214,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticRoutes,
     ...productRoutes,
     ...productStyleRoutes,
+    ...comparisonRoutes,
     ...applicationRoutes,
     ...industryRoutes,
     ...cosmeticsRoutes,

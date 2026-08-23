@@ -3,6 +3,10 @@ import {
   type MailerApplication,
 } from "@/data/mailer-applications";
 import {
+  comparisonGuides,
+  type ComparisonGuide,
+} from "@/data/comparison-guides";
+import {
   industryGuides,
   type IndustryGuide,
 } from "@/data/industry-guides";
@@ -19,11 +23,12 @@ const quoteUrl = `${siteConfig.url}/get-a-quote`;
 const catalogUrl = `${siteConfig.url}/product-catalog.json`;
 const toolsUrl = `${siteConfig.url}/tools`;
 const styleLibraryUrl = `${siteConfig.url}/packaging-styles`;
+const comparisonLibraryUrl = `${siteConfig.url}/compare`;
 const industriesUrl = `${siteConfig.url}/industries`;
 const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
 const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
 const artworkPreflightUrl = `${siteConfig.url}/tools/packaging-artwork-preflight`;
-const catalogUpdatedAt = "2026-08-13";
+const catalogUpdatedAt = "2026-08-23";
 
 function productUrl(product: Product) {
   return `${siteConfig.url}/products/${product.slug}`;
@@ -39,6 +44,10 @@ function applicationUrl(application: MailerApplication) {
 
 function industryUrl(guide: IndustryGuide) {
   return `${industriesUrl}/${guide.slug}`;
+}
+
+function comparisonUrl(guide: ComparisonGuide) {
+  return `${comparisonLibraryUrl}/${guide.slug}`;
 }
 
 function sampleKitCatalogEntry(kit: (typeof sampleKits)[number]) {
@@ -89,6 +98,13 @@ export function buildLlmsText() {
     )
     .join("\n");
 
+  const comparisonLines = comparisonGuides
+    .map(
+      (guide) =>
+        `- [${guide.name}](${comparisonUrl(guide)}): ${guide.quickAnswer}`
+    )
+    .join("\n");
+
   const sampleKitLines = sampleKits
     .map(
       (kit) =>
@@ -115,6 +131,7 @@ export function buildLlmsText() {
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 - Packaging Style Library: ${styleLibraryUrl}
+- Packaging Comparison Library: ${comparisonLibraryUrl}
 - Industry and application guides: ${industriesUrl}
 
 ## Approved product range
@@ -132,6 +149,10 @@ ${applicationLines}
 ## Industry and product application guides
 
 ${industryLines}
+
+## Packaging comparison guides
+
+${comparisonLines}
 
 ## Commercial model
 
@@ -157,6 +178,7 @@ Final dimensions remain subject to structural feasibility. Product compatibility
 
 - Product catalog: ${siteConfig.url}/products
 - Packaging style library: ${styleLibraryUrl}
+- Packaging comparison library: ${comparisonLibraryUrl}
 - Packaging planning tools: ${toolsUrl}
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
@@ -254,6 +276,27 @@ Content reviewed: ${guide.reviewedAt}
     )
     .join("\n");
 
+  const comparisonSections = comparisonGuides
+    .map(
+      (guide) => `### ${guide.name}
+
+Canonical page: ${comparisonUrl(guide)}
+Quick answer: ${guide.quickAnswer}
+Option one: ${guide.first.title}. ${guide.first.summary} Planning MOQ: ${guide.first.planningMoq}.
+Option two: ${guide.second.title}. ${guide.second.summary} Planning MOQ: ${guide.second.planningMoq}.
+Decision factors: ${guide.rows
+        .map(
+          (row) =>
+            `${row.criterion}: ${guide.first.title} — ${row.first}; ${guide.second.title} — ${row.second}`
+        )
+        .join("; ")}
+Project inputs: ${guide.projectInputs.join("; ")}
+Scope note: ${guide.scopeNote}
+Content reviewed: ${guide.reviewedAt}
+`
+    )
+    .join("\n");
+
   const sampleKitSections = sampleKits
     .map(
       (kit) => `### ${kit.name}
@@ -318,6 +361,11 @@ ${applicationSections}
 These guides answer distinct commercial searches while staying inside UPG's five approved product families. They do not add a new manufacturing category or an instant-price promise.
 
 ${industrySections}
+## Packaging comparison guides
+
+These pages answer side-by-side buyer decisions using approved UPG product facts, clear quote inputs, and explicit scope boundaries.
+
+${comparisonSections}
 ## Corrugated-box search intent
 
 UPG uses the broad term corrugated boxes because buyers use it when researching corrugated mailer packaging. The commercial offer remains limited to corrugated tuck boxes and ear-lock mailer boxes. Regular slotted containers, master cartons, standard shipping cartons, and RSC cases are outside the product range.
@@ -350,6 +398,7 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 - Packaging Style Library: ${styleLibraryUrl}
+- Packaging Comparison Library: ${comparisonLibraryUrl}
 - Industry and application guides: ${industriesUrl}
 - Cosmetics outer-packaging hub: ${siteConfig.url}/cosmetics
 - Sitemap: ${siteConfig.url}/sitemap.xml
@@ -389,6 +438,13 @@ export function buildAgentsMarkdown() {
     )
     .join("\n");
 
+  const comparisonLines = comparisonGuides
+    .map(
+      (guide) =>
+        `- ${guide.name}: ${guide.quickAnswer} Source: ${comparisonUrl(guide)}`
+    )
+    .join("\n");
+
   const sampleKitLines = sampleKits
     .map(
       (kit) =>
@@ -419,6 +475,10 @@ ${applicationLines}
 
 ${industryLines}
 
+## Packaging comparison guides
+
+${comparisonLines}
+
 ## Important operating rules
 
 - UPG serves brands worldwide.
@@ -436,6 +496,7 @@ ${sampleKitLines}
 
 - Read product catalog: ${catalogUrl}
 - Browse real packaging styles: ${styleLibraryUrl}
+- Compare packaging formats and buying paths: ${comparisonLibraryUrl}
 - Browse industry and product application guides: ${industriesUrl}
 - Compare approved product families: ${formatFinderUrl}
 - Build a packaging specification and check the planning MOQ: ${specBuilderUrl}
@@ -454,7 +515,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "2.0",
+    schemaVersion: "2.1",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -584,12 +645,36 @@ export function buildProductCatalog() {
         `Industry or application: ${guide.shortName}.`
       )}`,
     })),
+    comparisonGuides: comparisonGuides.map((guide) => ({
+      slug: guide.slug,
+      name: guide.name,
+      summary: guide.quickAnswer,
+      searchTerms: guide.keywords,
+      optionOne: {
+        name: guide.first.title,
+        summary: guide.first.summary,
+        planningMoq: guide.first.planningMoq,
+        url: guide.first.href ? `${siteConfig.url}${guide.first.href}` : null,
+      },
+      optionTwo: {
+        name: guide.second.title,
+        summary: guide.second.summary,
+        planningMoq: guide.second.planningMoq,
+        url: guide.second.href ? `${siteConfig.url}${guide.second.href}` : null,
+      },
+      decisionFactors: guide.rows,
+      projectInputs: guide.projectInputs,
+      scopeNote: guide.scopeNote,
+      contentReviewed: guide.reviewedAt,
+      url: comparisonUrl(guide),
+    })),
     sources: {
       conciseReference: `${siteConfig.url}/llms.txt`,
       fullReference: `${siteConfig.url}/llms-full.txt`,
       agentGuidance: `${siteConfig.url}/agents.md`,
       toolsHub: toolsUrl,
       packagingStyleLibrary: styleLibraryUrl,
+      packagingComparisonLibrary: comparisonLibraryUrl,
       industries: industriesUrl,
       packagingFormatFinder: formatFinderUrl,
       packagingSpecBuilder: specBuilderUrl,

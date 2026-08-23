@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/product-card";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
+import { getComparisonGuidesByProduct } from "@/data/comparison-guides";
 import { getIndustryGuidesByProduct } from "@/data/industry-guides";
 import { mailerApplications } from "@/data/mailer-applications";
 import { getProductStylesByParent } from "@/data/product-styles";
@@ -32,6 +33,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
   const industryGuides = getIndustryGuidesByProduct(product.slug);
   const applicationGuides =
     product.slug === "custom-mailer-boxes" ? mailerApplications : [];
+  const comparisonGuides = getComparisonGuidesByProduct(product.slug);
 
   return (
     <>
@@ -371,6 +373,46 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                     <span className="inline-block transition-transform group-hover:translate-x-1">
                       →
                     </span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {comparisonGuides.length > 0 ? (
+        <section className="section-shell">
+          <div className="container-editorial">
+            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <SectionHeading
+                eyebrow="Buyer decision guides"
+                title={`Compare ${product.shortName.toLowerCase()} with the closest alternatives.`}
+                intro="These pages answer distinct format-selection searches and carry the selected route into a prefilled project enquiry."
+              />
+              <Link
+                href="/compare"
+                className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                Browse all comparisons <span>→</span>
+              </Link>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {comparisonGuides.map((guide) => (
+                <Link
+                  key={guide.slug}
+                  href={`/compare/${guide.slug}`}
+                  className="surface-card group flex min-h-60 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+                >
+                  <span className="eyebrow">Compare</span>
+                  <h3 className="mt-6 font-serif text-2xl text-foreground">
+                    {guide.name}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {guide.metaDescription}
+                  </p>
+                  <span className="mt-auto pt-6 text-sm text-foreground">
+                    Review the buying decision →
                   </span>
                 </Link>
               ))}

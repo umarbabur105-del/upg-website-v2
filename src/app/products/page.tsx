@@ -97,6 +97,12 @@ export default function ProductsPage() {
                 Find the Right Format
               </Link>
               <Link
+                href="/compare"
+                className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
+              >
+                Compare Packaging Formats
+              </Link>
+              <Link
                 href="/tools/packaging-spec-builder"
                 className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
               >

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
+import { getComparisonGuidesByStyle } from "@/data/comparison-guides";
 import {
   getRelatedProductStyles,
   type ProductStyleGuide,
@@ -22,6 +23,7 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
   }
 
   const related = getRelatedProductStyles(guide);
+  const comparisonGuides = getComparisonGuidesByStyle(guide.slug);
   const pageUrl = `${SITE_URL}/packaging-styles/${guide.slug}`;
   const sampleKit =
     guide.family === "Mylar Bags"
@@ -279,6 +281,46 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
                     {option.linkLabel} →
                   </Link>
                 </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {comparisonGuides.length > 0 ? (
+        <section className="section-shell">
+          <div className="container-editorial">
+            <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <SectionHeading
+                eyebrow="Dedicated comparison"
+                title="See this format inside a side-by-side buying decision."
+                intro="Use the full comparison before the final structure, artwork template, or production quote is approved."
+              />
+              <Link
+                href="/compare"
+                className="inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                Browse all comparisons →
+              </Link>
+            </div>
+            <div className="grid gap-5 md:grid-cols-2">
+              {comparisonGuides.map((comparison) => (
+                <Link
+                  key={comparison.slug}
+                  href={`/compare/${comparison.slug}`}
+                  className="surface-card group flex min-h-56 flex-col p-7 hover:-translate-y-1 hover:shadow-card"
+                >
+                  <span className="eyebrow">Buyer decision guide</span>
+                  <h2 className="mt-5 font-serif text-3xl text-foreground">
+                    {comparison.name}
+                  </h2>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {comparison.quickAnswer}
+                  </p>
+                  <span className="mt-auto pt-6 text-sm text-foreground">
+                    Compare the two paths →
+                  </span>
+                </Link>
               ))}
             </div>
           </div>

@@ -12,6 +12,7 @@ import {
   trustPoints,
 } from "@/data/catalog";
 import { faqItems } from "@/data/faq";
+import { comparisonGuides } from "@/data/comparison-guides";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
 
@@ -129,14 +130,57 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section-shell bg-cream">
+        <div className="container-editorial">
+          <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Packaging buying decisions"
+              title="Compare the structures buyers most often confuse."
+              intro="Use side-by-side guides to choose the product family or format before final artwork and custom pricing begin."
+            />
+            <Link
+              href="/compare"
+              className="inline-flex items-center gap-1 border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+            >
+              Browse all comparisons <span>→</span>
+            </Link>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {comparisonGuides.slice(0, 4).map((guide, index) => (
+              <Link
+                key={guide.slug}
+                href={`/compare/${guide.slug}`}
+                className="surface-card group flex min-h-64 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="eyebrow">Compare</span>
+                  <span className="font-serif text-2xl text-gold">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h2 className="mt-6 font-serif text-2xl text-foreground">
+                  {guide.name}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {guide.metaDescription}
+                </p>
+                <span className="mt-auto pt-6 text-sm text-foreground">
+                  Compare the two paths →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-shell">
         <div className="container-editorial">
           <div className="mb-14 grid gap-12 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
               <SectionHeading
                 eyebrow="Capabilities"
-              title="Details that turn packaging into a brand asset."
-              intro="Foil, soft-touch, embossing, debossing, spot UV, custom inserts, windows, and interior print—matched to the selected format."
+                title="Details that turn packaging into a brand asset."
+                intro="Foil, soft-touch, embossing, debossing, spot UV, custom inserts, windows, and interior print—matched to the selected format."
               />
             </div>
             <div className="lg:col-span-5 lg:text-right">

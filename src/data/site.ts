@@ -14,7 +14,7 @@ export const siteConfig = {
     "https://universalpackaginggroup.com/shipping-returns#merchant-return-policy",
   language: "en-US",
   market: "Worldwide",
-  contentReviewedAt: "2026-08-10",
+  contentReviewedAt: "2026-08-23",
   businessModel:
     "Custom packaging manufacturing with project-specific structure, specification, pricing, proofing, production, and delivery planning.",
   pricingModel:
@@ -28,6 +28,7 @@ export const siteConfig = {
   navigation: [
     { label: "Products", href: "/products" },
     { label: "Styles", href: "/packaging-styles" },
+    { label: "Compare", href: "/compare" },
     { label: "Tools", href: "/tools" },
     { label: "Cosmetic Packaging", href: "/cosmetics" },
     { label: "Materials & Finishes", href: "/materials-finishes" },
@@ -44,6 +45,7 @@ export const siteConfig = {
   footerColumns: {
     productLinks: [
       { label: "Packaging Style Library", href: "/packaging-styles" },
+      { label: "Packaging Comparisons", href: "/compare" },
       { label: "Custom Tuck Boxes", href: "/products/custom-tuck-boxes" },
       { label: "Corrugated Mailer Boxes", href: "/products/custom-mailer-boxes" },
       { label: "Custom Magnetic Boxes", href: "/products/custom-magnetic-boxes" },

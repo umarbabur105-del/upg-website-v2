@@ -87,6 +87,7 @@ for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
   pages.push({
     route,
+    html,
     title: firstMatch(html, [/<title[^>]*>([\s\S]*?)<\/title>/i]),
     description: firstMatch(html, [
       /<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)/i,
@@ -135,6 +136,58 @@ for (const page of pages) {
 addDuplicateFailures(pages, "title", "Title", failures);
 addDuplicateFailures(pages, "description", "Meta description", failures);
 
+const comparisonRoutes = [...sitemapPaths].filter((route) =>
+  /^\/compare\/[^/]+$/.test(route)
+);
+const comparisonHub = pages.find((page) => page.route === "/compare");
+
+if (comparisonRoutes.length < 8) {
+  failures.push(
+    `Comparison cluster has ${comparisonRoutes.length} guide route(s); expected at least 8`
+  );
+}
+
+if (!comparisonHub) {
+  failures.push("/compare: missing rendered comparison hub");
+} else {
+  for (const route of comparisonRoutes) {
+    if (!comparisonHub.html.includes(`href="${route}"`)) {
+      failures.push(`/compare: missing internal link to ${route}`);
+    }
+  }
+}
+
+for (const route of comparisonRoutes) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered comparison page`);
+    continue;
+  }
+  if (!page.html.includes('id="comparison-table"')) {
+    failures.push(`${route}: missing side-by-side comparison table anchor`);
+  }
+  if (!page.html.includes('"@type":"ItemList"')) {
+    failures.push(`${route}: missing ItemList JSON-LD`);
+  }
+  if (!page.html.includes('"@type":"FAQPage"')) {
+    failures.push(`${route}: missing FAQPage JSON-LD`);
+  }
+  if (!page.html.includes('href="/get-a-quote?')) {
+    failures.push(`${route}: missing prefilled quote path`);
+  }
+
+  const inboundLinkCount = pages.reduce(
+    (count, candidate) =>
+      count + (candidate.html.match(new RegExp(`href="${route}"`, "g")) ?? []).length,
+    0
+  );
+  if (inboundLinkCount < 2) {
+    failures.push(
+      `${route}: only ${inboundLinkCount} rendered internal link(s); expected at least 2`
+    );
+  }
+}
+
 if (failures.length) {
   console.error(`SEO quality audit failed with ${failures.length} issue(s):`);
   for (const failure of failures) console.error(`- ${failure}`);
@@ -142,5 +195,5 @@ if (failures.length) {
 }
 
 console.log(
-  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, and uniqueness. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
+  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, uniqueness, and ${comparisonRoutes.length} comparison-guide contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
 );

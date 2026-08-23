@@ -1,6 +1,6 @@
 # UPG Organic Lead Engine
 
-Last reviewed: 2026-08-21
+Last reviewed: 2026-08-23
 
 ## Business objective
 
@@ -174,6 +174,22 @@ The gate checks rendered pages for required and unique titles and descriptions, 
 - Backlink distribution has started: 50 researched prospects, 13 still marked ready for a personalized pitch, and 2 individually approved editorial emails sent and awaiting response (FDPP and Packaging World). Further outreach is on hold.
 
 The immediate constraints are non-brand click-through, authority, and live physical-fulfillment readiness; crawlability, sitemap indexing, checkout-session creation, and the protected sandbox payment pipeline are healthy. While outreach is paused, the active lane is measurement, query-led content improvement, and conversion-path verification.
+
+### Buyer-decision cluster — local release candidate, 2026-08-23
+
+The next large organic batch is implemented locally and remains unreleased pending owner approval:
+
+- one indexable `/compare` hub;
+- eight distinct side-by-side buyer guides spanning box families, tuck directions, flexible formats, rollstock versus finished pouches, and the corrugated-mailer scope boundary;
+- prefilled quote handoffs for every available UPG path;
+- product-page and style-page cross-links plus global navigation and footer discovery;
+- WebPage, ItemList, BreadcrumbList, and FAQPage structured data;
+- sitemap, `llms.txt`, `llms-full.txt`, `agents.md`, and product-catalog JSON coverage;
+- an expanded rendered SEO gate that requires at least eight comparison pages, hub links, table anchors, ItemList and FAQ schema, quote paths, and at least two rendered internal links per guide.
+
+Fresh aggregate evidence through the available reporting windows: 1,100 Search Console impressions, 567 non-brand impressions, 8 total clicks, 0 non-brand clicks, 13 queries observed in positions 1-20, 6 GA4 Organic Search sessions, 1 Organic Shopping session, and 3 genuine CRM leads. The comparison cluster addresses decision-intent coverage and internal relevance; it does not replace the paused authority and backlink lane.
+
+Local proof currently passed: ESLint with zero warnings, TypeScript, diff check, Next.js build with 95/95 generated pages, 73 canonical rendered sitemap pages, 8 comparison-guide contracts, 76/76 local runtime sitemap URLs, 4/4 AI discovery endpoints, quote-prefill browser proof, and mobile Lighthouse 100 for accessibility, best practices, and SEO on both the hub and a representative guide.
 
 ### Phase 1 — Product-style lead cluster
 

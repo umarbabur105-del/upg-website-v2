@@ -100,6 +100,12 @@ export default function PackagingStylesPage() {
             >
               Check MOQ and build a spec
             </Link>
+            <Link
+              href="/compare"
+              className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
+            >
+              Compare similar formats
+            </Link>
           </div>
         </div>
       </section>

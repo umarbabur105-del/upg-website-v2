@@ -1,6 +1,6 @@
 # UPG Keyword Demand and Competitor Gap Map
 
-Last reviewed: 2026-08-13
+Last reviewed: 2026-08-23
 
 ## Evidence boundary
 
@@ -13,6 +13,10 @@ This map does not invent monthly search volume. It combines three currently veri
 Google Ads API is now enabled on the `upg-leads-crm` Cloud project. Exact Keyword Planner historical metrics remain blocked because the signed-in Google account does not yet have a Google Ads account, developer token, customer ID, or OAuth `adwords` scope. The monthly-volume field must remain pending until that access exists.
 
 ## Current UPG search baseline
+
+The latest aggregate 90-day report covers Search Console data through 2026-08-20. It contains 1,100 total impressions, 567 non-brand impressions, 8 total clicks, 0 non-brand clicks, and 13 queries with observed average positions from 1 through 20. GA4 recorded 6 Organic Search sessions and 1 Organic Shopping session in the corresponding operating window.
+
+This confirms that discovery is expanding, but commercial non-brand click-through remains the immediate constraint. New comparison pages are therefore treated as buyer-decision assets and internal-link bridges, not as an instant traffic claim.
 
 Search Console query clusters, 2026-05-01 to 2026-08-10:
 
@@ -83,6 +87,25 @@ The release queue uses a 100-point score:
 | Another coffee-bag page | 58 | Do not publish; strengthen the existing style page |
 | More cosmetics keyword variants | 55 | Do not publish as thin duplicates; improve current pages from Search Console evidence |
 | Shipping-carton, master-carton, or RSC pages | 0 | Never publish inside current UPG offer |
+
+## Buyer-comparison expansion — 2026-08-23
+
+Current search results contain active publisher and manufacturer coverage for stand-up versus flat-bottom pouches, rollstock versus finished pouches, and tuck boxes versus mailer boxes. That is a SERP-coverage signal, not monthly volume or proof that each query will convert.
+
+The local release candidate adds one visible comparison hub plus eight distinct buyer guides:
+
+1. Tuck Boxes vs Mailer Boxes
+2. Magnetic Boxes vs Collapsible Magnetic Boxes
+3. Tuck Boxes vs Magnetic Boxes
+4. Mailer Boxes vs Magnetic Boxes
+5. Straight Tuck vs Reverse Tuck Boxes
+6. Stand-Up Pouches vs Flat Bottom Bags
+7. Rollstock Film vs Finished Pouches
+8. Corrugated Mailer Boxes vs Shipping Cartons
+
+The last page is deliberately a scope filter: it keeps broad corrugated-box language discoverable while excluding standard shipping cartons, master cartons, and RSC cases from the quote path.
+
+Each page uses approved UPG product facts, visible side-by-side decisions, prefilled quote routing, FAQ and ItemList structured data, product and style cross-links, sitemap inclusion, and AI-readable catalog entries. The cluster is not considered released until the exact commit is pushed, Vercel succeeds for that SHA, and all live sitemap and page contracts pass.
 
 ## Monthly volume completion path
 
