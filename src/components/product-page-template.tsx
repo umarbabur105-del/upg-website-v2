@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { ProductCard } from "@/components/product-card";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { QuoteCta } from "@/components/quote-cta";
@@ -7,6 +8,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { getComparisonGuidesByProduct } from "@/data/comparison-guides";
 import { getIndustryGuidesByProduct } from "@/data/industry-guides";
 import { mailerApplications } from "@/data/mailer-applications";
+import { getOrganicIntentRoute } from "@/data/organic-intent-routes";
 import { getProductStylesByParent } from "@/data/product-styles";
 import {
   getProductFaqs,
@@ -34,6 +36,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
   const applicationGuides =
     product.slug === "custom-mailer-boxes" ? mailerApplications : [];
   const comparisonGuides = getComparisonGuidesByProduct(product.slug);
+  const intentRoute = getOrganicIntentRoute(`/products/${product.slug}`);
 
   return (
     <>
@@ -91,6 +94,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           </div>
         </div>
       </section>
+
+      {intentRoute ? <OrganicIntentBridge route={intentRoute} /> : null}
 
       <section className="section-shell">
         <div className="container-editorial">
@@ -232,7 +237,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
       </section>
 
       {product.styleDecisionGuide ? (
-        <section className="section-shell">
+        <section id="style-decision-guide" className="section-shell scroll-mt-28">
           <div className="container-editorial">
             <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <SectionHeading
@@ -289,7 +294,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
       ) : null}
 
       {styleGuides.length > 0 && !product.styleDecisionGuide ? (
-        <section className="section-shell bg-cream">
+        <section id="available-styles" className="section-shell scroll-mt-28 bg-cream">
           <div className="container-editorial">
             <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <SectionHeading

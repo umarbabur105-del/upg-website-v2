@@ -38,6 +38,13 @@ COMMERCIAL_PACKAGING_PATTERN = re.compile(
     r"\b(?:packaging|boxes?|mailers?|cartons?|pouches?|mylar|bags?|roll[\s-]?stock|tuck|magnetic)\b",
     re.IGNORECASE,
 )
+CORE_PRODUCT_PATHS = (
+    "/products/custom-tuck-boxes",
+    "/products/custom-mailer-boxes",
+    "/products/custom-magnetic-boxes",
+    "/products/custom-collapsible-magnetic-boxes",
+    "/products/custom-mylar-bags",
+)
 OUT_OF_SCOPE_QUERY_TERMS = (
     "gaylord",
     "master carton",
@@ -252,6 +259,25 @@ def search_console_report(
             }
         )
 
+    core_product_pages = []
+    for page in CORE_PRODUCT_PATHS:
+        values = page_totals.get(
+            page, {"clicks": 0.0, "impressions": 0.0, "position_sum": 0.0}
+        )
+        impressions = values["impressions"]
+        core_product_pages.append(
+            {
+                "page": page,
+                "clicks": round(values["clicks"], 2),
+                "impressions": round(impressions, 2),
+                "average_position": (
+                    round(values["position_sum"] / impressions, 1)
+                    if impressions
+                    else None
+                ),
+            }
+        )
+
     top_query_pages = [
         {
             "query": row["keys"][0],
@@ -325,6 +351,7 @@ def search_console_report(
         ),
         "top_non_brand_queries": top_queries,
         "top_non_brand_pages": top_pages,
+        "core_product_pages": core_product_pages,
         "top_non_brand_query_pages": top_query_pages,
         "zero_click_opportunities": zero_click_opportunities[:10],
         "zero_click_pages": zero_click_pages,
@@ -631,6 +658,16 @@ def markdown_report(report: dict[str, Any]) -> str:
         )
     else:
         lines.append("- No non-brand landing-page evidence in this period.")
+    lines.extend(["", "## Core product page visibility", ""])
+    lines.extend(
+        f"- {item['page']}: {item['impressions']} impressions, {item['clicks']} clicks, "
+        + (
+            f"position {item['average_position']}"
+            if item["average_position"] is not None
+            else "no measured position"
+        )
+        for item in current["search_console"]["core_product_pages"]
+    )
     lines.extend(["", "## Top non-brand query-to-page pairs", ""])
     query_pages = current["search_console"]["top_non_brand_query_pages"]
     if query_pages:

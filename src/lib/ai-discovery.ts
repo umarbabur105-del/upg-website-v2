@@ -577,7 +577,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "2.2",
+    schemaVersion: "2.3",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,

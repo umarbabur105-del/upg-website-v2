@@ -22,6 +22,230 @@ const reviewedAt = "2026-08-23";
 
 export const organicIntentRoutes: OrganicIntentRoute[] = [
   {
+    path: "/products/custom-tuck-boxes",
+    eyebrow: "Tuck-box buying routes",
+    title: "Start with the tuck-box structure or decision you already know.",
+    intro:
+      "UPG manufactures custom printed tuck boxes and folding cartons across five core structures. Choose a direct production brief, compare structures, or check whether the project is actually a corrugated mailer.",
+    options: [
+      {
+        label: "Custom retail outer box",
+        title: "Tuck box or folding carton",
+        description:
+          "Start a production brief for a straight tuck, reverse tuck, auto-lock, interlock, seal-end, cereal-style, or corrugated tuck box.",
+        status: "Available",
+        href: "/get-a-quote?product=Tuck%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Buyer%20intent%3A%20custom%20tuck%20box%20or%20folding%20carton.",
+        linkLabel: "Start a tuck-box brief",
+      },
+      {
+        label: "Structure not confirmed",
+        title: "Compare the five tuck-box structures",
+        description:
+          "Review the opening direction, locking-bottom, interlock, and seal-end starting routes before final artwork is placed on an approved dieline.",
+        status: "Related route",
+        href: "#style-decision-guide",
+        linkLabel: "Compare tuck structures",
+      },
+      {
+        label: "Presentation decision",
+        title: "Tuck box or corrugated mailer?",
+        description:
+          "Use the side-by-side guide when the project could be an individual retail carton or a larger ear-lock presentation mailer.",
+        status: "Related route",
+        href: "/compare/tuck-boxes-vs-mailer-boxes",
+        linkLabel: "Compare tuck and mailer boxes",
+      },
+      {
+        label: "Transit case",
+        title: "Regular shipping carton, master carton, or RSC case",
+        description:
+          "These standard transit cartons are outside UPG's current offer. Corrugated tuck boxes and ear-lock mailer boxes remain available.",
+        status: "Outside current offer",
+      },
+    ],
+    reviewedAt,
+  },
+  {
+    path: "/products/custom-mailer-boxes",
+    eyebrow: "Corrugated mailer buying routes",
+    title: "Choose the ear-lock mailer route that matches the program.",
+    intro:
+      "UPG manufactures custom corrugated ear-lock mailer boxes for branded presentation. Start with the program type, then confirm the product arrangement, insert, print, quantity, and destination.",
+    options: [
+      {
+        label: "Direct mailer project",
+        title: "Custom corrugated ear-lock mailer",
+        description:
+          "Start a made-to-spec mailer brief with the product arrangement, dimensions, quantity, artwork status, intended use, and destination.",
+        status: "Available",
+        href: "/get-a-quote?product=Mailer%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Buyer%20intent%3A%20custom%20corrugated%20ear-lock%20mailer%20box.",
+        linkLabel: "Start a mailer brief",
+      },
+      {
+        label: "Launch or media program",
+        title: "PR or influencer mailer",
+        description:
+          "Use an application guide when the ear-lock mailer is for press, media, creator seeding, product launch, or branded presentation.",
+        status: "Related route",
+        href: "/applications/custom-pr-boxes",
+        linkLabel: "Review custom PR boxes",
+      },
+      {
+        label: "Repeat program",
+        title: "Subscription mailer",
+        description:
+          "Use the subscription route when products or assortments repeat and the mailer, insert, and artwork need a consistent program brief.",
+        status: "Related route",
+        href: "/applications/custom-subscription-boxes",
+        linkLabel: "Review subscription mailers",
+      },
+      {
+        label: "Transit case",
+        title: "Regular shipping carton, master carton, or RSC case",
+        description:
+          "These standard transit cartons are outside UPG's current offer. The available corrugated product is a custom ear-lock mailer for branded presentation.",
+        status: "Outside current offer",
+      },
+    ],
+    reviewedAt,
+  },
+  {
+    path: "/products/custom-magnetic-boxes",
+    eyebrow: "Magnetic-box buying routes",
+    title: "Choose an assembled magnetic presentation or compare fold-flat delivery.",
+    intro:
+      "UPG manufactures custom rigid magnetic boxes for premium presentation. The first decision is whether the approved structure should remain assembled or use a collapsible fold-flat route.",
+    options: [
+      {
+        label: "Assembled presentation",
+        title: "Custom magnetic rigid box",
+        description:
+          "Start here for a premium assembled magnetic box developed around the product arrangement, dimensions, quantity, artwork, finish, and destination.",
+        status: "Available",
+        href: "/get-a-quote?product=Magnetic%20Boxes&builder_note=Buyer%20intent%3A%20custom%20assembled%20magnetic%20rigid%20box.",
+        linkLabel: "Start a magnetic-box brief",
+      },
+      {
+        label: "Multi-product set",
+        title: "Magnetic box with custom insert",
+        description:
+          "Use this route when several products need one premium presentation and the insert must be reviewed with the planned arrangement.",
+        status: "Available",
+        href: "/get-a-quote?product=Magnetic%20Boxes&builder_note=Buyer%20intent%3A%20magnetic%20presentation%20box%20with%20custom%20insert.",
+        linkLabel: "Start an insert-led brief",
+      },
+      {
+        label: "Freight and storage decision",
+        title: "Standard or collapsible magnetic box?",
+        description:
+          "Use the comparison guide when a premium magnetic presentation is required but a fold-flat structure may better suit freight, storage, or packing plans.",
+        status: "Related route",
+        href: "/compare/magnetic-boxes-vs-collapsible-magnetic-boxes",
+        linkLabel: "Compare magnetic structures",
+      },
+      {
+        label: "Different presentation level",
+        title: "Tuck box or magnetic box?",
+        description:
+          "Use the side-by-side guide when the decision is between a folding retail carton and a premium rigid magnetic presentation.",
+        status: "Related route",
+        href: "/compare/tuck-boxes-vs-magnetic-boxes",
+        linkLabel: "Compare tuck and magnetic boxes",
+      },
+    ],
+    reviewedAt,
+  },
+  {
+    path: "/products/custom-collapsible-magnetic-boxes",
+    eyebrow: "Collapsible magnetic-box routes",
+    title: "Start with the fold-flat magnetic structure or compare an assembled box.",
+    intro:
+      "UPG manufactures custom collapsible magnetic boxes that fold flat before assembly. Product arrangement, dimensions, insert, finish, quantity, destination, and packing method remain part of structural review.",
+    options: [
+      {
+        label: "Fold-flat presentation",
+        title: "Custom collapsible magnetic box",
+        description:
+          "Start here when the brief requires a premium rigid magnetic presentation that ships or stores flat before assembly.",
+        status: "Available",
+        href: "/get-a-quote?product=Collapsible%20Magnetic%20Boxes&builder_note=Buyer%20intent%3A%20custom%20fold-flat%20collapsible%20magnetic%20box.",
+        linkLabel: "Start a collapsible-box brief",
+      },
+      {
+        label: "Structure comparison",
+        title: "Collapsible or assembled magnetic box?",
+        description:
+          "Compare the fold-flat route with a standard assembled rigid magnetic box before the structure and packing method are approved.",
+        status: "Related route",
+        href: "/compare/magnetic-boxes-vs-collapsible-magnetic-boxes",
+        linkLabel: "Compare both magnetic formats",
+      },
+      {
+        label: "Multi-product set",
+        title: "Collapsible magnetic box with insert",
+        description:
+          "Use this route when a fold-flat magnetic presentation also needs a custom insert developed around several products.",
+        status: "Available",
+        href: "/get-a-quote?product=Collapsible%20Magnetic%20Boxes&builder_note=Buyer%20intent%3A%20collapsible%20magnetic%20box%20with%20custom%20insert.",
+        linkLabel: "Start an insert-led brief",
+      },
+      {
+        label: "Different presentation level",
+        title: "Folding carton or rigid presentation?",
+        description:
+          "Use the tuck-versus-magnetic guide when the project may only need a printed folding carton rather than a rigid magnetic structure.",
+        status: "Related route",
+        href: "/compare/tuck-boxes-vs-magnetic-boxes",
+        linkLabel: "Compare carton and rigid formats",
+      },
+    ],
+    reviewedAt,
+  },
+  {
+    path: "/products/custom-mylar-bags",
+    eyebrow: "Flexible-packaging buying routes",
+    title: "Choose a finished pouch, printed rollstock, or a format comparison.",
+    intro:
+      "UPG supplies custom printed Mylar bags, finished pouches, and printed rollstock film. Start with the physical format required by the product and packing plan.",
+    options: [
+      {
+        label: "Finished flexible package",
+        title: "Custom printed bag or pouch",
+        description:
+          "Start a finished-pouch brief for stand-up, flat-bottom, three-side-seal, spout, coffee, or child-resistant formats.",
+        status: "Available",
+        href: "/get-a-quote?product=Mylar%20Bags&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Buyer%20intent%3A%20custom%20printed%20finished%20bag%20or%20pouch.",
+        linkLabel: "Start a pouch brief",
+      },
+      {
+        label: "Film supplied on roll",
+        title: "Custom printed rollstock film",
+        description:
+          "Use the rollstock route when the packing plan requires printed film on roll and machine, web, repeat, sealing, and product details are available for review.",
+        status: "Available",
+        href: "/packaging-styles/printed-rollstock-film",
+        linkLabel: "Review printed rollstock",
+      },
+      {
+        label: "Pouch structure decision",
+        title: "Stand-up pouch or flat-bottom bag?",
+        description:
+          "Use the side-by-side guide when both finished formats are being considered for the same product and presentation brief.",
+        status: "Related route",
+        href: "/compare/stand-up-pouches-vs-flat-bottom-bags",
+        linkLabel: "Compare finished pouch formats",
+      },
+      {
+        label: "Packing equipment or service",
+        title: "Filling, sealing, pouch-making, or converting machinery",
+        description:
+          "UPG supplies custom flexible packaging. Packing services and packing or converting machinery are outside the current product offer.",
+        status: "Outside current offer",
+      },
+    ],
+    reviewedAt,
+  },
+  {
     path: "/cosmetics",
     eyebrow: "Cosmetic packaging scope",
     title: "Choose the custom outer-packaging route that fits your project.",

@@ -88,7 +88,7 @@ The release queue uses a 100-point score:
 | More cosmetics keyword variants | 55 | Do not publish as thin duplicates; improve current pages from Search Console evidence |
 | Shipping-carton, master-carton, or RSC pages | 0 | Never publish inside current UPG offer |
 
-## Buyer-comparison expansion — 2026-08-23
+## Buyer-comparison expansion — production release, 2026-08-23
 
 Current search results contain active publisher and manufacturer coverage for stand-up versus flat-bottom pouches, rollstock versus finished pouches, and tuck boxes versus mailer boxes. That is a SERP-coverage signal, not monthly volume or proof that each query will convert.
 
@@ -105,9 +105,9 @@ The local release candidate adds one visible comparison hub plus eight distinct 
 
 The last page is deliberately a scope filter: it keeps broad corrugated-box language discoverable while excluding standard shipping cartons, master cartons, and RSC cases from the quote path.
 
-Each page uses approved UPG product facts, visible side-by-side decisions, prefilled quote routing, FAQ and ItemList structured data, product and style cross-links, sitemap inclusion, and AI-readable catalog entries. The cluster is not considered released until the exact commit is pushed, Vercel succeeds for that SHA, and all live sitemap and page contracts pass.
+Each page uses approved UPG product facts, visible side-by-side decisions, prefilled quote routing, FAQ and ItemList structured data, product and style cross-links, sitemap inclusion, and AI-readable catalog entries. The cluster is live from commit `961825e`; later production verification confirmed it inside the 76/76 live sitemap crawl.
 
-## Zero-click query-to-page batch — local release candidate, 2026-08-23
+## Zero-click query-to-page batch — production release, 2026-08-23
 
 The latest available 90-day Search Console evidence shows 567 non-brand impressions and 0 non-brand clicks. Six existing commercial pages account for 443 of those impressions, or about 78.1%:
 
@@ -120,7 +120,13 @@ The latest available 90-day Search Console evidence shows 567 non-brand impressi
 | `/cosmetics/serum-boxes` | 19 | Clarify serum outer cartons and filter bottles, formulas, and filling |
 | `/samples/box-sample-kit` | 18 | Separate paid kit, free review, Mylar samples, and production enquiry |
 
-The local candidate improves metadata, visible buyer routing, internal links, prefilled enquiry paths, ItemList structured data, AI-readable discovery files, and rendered SEO contracts on these pages. It does not create duplicate pages for every query variant, and it does not treat adjacent component, overwrap, fulfillment, or machinery impressions as valid UPG demand. The detailed evidence and 28-day measurement rule are recorded in `docs/zero-click-opportunity-plan.md`.
+The production release improves metadata, visible buyer routing, internal links, prefilled enquiry paths, ItemList structured data, AI-readable discovery files, and rendered SEO contracts on these pages. It does not create duplicate pages for every query variant, and it does not treat adjacent component, overwrap, fulfillment, or machinery impressions as valid UPG demand. Commits `20ff81a` and `8d46330` were deployed with Vercel success, 76/76 live sitemap proof, and 100 Lighthouse scores for accessibility, best practices, and SEO on the representative lipstick and box-sample pages. The detailed evidence and 28-day measurement rule are recorded in `docs/zero-click-opportunity-plan.md`.
+
+## Five-product authority batch — local release candidate, 2026-08-23
+
+The five canonical product pages collectively produced 10 non-brand impressions and 0 clicks in the available 90-day Search Console window. A production crawl found 88–117 rendered inbound-link occurrences per product page, so this batch does not respond by adding more global links or duplicate URLs.
+
+Instead, each money page receives a distinct visible buying-route section, product-specific search language, qualification boundaries, structured data, and conversion handoffs. The Products hub becomes one five-family catalog with explicit CollectionPage and ItemList schema. Full evidence, query rows, scope decisions, and the 28-day measurement rule are recorded in `docs/core-product-authority-plan.md`.
 
 ## Monthly volume completion path
 

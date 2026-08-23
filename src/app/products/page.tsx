@@ -4,12 +4,12 @@ import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { products } from "@/data/products";
-import { createPageMetadata } from "@/lib/seo";
+import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Custom Boxes & Flexible Packaging Products",
+  title: "Custom Packaging Products | Boxes, Mailers & Mylar",
   description:
-    "Compare custom tuck boxes, corrugated mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar bags with planning MOQs based on product and size.",
+    "Compare custom tuck boxes, corrugated mailers, magnetic and collapsible magnetic boxes, plus printed Mylar bags. Worldwide made-to-spec manufacturing.",
   path: "/products",
   keywords: [
     "custom packaging products",
@@ -18,62 +18,79 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
-const groups = [
-  {
-    label: "Tuck & rigid boxes",
-    categories: ["Tuck Boxes", "Rigid Boxes"] as const,
-  },
-  {
-    label: "Corrugated mailers & flexible packaging",
-    categories: ["Corrugated Mailers", "Flexible Packaging"] as const,
-  },
-];
+const productsCollectionSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": `${SITE_URL}/products#collection`,
+      url: `${SITE_URL}/products`,
+      name: "Custom Packaging Products",
+      description:
+        "Five made-to-spec custom packaging product families manufactured for brands worldwide.",
+      dateModified: "2026-08-23",
+      mainEntity: { "@id": `${SITE_URL}/products#core-product-catalog` },
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${SITE_URL}/products#core-product-catalog`,
+      name: "UPG core packaging products",
+      numberOfItems: products.length,
+      itemListElement: products.map((product, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Service",
+          "@id": `${SITE_URL}/products/${product.slug}#service`,
+          name: product.name,
+          description: product.summary,
+          url: `${SITE_URL}/products/${product.slug}`,
+          provider: { "@id": `${SITE_URL}/#organization` },
+          areaServed: "Worldwide",
+        },
+      })),
+    },
+  ],
+};
 
 export default function ProductsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productsCollectionSchema) }}
+      />
       <section className="bg-background">
         <div className="container-editorial pt-12 pb-8 md:pt-16 md:pb-10">
           <div className="max-w-4xl">
-            <div className="eyebrow mb-5">The catalog</div>
-            <h1 className="display-1 text-balance">Custom packaging formats for product brands.</h1>
+            <div className="eyebrow mb-5">Five core product families</div>
+            <h1 className="display-1 text-balance">Custom packaging manufactured around the product.</h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty">
-              Compare tuck boxes, magnetic presentation boxes, corrugated
-              mailer boxes, collapsible magnetic boxes, and Mylar bags. Every
-              project is manufactured around the required structure, material,
-              intended use, quantity, and destination.
+              Compare custom tuck boxes, corrugated ear-lock mailers, magnetic
+              boxes, collapsible magnetic boxes, and Mylar bags. Every project
+              is reviewed around the structure, dimensions, material, print,
+              finish, quantity, intended use, and delivery destination.
             </p>
           </div>
         </div>
       </section>
 
-      {groups.map((group) => {
-        const groupProducts = products.filter((product) =>
-          group.categories.some((category) => category === product.category)
-        );
-
-        return (
-          <section
-            key={group.label}
-            className="py-12 first:pt-10 first:pb-16 md:py-16 md:first:pt-14 md:first:pb-20"
-          >
-            <div className="container-editorial">
-              <div className="mb-8 flex items-end justify-between gap-6 md:mb-10">
-                <SectionHeading
-                  eyebrow="Product group"
-                  title={group.label}
-                  intro="Choose a starting format, then confirm the structure, specifications, artwork, and production fit with our team."
-                />
-              </div>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {groupProducts.map((product) => (
-                  <ProductCard key={product.slug} product={product} />
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-      })}
+      <section id="core-product-catalog" className="section-shell scroll-mt-28">
+        <div className="container-editorial">
+          <div className="mb-10 max-w-4xl">
+            <SectionHeading
+              eyebrow="Core manufacturing routes"
+              title="Choose the physical packaging format first."
+              intro="Each product page separates the available structure from adjacent searches, shows the planning minimum, and connects the project to the relevant style, application, comparison, sample, or enquiry path."
+            />
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {products.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="pb-24">
         <div className="container-editorial">

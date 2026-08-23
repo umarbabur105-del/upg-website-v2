@@ -188,7 +188,55 @@ for (const route of comparisonRoutes) {
   }
 }
 
+const coreProductContracts = new Map([
+  ["/products/custom-tuck-boxes", ["/packaging-styles/", "/compare/", "/industries/"]],
+  ["/products/custom-mailer-boxes", ["/applications/", "/compare/"]],
+  ["/products/custom-magnetic-boxes", ["/compare/", "/industries/"]],
+  ["/products/custom-collapsible-magnetic-boxes", ["/compare/", "/industries/"]],
+  ["/products/custom-mylar-bags", ["/packaging-styles/", "/compare/", "/industries/"]],
+]);
+const productsHub = pages.find((page) => page.route === "/products");
+
+if (!productsHub) {
+  failures.push("/products: missing rendered product hub");
+} else {
+  if (!productsHub.html.includes('id="core-product-catalog"')) {
+    failures.push("/products: missing core product catalog anchor");
+  }
+  if (!productsHub.html.includes("/products#core-product-catalog")) {
+    failures.push("/products: missing core product ItemList JSON-LD");
+  }
+  for (const route of coreProductContracts.keys()) {
+    if (!productsHub.html.includes(`href="${route}"`)) {
+      failures.push(`/products: missing core product link to ${route}`);
+    }
+  }
+}
+
+for (const [route, requiredPrefixes] of coreProductContracts) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered core product page`);
+    continue;
+  }
+  for (const schemaType of ["Service", "BreadcrumbList", "FAQPage"]) {
+    if (!page.html.includes(`"@type":"${schemaType}"`)) {
+      failures.push(`${route}: missing ${schemaType} JSON-LD`);
+    }
+  }
+  for (const prefix of requiredPrefixes) {
+    if (!page.html.includes(`href="${prefix}`)) {
+      failures.push(`${route}: missing contextual link to ${prefix}`);
+    }
+  }
+}
+
 const organicIntentContracts = new Map([
+  ["/products/custom-tuck-boxes", { scopeMarker: "regular shipping carton", statusMarker: "Outside current offer" }],
+  ["/products/custom-mailer-boxes", { scopeMarker: "master carton", statusMarker: "Outside current offer" }],
+  ["/products/custom-magnetic-boxes", { scopeMarker: "fold-flat", statusMarker: "Related route" }],
+  ["/products/custom-collapsible-magnetic-boxes", { scopeMarker: "assembled rigid", statusMarker: "Related route" }],
+  ["/products/custom-mylar-bags", { scopeMarker: "packing or converting machinery", statusMarker: "Outside current offer" }],
   ["/cosmetics", { scopeMarker: "primary cosmetic packaging", statusMarker: "Outside current offer" }],
   ["/cosmetics/lipstick-boxes", { scopeMarker: "lipstick tube, casing", statusMarker: "Outside current offer" }],
   ["/cosmetics/serum-boxes", { scopeMarker: "bottle, jar, dropper", statusMarker: "Outside current offer" }],
@@ -227,5 +275,5 @@ if (failures.length) {
 }
 
 console.log(
-  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, uniqueness, ${comparisonRoutes.length} comparison-guide contracts, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
+  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, uniqueness, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
 );

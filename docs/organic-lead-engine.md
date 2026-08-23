@@ -175,9 +175,9 @@ The gate checks rendered pages for required and unique titles and descriptions, 
 
 The immediate constraints are non-brand click-through, authority, and live physical-fulfillment readiness; crawlability, sitemap indexing, checkout-session creation, and the protected sandbox payment pipeline are healthy. While outreach is paused, the active lane is measurement, query-led content improvement, and conversion-path verification.
 
-### Buyer-decision cluster — local release candidate, 2026-08-23
+### Buyer-decision cluster — production release, 2026-08-23
 
-The next large organic batch is implemented locally and remains unreleased pending owner approval:
+The buyer-decision cluster is live from commit `961825e`:
 
 - one indexable `/compare` hub;
 - eight distinct side-by-side buyer guides spanning box families, tuck directions, flexible formats, rollstock versus finished pouches, and the corrugated-mailer scope boundary;
@@ -189,9 +189,9 @@ The next large organic batch is implemented locally and remains unreleased pendi
 
 Fresh aggregate evidence through the available reporting windows: 1,100 Search Console impressions, 567 non-brand impressions, 8 total clicks, 0 non-brand clicks, 13 queries observed in positions 1-20, 6 GA4 Organic Search sessions, 1 Organic Shopping session, and 3 genuine CRM leads. The comparison cluster addresses decision-intent coverage and internal relevance; it does not replace the paused authority and backlink lane.
 
-Local proof currently passed: ESLint with zero warnings, TypeScript, diff check, Next.js build with 95/95 generated pages, 73 canonical rendered sitemap pages, 8 comparison-guide contracts, 76/76 local runtime sitemap URLs, 4/4 AI discovery endpoints, quote-prefill browser proof, and mobile Lighthouse 100 for accessibility, best practices, and SEO on both the hub and a representative guide.
+Release proof passed: ESLint with zero warnings, TypeScript, diff check, Next.js build with 95/95 generated pages, 73 canonical rendered sitemap pages, 8 comparison-guide contracts, 76/76 runtime sitemap URLs after the later production batches, 4/4 AI discovery endpoints, quote-prefill browser proof, and mobile Lighthouse 100 for accessibility, best practices, and SEO on both the hub and a representative guide.
 
-### Zero-click query-to-page batch — local release candidate, 2026-08-23
+### Zero-click query-to-page batch — production release, 2026-08-23
 
 The next organic-conversion batch focuses on six existing commercial pages that collectively received 443 of the latest 567 measured non-brand impressions, or about 78.1%, while producing no non-brand click in the available 90-day window.
 
@@ -203,7 +203,23 @@ The next organic-conversion batch focuses on six existing commercial pages that 
 - All six pages have visible buyer-intent cards, contextual links, prefilled enquiry routes, ItemList structured data, sitemap review dates, AI-readable entries, and rendered audit contracts.
 - The weekly opportunity report filters known fulfillment, overwrap, primary lipstick-component, filling, shipping-carton, master-carton, and RSC noise from the action queue while preserving the raw source data.
 
-Detailed query evidence, exclusions, and the full 28-day measurement rule are recorded in `docs/zero-click-opportunity-plan.md`. This batch remains local until owner-approved push, exact-SHA deployment proof, live runtime crawl, and analytics verification.
+Detailed query evidence, exclusions, and the full 28-day measurement rule are recorded in `docs/zero-click-opportunity-plan.md`. Commits `20ff81a` and `8d46330` are live with exact-SHA Vercel success, 76/76 sitemap proof, six target-page contracts, working AI discovery and quote-prefill routes, and representative live Lighthouse scores of 100 for accessibility, best practices, and SEO.
+
+### Five-product authority cluster — local release candidate, 2026-08-23
+
+The next large on-site batch consolidates authority around the five approved money pages instead of publishing more URLs:
+
+- one visible four-route buyer-intent bridge on every core product page;
+- separate structure, application, comparison, scope, and prefilled enquiry paths based on the actual product family;
+- explicit shipping-carton filtration on tuck and mailer routes without removing broad corrugated-box relevance;
+- assembled-versus-fold-flat magnetic guidance without unsupported savings claims;
+- finished-pouch, rollstock, format-comparison, and machinery boundaries for Mylar;
+- one five-product catalog on `/products`, with CollectionPage and ItemList schema;
+- product-specific search terms and buyer FAQs for magnetic, collapsible magnetic, and Mylar pages;
+- product catalog schema version 2.3 plus AI-readable coverage across all buyer-intent routes;
+- rendered contracts for the Products hub, five Service pages, FAQ and breadcrumb schema, contextual links, scope qualification, and quote handoffs.
+
+Search Console recorded only 10 non-brand impressions and 0 clicks across the five product pages in the available 90-day window. Existing internal-link volume is already high, so the batch focuses on page differentiation and buyer routing rather than adding duplicate pages or indiscriminate links. Full evidence is recorded in `docs/core-product-authority-plan.md`.
 
 ### Phase 1 — Product-style lead cluster
 

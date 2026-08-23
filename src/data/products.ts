@@ -258,6 +258,19 @@ export const products: Product[] = [
       "Custom magnetic boxes create a premium presentation for gifts, beauty products, apparel, electronics, and launch collections. The structure can be paired with custom inserts and premium finish options.",
     metaDescription:
       "Custom magnetic rigid boxes with premium finishes and inserts for brands worldwide. Minimum order 250 units; specifications are confirmed per project.",
+    searchTerms: [
+      "custom magnetic boxes",
+      "custom magnetic closure boxes",
+      "custom rigid magnetic boxes",
+      "magnetic gift boxes",
+      "premium magnetic boxes",
+    ],
+    reviewedAt: "2026-08-23",
+    buyerDecisionFaq: {
+      question: "Should I choose a standard or collapsible magnetic box?",
+      answer:
+        "A standard magnetic box uses an assembled rigid presentation structure. A collapsible magnetic box folds flat before assembly for more efficient freight and storage. Compare both routes from the product arrangement, dimensions, insert, quantity, finish, destination, and preferred packing method before the structure is approved.",
+    },
     moq: "250 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
@@ -310,6 +323,19 @@ export const products: Product[] = [
       "Custom collapsible magnetic boxes deliver the premium presentation of a magnetic box while folding flat for more efficient freight and storage. Custom inserts and premium finishes are available.",
     metaDescription:
       "Custom collapsible magnetic boxes that fold flat for efficient storage and freight. Worldwide manufacturing with a 250-unit minimum order.",
+    searchTerms: [
+      "custom collapsible magnetic boxes",
+      "fold flat magnetic boxes",
+      "foldable magnetic gift boxes",
+      "collapsible rigid boxes",
+      "collapsible magnetic closure boxes",
+    ],
+    reviewedAt: "2026-08-23",
+    buyerDecisionFaq: {
+      question: "When should I compare a collapsible magnetic box?",
+      answer:
+        "Compare the collapsible route when a premium magnetic presentation is required and the box should ship or store flat before assembly. Compare a standard magnetic box when an assembled rigid presentation structure is preferred. Final suitability depends on the dimensions, product arrangement, insert, finish, quantity, destination, and packing method.",
+    },
     moq: "250 units",
     leadTime: "Confirmed after specification review",
     image:
@@ -365,11 +391,21 @@ export const products: Product[] = [
     metaDescription:
       "Custom printed Mylar bags, pouches, and rollstock film in stand-up, flat-bottom, three-side-seal, spout, child-resistant, and coffee formats. MOQ 500.",
     searchTerms: [
+      "custom Mylar bags",
       "custom printed Mylar bags",
       "custom printed pouches",
+      "custom stand up pouches",
+      "custom coffee bags",
+      "custom spout pouches",
       "printed rollstock film",
       "flexible packaging rollstock",
     ],
+    reviewedAt: "2026-08-23",
+    buyerDecisionFaq: {
+      question: "Should I request finished pouches or printed rollstock film?",
+      answer:
+        "Choose a finished pouch route when the required format is a stand-up, flat-bottom, three-side-seal, spout, coffee, or child-resistant bag. Choose printed rollstock when the packing plan requires custom film on roll. Film structure, product compatibility, machine, web, repeat, sealing, quantity, print, and destination details require project review.",
+    },
     moq: "500 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
