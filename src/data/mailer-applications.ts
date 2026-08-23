@@ -158,14 +158,14 @@ export const mailerApplications: MailerApplication[] = [
   },
   {
     slug: "influencer-kits",
-    title: "Custom Influencer Mailer Boxes & PR Kits",
+    title: "Custom Influencer Mailer Boxes & PR Kit Packaging",
     shortName: "Influencer Mailer Boxes",
     projectName: "influencer mailer box",
     heroTitle: "Custom influencer mailer boxes and PR kits for creator seeding.",
     heroDescription:
-      "Create branded influencer mailer boxes for creator seeding, campaign drops, and multi-product PR kits. UPG manufactures each ear-lock corrugated mailer around the approved product arrangement, artwork, quantity, and destination.",
+      "Create branded influencer mailer boxes and PR kit packaging for creator seeding, campaign drops, and product launches. UPG manufactures each ear-lock corrugated mailer around the approved product arrangement, artwork, quantity, and destination.",
     metaDescription:
-      "Custom influencer mailer boxes and creator PR kits for seeding campaigns, launch drops, and branded product presentation. Manufactured worldwide.",
+      "Custom influencer mailer boxes and PR kit packaging for creator seeding and launch drops. Ear-lock mailers and inserts—not campaign fulfillment.",
     keywords: [
       "custom influencer mailer boxes",
       "influencer mailer boxes",
@@ -255,7 +255,7 @@ export const mailerApplications: MailerApplication[] = [
       label: "Explore the beauty-specific PR box guide",
       href: "/cosmetics/pr-boxes",
     },
-    reviewedAt: "2026-08-21",
+    reviewedAt: "2026-08-23",
   },
   {
     slug: "custom-subscription-boxes",

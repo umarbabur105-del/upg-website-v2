@@ -107,6 +107,21 @@ The last page is deliberately a scope filter: it keeps broad corrugated-box lang
 
 Each page uses approved UPG product facts, visible side-by-side decisions, prefilled quote routing, FAQ and ItemList structured data, product and style cross-links, sitemap inclusion, and AI-readable catalog entries. The cluster is not considered released until the exact commit is pushed, Vercel succeeds for that SHA, and all live sitemap and page contracts pass.
 
+## Zero-click query-to-page batch — local release candidate, 2026-08-23
+
+The latest available 90-day Search Console evidence shows 567 non-brand impressions and 0 non-brand clicks. Six existing commercial pages account for 443 of those impressions, or about 78.1%:
+
+| Page | Non-brand impressions | Decision |
+| --- | ---: | --- |
+| `/cosmetics/lipstick-boxes` | 261 | Clarify lipstick outer cartons and filter primary components |
+| `/cosmetics` | 67 | Define cosmetic outer-packaging scope and route three buying paths |
+| `/applications/influencer-kits` | 53 | Sell ear-lock mailer manufacturing without implying fulfillment |
+| `/packaging-styles/printed-rollstock-film` | 25 | Separate film-on-roll from finished pouches and machinery searches |
+| `/cosmetics/serum-boxes` | 19 | Clarify serum outer cartons and filter bottles, formulas, and filling |
+| `/samples/box-sample-kit` | 18 | Separate paid kit, free review, Mylar samples, and production enquiry |
+
+The local candidate improves metadata, visible buyer routing, internal links, prefilled enquiry paths, ItemList structured data, AI-readable discovery files, and rendered SEO contracts on these pages. It does not create duplicate pages for every query variant, and it does not treat adjacent component, overwrap, fulfillment, or machinery impressions as valid UPG demand. The detailed evidence and 28-day measurement rule are recorded in `docs/zero-click-opportunity-plan.md`.
+
 ## Monthly volume completion path
 
 When a Google Ads account is available:

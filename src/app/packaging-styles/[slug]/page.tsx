@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!guide) return {};
 
   return createPageMetadata({
-    title: guide.name,
+    title: guide.metaTitle ?? guide.name,
     description: guide.metaDescription,
     path: `/packaging-styles/${guide.slug}`,
     keywords: [

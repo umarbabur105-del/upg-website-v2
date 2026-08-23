@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { SampleKitCheckout } from "@/components/sample-kit-checkout";
 import { SampleRequestForm } from "@/components/sample-request-form";
 import {
@@ -9,6 +10,7 @@ import {
   type SampleKit,
 } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
+import { getOrganicIntentRoute } from "@/data/organic-intent-routes";
 
 function getSampleKitFaqs(kit: SampleKit) {
   return [
@@ -155,6 +157,7 @@ function buildStructuredData(kit: SampleKit) {
 
 export function SampleKitProductPage({ kit }: { kit: SampleKit }) {
   const faqItems = getSampleKitFaqs(kit);
+  const intentRoute = getOrganicIntentRoute(kit.path);
   const quoteProduct = kit.kind === "box" ? "Tuck Boxes" : "Mylar Bags";
   const steps = [
     {
@@ -206,7 +209,10 @@ export function SampleKitProductPage({ kit }: { kit: SampleKit }) {
               {kit.heroDescription}
             </p>
 
-            <div className="mt-8 border border-border bg-surface p-6 shadow-soft">
+            <div
+              id="sample-kit-checkout"
+              className="mt-8 scroll-mt-28 border border-border bg-surface p-6 shadow-soft"
+            >
               <div className="flex flex-wrap items-end justify-between gap-3">
                 <div>
                   <div className="eyebrow">One {kit.shortName}</div>
@@ -253,6 +259,8 @@ export function SampleKitProductPage({ kit }: { kit: SampleKit }) {
           </div>
         </div>
       </section>
+
+      {intentRoute ? <OrganicIntentBridge route={intentRoute} /> : null}
 
       <section className="section-shell bg-background">
         <div className="container-editorial">

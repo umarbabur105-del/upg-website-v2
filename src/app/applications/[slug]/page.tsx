@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import {
@@ -10,6 +11,7 @@ import {
   mailerApplications,
 } from "@/data/mailer-applications";
 import { siteConfig } from "@/data/site";
+import { getOrganicIntentRoute } from "@/data/organic-intent-routes";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 interface PageProps {
@@ -48,6 +50,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
   }
 
   const pageUrl = `${SITE_URL}/applications/${application.slug}`;
+  const intentRoute = getOrganicIntentRoute(`/applications/${application.slug}`);
   const quoteHref = `/get-a-quote?product=${encodeURIComponent("Mailer Boxes")}${
     application.quoteStyle
       ? `&style=${encodeURIComponent(application.quoteStyle)}`
@@ -218,6 +221,8 @@ export default async function MailerApplicationPage({ params }: PageProps) {
           </div>
         </section>
       ) : null}
+
+      {intentRoute ? <OrganicIntentBridge route={intentRoute} /> : null}
 
       {application.decisionGuide ? (
         <section className="section-shell bg-cream">

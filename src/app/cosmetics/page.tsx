@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
@@ -11,12 +12,13 @@ import {
   sampleHighlights,
 } from "@/data/catalog";
 import { products } from "@/data/products";
+import { getOrganicIntentRoute } from "@/data/organic-intent-routes";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Custom Cosmetic Boxes & Beauty Packaging",
+  title: "Custom Cosmetic Boxes & Outer Packaging Manufacturer",
   description:
-    "Custom printed cosmetic boxes, outer cartons, magnetic presentation boxes, and corrugated mailers manufactured for beauty brands worldwide.",
+    "Custom cosmetic boxes and printed outer packaging for beauty products, including tuck cartons, magnetic boxes, PR mailers, and inserts. Worldwide delivery.",
   path: "/cosmetics",
   keywords: [
     "custom cosmetic boxes",
@@ -37,6 +39,7 @@ const cosmeticsPageSchema = {
       name: "Custom Cosmetic Boxes & Beauty Packaging",
       description:
         "Custom printed outer packaging for beauty, skincare, cosmetics, fragrance, and personal-care brands worldwide.",
+      dateModified: "2026-08-23",
       mainEntity: { "@id": `${SITE_URL}/cosmetics#services` },
     },
     {
@@ -106,6 +109,8 @@ const cosmeticsBuyingPaths = [
     note: "Review the parent carton family, approved materials, print options, finishes, and size-based MOQs.",
   },
 ] as const;
+
+const cosmeticsIntentRoute = getOrganicIntentRoute("/cosmetics");
 
 const productTypeRecs = [
   {
@@ -191,6 +196,10 @@ export default function CosmeticsPage() {
           </div>
         </div>
       </section>
+
+      {cosmeticsIntentRoute ? (
+        <OrganicIntentBridge route={cosmeticsIntentRoute} />
+      ) : null}
 
       <section className="section-shell">
         <div className="container-editorial grid gap-10 lg:grid-cols-12 lg:gap-16">

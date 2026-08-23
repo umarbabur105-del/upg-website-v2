@@ -10,6 +10,7 @@ import {
   industryGuides,
   type IndustryGuide,
 } from "@/data/industry-guides";
+import { organicIntentRoutes } from "@/data/organic-intent-routes";
 import { cosmeticsPackagingScope } from "@/data/catalog";
 import {
   productStyleGuides,
@@ -48,6 +49,17 @@ function industryUrl(guide: IndustryGuide) {
 
 function comparisonUrl(guide: ComparisonGuide) {
   return `${comparisonLibraryUrl}/${guide.slug}`;
+}
+
+function intentRouteUrl(path: string) {
+  return `${siteConfig.url}${path}`;
+}
+
+function intentOptionUrl(path: string, href?: string) {
+  if (!href) return null;
+  if (href.startsWith("#")) return `${siteConfig.url}${path}${href}`;
+  if (href.startsWith("/")) return `${siteConfig.url}${href}`;
+  return href;
 }
 
 function sampleKitCatalogEntry(kit: (typeof sampleKits)[number]) {
@@ -105,6 +117,15 @@ export function buildLlmsText() {
     )
     .join("\n");
 
+  const intentRouteLines = organicIntentRoutes
+    .map(
+      (route) =>
+        `- [${route.title}](${intentRouteUrl(route.path)}): ${route.intro} ${route.options
+          .map((option) => `${option.title} — ${option.status}`)
+          .join("; ")}.`
+    )
+    .join("\n");
+
   const sampleKitLines = sampleKits
     .map(
       (kit) =>
@@ -153,6 +174,10 @@ ${industryLines}
 ## Packaging comparison guides
 
 ${comparisonLines}
+
+## Qualified buyer-intent routes
+
+${intentRouteLines}
 
 ## Commercial model
 
@@ -297,6 +322,25 @@ Content reviewed: ${guide.reviewedAt}
     )
     .join("\n");
 
+  const intentRouteSections = organicIntentRoutes
+    .map(
+      (route) => `### ${route.title}
+
+Canonical page: ${intentRouteUrl(route.path)}
+Scope: ${route.intro}
+Buyer routes: ${route.options
+        .map(
+          (option) =>
+            `${option.title} (${option.status}): ${option.description}${
+              option.href ? ` Route: ${option.href}` : ""
+            }`
+        )
+        .join("; ")}
+Content reviewed: ${route.reviewedAt}
+`
+    )
+    .join("\n");
+
   const sampleKitSections = sampleKits
     .map(
       (kit) => `### ${kit.name}
@@ -366,6 +410,11 @@ ${industrySections}
 These pages answer side-by-side buyer decisions using approved UPG product facts, clear quote inputs, and explicit scope boundaries.
 
 ${comparisonSections}
+## Qualified buyer-intent routes
+
+These routes separate products UPG manufactures from adjacent components, machinery, logistics, or fulfillment searches that are outside the current offer.
+
+${intentRouteSections}
 ## Corrugated-box search intent
 
 UPG uses the broad term corrugated boxes because buyers use it when researching corrugated mailer packaging. The commercial offer remains limited to corrugated tuck boxes and ear-lock mailer boxes. Regular slotted containers, master cartons, standard shipping cartons, and RSC cases are outside the product range.
@@ -445,6 +494,15 @@ export function buildAgentsMarkdown() {
     )
     .join("\n");
 
+  const intentRouteLines = organicIntentRoutes
+    .map(
+      (route) =>
+        `- ${route.title}: ${route.options
+          .map((option) => `${option.title} — ${option.status}`)
+          .join("; ")}. Source: ${intentRouteUrl(route.path)}`
+    )
+    .join("\n");
+
   const sampleKitLines = sampleKits
     .map(
       (kit) =>
@@ -478,6 +536,10 @@ ${industryLines}
 ## Packaging comparison guides
 
 ${comparisonLines}
+
+## Qualified buyer-intent routes
+
+${intentRouteLines}
 
 ## Important operating rules
 
@@ -515,7 +577,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "2.1",
+    schemaVersion: "2.2",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -667,6 +729,20 @@ export function buildProductCatalog() {
       scopeNote: guide.scopeNote,
       contentReviewed: guide.reviewedAt,
       url: comparisonUrl(guide),
+    })),
+    buyerIntentRoutes: organicIntentRoutes.map((route) => ({
+      path: route.path,
+      url: intentRouteUrl(route.path),
+      title: route.title,
+      scope: route.intro,
+      options: route.options.map((option) => ({
+        label: option.label,
+        name: option.title,
+        status: option.status,
+        description: option.description,
+        url: intentOptionUrl(route.path, option.href),
+      })),
+      contentReviewed: route.reviewedAt,
     })),
     sources: {
       conciseReference: `${siteConfig.url}/llms.txt`,

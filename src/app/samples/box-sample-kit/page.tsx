@@ -4,9 +4,9 @@ import { boxSampleKit } from "@/data/sample-kit";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Custom Box Samples & Sample Kit",
+  title: "Custom Box Samples | Finished Packaging Sample Kit",
   description:
-    "Order custom box samples in a $19.99 finished-box kit with shipping included, 3–7 business-day delivery, and full credit toward a first production order.",
+    "Order a $19.99 finished custom box sample kit with shipping included, 3–7 business-day delivery, and full credit toward your first UPG production order.",
   path: boxSampleKit.path,
   keywords: [
     "custom box sample kit",

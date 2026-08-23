@@ -191,6 +191,20 @@ Fresh aggregate evidence through the available reporting windows: 1,100 Search C
 
 Local proof currently passed: ESLint with zero warnings, TypeScript, diff check, Next.js build with 95/95 generated pages, 73 canonical rendered sitemap pages, 8 comparison-guide contracts, 76/76 local runtime sitemap URLs, 4/4 AI discovery endpoints, quote-prefill browser proof, and mobile Lighthouse 100 for accessibility, best practices, and SEO on both the hub and a representative guide.
 
+### Zero-click query-to-page batch — local release candidate, 2026-08-23
+
+The next organic-conversion batch focuses on six existing commercial pages that collectively received 443 of the latest 567 measured non-brand impressions, or about 78.1%, while producing no non-brand click in the available 90-day window.
+
+- Lipstick and serum pages now define UPG's outer-carton offer and visibly exclude tubes, casings, bottles, formulas, and filling.
+- The cosmetics hub routes retail cartons, premium presentation boxes, and PR mailers without implying primary cosmetic packaging.
+- The influencer page sells the ear-lock mailer and insert without implying campaign fulfillment.
+- The rollstock page separates printed film on roll, finished pouches, and machinery intent.
+- The box sample page separates the paid finished kit, free project review, Mylar samples, and custom production.
+- All six pages have visible buyer-intent cards, contextual links, prefilled enquiry routes, ItemList structured data, sitemap review dates, AI-readable entries, and rendered audit contracts.
+- The weekly opportunity report filters known fulfillment, overwrap, primary lipstick-component, filling, shipping-carton, master-carton, and RSC noise from the action queue while preserving the raw source data.
+
+Detailed query evidence, exclusions, and the full 28-day measurement rule are recorded in `docs/zero-click-opportunity-plan.md`. This batch remains local until owner-approved push, exact-SHA deployment proof, live runtime crawl, and analytics verification.
+
 ### Phase 1 — Product-style lead cluster
 
 - Publish the 12 approved style pages and the Style Library.

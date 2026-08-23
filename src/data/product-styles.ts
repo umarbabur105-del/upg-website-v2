@@ -3,6 +3,7 @@ import type { ProductFamily } from "@/data/products";
 export interface ProductStyleGuide {
   slug: string;
   name: string;
+  metaTitle?: string;
   shortName: string;
   quoteStyle: string;
   family: ProductFamily;
@@ -414,6 +415,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
   {
     slug: "printed-rollstock-film",
     name: "Custom Printed Rollstock Film",
+    metaTitle: "Custom Printed Rollstock Film & Roll Stock Packaging",
     shortName: "Printed Rollstock Film",
     quoteStyle: "Rollstock Film",
     family: "Mylar Bags",
@@ -421,7 +423,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Mylar Bags",
     category: "Mylar bag format",
     metaDescription:
-      "Custom printed rollstock film and roll stock packaging with 500-unit MOQ guidance, plus project review of machine, web, repeat, film, print, and fit.",
+      "Custom printed rollstock film and roll stock packaging. Share machine, web, repeat, sealing, product, quantity, print, and destination details for review.",
     searchTerms: [
       "custom printed rollstock film",
       "custom printed roll stock",
@@ -466,7 +468,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     },
     complianceNote:
       "Machine compatibility, film structure, seals, product compatibility, and market requirements must be confirmed before approval.",
-    reviewedAt,
+    reviewedAt: "2026-08-23",
   },
 ];
 

@@ -44,6 +44,14 @@ OUT_OF_SCOPE_QUERY_TERMS = (
     "shipping carton",
     "rsc box",
     "rsc carton",
+    "fulfillment",
+    "overwrap",
+    "overwrapper",
+    "lipstick casing",
+    "lipstick mechanism",
+    "aluminum lipstick",
+    "refillable lipstick",
+    "filling and packaging",
 )
 AI_SOURCES = (
     "chatgpt",

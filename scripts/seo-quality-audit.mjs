@@ -188,6 +188,38 @@ for (const route of comparisonRoutes) {
   }
 }
 
+const organicIntentContracts = new Map([
+  ["/cosmetics", { scopeMarker: "primary cosmetic packaging", statusMarker: "Outside current offer" }],
+  ["/cosmetics/lipstick-boxes", { scopeMarker: "lipstick tube, casing", statusMarker: "Outside current offer" }],
+  ["/cosmetics/serum-boxes", { scopeMarker: "bottle, jar, dropper", statusMarker: "Outside current offer" }],
+  ["/applications/influencer-kits", { scopeMarker: "campaign fulfillment", statusMarker: "Outside current offer" }],
+  ["/packaging-styles/printed-rollstock-film", { scopeMarker: "packing and converting machinery", statusMarker: "Outside current offer" }],
+  ["/samples/box-sample-kit", { scopeMarker: "$19.99 finished box sample kit", statusMarker: "Related route" }],
+]);
+
+for (const [route, { scopeMarker, statusMarker }] of organicIntentContracts) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered organic-intent page`);
+    continue;
+  }
+  if (!page.html.includes('id="buyer-intent-routes"')) {
+    failures.push(`${route}: missing buyer-intent route bridge`);
+  }
+  if (!page.html.includes(`${route}#buyer-intent-routes`)) {
+    failures.push(`${route}: missing buyer-intent ItemList JSON-LD`);
+  }
+  if (!page.html.includes(statusMarker)) {
+    failures.push(`${route}: missing visible qualification status "${statusMarker}"`);
+  }
+  if (!page.html.includes('href="/get-a-quote?')) {
+    failures.push(`${route}: missing prefilled buyer-intent quote path`);
+  }
+  if (!page.html.toLowerCase().includes(scopeMarker)) {
+    failures.push(`${route}: missing scope marker "${scopeMarker}"`);
+  }
+}
+
 if (failures.length) {
   console.error(`SEO quality audit failed with ${failures.length} issue(s):`);
   for (const failure of failures) console.error(`- ${failure}`);
@@ -195,5 +227,5 @@ if (failures.length) {
 }
 
 console.log(
-  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, uniqueness, and ${comparisonRoutes.length} comparison-guide contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
+  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, uniqueness, ${comparisonRoutes.length} comparison-guide contracts, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
 );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
@@ -11,6 +12,7 @@ import {
   getCosmeticsSubcategoryBySlug,
 } from "@/data/catalog";
 import { getProductBySlug } from "@/data/products";
+import { getOrganicIntentRoute } from "@/data/organic-intent-routes";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 interface PageProps {
@@ -66,6 +68,7 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   const pageUrl = `${SITE_URL}/cosmetics/${slug}`;
+  const intentRoute = getOrganicIntentRoute(`/cosmetics/${slug}`);
   const quoteHref = `/get-a-quote?product=${encodeURIComponent(
     subcategory.quoteFamily
   )}&builder_note=${encodeURIComponent(`Cosmetics project: ${subcategory.title}.`)}`;
@@ -165,6 +168,8 @@ export default async function CosmeticSubcategoryPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {intentRoute ? <OrganicIntentBridge route={intentRoute} /> : null}
 
       {subcategory.quickAnswer ? (
         <section className="section-shell">

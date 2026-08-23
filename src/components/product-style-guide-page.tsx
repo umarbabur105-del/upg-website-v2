@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { getComparisonGuidesByStyle } from "@/data/comparison-guides";
@@ -8,6 +9,7 @@ import {
   type ProductStyleGuide,
 } from "@/data/product-styles";
 import { getProductBySlug } from "@/data/products";
+import { getOrganicIntentRoute } from "@/data/organic-intent-routes";
 import { siteConfig } from "@/data/site";
 import { SITE_URL } from "@/lib/seo";
 
@@ -25,6 +27,7 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
   const related = getRelatedProductStyles(guide);
   const comparisonGuides = getComparisonGuidesByStyle(guide.slug);
   const pageUrl = `${SITE_URL}/packaging-styles/${guide.slug}`;
+  const intentRoute = getOrganicIntentRoute(`/packaging-styles/${guide.slug}`);
   const sampleKit =
     guide.family === "Mylar Bags"
       ? {
@@ -186,6 +189,8 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
           </div>
         </div>
       </section>
+
+      {intentRoute ? <OrganicIntentBridge route={intentRoute} /> : null}
 
       <section className="border-y border-border bg-moss text-primary-foreground">
         <div className="container-editorial grid gap-px bg-white/15 sm:grid-cols-3">

@@ -10,8 +10,9 @@ import { siteConfig } from "@/data/site";
 import { SITE_URL } from "@/lib/seo";
 
 const CONTENT_UPDATED_AT = new Date(`${siteConfig.contentReviewedAt}T00:00:00.000Z`);
-const COSMETICS_UPDATED_AT = new Date("2026-08-13T00:00:00.000Z");
+const COSMETICS_UPDATED_AT = new Date("2026-08-23T00:00:00.000Z");
 const STYLE_LIBRARY_UPDATED_AT = new Date("2026-08-13T00:00:00.000Z");
+const SAMPLES_UPDATED_AT = new Date("2026-08-23T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -89,13 +90,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/samples`,
-      lastModified: CONTENT_UPDATED_AT,
+      lastModified: SAMPLES_UPDATED_AT,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${SITE_URL}/samples/box-sample-kit`,
-      lastModified: CONTENT_UPDATED_AT,
+      lastModified: SAMPLES_UPDATED_AT,
       changeFrequency: "monthly",
       priority: 0.82,
     },
