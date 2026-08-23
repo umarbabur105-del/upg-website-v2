@@ -26,7 +26,7 @@ const analyticsConsentBootstrap = `
     upgAnalyticsChoice = null;
   }
   window.gtag("consent", "default", {
-    analytics_storage: upgAnalyticsChoice === "denied" ? "denied" : "granted",
+    analytics_storage: upgAnalyticsChoice === "granted" ? "granted" : "denied",
     ad_storage: "denied",
     ad_user_data: "denied",
     ad_personalization: "denied",

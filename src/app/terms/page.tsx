@@ -15,11 +15,15 @@ export default function TermsPage() {
       <section className="bg-olive px-6 pt-32 pb-20 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <SectionHeading as="h1" className="text-offwhite">Website Terms</SectionHeading>
-          <SectionSubheading className="text-offwhite/70">Effective August 6, 2026.</SectionSubheading>
+          <SectionSubheading className="text-offwhite/70">Effective August 24, 2026.</SectionSubheading>
         </div>
       </section>
       <Section variant="cream">
         <div className="mx-auto max-w-3xl space-y-8 text-sm leading-7 text-charcoal/75">
+          <div>
+            <h2 className="font-serif text-2xl text-charcoal">Business entities</h2>
+            <p className="mt-3">Universal Packaging Group operates through {siteConfig.legalEntities.uk} and {siteConfig.legalEntities.us}. The seller and payment-processing entity for fixed-price sample kits purchased through this website is {siteConfig.legalEntities.sampleKitSeller}. The accepted written quote or agreement for a custom packaging project identifies the entity and terms governing that project.</p>
+          </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Website information</h2>
             <p className="mt-3">Website content, representative images, planning MOQs, materials, finishes, and production information are general guidance, not a binding offer or guarantee. Final appearance, construction, suitability, availability, pricing, and timing depend on the confirmed specification and production review.</p>

@@ -7,7 +7,7 @@ import { siteConfig } from "@/data/site";
 
 const buyerProof = [
   { value: "5", label: "focused product families" },
-  { value: "250+", label: "units on qualifying box projects" },
+  { value: "Clear MOQs", label: "based on product family and finished size" },
   { value: "Worldwide", label: "production and delivery" },
   { value: "1 business day", label: "target for an initial reply" },
 ];

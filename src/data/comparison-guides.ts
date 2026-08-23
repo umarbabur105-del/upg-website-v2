@@ -68,7 +68,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-tuck-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Mailer%20Boxes.",
-      planningMoq: "250–1,000 units, based on finished size",
+      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
       chooseWhen: [
         "The project starts with one product and its outer carton",
         "A tuck, auto-lock, interlock, or seal-end structure is the intended route",
@@ -83,7 +83,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mailer-boxes",
       quoteHref:
         "/get-a-quote?product=Mailer%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Mailer%20Boxes.",
-      planningMoq: "250–1,000 units, based on finished size",
+      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
       chooseWhen: [
         "The project is a branded unboxing or presentation program",
         "Several products or a custom insert may need to be planned together",
@@ -319,7 +319,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-tuck-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Magnetic%20Boxes.",
-      planningMoq: "250–1,000 units, based on finished size",
+      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
       chooseWhen: [
         "The project needs an individual folded outer carton",
         "A tuck, auto-lock, interlock, or seal-end style is the intended route",
@@ -445,7 +445,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mailer-boxes",
       quoteHref:
         "/get-a-quote?product=Mailer%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Mailer%20Boxes%20vs%20Magnetic%20Boxes.",
-      planningMoq: "250–1,000 units, based on finished size",
+      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
       chooseWhen: [
         "The project is a PR, influencer, subscription, ecommerce, or launch program",
         "A corrugated ear-lock opening and branded unboxing are required",
@@ -572,7 +572,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/straight-tuck-end-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Straight%20Tuck%20End&builder_note=Comparison%20path%3A%20Straight%20Tuck%20vs%20Reverse%20Tuck.",
-      planningMoq: "250–1,000 units, based on finished size",
+      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
       chooseWhen: [
         "Straight tuck end is the intended starting structure",
         "The opening direction and panel plan match the approved product brief",
@@ -587,7 +587,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/reverse-tuck-end-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Reverse%20Tuck%20End&builder_note=Comparison%20path%3A%20Straight%20Tuck%20vs%20Reverse%20Tuck.",
-      planningMoq: "250–1,000 units, based on finished size",
+      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
       chooseWhen: [
         "Reverse tuck end is the intended starting structure",
         "The alternate flap orientation fits the approved product and panel brief",
@@ -949,7 +949,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mailer-boxes",
       quoteHref:
         "/get-a-quote?product=Mailer%20Boxes&style=Ear-Lock%20Mailer%20Box&builder_note=Comparison%20path%3A%20Corrugated%20Mailer%20Boxes%20vs%20Shipping%20Cartons.%20Project%20is%20for%20an%20ear-lock%20presentation%20mailer.",
-      planningMoq: "250–1,000 units, based on finished size",
+      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
       chooseWhen: [
         "The required product is a corrugated ear-lock mailer",
         "Branded presentation or unboxing is part of the brief",

@@ -16,7 +16,7 @@ export default function PrivacyPage() {
         <div className="mx-auto max-w-3xl">
           <SectionHeading as="h1" className="text-offwhite">Privacy Policy</SectionHeading>
           <SectionSubheading className="text-offwhite/70">
-            Effective August 6, 2026. This policy explains how information submitted
+            Effective August 24, 2026. This policy explains how information submitted
             through universalpackaginggroup.com is handled.
           </SectionSubheading>
         </div>
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Analytics and consent choices</h2>
-            <p className="mt-3">We use Google Analytics to understand website visits, traffic sources, page interactions, contact-link use, and whether an enquiry was successfully submitted. We do not intentionally send names, email addresses, phone numbers, project notes, or other form contents to Google Analytics. Analytics storage is enabled by default. Advertising storage, advertising user data, and advertising personalization remain disabled. You can opt out or change your choice at any time through the Privacy choices control in the website footer.</p>
+            <p className="mt-3">We use Google Analytics to understand website visits, traffic sources, page interactions, contact-link use, and whether an enquiry was successfully submitted. We do not intentionally send names, email addresses, phone numbers, project notes, or other form contents to Google Analytics. Analytics storage is disabled unless you choose Allow. Advertising storage, advertising user data, and advertising personalization remain disabled. You can deny analytics or change your choice at any time through the Privacy choices control in the website footer.</p>
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Your choices</h2>

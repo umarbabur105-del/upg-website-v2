@@ -680,7 +680,7 @@ export function buildProductCatalog() {
       parentProductUrl: `${siteConfig.url}/products/custom-mailer-boxes`,
       summary: application.quickAnswer,
       bestFor: application.bestFor,
-      planningMoq: "250–1,000 units, based on finished size",
+      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
       projectInputs: application.projectInputs,
       contentReviewed: application.reviewedAt,
       url: applicationUrl(application),

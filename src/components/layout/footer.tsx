@@ -90,8 +90,15 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; {new Date().getFullYear()} Universal Packaging Group. All rights reserved.</p>
+        <div className="mt-16 flex flex-col gap-4 border-t border-border pt-6 text-xs text-muted-foreground lg:flex-row lg:items-start lg:justify-between">
+          <div className="max-w-2xl space-y-1.5">
+            <p>&copy; {new Date().getFullYear()} Universal Packaging Group. All rights reserved.</p>
+            <p>
+              Legal entities: {siteConfig.legalEntities.uk} and{" "}
+              {siteConfig.legalEntities.us}. Sample-kit payments are processed by{" "}
+              {siteConfig.legalEntities.sampleKitSeller}.
+            </p>
+          </div>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             <Link href="/about" className="hover:text-foreground">
               About

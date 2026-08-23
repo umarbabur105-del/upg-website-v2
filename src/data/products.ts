@@ -114,7 +114,7 @@ export const products: Product[] = [
         },
       ],
     },
-    moq: "250–1,000 units, based on finished size",
+    moq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
     heroImage: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
@@ -200,7 +200,7 @@ export const products: Product[] = [
       answer:
         "Use the PR box guide for launches, press, media kits, events, or broad brand presentations; the influencer guide for creator seeding; the subscription guide for recurring assortments; and the ecommerce guide for branded online-order presentation. Every path stays inside UPG's custom ear-lock corrugated mailer offer. Standard shipping cartons, master cartons, and RSC cases are not supplied.",
     },
-    moq: "250–1,000 units, based on finished size",
+    moq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
     heroImage: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",

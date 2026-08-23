@@ -23,10 +23,23 @@ export function AnalyticsRuntime() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    let savedChoice: string | null = null;
+    try {
+      savedChoice = window.localStorage.getItem(ANALYTICS_CONSENT_STORAGE_KEY);
+    } catch {
+      // When storage is unavailable, ask again without blocking the website.
+    }
+
+    const openTimer =
+      savedChoice !== "granted" && savedChoice !== "denied"
+        ? window.setTimeout(() => setIsOpen(true), 0)
+        : undefined;
+
     const openPreferences = () => setIsOpen(true);
     window.addEventListener(ANALYTICS_CONSENT_EVENT, openPreferences);
 
     return () => {
+      if (openTimer !== undefined) window.clearTimeout(openTimer);
       window.removeEventListener(ANALYTICS_CONSENT_EVENT, openPreferences);
     };
   }, []);
