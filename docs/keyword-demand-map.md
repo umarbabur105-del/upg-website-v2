@@ -122,11 +122,11 @@ The latest available 90-day Search Console evidence shows 567 non-brand impressi
 
 The production release improves metadata, visible buyer routing, internal links, prefilled enquiry paths, ItemList structured data, AI-readable discovery files, and rendered SEO contracts on these pages. It does not create duplicate pages for every query variant, and it does not treat adjacent component, overwrap, fulfillment, or machinery impressions as valid UPG demand. Commits `20ff81a` and `8d46330` were deployed with Vercel success, 76/76 live sitemap proof, and 100 Lighthouse scores for accessibility, best practices, and SEO on the representative lipstick and box-sample pages. The detailed evidence and 28-day measurement rule are recorded in `docs/zero-click-opportunity-plan.md`.
 
-## Five-product authority batch — local release candidate, 2026-08-23
+## Five-product authority batch — production release, 2026-08-23
 
 The five canonical product pages collectively produced 10 non-brand impressions and 0 clicks in the available 90-day Search Console window. A production crawl found 88–117 rendered inbound-link occurrences per product page, so this batch does not respond by adding more global links or duplicate URLs.
 
-Instead, each money page receives a distinct visible buying-route section, product-specific search language, qualification boundaries, structured data, and conversion handoffs. The Products hub becomes one five-family catalog with explicit CollectionPage and ItemList schema. Full evidence, query rows, scope decisions, and the 28-day measurement rule are recorded in `docs/core-product-authority-plan.md`.
+Instead, each money page receives a distinct visible buying-route section, product-specific search language, qualification boundaries, structured data, and conversion handoffs. The Products hub becomes one five-family catalog with explicit CollectionPage and ItemList schema. Commit `adfde6c` is live with exact-SHA Vercel success, 76/76 live sitemap proof, all five product contracts, all four AI discovery endpoints, and representative live Lighthouse scores of 100 for accessibility, best practices, and SEO. Full evidence, query rows, scope decisions, and the 28-day measurement rule are recorded in `docs/core-product-authority-plan.md`.
 
 ## Monthly volume completion path
 

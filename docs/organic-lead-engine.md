@@ -205,9 +205,9 @@ The next organic-conversion batch focuses on six existing commercial pages that 
 
 Detailed query evidence, exclusions, and the full 28-day measurement rule are recorded in `docs/zero-click-opportunity-plan.md`. Commits `20ff81a` and `8d46330` are live with exact-SHA Vercel success, 76/76 sitemap proof, six target-page contracts, working AI discovery and quote-prefill routes, and representative live Lighthouse scores of 100 for accessibility, best practices, and SEO.
 
-### Five-product authority cluster — local release candidate, 2026-08-23
+### Five-product authority cluster — production release, 2026-08-23
 
-The next large on-site batch consolidates authority around the five approved money pages instead of publishing more URLs:
+Commit `adfde6c` released the five-product authority cluster, consolidating authority around the five approved money pages instead of publishing more URLs:
 
 - one visible four-route buyer-intent bridge on every core product page;
 - separate structure, application, comparison, scope, and prefilled enquiry paths based on the actual product family;
@@ -219,7 +219,7 @@ The next large on-site batch consolidates authority around the five approved mon
 - product catalog schema version 2.3 plus AI-readable coverage across all buyer-intent routes;
 - rendered contracts for the Products hub, five Service pages, FAQ and breadcrumb schema, contextual links, scope qualification, and quote handoffs.
 
-Search Console recorded only 10 non-brand impressions and 0 clicks across the five product pages in the available 90-day window. Existing internal-link volume is already high, so the batch focuses on page differentiation and buyer routing rather than adding duplicate pages or indiscriminate links. Full evidence is recorded in `docs/core-product-authority-plan.md`.
+Search Console recorded only 10 non-brand impressions and 0 clicks across the five product pages in the available 90-day window. Existing internal-link volume is already high, so the batch focuses on page differentiation and buyer routing rather than adding duplicate pages or indiscriminate links. Release proof passed with exact-SHA Vercel success, 76/76 live sitemap URLs, five product contracts, four AI discovery endpoints, and live Lighthouse scores of 100 for accessibility, best practices, and SEO on three representative pages. Full evidence is recorded in `docs/core-product-authority-plan.md`.
 
 ### Phase 1 — Product-style lead cluster
 

@@ -22,9 +22,9 @@ A rendered crawl of the 76-page production sitemap found 88–117 inbound-link o
 
 The immediate on-site weakness is therefore not a raw shortage of links. It is the absence of a concise, product-specific route that separates the manufactured product from adjacent or ambiguous searches and carries the buyer into the correct next action.
 
-## Local release candidate
+## Production release
 
-This batch keeps the five existing canonical product URLs and adds no thin landing pages.
+Commit `adfde6c` released this batch to production. It keeps the five existing canonical product URLs and adds no thin landing pages.
 
 1. Every core product page receives a visible buyer-intent bridge with four distinct routes.
 2. Tuck and mailer pages preserve broad corrugated language while explicitly excluding regular shipping cartons, master cartons, and RSC cases.
@@ -39,11 +39,13 @@ This batch keeps the five existing canonical product URLs and adds no thin landi
 
 ## Measurement rule
 
-After an approved production release, compare full 28-day windows for:
+After the 2026-08-23 production release, compare full 28-day windows for:
 
 1. Non-brand impressions, clicks, click-through rate, and average position for each core product URL.
 2. Queries that move from a style, application, or comparison page into a core product page.
 3. Organic enquiry starts, successful submissions, and qualified-lead rate by product family.
 4. New query mismatches that require a visible scope correction instead of another page.
 
-This batch cannot replace external authority. Outreach remains paused by owner instruction, so no ranking or lead guarantee is attached to the local implementation.
+Release proof passed for the exact commit: Vercel deployment success, 76/76 live sitemap URLs returning HTTP 200, all five product contracts, all four AI discovery endpoints, and live Lighthouse scores of 100 for accessibility, best practices, and SEO on the Products hub, tuck-box page, and Mylar page.
+
+This batch cannot replace external authority. Outreach remains paused by owner instruction, so no ranking or lead guarantee is attached to the release.
