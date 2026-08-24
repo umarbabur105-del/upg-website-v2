@@ -746,6 +746,211 @@ export const industryGuides: IndustryGuide[] = [
       "This guide covers the custom branded presentation box and approved insert. Product sourcing, assembly, packout, warehousing, and fulfillment require separate written confirmation if requested.",
     reviewedAt,
   },
+  {
+    slug: "custom-pet-food-packaging",
+    name: "Custom Pet Food & Treat Packaging",
+    shortName: "Pet Food & Treat Packaging",
+    primaryFamily: "Mylar Bags",
+    productSlugs: ["custom-mylar-bags"],
+    formatSlugs: [
+      "stand-up-pouches",
+      "flat-bottom-bags",
+      "three-side-seal-bags",
+      "printed-rollstock-film",
+    ],
+    heroTitle: "Custom pet food and treat packaging.",
+    heroDescription:
+      "Compare UPG's current pouch and rollstock formats around the contents, target fill, closure, filling process, artwork, quantity, intended market, and delivery destination.",
+    metaDescription:
+      "Custom printed pet food and treat packaging in stand-up, flat-bottom, three-side seal, and rollstock formats, with a 500-unit UPG MOQ and project review.",
+    keywords: [
+      "custom pet food packaging",
+      "custom dog treat bags",
+      "custom pet treat packaging",
+      "printed pet food pouches",
+    ],
+    image: {
+      src: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
+      alt: "Representative custom printed flexible pouch concepts",
+    },
+    quickAnswer:
+      "UPG can develop custom printed Mylar bags for pet food and treat projects in its current stand-up, flat-bottom, three-side seal, and rollstock formats. The contents, fill, closure, film brief, process, artwork, quantity, intended market, and destination must be reviewed before the final specification is approved.",
+    bestFor: [
+      "Printed pet treat pouches",
+      "Stand-up and flat-bottom pack concepts",
+      "Three-side seal projects",
+      "Printed rollstock requirements",
+    ],
+    planningQuestions: [
+      {
+        title: "Describe the contents and target fill",
+        description:
+          "Share what will be packed, the target fill, storage expectations, and intended market before a film structure or format is approved.",
+      },
+      {
+        title: "Choose the format from the packing plan",
+        description:
+          "Compare the current pouch and rollstock formats using the intended filling, sealing, opening, closure, and display requirements.",
+      },
+      {
+        title: "Confirm compatibility requirements",
+        description:
+          "Required compatibility, barrier, storage, testing, and market documentation must come from the project brief rather than from a general product category.",
+      },
+    ],
+    projectInputs: [
+      "Product contents, target fill, and intended market",
+      "Preferred pouch or rollstock format",
+      "Filling, sealing, storage, and closure requirements",
+      "Quantity, dimensions, and delivery destination",
+      "Artwork, print, and finish direction",
+      "Required compatibility, barrier, testing, or market documentation",
+    ],
+    scopeNote:
+      "This guide covers custom printed flexible packaging. Pet food or treat production, filling, product claims, shelf-life validation, and market approval are outside the standard packaging quote.",
+    compatibilityNote:
+      "Film structure, contents, process, barrier, storage, testing, and destination-market requirements must be confirmed before final approval.",
+    reviewedAt: "2026-08-24",
+  },
+  {
+    slug: "custom-snack-packaging",
+    name: "Custom Snack & Confectionery Packaging",
+    shortName: "Snack & Confectionery Packaging",
+    primaryFamily: "Mylar Bags",
+    productSlugs: ["custom-mylar-bags", "custom-tuck-boxes"],
+    formatSlugs: [
+      "stand-up-pouches",
+      "flat-bottom-bags",
+      "three-side-seal-bags",
+      "printed-rollstock-film",
+      "seal-end-boxes",
+    ],
+    heroTitle: "Custom snack and confectionery packaging.",
+    heroDescription:
+      "Compare current UPG pouch, rollstock, and seal-end carton formats around the contents, target fill, packing method, retail presentation, quantity, artwork, intended market, and destination.",
+    metaDescription:
+      "Custom printed snack and confectionery packaging across pouches, rollstock, and seal-end cartons, with UPG MOQ guidance and project review.",
+    keywords: [
+      "custom snack packaging",
+      "custom candy packaging",
+      "custom confectionery packaging",
+      "printed snack bags",
+    ],
+    image: {
+      src: "/images/generated/mylar-bags/mylar-bags-pouch-formats-v1.png",
+      alt: "Representative custom printed flexible pouch formats",
+    },
+    quickAnswer:
+      "UPG can quote current Mylar bag formats for snack and confectionery projects and can also review a custom seal-end outer carton when that structure fits the brief. Contents, fill, packing process, film or board specification, closure, artwork, quantity, intended market, and destination require review before approval.",
+    bestFor: [
+      "Printed snack and candy pouches",
+      "Stand-up and flat-bottom pack concepts",
+      "Three-side seal and rollstock projects",
+      "Seal-end retail outer cartons",
+    ],
+    planningQuestions: [
+      {
+        title: "Choose the pack role first",
+        description:
+          "State whether the project needs a flexible primary pack, printed rollstock, or an outer retail carton so the correct UPG family is reviewed.",
+      },
+      {
+        title: "Share the filling and sealing process",
+        description:
+          "The contents, target fill, packing equipment or method, closure, and storage expectations shape the specification review.",
+      },
+      {
+        title: "Keep artwork tied to the approved structure",
+        description:
+          "Final artwork should be placed only after the pouch, rollstock, or carton format and its production template are confirmed.",
+      },
+    ],
+    projectInputs: [
+      "Product contents, target fill, and intended market",
+      "Flexible pack, rollstock, or outer-carton requirement",
+      "Filling, sealing, closure, and storage process",
+      "Quantity, dimensions, and delivery destination",
+      "Artwork and print direction",
+      "Required compatibility, barrier, testing, or market documentation",
+    ],
+    scopeNote:
+      "This guide covers custom printed flexible packaging and approved tuck-box outer cartons. Product manufacture, filling, wrapping, shelf-life validation, and market approval are outside the standard packaging quote.",
+    compatibilityNote:
+      "Contents, film or board structure, filling process, barrier, storage, testing, and destination-market requirements must be confirmed before final approval.",
+    reviewedAt: "2026-08-24",
+  },
+  {
+    slug: "custom-toy-packaging",
+    name: "Custom Packaging for Games, Toys & Collectibles",
+    shortName: "Games, Toys & Collectibles",
+    primaryFamily: "Tuck Boxes",
+    productSlugs: [
+      "custom-tuck-boxes",
+      "custom-mailer-boxes",
+      "custom-magnetic-boxes",
+      "custom-collapsible-magnetic-boxes",
+    ],
+    formatSlugs: [
+      "straight-tuck-end-boxes",
+      "reverse-tuck-end-boxes",
+      "auto-lock-bottom-boxes",
+      "interlock-boxes",
+      "seal-end-boxes",
+    ],
+    heroTitle: "Custom packaging for games, toys, and collectible product sets.",
+    heroDescription:
+      "Compare current UPG tuck, ear-lock mailer, magnetic, and collapsible magnetic boxes around the product arrangement, retail or presentation role, insert needs, artwork, quantity, and destination.",
+    metaDescription:
+      "Custom packaging for games, toys, and collectibles across tuck, ear-lock mailer, magnetic, and collapsible magnetic box formats.",
+    keywords: [
+      "custom toy packaging",
+      "custom game boxes",
+      "custom collectible packaging",
+      "custom toy boxes",
+    ],
+    image: {
+      src: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
+      alt: "Representative corrugated ear-lock presentation mailer with a custom insert",
+    },
+    quickAnswer:
+      "UPG can review tuck boxes for individual retail products, corrugated ear-lock mailers for branded presentation, and fixed or collapsible magnetic boxes for premium sets. The complete product arrangement, dimensions, weights, insert plan, opening sequence, artwork, quantity, and destination determine the correct starting structure.",
+    bestFor: [
+      "Individual retail toy cartons",
+      "Game and collectible sets",
+      "Branded ear-lock presentation mailers",
+      "Premium magnetic-box editions",
+    ],
+    planningQuestions: [
+      {
+        title: "Define retail, presentation, or premium gifting",
+        description:
+          "The packaging role narrows the choice between a tuck carton, branded ear-lock mailer, and a fixed or collapsible magnetic presentation box.",
+      },
+      {
+        title: "List every packed component",
+        description:
+          "Share the product pieces, dimensions, weights, documents, accessories, and intended arrangement before the outer box and insert are finalized.",
+      },
+      {
+        title: "Separate presentation from transport requirements",
+        description:
+          "State the handling and protection requirements explicitly. UPG's corrugated offer on this page is an ear-lock presentation mailer, not a standard shipping carton or master carton.",
+      },
+    ],
+    projectInputs: [
+      "Complete product and accessory list",
+      "Dimensions, weights, and intended arrangement",
+      "Retail, presentation, or premium-gift role",
+      "Insert and opening-sequence requirements",
+      "Quantity and delivery destination",
+      "Artwork, print, and finish references",
+    ],
+    scopeNote:
+      "This guide covers custom printed tuck boxes, branded corrugated ear-lock mailers, and magnetic presentation boxes. Standard shipping cartons, master cartons, RSC cases, product assembly, packout, and fulfillment are outside the standard offer.",
+    compatibilityNote:
+      "Product fit, insert performance, handling, transport, testing, and destination-market requirements must be supplied and reviewed when they apply.",
+    reviewedAt: "2026-08-24",
+  },
 ];
 
 export function getIndustryGuideBySlug(slug: string) {

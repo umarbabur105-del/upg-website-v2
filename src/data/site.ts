@@ -19,7 +19,7 @@ export const siteConfig = {
     "https://universalpackaginggroup.com/shipping-returns#merchant-return-policy",
   language: "en-US",
   market: "Worldwide",
-  contentReviewedAt: "2026-08-23",
+  contentReviewedAt: "2026-08-24",
   businessModel:
     "Custom packaging manufacturing with project-specific structure, specification, pricing, proofing, production, and delivery planning.",
   pricingModel:
@@ -31,13 +31,10 @@ export const siteConfig = {
   imagePolicy:
     "AI-generated packaging images are representative concepts, not completed customer work. Final construction, color, print, and finish are confirmed for each project.",
   navigation: [
-    { label: "Products", href: "/products" },
-    { label: "Cosmetics", href: "/cosmetics" },
     { label: "Samples", href: "/samples" },
     { label: "About", href: "/about" },
   ],
   utilityNavigation: [
-    { label: "Industries", href: "/industries" },
     { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
@@ -54,13 +51,6 @@ export const siteConfig = {
       { label: "Custom Magnetic Boxes", href: "/products/custom-magnetic-boxes" },
       { label: "Collapsible Magnetic Boxes", href: "/products/custom-collapsible-magnetic-boxes" },
       { label: "Custom Mylar Bags", href: "/products/custom-mylar-bags" },
-    ],
-    cosmeticsLinks: [
-      { label: "Skincare Boxes", href: "/cosmetics/skincare-boxes" },
-      { label: "Serum Boxes", href: "/cosmetics/serum-boxes" },
-      { label: "Lipstick Boxes", href: "/cosmetics/lipstick-boxes" },
-      { label: "Perfume Boxes", href: "/cosmetics/perfume-boxes" },
-      { label: "PR Boxes", href: "/cosmetics/pr-boxes" },
     ],
   },
 } as const;

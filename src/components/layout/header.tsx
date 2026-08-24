@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "@/components/layout/wordmark";
+import {
+  industryNavigationGroups,
+  styleNavigation,
+} from "@/data/navigation";
 import { siteConfig } from "@/data/site";
 
 const HAS_WHATSAPP = Boolean(siteConfig.whatsappUrl);
@@ -22,11 +26,69 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
+function MenuChevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 12 8"
+      aria-hidden="true"
+      className={`h-2 w-3 transition-transform ${open ? "rotate-180" : ""}`}
+    >
+      <path
+        d="m1 1.25 5 5 5-5"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+}
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [desktopMenu, setDesktopMenu] = useState<"style" | "industry" | null>(
+    null
+  );
+  const [mobileSection, setMobileSection] = useState<
+    "style" | "industry" | null
+  >(null);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    function closeOnOutsideClick(event: PointerEvent) {
+      if (!headerRef.current?.contains(event.target as Node)) {
+        setDesktopMenu(null);
+      }
+    }
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setDesktopMenu(null);
+        setMobileSection(null);
+        setMobileOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    document.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsideClick);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, []);
+
+  function closeMobileNavigation() {
+    setMobileOpen(false);
+    setMobileSection(null);
+  }
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/70 bg-background/96 backdrop-blur-md">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-40 w-full border-b border-border/70 bg-background/96 backdrop-blur-md"
+    >
       <div className="container-editorial flex h-16 items-center justify-between md:h-20">
         <Link
           href="/"
@@ -36,7 +98,135 @@ export function Header() {
           <Wordmark />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-1 lg:flex">
+          <div
+            className="relative"
+            onMouseEnter={() => setDesktopMenu("style")}
+            onMouseLeave={() => setDesktopMenu(null)}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setDesktopMenu(null);
+              }
+            }}
+          >
+            <button
+              type="button"
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm text-muted-foreground hover:text-foreground"
+              aria-expanded={desktopMenu === "style"}
+              aria-controls="desktop-style-navigation"
+              onClick={() => setDesktopMenu("style")}
+            >
+              By Style
+              <MenuChevron open={desktopMenu === "style"} />
+            </button>
+
+            {desktopMenu === "style" ? (
+              <div
+                id="desktop-style-navigation"
+                className="absolute top-full left-1/2 w-[44rem] -translate-x-1/2 pt-3"
+              >
+                <div className="border border-border bg-surface p-6 shadow-lift">
+                  <div className="mb-5 flex items-end justify-between gap-6 border-b border-border pb-5">
+                    <div>
+                      <div className="eyebrow">Five product families</div>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        Choose the closest structure. Final specifications are reviewed per project.
+                      </p>
+                    </div>
+                    <Link
+                      href="/packaging-styles"
+                      onClick={() => setDesktopMenu(null)}
+                      className="shrink-0 text-sm text-foreground hover:text-primary"
+                    >
+                      View 12 format guides →
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {styleNavigation.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setDesktopMenu(null)}
+                        className="group border border-transparent p-4 hover:border-border hover:bg-cream"
+                      >
+                        <span className="text-sm font-semibold text-foreground">
+                          {item.label}
+                        </span>
+                        <span className="mt-1.5 block text-xs leading-relaxed text-muted-foreground">
+                          {item.description}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : null}
+          </div>
+
+          <div
+            className="relative"
+            onMouseEnter={() => setDesktopMenu("industry")}
+            onMouseLeave={() => setDesktopMenu(null)}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setDesktopMenu(null);
+              }
+            }}
+          >
+            <button
+              type="button"
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm text-muted-foreground hover:text-foreground"
+              aria-expanded={desktopMenu === "industry"}
+              aria-controls="desktop-industry-navigation"
+              onClick={() => setDesktopMenu("industry")}
+            >
+              By Industry
+              <MenuChevron open={desktopMenu === "industry"} />
+            </button>
+
+            {desktopMenu === "industry" ? (
+              <div
+                id="desktop-industry-navigation"
+                className="absolute top-full left-1/2 w-[50rem] -translate-x-1/2 pt-3"
+              >
+                <div className="border border-border bg-surface p-6 shadow-lift">
+                  <div className="mb-5 flex items-end justify-between gap-6 border-b border-border pb-5">
+                    <div>
+                      <div className="eyebrow">Packaging by market</div>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        Start from your industry, then compare the relevant UPG product families.
+                      </p>
+                    </div>
+                    <Link
+                      href="/industries"
+                      onClick={() => setDesktopMenu(null)}
+                      className="shrink-0 text-sm text-foreground hover:text-primary"
+                    >
+                      View all industries →
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {industryNavigationGroups.map((group) => (
+                      <Link
+                        key={group.id}
+                        href={`/industries#${group.id}`}
+                        onClick={() => setDesktopMenu(null)}
+                        className="group border border-transparent p-4 hover:border-border hover:bg-cream"
+                      >
+                        <span className="text-sm font-semibold text-foreground">
+                          {group.label}
+                        </span>
+                        <span className="mt-1.5 block text-xs leading-relaxed text-muted-foreground">
+                          {group.description}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : null}
+          </div>
+
           {siteConfig.navigation.map((item) => (
             <Link
               key={item.href}
@@ -70,7 +260,10 @@ export function Header() {
 
         <button
           className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface lg:hidden"
-          onClick={() => setMobileOpen((open) => !open)}
+          onClick={() => {
+            setMobileOpen((open) => !open);
+            setMobileSection(null);
+          }}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
           aria-controls="mobile-navigation"
@@ -99,11 +292,97 @@ export function Header() {
           className="border-t border-border bg-background lg:hidden"
         >
           <nav className="container-editorial flex flex-col gap-1 py-6">
+            <div className="border-b border-border">
+              <button
+                type="button"
+                onClick={() =>
+                  setMobileSection((current) =>
+                    current === "style" ? null : "style"
+                  )
+                }
+                className="flex w-full items-center justify-between py-3 text-base text-foreground/80"
+                aria-expanded={mobileSection === "style"}
+                aria-controls="mobile-style-navigation"
+              >
+                By Style
+                <MenuChevron open={mobileSection === "style"} />
+              </button>
+              {mobileSection === "style" ? (
+                <div id="mobile-style-navigation" className="pb-4">
+                  {styleNavigation.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={closeMobileNavigation}
+                      className="block border-t border-border/60 py-3 pl-4 text-sm text-muted-foreground hover:text-foreground"
+                    >
+                      <span className="block font-semibold text-foreground">
+                        {item.label}
+                      </span>
+                      <span className="mt-1 block text-xs leading-relaxed">
+                        {item.description}
+                      </span>
+                    </Link>
+                  ))}
+                  <Link
+                    href="/packaging-styles"
+                    onClick={closeMobileNavigation}
+                    className="mt-2 block py-2 pl-4 text-sm text-foreground"
+                  >
+                    View 12 format guides →
+                  </Link>
+                </div>
+              ) : null}
+            </div>
+
+            <div className="border-b border-border">
+              <button
+                type="button"
+                onClick={() =>
+                  setMobileSection((current) =>
+                    current === "industry" ? null : "industry"
+                  )
+                }
+                className="flex w-full items-center justify-between py-3 text-base text-foreground/80"
+                aria-expanded={mobileSection === "industry"}
+                aria-controls="mobile-industry-navigation"
+              >
+                By Industry
+                <MenuChevron open={mobileSection === "industry"} />
+              </button>
+              {mobileSection === "industry" ? (
+                <div id="mobile-industry-navigation" className="pb-4">
+                  {industryNavigationGroups.map((group) => (
+                    <Link
+                      key={group.id}
+                      href={`/industries#${group.id}`}
+                      onClick={closeMobileNavigation}
+                      className="block border-t border-border/60 py-3 pl-4 text-sm text-muted-foreground hover:text-foreground"
+                    >
+                      <span className="block font-semibold text-foreground">
+                        {group.label}
+                      </span>
+                      <span className="mt-1 block text-xs leading-relaxed">
+                        {group.description}
+                      </span>
+                    </Link>
+                  ))}
+                  <Link
+                    href="/industries"
+                    onClick={closeMobileNavigation}
+                    className="mt-2 block py-2 pl-4 text-sm text-foreground"
+                  >
+                    View all industries →
+                  </Link>
+                </div>
+              ) : null}
+            </div>
+
             {siteConfig.navigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={() => setMobileOpen(false)}
+                onClick={closeMobileNavigation}
                 className="py-3 text-base text-foreground/80 hover:text-foreground"
               >
                 {item.label}
@@ -114,7 +393,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={closeMobileNavigation}
                   className="py-2 text-sm text-muted-foreground hover:text-foreground"
                 >
                   {item.label}
@@ -135,7 +414,7 @@ export function Header() {
               ) : null}
               <Link
                 href={siteConfig.cta.href}
-                onClick={() => setMobileOpen(false)}
+                onClick={closeMobileNavigation}
                 className="mt-3 block rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground"
               >
                 {siteConfig.cta.label}

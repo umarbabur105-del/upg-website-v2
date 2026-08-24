@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AnalyticsPreferencesButton } from "@/components/analytics-runtime";
 import { Wordmark } from "@/components/layout/wordmark";
+import { industryNavigationGroups } from "@/data/navigation";
 import { siteConfig } from "@/data/site";
 
 const HAS_WHATSAPP = Boolean(siteConfig.whatsappUrl);
@@ -58,12 +59,15 @@ export function Footer() {
           </div>
 
           <div>
-            <div className="eyebrow mb-4">Cosmetics</div>
+            <div className="eyebrow mb-4">By industry</div>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              {siteConfig.footerColumns.cosmeticsLinks.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className="hover:text-foreground">
-                    {item.label}
+              {industryNavigationGroups.map((group) => (
+                <li key={group.id}>
+                  <Link
+                    href={`/industries#${group.id}`}
+                    className="hover:text-foreground"
+                  >
+                    {group.label}
                   </Link>
                 </li>
               ))}
