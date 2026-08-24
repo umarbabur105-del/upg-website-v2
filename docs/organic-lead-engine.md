@@ -221,6 +221,20 @@ Commit `adfde6c` released the five-product authority cluster, consolidating auth
 
 Search Console recorded only 10 non-brand impressions and 0 clicks across the five product pages in the available 90-day window. Existing internal-link volume is already high, so the batch focuses on page differentiation and buyer routing rather than adding duplicate pages or indiscriminate links. Release proof passed with exact-SHA Vercel success, 76/76 live sitemap URLs, five product contracts, four AI discovery endpoints, and live Lighthouse scores of 100 for accessibility, best practices, and SEO on three representative pages. Full evidence is recorded in `docs/core-product-authority-plan.md`.
 
+### Commercial industry hubs — local release candidate, 2026-08-24
+
+The top navigation already grouped seven industry markets, but only three groups had a dedicated overview page. This batch turns the three remaining multi-guide commercial groups into real buyer-decision hubs:
+
+- Fashion, Jewelry & Luxury Packaging
+- Electronics & Consumer Goods Packaging
+- Home, Candle & Gift Packaging
+
+Each hub reuses current UPG product families and existing reviewed guides; it does not add a new packaging style. The pages compare available starting formats, preserve project-review boundaries, link to a prefilled enquiry, and join the sitemap, structured-data, product-page, navigation, and AI-discovery systems through the shared industry-hub dataset.
+
+Pet Products remains an anchor group on `/industries` because it currently has only one underlying guide. Publishing a second overview page for the same single path would add duplication rather than buyer value.
+
+Fresh Search Console evidence for 2026-07-25 through 2026-08-21 contains 408 impressions, 291 non-brand impressions, 3 total clicks, and 0 non-brand clicks. Recently changed lipstick and cosmetics pages are not rewritten again in this batch; their material changes require a full 28-day comparison window. The commercial industry hubs expand coherent discovery paths without disrupting that measurement.
+
 ### Phase 1 — Product-style lead cluster
 
 - Publish the 12 approved style pages and the Style Library.

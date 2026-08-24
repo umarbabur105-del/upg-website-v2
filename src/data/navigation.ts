@@ -95,7 +95,7 @@ export const industryNavigationGroups = [
   {
     id: "fashion-jewelry-luxury",
     label: "Fashion, Jewelry & Luxury",
-    href: "/industries#fashion-jewelry-luxury",
+    href: "/industries/fashion-jewelry-luxury-packaging",
     description: "Apparel and jewelry presentation packaging.",
     links: [
       {
@@ -113,7 +113,7 @@ export const industryNavigationGroups = [
   {
     id: "electronics-consumer-goods",
     label: "Electronics & Consumer Goods",
-    href: "/industries#electronics-consumer-goods",
+    href: "/industries/electronics-consumer-goods-packaging",
     description: "Presentation and retail packaging for products, devices, toys, and games.",
     links: [
       {
@@ -136,7 +136,7 @@ export const industryNavigationGroups = [
   {
     id: "home-candles-gifts",
     label: "Home, Candles & Gifts",
-    href: "/industries#home-candles-gifts",
+    href: "/industries/home-candle-gift-packaging",
     description: "Candle cartons and premium gift presentation boxes.",
     links: [
       {

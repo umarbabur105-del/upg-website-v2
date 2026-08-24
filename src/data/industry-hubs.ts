@@ -376,6 +376,337 @@ export const industryHubs: IndustryHub[] = [
     ],
     reviewedAt,
   },
+  {
+    slug: "fashion-jewelry-luxury-packaging",
+    name: "Custom Fashion, Jewelry & Luxury Packaging",
+    shortName: "Fashion, Jewelry & Luxury",
+    heroTitle:
+      "Custom fashion, jewelry, and luxury packaging for premium presentation.",
+    heroDescription:
+      "Compare UPG magnetic and collapsible magnetic boxes around the product arrangement, insert, opening experience, branding, quantity, storage priorities, and destination.",
+    metaDescription:
+      "Compare custom fashion, jewelry, and luxury packaging across magnetic, collapsible magnetic, apparel, jewelry, and premium gift box formats.",
+    keywords: [
+      "custom fashion packaging",
+      "custom jewelry packaging",
+      "custom luxury packaging boxes",
+      "custom apparel boxes",
+      "premium presentation packaging",
+    ],
+    image: {
+      src: "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-hero-v1.png",
+      alt: "Representative custom collapsible magnetic presentation box for fashion and luxury products",
+    },
+    productSlugs: [
+      "custom-magnetic-boxes",
+      "custom-collapsible-magnetic-boxes",
+    ],
+    guideLinks: [
+      {
+        label: "Apparel Boxes",
+        href: "/industries/custom-apparel-boxes",
+        description:
+          "Plan fixed or collapsible magnetic presentation boxes around folded apparel, arrangement, and branding.",
+      },
+      {
+        label: "Jewelry Presentation Boxes",
+        href: "/industries/custom-jewelry-boxes",
+        description:
+          "Develop the outer presentation box and insert around the jewelry item or complete set.",
+      },
+      {
+        label: "Luxury Gift Boxes",
+        href: "/industries/custom-luxury-gift-boxes",
+        description:
+          "Compare fixed and collapsible magnetic gift boxes around the full product arrangement.",
+      },
+      {
+        label: "Fixed vs Collapsible Magnetic Boxes",
+        href: "/compare/magnetic-boxes-vs-collapsible-magnetic-boxes",
+        description:
+          "Compare assembled and fold-flat presentation structures before choosing a starting format.",
+      },
+    ],
+    childGuideSlugs: ["custom-apparel-boxes", "custom-jewelry-boxes"],
+    quickAnswer:
+      "Start with a fixed magnetic box when the assembled presentation structure leads the brief. Compare a collapsible magnetic box when fold-flat storage before assembly is important. Product dimensions, arrangement, insert needs, artwork, quantity, and destination still determine the final specification.",
+    selectionGuide: [
+      {
+        need: "A fixed premium presentation box",
+        startingPoint: "Magnetic boxes",
+        reason:
+          "Build the box and insert around the complete product arrangement and opening experience.",
+        href: "/products/custom-magnetic-boxes",
+      },
+      {
+        need: "Fold-flat storage before assembly",
+        startingPoint: "Collapsible magnetic boxes",
+        reason:
+          "Use the collapsible route when pre-assembly storage volume is part of the project brief.",
+        href: "/products/custom-collapsible-magnetic-boxes",
+      },
+      {
+        need: "Branded apparel presentation",
+        startingPoint: "Apparel boxes",
+        reason:
+          "Start from the folded product dimensions, item count, arrangement, and presentation goal.",
+        href: "/industries/custom-apparel-boxes",
+      },
+      {
+        need: "Jewelry or a multi-piece set",
+        startingPoint: "Jewelry presentation boxes",
+        reason:
+          "Define the complete set and insert arrangement before final dimensions are approved.",
+        href: "/industries/custom-jewelry-boxes",
+      },
+    ],
+    projectInputs: [
+      "Product count, finished dimensions, and arrangement",
+      "Fixed or collapsible magnetic structure preference",
+      "Insert and opening-experience requirements",
+      "Quantity, artwork status, and delivery destination",
+      "Wrap, print, and finish direction",
+      "Packing, storage, handling, or product-specific requirements",
+    ],
+    scopeNote:
+      "This hub covers custom branded magnetic and collapsible magnetic presentation boxes. Products, display fixtures, assembly, packout, warehousing, and fulfillment are outside the standard offer.",
+    compatibilityNote:
+      "Product fit, insert layout, handling, protection, testing, storage, and destination-market requirements must be supplied and reviewed when they apply.",
+    faqs: [
+      {
+        question: "Should I choose a fixed or collapsible magnetic box?",
+        answer:
+          "Start with a fixed magnetic box for an assembled premium presentation structure. Compare a collapsible magnetic box when fold-flat storage before assembly is important. The complete project brief decides the final choice.",
+      },
+      {
+        question: "Can the box and insert be planned together?",
+        answer:
+          "Yes. Share the complete product arrangement, dimensions, orientation, and presentation sequence so the outer box and insert can be reviewed as one project.",
+      },
+    ],
+    reviewedAt,
+  },
+  {
+    slug: "electronics-consumer-goods-packaging",
+    name: "Custom Electronics & Consumer Goods Packaging",
+    shortName: "Electronics & Consumer Goods",
+    heroTitle:
+      "Custom electronics and consumer-goods packaging across retail and presentation boxes.",
+    heroDescription:
+      "Compare UPG tuck, corrugated ear-lock mailer, magnetic, and collapsible magnetic boxes around the product, accessories, insert, retail or presentation role, quantity, and destination.",
+    metaDescription:
+      "Compare custom electronics and consumer-goods packaging across tuck, ear-lock mailer, magnetic, collapsible magnetic, retail, toy, and game boxes.",
+    keywords: [
+      "custom electronics packaging",
+      "custom consumer product boxes",
+      "custom electronics boxes",
+      "custom retail packaging boxes",
+      "custom toy and game packaging",
+    ],
+    image: {
+      src: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
+      alt: "Representative corrugated ear-lock presentation mailer with a custom product insert",
+    },
+    productSlugs: [
+      "custom-tuck-boxes",
+      "custom-mailer-boxes",
+      "custom-magnetic-boxes",
+      "custom-collapsible-magnetic-boxes",
+    ],
+    guideLinks: [
+      {
+        label: "Electronics Presentation Boxes",
+        href: "/industries/custom-electronics-boxes",
+        description:
+          "Plan a magnetic or collapsible magnetic presentation box around the device, accessories, and insert.",
+      },
+      {
+        label: "Retail Product Boxes",
+        href: "/industries/custom-retail-boxes",
+        description:
+          "Select an approved tuck-box structure around the packed product and shelf presentation.",
+      },
+      {
+        label: "Games, Toys & Collectibles",
+        href: "/industries/custom-toy-packaging",
+        description:
+          "Compare tuck, ear-lock mailer, magnetic, and collapsible magnetic formats for the complete set.",
+      },
+      {
+        label: "Mailer Boxes vs Magnetic Boxes",
+        href: "/compare/mailer-boxes-vs-magnetic-boxes",
+        description:
+          "Compare corrugated ear-lock presentation with a premium magnetic structure.",
+      },
+    ],
+    childGuideSlugs: [
+      "custom-electronics-boxes",
+      "custom-retail-boxes",
+      "custom-toy-packaging",
+    ],
+    quickAnswer:
+      "Use tuck boxes for individual shelf-facing outer cartons, corrugated ear-lock mailers for branded presentation, and magnetic or collapsible magnetic boxes for premium sets. The complete product list, dimensions, weights, arrangement, insert, handling requirements, quantity, and destination determine the correct starting structure.",
+    selectionGuide: [
+      {
+        need: "An individual retail outer carton",
+        startingPoint: "Tuck boxes",
+        reason:
+          "Start from the packed product dimensions, orientation, panel content, and shelf role.",
+        href: "/industries/custom-retail-boxes",
+      },
+      {
+        need: "A branded corrugated presentation box",
+        startingPoint: "Ear-lock mailer boxes",
+        reason:
+          "Use this route for a presentation mailer with an approved insert, not a standard shipping carton.",
+        href: "/products/custom-mailer-boxes",
+      },
+      {
+        need: "A fixed premium presentation set",
+        startingPoint: "Magnetic boxes",
+        reason:
+          "Plan the outer box and insert around the complete device and accessory arrangement.",
+        href: "/products/custom-magnetic-boxes",
+      },
+      {
+        need: "Premium presentation with fold-flat storage",
+        startingPoint: "Collapsible magnetic boxes",
+        reason:
+          "Compare this structure when pre-assembly storage volume is part of the project brief.",
+        href: "/products/custom-collapsible-magnetic-boxes",
+      },
+    ],
+    projectInputs: [
+      "Complete product, accessory, and document list",
+      "Dimensions, weights, orientation, and arrangement",
+      "Retail, presentation, or premium-set role",
+      "Insert, opening-sequence, and handling requirements",
+      "Quantity, artwork status, and delivery destination",
+      "Protection, testing, battery, static-control, or market requirements when applicable",
+    ],
+    scopeNote:
+      "This hub covers custom printed tuck boxes, branded corrugated ear-lock mailers, and magnetic presentation boxes. Standard shipping cartons, master cartons, RSC cases, product assembly, packout, and fulfillment are outside the standard offer.",
+    compatibilityNote:
+      "Product fit, insert performance, handling, transport, protection, testing, battery, static-control, and destination-market requirements must be supplied and reviewed when they apply.",
+    faqs: [
+      {
+        question: "Does this category include standard shipping cartons?",
+        answer:
+          "No. UPG's corrugated offer on this page is the custom ear-lock presentation mailer. Standard shipping cartons, master cartons, and RSC cases are outside the current offer.",
+      },
+      {
+        question: "Does a presentation box replace product protection testing?",
+        answer:
+          "No. Protection, handling, transport, battery, static-control, testing, and market requirements must be stated and reviewed for the project.",
+      },
+    ],
+    reviewedAt,
+  },
+  {
+    slug: "home-candle-gift-packaging",
+    name: "Custom Home, Candle & Gift Packaging",
+    shortName: "Home, Candles & Gifts",
+    heroTitle:
+      "Custom home, candle, and gift packaging from retail cartons to premium boxes.",
+    heroDescription:
+      "Compare UPG tuck, magnetic, and collapsible magnetic boxes around the product or set, container dimensions, insert, presentation goal, artwork, quantity, and destination.",
+    metaDescription:
+      "Compare custom home, candle, and gift packaging across printed tuck boxes, magnetic boxes, collapsible magnetic boxes, candle cartons, and luxury gift boxes.",
+    keywords: [
+      "custom candle packaging",
+      "custom gift packaging boxes",
+      "custom home product packaging",
+      "custom candle boxes",
+      "custom luxury gift boxes",
+    ],
+    image: {
+      src: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
+      alt: "Representative custom magnetic gift box for home, candle, and gift products",
+    },
+    productSlugs: [
+      "custom-tuck-boxes",
+      "custom-magnetic-boxes",
+      "custom-collapsible-magnetic-boxes",
+    ],
+    guideLinks: [
+      {
+        label: "Candle Boxes",
+        href: "/industries/custom-candle-boxes",
+        description:
+          "Compare a printed tuck carton with a premium magnetic presentation box around the candle container.",
+      },
+      {
+        label: "Luxury Gift Boxes",
+        href: "/industries/custom-luxury-gift-boxes",
+        description:
+          "Plan fixed or collapsible magnetic boxes around the complete gift set and insert.",
+      },
+      {
+        label: "Tuck Boxes vs Magnetic Boxes",
+        href: "/compare/tuck-boxes-vs-magnetic-boxes",
+        description:
+          "Compare folding retail cartons with premium magnetic presentation structures.",
+      },
+    ],
+    childGuideSlugs: ["custom-candle-boxes", "custom-luxury-gift-boxes"],
+    quickAnswer:
+      "Use a tuck box for an individual retail outer carton. Start with a magnetic or collapsible magnetic box for a premium product set or gift presentation. The packed product dimensions, arrangement, insert, opening experience, artwork, quantity, and destination determine the final structure.",
+    selectionGuide: [
+      {
+        need: "An individual shelf-facing outer carton",
+        startingPoint: "Tuck boxes",
+        reason:
+          "Develop the carton around the packed product dimensions, opening direction, panels, and artwork.",
+        href: "/products/custom-tuck-boxes",
+      },
+      {
+        need: "A candle retail or presentation project",
+        startingPoint: "Candle boxes",
+        reason:
+          "Compare tuck and magnetic formats around the finished candle container and intended presentation.",
+        href: "/industries/custom-candle-boxes",
+      },
+      {
+        need: "A fixed premium gift presentation",
+        startingPoint: "Magnetic boxes",
+        reason:
+          "Plan the complete product arrangement, opening experience, and insert together.",
+        href: "/products/custom-magnetic-boxes",
+      },
+      {
+        need: "A premium set with fold-flat storage",
+        startingPoint: "Collapsible magnetic boxes",
+        reason:
+          "Use the collapsible route when pre-assembly storage volume is part of the brief.",
+        href: "/products/custom-collapsible-magnetic-boxes",
+      },
+    ],
+    projectInputs: [
+      "Product or container dimensions, count, and arrangement",
+      "Individual retail carton or premium-set role",
+      "Preferred tuck, fixed magnetic, or collapsible magnetic structure",
+      "Insert and opening-experience requirements",
+      "Quantity, artwork status, finishes, and delivery destination",
+      "Packing, handling, storage, or product-specific requirements",
+    ],
+    scopeNote:
+      "This hub covers custom printed outer cartons and magnetic presentation boxes. Products, filling, assembly, packout, warehousing, and fulfillment are outside the standard offer.",
+    compatibilityNote:
+      "Container or product fit, insert performance, handling, protection, testing, storage, and destination-market requirements must be supplied and reviewed when they apply.",
+    faqs: [
+      {
+        question: "Should I use a tuck box or a magnetic gift box?",
+        answer:
+          "Use a tuck box for an individual folding retail carton. Compare magnetic or collapsible magnetic boxes when the project is a premium set or presentation-led gift box.",
+      },
+      {
+        question: "Can UPG plan an insert for a gift set?",
+        answer:
+          "Yes. Share every product, its dimensions, orientation, arrangement, and opening sequence so the insert and outer presentation box can be reviewed together.",
+      },
+    ],
+    reviewedAt,
+  },
 ];
 
 export function getIndustryHubBySlug(slug: string) {

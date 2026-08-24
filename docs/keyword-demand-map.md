@@ -128,6 +128,18 @@ The five canonical product pages collectively produced 10 non-brand impressions 
 
 Instead, each money page receives a distinct visible buying-route section, product-specific search language, qualification boundaries, structured data, and conversion handoffs. The Products hub becomes one five-family catalog with explicit CollectionPage and ItemList schema. Commit `adfde6c` is live with exact-SHA Vercel success, 76/76 live sitemap proof, all five product contracts, all four AI discovery endpoints, and representative live Lighthouse scores of 100 for accessibility, best practices, and SEO. Full evidence, query rows, scope decisions, and the 28-day measurement rule are recorded in `docs/core-product-authority-plan.md`.
 
+## Commercial industry-hub completion — local release candidate, 2026-08-24
+
+The industry navigation now maps six multi-guide markets to dedicated overview pages. Three new hubs consolidate already-published guides instead of creating keyword-variant product pages:
+
+| Hub | Existing guides consolidated | Product families kept in scope |
+| --- | --- | --- |
+| `/industries/fashion-jewelry-luxury-packaging` | Apparel, jewelry, and a contextual luxury-gift path | Magnetic and collapsible magnetic boxes |
+| `/industries/electronics-consumer-goods-packaging` | Electronics, retail products, games, toys, and collectibles | Tuck, ear-lock mailer, magnetic, and collapsible magnetic boxes |
+| `/industries/home-candle-gift-packaging` | Candle and luxury gift boxes | Tuck, magnetic, and collapsible magnetic boxes |
+
+This follows the earlier competitor-coverage proxy for gift, candle, jewelry, retail, electronics, apparel, and toy intent while keeping the five approved product families unchanged. Pet Products stays on the industry index with its existing guide; a one-child hub is not published.
+
 ## Monthly volume completion path
 
 When a Google Ads account is available:

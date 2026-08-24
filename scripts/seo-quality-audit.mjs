@@ -231,6 +231,53 @@ for (const [route, requiredPrefixes] of coreProductContracts) {
   }
 }
 
+const industryHubRoutes = [...sitemapPaths].filter((route) =>
+  /^\/industries\/(?:food-beverage|beauty-personal-care|supplement|fashion-jewelry-luxury|electronics-consumer-goods|home-candle-gift)-packaging$/.test(
+    route
+  )
+);
+const industriesHub = pages.find((page) => page.route === "/industries");
+
+if (industryHubRoutes.length < 6) {
+  failures.push(
+    `Commercial industry cluster has ${industryHubRoutes.length} hub route(s); expected at least 6`
+  );
+}
+
+if (!industriesHub) {
+  failures.push("/industries: missing rendered industry hub");
+} else {
+  for (const route of industryHubRoutes) {
+    if (!industriesHub.html.includes(`href="${route}"`)) {
+      failures.push(`/industries: missing internal link to ${route}`);
+    }
+  }
+}
+
+for (const route of industryHubRoutes) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered commercial industry hub`);
+    continue;
+  }
+  for (const schemaType of [
+    "CollectionPage",
+    "ItemList",
+    "BreadcrumbList",
+    "FAQPage",
+  ]) {
+    if (!page.html.includes(`"@type":"${schemaType}"`)) {
+      failures.push(`${route}: missing ${schemaType} JSON-LD`);
+    }
+  }
+  if (!page.html.includes('href="/get-a-quote?')) {
+    failures.push(`${route}: missing prefilled quote path`);
+  }
+  if (!page.html.includes('href="/industries"')) {
+    failures.push(`${route}: missing parent industry-hub link`);
+  }
+}
+
 const organicIntentContracts = new Map([
   ["/products/custom-tuck-boxes", { scopeMarker: "regular shipping carton", statusMarker: "Outside current offer" }],
   ["/products/custom-mailer-boxes", { scopeMarker: "master carton", statusMarker: "Outside current offer" }],
@@ -275,5 +322,5 @@ if (failures.length) {
 }
 
 console.log(
-  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, uniqueness, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
+  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, uniqueness, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, ${industryHubRoutes.length} commercial industry-hub contracts, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
 );
