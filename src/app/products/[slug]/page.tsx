@@ -19,9 +19,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!product) return {};
 
-  const title = product.name;
   return createPageMetadata({
-    title,
+    title: product.metaTitle,
     description: product.metaDescription,
     path: `/products/${slug}`,
     keywords: [

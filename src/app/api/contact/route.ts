@@ -14,6 +14,15 @@ import {
   prepareGoogleSheetsAuth,
 } from "@/lib/google-sheets";
 
+const allowedFamilies = new Set([
+  "Tuck Boxes",
+  "Mailer Boxes",
+  "Magnetic Boxes",
+  "Collapsible Magnetic Boxes",
+  "Mylar Bags",
+  "Not sure yet",
+]);
+
 export async function POST(request: Request) {
   try {
     const input = await parseFormRequest(request, 12_000);
@@ -28,6 +37,9 @@ export async function POST(request: Request) {
       email: cleanText(input.email, { max: 254, singleLine: true }).toLowerCase(),
       company: cleanText(input.company, { max: 160, singleLine: true }),
       phone: cleanText(input.phone, { max: 60, singleLine: true }),
+      productFamily:
+        cleanText(input.product_family, { max: 80, singleLine: true }) ||
+        "Not sure yet",
       message: cleanText(input.message, { max: 4_000 }),
     };
 
@@ -47,6 +59,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Enter a valid email address" }, { status: 400 });
     }
 
+    if (!allowedFamilies.has(data.productFamily)) {
+      return NextResponse.json({ error: "Invalid product family" }, { status: 400 });
+    }
+
     const subjectName = String(data.name).trim();
     const subject = `[UPG Contact] ${subjectName}`;
 
@@ -55,6 +71,7 @@ export async function POST(request: Request) {
       { label: "Email", value: data.email },
       { label: "Company", value: data.company },
       { label: "Phone", value: data.phone },
+      { label: "Product family", value: data.productFamily },
       { label: "Message", value: data.message },
     ]);
 
@@ -84,6 +101,7 @@ export async function POST(request: Request) {
         email: data.email,
         phone: data.phone,
         company: data.company,
+        productFamily: data.productFamily,
         message: data.message,
         landingPage: attribution.landing_page,
         referrer: attribution.referrer,

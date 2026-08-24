@@ -377,13 +377,13 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "lipstick-boxes",
     title: "Lipstick Boxes",
-    metaTitle: "Custom Lipstick Packaging Boxes & Printed Cartons",
+    metaTitle: "Custom Lipstick Packaging & Printed Lipstick Boxes",
     metaDescription:
-      "Custom lipstick packaging boxes and printed outer cartons for lipstick, lip balm, lip oil, and sets. UPG supplies boxes—not lipstick tubes or mechanisms.",
+      "Custom lipstick packaging and printed lipstick boxes for lipstick, lip balm, lip oil, lip gloss, and sets. Outer boxes only—not tubes or mechanisms.",
     quoteFamily: "Tuck Boxes",
-    heroTitle: "Custom lipstick packaging boxes and printed outer cartons.",
+    heroTitle: "Custom lipstick packaging and printed lipstick boxes.",
     heroDescription:
-      "Custom printed outer cartons and premium presentation boxes manufactured around finished lipstick, lip oil, lip balm, lip gloss, and other slim beauty products.",
+      "Custom printed outer cartons and premium presentation boxes manufactured as packaging for finished lipstick, lip oil, lip balm, lip gloss, and other slim beauty products.",
     quickAnswer:
       "UPG manufactures the custom printed outer box around lipstick, lip balm, lip oil, and related slim beauty products. Individual products can use a tuck carton, while premium collections can be reviewed in a magnetic presentation box. Structure, print, finish, and inserts are confirmed from the product dimensions, quantity, artwork, intended use, and delivery country.",
     intro:

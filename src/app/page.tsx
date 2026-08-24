@@ -1,9 +1,24 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Custom Packaging Manufacturer: Boxes & Mylar Bags",
+  description:
+    "Custom printed tuck boxes, corrugated ear-lock mailers, magnetic boxes, collapsible magnetic boxes, and Mylar bags manufactured for brands worldwide.",
+  path: "/",
+  keywords: [
+    "custom packaging manufacturer",
+    "custom printed cardboard boxes",
+    "custom boxes manufacturer",
+    "custom flexible packaging",
+  ],
+});
 
 const buyerProof = [
   { value: "5", label: "focused product families" },

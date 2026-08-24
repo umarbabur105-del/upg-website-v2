@@ -5,6 +5,7 @@ import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { getComparisonGuidesByProduct } from "@/data/comparison-guides";
+import { getIndustryHubsByProduct } from "@/data/industry-hubs";
 import { getIndustryGuidesByProduct } from "@/data/industry-guides";
 import { mailerApplications } from "@/data/mailer-applications";
 import { getOrganicIntentRoute } from "@/data/organic-intent-routes";
@@ -37,6 +38,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
     })
   );
   const industryGuides = getIndustryGuidesByProduct(product.slug);
+  const industryHubs = getIndustryHubsByProduct(product.slug);
   const applicationGuides =
     product.slug === "custom-mailer-boxes" ? mailerApplications : [];
   const comparisonGuides = getComparisonGuidesByProduct(product.slug);
@@ -360,7 +362,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
               </details>
             ) : null}
 
-            {industryGuides.length > 0 ? (
+            {industryHubs.length > 0 || industryGuides.length > 0 ? (
               <details className={disclosureClass}>
                 <summary className={summaryClass}>
                   <div>
@@ -372,6 +374,15 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                   <span className="text-2xl text-gold-dark transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <div className="grid gap-3 border-t border-border py-6 sm:grid-cols-2">
+                  {industryHubs.map((hub) => (
+                    <Link
+                      key={hub.slug}
+                      href={`/industries/${hub.slug}`}
+                      className="border-b border-border py-3 text-sm font-semibold text-foreground"
+                    >
+                      {hub.shortName} packaging overview →
+                    </Link>
+                  ))}
                   {industryGuides.map((guide) => (
                     <Link
                       key={guide.slug}

@@ -21,6 +21,7 @@ export interface Product {
   bestFor: string;
   summary: string;
   longSummary: string;
+  metaTitle: string;
   metaDescription: string;
   searchTerms?: string[];
   reviewedAt?: string;
@@ -77,6 +78,7 @@ export const products: Product[] = [
       "Custom printed tuck boxes and folding cartons across the core structures, materials, and premium finish options.",
     longSummary:
       "Custom tuck boxes are printed folding cartons available in straight tuck end, reverse tuck end, auto-lock, interlock, and seal-end structures. Cereal-style seal-end boxes are included in this family.",
+    metaTitle: "Custom Tuck Boxes & Printed Folding Cartons",
     metaDescription:
       "Custom printed tuck boxes and folding cartons in straight tuck, reverse tuck, auto-lock, interlock, seal-end and cereal-style formats. Worldwide delivery.",
     searchTerms: [
@@ -200,6 +202,7 @@ export const products: Product[] = [
       "Custom printed corrugated ear-lock mailer boxes for branded unboxing, product presentation, and repeat programs.",
     longSummary:
       "UPG's custom corrugated mailer boxes use an ear-lock structure for PR kits, influencer campaigns, subscription programs, ecommerce presentation, and branded product launches. Exterior printing, interior printing, custom inserts, and specialty finishes are available.",
+    metaTitle: "Custom Corrugated Mailer & Ear-Lock Boxes",
     metaDescription:
       "Custom printed corrugated mailer boxes and ear-lock boxes for PR kits, subscriptions, ecommerce and branded presentation. Worldwide delivery.",
     searchTerms: [
@@ -288,6 +291,7 @@ export const products: Product[] = [
       "Premium rigid boxes with a magnetic closure, custom inserts, and presentation-led finishes.",
     longSummary:
       "Custom magnetic boxes create a premium presentation for gifts, beauty products, apparel, electronics, and launch collections. The structure can be paired with custom inserts and premium finish options.",
+    metaTitle: "Custom Magnetic Rigid Boxes with Inserts",
     metaDescription:
       "Custom magnetic rigid boxes with premium finishes and inserts for brands worldwide. Minimum order 250 units; specifications are confirmed per project.",
     searchTerms: [
@@ -353,6 +357,7 @@ export const products: Product[] = [
       "A premium magnetic rigid box that folds flat to reduce freight and storage space.",
     longSummary:
       "Custom collapsible magnetic boxes deliver the premium presentation of a magnetic box while folding flat for more efficient freight and storage. Custom inserts and premium finishes are available.",
+    metaTitle: "Custom Collapsible Magnetic Boxes",
     metaDescription:
       "Custom collapsible magnetic boxes that fold flat for efficient storage and freight. Worldwide manufacturing with a 250-unit minimum order.",
     searchTerms: [
@@ -420,6 +425,7 @@ export const products: Product[] = [
       "Custom printed Mylar bags, pouches, and rollstock film across UPG's current flexible-packaging formats.",
     longSummary:
       "Custom printed Mylar bags include three-side seal bags, flat-bottom bags, stand-up pouches, spout bags, child-resistant bags, coffee bags, and printed rollstock film. Depending on the format, options can include zippers, valves, windows, and matte, gloss, or metallic finishes.",
+    metaTitle: "Custom Printed Mylar Bags, Pouches & Rollstock",
     metaDescription:
       "Custom printed Mylar bags, pouches, and rollstock film in stand-up, flat-bottom, three-side-seal, spout, child-resistant, and coffee formats. MOQ 500.",
     searchTerms: [

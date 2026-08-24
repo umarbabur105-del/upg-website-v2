@@ -382,6 +382,10 @@ export function getIndustryHubBySlug(slug: string) {
   return industryHubs.find((hub) => hub.slug === slug);
 }
 
+export function getIndustryHubsByProduct(productSlug: string) {
+  return industryHubs.filter((hub) => hub.productSlugs.includes(productSlug));
+}
+
 export function getIndustryHubForGuideSlug(guideSlug: string) {
   return industryHubs.find((hub) => hub.childGuideSlugs.includes(guideSlug));
 }

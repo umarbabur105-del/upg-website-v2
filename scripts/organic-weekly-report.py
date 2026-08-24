@@ -617,6 +617,29 @@ def markdown_report(report: dict[str, Any]) -> str:
         lines.extend(f"- {source}: {count}" for source, count in acquisition.items())
     else:
         lines.append("- No non-spam website leads in this period.")
+    lines.extend(["", "## Current lead statuses", ""])
+    statuses = current["crm"]["statuses"]
+    if statuses:
+        lines.extend(f"- {status}: {count}" for status, count in statuses.items())
+    else:
+        lines.append("- No non-spam website lead statuses in this period.")
+    lines.extend(["", "## Current product-family attribution", ""])
+    product_families = current["crm"]["product_families"]
+    if product_families:
+        lines.extend(
+            f"- {product_family}: {count}"
+            for product_family, count in product_families.items()
+        )
+    else:
+        lines.append("- No product-family attribution in this period.")
+    lines.extend(
+        [
+            "",
+            "## CRM exclusions",
+            "",
+            f"- Spam or verification rows excluded: {current['crm']['excluded_spam_or_verification']}",
+        ]
+    )
     lines.extend(["", "## Lead outcomes by landing page", ""])
     landing_page_outcomes = current["crm"]["landing_page_outcomes"]
     if landing_page_outcomes:

@@ -5,11 +5,21 @@ import { useState, type FormEvent } from "react";
 import { trackGenerateLead } from "@/lib/analytics";
 import { getLeadAttribution } from "@/lib/lead-attribution";
 
+const productFamilies = [
+  "Tuck Boxes",
+  "Mailer Boxes",
+  "Magnetic Boxes",
+  "Collapsible Magnetic Boxes",
+  "Mylar Bags",
+  "Not sure yet",
+];
+
 export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [phone, setPhone] = useState("");
+  const [productFamily, setProductFamily] = useState("Not sure yet");
   const [message, setMessage] = useState("");
   const [submissionId] = useState(() => crypto.randomUUID());
   const [formStartedAt] = useState(() => Date.now());
@@ -35,6 +45,7 @@ export function ContactForm() {
           email,
           company,
           phone,
+          product_family: productFamily,
           message,
           submission_id: submissionId,
           form_started_at: formStartedAt,
@@ -46,7 +57,7 @@ export function ContactForm() {
       if (!res.ok || data.accepted !== true) {
         throw new Error(data.error ?? "Submission failed");
       }
-      trackGenerateLead("contact_form");
+      trackGenerateLead("contact_form", { product_family: productFamily });
       setSubmitted(true);
     } catch (submissionError) {
       setError(
@@ -147,6 +158,24 @@ export function ContactForm() {
             className={inputClass}
           />
         </div>
+      </div>
+      <div>
+        <label htmlFor="contact-product-family" className={labelClass}>
+          Packaging type <span className="font-normal text-charcoal/50">(optional)</span>
+        </label>
+        <select
+          id="contact-product-family"
+          name="product_family"
+          value={productFamily}
+          onChange={(event) => setProductFamily(event.target.value)}
+          className={inputClass}
+        >
+          {productFamilies.map((family) => (
+            <option key={family} value={family}>
+              {family}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
         <label htmlFor="contact-message" className={labelClass}>Message <span className="text-gold">*</span></label>
