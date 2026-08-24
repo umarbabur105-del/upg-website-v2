@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog-posts";
 import { comparisonGuides } from "@/data/comparison-guides";
 import { cosmeticsSubcategories } from "@/data/catalog";
+import { industryHubs } from "@/data/industry-hubs";
 import { industryGuides } from "@/data/industry-guides";
 import { mailerApplications } from "@/data/mailer-applications";
 import { productStyleGuides } from "@/data/product-styles";
@@ -186,6 +187,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.82,
   }));
 
+  const industryHubRoutes: MetadataRoute.Sitemap = industryHubs.map((hub) => ({
+    url: `${SITE_URL}/industries/${hub.slug}`,
+    lastModified: new Date(`${hub.reviewedAt}T00:00:00.000Z`),
+    changeFrequency: "monthly" as const,
+    priority: 0.88,
+  }));
+
   const productStyleRoutes: MetadataRoute.Sitemap = productStyleGuides.map(
     (guide) => ({
       url: `${SITE_URL}/packaging-styles/${guide.slug}`,
@@ -217,6 +225,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...productStyleRoutes,
     ...comparisonRoutes,
     ...applicationRoutes,
+    ...industryHubRoutes,
     ...industryRoutes,
     ...cosmeticsRoutes,
     ...blogRoutes,

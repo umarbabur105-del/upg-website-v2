@@ -209,7 +209,7 @@ export function Header() {
                     {industryNavigationGroups.map((group) => (
                       <Link
                         key={group.id}
-                        href={`/industries#${group.id}`}
+                        href={group.href}
                         onClick={() => setDesktopMenu(null)}
                         className="group border border-transparent p-4 hover:border-border hover:bg-cream"
                       >
@@ -355,7 +355,7 @@ export function Header() {
                   {industryNavigationGroups.map((group) => (
                     <Link
                       key={group.id}
-                      href={`/industries#${group.id}`}
+                      href={group.href}
                       onClick={closeMobileNavigation}
                       className="block border-t border-border/60 py-3 pl-4 text-sm text-muted-foreground hover:text-foreground"
                     >

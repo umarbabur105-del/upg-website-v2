@@ -29,7 +29,22 @@ interface IndustryNavigationLink {
 
 const industryLinks = industryNavigationGroups.reduce<
   IndustryNavigationLink[]
->((items, group) => [...items, ...group.links], []);
+>(
+  (items, group) => [
+    ...items,
+    ...(group.href.includes("#")
+      ? []
+      : [
+          {
+            label: `${group.label} Packaging`,
+            href: group.href,
+            kind: "Industry hub",
+          },
+        ]),
+    ...group.links,
+  ],
+  []
+);
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -95,7 +110,7 @@ export default function IndustriesPage() {
               {industryNavigationGroups.map((group) => (
                 <Link
                   key={group.id}
-                  href={`#${group.id}`}
+                  href={group.href}
                   className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-foreground hover:bg-stone"
                 >
                   {group.label}
@@ -125,6 +140,14 @@ export default function IndustriesPage() {
                   <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
                     {group.description}
                   </p>
+                  {!group.href.includes("#") ? (
+                    <Link
+                      href={group.href}
+                      className="mt-5 inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+                    >
+                      View {group.label} overview →
+                    </Link>
+                  ) : null}
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">

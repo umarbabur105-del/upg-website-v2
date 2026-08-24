@@ -64,7 +64,7 @@ export function Footer() {
               {industryNavigationGroups.map((group) => (
                 <li key={group.id}>
                   <Link
-                    href={`/industries#${group.id}`}
+                    href={group.href}
                     className="hover:text-foreground"
                   >
                     {group.label}

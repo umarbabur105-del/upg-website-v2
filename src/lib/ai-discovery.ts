@@ -10,6 +10,7 @@ import {
   industryGuides,
   type IndustryGuide,
 } from "@/data/industry-guides";
+import { industryHubs, type IndustryHub } from "@/data/industry-hubs";
 import { organicIntentRoutes } from "@/data/organic-intent-routes";
 import { cosmeticsPackagingScope } from "@/data/catalog";
 import {
@@ -29,7 +30,7 @@ const industriesUrl = `${siteConfig.url}/industries`;
 const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
 const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
 const artworkPreflightUrl = `${siteConfig.url}/tools/packaging-artwork-preflight`;
-const catalogUpdatedAt = "2026-08-23";
+const catalogUpdatedAt = "2026-08-24";
 
 function productUrl(product: Product) {
   return `${siteConfig.url}/products/${product.slug}`;
@@ -45,6 +46,10 @@ function applicationUrl(application: MailerApplication) {
 
 function industryUrl(guide: IndustryGuide) {
   return `${industriesUrl}/${guide.slug}`;
+}
+
+function industryHubUrl(hub: IndustryHub) {
+  return `${industriesUrl}/${hub.slug}`;
 }
 
 function comparisonUrl(guide: ComparisonGuide) {
@@ -110,6 +115,13 @@ export function buildLlmsText() {
     )
     .join("\n");
 
+  const industryHubLines = industryHubs
+    .map(
+      (hub) =>
+        `- [${hub.name}](${industryHubUrl(hub)}): ${hub.quickAnswer}`
+    )
+    .join("\n");
+
   const comparisonLines = comparisonGuides
     .map(
       (guide) =>
@@ -166,6 +178,10 @@ ${styleLines}
 ## Corrugated mailer application guides
 
 ${applicationLines}
+
+## Industry packaging hubs
+
+${industryHubLines}
 
 ## Industry and product application guides
 
@@ -301,6 +317,27 @@ Content reviewed: ${guide.reviewedAt}
     )
     .join("\n");
 
+  const industryHubSections = industryHubs
+    .map(
+      (hub) => `### ${hub.name}
+
+Canonical page: ${industryHubUrl(hub)}
+Approved product pages: ${hub.productSlugs
+        .map((slug) => `${siteConfig.url}/products/${slug}`)
+        .join("; ")}
+Search terms: ${hub.keywords.join("; ")}
+Quick answer: ${hub.quickAnswer}
+Specific buyer paths: ${hub.guideLinks
+        .map((item) => `${item.label}: ${siteConfig.url}${item.href}`)
+        .join("; ")}
+Project inputs: ${hub.projectInputs.join("; ")}
+Scope note: ${hub.scopeNote}
+Compatibility or market note: ${hub.compatibilityNote}
+Content reviewed: ${hub.reviewedAt}
+`
+    )
+    .join("\n");
+
   const comparisonSections = comparisonGuides
     .map(
       (guide) => `### ${guide.name}
@@ -400,9 +437,12 @@ ${styleSections}
 These guides answer distinct buyer intents while remaining within UPG's approved corrugated ear-lock mailer product range.
 
 ${applicationSections}
-## Industry and product application guides
+## Industry packaging hubs
 
 These guides answer distinct commercial searches while staying inside UPG's five approved product families. They do not add a new manufacturing category or an instant-price promise.
+
+${industryHubSections}
+## Industry and product application guides
 
 ${industrySections}
 ## Packaging comparison guides
@@ -487,6 +527,13 @@ export function buildAgentsMarkdown() {
     )
     .join("\n");
 
+  const industryHubLines = industryHubs
+    .map(
+      (hub) =>
+        `- ${hub.name}: ${hub.quickAnswer} Source: ${industryHubUrl(hub)}`
+    )
+    .join("\n");
+
   const comparisonLines = comparisonGuides
     .map(
       (guide) =>
@@ -528,6 +575,10 @@ ${styleLines}
 ## Corrugated mailer application guides
 
 ${applicationLines}
+
+## Industry packaging hubs
+
+${industryHubLines}
 
 ## Industry and product application guides
 
@@ -577,7 +628,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "2.3",
+    schemaVersion: "2.4",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -705,6 +756,28 @@ export function buildProductCatalog() {
         guide.primaryFamily
       )}&builder_note=${encodeURIComponent(
         `Industry or application: ${guide.shortName}.`
+      )}`,
+    })),
+    industryHubs: industryHubs.map((hub) => ({
+      slug: hub.slug,
+      name: hub.name,
+      approvedProductUrls: hub.productSlugs.map(
+        (slug) => `${siteConfig.url}/products/${slug}`
+      ),
+      summary: hub.quickAnswer,
+      searchTerms: hub.keywords,
+      buyerPaths: hub.guideLinks.map((item) => ({
+        name: item.label,
+        description: item.description,
+        url: `${siteConfig.url}${item.href}`,
+      })),
+      projectInputs: hub.projectInputs,
+      scopeNote: hub.scopeNote,
+      compatibilityOrMarketNote: hub.compatibilityNote,
+      contentReviewed: hub.reviewedAt,
+      url: industryHubUrl(hub),
+      requestQuoteUrl: `${quoteUrl}?builder_note=${encodeURIComponent(
+        `Industry: ${hub.shortName}. Please recommend the right packaging format.`
       )}`,
     })),
     comparisonGuides: comparisonGuides.map((guide) => ({

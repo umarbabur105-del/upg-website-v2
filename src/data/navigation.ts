@@ -30,6 +30,7 @@ export const industryNavigationGroups = [
   {
     id: "beauty-personal-care",
     label: "Beauty & Personal Care",
+    href: "/industries/beauty-personal-care-packaging",
     description: "Cosmetics, skincare, perfume, and soap packaging.",
     links: [
       { label: "Cosmetics Packaging", href: "/cosmetics", kind: "Category hub" },
@@ -43,6 +44,7 @@ export const industryNavigationGroups = [
   {
     id: "food-beverage-coffee",
     label: "Food, Beverage & Coffee",
+    href: "/industries/food-beverage-packaging",
     description: "Cereal cartons, printed pouches, drink formats, snacks, and coffee bags.",
     links: [
       {
@@ -75,6 +77,7 @@ export const industryNavigationGroups = [
   {
     id: "supplements-wellness",
     label: "Supplements & Wellness",
+    href: "/industries/supplement-packaging",
     description: "Printed outer cartons and flexible packs for supplement products.",
     links: [
       {
@@ -92,6 +95,7 @@ export const industryNavigationGroups = [
   {
     id: "fashion-jewelry-luxury",
     label: "Fashion, Jewelry & Luxury",
+    href: "/industries#fashion-jewelry-luxury",
     description: "Apparel and jewelry presentation packaging.",
     links: [
       {
@@ -109,6 +113,7 @@ export const industryNavigationGroups = [
   {
     id: "electronics-consumer-goods",
     label: "Electronics & Consumer Goods",
+    href: "/industries#electronics-consumer-goods",
     description: "Presentation and retail packaging for products, devices, toys, and games.",
     links: [
       {
@@ -131,6 +136,7 @@ export const industryNavigationGroups = [
   {
     id: "home-candles-gifts",
     label: "Home, Candles & Gifts",
+    href: "/industries#home-candles-gifts",
     description: "Candle cartons and premium gift presentation boxes.",
     links: [
       {
@@ -148,6 +154,7 @@ export const industryNavigationGroups = [
   {
     id: "pet-products",
     label: "Pet Products",
+    href: "/industries#pet-products",
     description: "Printed flexible packaging for pet food and treat projects.",
     links: [
       {

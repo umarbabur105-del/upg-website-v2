@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
+import { getIndustryHubForGuideSlug } from "@/data/industry-hubs";
 import {
   industryGuides,
   type IndustryGuide,
@@ -23,13 +24,22 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
   const formatGuides = (guide.formatSlugs ?? [])
     .map((slug) => getProductStyleGuide(slug))
     .filter((format) => format !== undefined);
-  const related = industryGuides
-    .filter(
-      (candidate) =>
-        candidate.slug !== guide.slug &&
-        candidate.productSlugs.some((slug) => guide.productSlugs.includes(slug))
-    )
-    .slice(0, 3);
+  const industryHub = getIndustryHubForGuideSlug(guide.slug);
+  const related = industryHub
+    ? industryHub.childGuideSlugs
+        .filter((slug) => slug !== guide.slug)
+        .map((slug) => industryGuides.find((candidate) => candidate.slug === slug))
+        .filter((candidate) => candidate !== undefined)
+        .slice(0, 3)
+    : industryGuides
+        .filter(
+          (candidate) =>
+            candidate.slug !== guide.slug &&
+            candidate.productSlugs.some((slug) =>
+              guide.productSlugs.includes(slug)
+            )
+        )
+        .slice(0, 3);
   const pageUrl = `${SITE_URL}/industries/${guide.slug}`;
   const quoteNote = `Industry or application: ${guide.shortName}.`;
   const quoteHref = `/get-a-quote?product=${encodeURIComponent(
@@ -116,9 +126,21 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
           {
             "@type": "ListItem",
             position: 3,
-            name: guide.shortName,
-            item: pageUrl,
+            name: industryHub?.shortName ?? guide.shortName,
+            item: industryHub
+              ? `${SITE_URL}/industries/${industryHub.slug}`
+              : pageUrl,
           },
+          ...(industryHub
+            ? [
+                {
+                  "@type": "ListItem",
+                  position: 4,
+                  name: guide.shortName,
+                  item: pageUrl,
+                },
+              ]
+            : []),
         ],
       },
       {
@@ -151,6 +173,17 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
             <Link href="/industries" className="hover:text-foreground">
               Industries
             </Link>
+            {industryHub ? (
+              <>
+                <span aria-hidden="true">/</span>
+                <Link
+                  href={`/industries/${industryHub.slug}`}
+                  className="hover:text-foreground"
+                >
+                  {industryHub.shortName}
+                </Link>
+              </>
+            ) : null}
             <span aria-hidden="true">/</span>
             <span aria-current="page" className="text-foreground">
               {guide.shortName}
@@ -393,10 +426,16 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                 intro="Each linked guide maps back to a real UPG product family and a human-reviewed enquiry."
               />
               <Link
-                href="/industries"
+                href={
+                  industryHub
+                    ? `/industries/${industryHub.slug}`
+                    : "/industries"
+                }
                 className="inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
               >
-                Browse all industry guides →
+                {industryHub
+                  ? `Back to ${industryHub.shortName} packaging →`
+                  : "Browse all industry guides →"}
               </Link>
             </div>
             <div className="grid gap-5 md:grid-cols-3">
