@@ -33,7 +33,12 @@ SEARCH_CONSOLE_SITE = os.getenv(
 LEADS_SHEET_ID = os.getenv(
     "UPG_LEADS_SPREADSHEET_ID", "1nIMeqtTF9mv0gYxbI83GbgTatY0WdnSlfm3d009hxqQ"
 )
-BRAND_TERMS = ("universal packaging", "universal package", "upg")
+BRAND_TERMS = (
+    "universal packaging",
+    "universal package",
+    "universal packing",
+    "upg",
+)
 COMMERCIAL_PACKAGING_PATTERN = re.compile(
     r"\b(?:packaging|boxes?|mailers?|cartons?|pouches?|mylar|bags?|roll[\s-]?stock|tuck|magnetic)\b",
     re.IGNORECASE,
@@ -59,6 +64,14 @@ OUT_OF_SCOPE_QUERY_TERMS = (
     "aluminum lipstick",
     "refillable lipstick",
     "filling and packaging",
+)
+NAME_COLLISION_QUERY_TERMS = (
+    "quick packaging llc",
+    "upward packaging",
+)
+NAME_COLLISION_EXACT_QUERIES = (
+    "u packaging",
+    "up packaging",
 )
 AI_SOURCES = (
     "chatgpt",
@@ -86,6 +99,9 @@ TOOL_EVENT_NAMES = (
     "packaging_spec_download",
     "packaging_spec_print",
     "packaging_spec_quote_handoff",
+    "packing_cbm_result",
+    "packing_cbm_copy",
+    "packing_cbm_quote_handoff",
 )
 
 
@@ -178,8 +194,11 @@ def search_opportunity_score(impressions: float, position: float) -> float:
 
 def is_commercial_packaging_query(query: str) -> bool:
     lowered = query.casefold()
-    return bool(COMMERCIAL_PACKAGING_PATTERN.search(query)) and not any(
-        term in lowered for term in OUT_OF_SCOPE_QUERY_TERMS
+    return (
+        bool(COMMERCIAL_PACKAGING_PATTERN.search(query))
+        and not any(term in lowered for term in OUT_OF_SCOPE_QUERY_TERMS)
+        and not any(term in lowered for term in NAME_COLLISION_QUERY_TERMS)
+        and lowered not in NAME_COLLISION_EXACT_QUERIES
     )
 
 

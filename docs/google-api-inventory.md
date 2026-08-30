@@ -1,6 +1,6 @@
 # Google API Inventory
 
-Last verified: 2026-08-21
+Last verified: 2026-08-30
 
 This inventory describes the Google access used to operate the UPG website and its connected business tools. It intentionally contains no credential values, refresh tokens, client secrets, or API key strings.
 
@@ -64,10 +64,10 @@ Its key string exists only in `~/.config/gcloud/upg-automation/web_data_api_key.
 
 ## Enabled and verified APIs
 
-| API | Service name | 2026-08-21 proof |
+| API | Service name | Latest recorded proof |
 | --- | --- | --- |
 | Merchant API | `merchantapi.googleapis.com` | Project registered to Merchant account; account read succeeded; 2 processed products returned and both are approved for Free Listings in all 32 configured countries; GA4 property `548846712` is linked as an active conversion source |
-| Search Console API | `searchconsole.googleapis.com` | Domain property returned with `siteOwner` permission; URL Inspection reported all 67 live sitemap URLs submitted and indexed, with successful fetches and robots access |
+| Search Console API | `searchconsole.googleapis.com` | Domain property returned with `siteOwner` permission; fresh URL Inspection on 2026-08-30 reported 83 of 85 live sitemap URLs indexed. `/industries/beauty-personal-care-packaging` was unknown to Google and `/industries/supplement-packaging` was discovered but not indexed; both live URLs returned HTTP 200 and were allowed for indexing. |
 | Google Analytics Data API | `analyticsdata.googleapis.com` | GA4 channel and event-funnel reports read succeeded; the aggregate report now includes form starts, submitted leads, checkout starts, purchases, and tool handoffs |
 | Google Analytics Admin API | `analyticsadmin.googleapis.com` | Target account and property both returned |
 | Google Drive API | `drive.googleapis.com` | Workspace account and CRM spreadsheet search succeeded |

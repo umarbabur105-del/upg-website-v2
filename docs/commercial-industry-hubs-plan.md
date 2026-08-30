@@ -1,6 +1,6 @@
 # UPG Commercial Industry Hubs
 
-Last reviewed: 2026-08-24
+Last reviewed: 2026-08-30
 
 ## Objective
 
@@ -13,7 +13,7 @@ Turn the strongest multi-guide industry groups in UPG's visible navigation into 
 - UPG already has reviewed guides for these applications. The missing layer is a market-level page that helps a buyer choose among the current five product families.
 - Lipstick and cosmetics pages were materially changed on 2026-08-24 and need a full 28-day comparison window before another rewrite.
 
-## Release candidate
+## Published hubs
 
 1. Fashion, Jewelry & Luxury Packaging
    - Magnetic and collapsible magnetic boxes
@@ -29,6 +29,15 @@ Turn the strongest multi-guide industry groups in UPG's visible navigation into 
    - Retail-carton versus premium-presentation decision path
 
 Pet Products remains a section on `/industries` with its existing guide. A separate hub is deferred until it can answer more than the same single buyer path.
+
+## Production and indexing status
+
+- Commit `ee942ce` was released with exact-SHA Vercel success.
+- The production sitemap contained 85 canonical URLs and all 85 returned HTTP 200 at release verification.
+- Fresh Search Console URL Inspection on 2026-08-30 reports 83 of 85 URLs indexed.
+- `/industries/beauty-personal-care-packaging` is unknown to Google.
+- `/industries/supplement-packaging` is discovered but not indexed.
+- Both pending URLs are live, canonical, allowed for indexing, and remain explicit follow-ups rather than being reported as indexed.
 
 ## Search and conversion contract
 

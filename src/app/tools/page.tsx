@@ -6,7 +6,7 @@ import { SITE_URL, createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Free Custom Packaging Planning Tools",
   description:
-    "Use UPG's free Format Finder, Spec & MOQ Builder, and Artwork Preflight Checker to choose a format, prepare the project, and organize artwork readiness.",
+    "Use UPG's free tools to choose a packaging format, build a specification, check artwork, and estimate packing CBM and shipment weight.",
   path: "/tools",
   keywords: [
     "custom packaging tools",
@@ -14,6 +14,8 @@ export const metadata: Metadata = createPageMetadata({
     "packaging MOQ calculator",
     "packaging specification tool",
     "packaging artwork preflight checker",
+    "packing CBM calculator",
+    "packaging weight calculator",
   ],
 });
 
@@ -58,6 +60,20 @@ const tools = [
       "No artwork upload or automated approval",
     ],
   },
+  {
+    number: "04",
+    title: "Packing CBM & Weight Calculator",
+    description:
+      "Estimate master-carton count, packed carton dimensions, total CBM, measured weight, and dimensional weight from a transparent packing layout.",
+    href: "/tools/packing-cbm-weight-calculator",
+    cta: "Estimate packing volume",
+    details: [
+      "Manual units-per-carton layout",
+      "Carton and total CBM",
+      "Measured and dimensional weight",
+      "No freight price or hidden density guess",
+    ],
+  },
 ];
 
 const structuredData = {
@@ -69,7 +85,7 @@ const structuredData = {
       name: "UPG Custom Packaging Planning Tools",
       url: `${SITE_URL}/tools`,
       description:
-        "Free planning tools for choosing a custom packaging format, checking the applicable MOQ, preparing a project specification, and organizing artwork readiness.",
+        "Free planning tools for choosing a custom packaging format, checking the applicable MOQ, preparing a specification, organizing artwork readiness, and estimating packing volume and weight.",
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@id": `${SITE_URL}/#organization` },
     },
@@ -124,7 +140,7 @@ export default function ToolsPage() {
       </section>
 
       <section className="pb-20 md:pb-28">
-        <div className="container-editorial grid gap-6 lg:grid-cols-3">
+        <div className="container-editorial grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {tools.map((tool) => (
             <article key={tool.href} className="surface-card flex flex-col p-7 md:p-10">
               <div className="font-serif text-5xl text-gold">{tool.number}</div>

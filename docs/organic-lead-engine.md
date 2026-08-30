@@ -1,6 +1,6 @@
 # UPG Organic Lead Engine
 
-Last reviewed: 2026-08-23
+Last reviewed: 2026-08-30
 
 ## Business objective
 
@@ -80,6 +80,7 @@ UPG should earn links and AI-search citations through practical resources rather
 - Packaging Format Finder
 - Packaging Spec & MOQ Builder using UPG's approved MOQ rules
 - Packaging Artwork Preflight Checker
+- Packing CBM & Weight Calculator using buyer-entered dimensions, layout, quantity, and optional measured weights
 - Packaging Style Library
 - Future: dieline briefing tool, landed-project checklist, print-finish decision tool, and anonymized packaging-planning benchmarks after enough first-party enquiries exist
 
@@ -152,28 +153,28 @@ The gate checks rendered pages for required and unique titles and descriptions, 
 
 ## Release sequence
 
-### Current implementation status — 2026-08-13
+### Current implementation status — 2026-08-30
 
 - Phase 1 style cluster: implemented with 12 visible style pages.
 - Phase 2 first commercial cluster: implemented with 12 visible industry and product-application guides.
 - Demand evidence: Search Console baseline and Teal public-coverage proxy recorded in `docs/keyword-demand-map.md`.
 - Exact monthly volume: pending a real Google Ads account, developer token, customer ID, and OAuth `adwords` scope. The Google Ads API service itself is enabled.
-- Phase 3 authority asset: the Packaging Spec & MOQ Builder now creates shareable, downloadable, and print-ready planning briefs, shows exact 5-inch and 10-inch boundary examples, measures brief completeness, and carries specifications into the enquiry form.
+- Phase 3 authority assets: the Packaging Spec & MOQ Builder creates shareable, downloadable, and print-ready planning briefs, while the Packing CBM & Weight Calculator is a local release candidate that calculates carton count, estimated outer-carton size, CBM, dimensional weight, and optional net and gross weight from buyer-entered values without presenting a freight quote or inventing a carton specification.
 - Phase 3 prospecting: 50 prospects and approval-gated outreach drafts recorded in `docs/backlink-prospects.csv`, `docs/backlink-outreach-drafts.md`, and `docs/backlink-personalized-drafts.md`; two individually approved editorial emails were sent on 2026-08-21. Further outreach is paused by owner instruction.
-- Measurement: aggregate-only Search Console, GA4, and CRM report available through `npm run report:organic`; it now includes form starts, successful lead submissions, sample-kit checkout starts, purchases, and authority-tool events.
+- Measurement: aggregate-only Search Console, GA4, and CRM report available through `npm run report:organic`; it includes form starts, successful lead submissions, sample-kit checkout starts, purchases, and authority-tool events. Brand filtering now treats `universal packing` as a UPG brand variant, and the action queue excludes known similarly named packaging companies without removing valid commercial packaging queries from the raw evidence.
 
-### Current acquisition evidence — 2026-08-21
+### Current acquisition evidence — 2026-08-30
 
 - Google operator OAuth was reauthorized after an `invalid_rapt` reauthentication failure; all core Google API probes passed afterwards.
-- Search Console URL Inspection reports all 67 live sitemap URLs as submitted and indexed, with indexing allowed, robots allowed, and successful page fetches.
-- The latest 30-day report contains 427 Search Console impressions, 292 non-brand impressions, 6 total clicks, 0 non-brand clicks, and 4 GA4 Organic Search sessions.
-- Non-brand impressions increased from 140 to 292 versus the previous comparison period, but the current visibility has not yet produced a dependable non-brand click flow.
-- The CRM contains 3 genuine leads in the period, all still New: 2 AI referrals and 1 direct or unattributed. Qualified and won counts remain 0.
+- The live sitemap contained 85 canonical URLs and every URL returned HTTP 200. Fresh Search Console URL Inspection reports 83 indexed URLs; `/industries/beauty-personal-care-packaging` is unknown to Google and `/industries/supplement-packaging` is discovered but not indexed. These are explicit indexing gaps, not broken or blocked pages.
+- The latest 90-day report contains 1,125 Search Console impressions, 580 correctly filtered non-brand impressions, 0 non-brand clicks, and 12 queries observed in positions 1-20. GA4 recorded 8 Organic Search sessions and 2 Organic Shopping sessions in the corresponding operating window.
+- GA4 recorded 4 enquiry-form starts and 2 successful lead submissions. Sample-kit checkout starts and purchases were 0 in this window.
+- The CRM contains 3 genuine leads in the period, all still New; 2 did not record a product family. Qualified and won counts remain 0.
 - Both Merchant sample kits are approved for Free Listings in all 32 configured countries, but Merchant performance reports contain no impressions, clicks, or conversions for 2026-08-11 through 2026-08-20.
 - The protected Stripe sandbox lane is proven end to end without charging real money: a US$19.99 test payment completed with `livemode=false`, and the hardened deployment's next event returned HTTP 200 on its first delivery. CRM stored the record as `Stripe Test Order` / `Spam` / `System Test`, and the clearly labeled no-real-payment notification reached the UPG inbox. Live payment and physical fulfillment remain approval-gated. Sandbox analytics uses `stripe_test_purchase`, not the real `purchase` event; GA4 receipt still needs confirmation after reporting latency.
 - Backlink distribution has started: 50 researched prospects, 13 still marked ready for a personalized pitch, and 2 individually approved editorial emails sent and awaiting response (FDPP and Packaging World). Further outreach is on hold.
 
-The immediate constraints are non-brand click-through, authority, and live physical-fulfillment readiness; crawlability, sitemap indexing, checkout-session creation, and the protected sandbox payment pipeline are healthy. While outreach is paused, the active lane is measurement, query-led content improvement, and conversion-path verification.
+The immediate constraints are non-brand click-through, authority, two unresolved Google indexing gaps, incomplete lead qualification, and live physical-fulfillment readiness. Crawlability and the protected sandbox payment pipeline are healthy, but indexing is not described as complete until both pending industry URLs are confirmed. While outreach is paused, the active lane is measurement, query-led content improvement, useful planning tools, and conversion-path verification.
 
 ### Buyer-decision cluster — production release, 2026-08-23
 
@@ -221,7 +222,7 @@ Commit `adfde6c` released the five-product authority cluster, consolidating auth
 
 Search Console recorded only 10 non-brand impressions and 0 clicks across the five product pages in the available 90-day window. Existing internal-link volume is already high, so the batch focuses on page differentiation and buyer routing rather than adding duplicate pages or indiscriminate links. Release proof passed with exact-SHA Vercel success, 76/76 live sitemap URLs, five product contracts, four AI discovery endpoints, and live Lighthouse scores of 100 for accessibility, best practices, and SEO on three representative pages. Full evidence is recorded in `docs/core-product-authority-plan.md`.
 
-### Commercial industry hubs — local release candidate, 2026-08-24
+### Commercial industry hubs — production release, 2026-08-25
 
 The top navigation already grouped seven industry markets, but only three groups had a dedicated overview page. This batch turns the three remaining multi-guide commercial groups into real buyer-decision hubs:
 
@@ -234,6 +235,14 @@ Each hub reuses current UPG product families and existing reviewed guides; it do
 Pet Products remains an anchor group on `/industries` because it currently has only one underlying guide. Publishing a second overview page for the same single path would add duplication rather than buyer value.
 
 Fresh Search Console evidence for 2026-07-25 through 2026-08-21 contains 408 impressions, 291 non-brand impressions, 3 total clicks, and 0 non-brand clicks. Recently changed lipstick and cosmetics pages are not rewritten again in this batch; their material changes require a full 28-day comparison window. The commercial industry hubs expand coherent discovery paths without disrupting that measurement.
+
+Commit `ee942ce` released the hubs with exact-SHA Vercel success and 85/85 live sitemap URLs returning HTTP 200. Fresh URL Inspection on 2026-08-30 reports 83 of those 85 URLs indexed; the beauty and supplement industry hubs remain the two explicit indexing follow-ups.
+
+### Packing CBM & Weight Calculator — local release candidate, 2026-08-30
+
+The calculator adds one useful planning route at `/tools/packing-cbm-weight-calculator` and a visible discovery card on `/tools`. It uses only buyer-entered packed-unit dimensions, manual carton layout, quantity, allowance, dimensional-weight divisor, and optional measured weights. It does not guess material, board grade, carrier approval, freight price, or final carton construction.
+
+The local release candidate includes WebApplication, FAQPage, and BreadcrumbList structured data; sitemap and AI-discovery coverage; copy and prefilled quote handoffs; unit conversion; a pure calculation library; four deterministic calculation tests; and a rendered SEO contract. Isolated lint, TypeScript, build, and SEO audit plus desktop and mobile browser verification must be rerun after the final quote-summary patch before production status is recorded.
 
 ### Phase 1 — Product-style lead cluster
 

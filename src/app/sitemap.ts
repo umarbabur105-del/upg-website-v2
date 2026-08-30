@@ -49,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/tools`,
-      lastModified: new Date("2026-08-12T00:00:00.000Z"),
+      lastModified: new Date("2026-08-30T00:00:00.000Z"),
       changeFrequency: "monthly",
       priority: 0.85,
     },
@@ -68,6 +68,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${SITE_URL}/tools/packaging-spec-builder`,
       lastModified: new Date("2026-08-12T00:00:00.000Z"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/tools/packing-cbm-weight-calculator`,
+      lastModified: new Date("2026-08-30T00:00:00.000Z"),
       changeFrequency: "monthly",
       priority: 0.9,
     },

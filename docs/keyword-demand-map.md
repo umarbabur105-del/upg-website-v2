@@ -1,6 +1,6 @@
 # UPG Keyword Demand and Competitor Gap Map
 
-Last reviewed: 2026-08-23
+Last reviewed: 2026-08-30
 
 ## Evidence boundary
 
@@ -14,7 +14,7 @@ Google Ads API is now enabled on the `upg-leads-crm` Cloud project. Exact Keywor
 
 ## Current UPG search baseline
 
-The latest aggregate 90-day report covers Search Console data through 2026-08-20. It contains 1,100 total impressions, 567 non-brand impressions, 8 total clicks, 0 non-brand clicks, and 13 queries with observed average positions from 1 through 20. GA4 recorded 6 Organic Search sessions and 1 Organic Shopping session in the corresponding operating window.
+The latest aggregate 90-day report covers Search Console data through 2026-08-27. It contains 1,125 total impressions, 580 correctly filtered non-brand impressions, 0 non-brand clicks, and 12 queries with observed average positions from 1 through 20. GA4 recorded 8 Organic Search sessions and 2 Organic Shopping sessions in the corresponding operating window. The brand filter now includes the `universal packing` variant, which removed 29 misclassified brand impressions from the non-brand total.
 
 This confirms that discovery is expanding, but commercial non-brand click-through remains the immediate constraint. New comparison pages are therefore treated as buyer-decision assets and internal-link bridges, not as an instant traffic claim.
 
@@ -128,7 +128,7 @@ The five canonical product pages collectively produced 10 non-brand impressions 
 
 Instead, each money page receives a distinct visible buying-route section, product-specific search language, qualification boundaries, structured data, and conversion handoffs. The Products hub becomes one five-family catalog with explicit CollectionPage and ItemList schema. Commit `adfde6c` is live with exact-SHA Vercel success, 76/76 live sitemap proof, all five product contracts, all four AI discovery endpoints, and representative live Lighthouse scores of 100 for accessibility, best practices, and SEO. Full evidence, query rows, scope decisions, and the 28-day measurement rule are recorded in `docs/core-product-authority-plan.md`.
 
-## Commercial industry-hub completion — local release candidate, 2026-08-24
+## Commercial industry-hub completion — production release, 2026-08-25
 
 The industry navigation now maps six multi-guide markets to dedicated overview pages. Three new hubs consolidate already-published guides instead of creating keyword-variant product pages:
 
@@ -139,6 +139,12 @@ The industry navigation now maps six multi-guide markets to dedicated overview p
 | `/industries/home-candle-gift-packaging` | Candle and luxury gift boxes | Tuck, magnetic, and collapsible magnetic boxes |
 
 This follows the earlier competitor-coverage proxy for gift, candle, jewelry, retail, electronics, apparel, and toy intent while keeping the five approved product families unchanged. Pet Products stays on the industry index with its existing guide; a one-child hub is not published.
+
+Commit `ee942ce` released the three hubs with exact-SHA Vercel success and 85/85 live sitemap URLs returning HTTP 200. Fresh Search Console URL Inspection on 2026-08-30 reports 83 of 85 indexed. `/industries/beauty-personal-care-packaging` remains unknown to Google and `/industries/supplement-packaging` is discovered but not indexed; neither URL is treated as indexed until the API confirms it.
+
+## Packing calculator authority asset — local release candidate, 2026-08-30
+
+The Packing CBM & Weight Calculator targets practical planning intent with one canonical tool instead of publishing keyword-variant articles. It calculates carton count, estimated outer-carton dimensions, CBM, dimensional weight, and optional net and gross weight from user-entered dimensions, quantity, manual layout, allowance, and measured weights. The page explicitly separates a planning estimate from a freight quote, final carton specification, material recommendation, or carrier approval. Search and conversion measurement begins only after production release; no traffic or ranking outcome is claimed from local implementation.
 
 ## Monthly volume completion path
 

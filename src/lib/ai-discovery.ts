@@ -30,7 +30,8 @@ const industriesUrl = `${siteConfig.url}/industries`;
 const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
 const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
 const artworkPreflightUrl = `${siteConfig.url}/tools/packaging-artwork-preflight`;
-const catalogUpdatedAt = "2026-08-24";
+const packingCalculatorUrl = `${siteConfig.url}/tools/packing-cbm-weight-calculator`;
+const catalogUpdatedAt = "2026-08-30";
 
 function productUrl(product: Product) {
   return `${siteConfig.url}/products/${product.slug}`;
@@ -163,6 +164,7 @@ export function buildLlmsText() {
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
+- Packing CBM & Weight Calculator: ${packingCalculatorUrl}
 - Packaging Style Library: ${styleLibraryUrl}
 - Packaging Comparison Library: ${comparisonLibraryUrl}
 - Industry and application guides: ${industriesUrl}
@@ -224,6 +226,7 @@ Final dimensions remain subject to structural feasibility. Product compatibility
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
+- Packing CBM & Weight Calculator: ${packingCalculatorUrl}
 - Start a project: ${quoteUrl}
 - Cosmetic packaging hub: ${siteConfig.url}/cosmetics
 - Materials and finishes: ${siteConfig.url}/materials-finishes
@@ -418,6 +421,8 @@ The free Packaging Spec & MOQ Builder at ${specBuilderUrl} calculates the applic
 
 The free Packaging Artwork Preflight Checker at ${artworkPreflightUrl} organizes eight preparation checks covering the structure and dieline, editable source, placed images, fonts, color intent, special finishes, copy and variable elements, and version approval. It does not upload or inspect files and does not approve artwork for production.
 
+The free Packing CBM & Weight Calculator at ${packingCalculatorUrl} estimates master-carton count, packed carton dimensions, total CBM, measured net and gross weight, and dimensional weight from a buyer-supplied packing layout. It does not guess material weight, publish freight pricing, specify a shipping carton, or approve a carrier plan.
+
 ## Fixed-price sample kits
 
 ${sampleKitSections}
@@ -463,10 +468,11 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 
 1. If the product family is not clear, use the Packaging Format Finder at ${formatFinderUrl}.
 2. Build a planning specification at ${specBuilderUrl}, or submit the known product details directly at ${quoteUrl}.
-3. Organize artwork readiness at ${artworkPreflightUrl} when artwork exists.
-4. ${siteConfig.responseTarget}
-5. Structure, materials, finishes, artwork, pricing, manufacturing, and delivery details are confirmed as required.
-6. Manufacturing starts only after the applicable commercial, artwork, and proof approvals.
+3. Estimate the packing plan at ${packingCalculatorUrl} when packed-unit dimensions and carton layout are known.
+4. Organize artwork readiness at ${artworkPreflightUrl} when artwork exists.
+5. ${siteConfig.responseTarget}
+6. Structure, materials, finishes, artwork, pricing, manufacturing, packing, and delivery details are confirmed as required.
+7. Manufacturing starts only after the applicable commercial, artwork, and proof approvals.
 
 ## Commercial qualifications
 
@@ -486,6 +492,7 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
+- Packing CBM & Weight Calculator: ${packingCalculatorUrl}
 - Packaging Style Library: ${styleLibraryUrl}
 - Packaging Comparison Library: ${comparisonLibraryUrl}
 - Industry and application guides: ${industriesUrl}
@@ -564,7 +571,7 @@ Canonical entity: ${siteConfig.url}
 
 ## Supported discovery
 
-Agents may read the public product catalog, compare the five approved product families, direct an undecided buyer to the Packaging Format Finder, continue to the Packaging Spec & MOQ Builder, organize artwork preparation with the Packaging Artwork Preflight Checker, and then continue to the project enquiry form.
+Agents may read the public product catalog, compare the five approved product families, direct an undecided buyer to the Packaging Format Finder, continue to the Packaging Spec & MOQ Builder, estimate a transparent packing plan with the Packing CBM & Weight Calculator, organize artwork preparation with the Packaging Artwork Preflight Checker, and then continue to the project enquiry form.
 
 ${productLines}
 
@@ -613,6 +620,7 @@ ${sampleKitLines}
 - Browse industry and product application guides: ${industriesUrl}
 - Compare approved product families: ${formatFinderUrl}
 - Build a packaging specification and check the planning MOQ: ${specBuilderUrl}
+- Estimate carton count, CBM, measured weight, and dimensional weight: ${packingCalculatorUrl}
 - Check packaging artwork preparation status: ${artworkPreflightUrl}
 - Explore custom cosmetic boxes and outer packaging: ${siteConfig.url}/cosmetics
 - Start a project enquiry: ${quoteUrl}
@@ -628,7 +636,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "2.5",
+    schemaVersion: "2.6",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -677,6 +685,16 @@ export function buildProductCatalog() {
         fileUpload: false,
         automatedArtworkApproval: false,
         productionApproval: false,
+      },
+      {
+        name: "UPG Packing CBM & Weight Calculator",
+        url: packingCalculatorUrl,
+        purpose:
+          "Estimate master-carton count, packed carton dimensions, total CBM, measured net and gross weight, and dimensional weight from a visible packing layout.",
+        pricingOutput: false,
+        freightQuote: false,
+        materialWeightGuess: false,
+        carrierApproval: false,
       },
     ],
     boxSampleKit: {
@@ -828,6 +846,7 @@ export function buildProductCatalog() {
       packagingFormatFinder: formatFinderUrl,
       packagingSpecBuilder: specBuilderUrl,
       packagingArtworkPreflight: artworkPreflightUrl,
+      packingCbmWeightCalculator: packingCalculatorUrl,
       cosmeticsHub: `${siteConfig.url}/cosmetics`,
       sitemap: `${siteConfig.url}/sitemap.xml`,
       googleMerchantFeed: `${siteConfig.url}/feeds/google-merchant.tsv`,

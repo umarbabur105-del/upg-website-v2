@@ -278,6 +278,45 @@ for (const route of industryHubRoutes) {
   }
 }
 
+const planningToolContracts = new Map([
+  [
+    "/tools/packing-cbm-weight-calculator",
+    {
+      schemaTypes: ["WebApplication", "FAQPage", "BreadcrumbList"],
+      scopeMarkers: ["not a freight quote", "planning estimate"],
+    },
+  ],
+]);
+const toolsHub = pages.find((page) => page.route === "/tools");
+
+if (!toolsHub) {
+  failures.push("/tools: missing rendered planning-tools hub");
+}
+
+for (const [route, contract] of planningToolContracts) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered planning tool`);
+    continue;
+  }
+  if (!toolsHub?.html.includes(`href="${route}"`)) {
+    failures.push(`/tools: missing internal link to ${route}`);
+  }
+  for (const schemaType of contract.schemaTypes) {
+    if (!page.html.includes(`"@type":"${schemaType}"`)) {
+      failures.push(`${route}: missing ${schemaType} JSON-LD`);
+    }
+  }
+  for (const marker of contract.scopeMarkers) {
+    if (!page.html.toLowerCase().includes(marker)) {
+      failures.push(`${route}: missing scope marker "${marker}"`);
+    }
+  }
+  if (!page.html.includes('href="/get-a-quote')) {
+    failures.push(`${route}: missing project-enquiry handoff`);
+  }
+}
+
 const organicIntentContracts = new Map([
   ["/products/custom-tuck-boxes", { scopeMarker: "regular shipping carton", statusMarker: "Outside current offer" }],
   ["/products/custom-mailer-boxes", { scopeMarker: "master carton", statusMarker: "Outside current offer" }],
@@ -322,5 +361,5 @@ if (failures.length) {
 }
 
 console.log(
-  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, uniqueness, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, ${industryHubRoutes.length} commercial industry-hub contracts, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
+  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, uniqueness, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, ${industryHubRoutes.length} commercial industry-hub contracts, ${planningToolContracts.size} planning-tool contract, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
 );
