@@ -31,7 +31,7 @@ const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
 const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
 const artworkPreflightUrl = `${siteConfig.url}/tools/packaging-artwork-preflight`;
 const packingCalculatorUrl = `${siteConfig.url}/tools/packing-cbm-weight-calculator`;
-const catalogUpdatedAt = "2026-08-30";
+const catalogUpdatedAt = siteConfig.contentReviewedAt;
 
 function productUrl(product: Product) {
   return `${siteConfig.url}/products/${product.slug}`;
