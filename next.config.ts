@@ -52,6 +52,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/products/printed-rollstock",
+        destination: "/packaging-styles/printed-rollstock-film",
+        permanent: true,
+      },
+      {
         source: "/products/custom-folding-cartons",
         destination: "/products/custom-tuck-boxes",
         permanent: true,
