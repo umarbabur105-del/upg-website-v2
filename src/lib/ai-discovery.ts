@@ -417,7 +417,7 @@ For beauty and cosmetics projects, ${cosmeticsPackagingScope.included} ${cosmeti
 
 The free Packaging Format Finder at ${formatFinderUrl} uses four guided questions to recommend a starting format from the five approved UPG product families. It can show an alternate when two formats deserve comparison. The result is planning guidance, not structural approval.
 
-The free Packaging Spec & MOQ Builder at ${specBuilderUrl} calculates the applicable planning MOQ, explains the exact 5-inch and 10-inch boundaries, creates a shareable or downloadable planning brief, and carries known project details into the human-reviewed enquiry form. These planning tools do not estimate custom-production pricing.
+The free Packaging Spec & MOQ Builder at ${specBuilderUrl} applies one 250-unit planning MOQ across every UPG custom product family, creates a shareable or downloadable planning brief, and carries known project details into the human-reviewed enquiry form. Dimensions remain part of feasibility, specification, and pricing review. These planning tools do not estimate custom-production pricing.
 
 The free Packaging Artwork Preflight Checker at ${artworkPreflightUrl} organizes eight preparation checks covering the structure and dieline, editable source, placed images, fonts, color intent, special finishes, copy and variable elements, and version approval. It does not upload or inspect files and does not approve artwork for production.
 
@@ -749,7 +749,7 @@ export function buildProductCatalog() {
       parentProductUrl: `${siteConfig.url}/products/custom-mailer-boxes`,
       summary: application.quickAnswer,
       bestFor: application.bestFor,
-      planningMoq: "Largest finished dimension: ≤5 in = 1,000; >5–10 in = 500; >10 in = 250",
+      planningMoq: "250 units, regardless of finished size",
       projectInputs: application.projectInputs,
       contentReviewed: application.reviewedAt,
       url: applicationUrl(application),

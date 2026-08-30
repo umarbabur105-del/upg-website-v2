@@ -32,7 +32,7 @@ export interface ProductStyleGuide {
   reviewedAt: string;
 }
 
-const reviewedAt = "2026-08-13";
+const reviewedAt = "2026-08-31";
 
 export const productStyleGuides: ProductStyleGuide[] = [
   {
@@ -45,7 +45,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Tuck Boxes",
     category: "Tuck box style",
     metaDescription:
-      "Plan custom straight tuck end boxes with UPG's approved size-based MOQs, board options, printing, finishes, and human-reviewed quote process.",
+      "Plan custom straight tuck end boxes with UPG's 250-unit planning MOQ, board options, printing, finishes, and human-reviewed quote process.",
     searchTerms: ["straight tuck end boxes", "custom straight tuck boxes", "STE boxes"],
     quickAnswer:
       "Straight tuck end is one of the folding-carton structures available within UPG's custom tuck box family. The final flap orientation, panel layout, dimensions, board, printing, and finishes are confirmed for the specific product and packing process.",
@@ -88,7 +88,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
         },
       ],
     },
-    reviewedAt: "2026-08-23",
+    reviewedAt,
   },
   {
     slug: "reverse-tuck-end-boxes",
@@ -100,7 +100,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Tuck Boxes",
     category: "Tuck box style",
     metaDescription:
-      "Plan custom reverse tuck end boxes with size-based MOQs, approved materials, print options, finishes, and a project-specific UPG quote.",
+      "Plan custom reverse tuck end boxes with a 250-unit planning MOQ, approved materials, print options, finishes, and a project-specific UPG quote.",
     searchTerms: ["reverse tuck end boxes", "custom reverse tuck boxes", "RTE boxes"],
     quickAnswer:
       "Reverse tuck end is one of the folding-carton structures available within UPG's custom tuck box family. The final flap orientation, panel layout, dimensions, board, printing, and finishes are confirmed from the product and packing plan.",
@@ -143,7 +143,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
         },
       ],
     },
-    reviewedAt: "2026-08-23",
+    reviewedAt,
   },
   {
     slug: "auto-lock-bottom-boxes",
@@ -155,7 +155,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Tuck Boxes",
     category: "Tuck box style",
     metaDescription:
-      "Plan custom auto-lock bottom boxes with UPG's approved tuck-box materials, finishes, exact size-based MOQ guidance, and quote handoff.",
+      "Plan custom auto-lock bottom boxes with UPG's approved tuck-box materials, finishes, 250-unit planning MOQ, and quote handoff.",
     searchTerms: ["auto-lock bottom boxes", "auto bottom boxes", "automatic bottom cartons"],
     quickAnswer:
       "Auto-lock bottom is available within UPG's custom tuck box family. The top closure, bottom construction, board, dimensions, print, and finishes are developed around the product and the intended packing method.",
@@ -180,7 +180,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Tuck Boxes",
     category: "Tuck box style",
     metaDescription:
-      "Plan custom interlock boxes with UPG's available board, print and finish options, size-based MOQ guidance, and project-specific review.",
+      "Plan custom interlock boxes with UPG's available board, print and finish options, 250-unit planning MOQ, and project-specific review.",
     searchTerms: ["interlock boxes", "custom interlocking boxes", "interlock cartons"],
     quickAnswer:
       "Interlock is an available structure within UPG's custom tuck box family. The locking arrangement, dimensions, panel layout, board, print, and finish specification are confirmed during structural review.",
@@ -205,7 +205,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Tuck Boxes",
     category: "Tuck box style",
     metaDescription:
-      "Plan custom seal end boxes, including cereal-style cartons, with UPG's approved materials, finishes, size-based MOQs, and quote process.",
+      "Plan custom seal end boxes, including cereal-style cartons, with UPG's approved materials, finishes, 250-unit planning MOQ, and quote process.",
     searchTerms: ["seal end boxes", "custom seal end cartons", "cereal box packaging"],
     quickAnswer:
       "Seal end boxes, including cereal-style cartons, are available within UPG's custom tuck box family. The sealing method, dimensions, board, print, and finish specification are confirmed from the product and production plan.",
@@ -230,7 +230,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Mylar Bags",
     category: "Mylar bag format",
     metaDescription:
-      "Plan custom printed stand-up pouches with a 500-unit UPG MOQ, project-specific film, zipper, window, finish, and compatibility review.",
+      "Plan custom printed stand-up pouches with a 250-unit UPG planning MOQ, project-specific film, zipper, window, finish, and compatibility review.",
     searchTerms: ["custom stand-up pouches", "printed stand-up bags", "stand-up Mylar bags"],
     quickAnswer:
       "Stand-up pouches are available within UPG's custom Mylar bag range. Dimensions, film structure, seals, zipper or window options, print, finish, and product compatibility are confirmed for the project.",
@@ -257,7 +257,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Mylar Bags",
     category: "Mylar bag format",
     metaDescription:
-      "Plan custom flat bottom bags with UPG's 500-unit MOQ, printed-film options, finishes, features, and product-specific compatibility review.",
+      "Plan custom flat bottom bags with UPG's 250-unit planning MOQ, printed-film options, finishes, features, and product-specific compatibility review.",
     searchTerms: ["custom flat bottom bags", "printed flat bottom pouches", "flat bottom Mylar bags"],
     quickAnswer:
       "Flat-bottom bags are available within UPG's custom Mylar bag range. The final dimensions, film structure, seals, zipper or valve options, print, finish, and compatibility are reviewed around the product.",
@@ -284,7 +284,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Mylar Bags",
     category: "Mylar bag format",
     metaDescription:
-      "Plan custom three-side seal bags with a 500-unit UPG MOQ, printed flexible film, finish options, and product compatibility review.",
+      "Plan custom three-side seal bags with a 250-unit UPG planning MOQ, printed flexible film, finish options, and product compatibility review.",
     searchTerms: ["custom three-side seal bags", "printed three-side seal pouches", "3 side seal bags"],
     quickAnswer:
       "Three-side seal bags are available within UPG's custom Mylar bag range. Bag dimensions, film structure, seal areas, print, finish, and product compatibility are confirmed for the intended use.",
@@ -311,7 +311,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Mylar Bags",
     category: "Mylar bag format",
     metaDescription:
-      "Plan custom spout pouches with UPG's 500-unit MOQ, project-specific spout, film, print, finish, compatibility, and market review.",
+      "Plan custom spout pouches with UPG's 250-unit planning MOQ, project-specific spout, film, print, finish, compatibility, and market review.",
     searchTerms: ["custom spout pouches", "printed spout bags", "spout Mylar bags"],
     quickAnswer:
       "Spout pouches are available within UPG's custom Mylar bag range. Spout selection and position, bag dimensions, film structure, seals, print, finish, and product compatibility are confirmed for the project.",
@@ -338,7 +338,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Mylar Bags",
     category: "Mylar bag format",
     metaDescription:
-      "Plan custom child-resistant bag projects with a 500-unit UPG MOQ and explicit market, certification, film, closure, print, and compliance review.",
+      "Plan custom child-resistant bag projects with a 250-unit UPG planning MOQ and explicit market, certification, film, closure, print, and compliance review.",
     searchTerms: ["custom child-resistant bags", "CR bags", "child-resistant Mylar bags"],
     quickAnswer:
       "Child-resistant bag projects are available within UPG's custom Mylar bag range. The target market, required evidence, closure, film structure, dimensions, print, and product compatibility must be reviewed together.",
@@ -365,7 +365,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Mylar Bags",
     category: "Mylar bag format",
     metaDescription:
-      "Plan custom printed coffee bags with a 500-unit UPG MOQ, format, valve, zipper, film, print, finish, and product compatibility review.",
+      "Plan custom printed coffee bags with a 250-unit UPG planning MOQ, format, valve, zipper, film, print, finish, and product compatibility review.",
     searchTerms: ["custom coffee bags", "printed coffee pouches", "coffee packaging bags"],
     quickAnswer:
       "Coffee bags are available within UPG's custom Mylar bag range. Bag format, dimensions, film structure, valve or zipper options, print, finish, and product compatibility are confirmed for the project.",
@@ -410,7 +410,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     },
     complianceNote:
       "Film structure, valve selection, product compatibility, and food-contact requirements must be confirmed before approval.",
-    reviewedAt: "2026-08-23",
+    reviewedAt,
   },
   {
     slug: "printed-rollstock-film",
@@ -468,7 +468,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
     },
     complianceNote:
       "Machine compatibility, film structure, seals, product compatibility, and market requirements must be confirmed before approval.",
-    reviewedAt: "2026-08-23",
+    reviewedAt,
   },
 ];
 

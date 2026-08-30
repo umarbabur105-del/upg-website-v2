@@ -38,7 +38,7 @@ export interface ComparisonGuide {
   reviewedAt: string;
 }
 
-const reviewedAt = "2026-08-23";
+const reviewedAt = "2026-08-31";
 
 export const comparisonGuides: ComparisonGuide[] = [
   {
@@ -59,7 +59,7 @@ export const comparisonGuides: ComparisonGuide[] = [
     heroDescription:
       "Compare an individual folded outer carton with a corrugated ear-lock presentation mailer before dimensions, artwork, and production details are finalized.",
     quickAnswer:
-      "Start with tuck boxes when the brief is an individual folded outer carton. Start with corrugated ear-lock mailer boxes when the brief is a PR kit, subscription, ecommerce, launch, or other branded presentation program. Both are custom-made, and both use UPG's size-based planning MOQ rules.",
+      "Start with tuck boxes when the brief is an individual folded outer carton. Start with corrugated ear-lock mailer boxes when the brief is a PR kit, subscription, ecommerce, launch, or other branded presentation program. Both are custom-made, and both use a 250-unit planning MOQ.",
     first: {
       title: "Custom Tuck Boxes",
       label: "Folded outer carton",
@@ -68,7 +68,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-tuck-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Mailer%20Boxes.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "The project starts with one product and its outer carton",
         "A tuck, auto-lock, interlock, or seal-end structure is the intended route",
@@ -83,7 +83,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mailer-boxes",
       quoteHref:
         "/get-a-quote?product=Mailer%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Mailer%20Boxes.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "The project is a branded unboxing or presentation program",
         "Several products or a custom insert may need to be planned together",
@@ -108,8 +108,8 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning MOQ",
-        first: "1,000 at 5 in or less; 500 over 5 through 10 in; 250 over 10 in",
-        second: "1,000 at 5 in or less; 500 over 5 through 10 in; 250 over 10 in",
+        first: "250 units for any approved finished size",
+        second: "250 units for any approved finished size",
       },
       {
         criterion: "Quote needs",
@@ -152,7 +152,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       {
         question: "Do tuck boxes and mailer boxes have the same MOQ?",
         answer:
-          "Yes. For both families, the planning MOQ is 1,000 units when every finished dimension is 5 inches or less, 500 units when the largest dimension is over 5 inches through exactly 10 inches, and 250 units when the largest dimension is over 10 inches.",
+          "Yes. Both families use a 250-unit planning MOQ, regardless of finished size.",
       },
       {
         question: "Can UPG recommend the structure if I am undecided?",
@@ -194,7 +194,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-magnetic-boxes",
       quoteHref:
         "/get-a-quote?product=Magnetic%20Boxes&style=Standard%20Magnetic%20Box&builder_note=Comparison%20path%3A%20Magnetic%20vs%20Collapsible%20Magnetic%20Boxes.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "An assembled rigid magnetic box is the intended presentation",
         "The project is planned around a fixed structure and insert layout",
@@ -209,7 +209,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-collapsible-magnetic-boxes",
       quoteHref:
         "/get-a-quote?product=Collapsible%20Magnetic%20Boxes&style=Collapsible%20%2F%20Flat-Pack%20Magnetic%20Box&builder_note=Comparison%20path%3A%20Magnetic%20vs%20Collapsible%20Magnetic%20Boxes.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "Flat packing before assembly is a project priority",
         "Freight and pre-assembly storage volume need to be considered",
@@ -239,8 +239,8 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning MOQ",
-        first: "From 250 units",
-        second: "From 250 units",
+        first: "250 units",
+        second: "250 units",
       },
     ],
     decisionQuestions: [
@@ -310,7 +310,7 @@ export const comparisonGuides: ComparisonGuide[] = [
     heroDescription:
       "Compare a folded individual outer carton with a premium rigid magnetic presentation box before structure, artwork, inserts, and finishes are approved.",
     quickAnswer:
-      "Start with a tuck box when the brief is an individual folded product or retail outer carton. Start with a magnetic box when the brief is premium gifting, a launch collection, or presentation-led packaging that may include a custom insert. Their structures and MOQ models are different, so the decision should be made before artwork begins.",
+      "Start with a tuck box when the brief is an individual folded product or retail outer carton. Start with a magnetic box when the brief is premium gifting, a launch collection, or presentation-led packaging that may include a custom insert. Their structures differ, but both use a 250-unit planning MOQ, so the structure decision should be made before artwork begins.",
     first: {
       title: "Custom Tuck Boxes",
       label: "Folded product carton",
@@ -319,7 +319,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-tuck-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Magnetic%20Boxes.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "The project needs an individual folded outer carton",
         "A tuck, auto-lock, interlock, or seal-end style is the intended route",
@@ -334,7 +334,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-magnetic-boxes",
       quoteHref:
         "/get-a-quote?product=Magnetic%20Boxes&style=Standard%20Magnetic%20Box&builder_note=Comparison%20path%3A%20Tuck%20Boxes%20vs%20Magnetic%20Boxes.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "Premium presentation is the primary packaging goal",
         "The project is a gift, set, or launch collection",
@@ -359,7 +359,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning MOQ",
-        first: "1,000 at 5 in or less; 500 over 5 through 10 in; 250 over 10 in",
+        first: "250 units for any approved finished size",
         second: "250 units for any approved finished size",
       },
       {
@@ -401,9 +401,9 @@ export const comparisonGuides: ComparisonGuide[] = [
           "Choose the tuck-box path when the brief is a folded individual outer carton. Choose the magnetic-box path when the brief is premium rigid presentation with a magnetic closure, often around a gift, set, or launch collection.",
       },
       {
-        question: "Which option has the lower MOQ?",
+        question: "Do both formats use the same MOQ?",
         answer:
-          "Magnetic boxes have a 250-unit planning MOQ. Tuck-box MOQ depends on the largest finished dimension: 1,000, 500, or 250 units across UPG's approved size brackets.",
+          "Yes. Tuck boxes and magnetic boxes both use a 250-unit planning MOQ, regardless of finished size.",
       },
       {
         question: "Can both formats use premium finishes?",
@@ -445,7 +445,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mailer-boxes",
       quoteHref:
         "/get-a-quote?product=Mailer%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Mailer%20Boxes%20vs%20Magnetic%20Boxes.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "The project is a PR, influencer, subscription, ecommerce, or launch program",
         "A corrugated ear-lock opening and branded unboxing are required",
@@ -460,7 +460,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-magnetic-boxes",
       quoteHref:
         "/get-a-quote?product=Magnetic%20Boxes&style=Standard%20Magnetic%20Box&builder_note=Comparison%20path%3A%20Mailer%20Boxes%20vs%20Magnetic%20Boxes.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "A rigid premium presentation is the intended structure",
         "The magnetic closure is part of the opening experience",
@@ -485,8 +485,8 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning MOQ",
-        first: "1,000 at 5 in or less; 500 over 5 through 10 in; 250 over 10 in",
-        second: "From 250 units",
+        first: "250 units for any approved finished size",
+        second: "250 units for any approved finished size",
       },
       {
         criterion: "Scope boundary",
@@ -572,7 +572,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/straight-tuck-end-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Straight%20Tuck%20End&builder_note=Comparison%20path%3A%20Straight%20Tuck%20vs%20Reverse%20Tuck.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "Straight tuck end is the intended starting structure",
         "The opening direction and panel plan match the approved product brief",
@@ -587,7 +587,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/reverse-tuck-end-boxes",
       quoteHref:
         "/get-a-quote?product=Tuck%20Boxes&style=Reverse%20Tuck%20End&builder_note=Comparison%20path%3A%20Straight%20Tuck%20vs%20Reverse%20Tuck.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "Reverse tuck end is the intended starting structure",
         "The alternate flap orientation fits the approved product and panel brief",
@@ -607,8 +607,8 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning MOQ",
-        first: "Size-based: 1,000, 500, or 250 units",
-        second: "Size-based: 1,000, 500, or 250 units",
+        first: "250 units for any approved finished size",
+        second: "250 units for any approved finished size",
       },
       {
         criterion: "Materials and finishes",
@@ -656,7 +656,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       {
         question: "Do straight and reverse tuck boxes use the same MOQ rules?",
         answer:
-          "Yes. Both use UPG's tuck-box size brackets: 1,000 units at 5 inches or less, 500 units over 5 through exactly 10 inches, and 250 units over 10 inches.",
+          "Yes. Both use a 250-unit planning MOQ, regardless of finished size.",
       },
       {
         question: "Can I reuse the same artwork dieline for both styles?",
@@ -677,7 +677,7 @@ export const comparisonGuides: ComparisonGuide[] = [
     productSlugs: ["custom-mylar-bags"],
     styleSlugs: ["stand-up-pouches", "flat-bottom-bags"],
     metaDescription:
-      "Compare stand-up pouches and flat bottom bags by filled shape, features, film review, artwork inputs, compatibility, and 500-unit MOQ.",
+      "Compare stand-up pouches and flat bottom bags by filled shape, features, film review, artwork inputs, compatibility, and 250-unit MOQ.",
     keywords: [
       "stand up pouch vs flat bottom bag",
       "flat bottom pouch vs stand up pouch",
@@ -689,7 +689,7 @@ export const comparisonGuides: ComparisonGuide[] = [
     heroDescription:
       "Both formats are available in UPG's custom Mylar bag range. The final choice depends on the target fill, finished dimensions, filled shape, required features, artwork, compatibility, and market requirements.",
     quickAnswer:
-      "Choose the stand-up pouch path when that is the intended finished pouch format and compare it with a flat-bottom bag before the filled shape is finalized. Choose the flat-bottom path when that structure, its product arrangement, and its optional zipper or valve direction fit the brief. Both have a 500-unit planning MOQ and require film and product compatibility review.",
+      "Choose the stand-up pouch path when that is the intended finished pouch format and compare it with a flat-bottom bag before the filled shape is finalized. Choose the flat-bottom path when that structure, its product arrangement, and its optional zipper or valve direction fit the brief. Both have a 250-unit planning MOQ and require film and product compatibility review.",
     first: {
       title: "Custom Stand-Up Pouches",
       label: "Stand-up pouch route",
@@ -698,7 +698,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/stand-up-pouches",
       quoteHref:
         "/get-a-quote?product=Mylar%20Bags&style=Stand-Up%20Pouch&builder_note=Comparison%20path%3A%20Stand-Up%20Pouches%20vs%20Flat-Bottom%20Bags.",
-      planningMoq: "From 500 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "Stand-up pouch is the intended finished format",
         "Target fill and filled dimensions are available for review",
@@ -713,7 +713,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/flat-bottom-bags",
       quoteHref:
         "/get-a-quote?product=Mylar%20Bags&style=Flat-Bottom%20Bag&builder_note=Comparison%20path%3A%20Stand-Up%20Pouches%20vs%20Flat-Bottom%20Bags.",
-      planningMoq: "From 500 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "Flat-bottom bag is the intended finished format",
         "The filled shape and product arrangement support that route",
@@ -738,8 +738,8 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning MOQ",
-        first: "From 500 units",
-        second: "From 500 units",
+        first: "250 units",
+        second: "250 units",
       },
       {
         criterion: "Required approval",
@@ -782,7 +782,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       {
         question: "Do both flexible formats have the same MOQ?",
         answer:
-          "Yes. The UPG planning MOQ is 500 units for both stand-up pouches and flat bottom bags.",
+          "Yes. The UPG planning MOQ is 250 units for both stand-up pouches and flat bottom bags.",
       },
       {
         question: "Does this page confirm which film is compatible with my product?",
@@ -824,7 +824,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/packaging-styles/printed-rollstock-film",
       quoteHref:
         "/get-a-quote?product=Mylar%20Bags&style=Rollstock%20Film&builder_note=Comparison%20path%3A%20Rollstock%20Film%20vs%20Finished%20Pouches.",
-      planningMoq: "From 500 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "The enquiry is for printed film on roll",
         "Packing-machine, web, repeat, and sealing information is available",
@@ -839,7 +839,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mylar-bags",
       quoteHref:
         "/get-a-quote?product=Mylar%20Bags&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Comparison%20path%3A%20Rollstock%20Film%20vs%20Finished%20Pouches.",
-      planningMoq: "From 500 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "The project needs a finished pouch rather than film on roll",
         "Finished dimensions, target fill, closure, and features can be reviewed",
@@ -864,8 +864,8 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning minimum",
-        first: "From 500 units; final rollstock specification requires review",
-        second: "500 finished units",
+        first: "250 units; final rollstock specification requires review",
+        second: "250 finished units",
       },
       {
         criterion: "Required approval",
@@ -949,7 +949,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       href: "/products/custom-mailer-boxes",
       quoteHref:
         "/get-a-quote?product=Mailer%20Boxes&style=Ear-Lock%20Mailer%20Box&builder_note=Comparison%20path%3A%20Corrugated%20Mailer%20Boxes%20vs%20Shipping%20Cartons.%20Project%20is%20for%20an%20ear-lock%20presentation%20mailer.",
-      planningMoq: "From 250 units",
+      planningMoq: "250 units",
       chooseWhen: [
         "The required product is a corrugated ear-lock mailer",
         "Branded presentation or unboxing is part of the brief",
@@ -993,7 +993,7 @@ export const comparisonGuides: ComparisonGuide[] = [
       },
       {
         criterion: "Planning MOQ",
-        first: "1,000 at 5 in or less; 500 over 5 through 10 in; 250 over 10 in",
+        first: "250 units for any approved finished size",
         second: "Not applicable",
       },
     ],

@@ -269,26 +269,17 @@ export default async function MailerApplicationPage({ params }: PageProps) {
             </p>
           </div>
           <aside className="surface-card p-6 md:p-8 lg:col-span-5">
-            <div className="eyebrow mb-4">Planning MOQ by finished size</div>
+            <div className="eyebrow mb-4">Planning MOQ</div>
             <dl className="space-y-5 text-sm">
-              <div className="flex items-start justify-between gap-5 border-b border-border pb-5">
-                <dt className="text-muted-foreground">Every dimension 5 in or less</dt>
-                <dd className="font-semibold text-foreground">1,000 units</dd>
-              </div>
-              <div className="flex items-start justify-between gap-5 border-b border-border pb-5">
-                <dt className="text-muted-foreground">
-                  Largest dimension over 5 through 10 in
-                </dt>
-                <dd className="font-semibold text-foreground">500 units</dd>
-              </div>
               <div className="flex items-start justify-between gap-5">
-                <dt className="text-muted-foreground">Largest dimension over 10 in</dt>
+                <dt className="text-muted-foreground">All finished sizes</dt>
                 <dd className="font-semibold text-foreground">250 units</dd>
               </div>
             </dl>
             <p className="mt-6 border-t border-border pt-5 text-xs leading-relaxed text-muted-foreground">
-              Final dimensions remain subject to structural feasibility. Production
-              timing is confirmed after specification review.
+              Finished size does not change the planning MOQ. Final dimensions remain
+              subject to structural feasibility, and production timing is confirmed
+              after specification review.
             </p>
           </aside>
         </div>

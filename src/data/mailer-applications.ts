@@ -142,7 +142,7 @@ export const mailerApplications: MailerApplication[] = [
       {
         question: "What is the minimum order for custom PR boxes?",
         answer:
-          "The planning MOQ is 1,000 units when every finished dimension is 5 inches or less, 500 units when the largest dimension is over 5 inches through exactly 10 inches, and 250 units when the largest dimension is over 10 inches.",
+          "The planning MOQ is 250 units, regardless of finished size. Final dimensions remain subject to structural feasibility review.",
       },
       {
         question: "What should I send for a PR box quote?",
@@ -154,7 +154,7 @@ export const mailerApplications: MailerApplication[] = [
       label: "Explore the beauty-specific PR box guide",
       href: "/cosmetics/pr-boxes",
     },
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
   },
   {
     slug: "influencer-kits",
@@ -238,7 +238,7 @@ export const mailerApplications: MailerApplication[] = [
       {
         question: "What is the minimum order for influencer boxes?",
         answer:
-          "The planning MOQ is 1,000 units when every finished dimension is 5 inches or less, 500 units when the largest dimension is over 5 inches through exactly 10 inches, and 250 units when the largest dimension is over 10 inches.",
+          "The planning MOQ is 250 units, regardless of finished size. Final dimensions remain subject to structural feasibility review.",
       },
       {
         question: "Does UPG provide campaign fulfillment or creator mailing?",
@@ -255,7 +255,7 @@ export const mailerApplications: MailerApplication[] = [
       label: "Explore the beauty-specific PR box guide",
       href: "/cosmetics/pr-boxes",
     },
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
   },
   {
     slug: "custom-subscription-boxes",
@@ -365,7 +365,7 @@ export const mailerApplications: MailerApplication[] = [
       {
         question: "What is the minimum order for custom subscription boxes?",
         answer:
-          "The planning MOQ is 1,000 units when every finished dimension is 5 inches or less, 500 units when the largest dimension is over 5 inches through exactly 10 inches, and 250 units when the largest dimension is over 10 inches.",
+          "The planning MOQ is 250 units, regardless of finished size. Final dimensions remain subject to structural feasibility review.",
       },
       {
         question: "Can one box work for changing monthly products?",
@@ -377,7 +377,7 @@ export const mailerApplications: MailerApplication[] = [
       label: "Explore the beauty-specific subscription guide",
       href: "/cosmetics/cosmetic-subscription-boxes",
     },
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
   },
   {
     slug: "branded-ecommerce-mailer-boxes",
@@ -485,7 +485,7 @@ export const mailerApplications: MailerApplication[] = [
       {
         question: "What is the minimum order for branded ecommerce mailers?",
         answer:
-          "The planning MOQ is 1,000 units when every finished dimension is 5 inches or less, 500 units when the largest dimension is over 5 inches through exactly 10 inches, and 250 units when the largest dimension is over 10 inches.",
+          "The planning MOQ is 250 units, regardless of finished size. Final dimensions remain subject to structural feasibility review.",
       },
       {
         question: "Are these regular shipping cartons?",
@@ -493,7 +493,7 @@ export const mailerApplications: MailerApplication[] = [
           "No. The UPG offer is a custom ear-lock corrugated mailer for branded presentation. Standard shipping cartons, master cartons, and RSC cases are outside the product range.",
       },
     ],
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
   },
 ];
 

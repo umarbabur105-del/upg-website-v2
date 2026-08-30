@@ -30,7 +30,7 @@ export interface IndustryHub {
   reviewedAt: string;
 }
 
-const reviewedAt = "2026-08-24";
+const reviewedAt = "2026-08-31";
 
 export const industryHubs: IndustryHub[] = [
   {

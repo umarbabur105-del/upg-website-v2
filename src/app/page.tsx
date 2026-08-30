@@ -22,7 +22,7 @@ export const metadata: Metadata = createPageMetadata({
 
 const buyerProof = [
   { value: "5", label: "focused product families" },
-  { value: "Clear MOQs", label: "based on product family and finished size" },
+  { value: "250 units", label: "planning MOQ for every product family" },
   { value: "Worldwide", label: "production and delivery" },
   { value: "1 business day", label: "target for an initial reply" },
 ];

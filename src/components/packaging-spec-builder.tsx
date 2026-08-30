@@ -111,7 +111,7 @@ export function PackagingSpecBuilder({
   const selectedProduct = products.find((product) => product.family === family);
   const parsedDimensions = parseFinishedDimensions(dimensions);
   const formattedDimensions = formatFinishedDimensions(parsedDimensions, unit);
-  const moq = getPlanningMoq(family, parsedDimensions, unit);
+  const moq = getPlanningMoq(family);
   const plannedQuantity = parsePositiveQuantity(quantity);
   const quantityMeetsMoq =
     plannedQuantity !== undefined && moq.units !== null && plannedQuantity >= moq.units;
@@ -119,12 +119,11 @@ export function PackagingSpecBuilder({
     plannedQuantity !== undefined && moq.units !== null && plannedQuantity < moq.units;
   const availableStyles = family ? productStyles[family] : [];
   const availableMaterials = family ? materialOptions[family] : [];
-  const dimensionsRequired = family === "Tuck Boxes" || family === "Mailer Boxes";
   const coreBriefItems = [
     { label: "Product family", complete: Boolean(family) },
     {
-      label: dimensionsRequired ? "Finished dimensions" : "Size review",
-      complete: dimensionsRequired ? Boolean(parsedDimensions) : Boolean(family),
+      label: "Size review",
+      complete: Boolean(family),
     },
     { label: "Planning quantity", complete: Boolean(plannedQuantity) },
     { label: "Intended use", complete: Boolean(intendedUse.trim()) },
@@ -142,7 +141,7 @@ export function PackagingSpecBuilder({
       `Style: ${style || "Not selected"}`,
       `Finished dimensions: ${formattedDimensions || "Not provided"}`,
       `Planning quantity: ${plannedQuantity ? `${formatUnits(plannedQuantity)} units` : "Not provided"}`,
-      `Planning MOQ: ${moq.units ? moq.label : "Pending dimensions"}`,
+      `Planning MOQ: ${moq.label}`,
       `Material: ${material || "Not selected"}`,
       `Finishes: ${finishes.length ? finishes.join(", ") : "Not selected"}`,
       `Intended use: ${intendedUse.trim() || "Not provided"}`,
@@ -164,7 +163,7 @@ export function PackagingSpecBuilder({
     if (finishes.length) params.set("finishes", finishes.join(", "));
     params.set(
       "builder_note",
-      `Prepared with the UPG Packaging Spec & MOQ Builder. Planning MOQ: ${moq.units ? moq.label : "pending finished dimensions"}.`
+      `Prepared with the UPG Packaging Spec & MOQ Builder. Planning MOQ: ${moq.label}.`
     );
     return `/get-a-quote?${params.toString()}`;
   }, [family, style, plannedQuantity, intendedUse, destination, formattedDimensions, material, finishes, moq]);
@@ -316,7 +315,7 @@ export function PackagingSpecBuilder({
             Add the known project details.
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Finished dimensions are required for a tuck box or mailer box MOQ. Other fields can stay open for review.
+            Finished dimensions help UPG review feasibility and pricing, but they do not change the 250-unit planning MOQ. Fields can stay open for review.
           </p>
 
           <div className="mt-7 grid gap-6 sm:grid-cols-2">
@@ -352,7 +351,7 @@ export function PackagingSpecBuilder({
                 value={quantity}
                 onChange={(event) => setQuantity(event.target.value)}
                 className={inputClass}
-                placeholder="e.g. 1000"
+                placeholder="e.g. 250"
               />
             </div>
 
@@ -360,7 +359,7 @@ export function PackagingSpecBuilder({
               <div className="flex flex-wrap items-end justify-between gap-3">
                 <div>
                   <div className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                    Finished dimensions {dimensionsRequired ? "— required for MOQ" : "— optional"}
+                    Finished dimensions — optional
                   </div>
                   <p className="mt-2 text-xs text-muted-foreground">Enter length × width × height.</p>
                 </div>

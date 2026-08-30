@@ -231,6 +231,27 @@ for (const [route, requiredPrefixes] of coreProductContracts) {
   }
 }
 
+const moqContractRoutes = [
+  ...coreProductContracts.keys(),
+  "/faq",
+];
+
+for (const route of moqContractRoutes) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered MOQ contract page`);
+    continue;
+  }
+  if (!page.html.includes("250 units")) {
+    failures.push(`${route}: missing 250-unit planning MOQ`);
+  }
+  for (const staleMoq of ["1,000 units", "500 units", "size-based MOQ"]) {
+    if (page.html.includes(staleMoq)) {
+      failures.push(`${route}: contains stale MOQ copy (${staleMoq})`);
+    }
+  }
+}
+
 const industryHubRoutes = [...sitemapPaths].filter((route) =>
   /^\/industries\/(?:food-beverage|beauty-personal-care|supplement|fashion-jewelry-luxury|electronics-consumer-goods|home-candle-gift)-packaging$/.test(
     route

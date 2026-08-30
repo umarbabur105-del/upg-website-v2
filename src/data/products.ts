@@ -42,10 +42,6 @@ export interface Product {
     }>;
   };
   moq: string;
-  moqTiers?: Array<{
-    size: string;
-    minimum: string;
-  }>;
   leadTime: string;
   image: string;
   heroImage: string;
@@ -91,7 +87,7 @@ export const products: Product[] = [
       "auto-lock bottom boxes",
       "seal end boxes",
     ],
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
     styleDecisionGuide: {
       eyebrow: "Tuck box structure comparison",
       title: "Compare five real structures before final artwork begins.",
@@ -120,21 +116,7 @@ export const products: Product[] = [
         },
       ],
     },
-    moq: "From 250 units",
-    moqTiers: [
-      {
-        size: "Up to and including 5 in",
-        minimum: "1,000 units",
-      },
-      {
-        size: "Over 5 in, up to and including 10 in",
-        minimum: "500 units",
-      },
-      {
-        size: "Over 10 in",
-        minimum: "250 units",
-      },
-    ],
+    moq: "250 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
     heroImage: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
@@ -168,9 +150,9 @@ export const products: Product[] = [
       "Window",
     ],
     sizes:
-      "Custom sizes. The planning MOQ is based on the largest finished dimension; see the size table on this page.",
+      "Custom sizes with a 250-unit planning MOQ; final dimensions remain subject to structural feasibility review.",
     sizeFlexibility:
-      "The final minimum is confirmed from the finished dimensions and selected structure.",
+      "Dimensions and structure are confirmed for feasibility and pricing; the planning MOQ remains 250 units.",
     useCases: [
       "Straight tuck end boxes",
       "Reverse tuck end boxes",
@@ -187,7 +169,7 @@ export const products: Product[] = [
     artworkRequirements:
       "Final artwork is prepared on the approved dieline. Share existing files or references with the project enquiry.",
     screeningNote:
-      "MOQ depends on finished size. Additional materials, calipers, and finishes can be reviewed for the specific project.",
+      "Additional materials, calipers, and finishes can be reviewed for the specific project.",
     quoteCta: "Start a tuck box project",
   },
   {
@@ -215,27 +197,13 @@ export const products: Product[] = [
       "custom subscription boxes",
       "branded ecommerce mailer boxes",
     ],
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
     buyerDecisionFaq: {
       question: "Which corrugated mailer box path should I use?",
       answer:
         "Use the PR box guide for launches, press, media kits, events, or broad brand presentations; the influencer guide for creator seeding; the subscription guide for recurring assortments; and the ecommerce guide for branded online-order presentation. Every path stays inside UPG's custom ear-lock corrugated mailer offer. Standard shipping cartons, master cartons, and RSC cases are not supplied.",
     },
-    moq: "From 250 units",
-    moqTiers: [
-      {
-        size: "Up to and including 5 in",
-        minimum: "1,000 units",
-      },
-      {
-        size: "Over 5 in, up to and including 10 in",
-        minimum: "500 units",
-      },
-      {
-        size: "Over 10 in",
-        minimum: "250 units",
-      },
-    ],
+    moq: "250 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
     heroImage: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
@@ -257,9 +225,9 @@ export const products: Product[] = [
     prints: ["Exterior print", "Interior and exterior print"],
     finishes: ["Matte or gloss", "Foil stamping", "Spot UV", "Custom inserts"],
     sizes:
-      "Custom sizes. The planning MOQ is based on the largest finished dimension; see the size table on this page.",
+      "Custom sizes with a 250-unit planning MOQ; final dimensions remain subject to structural feasibility review.",
     sizeFlexibility:
-      "The final minimum is confirmed from the finished dimensions and ear-lock mailer structure.",
+      "Dimensions and the ear-lock structure are confirmed for feasibility and pricing; the planning MOQ remains 250 units.",
     useCases: [
       "PR and influencer kits",
       "Subscription mailers",
@@ -301,13 +269,13 @@ export const products: Product[] = [
       "magnetic gift boxes",
       "premium magnetic boxes",
     ],
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
     buyerDecisionFaq: {
       question: "Should I choose a standard or collapsible magnetic box?",
       answer:
         "A standard magnetic box uses an assembled rigid presentation structure. A collapsible magnetic box folds flat before assembly for more efficient freight and storage. Compare both routes from the product arrangement, dimensions, insert, quantity, finish, destination, and preferred packing method before the structure is approved.",
     },
-    moq: "From 250 units",
+    moq: "250 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
     heroImage: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
@@ -367,13 +335,13 @@ export const products: Product[] = [
       "collapsible rigid boxes",
       "collapsible magnetic closure boxes",
     ],
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
     buyerDecisionFaq: {
       question: "When should I compare a collapsible magnetic box?",
       answer:
         "Compare the collapsible route when a premium magnetic presentation is required and the box should ship or store flat before assembly. Compare a standard magnetic box when an assembled rigid presentation structure is preferred. Final suitability depends on the dimensions, product arrangement, insert, finish, quantity, destination, and packing method.",
     },
-    moq: "From 250 units",
+    moq: "250 units",
     leadTime: "Confirmed after specification review",
     image:
       "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-hero-v1.png",
@@ -427,7 +395,7 @@ export const products: Product[] = [
       "Custom printed Mylar bags include three-side seal bags, flat-bottom bags, stand-up pouches, spout bags, child-resistant bags, coffee bags, and printed rollstock film. Depending on the format, options can include zippers, valves, windows, and matte, gloss, or metallic finishes.",
     metaTitle: "Custom Printed Mylar Bags, Pouches & Rollstock",
     metaDescription:
-      "Custom printed Mylar bags, pouches, and rollstock film in stand-up, flat-bottom, three-side-seal, spout, child-resistant, and coffee formats. MOQ 500.",
+      "Custom printed Mylar bags, pouches, and rollstock film in stand-up, flat-bottom, three-side-seal, spout, child-resistant, and coffee formats. MOQ 250.",
     searchTerms: [
       "custom Mylar bags",
       "custom printed Mylar bags",
@@ -438,13 +406,13 @@ export const products: Product[] = [
       "printed rollstock film",
       "flexible packaging rollstock",
     ],
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
     buyerDecisionFaq: {
       question: "Should I request finished pouches or printed rollstock film?",
       answer:
         "Choose a finished pouch route when the required format is a stand-up, flat-bottom, three-side-seal, spout, coffee, or child-resistant bag. Choose printed rollstock when the packing plan requires custom film on roll. Film structure, product compatibility, machine, web, repeat, sealing, quantity, print, and destination details require project review.",
     },
-    moq: "From 500 units",
+    moq: "250 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
     heroImage: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
@@ -465,7 +433,7 @@ export const products: Product[] = [
     materials: ["Flexible film structures", "Rollstock film", "Window options"],
     prints: ["Custom printed bags", "Custom printed pouches", "Printed rollstock film"],
     finishes: ["Matte", "Gloss", "Metallic", "Window", "Zipper", "Valve"],
-    sizes: "Custom sizes with a 500-unit MOQ.",
+    sizes: "Custom sizes with a 250-unit planning MOQ.",
     sizeFlexibility:
       "Bag format, dimensions, closure, valve, spout, and rollstock requirements are reviewed per project.",
     useCases: [
@@ -506,11 +474,8 @@ export function getProductFaqs(product: Product): ProductFaq[] {
   const faqs = [
     {
       question: `What is the minimum order for ${product.name}?`,
-      answer: product.moqTiers
-        ? `${product.moq}. The planning MOQ is based on the largest finished dimension: ${product.moqTiers
-            .map((tier) => `${tier.size}: ${tier.minimum}`)
-            .join("; ")}.`
-        : product.sizes,
+      answer:
+        "The planning MOQ is 250 units for this product family, regardless of finished size. Final structure and specifications remain subject to project review.",
     },
     {
       question: `What are ${product.name.toLowerCase()} best used for?`,

@@ -11,8 +11,8 @@ import { siteConfig } from "@/data/site";
 import { SITE_URL } from "@/lib/seo";
 
 const CONTENT_UPDATED_AT = new Date(`${siteConfig.contentReviewedAt}T00:00:00.000Z`);
-const COSMETICS_UPDATED_AT = new Date("2026-08-23T00:00:00.000Z");
-const STYLE_LIBRARY_UPDATED_AT = new Date("2026-08-13T00:00:00.000Z");
+const COSMETICS_UPDATED_AT = new Date("2026-08-31T00:00:00.000Z");
+const STYLE_LIBRARY_UPDATED_AT = new Date("2026-08-31T00:00:00.000Z");
 const SAMPLES_UPDATED_AT = new Date("2026-08-23T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -43,13 +43,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/compare`,
-      lastModified: new Date("2026-08-23T00:00:00.000Z"),
+      lastModified: new Date("2026-08-31T00:00:00.000Z"),
       changeFrequency: "weekly",
       priority: 0.92,
     },
     {
       url: `${SITE_URL}/tools`,
-      lastModified: new Date("2026-08-30T00:00:00.000Z"),
+      lastModified: new Date("2026-08-31T00:00:00.000Z"),
       changeFrequency: "monthly",
       priority: 0.85,
     },
@@ -67,7 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/tools/packaging-spec-builder`,
-      lastModified: new Date("2026-08-12T00:00:00.000Z"),
+      lastModified: new Date("2026-08-31T00:00:00.000Z"),
       changeFrequency: "monthly",
       priority: 0.9,
     },
@@ -220,7 +220,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
+    lastModified: new Date(post.updatedAt ?? post.date),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));

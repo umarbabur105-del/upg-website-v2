@@ -19,7 +19,7 @@ export const siteConfig = {
     "https://universalpackaginggroup.com/shipping-returns#merchant-return-policy",
   language: "en-US",
   market: "Worldwide",
-  contentReviewedAt: "2026-08-24",
+  contentReviewedAt: "2026-08-31",
   businessModel:
     "Custom packaging manufacturing with project-specific structure, specification, pricing, proofing, production, and delivery planning.",
   pricingModel:

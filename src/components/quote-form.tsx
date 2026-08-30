@@ -299,7 +299,7 @@ export function QuoteForm({ prefill }: QuoteFormProps) {
               value={form.quantity}
               onChange={(event) => update("quantity", event.target.value)}
               className={inputClass}
-              placeholder="e.g. 1,000 units"
+              placeholder="e.g. 250 units"
             />
           </Field>
 

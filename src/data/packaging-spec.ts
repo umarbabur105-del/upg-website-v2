@@ -94,12 +94,6 @@ export interface PlanningMoqResult {
   needsDimensions: boolean;
 }
 
-function toInches(value: number, unit: MeasurementUnit) {
-  if (unit === "cm") return value / 2.54;
-  if (unit === "mm") return value / 25.4;
-  return value;
-}
-
 function dimensionsAreValid(dimensions?: FinishedDimensions) {
   if (!dimensions) return false;
   return [dimensions.length, dimensions.width, dimensions.height].every(
@@ -108,9 +102,7 @@ function dimensionsAreValid(dimensions?: FinishedDimensions) {
 }
 
 export function getPlanningMoq(
-  family: ProductFamily | "",
-  dimensions: FinishedDimensions | undefined,
-  unit: MeasurementUnit
+  family: ProductFamily | ""
 ): PlanningMoqResult {
   if (!family) {
     return {
@@ -121,62 +113,10 @@ export function getPlanningMoq(
     };
   }
 
-  if (family === "Magnetic Boxes" || family === "Collapsible Magnetic Boxes") {
-    return {
-      units: 250,
-      label: "250 units",
-      note: "Planning MOQ for this product family, regardless of finished size.",
-      needsDimensions: false,
-    };
-  }
-
-  if (family === "Mylar Bags") {
-    return {
-      units: 500,
-      label: "500 units",
-      note: "Planning MOQ for the approved Mylar bag range.",
-      needsDimensions: false,
-    };
-  }
-
-  if (!dimensionsAreValid(dimensions)) {
-    return {
-      units: null,
-      label: "Add all three dimensions",
-      note: "Tuck box and mailer box MOQs are based on the largest finished dimension.",
-      needsDimensions: true,
-    };
-  }
-
-  const largestDimensionInches = Math.max(
-    toInches(dimensions!.length, unit),
-    toInches(dimensions!.width, unit),
-    toInches(dimensions!.height, unit)
-  );
-  const tolerance = 0.000001;
-
-  if (largestDimensionInches <= 5 + tolerance) {
-    return {
-      units: 1000,
-      label: "1,000 units",
-      note: "Every finished dimension is 5 inches or less.",
-      needsDimensions: false,
-    };
-  }
-
-  if (largestDimensionInches <= 10 + tolerance) {
-    return {
-      units: 500,
-      label: "500 units",
-      note: "The largest finished dimension is over 5 inches and no more than 10 inches.",
-      needsDimensions: false,
-    };
-  }
-
   return {
     units: 250,
     label: "250 units",
-    note: "The largest finished dimension is over 10 inches.",
+    note: "Planning MOQ for every UPG custom product family, regardless of finished size.",
     needsDimensions: false,
   };
 }

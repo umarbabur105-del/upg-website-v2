@@ -7,7 +7,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "What is your minimum order quantity?",
     answer:
-      "Magnetic and collapsible magnetic boxes start at 250 units. Mylar bags start at 500. Tuck and mailer boxes start at 1,000 units when every dimension is 5 in or less, 500 units when the largest dimension is over 5 in through 10 in, and 250 units when it is over 10 in.",
+      "The planning MOQ is 250 units for every UPG custom product family, regardless of finished size. Final structure, dimensions, materials, and specifications remain subject to project review.",
   },
   {
     question: "How fast can I get a quote?",

@@ -106,7 +106,7 @@ const cosmeticsBuyingPaths = [
   {
     title: "Custom tuck boxes",
     href: "/products/custom-tuck-boxes",
-    note: "Review the parent carton family, approved materials, print options, finishes, and size-based MOQs.",
+    note: "Review the parent carton family, approved materials, print options, finishes, and 250-unit planning MOQ.",
   },
 ] as const;
 

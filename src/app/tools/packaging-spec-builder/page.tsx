@@ -39,19 +39,19 @@ const faqItems = [
       "No. Custom production pricing depends on the approved structure, dimensions, material, print, finishes, quantity, and delivery destination. The tool prepares a planning specification and MOQ only.",
   },
   {
-    question: "How is the tuck box or mailer box MOQ calculated?",
+    question: "What is the planning MOQ?",
     answer:
-      "When every finished dimension is 5 inches or less, the planning MOQ is 1,000 units. When the largest dimension is over 5 inches and no more than 10 inches, it is 500 units. When the largest dimension is over 10 inches, it is 250 units.",
+      "The planning MOQ is 250 units for every UPG custom product family, regardless of finished size.",
   },
   {
     question: "Can I enter dimensions in centimeters or millimeters?",
     answer:
-      "Yes. Choose inches, centimeters, or millimeters. The tool converts the dimensions before applying the approved size-based MOQ boundaries.",
+      "Yes. Choose inches, centimeters, or millimeters. Dimensions stay on the brief for feasibility, specification, and pricing review, but they do not change the 250-unit planning MOQ.",
   },
   {
-    question: "What is the MOQ for magnetic boxes and Mylar bags?",
+    question: "Does the same MOQ apply to all five product families?",
     answer:
-      "The planning MOQ is 250 units for magnetic boxes and collapsible magnetic boxes, and 500 units for Mylar bags.",
+      "Yes. Tuck boxes, corrugated mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar bags all use a 250-unit planning MOQ.",
   },
   {
     question: "Does the mailer option include standard shipping cartons?",
@@ -82,7 +82,7 @@ const structuredData = {
       provider: { "@id": `${SITE_URL}/#organization` },
       featureList: [
         "Product family comparison",
-        "Size-based MOQ calculation",
+        "One 250-unit planning MOQ across all product families",
         "Inch, centimeter, and millimeter support",
         "Material and finish planning",
         "Shareable specification links",
@@ -123,52 +123,29 @@ const structuredData = {
 
 const moqRows = [
   {
-    product: "Tuck boxes and corrugated mailer boxes",
-    condition: "Every finished dimension is 5 in or less",
-    moq: "1,000 units",
-  },
-  {
-    product: "Tuck boxes and corrugated mailer boxes",
-    condition: "Largest finished dimension is over 5 in through 10 in",
-    moq: "500 units",
-  },
-  {
-    product: "Tuck boxes and corrugated mailer boxes",
-    condition: "Largest finished dimension is over 10 in",
+    product: "Tuck boxes",
+    condition: "Any custom size, subject to structural review",
     moq: "250 units",
   },
   {
-    product: "Magnetic and collapsible magnetic boxes",
-    condition: "Any size, subject to structural review",
+    product: "Corrugated mailer boxes",
+    condition: "Any custom size, subject to structural review",
+    moq: "250 units",
+  },
+  {
+    product: "Magnetic boxes",
+    condition: "Any custom size, subject to structural review",
+    moq: "250 units",
+  },
+  {
+    product: "Collapsible magnetic boxes",
+    condition: "Any custom size, subject to structural review",
     moq: "250 units",
   },
   {
     product: "Mylar bags",
-    condition: "Approved bag and pouch range",
-    moq: "500 units",
-  },
-];
-
-const boundaryExamples = [
-  {
-    size: "5 × 4 × 2 in",
-    result: "1,000 units",
-    reason: "Every finished dimension is 5 inches or less.",
-  },
-  {
-    size: "5.01 × 4 × 2 in",
-    result: "500 units",
-    reason: "The largest finished dimension is now over 5 inches.",
-  },
-  {
-    size: "10 × 8 × 3 in",
-    result: "500 units",
-    reason: "Exactly 10 inches stays inside the 500-unit boundary.",
-  },
-  {
-    size: "10.01 × 8 × 3 in",
-    result: "250 units",
-    reason: "The largest finished dimension is now over 10 inches.",
+    condition: "Any approved bag, pouch, or rollstock format; compatibility review required",
+    moq: "250 units",
   },
 ];
 
@@ -289,51 +266,19 @@ export default async function PackagingSpecBuilderPage({ searchParams }: PagePro
         </div>
       </section>
 
-      <section className="section-shell">
-        <div className="container-editorial grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <SectionHeading
-              eyebrow="Exact boundary examples"
-              title="What happens at 5 and 10 inches?"
-              intro="For tuck boxes and corrugated ear-lock mailers, the largest finished dimension controls the planning MOQ. These examples make the exact boundaries unambiguous."
-            />
-          </div>
-          <div className="overflow-x-auto border border-border bg-surface lg:col-span-8">
-            <table className="w-full min-w-[620px] border-collapse text-left text-sm">
-              <thead className="bg-moss text-primary-foreground">
-                <tr>
-                  <th className="px-5 py-4 font-semibold">Finished size example</th>
-                  <th className="px-5 py-4 font-semibold">Planning MOQ</th>
-                  <th className="px-5 py-4 font-semibold">Boundary logic</th>
-                </tr>
-              </thead>
-              <tbody>
-                {boundaryExamples.map((example) => (
-                  <tr key={example.size} className="border-t border-border first:border-t-0">
-                    <td className="px-5 py-4 font-semibold text-foreground">{example.size}</td>
-                    <td className="px-5 py-4 text-foreground">{example.result}</td>
-                    <td className="px-5 py-4 text-muted-foreground">{example.reason}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
       <section className="section-shell bg-cream">
         <div className="container-editorial">
           <SectionHeading
             eyebrow="Planning rules"
-            title="MOQ guidance used by the builder."
-            intro="These values help qualify the starting quantity. Final production details remain subject to specification and structural review."
+            title="One planning minimum across all five product families."
+            intro="Finished dimensions affect feasibility, specification, and pricing review, but not the 250-unit planning MOQ."
           />
           <div className="mt-10 overflow-x-auto border border-border bg-surface">
             <table className="w-full min-w-[720px] border-collapse text-left text-sm">
               <thead className="bg-moss text-primary-foreground">
                 <tr>
                   <th className="px-5 py-4 font-semibold">Product family</th>
-                  <th className="px-5 py-4 font-semibold">Finished-size condition</th>
+                  <th className="px-5 py-4 font-semibold">Review condition</th>
                   <th className="px-5 py-4 font-semibold">Planning MOQ</th>
                 </tr>
               </thead>

@@ -62,7 +62,7 @@ export const cosmeticsPackagingScope = {
 } as const;
 
 export const trustPoints: TrustPoint[] = [
-  { label: "MOQs vary by product & size" },
+  { label: "250-unit planning MOQ across every product family" },
   { label: "Worldwide production & delivery" },
   { label: "Custom sizes & structures" },
   { label: "Dieline & artwork guidance" },
@@ -240,7 +240,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       "Gift sets",
       "Skincare launches",
     ],
-    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    moqNote: "Every UPG custom product family uses a 250-unit planning MOQ; final specifications remain subject to review.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
@@ -284,7 +284,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       "Gift sets",
     ],
     moqNote:
-      "For tuck boxes: 1,000 units when every finished dimension is 5 inches or less; 500 units when the largest dimension is over 5 inches through exactly 10 inches; and 250 units when the largest dimension is over 10 inches. Magnetic boxes start at 250 units.",
+      "Tuck boxes and magnetic boxes both use a 250-unit planning MOQ, regardless of finished size. Final specifications remain subject to review.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
@@ -302,7 +302,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       {
         question: "What is the minimum order for custom serum boxes?",
         answer:
-          "For tuck boxes, the planning MOQ is 1,000 units when every finished dimension is 5 inches or less, 500 units when the largest dimension is over 5 inches through exactly 10 inches, and 250 units when the largest dimension is over 10 inches. Magnetic boxes have a 250-unit planning MOQ.",
+          "Tuck boxes and magnetic boxes both use a 250-unit planning MOQ, regardless of finished size. Final specifications remain subject to review.",
       },
       {
         question: "What should I send for a serum box quote?",
@@ -316,7 +316,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       },
     ],
     relatedSlugs: ["skincare-boxes", "cream-boxes", "perfume-boxes"],
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
   },
   {
     slug: "cream-boxes",
@@ -341,7 +341,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
     inserts: ["Custom inserts where required"],
     idealFor: ["Cream jars", "Body lotions", "Personal care kits", "Retail sets"],
-    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    moqNote: "Every UPG custom product family uses a 250-unit planning MOQ; final specifications remain subject to review.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
@@ -369,7 +369,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
     inserts: ["Custom inserts where required"],
     idealFor: ["Pump bottles", "Body lotions", "Sample sets", "Retail bundles"],
-    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    moqNote: "Every UPG custom product family uses a 250-unit planning MOQ; final specifications remain subject to review.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
@@ -408,7 +408,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     inserts: ["Custom inserts where required"],
     idealFor: ["Lipstick", "Lip gloss", "Lip balm", "Mini sets"],
     moqNote:
-      "For tuck boxes: 1,000 units when every finished dimension is 5 inches or less; 500 units when the largest dimension is over 5 inches through exactly 10 inches; and 250 units when the largest dimension is over 10 inches. Magnetic boxes start at 250 units.",
+      "Tuck boxes and magnetic boxes both use a 250-unit planning MOQ, regardless of finished size. Final specifications remain subject to review.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
@@ -454,7 +454,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       {
         question: "What is the minimum order for custom lipstick boxes?",
         answer:
-          "For tuck boxes, the planning MOQ is 1,000 units when every finished dimension is 5 inches or less, 500 units when the largest dimension is over 5 inches through exactly 10 inches, and 250 units when the largest dimension is over 10 inches. Magnetic boxes have a 250-unit planning MOQ.",
+          "Tuck boxes and magnetic boxes both use a 250-unit planning MOQ, regardless of finished size. Final specifications remain subject to review.",
       },
       {
         question: "What should I send for a lipstick box quote?",
@@ -468,7 +468,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       },
     ],
     relatedSlugs: ["lip-gloss-boxes", "mascara-boxes", "cosmetic-subscription-boxes"],
-    reviewedAt: "2026-08-23",
+    reviewedAt: "2026-08-31",
   },
   {
     slug: "lip-gloss-boxes",
@@ -493,7 +493,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
     inserts: ["Custom inserts where required"],
     idealFor: ["Lip gloss tubes", "Beauty mini sets", "Retail gloss lines"],
-    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    moqNote: "Every UPG custom product family uses a 250-unit planning MOQ; final specifications remain subject to review.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
@@ -517,7 +517,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
     inserts: ["Custom inserts where required"],
     idealFor: ["Mascara tubes", "Slim cosmetic products", "Retail beauty lines"],
-    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    moqNote: "Every UPG custom product family uses a 250-unit planning MOQ; final specifications remain subject to review.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
@@ -545,7 +545,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
     inserts: ["Custom inserts where required"],
     idealFor: ["Fragrance launches", "Premium bottles", "Discovery sets", "Gift formats"],
-    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    moqNote: "Every UPG custom product family uses a 250-unit planning MOQ; final specifications remain subject to review.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
@@ -581,7 +581,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       "Retention programs",
       "PR-heavy subscription launches",
     ],
-    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    moqNote: "Every UPG custom product family uses a 250-unit planning MOQ; final specifications remain subject to review.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
@@ -609,7 +609,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
     inserts: ["Custom inserts where required"],
     idealFor: ["Influencer seeding", "Launch kits", "Press mailers", "Gifted collections"],
-    moqNote: "MOQ follows the selected product family and, for tuck or mailer boxes, the finished size.",
+    moqNote: "Every UPG custom product family uses a 250-unit planning MOQ; final specifications remain subject to review.",
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",

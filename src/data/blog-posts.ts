@@ -3,6 +3,7 @@ export interface BlogPost {
   title: string;
   metaTitle?: string;
   date: string;
+  updatedAt?: string;
   excerpt: string;
   content: string;
 }
@@ -12,6 +13,7 @@ export const blogPosts: BlogPost[] = [
     slug: "what-is-moq-custom-packaging",
     title: "What Is MOQ in Custom Packaging?",
     date: "2026-08-04",
+    updatedAt: "2026-08-31",
     excerpt:
       "MOQ is the minimum quantity available for a packaging format. See UPG's planning minimums for tuck boxes, mailer boxes, magnetic boxes, and Mylar bags.",
     content: `
@@ -19,19 +21,19 @@ MOQ means **minimum order quantity**. It is the lowest quantity available for a 
 
 ## UPG planning MOQs
 
-- **Tuck boxes:** 1,000 units when every finished dimension is 5 inches or less; 500 units over 5 inches through 10 inches; 250 units over 10 inches.
-- **Corrugated mailer boxes:** the same size-based minimums as tuck boxes.
-- **Magnetic boxes:** 250 units; final dimensions are confirmed after structural feasibility review.
-- **Collapsible magnetic boxes:** 250 units; final dimensions are confirmed after structural feasibility review.
-- **Mylar bags:** 500 units.
+- **Tuck boxes:** 250 units.
+- **Corrugated mailer boxes:** 250 units.
+- **Magnetic boxes:** 250 units.
+- **Collapsible magnetic boxes:** 250 units.
+- **Mylar bags:** 250 units.
 
-## Why dimensions matter
+## Why dimensions still matter
 
-Tuck and ear-lock mailer projects move through three planning brackets. Share all finished dimensions in your project enquiry so the correct bracket can be confirmed before pricing.
+Finished dimensions do not change UPG's 250-unit planning MOQ. They still affect structural feasibility, material use, packing, freight, and final pricing.
 
 ## A simple way to start
 
-Choose the product family, add the quantity and dimensions you need, and explain what the packaging will hold. UPG will review the structure, confirm the applicable MOQ, and prepare project pricing.
+Choose the product family, add the quantity and dimensions you need, and explain what the packaging will hold. UPG will review the structure, confirm the specification, and prepare project pricing.
     `.trim(),
   },
   {

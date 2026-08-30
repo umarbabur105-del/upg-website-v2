@@ -21,7 +21,7 @@ export interface IndustryGuide {
   reviewedAt: string;
 }
 
-const reviewedAt = "2026-08-13";
+const reviewedAt = "2026-08-31";
 
 export const industryGuides: IndustryGuide[] = [
   {
@@ -35,7 +35,7 @@ export const industryGuides: IndustryGuide[] = [
     heroDescription:
       "Plan a cereal-style outer carton around the finished size, quantity, board direction, artwork, packing method, and destination. UPG includes cereal-style seal-end boxes within its custom tuck box range.",
     metaDescription:
-      "Custom printed cereal boxes and cereal-style seal-end cartons with size-based UPG MOQs, approved tuck-box options, and project-specific pricing.",
+      "Custom printed cereal boxes and cereal-style seal-end cartons with UPG's 250-unit planning MOQ, approved tuck-box options, and project-specific pricing.",
     keywords: [
       "custom cereal boxes",
       "custom printed cereal boxes",
@@ -82,7 +82,7 @@ export const industryGuides: IndustryGuide[] = [
       "This guide covers custom printed cereal-style outer cartons within UPG's tuck box range.",
     compatibilityNote:
       "The intended contents, liner or inner pack, packing process, and market requirements must be reviewed before the final carton specification is approved.",
-    reviewedAt: "2026-08-23",
+    reviewedAt,
   },
   {
     slug: "custom-supplement-boxes",
@@ -94,7 +94,7 @@ export const industryGuides: IndustryGuide[] = [
     heroDescription:
       "Develop a printed tuck box around the supplement container, finished dimensions, panel content, quantity, artwork, and destination without treating the outer carton as the filled product.",
     metaDescription:
-      "Custom supplement boxes and printed outer cartons with size-based UPG MOQs, tuck-box structures, premium finishes, and project review.",
+      "Custom supplement boxes and printed outer cartons with UPG's 250-unit planning MOQ, tuck-box structures, premium finishes, and project review.",
     keywords: [
       "custom supplement boxes",
       "supplement packaging boxes",
@@ -153,7 +153,7 @@ export const industryGuides: IndustryGuide[] = [
     heroDescription:
       "Plan a printed tuck box around the finished soap dimensions, any inner wrap, artwork, quantity, opening direction, and destination.",
     metaDescription:
-      "Custom printed soap boxes with size-based UPG MOQs, tuck-box style choices, board and finish options, and human-reviewed pricing.",
+      "Custom printed soap boxes with UPG's 250-unit planning MOQ, tuck-box style choices, board and finish options, and human-reviewed pricing.",
     keywords: [
       "custom soap boxes",
       "custom printed soap boxes",
@@ -447,7 +447,7 @@ export const industryGuides: IndustryGuide[] = [
     heroDescription:
       "Select an approved tuck-box structure around the product dimensions, packing process, panel layout, quantity, printing, finishes, and destination.",
     metaDescription:
-      "Custom retail product boxes with UPG's tuck-box styles, size-based MOQs, board, print and finish options, and project-specific pricing.",
+      "Custom retail product boxes with UPG's tuck-box styles, 250-unit planning MOQ, board, print and finish options, and project-specific pricing.",
     keywords: [
       "custom retail boxes",
       "custom retail packaging boxes",
@@ -492,7 +492,7 @@ export const industryGuides: IndustryGuide[] = [
     ],
     scopeNote:
       "This guide covers custom printed retail outer cartons within UPG's tuck box range.",
-    reviewedAt: "2026-08-23",
+    reviewedAt,
   },
   {
     slug: "custom-food-pouches",
@@ -512,7 +512,7 @@ export const industryGuides: IndustryGuide[] = [
     heroDescription:
       "Compare stand-up, flat-bottom, three-side seal, spout, and rollstock formats while keeping film structure, compatibility, filling, quantity, and market requirements subject to project review.",
     metaDescription:
-      "Custom printed food pouches across stand-up, flat-bottom, three-side seal, spout and rollstock formats, with a 500-unit UPG MOQ and compatibility review.",
+      "Custom printed food pouches across stand-up, flat-bottom, three-side seal, spout and rollstock formats, with a 250-unit MOQ and compatibility review.",
     keywords: [
       "custom food pouches",
       "custom printed food bags",
@@ -560,7 +560,7 @@ export const industryGuides: IndustryGuide[] = [
       "This guide covers custom printed flexible packaging. Product formulation, filling, shelf-life validation, and market approval are not automatic parts of the packaging quote.",
     compatibilityNote:
       "Film structure, contents, process, barrier, food-contact, storage, and destination-market requirements must be confirmed before approval.",
-    reviewedAt: "2026-08-23",
+    reviewedAt,
   },
   {
     slug: "custom-supplement-pouches",
@@ -579,7 +579,7 @@ export const industryGuides: IndustryGuide[] = [
     heroDescription:
       "Compare approved flexible formats around the contents, target fill, closure, film and barrier brief, artwork, quantity, intended market, and destination.",
     metaDescription:
-      "Custom printed supplement pouches with a 500-unit UPG MOQ, stand-up, flat-bottom, three-side seal and rollstock options, and compatibility review.",
+      "Custom printed supplement pouches with a 250-unit UPG planning MOQ, stand-up, flat-bottom, three-side seal and rollstock options, and compatibility review.",
     keywords: [
       "custom supplement pouches",
       "supplement mylar bags",
@@ -627,7 +627,7 @@ export const industryGuides: IndustryGuide[] = [
       "This guide covers custom printed flexible packaging. Supplement production, filling, regulatory copy creation, and market approval are outside the standard offer.",
     compatibilityNote:
       "Film structure, contents, filling process, barrier, storage, and market requirements must be confirmed before approval.",
-    reviewedAt: "2026-08-23",
+    reviewedAt,
   },
   {
     slug: "custom-beverage-pouches",
@@ -639,7 +639,7 @@ export const industryGuides: IndustryGuide[] = [
     heroDescription:
       "Plan a spout or other approved flexible format around the beverage contents, fill volume, spout, film and barrier brief, process, artwork, quantity, intended market, and destination.",
     metaDescription:
-      "Custom printed beverage and spout pouches with a 500-unit UPG MOQ, project-specific film, spout, print, finish, and compatibility review.",
+      "Custom printed beverage and spout pouches with a 250-unit UPG planning MOQ, project-specific film, spout, print, finish, and compatibility review.",
     keywords: [
       "custom beverage pouches",
       "custom spout pouches",
@@ -762,7 +762,7 @@ export const industryGuides: IndustryGuide[] = [
     heroDescription:
       "Compare UPG's current pouch and rollstock formats around the contents, target fill, closure, filling process, artwork, quantity, intended market, and delivery destination.",
     metaDescription:
-      "Custom printed pet food and treat packaging in stand-up, flat-bottom, three-side seal, and rollstock formats, with a 500-unit UPG MOQ and project review.",
+      "Custom pet food and treat packaging in stand-up, flat-bottom, three-side seal, and rollstock formats, with a 250-unit planning MOQ and project review.",
     keywords: [
       "custom pet food packaging",
       "custom dog treat bags",
@@ -810,7 +810,7 @@ export const industryGuides: IndustryGuide[] = [
       "This guide covers custom printed flexible packaging. Pet food or treat production, filling, product claims, shelf-life validation, and market approval are outside the standard packaging quote.",
     compatibilityNote:
       "Film structure, contents, process, barrier, storage, testing, and destination-market requirements must be confirmed before final approval.",
-    reviewedAt: "2026-08-24",
+    reviewedAt,
   },
   {
     slug: "custom-snack-packaging",
@@ -877,7 +877,7 @@ export const industryGuides: IndustryGuide[] = [
       "This guide covers custom printed flexible packaging and approved tuck-box outer cartons. Product manufacture, filling, wrapping, shelf-life validation, and market approval are outside the standard packaging quote.",
     compatibilityNote:
       "Contents, film or board structure, filling process, barrier, storage, testing, and destination-market requirements must be confirmed before final approval.",
-    reviewedAt: "2026-08-24",
+    reviewedAt,
   },
   {
     slug: "custom-toy-packaging",
@@ -949,7 +949,7 @@ export const industryGuides: IndustryGuide[] = [
       "This guide covers custom printed tuck boxes, branded corrugated ear-lock mailers, and magnetic presentation boxes. Standard shipping cartons, master cartons, RSC cases, product assembly, packout, and fulfillment are outside the standard offer.",
     compatibilityNote:
       "Product fit, insert performance, handling, transport, testing, and destination-market requirements must be supplied and reviewed when they apply.",
-    reviewedAt: "2026-08-24",
+    reviewedAt,
   },
 ];
 

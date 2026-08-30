@@ -164,7 +164,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updatedAt ?? post.date,
     mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
     author: {
       "@type": "Organization",

@@ -41,7 +41,7 @@ const tools = [
     href: "/tools/packaging-spec-builder",
     cta: "Build a specification",
     details: [
-      "Exact size-based MOQ rules",
+      "One 250-unit MOQ across all product families",
       "Inch, centimeter, and millimeter support",
       "Shareable and downloadable planning brief",
       "Quote-form specification handoff",

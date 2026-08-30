@@ -57,7 +57,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
     },
     {
       question: `What is the minimum order for ${guide.shortName.toLowerCase()}?`,
-      answer: `${moqAnswer}. The selected product family and, where applicable, finished dimensions control the planning MOQ.`,
+      answer: `${moqAnswer}. Every UPG custom product family uses the same 250-unit planning MOQ; finished dimensions remain part of feasibility and specification review.`,
     },
     {
       question: "Can UPG publish an instant price from this guide?",
