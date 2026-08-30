@@ -92,7 +92,7 @@ The release queue uses a 100-point score:
 
 Current search results contain active publisher and manufacturer coverage for stand-up versus flat-bottom pouches, rollstock versus finished pouches, and tuck boxes versus mailer boxes. That is a SERP-coverage signal, not monthly volume or proof that each query will convert.
 
-The local release candidate adds one visible comparison hub plus eight distinct buyer guides:
+The production release added one visible comparison hub plus eight distinct buyer guides:
 
 1. Tuck Boxes vs Mailer Boxes
 2. Magnetic Boxes vs Collapsible Magnetic Boxes
@@ -142,9 +142,9 @@ This follows the earlier competitor-coverage proxy for gift, candle, jewelry, re
 
 Commit `ee942ce` released the three hubs with exact-SHA Vercel success and 85/85 live sitemap URLs returning HTTP 200. Fresh Search Console URL Inspection on 2026-08-30 reports 83 of 85 indexed. `/industries/beauty-personal-care-packaging` remains unknown to Google and `/industries/supplement-packaging` is discovered but not indexed; neither URL is treated as indexed until the API confirms it.
 
-## Packing calculator authority asset — local release candidate, 2026-08-30
+## Packing calculator authority asset — production release, 2026-08-30
 
-The Packing CBM & Weight Calculator targets practical planning intent with one canonical tool instead of publishing keyword-variant articles. It calculates carton count, estimated outer-carton dimensions, CBM, dimensional weight, and optional net and gross weight from user-entered dimensions, quantity, manual layout, allowance, and measured weights. The page explicitly separates a planning estimate from a freight quote, final carton specification, material recommendation, or carrier approval. Search and conversion measurement begins only after production release; no traffic or ranking outcome is claimed from local implementation.
+The Packing CBM & Weight Calculator targets practical planning intent with one canonical tool instead of publishing keyword-variant articles. It calculates carton count, estimated outer-carton dimensions, CBM, dimensional weight, and optional net and gross weight from user-entered dimensions, quantity, manual layout, allowance, and measured weights. The page explicitly separates a planning estimate from a freight quote, final carton specification, material recommendation, or carrier approval. Commit `daa69df` is live with exact-SHA Vercel success, 86/86 runtime sitemap proof, AI-discovery and product-catalog coverage, complete quote-prefill browser proof, and IndexNow HTTP 200 acceptance. Search and conversion measurement begins from this production baseline; no traffic, indexing, or ranking outcome is claimed from the release itself.
 
 ## Monthly volume completion path
 

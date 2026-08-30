@@ -1,6 +1,6 @@
 # AI Discovery and Citation Operations
 
-Last checked: 2026-08-21
+Last checked: 2026-08-30
 
 This document separates crawler access, search indexing, AI citations, and product-feed eligibility. None of these systems guarantees inclusion, ranking, citation, or a lead.
 
@@ -79,8 +79,9 @@ Next checks:
 
 1. Bingbot received HTTP 200 from the live homepage and the ownership key returned HTTP 200 on 2026-08-21.
 2. All 67 canonical live-sitemap URLs were accepted by IndexNow with HTTP 200 on 2026-08-21.
-3. Re-check URL Inspection, Site Explorer, Search Performance, Backlinks, Recommendations, and AI Performance after Bing processes the submission.
-4. Use the cited-page and grounding-query reports to choose content improvements when Bing exposes a sufficient sample.
+3. `/tools`, `/tools/packing-cbm-weight-calculator`, `/industries/beauty-personal-care-packaging`, and `/industries/supplement-packaging` were accepted by IndexNow with HTTP 200 after production verification on 2026-08-30.
+4. Re-check URL Inspection, Site Explorer, Search Performance, Backlinks, Recommendations, and AI Performance after Bing processes the submission.
+5. Use the cited-page and grounding-query reports to choose content improvements when Bing exposes a sufficient sample.
 
 ## ChatGPT product discovery
 
@@ -92,7 +93,7 @@ Official reference: [OpenAI Agentic Commerce onboarding](https://developers.open
 
 ## Remaining citation work
 
-1. The UPG Packaging Spec and MOQ Builder is live; measure its copy, download, share, print, and quote-handoff events before expanding it.
+1. The UPG Packaging Spec and MOQ Builder and Packing CBM & Weight Calculator are live; measure their copy, download, share, print, calculation-result, and quote-handoff events before expanding either tool.
 2. Add expert-reviewed, answer-first technical pages using UPG-approved product knowledge and measured query gaps.
 3. Publish original structure diagrams, comparison tables, and downloadable specification templates after product-structure approval.
 4. Third-party citation outreach is paused by owner instruction; preserve the researched queue without sending or submitting anything.
