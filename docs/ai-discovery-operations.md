@@ -1,6 +1,6 @@
 # AI Discovery and Citation Operations
 
-Last checked: 2026-08-30
+Last checked: 2026-08-31
 
 This document separates crawler access, search indexing, AI citations, and product-feed eligibility. None of these systems guarantees inclusion, ranking, citation, or a lead.
 
@@ -13,7 +13,7 @@ This document separates crawler access, search indexing, AI citations, and produ
 | Perplexity | `PerplexityBot` and `Perplexity-User` in `robots.txt` | Explicitly allowed |
 | Google AI features | Google Search crawl, index, and snippet eligibility | Allowed through the general crawler rule |
 | Microsoft Copilot and Bing AI | Bing crawl/index eligibility | Allowed through the general crawler rule |
-| Machine-readable references | `/llms.txt`, `/llms-full.txt`, `/agents.md`, `/product-catalog.json`, and `/feeds/products.tsv` | Published by the application |
+| Machine-readable references | `/llms.txt`, `/llms-full.txt`, `/agents.md`, `/product-catalog.json`, `/feeds/products.tsv`, and `/custom-packaging-pricing.md` | Published by the application |
 | Search discovery | `/sitemap.xml` | Published by the application |
 
 `llms.txt` and the public catalog are supplementary references. They do not replace crawlable visible pages, indexing, original content, external authority, or a reliable page response.
@@ -80,8 +80,9 @@ Next checks:
 1. Bingbot received HTTP 200 from the live homepage and the ownership key returned HTTP 200 on 2026-08-21.
 2. All 67 canonical live-sitemap URLs were accepted by IndexNow with HTTP 200 on 2026-08-21.
 3. `/tools`, `/tools/packing-cbm-weight-calculator`, `/industries/beauty-personal-care-packaging`, and `/industries/supplement-packaging` were accepted by IndexNow with HTTP 200 after production verification on 2026-08-30.
-4. Re-check URL Inspection, Site Explorer, Search Performance, Backlinks, Recommendations, and AI Performance after Bing processes the submission.
-5. Use the cited-page and grounding-query reports to choose content improvements when Bing exposes a sufficient sample.
+4. `/custom-packaging-pricing` and the five core product pages were accepted by IndexNow with HTTP 200 after exact-SHA production verification on 2026-08-31.
+5. Re-check URL Inspection, Site Explorer, Search Performance, Backlinks, Recommendations, and AI Performance after Bing processes the submission.
+6. Use the cited-page and grounding-query reports to choose content improvements when Bing exposes a sufficient sample.
 
 ## ChatGPT product discovery
 
@@ -93,7 +94,7 @@ Official reference: [OpenAI Agentic Commerce onboarding](https://developers.open
 
 ## Remaining citation work
 
-1. The UPG Packaging Spec and MOQ Builder and Packing CBM & Weight Calculator are live; measure their copy, download, share, print, calculation-result, and quote-handoff events before expanding either tool.
+1. The UPG Packaging Spec and MOQ Builder, Packing CBM & Weight Calculator, and answer-first pricing/MOQ source are live; measure their discovery, engagement, and quote-handoff events before expanding them.
 2. Add expert-reviewed, answer-first technical pages using UPG-approved product knowledge and measured query gaps.
 3. Publish original structure diagrams, comparison tables, and downloadable specification templates after product-structure approval.
 4. Third-party citation outreach is paused by owner instruction; preserve the researched queue without sending or submitting anything.

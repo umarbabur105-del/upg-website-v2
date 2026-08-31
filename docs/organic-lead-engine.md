@@ -1,6 +1,6 @@
 # UPG Organic Lead Engine
 
-Last reviewed: 2026-08-30
+Last reviewed: 2026-08-31
 
 ## Business objective
 
@@ -175,6 +175,20 @@ The gate checks rendered pages for required and unique titles and descriptions, 
 - Backlink distribution has started: 50 researched prospects, 13 still marked ready for a personalized pitch, and 2 individually approved editorial emails sent and awaiting response (FDPP and Packaging World). Further outreach is on hold.
 
 The immediate constraints are non-brand click-through, authority, two confirmed Google indexing gaps plus the new tool awaiting later inspection, incomplete lead qualification, and live physical-fulfillment readiness. Crawlability and the protected sandbox payment pipeline are healthy, but indexing is not described as complete without URL Inspection proof. While outreach is paused, the active lane is measurement, query-led content improvement, useful planning tools, and conversion-path verification.
+
+### Site-first pricing and MOQ authority page — production release, 2026-08-31
+
+Commit `5c9f3a1` adds an owned-site commercial source at `/custom-packaging-pricing`; it does not depend on Merchant Center eligibility. The page gives buyers and retrieval systems one answer-first reference for:
+
+- the 250-unit planning MOQ across all five custom product families;
+- the six inputs that can change a custom-production quote;
+- the project details needed for a useful first review;
+- the commercial, artwork, proofing, freight, tax, and delivery details that the final written quote controls;
+- the truthful boundary between quote-led custom production and the two separate $19.99 fixed-price sample kits.
+
+The route includes WebPage, ItemList, FAQPage, and BreadcrumbList structured data, direct links to all five product sources, a `text/markdown` alternate at `/custom-packaging-pricing.md`, global footer discovery, and backlinks from every core product page. `llms.txt`, `llms-full.txt`, `agents.md`, and `product-catalog.json` expose the same source without changing the quote-led commercial model.
+
+Release proof passed: ESLint, TypeScript, 11 regression tests, a 107-page Next.js production build, 84 canonical rendered sitemap pages plus 3 dynamic pages, the expanded commercial-page audit contract, production-mode HTTP checks, exact remote-main SHA, Vercel success, and live apex checks for HTML, canonical metadata, schema, Markdown content type, product backlinks, sitemap, `llms.txt`, and catalog discovery. IndexNow accepted the new route and five changed product pages with HTTP 200. Google indexing, rankings, AI citations, recommendations, and leads remain measurement outcomes rather than release claims.
 
 ### Buyer-decision cluster — production release, 2026-08-23
 
