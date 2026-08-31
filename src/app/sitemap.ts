@@ -36,6 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95,
     },
     {
+      url: `${SITE_URL}/custom-packaging-pricing`,
+      lastModified: CONTENT_UPDATED_AT,
+      changeFrequency: "monthly",
+      priority: 0.92,
+    },
+    {
       url: `${SITE_URL}/packaging-styles`,
       lastModified: STYLE_LIBRARY_UPDATED_AT,
       changeFrequency: "weekly",

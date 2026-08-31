@@ -82,7 +82,19 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                 >
                   See Options
                 </Link>
+                <Link
+                  href="/custom-packaging-pricing"
+                  className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
+                >
+                  Pricing &amp; MOQ Guide
+                </Link>
               </div>
+              {product.reviewedAt ? (
+                <p className="mt-5 text-xs text-muted-foreground">
+                  Product facts reviewed {product.reviewedAt}. Final written
+                  project terms control pricing and production.
+                </p>
+              ) : null}
             </div>
 
             <div className="lg:col-span-6">

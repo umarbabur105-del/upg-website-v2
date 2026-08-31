@@ -42,6 +42,7 @@ export const siteConfig = {
   cta: { label: "Get a Quote", href: "/get-a-quote" },
   footerColumns: {
     productLinks: [
+      { label: "Pricing & MOQ", href: "/custom-packaging-pricing" },
       { label: "Packaging Style Library", href: "/packaging-styles" },
       { label: "Packaging Comparisons", href: "/compare" },
       { label: "Materials & Finishes", href: "/materials-finishes" },

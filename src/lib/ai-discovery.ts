@@ -18,6 +18,10 @@ import {
   type ProductStyleGuide,
 } from "@/data/product-styles";
 import { products, type Product } from "@/data/products";
+import {
+  commercialPricingFaqs,
+  commercialTerms,
+} from "@/data/commercial-terms";
 import { boxSampleKit, sampleKits } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
 
@@ -27,6 +31,8 @@ const toolsUrl = `${siteConfig.url}/tools`;
 const styleLibraryUrl = `${siteConfig.url}/packaging-styles`;
 const comparisonLibraryUrl = `${siteConfig.url}/compare`;
 const industriesUrl = `${siteConfig.url}/industries`;
+const commercialTermsUrl = `${siteConfig.url}${commercialTerms.path}`;
+const commercialTermsMarkdownUrl = `${siteConfig.url}${commercialTerms.markdownPath}`;
 const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
 const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
 const artworkPreflightUrl = `${siteConfig.url}/tools/packaging-artwork-preflight`;
@@ -85,6 +91,78 @@ function sampleKitCatalogEntry(kit: (typeof sampleKits)[number]) {
     url: kit.url,
     image: `${siteConfig.url}${kit.image}`,
   };
+}
+
+export function buildCommercialTermsMarkdown() {
+  const productLines = products
+    .map(
+      (product) =>
+        `- [${product.name}](${productUrl(product)}): planning MOQ ${product.moq}. Best for: ${product.bestFor}.`
+    )
+    .join("\n");
+  const factorLines = commercialTerms.pricingFactors
+    .map((factor) => `- **${factor.title}:** ${factor.description}`)
+    .join("\n");
+  const inputLines = commercialTerms.quoteInputs
+    .map((input, index) => `${index + 1}. ${input}`)
+    .join("\n");
+  const controlLines = commercialTerms.writtenQuoteControls
+    .map((item) => `- ${item}`)
+    .join("\n");
+  const faqSections = commercialPricingFaqs
+    .map((item) => `### ${item.question}\n\n${item.answer}`)
+    .join("\n\n");
+  const sampleKitLines = sampleKits
+    .map(
+      (kit) =>
+        `- [${kit.name}](${kit.url}): $${kit.price.toFixed(2)} ${kit.currency}. ${kit.creditText}`
+    )
+    .join("\n");
+
+  return `# Custom Packaging Pricing, MOQ, and Quote Process
+
+Canonical page: ${commercialTermsUrl}
+Content reviewed: ${commercialTerms.reviewedAt}
+Provider: ${siteConfig.name}
+Market: ${siteConfig.market}
+
+## Direct answer
+
+${commercialTerms.quickAnswer}
+
+## What changes a custom-packaging quote
+
+${factorLines}
+
+## What to send for quote review
+
+${inputLines}
+
+## Planning MOQ by product family
+
+${productLines}
+
+## What the final written quote controls
+
+${controlLines}
+
+## Fixed-price sample kits
+
+${sampleKitLines}
+
+The two kits are purchased separately. Custom production pricing remains separate and requires a written quote.
+
+## Frequently asked questions
+
+${faqSections}
+
+## Public actions
+
+- Request a custom quote: ${quoteUrl}
+- Build a packaging specification: ${specBuilderUrl}
+- Compare product families: ${formatFinderUrl}
+- Browse all products: ${siteConfig.url}/products
+`;
 }
 
 export function buildLlmsText() {
@@ -161,6 +239,8 @@ export function buildLlmsText() {
 - Product catalog TSV: ${siteConfig.url}/feeds/products.tsv
 - Google Merchant Sample Kit feed: ${siteConfig.url}/feeds/google-merchant.tsv
 - Agent guidance: ${siteConfig.url}/agents.md
+- Custom packaging pricing and MOQ: ${commercialTermsUrl}
+- Pricing and MOQ Markdown: ${commercialTermsMarkdownUrl}
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
@@ -228,6 +308,7 @@ Final dimensions remain subject to structural feasibility. Product compatibility
 - Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 - Packing CBM & Weight Calculator: ${packingCalculatorUrl}
 - Start a project: ${quoteUrl}
+- Custom packaging pricing and MOQ: ${commercialTermsUrl}
 - Cosmetic packaging hub: ${siteConfig.url}/cosmetics
 - Materials and finishes: ${siteConfig.url}/materials-finishes
 - Sample Kit hub: ${siteConfig.url}/samples
@@ -423,6 +504,8 @@ The free Packaging Artwork Preflight Checker at ${artworkPreflightUrl} organizes
 
 The free Packing CBM & Weight Calculator at ${packingCalculatorUrl} estimates master-carton count, packed carton dimensions, total CBM, measured net and gross weight, and dimensional weight from a buyer-supplied packing layout. It does not guess material weight, publish freight pricing, specify a shipping carton, or approve a carrier plan.
 
+The commercial guide at ${commercialTermsUrl} explains the 250-unit planning MOQ, the factors that change custom-production pricing, the inputs needed for review, and the written terms that control each project. A Markdown alternate is available at ${commercialTermsMarkdownUrl}.
+
 ## Fixed-price sample kits
 
 ${sampleKitSections}
@@ -488,6 +571,8 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Product catalog TSV: ${siteConfig.url}/feeds/products.tsv
 - Google Merchant Sample Kit feed: ${siteConfig.url}/feeds/google-merchant.tsv
 - Agent guidance: ${siteConfig.url}/agents.md
+- Custom packaging pricing and MOQ: ${commercialTermsUrl}
+- Pricing and MOQ Markdown: ${commercialTermsMarkdownUrl}
 - Packaging planning tools: ${toolsUrl}
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Spec & MOQ Builder: ${specBuilderUrl}
@@ -618,6 +703,7 @@ ${sampleKitLines}
 - Browse real packaging styles: ${styleLibraryUrl}
 - Compare packaging formats and buying paths: ${comparisonLibraryUrl}
 - Browse industry and product application guides: ${industriesUrl}
+- Review custom packaging pricing and the 250-unit planning MOQ: ${commercialTermsUrl}
 - Compare approved product families: ${formatFinderUrl}
 - Build a packaging specification and check the planning MOQ: ${specBuilderUrl}
 - Estimate carton count, CBM, measured weight, and dimensional weight: ${packingCalculatorUrl}
@@ -651,6 +737,9 @@ export function buildProductCatalog() {
       ordering: "Made to specification; human-reviewed project enquiry",
       pricing: siteConfig.pricingModel,
       responseTarget: siteConfig.responseTarget,
+      planningMoq: "250 units for every custom product family",
+      guideUrl: commercialTermsUrl,
+      markdownGuideUrl: commercialTermsMarkdownUrl,
       requestQuoteUrl: quoteUrl,
     },
     planningTool: {
@@ -839,6 +928,8 @@ export function buildProductCatalog() {
       conciseReference: `${siteConfig.url}/llms.txt`,
       fullReference: `${siteConfig.url}/llms-full.txt`,
       agentGuidance: `${siteConfig.url}/agents.md`,
+      commercialTerms: commercialTermsUrl,
+      commercialTermsMarkdown: commercialTermsMarkdownUrl,
       toolsHub: toolsUrl,
       packagingStyleLibrary: styleLibraryUrl,
       packagingComparisonLibrary: comparisonLibraryUrl,

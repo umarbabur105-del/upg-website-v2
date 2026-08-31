@@ -234,6 +234,7 @@ for (const [route, requiredPrefixes] of coreProductContracts) {
 const moqContractRoutes = [
   ...coreProductContracts.keys(),
   "/faq",
+  "/custom-packaging-pricing",
 ];
 
 for (const route of moqContractRoutes) {
@@ -249,6 +250,55 @@ for (const route of moqContractRoutes) {
     if (page.html.includes(staleMoq)) {
       failures.push(`${route}: contains stale MOQ copy (${staleMoq})`);
     }
+  }
+}
+
+const commercialTermsPage = pages.find(
+  (page) => page.route === "/custom-packaging-pricing"
+);
+
+if (!commercialTermsPage) {
+  failures.push(
+    "/custom-packaging-pricing: missing rendered commercial terms page"
+  );
+} else {
+  for (const schemaType of ["WebPage", "ItemList", "FAQPage", "BreadcrumbList"]) {
+    if (!commercialTermsPage.html.includes(`"@type":"${schemaType}"`)) {
+      failures.push(
+        `/custom-packaging-pricing: missing ${schemaType} JSON-LD`
+      );
+    }
+  }
+  for (const marker of [
+    "250 units",
+    "Structure and dimensions",
+    "Delivery destination",
+    "final written quote",
+  ]) {
+    if (!commercialTermsPage.html.includes(marker)) {
+      failures.push(
+        `/custom-packaging-pricing: missing commercial marker "${marker}"`
+      );
+    }
+  }
+  if (!commercialTermsPage.html.includes('type="text/markdown"')) {
+    failures.push(
+      "/custom-packaging-pricing: missing Markdown alternate discovery link"
+    );
+  }
+  for (const route of coreProductContracts.keys()) {
+    if (!commercialTermsPage.html.includes(`href="${route}"`)) {
+      failures.push(
+        `/custom-packaging-pricing: missing product source link to ${route}`
+      );
+    }
+  }
+}
+
+for (const route of coreProductContracts.keys()) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (page && !page.html.includes('href="/custom-packaging-pricing"')) {
+    failures.push(`${route}: missing pricing and MOQ guide link`);
   }
 }
 

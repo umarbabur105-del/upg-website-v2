@@ -177,6 +177,18 @@ export default function RootLayout({
         />
         <link
           rel="alternate"
+          type="text/plain"
+          href="/llms-full.txt"
+          title="UPG full machine-readable reference"
+        />
+        <link
+          rel="alternate"
+          type="text/markdown"
+          href="/agents.md"
+          title="UPG public agent guidance"
+        />
+        <link
+          rel="alternate"
           type="application/json"
           href="/product-catalog.json"
           title="UPG machine-readable product catalog"
