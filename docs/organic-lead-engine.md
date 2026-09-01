@@ -295,6 +295,41 @@ The original release added one planning route at `/tools/packing-cbm-weight-calc
 
 Commit `daa69df` released WebApplication, FAQPage, and BreadcrumbList structured data; sitemap and AI-discovery coverage; copy and complete prefilled quote handoffs; unit conversion; a pure calculation library; four deterministic calculation tests; and a rendered SEO contract. Production proof passed with exact-SHA Vercel success, 4/4 calculation tests, 3/3 organic-report regression tests, ESLint, TypeScript, a 105-page Next.js build, 83 canonical rendered audit pages plus 3 dynamic runtime pages, 86/86 live sitemap URLs returning HTTP 200, all four AI-discovery endpoints, product catalog schema 2.6, desktop and mobile browser verification, zero horizontal overflow at 375px, and HTTP 200 IndexNow acceptance for four changed or pending URLs.
 
+### Buyer-guide authority cluster — production release, 2026-09-01
+
+Commit `fb3f30e` released a truthful visual resource cluster that covers the
+authority gaps UPG can address without public dieline downloads, customer
+reviews, or client stories:
+
+- seven new buyer guides and three upgraded guides across project planning,
+  structure and delivery, artwork and print, and materials and finishes;
+- answer-first pages with visual decision cards, concise tables or checklists,
+  visible FAQs, primary sources where applicable, and commercial next steps;
+- explicit concept-image disclosures and no Review or AggregateRating schema;
+- reciprocal links from Pricing & MOQ, Samples, Materials & Finishes, About,
+  the footer, related guides, and the buyer-guide hub;
+- BlogPosting, FAQPage, and BreadcrumbList schema on every guide plus
+  CollectionPage, ItemList, and BreadcrumbList schema on the hub;
+- buyer-guide discovery in `llms.txt`, `llms-full.txt`, `agents.md`, and product
+  catalog schema version 2.8;
+- a rendered SEO gate that fails if the ten-guide architecture, visible answer
+  system, schema, image disclosures, primary-source requirement, AI discovery,
+  or no-review boundary regresses.
+
+Release proof passed ESLint, TypeScript, 12 regression tests, a 111-page Next.js
+build, the rendered SEO audit, a 91/91 local runtime crawl, desktop and mobile
+browser review, and representative mobile Lighthouse scores of 99 performance
+and 100 accessibility, best practices, SEO, and agentic browsing. The exact
+remote commit reached Vercel production Ready; the canonical hub, guide,
+sitemap, quote route, and four AI discovery sources returned HTTP 200; all 91
+sitemap URLs returned HTTP 200 from the exact production alias; and IndexNow
+accepted 15 changed URLs with HTTP 200.
+
+Fresh canonical responses were complete but the Cloudflare edge delayed initial
+bytes by about 20 seconds during verification. That latency remains an
+operations follow-up. Publication does not prove indexing, ranking, AI citation,
+recommendation, or leads.
+
 ### Phase 1 — Product-style lead cluster
 
 - Publish the 12 approved style pages and the Style Library.

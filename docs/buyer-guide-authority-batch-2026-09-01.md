@@ -100,9 +100,33 @@ The production candidate passed:
   practices 100, SEO 100, agentic browsing 100, LCP 2.2 seconds, CLS 0, TBT 10
   milliseconds, and Speed Index 1.2 seconds.
 
-## Release boundary
+## Production release proof
 
-Local proof does not establish production deployment, indexing, ranking, AI
-citation, recommendation, or lead generation. Exact remote-main, Vercel, live
-URL, sitemap, schema, and AI-source verification are required before this batch
-is described as live.
+Commit `fb3f30e4221b412b7abf5226cbdc4f17508378a1` was pushed to remote `main`.
+Vercel production deployment `dpl_FjDMUK3L4LEeRxqnhZs8fLxjA6pM` reached Ready
+for that exact commit and assigned both canonical domain aliases.
+
+Fresh production verification established:
+
+- the canonical `/blog` hub returned HTTP 200 and exposed all ten distinct
+  buyer-guide routes with CollectionPage, ItemList, and BreadcrumbList schema;
+- the representative shipping guide returned complete HTTP 200 HTML with its
+  direct answer, concept-image disclosure, BlogPosting, FAQPage, and
+  BreadcrumbList schema;
+- the canonical sitemap returned HTTP 200 with 91 URLs;
+- all 91 sitemap routes returned HTTP 200 from the exact public Vercel
+  production alias;
+- `/get-a-quote`, `llms.txt`, `llms-full.txt`, `agents.md`, and
+  `product-catalog.json` returned HTTP 200 from the canonical domain;
+- the catalog returned valid JSON with schema version 2.8 and buyer-guide data;
+- the `www` guide-hub URL permanently redirected to the apex URL with HTTP 308;
+- IndexNow accepted the hub, ten guides, and four updated commercial source
+  pages in one 15-URL submission with HTTP 200.
+
+The canonical Cloudflare edge took about 20 seconds to begin several fresh
+responses during release verification even though complete HTTP 200 bodies were
+returned. That latency is an operations follow-up, not a failed deployment.
+
+This proof establishes publication and crawlable technical delivery only. It
+does not establish Google indexing, ranking, AI citation, recommendation, or
+lead generation; those remain measured outcomes.
