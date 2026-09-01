@@ -30,7 +30,7 @@ The third-party `is-agentic` scan returned `scan_failed`, so this batch does not
 
 The new homepage block reuses approved product and industry visuals and keeps the copy compact. No calculator, interactive tool, new product family, unsupported review, invented credential, fixed custom-production price, or unapproved external action is introduced.
 
-## Candidate verification
+## Verification
 
 The local production candidate passed:
 
@@ -42,7 +42,17 @@ The local production candidate passed:
 - desktop and 375-pixel mobile browser review, including 7 visible industry cards, one H1, no missing image alternative text, and zero horizontal overflow;
 - local production Lighthouse: performance 96, accessibility 100, best practices 100, SEO 100, LCP 2.7 seconds, CLS 0, TBT 20 ms, and a confirmed high-priority LCP image request.
 
-Release, exact remote commit, production deployment, live route checks, and IndexNow acceptance must be recorded only after each is proven.
+Implementation commit `5d2b8fcba145f36ca88f992cb69f093d088dd67e` was pushed to remote `main` and the matching Vercel production deployment reached `READY`. Production verification confirmed:
+
+- all 84 canonical sitemap URLs returned HTTP 200 on the canonical apex origin;
+- the runtime `/get-a-quote` route returned HTTP 200;
+- the live homepage rendered one H1, the correct canonical URL, 5 visible `MOQ: 250 units` labels, 7 visual industry cards, 13 images with no missing alternative text, 5 quote links, and Organization, MerchantReturnPolicy, WebSite, WebPage, and ItemList schema;
+- the homepage response returned all four AI-discovery `Link` headers;
+- `llms.txt`, `llms-full.txt`, `agents.md`, `product-catalog.json`, and `sitemap.xml` returned HTTP 200 with their intended content types;
+- `www` returned HTTP 308 to the canonical apex homepage;
+- IndexNow accepted the 10-URL priority recrawl batch with HTTP 200.
+
+The release proof does not claim that Google has refreshed its cached snippets. Google URL Inspection or a manual indexing request remains a separate owner-confirmed action.
 
 ## Measurement boundary
 

@@ -37,7 +37,7 @@ The operator network also produced intermittent TLS failures and 12-second timeo
 
 External search results rechecked on 2026-09-01 still showed older homepage and MOQ wording. Current live product and pricing sources publish a 250-unit planning MOQ, and the `www` host permanently redirects to the canonical apex host. The search results are therefore stale copies rather than current live-page truth. Faster change notification and recrawl monitoring are required, but neither guarantees a refreshed snippet, indexing, ranking, citation, or lead.
 
-The homepage release candidate also advertises `llms.txt`, `llms-full.txt`, `agents.md`, and `product-catalog.json` through HTTP `Link` headers. These headers improve source discovery but remain supplementary to visible crawlable pages.
+The homepage released in implementation commit `5d2b8fc` also advertises `llms.txt`, `llms-full.txt`, `agents.md`, and `product-catalog.json` through HTTP `Link` headers. These headers improve source discovery but remain supplementary to visible crawlable pages.
 
 ## IndexNow
 
@@ -88,8 +88,9 @@ Next checks:
 4. `/custom-packaging-pricing` and the five core product pages were accepted by IndexNow with HTTP 200 after exact-SHA production verification on 2026-08-31.
 5. All 87 canonical sitemap URLs were accepted by IndexNow with HTTP 200 after the 2026-09-01 sitewide organic and AI-readiness release.
 6. Search Console accepted a manual indexing request for `/custom-packaging-pricing` after owner confirmation. Two controlled requests for `/tools/packing-cbm-weight-calculator` returned Google's temporary submission error; the calculator is not claimed as manually queued or indexed.
-7. Re-check URL Inspection, Site Explorer, Search Performance, Backlinks, Recommendations, and AI Performance after Bing processes the submission.
-8. Use the cited-page and grounding-query reports to choose content improvements when Bing exposes a sufficient sample.
+7. The homepage, pricing source, industry index, six commercial industry hubs, and Pet Products guide were accepted by IndexNow with HTTP 200 after the 2026-09-01 homepage industry-discovery release.
+8. Re-check URL Inspection, Site Explorer, Search Performance, Backlinks, Recommendations, and AI Performance after Bing processes the submission.
+9. Use the cited-page and grounding-query reports to choose content improvements when Bing exposes a sufficient sample.
 
 ## ChatGPT product discovery
 

@@ -173,7 +173,7 @@ The gate checks rendered pages for required and unique titles and descriptions, 
 
 The immediate constraints are non-brand click-through, authority, incomplete lead qualification, and live physical-fulfillment readiness. Crawlability and the protected sandbox payment pipeline are healthy, but indexing is not described as complete without URL Inspection proof. The active lane combines approval-gated authority outreach, measurement, query-led content improvement, accurate planning tools, and conversion-path verification.
 
-### Homepage industry discovery and agent-readable routing — release candidate, 2026-09-01
+### Homepage industry discovery and agent-readable routing — production release, 2026-09-01
 
 This owned-site batch makes the homepage a visual discovery layer for all seven industry markets without creating duplicate keyword pages or depending on Merchant Center:
 
@@ -183,7 +183,9 @@ This owned-site batch makes the homepage a visual discovery layer for all seven 
 - the rendered gate now protects image alternative text, homepage schema and industry links, a minimum of two separate inbound sitemap pages per rendered route, and the AI-discovery headers;
 - the mobile hero image receives explicit high fetch priority because it is the largest-contentful element.
 
-The source audit found 84 canonical sitemap routes, no orphaned rendered routes, at least two inbound sitemap pages for every non-home rendered route, and 627 rendered images with no missing or empty alternative text. Current local production proof includes ESLint, TypeScript, the 104-page build, all 12 regression tests, the strengthened 83-page rendered audit plus one runtime route, desktop and 375-pixel browser review, zero horizontal overflow, and Lighthouse scores of 96 performance, 100 accessibility, 100 best practices, and 100 SEO. LCP measured 2.7 seconds with the hero request correctly marked high priority. Exact release and production evidence remain unclaimed until remote-main and Vercel verification are complete. Full evidence is recorded in `docs/owned-site-seo-batch-2026-09-01.md`.
+The source audit found 84 canonical sitemap routes, no orphaned rendered routes, at least two inbound sitemap pages for every non-home rendered route, and 627 rendered images with no missing or empty alternative text. Local production proof includes ESLint, TypeScript, the 104-page build, all 12 regression tests, the strengthened 83-page rendered audit plus one runtime route, desktop and 375-pixel browser review, zero horizontal overflow, and Lighthouse scores of 96 performance, 100 accessibility, 100 best practices, and 100 SEO. LCP measured 2.7 seconds with the hero request correctly marked high priority. Full evidence is recorded in `docs/owned-site-seo-batch-2026-09-01.md`.
+
+Implementation commit `5d2b8fcba145f36ca88f992cb69f093d088dd67e` reached remote `main` and an exact-SHA Vercel production deployment with status `READY`. Live proof passed for 84/84 canonical sitemap URLs, the runtime quote route, the homepage H1, canonical, schema, visible 250-unit MOQ labels, 7 visual industry cards, image alternative text, AI-discovery headers, all four AI-readable endpoints, the sitemap, and the permanent `www` redirect. IndexNow accepted the 10-URL priority recrawl batch with HTTP 200.
 
 Search results observed during the audit still carried older homepage and MOQ snippets even though current live sources publish the 250-unit planning MOQ and `www` permanently redirects to the apex host. This is stale search-cache evidence, not current live-page content. Recrawl notification can request discovery but cannot guarantee refresh, indexing, ranking, AI citation, recommendation, or a lead.
 
