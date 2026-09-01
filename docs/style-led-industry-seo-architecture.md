@@ -73,9 +73,35 @@ to increase URL count.
 - No public dielines, fabricated reviews, customer stories, or unsupported
   suitability claims may be added to close a content gap.
 
-## Release boundary
+## Production release proof
 
-Local implementation and audit results do not establish production deployment,
-indexing, ranking, AI citation, or leads. Exact remote-main, Vercel, live route,
-sitemap, schema, reciprocal-link, and AI-source proof are required before this
-batch is described as live.
+Implementation commit `c16c6ca9f900c0659653ff963c98ce58f34903c8`
+reached remote `main`. Vercel production deployment
+`dpl_UY3DmoiCEAmQj5JxrTGYRQkr8Foi` reached Ready for that release, and the
+canonical domain and public production alias both resolved to it.
+
+Fresh proof established:
+
+- ESLint, TypeScript, 12 regression tests, and the 111-page Next.js production
+  build passed;
+- the rendered SEO audit passed all 12 reciprocal style-industry contracts;
+- the local production runtime returned HTTP 200 for all 91 sitemap URLs;
+- rendered browser checks passed for the industries hub, seal-end style, and
+  spout-pouch style with one H1, reciprocal links, ItemList data, complete image
+  alternatives, and no horizontal overflow;
+- representative mobile Lighthouse scored 97 performance and 100 for
+  accessibility, best practices, and SEO, with zero CLS and zero blocking time;
+- the exact public production alias returned HTTP 200 for all 91 sitemap URLs;
+- canonical style, industry, sitemap, and product-catalog URLs returned complete
+  HTTP 200 responses with the new relationships;
+- product catalog schema 2.9 returned valid JSON with 12 style-to-industry lists
+  and 15 industry-to-style lists;
+- `www` permanently redirected the representative style URL to the apex URL
+  with HTTP 308;
+- IndexNow accepted the 12 style pages, industries hub, and beverage guide in a
+  14-URL submission with HTTP 200.
+
+The Cloudflare edge again delayed initial bytes by about 21-22 seconds during
+canonical verification, while the direct production alias responded in about
+1-3 seconds. That latency remains an operations follow-up. Publication does not
+prove indexing, ranking, AI citation, recommendation, or leads.

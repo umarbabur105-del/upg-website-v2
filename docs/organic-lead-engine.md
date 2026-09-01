@@ -330,12 +330,51 @@ bytes by about 20 seconds during verification. That latency remains an
 operations follow-up. Publication does not prove indexing, ranking, AI citation,
 recommendation, or leads.
 
-### Phase 1 — Product-style lead cluster
+### Style-led industry architecture — production release, 2026-09-01
 
-- Publish the 12 approved style pages and the Style Library.
-- Link them from the global navigation, footer, Products hub, and parent product pages.
-- Add prefilled quote routing, structured data, sitemap entries, and AI-readable catalog entries.
-- Submit the new URLs through IndexNow after production verification.
+Commit `c16c6ca` makes the 12 approved packaging-style pages the structural
+source layer for industry SEO:
+
+- every style page now shows visual, reciprocal industry-application paths;
+- every style exposes those paths as ItemList structured data;
+- industry pages continue to link to canonical product sources and now label
+  nested style routes as the source of truth rather than separate products;
+- beverage pouches now resolve explicitly to the existing spout-pouch style;
+- product catalog schema 2.9 exposes style-to-industry and
+  industry-to-approved-style relationships;
+- the data contract rejects unknown style slugs, missing parent products, and
+  approved styles with no industry application;
+- the rendered SEO gate protects all 12 reciprocal relationships;
+- the industry directory explains keyword ownership: product and style pages
+  own format intent, while industry pages own market and application intent.
+
+No product family, unapproved style, public dieline, customer review, client
+story, or new tool was created. Mailer, magnetic, and collapsible-magnetic
+industry paths continue to use their canonical product pages because separate
+nested style pages are not approved.
+
+Release proof passed ESLint, TypeScript, 12 regression tests, a 111-page build,
+the rendered SEO audit, 91/91 local runtime URLs, representative browser checks,
+and mobile Lighthouse scores of 97 performance and 100 accessibility, best
+practices, and SEO. The exact remote commit reached Vercel production Ready;
+91/91 production-alias sitemap routes returned HTTP 200; canonical style,
+industry, sitemap, and catalog URLs returned complete HTTP 200 responses; and
+IndexNow accepted 14 updated URLs with HTTP 200.
+
+The canonical Cloudflare edge delayed initial bytes by about 21-22 seconds,
+versus about 1-3 seconds on the public Vercel production alias. This remains the
+highest-priority technical operations follow-up. Publication does not prove
+indexing, ranking, AI citation, recommendation, or leads.
+
+### Phase 1 — Product-style lead cluster — complete
+
+- The 12 approved style pages and Style Library are published.
+- Global, footer, product, comparison, industry, and contextual discovery paths
+  are active.
+- Prefilled quote routing, structured data, sitemap coverage, and AI-readable
+  catalog entries are active.
+- The latest reciprocal style-industry batch was accepted by IndexNow after
+  production verification.
 - Request Google indexing through the existing Search Console operating workflow without claiming indexing or ranking.
 
 ### Phase 2 — Demand map and high-intent expansion
