@@ -11,6 +11,7 @@ import {
 import { getProductStyleGuide } from "@/data/product-styles";
 import { getProductBySlug } from "@/data/products";
 import { siteConfig } from "@/data/site";
+import { getIndustryLinkVisual } from "@/lib/industry-visuals";
 import { SITE_URL } from "@/lib/seo";
 
 interface IndustryGuidePageProps {
@@ -40,6 +41,25 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
             )
         )
         .slice(0, 3);
+  const heroCompanionVisuals = [
+    ...products.flatMap((product) => [
+      {
+        src: product.heroImage,
+        alt: `${product.shortName} packaging concept for ${guide.shortName.toLowerCase()}`,
+      },
+      ...product.galleryImages,
+    ]),
+    ...formatGuides.map((format) =>
+      getIndustryLinkVisual(`/packaging-styles/${format.slug}`)
+    ),
+    ...related.map((item) => item.image),
+  ]
+    .filter(
+      (visual, index, visuals) =>
+        visual.src !== guide.image.src &&
+        visuals.findIndex((candidate) => candidate.src === visual.src) === index
+    )
+    .slice(0, 2);
   const pageUrl = `${SITE_URL}/industries/${guide.slug}`;
   const quoteNote = `Industry or application: ${guide.shortName}.`;
   const quoteHref = `/get-a-quote?product=${encodeURIComponent(
@@ -96,6 +116,13 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
         name: guide.name,
         description: guide.metaDescription,
         dateModified: guide.reviewedAt,
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": `${SITE_URL}/#organization` },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${SITE_URL}${guide.image.src}`,
+          caption: guide.image.alt,
+        },
         mainEntity: { "@id": `${pageUrl}#service` },
       },
       {
@@ -105,8 +132,42 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
         description: guide.quickAnswer,
         serviceType: `${guide.name} manufacturing`,
         category: products.map((product) => product.name).join(", "),
+        image: `${SITE_URL}${guide.image.src}`,
         provider: { "@id": `${SITE_URL}/#organization` },
         areaServed: siteConfig.market,
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${pageUrl}#formats`,
+        name: `Approved starting formats for ${guide.shortName}`,
+        numberOfItems: products.length + formatGuides.length,
+        itemListElement: [
+          ...products.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "Service",
+              name: product.name,
+              url: `${SITE_URL}/products/${product.slug}`,
+              image: `${SITE_URL}${product.heroImage}`,
+            },
+          })),
+          ...formatGuides.map((format, index) => {
+            const visual = getIndustryLinkVisual(
+              `/packaging-styles/${format.slug}`
+            );
+            return {
+              "@type": "ListItem",
+              position: products.length + index + 1,
+              item: {
+                "@type": "Service",
+                name: format.name,
+                url: `${SITE_URL}/packaging-styles/${format.slug}`,
+                image: `${SITE_URL}${visual.src}`,
+              },
+            };
+          }),
+        ],
       },
       {
         "@type": "BreadcrumbList",
@@ -193,11 +254,13 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-6">
               <div className="eyebrow mb-5">Packaging application guide</div>
-              <h1 className="display-1 text-balance">{guide.heroTitle}</h1>
-              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              <h1 className="text-balance font-serif text-[clamp(2.55rem,3.9vw,4rem)] leading-[0.98] font-light tracking-[-0.035em]">
+                {guide.heroTitle}
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
                 {guide.heroDescription}
               </p>
-              <div className="mt-9 flex flex-wrap gap-4">
+              <div className="mt-7 flex flex-wrap gap-4">
                 <Link
                   href={quoteHref}
                   className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
@@ -205,28 +268,48 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                   Start this project
                 </Link>
                 <Link
-                  href={quoteHref}
+                  href="#approved-formats"
                   className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
                 >
-                  Send the known details
+                  Compare formats
                 </Link>
               </div>
             </div>
 
             <figure className="lg:col-span-6">
-              <div className="relative aspect-[5/4] overflow-hidden bg-stone shadow-lift">
-                <Image
-                  src={guide.image.src}
-                  alt={guide.image.alt}
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+              <div className="grid grid-cols-5 gap-3">
+                <div className="relative col-span-5 aspect-[16/10] overflow-hidden bg-stone shadow-lift sm:col-span-4 sm:row-span-2 sm:aspect-auto sm:min-h-[31rem]">
+                  <Image
+                    src={guide.image.src}
+                    alt={guide.image.alt}
+                    fill
+                    priority
+                    className="object-cover transition-transform duration-700 hover:scale-[1.02]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 40vw"
+                  />
+                </div>
+                {heroCompanionVisuals.map((visual) => (
+                  <div
+                    key={visual.src}
+                    className="relative col-span-1 hidden min-h-60 overflow-hidden bg-stone sm:block"
+                  >
+                    <Image
+                      src={visual.src}
+                      alt={visual.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 20vw, 10vw"
+                    />
+                  </div>
+                ))}
               </div>
-              <figcaption className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                Representative packaging concept. Final construction, dimensions,
-                color, print, insert, and finish are confirmed for each project.
+              <figcaption className="mt-3 flex flex-col gap-1 text-xs leading-relaxed text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+                <span>
+                  Representative packaging concepts. Final construction,
+                  dimensions, color, print, insert, and finish are confirmed for
+                  each project.
+                </span>
+                <span className="shrink-0">Reviewed {guide.reviewedAt}</span>
               </figcaption>
             </figure>
           </div>
@@ -250,7 +333,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
         </div>
       </section>
 
-      <section className="section-shell">
+      <section id="approved-formats" className="section-shell scroll-mt-24">
         <div className="container-editorial grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <SectionHeading
@@ -270,24 +353,36 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
             ) : null}
           </div>
 
-          <aside className="surface-card p-7 lg:col-span-5 lg:p-9">
+          <aside className="surface-card p-5 lg:col-span-5 lg:p-7">
             <div className="eyebrow mb-5">Approved starting formats</div>
-            <div className="space-y-6">
+            <div className="space-y-4">
               {products.map((product) => (
-                <div key={product.slug} className="border-b border-border pb-6 last:border-0 last:pb-0">
-                  <h2 className="font-serif text-2xl text-foreground">
-                    {product.shortName}
-                  </h2>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Planning MOQ: {product.moq}
-                  </p>
-                  <Link
-                    href={`/products/${product.slug}`}
-                    className="mt-3 inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
-                  >
-                    Review product specifications →
-                  </Link>
-                </div>
+                <Link
+                  key={product.slug}
+                  href={`/products/${product.slug}`}
+                  className="group grid grid-cols-[6rem_1fr] overflow-hidden border border-border bg-background"
+                >
+                  <span className="relative min-h-32 overflow-hidden bg-stone">
+                    <Image
+                      src={product.heroImage}
+                      alt={`${product.shortName} representative packaging concept`}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      sizes="96px"
+                    />
+                  </span>
+                  <span className="p-4">
+                    <span className="block font-serif text-xl text-foreground">
+                      {product.shortName}
+                    </span>
+                    <span className="mt-2 block text-xs leading-relaxed text-muted-foreground">
+                      Planning MOQ: {product.moq}
+                    </span>
+                    <span className="mt-3 block text-xs text-foreground">
+                      Review specifications →
+                    </span>
+                  </span>
+                </Link>
               ))}
             </div>
           </aside>
@@ -307,17 +402,36 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                 <Link
                   key={format.slug}
                   href={`/packaging-styles/${format.slug}`}
-                  className="surface-card group flex min-h-56 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+                  className="surface-card group flex min-h-[25rem] flex-col overflow-hidden hover:-translate-y-1 hover:shadow-card"
                 >
-                  <span className="eyebrow">{format.category}</span>
-                  <h2 className="mt-5 font-serif text-2xl text-foreground">
-                    {format.shortName}
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {format.selectionNote}
-                  </p>
-                  <span className="mt-auto pt-6 text-sm text-foreground">
-                    Review format and quote inputs →
+                  <span className="relative aspect-[16/10] overflow-hidden bg-stone">
+                    <Image
+                      src={
+                        getIndustryLinkVisual(
+                          `/packaging-styles/${format.slug}`
+                        ).src
+                      }
+                      alt={
+                        getIndustryLinkVisual(
+                          `/packaging-styles/${format.slug}`
+                        ).alt
+                      }
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </span>
+                  <span className="flex flex-1 flex-col p-6">
+                    <span className="eyebrow">{format.category}</span>
+                    <h2 className="mt-4 font-serif text-2xl text-foreground">
+                      {format.shortName}
+                    </h2>
+                    <span className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {format.selectionNote}
+                    </span>
+                    <span className="mt-auto pt-6 text-sm text-foreground">
+                      Review format and quote inputs →
+                    </span>
                   </span>
                 </Link>
               ))}
@@ -443,17 +557,28 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                 <Link
                   key={item.slug}
                   href={`/industries/${item.slug}`}
-                  className="surface-card group flex min-h-56 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+                  className="surface-card group flex min-h-[25rem] flex-col overflow-hidden hover:-translate-y-1 hover:shadow-card"
                 >
-                  <span className="eyebrow">Application guide</span>
-                  <h2 className="mt-5 font-serif text-2xl text-foreground">
-                    {item.shortName}
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {item.metaDescription}
-                  </p>
-                  <span className="mt-auto pt-6 text-sm text-foreground">
-                    Read this guide →
+                  <span className="relative aspect-[16/10] overflow-hidden bg-stone">
+                    <Image
+                      src={item.image.src}
+                      alt={item.image.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </span>
+                  <span className="flex flex-1 flex-col p-6">
+                    <span className="eyebrow">Application guide</span>
+                    <h2 className="mt-4 font-serif text-2xl text-foreground">
+                      {item.shortName}
+                    </h2>
+                    <span className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {item.metaDescription}
+                    </span>
+                    <span className="mt-auto pt-6 text-sm text-foreground">
+                      Read this guide →
+                    </span>
                   </span>
                 </Link>
               ))}

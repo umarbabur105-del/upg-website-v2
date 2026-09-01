@@ -103,6 +103,7 @@ for (const file of htmlFiles) {
       /<link[^>]+href=["']([^"']*)["'][^>]+rel=["']canonical["']/i,
     ]),
     jsonLdCount: (html.match(/application\/ld\+json/g) ?? []).length,
+    imageCount: (html.match(/<img\b/gi) ?? []).length,
   });
 }
 
@@ -427,6 +428,19 @@ if (industryHubRoutes.length < 6) {
 if (!industriesHub) {
   failures.push("/industries: missing rendered industry hub");
 } else {
+  for (const schemaType of ["CollectionPage", "ItemList", "BreadcrumbList"]) {
+    if (!industriesHub.html.includes(`"@type":"${schemaType}"`)) {
+      failures.push(`/industries: missing ${schemaType} JSON-LD`);
+    }
+  }
+  if (!industriesHub.html.includes("primaryImageOfPage")) {
+    failures.push("/industries: missing primary image schema");
+  }
+  if (industriesHub.imageCount < 12) {
+    failures.push(
+      `/industries: only ${industriesHub.imageCount} rendered image(s); expected at least 12 for the visual industry directory`
+    );
+  }
   for (const route of industryHubRoutes) {
     if (!industriesHub.html.includes(`href="${route}"`)) {
       failures.push(`/industries: missing internal link to ${route}`);
@@ -455,6 +469,69 @@ for (const route of industryHubRoutes) {
   }
   if (!page.html.includes('href="/industries"')) {
     failures.push(`${route}: missing parent industry-hub link`);
+  }
+  if (!page.html.includes("primaryImageOfPage")) {
+    failures.push(`${route}: missing primary image schema`);
+  }
+  if (page.imageCount < 6) {
+    failures.push(
+      `${route}: only ${page.imageCount} rendered image(s); expected at least 6 for a visual-first industry hub`
+    );
+  }
+}
+
+const industryGuideRoutes = [...sitemapPaths].filter(
+  (route) =>
+    /^\/industries\/[^/]+$/.test(route) && !industryHubRoutes.includes(route)
+);
+
+if (industryGuideRoutes.length < 15) {
+  failures.push(
+    `Industry application cluster has ${industryGuideRoutes.length} guide route(s); expected at least 15`
+  );
+}
+
+for (const route of industryGuideRoutes) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered industry application guide`);
+    continue;
+  }
+  for (const schemaType of [
+    "WebPage",
+    "Service",
+    "ItemList",
+    "BreadcrumbList",
+    "FAQPage",
+  ]) {
+    if (!page.html.includes(`"@type":"${schemaType}"`)) {
+      failures.push(`${route}: missing ${schemaType} JSON-LD`);
+    }
+  }
+  for (const marker of [
+    'id="approved-formats"',
+    'href="/get-a-quote?',
+    'href="/products/',
+    "primaryImageOfPage",
+    "Reviewed ",
+  ]) {
+    if (!page.html.includes(marker)) {
+      failures.push(`${route}: missing industry-guide marker ${marker}`);
+    }
+  }
+  if (page.imageCount < 4) {
+    failures.push(
+      `${route}: only ${page.imageCount} rendered image(s); expected at least 4 for a visual-first application guide`
+    );
+  }
+  const inboundPageCount = pages.filter(
+    (candidate) =>
+      candidate.route !== route && candidate.html.includes(`href="${route}"`)
+  ).length;
+  if (inboundPageCount < 2) {
+    failures.push(
+      `${route}: only ${inboundPageCount} inbound sitemap page(s); expected parent-hub and directory links`
+    );
   }
 }
 

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { QuoteCta } from "@/components/quote-cta";
 import { getIndustryGuideBySlug } from "@/data/industry-guides";
 import { industryNavigationGroups } from "@/data/navigation";
+import { getIndustryLinkVisual } from "@/lib/industry-visuals";
 import { SITE_URL, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -45,6 +47,11 @@ const industryLinks = industryNavigationGroups.reduce<
   ],
   []
 );
+const industryHeroVisuals = industryNavigationGroups.slice(0, 4).map((group) =>
+  getIndustryLinkVisual(
+    group.href.includes("#") ? group.links[0]?.href ?? "/industries" : group.href
+  )
+);
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -58,17 +65,47 @@ const structuredData = {
         "Industry-led custom packaging paths across UPG's five current product families.",
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@id": `${SITE_URL}/#organization` },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}${industryHeroVisuals[0].src}`,
+        caption: industryHeroVisuals[0].alt,
+      },
     },
     {
       "@type": "ItemList",
       name: "UPG packaging industry guides",
       numberOfItems: industryLinks.length,
-      itemListElement: industryLinks.map((item, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name: item.label,
-        url: `${SITE_URL}${item.href}`,
-      })),
+      itemListElement: industryLinks.map((item, index) => {
+        const visual = getIndustryLinkVisual(item.href);
+        return {
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "WebPage",
+            "@id": `${SITE_URL}${item.href}`,
+            url: `${SITE_URL}${item.href}`,
+            name: item.label,
+            image: `${SITE_URL}${visual.src}`,
+          },
+        };
+      }),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Industries",
+          item: `${SITE_URL}/industries`,
+        },
+      ],
     },
   ],
 };
@@ -95,26 +132,48 @@ export default function IndustriesPage() {
       />
 
       <section className="bg-background">
-        <div className="container-editorial pt-16 pb-20 md:pt-24 md:pb-28">
-          <div className="max-w-4xl">
-            <div className="eyebrow mb-5">By industry</div>
-            <h1 className="display-1 text-balance">
-              Find the right packaging path for your market.
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Explore packaging for beauty, food, supplements, fashion,
-              electronics, gifts, and pet products. Every path connects to a
-              current UPG box or bag format.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              {industryNavigationGroups.map((group) => (
-                <Link
-                  key={group.id}
-                  href={group.href}
-                  className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-foreground hover:bg-stone"
+        <div className="container-editorial pt-12 pb-20 md:pt-16 md:pb-28">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <div className="eyebrow mb-5">By industry</div>
+              <h1 className="text-balance font-serif text-[clamp(2.8rem,5.4vw,5.2rem)] leading-[0.98] font-light tracking-[-0.035em]">
+                Find the right packaging path for your market.
+              </h1>
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+                Explore packaging for beauty, food, supplements, fashion,
+                electronics, gifts, and pet products. Every path connects to a
+                current UPG box or bag format.
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                {industryNavigationGroups.map((group) => (
+                  <Link
+                    key={group.id}
+                    href={group.href}
+                    className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-foreground hover:bg-stone"
+                  >
+                    {group.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 lg:col-span-5">
+              {industryHeroVisuals.map((visual, index) => (
+                <div
+                  key={`${visual.src}-${index}`}
+                  className={`relative overflow-hidden bg-stone ${
+                    index === 0 ? "col-span-2 aspect-[16/9]" : "aspect-square"
+                  } ${index === 3 ? "hidden" : ""}`}
                 >
-                  {group.label}
-                </Link>
+                  <Image
+                    src={visual.src}
+                    alt={visual.alt}
+                    fill
+                    priority={index === 0}
+                    className="object-cover"
+                    sizes={index === 0 ? "(max-width: 1024px) 100vw, 42vw" : "(max-width: 1024px) 50vw, 21vw"}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -131,6 +190,27 @@ export default function IndustriesPage() {
             >
               <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
                 <div className="lg:col-span-4">
+                  <div className="relative mb-7 aspect-[16/10] overflow-hidden bg-stone">
+                    <Image
+                      src={
+                        getIndustryLinkVisual(
+                          group.href.includes("#")
+                            ? group.links[0]?.href ?? "/industries"
+                            : group.href
+                        ).src
+                      }
+                      alt={
+                        getIndustryLinkVisual(
+                          group.href.includes("#")
+                            ? group.links[0]?.href ?? "/industries"
+                            : group.href
+                        ).alt
+                      }
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                    />
+                  </div>
                   <div className="eyebrow">
                     {String(groupIndex + 1).padStart(2, "0")} / Industry group
                   </div>
@@ -155,17 +235,28 @@ export default function IndustriesPage() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="surface-card group flex min-h-52 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+                      className="surface-card group flex min-h-[22rem] flex-col overflow-hidden hover:-translate-y-1 hover:shadow-card"
                     >
-                      <span className="eyebrow">{item.kind}</span>
-                      <h3 className="mt-4 font-serif text-2xl text-foreground">
-                        {item.label}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                        {getLinkDescription(item.href) ?? group.description}
-                      </p>
-                      <span className="mt-auto pt-6 text-sm text-foreground">
-                        Explore <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                      <span className="relative aspect-[16/9] overflow-hidden bg-stone">
+                        <Image
+                          src={getIndustryLinkVisual(item.href).src}
+                          alt={getIndustryLinkVisual(item.href).alt}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      </span>
+                      <span className="flex flex-1 flex-col p-6">
+                        <span className="eyebrow">{item.kind}</span>
+                        <h3 className="mt-4 font-serif text-2xl text-foreground">
+                          {item.label}
+                        </h3>
+                        <span className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                          {getLinkDescription(item.href) ?? group.description}
+                        </span>
+                        <span className="mt-auto pt-6 text-sm text-foreground">
+                          Explore <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                        </span>
                       </span>
                     </Link>
                   ))}

@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/section-heading";
 import type { IndustryHub } from "@/data/industry-hubs";
 import { getProductBySlug } from "@/data/products";
 import { siteConfig } from "@/data/site";
+import { getIndustryLinkVisual } from "@/lib/industry-visuals";
 import { SITE_URL } from "@/lib/seo";
 
 interface IndustryHubPageProps {
@@ -16,6 +17,20 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
   const products = hub.productSlugs
     .map((slug) => getProductBySlug(slug))
     .filter((product) => product !== undefined);
+  const heroCompanionVisuals = products
+    .flatMap((product) => [
+      {
+        src: product.heroImage,
+        alt: `${product.shortName} packaging concept for ${hub.shortName.toLowerCase()} projects`,
+      },
+      ...product.galleryImages.slice(0, 1),
+    ])
+    .filter(
+      (visual, index, visuals) =>
+        visual.src !== hub.image.src &&
+        visuals.findIndex((candidate) => candidate.src === visual.src) === index
+    )
+    .slice(0, 2);
   const pageUrl = `${SITE_URL}/industries/${hub.slug}`;
   const quoteHref = `/get-a-quote?builder_note=${encodeURIComponent(
     `Industry: ${hub.shortName}. Please recommend the right packaging format.`
@@ -57,6 +72,11 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
         dateModified: hub.reviewedAt,
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: { "@id": `${SITE_URL}/#organization` },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${SITE_URL}${hub.image.src}`,
+          caption: hub.image.alt,
+        },
         mainEntity: { "@id": `${pageUrl}#guides` },
       },
       {
@@ -64,12 +84,20 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
         "@id": `${pageUrl}#guides`,
         name: `${hub.shortName} packaging guides`,
         numberOfItems: hub.guideLinks.length,
-        itemListElement: hub.guideLinks.map((item, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: item.label,
-          url: `${SITE_URL}${item.href}`,
-        })),
+        itemListElement: hub.guideLinks.map((item, index) => {
+          const visual = getIndustryLinkVisual(item.href);
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "WebPage",
+              "@id": `${SITE_URL}${item.href}`,
+              url: `${SITE_URL}${item.href}`,
+              name: item.label,
+              image: `${SITE_URL}${visual.src}`,
+            },
+          };
+        }),
       },
       {
         "@type": "BreadcrumbList",
@@ -133,11 +161,13 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-6">
               <div className="eyebrow mb-5">Packaging by industry</div>
-              <h1 className="display-1 text-balance">{hub.heroTitle}</h1>
-              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              <h1 className="text-balance font-serif text-[clamp(2.55rem,3.9vw,4rem)] leading-[0.98] font-light tracking-[-0.035em]">
+                {hub.heroTitle}
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
                 {hub.heroDescription}
               </p>
-              <div className="mt-9 flex flex-wrap gap-4">
+              <div className="mt-7 flex flex-wrap gap-4">
                 <Link
                   href={quoteHref}
                   className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
@@ -154,19 +184,39 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
             </div>
 
             <figure className="lg:col-span-6">
-              <div className="relative aspect-[5/4] overflow-hidden bg-stone shadow-lift">
-                <Image
-                  src={hub.image.src}
-                  alt={hub.image.alt}
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+              <div className="grid grid-cols-5 gap-3">
+                <div className="relative col-span-5 aspect-[16/10] overflow-hidden bg-stone shadow-lift sm:col-span-4 sm:row-span-2 sm:aspect-auto sm:min-h-[31rem]">
+                  <Image
+                    src={hub.image.src}
+                    alt={hub.image.alt}
+                    fill
+                    priority
+                    className="object-cover transition-transform duration-700 hover:scale-[1.02]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 40vw"
+                  />
+                </div>
+                {heroCompanionVisuals.map((visual) => (
+                  <div
+                    key={visual.src}
+                    className="relative col-span-1 hidden min-h-60 overflow-hidden bg-stone sm:block"
+                  >
+                    <Image
+                      src={visual.src}
+                      alt={visual.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 20vw, 10vw"
+                    />
+                  </div>
+                ))}
               </div>
-              <figcaption className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                Representative packaging concept. Final construction, dimensions,
-                color, print, insert, and finish are confirmed for each project.
+              <figcaption className="mt-3 flex flex-col gap-1 text-xs leading-relaxed text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+                <span>
+                  Representative packaging concepts. Final construction,
+                  dimensions, color, print, insert, and finish are confirmed for
+                  each project.
+                </span>
+                <span className="shrink-0">Reviewed {hub.reviewedAt}</span>
               </figcaption>
             </figure>
           </div>
@@ -202,21 +252,34 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
               <Link
                 key={item.need}
                 href={item.href}
-                className="surface-card group grid gap-5 p-6 hover:-translate-y-1 hover:shadow-card sm:grid-cols-[3rem_1fr] md:p-8"
+                className="surface-card group overflow-hidden hover:-translate-y-1 hover:shadow-card"
               >
-                <span className="font-serif text-3xl text-gold">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span>
-                  <span className="eyebrow">{item.need}</span>
-                  <span className="mt-3 block font-serif text-2xl text-foreground">
-                    {item.startingPoint}
+                <span className="grid sm:grid-cols-[11rem_1fr]">
+                  <span className="relative min-h-52 overflow-hidden bg-stone sm:min-h-full">
+                    <Image
+                      src={getIndustryLinkVisual(item.href).src}
+                      alt={getIndustryLinkVisual(item.href).alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      sizes="(max-width: 640px) 100vw, 176px"
+                    />
                   </span>
-                  <span className="mt-3 block text-sm leading-relaxed text-muted-foreground">
-                    {item.reason}
-                  </span>
-                  <span className="mt-5 block text-sm text-foreground">
-                    Review this path →
+                  <span className="flex min-h-64 gap-5 p-6 md:p-8">
+                    <span className="font-serif text-3xl text-gold">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>
+                      <span className="eyebrow">{item.need}</span>
+                      <span className="mt-3 block font-serif text-2xl text-foreground">
+                        {item.startingPoint}
+                      </span>
+                      <span className="mt-3 block text-sm leading-relaxed text-muted-foreground">
+                        {item.reason}
+                      </span>
+                      <span className="mt-5 block text-sm text-foreground">
+                        Review this path →
+                      </span>
+                    </span>
                   </span>
                 </span>
               </Link>
@@ -237,18 +300,29 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
               <Link
                 key={product.slug}
                 href={`/products/${product.slug}`}
-                className="surface-card group flex min-h-60 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+                className="surface-card group flex min-h-[24rem] flex-col overflow-hidden hover:-translate-y-1 hover:shadow-card"
               >
-                <span className="eyebrow">{product.category}</span>
-                <h2 className="mt-5 font-serif text-2xl text-foreground">
-                  {product.shortName}
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {product.summary}
-                </p>
-                <div className="mt-auto border-t border-border pt-5 text-sm text-foreground">
-                  MOQ {product.moq.toLowerCase()} →
-                </div>
+                <span className="relative aspect-[4/3] overflow-hidden bg-stone">
+                  <Image
+                    src={product.heroImage}
+                    alt={`${product.shortName} representative packaging concept`}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </span>
+                <span className="flex flex-1 flex-col p-6">
+                  <span className="eyebrow">{product.category}</span>
+                  <h2 className="mt-4 font-serif text-2xl text-foreground">
+                    {product.shortName}
+                  </h2>
+                  <span className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {product.summary}
+                  </span>
+                  <span className="mt-auto border-t border-border pt-5 text-sm text-foreground">
+                    MOQ {product.moq.toLowerCase()} →
+                  </span>
+                </span>
               </Link>
             ))}
           </div>
@@ -275,17 +349,28 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="surface-card group flex min-h-56 flex-col p-6 hover:-translate-y-1 hover:shadow-card"
+                className="surface-card group flex min-h-[25rem] flex-col overflow-hidden hover:-translate-y-1 hover:shadow-card"
               >
-                <span className="eyebrow">Buying guide</span>
-                <h2 className="mt-5 font-serif text-2xl text-foreground">
-                  {item.label}
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {item.description}
-                </p>
-                <span className="mt-auto pt-6 text-sm text-foreground">
-                  Open guide →
+                <span className="relative aspect-[16/10] overflow-hidden bg-stone">
+                  <Image
+                    src={getIndustryLinkVisual(item.href).src}
+                    alt={getIndustryLinkVisual(item.href).alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </span>
+                <span className="flex flex-1 flex-col p-6">
+                  <span className="eyebrow">Buying guide</span>
+                  <h2 className="mt-4 font-serif text-2xl text-foreground">
+                    {item.label}
+                  </h2>
+                  <span className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </span>
+                  <span className="mt-auto pt-6 text-sm text-foreground">
+                    Open guide →
+                  </span>
                 </span>
               </Link>
             ))}
