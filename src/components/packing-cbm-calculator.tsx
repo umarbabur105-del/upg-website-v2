@@ -13,12 +13,18 @@ import {
 } from "@/lib/packing-cbm";
 
 const inputClass =
-  "h-12 w-full rounded-xl border border-border bg-surface px-4 text-sm text-foreground outline-none focus:border-moss";
+  "h-12 w-full rounded-xl border border-border bg-surface px-4 text-base text-foreground outline-none transition-colors focus:border-moss focus:ring-2 focus:ring-moss/15";
 
 type DimensionFields = {
   length: string;
   width: string;
   height: string;
+};
+
+const dimensionToCentimeters: Record<PackingDimensionUnit, number> = {
+  cm: 1,
+  in: 2.54,
+  mm: 0.1,
 };
 
 function parsePositiveNumber(value: string) {
@@ -52,6 +58,19 @@ function formatWeight(valueKg: number) {
   )} lb`;
 }
 
+function convertDimensionValue(
+  value: string,
+  from: PackingDimensionUnit,
+  to: PackingDimensionUnit
+) {
+  if (!value.trim()) return value;
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return value;
+  const converted =
+    (parsed * dimensionToCentimeters[from]) / dimensionToCentimeters[to];
+  return Number(converted.toFixed(4)).toString();
+}
+
 function FieldLabel({
   htmlFor,
   children,
@@ -60,12 +79,33 @@ function FieldLabel({
   children: React.ReactNode;
 }) {
   return (
-    <label
-      htmlFor={htmlFor}
-      className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground"
-    >
+    <label htmlFor={htmlFor} className="text-sm font-semibold text-foreground">
       {children}
     </label>
+  );
+}
+
+function StepHeading({
+  number,
+  title,
+  description,
+}: {
+  number: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="flex gap-4">
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-moss text-sm font-semibold text-primary-foreground">
+        {number}
+      </div>
+      <div>
+        <h2 className="font-serif text-2xl text-foreground">{title}</h2>
+        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+          {description}
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -95,6 +135,15 @@ export function PackingCbmCalculator() {
     "idle"
   );
   const trackedSignature = useRef("");
+
+  const layoutCapacity = useMemo(() => {
+    const across = parsePositiveInteger(layout.length);
+    const deep = parsePositiveInteger(layout.width);
+    const layers = parsePositiveInteger(layout.height);
+    if (!across || !deep || !layers) return null;
+    const capacity = across * deep * layers;
+    return Number.isSafeInteger(capacity) ? capacity : null;
+  }, [layout]);
 
   const result = useMemo(() => {
     const length = parsePositiveNumber(unitDimensions.length);
@@ -149,26 +198,28 @@ export function PackingCbmCalculator() {
   const summary = useMemo(() => {
     if (!result) return "";
     const lines = [
-      "UPG Packing CBM & Weight Planning Estimate",
-      `Product family: ${family || "Not selected"}`,
-      `Packed unit dimensions: ${unitDimensions.length} × ${unitDimensions.width} × ${unitDimensions.height} ${dimensionUnit}`,
-      `Quantity: ${formatNumber(Number(quantity), 0)} units`,
-      `Packing layout: ${layout.length} × ${layout.width} × ${layout.height} units`,
-      `Units per carton: ${formatNumber(result.unitsPerCarton, 0)}`,
-      `Estimated cartons: ${formatNumber(result.cartonCount, 0)}`,
-      `Estimated outer carton: ${formatNumber(result.cartonDimensions.length)} × ${formatNumber(result.cartonDimensions.width)} × ${formatNumber(result.cartonDimensions.height)} ${dimensionUnit}`,
-      `Estimated total CBM: ${formatNumber(result.totalCbm, 4)}`,
-      `Dimensional weight: ${formatWeight(result.totalDimensionalWeightKg)} at divisor ${dimensionalWeightDivisor}`,
+      "UPG Carton & Shipping Space Estimate",
+      `Product type: ${family || "Not selected"}`,
+      `One packed item: ${unitDimensions.length} × ${unitDimensions.width} × ${unitDimensions.height} ${dimensionUnit}`,
+      `Total items: ${formatNumber(Number(quantity), 0)}`,
+      `Carton arrangement: ${layout.length} across × ${layout.width} deep × ${layout.height} layers`,
+      `Items per carton: ${formatNumber(result.unitsPerCarton, 0)}`,
+      `Cartons needed: ${formatNumber(result.cartonCount, 0)}`,
+      `Estimated carton size: ${formatNumber(result.cartonDimensions.length)} × ${formatNumber(result.cartonDimensions.width)} × ${formatNumber(result.cartonDimensions.height)} ${dimensionUnit}`,
+      `Total shipment space (CBM): ${formatNumber(result.totalCbm, 4)}`,
+      `Shipping volume weight: ${formatWeight(result.totalDimensionalWeightKg)} using factor ${dimensionalWeightDivisor}`,
     ];
 
     if (result.netWeightKg !== null) {
-      lines.push(`Net packed-unit weight: ${formatWeight(result.netWeightKg)}`);
+      lines.push(`Weight of all packed items: ${formatWeight(result.netWeightKg)}`);
     }
     if (result.grossWeightKg !== null) {
-      lines.push(`Estimated gross shipment weight: ${formatWeight(result.grossWeightKg)}`);
+      lines.push(
+        `Estimated total shipment weight: ${formatWeight(result.grossWeightKg)}`
+      );
     }
     lines.push(
-      "Planning estimate only. Confirm the packing method, master-carton specification, measured weight, and carrier rules before shipment."
+      "Planning estimate only. Confirm the final carton, packing method, weight, and carrier rules before shipping."
     );
     return lines.join("\n");
   }, [
@@ -189,20 +240,20 @@ export function PackingCbmCalculator() {
     if (!result) return "/get-a-quote";
     const params = new URLSearchParams();
     const quoteSummary = [
-      "UPG Packing CBM & Weight Planning Estimate",
-      `Packed unit: ${unitDimensions.length} × ${unitDimensions.width} × ${unitDimensions.height} ${dimensionUnit}`,
-      `Layout: ${layout.length} × ${layout.width} × ${layout.height}; ${formatNumber(result.unitsPerCarton, 0)} units/carton`,
+      "UPG Carton & Shipping Space Estimate",
+      `One packed item: ${unitDimensions.length} × ${unitDimensions.width} × ${unitDimensions.height} ${dimensionUnit}`,
+      `Carton arrangement: ${layout.length} across × ${layout.width} deep × ${layout.height} layers; ${formatNumber(result.unitsPerCarton, 0)} items/carton`,
       `Estimate: ${formatNumber(result.cartonCount, 0)} cartons; ${formatNumber(result.cartonDimensions.length)} × ${formatNumber(result.cartonDimensions.width)} × ${formatNumber(result.cartonDimensions.height)} ${dimensionUnit} each; ${formatNumber(result.totalCbm, 4)} total CBM`,
       result.grossWeightKg === null
-        ? `Dimensional weight: ${formatWeight(result.totalDimensionalWeightKg)}`
-        : `Gross weight: ${formatWeight(result.grossWeightKg)}; dimensional weight: ${formatWeight(result.totalDimensionalWeightKg)}`,
-      "Planning only; confirm packing method, carton, measured weight, and carrier rules.",
+        ? `Shipping volume weight: ${formatWeight(result.totalDimensionalWeightKg)}`
+        : `Estimated total weight: ${formatWeight(result.grossWeightKg)}; shipping volume weight: ${formatWeight(result.totalDimensionalWeightKg)}`,
+      "Planning only; please confirm the final packing and shipping details.",
     ].join("\n");
     params.set("product", family || "Not sure yet");
     params.set("quantity", quantity);
     params.set(
       "dimensions",
-      `${unitDimensions.length} × ${unitDimensions.width} × ${unitDimensions.height} ${dimensionUnit} packed unit`
+      `${unitDimensions.length} × ${unitDimensions.width} × ${unitDimensions.height} ${dimensionUnit} packed item`
     );
     params.set("builder_note", quoteSummary);
     return `/get-a-quote?${params.toString()}`;
@@ -276,6 +327,20 @@ export function PackingCbmCalculator() {
     setCopyStatus("idle");
   }
 
+  function changeDimensionUnit(nextUnit: PackingDimensionUnit) {
+    if (nextUnit === dimensionUnit) return;
+    setUnitDimensions((current) => ({
+      length: convertDimensionValue(current.length, dimensionUnit, nextUnit),
+      width: convertDimensionValue(current.width, dimensionUnit, nextUnit),
+      height: convertDimensionValue(current.height, dimensionUnit, nextUnit),
+    }));
+    setOuterAllowance((current) =>
+      convertDimensionValue(current, dimensionUnit, nextUnit)
+    );
+    setDimensionUnit(nextUnit);
+    setCopyStatus("idle");
+  }
+
   function trackQuoteHandoff() {
     if (!result) return;
     trackAnalyticsEvent("packing_cbm_quote_handoff", {
@@ -291,88 +356,87 @@ export function PackingCbmCalculator() {
     ["height", "Height"],
   ];
 
+  const layoutLabels: Array<[keyof DimensionFields, string]> = [
+    ["length", "Across"],
+    ["width", "Deep"],
+    ["height", "Layers"],
+  ];
+
   return (
     <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-      <div className="surface-card p-6 sm:p-8 lg:col-span-7">
-        <div className="grid gap-7">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div className="space-y-2">
-              <FieldLabel htmlFor="packing-family">Packaging family</FieldLabel>
-              <select
-                id="packing-family"
-                value={family}
-                onChange={(event) => {
-                  setFamily(event.target.value as ProductFamily | "");
-                  setCopyStatus("idle");
-                }}
-                className={inputClass}
-              >
-                <option value="">Optional — select a family</option>
-                {productFamilies.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="space-y-2">
+      <div className="surface-card p-5 sm:p-8 lg:col-span-7">
+        <div className="grid gap-8">
+          <section className="grid gap-5">
+            <StepHeading
+              number="1"
+              title="Measure one packed item"
+              description="Measure it as it will sit inside the shipping carton. A tape measure is enough."
+            />
+
+            <div className="space-y-2 sm:max-w-xs">
               <FieldLabel htmlFor="packing-dimension-unit">
-                Dimension unit
+                I am measuring in
               </FieldLabel>
               <select
                 id="packing-dimension-unit"
                 value={dimensionUnit}
-                onChange={(event) => {
-                  setDimensionUnit(event.target.value as PackingDimensionUnit);
-                  setCopyStatus("idle");
-                }}
+                onChange={(event) =>
+                  changeDimensionUnit(event.target.value as PackingDimensionUnit)
+                }
                 className={inputClass}
               >
-                <option value="cm">Centimeters</option>
-                <option value="in">Inches</option>
-                <option value="mm">Millimeters</option>
+                <option value="cm">Centimeters (cm)</option>
+                <option value="in">Inches (in)</option>
+                <option value="mm">Millimeters (mm)</option>
               </select>
             </div>
-          </div>
 
-          <fieldset>
-            <legend className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-              Packed unit dimensions
-            </legend>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Use the space one packed unit occupies inside the master carton—not a
-              flat dieline size.
-            </p>
-            <div className="mt-4 grid gap-4 sm:grid-cols-3">
-              {dimensionLabels.map(([key, label]) => (
-                <div key={key} className="space-y-2">
-                  <FieldLabel htmlFor={`packing-unit-${key}`}>
-                    {label} ({dimensionUnit})
-                  </FieldLabel>
-                  <input
-                    id={`packing-unit-${key}`}
-                    type="number"
-                    min="0"
-                    step="any"
-                    inputMode="decimal"
-                    value={unitDimensions[key]}
-                    onChange={(event) =>
-                      updateDimensions(
-                        setUnitDimensions,
-                        key,
-                        event.target.value
-                      )
-                    }
-                    className={inputClass}
-                  />
-                </div>
-              ))}
-            </div>
-          </fieldset>
+            <fieldset>
+              <legend className="sr-only">Size of one packed item</legend>
+              <div className="grid grid-cols-3 gap-3">
+                {dimensionLabels.map(([key, label]) => (
+                  <div key={key} className="space-y-2">
+                    <FieldLabel htmlFor={`packing-unit-${key}`}>
+                      {label}
+                    </FieldLabel>
+                    <input
+                      id={`packing-unit-${key}`}
+                      type="number"
+                      min="0"
+                      step="any"
+                      inputMode="decimal"
+                      value={unitDimensions[key]}
+                      onChange={(event) =>
+                        updateDimensions(
+                          setUnitDimensions,
+                          key,
+                          event.target.value
+                        )
+                      }
+                      aria-describedby="packed-item-size-help"
+                      className={inputClass}
+                      placeholder="0"
+                    />
+                  </div>
+                ))}
+              </div>
+              <p
+                id="packed-item-size-help"
+                className="mt-3 text-xs leading-relaxed text-muted-foreground"
+              >
+                Example: a packed pouch may be 20 cm long, 12 cm wide, and 4 cm high.
+              </p>
+            </fieldset>
+          </section>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div className="space-y-2">
-              <FieldLabel htmlFor="packing-quantity">Total quantity</FieldLabel>
+          <section className="grid gap-5 border-t border-border pt-8">
+            <StepHeading
+              number="2"
+              title="Enter your total quantity"
+              description="How many packed items do you plan to ship?"
+            />
+            <div className="space-y-2 sm:max-w-xs">
+              <FieldLabel htmlFor="packing-quantity">Total items</FieldLabel>
               <input
                 id="packing-quantity"
                 type="number"
@@ -385,167 +449,232 @@ export function PackingCbmCalculator() {
                   setCopyStatus("idle");
                 }}
                 className={inputClass}
-                placeholder="e.g. 1000"
+                placeholder="For example, 1,000"
               />
             </div>
-            <div className="space-y-2">
-              <FieldLabel htmlFor="packing-allowance">
-                Total outer allowance ({dimensionUnit})
-              </FieldLabel>
-              <input
-                id="packing-allowance"
-                type="number"
-                min="0"
-                step="any"
-                inputMode="decimal"
-                value={outerAllowance}
-                onChange={(event) => {
-                  setOuterAllowance(event.target.value);
-                  setCopyStatus("idle");
-                }}
-                className={inputClass}
-              />
-              <p className="text-xs leading-relaxed text-muted-foreground">
-                Added once to each estimated outer carton dimension for board and
-                packing clearance.
-              </p>
-            </div>
-          </div>
+          </section>
 
-          <fieldset>
-            <legend className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-              Units arranged inside one carton
-            </legend>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Enter a manual grid. Rotate the unit dimensions above if another
-              orientation packs better.
-            </p>
-            <div className="mt-4 grid gap-4 sm:grid-cols-3">
-              {dimensionLabels.map(([key, label]) => (
-                <div key={key} className="space-y-2">
-                  <FieldLabel htmlFor={`packing-layout-${key}`}>
-                    Along {label.toLowerCase()}
+          <section className="grid gap-5 border-t border-border pt-8">
+            <StepHeading
+              number="3"
+              title="Show how items fit in one carton"
+              description="Count items from left to right, front to back, and then the number of layers."
+            />
+
+            <div className="rounded-xl bg-cream p-4 text-sm leading-relaxed text-foreground">
+              <strong>
+                {layoutCapacity
+                  ? `${formatNumber(layoutCapacity, 0)} items per carton`
+                  : "Enter whole numbers"}
+              </strong>
+              <span className="text-muted-foreground">
+                {layoutCapacity
+                  ? ` — ${layout.length} across × ${layout.width} deep × ${layout.height} layers.`
+                  : " for each direction."}
+              </span>
+            </div>
+
+            <fieldset>
+              <legend className="sr-only">Items arranged inside one carton</legend>
+              <div className="grid grid-cols-3 gap-3">
+                {layoutLabels.map(([key, label]) => (
+                  <div key={key} className="space-y-2">
+                    <FieldLabel htmlFor={`packing-layout-${key}`}>
+                      {label}
+                    </FieldLabel>
+                    <input
+                      id={`packing-layout-${key}`}
+                      type="number"
+                      min="1"
+                      step="1"
+                      inputMode="numeric"
+                      value={layout[key]}
+                      onChange={(event) =>
+                        updateDimensions(setLayout, key, event.target.value)
+                      }
+                      className={inputClass}
+                    />
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                Not sure? Keep the sample 2 × 2 × 5 for a rough estimate, then ask
+                your supplier to confirm the packing arrangement.
+              </p>
+            </fieldset>
+          </section>
+
+          <details className="group border-t border-border pt-7">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-xl border border-border bg-background px-4 py-4 text-sm font-semibold text-foreground transition-colors hover:border-moss [&::-webkit-details-marker]:hidden">
+              <span>
+                Optional details
+                <span className="ml-2 font-normal text-muted-foreground">
+                  Product type, weights, and carrier settings
+                </span>
+              </span>
+              <span
+                aria-hidden="true"
+                className="text-xl leading-none text-muted-foreground transition-transform group-open:rotate-45"
+              >
+                +
+              </span>
+            </summary>
+
+            <div className="mt-6 grid gap-7 rounded-xl bg-cream/60 p-4 sm:p-6">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <FieldLabel htmlFor="packing-family">
+                    Product or packaging type
+                  </FieldLabel>
+                  <select
+                    id="packing-family"
+                    value={family}
+                    onChange={(event) => {
+                      setFamily(event.target.value as ProductFamily | "");
+                      setCopyStatus("idle");
+                    }}
+                    className={inputClass}
+                  >
+                    <option value="">Not sure / skip this</option>
+                    {productFamilies.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="space-y-2">
+                  <FieldLabel htmlFor="packing-allowance">
+                    Extra space for carton walls ({dimensionUnit})
                   </FieldLabel>
                   <input
-                    id={`packing-layout-${key}`}
+                    id="packing-allowance"
                     type="number"
-                    min="1"
-                    step="1"
-                    inputMode="numeric"
-                    value={layout[key]}
-                    onChange={(event) =>
-                      updateDimensions(setLayout, key, event.target.value)
-                    }
+                    min="0"
+                    step="any"
+                    inputMode="decimal"
+                    value={outerAllowance}
+                    onChange={(event) => {
+                      setOuterAllowance(event.target.value);
+                      setCopyStatus("idle");
+                    }}
                     className={inputClass}
                   />
+                  <p className="text-xs leading-relaxed text-muted-foreground">
+                    Keep the suggested value if you are unsure. It allows a little
+                    room for carton walls and packing clearance.
+                  </p>
                 </div>
-              ))}
-            </div>
-          </fieldset>
+              </div>
 
-          <fieldset className="border-t border-border pt-7">
-            <legend className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-              Optional measured weight
-            </legend>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Weight is calculated only from values you provide. The tool does not
-              guess weight from a material name.
-            </p>
-            <div className="mt-4 grid gap-4 sm:grid-cols-3">
-              <div className="space-y-2">
-                <FieldLabel htmlFor="packing-weight-unit">Weight unit</FieldLabel>
+              <fieldset className="border-t border-border pt-6">
+                <legend className="text-sm font-semibold text-foreground">
+                  Add measured weights if you have them
+                </legend>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  Skip these fields if you only need carton count and shipment space.
+                </p>
+                <div className="mt-4 grid gap-4 sm:grid-cols-3">
+                  <div className="space-y-2">
+                    <FieldLabel htmlFor="packing-weight-unit">
+                      Weight unit
+                    </FieldLabel>
+                    <select
+                      id="packing-weight-unit"
+                      value={weightUnit}
+                      onChange={(event) => {
+                        setWeightUnit(event.target.value as PackingWeightUnit);
+                        setCopyStatus("idle");
+                      }}
+                      className={inputClass}
+                    >
+                      <option value="g">Grams (g)</option>
+                      <option value="oz">Ounces (oz)</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <FieldLabel htmlFor="packing-unit-weight">
+                      One packed item ({weightUnit})
+                    </FieldLabel>
+                    <input
+                      id="packing-unit-weight"
+                      type="number"
+                      min="0"
+                      step="any"
+                      inputMode="decimal"
+                      value={unitWeight}
+                      onChange={(event) => {
+                        setUnitWeight(event.target.value);
+                        setCopyStatus("idle");
+                      }}
+                      className={inputClass}
+                      placeholder="Optional"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <FieldLabel htmlFor="packing-carton-tare">
+                      Empty carton ({weightUnit})
+                    </FieldLabel>
+                    <input
+                      id="packing-carton-tare"
+                      type="number"
+                      min="0"
+                      step="any"
+                      inputMode="decimal"
+                      value={cartonTareWeight}
+                      onChange={(event) => {
+                        setCartonTareWeight(event.target.value);
+                        setCopyStatus("idle");
+                      }}
+                      className={inputClass}
+                      placeholder="Optional"
+                    />
+                  </div>
+                </div>
+              </fieldset>
+
+              <div className="space-y-2 border-t border-border pt-6 sm:max-w-sm">
+                <FieldLabel htmlFor="packing-divisor">
+                  Carrier volume factor
+                </FieldLabel>
                 <select
-                  id="packing-weight-unit"
-                  value={weightUnit}
+                  id="packing-divisor"
+                  value={dimensionalWeightDivisor}
                   onChange={(event) => {
-                    setWeightUnit(event.target.value as PackingWeightUnit);
+                    setDimensionalWeightDivisor(
+                      Number(event.target.value) as 5000 | 6000
+                    );
                     setCopyStatus("idle");
                   }}
                   className={inputClass}
                 >
-                  <option value="g">Grams</option>
-                  <option value="oz">Ounces</option>
+                  <option value="5000">5,000 — common air/express</option>
+                  <option value="6000">6,000 — used by some carriers</option>
                 </select>
-              </div>
-              <div className="space-y-2">
-                <FieldLabel htmlFor="packing-unit-weight">
-                  Packed unit weight ({weightUnit})
-                </FieldLabel>
-                <input
-                  id="packing-unit-weight"
-                  type="number"
-                  min="0"
-                  step="any"
-                  inputMode="decimal"
-                  value={unitWeight}
-                  onChange={(event) => {
-                    setUnitWeight(event.target.value);
-                    setCopyStatus("idle");
-                  }}
-                  className={inputClass}
-                />
-              </div>
-              <div className="space-y-2">
-                <FieldLabel htmlFor="packing-carton-tare">
-                  Empty carton tare ({weightUnit})
-                </FieldLabel>
-                <input
-                  id="packing-carton-tare"
-                  type="number"
-                  min="0"
-                  step="any"
-                  inputMode="decimal"
-                  value={cartonTareWeight}
-                  onChange={(event) => {
-                    setCartonTareWeight(event.target.value);
-                    setCopyStatus("idle");
-                  }}
-                  className={inputClass}
-                />
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  Keep 5,000 unless your carrier gives you a different number.
+                </p>
               </div>
             </div>
-          </fieldset>
-
-          <div className="space-y-2 sm:max-w-sm">
-            <FieldLabel htmlFor="packing-divisor">
-              Dimensional-weight divisor
-            </FieldLabel>
-            <select
-              id="packing-divisor"
-              value={dimensionalWeightDivisor}
-              onChange={(event) => {
-                setDimensionalWeightDivisor(
-                  Number(event.target.value) as 5000 | 6000
-                );
-                setCopyStatus("idle");
-              }}
-              className={inputClass}
-            >
-              <option value="5000">5,000 — common air/express factor</option>
-              <option value="6000">6,000 — alternate carrier factor</option>
-            </select>
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              Carrier rules differ. Confirm the divisor and rounding method with
-              the selected service.
-            </p>
-          </div>
+          </details>
         </div>
       </div>
 
       <aside className="lg:sticky lg:top-28 lg:col-span-5">
-        <div className="border border-border bg-moss p-6 text-primary-foreground shadow-card sm:p-8">
+        <div className="border border-border bg-moss p-5 text-primary-foreground shadow-card sm:p-8">
           <div className="text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground/75">
-            Planning result
+            Your estimate
           </div>
           {result ? (
-            <div className="mt-6" aria-live="polite">
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            <div className="mt-5" aria-live="polite">
+              <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 xl:grid-cols-2">
                 {[
-                  ["Estimated cartons", formatNumber(result.cartonCount, 0)],
-                  ["Units per carton", formatNumber(result.unitsPerCarton, 0)],
-                  ["Total CBM", formatNumber(result.totalCbm, 4)],
+                  ["Cartons needed", formatNumber(result.cartonCount, 0)],
+                  ["Items per carton", formatNumber(result.unitsPerCarton, 0)],
+                  ["Shipment space (CBM)", formatNumber(result.totalCbm, 4)],
                   [
-                    "Estimated outer carton",
+                    "Estimated carton size",
                     `${formatNumber(result.cartonDimensions.length)} × ${formatNumber(result.cartonDimensions.width)} × ${formatNumber(result.cartonDimensions.height)} ${dimensionUnit}`,
                   ],
                 ].map(([label, value]) => (
@@ -553,7 +682,7 @@ export function PackingCbmCalculator() {
                     key={label}
                     className="border border-primary-foreground/18 bg-primary-foreground/7 p-4"
                   >
-                    <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-primary-foreground/65">
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-foreground/65">
                       {label}
                     </div>
                     <div className="mt-2 text-xl font-semibold text-primary-foreground">
@@ -563,51 +692,61 @@ export function PackingCbmCalculator() {
                 ))}
               </div>
 
-              <dl className="mt-6 space-y-4 border-t border-primary-foreground/20 pt-6 text-sm">
-                <div>
-                  <dt className="text-primary-foreground/65">CBM per carton</dt>
-                  <dd className="mt-1 font-semibold">
-                    {formatNumber(result.cbmPerCarton, 4)} CBM
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-primary-foreground/65">
-                    Total dimensional weight
-                  </dt>
-                  <dd className="mt-1 font-semibold">
-                    {formatWeight(result.totalDimensionalWeightKg)}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-primary-foreground/65">Net packed-unit weight</dt>
-                  <dd className="mt-1 font-semibold">
-                    {result.netWeightKg === null
-                      ? "Add a measured packed-unit weight"
-                      : formatWeight(result.netWeightKg)}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-primary-foreground/65">
-                    Estimated gross shipment weight
-                  </dt>
-                  <dd className="mt-1 font-semibold">
-                    {result.grossWeightKg === null
-                      ? "Add unit weight and carton tare"
-                      : formatWeight(result.grossWeightKg)}
-                  </dd>
-                </div>
-              </dl>
+              <p className="mt-5 text-sm leading-relaxed text-primary-foreground/80">
+                CBM is the estimated space all cartons take up. Your last carton
+                contains {formatNumber(result.lastCartonUnits, 0)} item
+                {result.lastCartonUnits === 1 ? "" : "s"}.
+              </p>
 
-              <div className="mt-6 space-y-2 border-t border-primary-foreground/20 pt-5 text-xs leading-relaxed text-primary-foreground/75">
-                <p>
-                  The last carton contains {formatNumber(result.lastCartonUnits, 0)} unit
-                  {result.lastCartonUnits === 1 ? "" : "s"}.
-                </p>
-                <p>
-                  Total CBM assumes every carton uses the same estimated outer size,
-                  including a partially filled last carton.
-                </p>
-              </div>
+              <details className="group mt-5 border-t border-primary-foreground/20 pt-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+                  More shipping figures
+                  <span
+                    aria-hidden="true"
+                    className="text-lg transition-transform group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <dl className="mt-4 space-y-4 text-sm">
+                  <div>
+                    <dt className="text-primary-foreground/65">
+                      Space per carton
+                    </dt>
+                    <dd className="mt-1 font-semibold">
+                      {formatNumber(result.cbmPerCarton, 4)} CBM
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-primary-foreground/65">
+                      Shipping volume weight
+                    </dt>
+                    <dd className="mt-1 font-semibold">
+                      {formatWeight(result.totalDimensionalWeightKg)}
+                    </dd>
+                  </div>
+                  {result.netWeightKg !== null ? (
+                    <div>
+                      <dt className="text-primary-foreground/65">
+                        Weight of all packed items
+                      </dt>
+                      <dd className="mt-1 font-semibold">
+                        {formatWeight(result.netWeightKg)}
+                      </dd>
+                    </div>
+                  ) : null}
+                  {result.grossWeightKg !== null ? (
+                    <div>
+                      <dt className="text-primary-foreground/65">
+                        Estimated total shipment weight
+                      </dt>
+                      <dd className="mt-1 font-semibold">
+                        {formatWeight(result.grossWeightKg)}
+                      </dd>
+                    </div>
+                  ) : null}
+                </dl>
+              </details>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
                 <button
@@ -624,31 +763,42 @@ export function PackingCbmCalculator() {
                 <Link
                   href={quoteHref}
                   onClick={trackQuoteHandoff}
-                  className="inline-flex justify-center rounded-full bg-primary-foreground px-5 py-3 text-sm font-semibold text-primary hover:bg-cream"
+                  className="inline-flex justify-center rounded-full bg-primary-foreground px-5 py-3 text-center text-sm font-semibold text-primary hover:bg-cream"
                 >
-                  Continue to project review
+                  Ask UPG to review it
                 </Link>
               </div>
             </div>
           ) : (
-            <div className="mt-6" aria-live="polite">
-              <h2 className="font-serif text-3xl">Add the packing inputs.</h2>
+            <div className="mt-5" aria-live="polite">
+              <h2 className="font-serif text-3xl">Your result will appear here.</h2>
               <p className="mt-4 text-sm leading-relaxed text-primary-foreground/75">
-                Complete all three packed-unit dimensions, total quantity, carton
-                layout, and a non-negative allowance. Measured weight fields are
-                optional.
+                Enter the size of one packed item, your total quantity, and how
+                items fit in a carton. Optional weight details can be skipped.
               </p>
+              <div className="mt-6 rounded-xl bg-primary-foreground/8 p-4 text-sm leading-relaxed text-primary-foreground/80">
+                No freight knowledge needed. Start with the three numbered steps.
+              </div>
             </div>
           )}
         </div>
 
-        <div className="mt-5 border border-border bg-cream p-5 text-sm leading-relaxed text-muted-foreground">
-          <strong className="text-foreground">Planning boundary:</strong> this is
-          not a freight quote, carton specification, load plan, carrier approval,
-          or structural review. Fold-flat boxes, flexible film, inserts, void fill,
-          palletization, and carrier rounding can materially change the shipped
-          result.
-        </div>
+        <details className="group mt-5 border border-border bg-cream p-5 text-sm leading-relaxed text-muted-foreground">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-foreground [&::-webkit-details-marker]:hidden">
+            Before you rely on this estimate
+            <span
+              aria-hidden="true"
+              className="text-lg transition-transform group-open:rotate-45"
+            >
+              +
+            </span>
+          </summary>
+          <p className="mt-3">
+            This is a planning estimate, not a freight quote (shipping price) or
+            final carton approval. Your supplier or carrier should confirm the
+            packing method, carton size, measured weight, and final shipping rules.
+          </p>
+        </details>
       </aside>
     </div>
   );

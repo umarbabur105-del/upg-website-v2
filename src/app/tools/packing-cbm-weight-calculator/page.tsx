@@ -9,9 +9,9 @@ const toolPath = "/tools/packing-cbm-weight-calculator";
 const toolUrl = `${SITE_URL}${toolPath}`;
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Packing CBM & Weight Calculator",
+  title: "Carton Count, CBM & Shipping Weight Calculator",
   description:
-    "Estimate master-carton count, packed carton dimensions, total CBM, actual weight, and dimensional weight for a packaging shipment.",
+    "Enter one packed item's size and quantity to estimate shipping cartons, carton dimensions, total CBM, and optional shipment weight.",
   path: toolPath,
   keywords: [
     "packing CBM calculator",
@@ -24,29 +24,29 @@ export const metadata: Metadata = createPageMetadata({
 
 const faqItems = [
   {
-    question: "What dimensions should I enter?",
+    question: "What exactly should I measure?",
     answer:
-      "Enter the length, width, and height of one packed unit as it will sit inside the master carton. Do not use a flat dieline size. For fold-flat boxes, flexible film, inserts, or nested products, use the actual shipping footprint after the packing method is known.",
+      "Measure one finished, packed item as it will sit in the shipping carton. Enter its length, width, and height. If the item folds or nests, measure the space it actually uses after it is prepared for shipping.",
   },
   {
-    question: "How does the calculator estimate the master-carton size?",
+    question: "What if I do not know how items fit in a carton?",
     answer:
-      "It multiplies each packed-unit dimension by the manual grid entered for that direction, then adds the selected total outer allowance once to each carton dimension. The result is a planning size, not a structural carton specification.",
+      "Use the sample arrangement for a rough starting point, or place a few packed items together and count how many fit across, how many fit from front to back, and how many layers can stack safely. Ask your supplier to confirm the final arrangement.",
   },
   {
-    question: "Does this tool estimate actual shipment weight from material?",
+    question: "What does CBM mean?",
     answer:
-      "No. Actual weight is calculated only when you enter a measured packed-unit weight. Gross weight also requires an empty master-carton tare weight. The tool does not guess weight from a material name or board grade.",
+      "CBM means cubic meters. It is the amount of space your cartons are expected to occupy. Freight providers often use this number when planning air, sea, or truck shipments.",
   },
   {
-    question: "What is dimensional weight?",
+    question: "Why can shipping volume weight differ from scale weight?",
     answer:
-      "Dimensional weight is a carrier planning value based on occupied volume. This tool divides carton volume in cubic centimeters by either 5,000 or 6,000. Carriers use different divisors, rounding rules, and billable-weight policies, so confirm the selected service before shipment.",
+      "A large, light carton uses a lot of vehicle or aircraft space, so carriers may charge using its size instead of its scale weight. This is often called dimensional or volumetric weight. Your carrier must confirm the final method and factor.",
   },
   {
-    question: "Is the CBM result a freight quote?",
+    question: "Is this my final shipping price?",
     answer:
-      "No. It does not calculate freight price, duties, taxes, palletization, container loading, carrier acceptance, or delivery timing. UPG and the selected logistics provider must confirm the final packing and shipping details.",
+      "No. This is not a freight quote. The result is for early planning and does not include freight rates, duties, taxes, pallets, delivery timing, or carrier approval. Confirm the final carton and shipping details before placing an order or booking freight.",
   },
 ];
 
@@ -59,7 +59,7 @@ const structuredData = {
       name: "UPG Packing CBM & Weight Calculator",
       url: toolUrl,
       description:
-        "A free planning calculator for master-carton count, packed carton dimensions, CBM, measured weight, and dimensional weight.",
+        "A free, easy-to-use calculator for shipping carton count, carton dimensions, CBM, measured weight, and dimensional weight.",
       applicationCategory: "BusinessApplication",
       operatingSystem: "Any",
       browserRequirements: "Requires a modern web browser with JavaScript enabled.",
@@ -111,27 +111,6 @@ const structuredData = {
   ],
 };
 
-const planningSteps = [
-  {
-    number: "01",
-    title: "Measure one packed unit",
-    description:
-      "Use the occupied shipping footprint after folding, nesting, inserts, or protective material are considered.",
-  },
-  {
-    number: "02",
-    title: "Set a manual carton grid",
-    description:
-      "Choose how many units run along the carton length, width, and height. Rotate the unit dimensions when testing another orientation.",
-  },
-  {
-    number: "03",
-    title: "Check volume and weight",
-    description:
-      "Review carton count, estimated packed size, total CBM, dimensional weight, and measured-weight outputs before project review.",
-  },
-];
-
 export default function PackingCbmWeightCalculatorPage() {
   return (
     <>
@@ -144,35 +123,22 @@ export default function PackingCbmWeightCalculatorPage() {
         <div className="container-editorial pt-12 pb-12 md:pt-20 md:pb-16">
           <SectionHeading
             as="h1"
-            eyebrow="Free packing planning tool"
-            title="Estimate carton count, CBM, and shipment weight."
-            intro="Build a transparent packing estimate from the dimensions of one packed unit, a manual master-carton layout, total quantity, and optional measured weights."
+            eyebrow="Free and easy packing calculator"
+            title="How many shipping cartons will you need?"
+            intro="Enter one packed item's size and your quantity. We will estimate the number of cartons, the space they use, and optional shipping weight."
             className="max-w-5xl"
           />
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">
+          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+            <span className="rounded-full bg-cream px-4 py-2 font-semibold text-foreground">
+              No freight experience needed
+            </span>
             <Link
               href="/tools"
               className="border-b border-foreground/20 pb-0.5 text-foreground"
             >
               View all packaging tools →
             </Link>
-            <Link
-              href="/tools/packaging-spec-builder"
-              className="border-b border-foreground/20 pb-0.5 text-foreground"
-            >
-              Build the product specification first →
-            </Link>
-            <Link
-              href="/get-a-quote?builder_note=Please%20review%20my%20packing%20and%20shipping%20plan."
-              className="border-b border-foreground/20 pb-0.5 text-foreground"
-            >
-              Start project review →
-            </Link>
           </div>
-          <p className="mt-7 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            This planning estimate keeps every input visible. It is not a freight
-            quote, final master-carton specification, or carrier approval.
-          </p>
         </div>
       </section>
 
@@ -183,35 +149,12 @@ export default function PackingCbmWeightCalculatorPage() {
       </section>
 
       <section className="section-shell bg-cream">
-        <div className="container-editorial">
-          <SectionHeading
-            eyebrow="How to use the estimate"
-            title="Make every packing assumption visible."
-            intro="The calculator does not choose a hidden packing pattern or infer weight from material. The inputs stay visible so a supplier or logistics provider can correct them."
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {planningSteps.map((step) => (
-              <article key={step.number} className="surface-card p-6 md:p-8">
-                <div className="font-serif text-4xl text-gold">{step.number}</div>
-                <h2 className="mt-5 font-serif text-2xl text-foreground">
-                  {step.title}
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {step.description}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell">
         <div className="container-editorial grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <SectionHeading
-              eyebrow="Planning boundaries"
-              title="CBM and weight answers."
-              intro="Use the estimate to prepare a conversation—not as a freight price, final carton drawing, or carrier approval."
+              eyebrow="Simple answers"
+              title="Common calculator questions."
+              intro="Plain-language help for measuring, carton packing, CBM, and shipping weight."
             />
           </div>
           <div className="surface-card p-6 sm:p-8 lg:col-span-8">
