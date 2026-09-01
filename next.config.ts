@@ -80,6 +80,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/tools/packaging-spec-builder",
+        destination: "/tools",
+        permanent: true,
+      },
+      {
+        source: "/tools/packaging-artwork-preflight",
+        destination: "/tools",
+        permanent: true,
+      },
+      {
         source: "/privacy-policy",
         destination: "/privacy",
         permanent: true,

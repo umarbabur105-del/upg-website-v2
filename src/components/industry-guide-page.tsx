@@ -205,10 +205,10 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                   Start this project
                 </Link>
                 <Link
-                  href="/tools/packaging-spec-builder"
+                  href={quoteHref}
                   className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
                 >
-                  Build a planning spec
+                  Send the known details
                 </Link>
               </div>
             </div>

@@ -120,10 +120,10 @@ export default function ProductsPage() {
                 Compare Packaging Formats
               </Link>
               <Link
-                href="/tools/packaging-spec-builder"
+                href="/get-a-quote"
                 className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
               >
-                Build Your Specification
+                Start Your Project
               </Link>
               <Link
                 href="/cosmetics"

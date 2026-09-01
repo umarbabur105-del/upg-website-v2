@@ -4,16 +4,15 @@ import { SectionHeading } from "@/components/section-heading";
 import { SITE_URL, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Free Custom Packaging Planning Tools",
+  title: "Free Custom Packaging Format Finder",
   description:
-    "Use UPG's free tools to choose a packaging format, build a specification, check the planning MOQ, and prepare artwork for review.",
+    "Use UPG's free Format Finder to compare five custom packaging families before submitting your known project details for human review.",
   path: "/tools",
   keywords: [
     "custom packaging tools",
     "packaging format finder",
-    "packaging MOQ calculator",
-    "packaging specification tool",
-    "packaging artwork preflight checker",
+    "custom packaging comparison",
+    "which packaging format should I use",
   ],
 });
 
@@ -28,34 +27,7 @@ const tools = [
     details: [
       "Primary format recommendation",
       "Alternate format when relevant",
-      "Direct handoff to the MOQ Builder",
-    ],
-  },
-  {
-    number: "02",
-    title: "Packaging Spec & MOQ Builder",
-    description:
-      "Choose the product family, add dimensions and known requirements, check the approved planning MOQ, then share, download, print, or carry the specification into a project enquiry.",
-    href: "/tools/packaging-spec-builder",
-    cta: "Build a specification",
-    details: [
-      "One 250-unit MOQ across all product families",
-      "Inch, centimeter, and millimeter support",
-      "Shareable and downloadable planning brief",
-      "Quote-form specification handoff",
-    ],
-  },
-  {
-    number: "03",
-    title: "Packaging Artwork Preflight Checker",
-    description:
-      "Work through eight preparation checks for the dieline, editable source, images, fonts, color intent, special finishes, copy, and version control before UPG review.",
-    href: "/tools/packaging-artwork-preflight",
-    cta: "Check artwork readiness",
-    details: [
-      "Foundation and production-detail checks",
-      "Open-item preparation summary",
-      "No artwork upload or automated approval",
+      "Direct handoff to a project enquiry",
     ],
   },
 ];
@@ -66,16 +38,16 @@ const structuredData = {
     {
       "@type": "CollectionPage",
       "@id": `${SITE_URL}/tools#page`,
-      name: "UPG Custom Packaging Planning Tools",
+      name: "UPG Custom Packaging Format Finder",
       url: `${SITE_URL}/tools`,
       description:
-        "Free planning tools for choosing a custom packaging format, checking the applicable MOQ, preparing a specification, and organizing artwork readiness.",
+        "A free guided tool for choosing a starting custom packaging format before human project review.",
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@id": `${SITE_URL}/#organization` },
     },
     {
       "@type": "ItemList",
-      name: "UPG packaging planning tools",
+      name: "UPG packaging planning tool",
       itemListElement: tools.map((tool, index) => ({
         "@type": "ListItem",
         position: index + 1,
@@ -115,16 +87,16 @@ export default function ToolsPage() {
         <div className="container-editorial pt-12 pb-14 md:pt-20 md:pb-20">
           <SectionHeading
             as="h1"
-            eyebrow="Free packaging planning tools"
-            title="Move from an early packaging idea to a clearer production brief."
-            intro="Choose a starting format, check the applicable planning MOQ, and organize the project details UPG needs for a useful manufacturing review."
+            eyebrow="Free packaging planning tool"
+            title="Choose a starting format before project review."
+            intro="Answer four short questions in the approved Format Finder, then send the known details to UPG for a human manufacturing review."
             className="max-w-5xl"
           />
         </div>
       </section>
 
       <section className="pb-20 md:pb-28">
-        <div className="container-editorial grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="container-editorial max-w-2xl">
           {tools.map((tool) => (
             <article key={tool.href} className="surface-card flex flex-col p-7 md:p-10">
               <div className="font-serif text-5xl text-gold">{tool.number}</div>
@@ -158,8 +130,8 @@ export default function ToolsPage() {
           <div className="lg:col-span-8">
             <SectionHeading
               eyebrow="Human-reviewed manufacturing"
-              title="Planning tools organize the brief. UPG confirms the project."
-              intro="The tools do not publish instant custom-production pricing or replace structural, material, artwork, proofing, production, or delivery review."
+              title="The finder suggests a starting point. UPG confirms the project."
+              intro="The Format Finder does not publish instant custom-production pricing or replace structural, material, artwork, proofing, production, or delivery review."
             />
           </div>
           <div className="lg:col-span-4 lg:text-right">

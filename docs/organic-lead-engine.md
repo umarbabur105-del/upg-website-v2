@@ -78,8 +78,6 @@ Initial style cluster:
 UPG should earn links and AI-search citations through practical resources rather than generic articles:
 
 - Packaging Format Finder
-- Packaging Spec & MOQ Builder using UPG's approved MOQ rules
-- Packaging Artwork Preflight Checker
 - Packaging Style Library
 - Future: dieline briefing tool, landed-project checklist, print-finish decision tool, and anonymized packaging-planning benchmarks after enough first-party enquiries exist
 
@@ -158,7 +156,7 @@ The gate checks rendered pages for required and unique titles and descriptions, 
 - Phase 2 first commercial cluster: implemented with 12 visible industry and product-application guides.
 - Demand evidence: Search Console baseline and Teal public-coverage proxy recorded in `docs/keyword-demand-map.md`.
 - Exact monthly volume: pending a real Google Ads account, developer token, customer ID, and OAuth `adwords` scope. The Google Ads API service itself is enabled.
-- Phase 3 authority assets: the Packaging Spec & MOQ Builder creates shareable, downloadable, and print-ready planning briefs. The Packing CBM & Weight Calculator was archived on 2026-09-01 because its assembled packing model did not reliably represent products supplied flat, folded, collapsed, or nested.
+- Phase 3 authority assets: the Packaging Format Finder remains live. The Packaging Spec & MOQ Builder, Packaging Artwork Preflight Checker, and Packing CBM & Weight Calculator were archived on 2026-09-01. No new tool may reach production before Umar tests its exact preview URL and explicitly approves it.
 - Phase 3 prospecting: 50 prospects and approval-gated outreach drafts recorded in `docs/backlink-prospects.csv`, `docs/backlink-outreach-drafts.md`, and `docs/backlink-personalized-drafts.md`; two individually approved editorial emails were sent on 2026-08-21. Further outreach is paused by owner instruction.
 - Measurement: aggregate-only Search Console, GA4, and CRM report available through `npm run report:organic`; it includes form starts, successful lead submissions, sample-kit checkout starts, purchases, and authority-tool events. Brand filtering now treats `universal packing` as a UPG brand variant, and the action queue excludes known similarly named packaging companies without removing valid commercial packaging queries from the raw evidence.
 

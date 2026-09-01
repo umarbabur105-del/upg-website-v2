@@ -236,12 +236,12 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
               {parentProduct.sizes}
             </p>
             <Link
-              href={`/tools/packaging-spec-builder?product=${encodeURIComponent(
+              href={`/get-a-quote?product=${encodeURIComponent(
                 guide.family
               )}&style=${encodeURIComponent(guide.quoteStyle)}`}
               className="mt-7 inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
             >
-              Check MOQ and build the specification →
+              Send this format for project review →
             </Link>
             <div className="mt-7 border-t border-border pt-6">
               <p className="text-sm leading-relaxed text-muted-foreground">

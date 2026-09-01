@@ -79,7 +79,7 @@ export default function PackagingStylesPage() {
           <div className="max-w-5xl">
             <div className="eyebrow mb-5">Custom packaging style library</div>
             <h1 className="display-1 text-balance">
-              Start with a real format, then build the specification.
+              Start with a real format, then send the known details.
             </h1>
             <p className="mt-7 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
               Explore the tuck box styles and Mylar bag formats inside UPG&apos;s
@@ -95,10 +95,10 @@ export default function PackagingStylesPage() {
               Find the right product family
             </Link>
             <Link
-              href="/tools/packaging-spec-builder"
+              href="/get-a-quote"
               className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
             >
-              Check MOQ and build a spec
+              Send your project details
             </Link>
             <Link
               href="/compare"

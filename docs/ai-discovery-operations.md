@@ -99,7 +99,7 @@ Official reference: [OpenAI Agentic Commerce onboarding](https://developers.open
 
 ## Remaining citation work
 
-1. The UPG Packaging Spec and MOQ Builder and answer-first pricing/MOQ source are live; measure their discovery, engagement, and quote-handoff events before expanding them.
+1. The answer-first pricing/MOQ source and Packaging Format Finder are live. The Spec and MOQ Builder and Artwork Preflight Checker were archived on 2026-09-01 and must not be represented as current sources.
 2. Add expert-reviewed, answer-first technical pages using UPG-approved product knowledge and measured query gaps.
 3. Publish original structure diagrams, comparison tables, and downloadable specification templates after product-structure approval.
 4. Third-party citation outreach is paused by owner instruction; preserve the researched queue without sending or submitting anything.

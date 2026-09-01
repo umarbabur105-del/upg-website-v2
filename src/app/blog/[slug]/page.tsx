@@ -46,10 +46,10 @@ const articleResources: Record<
       href: "/custom-packaging-pricing",
     },
     {
-      title: "Packaging Spec & MOQ Builder",
+      title: "Start a custom packaging project",
       description:
-        "Choose the product family, add known dimensions and requirements, and prepare a brief for project review.",
-      href: "/tools/packaging-spec-builder",
+        "Send the known product family, dimensions, quantity, material, finish, and destination for human review.",
+      href: "/get-a-quote",
     },
   ],
   "corrugated-vs-rigid-boxes": [
@@ -315,19 +315,19 @@ export default async function BlogPostPage({ params }: PageProps) {
           {post.slug === "how-to-prepare-artwork-for-custom-packaging" ? (
             <div className="mt-10 border border-charcoal/10 bg-cream p-6 md:p-8">
               <div className="text-xs font-semibold uppercase tracking-widest text-gold">
-                Free preparation tool
+                Human artwork review
               </div>
               <h2 className="mt-3 font-serif text-2xl font-semibold text-charcoal">
-                Turn the guide into an artwork readiness summary.
+                Send the known artwork details with your project.
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-charcoal/70">
-                Work through eight preparation checks and carry confirmed and open items into your UPG project enquiry. No artwork file is uploaded or automatically approved.
+                Use the guide above to organize confirmed and open items, then include the known artwork status in your UPG project enquiry. Final artwork and production readiness require human review.
               </p>
               <Link
-                href="/tools/packaging-artwork-preflight"
+                href="/get-a-quote?builder_note=Please%20review%20the%20artwork%20preparation%20status%20for%20this%20project."
                 className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
               >
-                Check artwork readiness
+                Start an artwork review enquiry
               </Link>
             </div>
           ) : null}

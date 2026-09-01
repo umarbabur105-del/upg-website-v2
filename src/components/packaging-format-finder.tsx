@@ -62,10 +62,10 @@ export function PackagingFormatFinder() {
     trackedSignature.current = "";
   }
 
-  function trackBuilderHandoff() {
+  function trackEnquiryHandoff() {
     trackAnalyticsEvent("packaging_format_finder_handoff", {
       recommended_family: primaryRank?.family ?? "human_review",
-      destination: "packaging_spec_builder",
+      destination: "project_enquiry",
     });
   }
 
@@ -224,11 +224,11 @@ export function PackagingFormatFinder() {
 
               <div className="mt-6 grid gap-3">
                 <Link
-                  href={`/tools/packaging-spec-builder?product=${encodeURIComponent(primaryProduct.family)}`}
-                  onClick={trackBuilderHandoff}
+                  href={`/get-a-quote?product=${encodeURIComponent(primaryProduct.family)}`}
+                  onClick={trackEnquiryHandoff}
                   className="inline-flex justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
                 >
-                  Check MOQ &amp; build the specification
+                  Continue with this recommendation
                 </Link>
                 <Link
                   href={`/products/${primaryProduct.slug}`}

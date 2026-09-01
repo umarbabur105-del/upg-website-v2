@@ -126,10 +126,10 @@ export default function CustomPackagingPricingPage() {
                 Request a Custom Quote
               </Link>
               <Link
-                href="/tools/packaging-spec-builder"
+                href="/get-a-quote"
                 className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
               >
-                Build Your Specification
+                Send Your Project Details
               </Link>
             </div>
             <p className="mt-5 text-xs text-muted-foreground">

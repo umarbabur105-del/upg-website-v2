@@ -187,29 +187,6 @@ for (const [route, action] of nativeFormContracts) {
 
 const sourceContracts = [
   {
-    file: "src/components/packaging-spec-builder.tsx",
-    label: "/tools/packaging-spec-builder semantic heading",
-    markers: ["<h2", "Packaging specification", "</h2>"],
-  },
-  {
-    file: "src/app/tools/packaging-spec-builder/page.tsx",
-    label: "/tools/packaging-spec-builder dynamic-page contract",
-    markers: [
-      '"@type": "WebApplication"',
-      '"@type": "FAQPage"',
-      "This tool does not estimate price",
-    ],
-  },
-  {
-    file: "src/app/tools/packaging-artwork-preflight/page.tsx",
-    label: "/tools/packaging-artwork-preflight dynamic-page contract",
-    markers: [
-      '"@type": "WebApplication"',
-      '"@type": "FAQPage"',
-      "No file is uploaded or automatically approved",
-    ],
-  },
-  {
     file: "src/components/quote-form.tsx",
     label: "/get-a-quote native form",
     markers: ['action="/api/quote"', 'method="post"'],
@@ -517,7 +494,32 @@ for (const [route, contract] of planningToolContracts) {
   }
 }
 
-const retiredToolRoutes = ["/tools/packing-cbm-weight-calculator"];
+const approvedLiveToolRoutes = new Set(["/tools/packaging-format-finder"]);
+const toolSourceEntries = await readdir(path.resolve("src/app/tools"), {
+  withFileTypes: true,
+});
+
+for (const entry of toolSourceEntries) {
+  if (!entry.isDirectory()) continue;
+  const route = `/tools/${entry.name}`;
+  let hasPage = true;
+  try {
+    await readFile(path.resolve("src/app/tools", entry.name, "page.tsx"), "utf8");
+  } catch {
+    hasPage = false;
+  }
+  if (hasPage && !approvedLiveToolRoutes.has(route)) {
+    failures.push(
+      `${route}: tool route is not approved for production; obtain Umar's explicit preview-test approval before adding it to main`
+    );
+  }
+}
+
+const retiredToolRoutes = [
+  "/tools/packing-cbm-weight-calculator",
+  "/tools/packaging-spec-builder",
+  "/tools/packaging-artwork-preflight",
+];
 
 for (const route of retiredToolRoutes) {
   if (pages.some((candidate) => candidate.route === route)) {
@@ -525,6 +527,19 @@ for (const route of retiredToolRoutes) {
   }
   if (toolsHub?.html.includes(`href="${route}"`)) {
     failures.push(`/tools: retired tool remains linked from the tools hub: ${route}`);
+  }
+}
+
+for (const file of [
+  "src/app/sitemap.ts",
+  "src/app/tools/page.tsx",
+  "src/lib/ai-discovery.ts",
+]) {
+  const source = await readFile(path.resolve(file), "utf8");
+  for (const route of retiredToolRoutes) {
+    if (source.includes(route)) {
+      failures.push(`${file}: retired tool remains in public discovery source: ${route}`);
+    }
   }
 }
 

@@ -442,8 +442,8 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
         title: "Lock the structure before final artwork",
         description:
           "Logo placement, copy, foil, spot UV, embossing, and debossing should be prepared on the approved dieline for the selected structure.",
-        href: "/tools/packaging-artwork-preflight",
-        linkLabel: "Check artwork readiness",
+        href: "/blog/how-to-prepare-artwork-for-custom-packaging",
+        linkLabel: "Review artwork preparation guidance",
       },
     ],
     faqs: [

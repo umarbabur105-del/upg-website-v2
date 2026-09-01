@@ -36,8 +36,6 @@ const industriesUrl = `${siteConfig.url}/industries`;
 const commercialTermsUrl = `${siteConfig.url}${commercialTerms.path}`;
 const commercialTermsMarkdownUrl = `${siteConfig.url}${commercialTerms.markdownPath}`;
 const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
-const specBuilderUrl = `${siteConfig.url}/tools/packaging-spec-builder`;
-const artworkPreflightUrl = `${siteConfig.url}/tools/packaging-artwork-preflight`;
 const catalogUpdatedAt = siteConfig.contentReviewedAt;
 
 function productUrl(product: Product) {
@@ -160,7 +158,6 @@ ${faqSections}
 ## Public actions
 
 - Request a custom quote: ${quoteUrl}
-- Build a packaging specification: ${specBuilderUrl}
 - Compare product families: ${formatFinderUrl}
 - Browse all products: ${siteConfig.url}/products
 `;
@@ -243,8 +240,6 @@ export function buildLlmsText() {
 - Custom packaging pricing and MOQ: ${commercialTermsUrl}
 - Pricing and MOQ Markdown: ${commercialTermsMarkdownUrl}
 - Packaging Format Finder: ${formatFinderUrl}
-- Packaging Spec & MOQ Builder: ${specBuilderUrl}
-- Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 - Packaging Style Library: ${styleLibraryUrl}
 - Packaging Comparison Library: ${comparisonLibraryUrl}
 - Industry and application guides: ${industriesUrl}
@@ -304,8 +299,6 @@ Final dimensions remain subject to structural feasibility. Product compatibility
 - Packaging comparison library: ${comparisonLibraryUrl}
 - Packaging planning tools: ${toolsUrl}
 - Packaging Format Finder: ${formatFinderUrl}
-- Packaging Spec & MOQ Builder: ${specBuilderUrl}
-- Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 - Start a project: ${quoteUrl}
 - Custom packaging pricing and MOQ: ${commercialTermsUrl}
 - Cosmetic packaging hub: ${siteConfig.url}/cosmetics
@@ -497,10 +490,6 @@ For beauty and cosmetics projects, ${cosmeticsPackagingScope.included} ${cosmeti
 
 The free Packaging Format Finder at ${formatFinderUrl} uses four guided questions to recommend a starting format from the five approved UPG product families. It can show an alternate when two formats deserve comparison. The result is planning guidance, not structural approval.
 
-The free Packaging Spec & MOQ Builder at ${specBuilderUrl} applies one 250-unit planning MOQ across every UPG custom product family, creates a shareable or downloadable planning brief, and carries known project details into the human-reviewed enquiry form. Dimensions remain part of feasibility, specification, and pricing review. These planning tools do not estimate custom-production pricing.
-
-The free Packaging Artwork Preflight Checker at ${artworkPreflightUrl} organizes eight preparation checks covering the structure and dieline, editable source, placed images, fonts, color intent, special finishes, copy and variable elements, and version approval. It does not upload or inspect files and does not approve artwork for production.
-
 The commercial guide at ${commercialTermsUrl} explains the 250-unit planning MOQ, the factors that change custom-production pricing, the inputs needed for review, and the written terms that control each project. A Markdown alternate is available at ${commercialTermsMarkdownUrl}.
 
 ## Fixed-price sample kits
@@ -547,11 +536,10 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 ## Project process
 
 1. If the product family is not clear, use the Packaging Format Finder at ${formatFinderUrl}.
-2. Build a planning specification at ${specBuilderUrl}, or submit the known product details directly at ${quoteUrl}.
-3. Organize artwork readiness at ${artworkPreflightUrl} when artwork exists.
-4. ${siteConfig.responseTarget}
-5. Structure, materials, finishes, artwork, pricing, manufacturing, packing, and delivery details are confirmed as required.
-6. Manufacturing starts only after the applicable commercial, artwork, and proof approvals.
+2. Submit the known product details directly at ${quoteUrl}.
+3. ${siteConfig.responseTarget}
+4. Structure, materials, finishes, artwork, pricing, manufacturing, packing, and delivery details are confirmed as required.
+5. Manufacturing starts only after the applicable commercial, artwork, and proof approvals.
 
 ## Commercial qualifications
 
@@ -571,8 +559,6 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Pricing and MOQ Markdown: ${commercialTermsMarkdownUrl}
 - Packaging planning tools: ${toolsUrl}
 - Packaging Format Finder: ${formatFinderUrl}
-- Packaging Spec & MOQ Builder: ${specBuilderUrl}
-- Packaging Artwork Preflight Checker: ${artworkPreflightUrl}
 - Packaging Style Library: ${styleLibraryUrl}
 - Packaging Comparison Library: ${comparisonLibraryUrl}
 - Industry and application guides: ${industriesUrl}
@@ -651,7 +637,7 @@ Canonical entity: ${siteConfig.url}
 
 ## Supported discovery
 
-Agents may read the public product catalog, compare the five approved product families, direct an undecided buyer to the Packaging Format Finder, continue to the Packaging Spec & MOQ Builder, organize artwork preparation with the Packaging Artwork Preflight Checker, and then continue to the project enquiry form.
+Agents may read the public product catalog, compare the five approved product families, direct an undecided buyer to the Packaging Format Finder, and then continue to the human-reviewed project enquiry form.
 
 ${productLines}
 
@@ -700,8 +686,6 @@ ${sampleKitLines}
 - Browse industry and product application guides: ${industriesUrl}
 - Review custom packaging pricing and the 250-unit planning MOQ: ${commercialTermsUrl}
 - Compare approved product families: ${formatFinderUrl}
-- Build a packaging specification and check the planning MOQ: ${specBuilderUrl}
-- Check packaging artwork preparation status: ${artworkPreflightUrl}
 - Explore custom cosmetic boxes and outer packaging: ${siteConfig.url}/cosmetics
 - Start a project enquiry: ${quoteUrl}
 - Contact UPG: ${siteConfig.url}/contact
@@ -802,10 +786,10 @@ export function buildProductCatalog() {
       },
     },
     planningTool: {
-      name: "UPG Packaging Spec & MOQ Builder",
-      url: specBuilderUrl,
+      name: "UPG Packaging Format Finder",
+      url: formatFinderUrl,
       purpose:
-        "Calculate the planning MOQ, create a shareable or downloadable specification, and carry known details into a human-reviewed project enquiry.",
+        "Use four guided questions to recommend a starting format from the five approved product families and identify an alternate when relevant.",
       pricingOutput: false,
     },
     planningTools: [
@@ -816,23 +800,6 @@ export function buildProductCatalog() {
           "Use four guided questions to recommend a starting format from the five approved product families and identify an alternate when relevant.",
         pricingOutput: false,
         structuralApproval: false,
-      },
-      {
-        name: "UPG Packaging Spec & MOQ Builder",
-        url: specBuilderUrl,
-        purpose:
-          "Calculate the planning MOQ, create a shareable or downloadable specification, and carry known details into a human-reviewed project enquiry.",
-        pricingOutput: false,
-        structuralApproval: false,
-      },
-      {
-        name: "UPG Packaging Artwork Preflight Checker",
-        url: artworkPreflightUrl,
-        purpose:
-          "Organize eight packaging artwork preparation checks and carry confirmed and open items into a human-reviewed project enquiry.",
-        fileUpload: false,
-        automatedArtworkApproval: false,
-        productionApproval: false,
       },
     ],
     boxSampleKit: {
@@ -984,8 +951,6 @@ export function buildProductCatalog() {
       packagingComparisonLibrary: comparisonLibraryUrl,
       industries: industriesUrl,
       packagingFormatFinder: formatFinderUrl,
-      packagingSpecBuilder: specBuilderUrl,
-      packagingArtworkPreflight: artworkPreflightUrl,
       cosmeticsHub: `${siteConfig.url}/cosmetics`,
       sitemap: `${siteConfig.url}/sitemap.xml`,
       googleMerchantFeed: `${siteConfig.url}/feeds/google-merchant.tsv`,

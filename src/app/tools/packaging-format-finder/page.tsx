@@ -37,7 +37,7 @@ const faqItems = [
   {
     question: "Does the Format Finder calculate a price?",
     answer:
-      "No. Custom packaging pricing depends on the approved structure, dimensions, material, print, finishes, quantity, and delivery destination. The next step is to build a specification and submit the known project details.",
+      "No. Custom packaging pricing depends on the approved structure, dimensions, material, print, finishes, quantity, and delivery destination. The next step is to organize the known details and submit them for human review.",
   },
   {
     question: "Can the finder recommend standard shipping or master cartons?",
@@ -47,7 +47,7 @@ const faqItems = [
   {
     question: "What should I do after receiving a recommendation?",
     answer:
-      "Continue to the Packaging Spec & MOQ Builder with the recommended family preselected. Add the known dimensions, quantity, material, finishes, and intended use, then carry that specification into the UPG project enquiry form.",
+      "Continue to the UPG project enquiry form with the recommended family preselected. Add the known dimensions, quantity, material, finishes, intended use, and destination for human review.",
   },
 ];
 
@@ -70,7 +70,7 @@ const structuredData = {
         "Four-question packaging format assessment",
         "Primary packaging family recommendation",
         "Alternate format comparison when relevant",
-        "Handoff to the Packaging Spec and MOQ Builder",
+        "Handoff to the human-reviewed project enquiry",
       ],
     },
     {
@@ -183,10 +183,10 @@ export default function PackagingFormatFinderPage() {
               title="Format selection answers."
             />
             <Link
-              href="/tools/packaging-spec-builder"
+              href="/get-a-quote"
               className="mt-7 inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
             >
-              Already know the format? Build a specification →
+              Already know the format? Start a project enquiry →
             </Link>
           </div>
           <div className="surface-card p-6 sm:p-8 lg:col-span-8 lg:p-10">

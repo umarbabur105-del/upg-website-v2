@@ -169,10 +169,10 @@ export default function ComparisonHubPage() {
           </div>
           <div className="flex flex-wrap gap-4 lg:col-span-4 lg:justify-end">
             <Link
-              href="/tools/packaging-spec-builder"
+              href="/get-a-quote?product=Not%20sure%20yet"
               className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
             >
-              Build a specification
+              Send the known details
             </Link>
             <Link
               href="/get-a-quote"
