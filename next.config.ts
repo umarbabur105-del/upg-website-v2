@@ -43,6 +43,16 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/",
+        headers: [
+          {
+            key: "Link",
+            value:
+              '</llms.txt>; rel="alternate"; type="text/plain", </llms-full.txt>; rel="alternate"; type="text/plain", </agents.md>; rel="alternate"; type="text/markdown", </product-catalog.json>; rel="alternate"; type="application/json"',
+          },
+        ],
+      },
+      {
         source: "/custom-packaging-pricing",
         headers: [
           {

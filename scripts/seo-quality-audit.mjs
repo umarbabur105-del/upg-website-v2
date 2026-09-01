@@ -85,6 +85,9 @@ for (const file of htmlFiles) {
   if (!sitemapPaths.has(route)) continue;
 
   const html = await readFile(file, "utf8");
+  const imageTags = [...html.matchAll(/<img\b[^>]*>/gi)].map(
+    (match) => match[0]
+  );
   pages.push({
     route,
     html,
@@ -103,7 +106,9 @@ for (const file of htmlFiles) {
       /<link[^>]+href=["']([^"']*)["'][^>]+rel=["']canonical["']/i,
     ]),
     jsonLdCount: (html.match(/application\/ld\+json/g) ?? []).length,
-    imageCount: (html.match(/<img\b/gi) ?? []).length,
+    imageCount: imageTags.length,
+    imagesMissingAltCount: imageTags.filter((tag) => !/\balt=["'][^"']*["']/i.test(tag))
+      .length,
   });
 }
 
@@ -126,6 +131,11 @@ for (const page of pages) {
     );
   }
   if (!page.jsonLdCount) failures.push(`${page.route}: missing JSON-LD`);
+  if (page.imagesMissingAltCount) {
+    failures.push(
+      `${page.route}: ${page.imagesMissingAltCount} rendered image(s) are missing alt attributes`
+    );
+  }
   if (!page.html.includes("<!--email_off-->")) {
     failures.push(`${page.route}: missing Cloudflare email-obfuscation exemption`);
   }
@@ -480,6 +490,26 @@ for (const route of industryHubRoutes) {
   }
 }
 
+const homepage = pages.find((page) => page.route === "/");
+
+if (!homepage) {
+  failures.push("/: missing rendered homepage");
+} else {
+  if (!homepage.html.includes('id="industry-paths"')) {
+    failures.push("/: missing visible industry-path section");
+  }
+  for (const schemaType of ["WebPage", "ItemList"]) {
+    if (!homepage.html.includes(`"@type":"${schemaType}"`)) {
+      failures.push(`/: missing ${schemaType} JSON-LD`);
+    }
+  }
+  for (const route of industryHubRoutes) {
+    if (!homepage.html.includes(`href="${route}"`)) {
+      failures.push(`/: missing contextual industry-hub link to ${route}`);
+    }
+  }
+}
+
 const industryGuideRoutes = [...sitemapPaths].filter(
   (route) =>
     /^\/industries\/[^/]+$/.test(route) && !industryHubRoutes.includes(route)
@@ -607,6 +637,27 @@ for (const route of retiredToolRoutes) {
   }
 }
 
+for (const page of pages) {
+  if (page.route === "/") continue;
+  const inboundPageCount = pages.filter(
+    (candidate) =>
+      candidate.route !== page.route &&
+      candidate.html.includes(`href="${page.route}"`)
+  ).length;
+  if (inboundPageCount < 2) {
+    failures.push(
+      `${page.route}: only ${inboundPageCount} inbound sitemap page(s); expected at least 2`
+    );
+  }
+}
+
+const nextConfigSource = await readFile(path.resolve("next.config.ts"), "utf8");
+for (const marker of ["</llms.txt>", "</llms-full.txt>", "</agents.md>", "</product-catalog.json>"]) {
+  if (!nextConfigSource.includes(marker)) {
+    failures.push(`next.config.ts: missing homepage discovery Link header for ${marker}`);
+  }
+}
+
 for (const file of [
   "src/app/sitemap.ts",
   "src/app/tools/page.tsx",
@@ -664,5 +715,5 @@ if (failures.length) {
 }
 
 console.log(
-  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, exactly one H1, canonical URLs, JSON-LD, length limits, uniqueness, semantic headings, native form actions, contextual inbound links, ${blogRoutes.length} blog contracts, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, ${industryHubRoutes.length} commercial industry-hub contracts, ${planningToolContracts.size} planning-tool contract, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
+  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, exactly one H1, canonical URLs, JSON-LD, image alt attributes, length limits, uniqueness, semantic headings, native form actions, sitewide inbound-link coverage, homepage industry discovery, ${blogRoutes.length} blog contracts, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, ${industryHubRoutes.length} commercial industry-hub contracts, ${planningToolContracts.size} planning-tool contract, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
 );

@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
+import { industryNavigationGroups } from "@/data/navigation";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
-import { createPageMetadata } from "@/lib/seo";
+import { getIndustryLinkVisual } from "@/lib/industry-visuals";
+import { SITE_URL, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Custom Packaging Manufacturer: Boxes & Mylar Bags",
@@ -57,13 +59,98 @@ const finishHighlights = [
   "Matte, gloss, and soft-touch finishes",
 ];
 
+const homepageIndustryPaths = industryNavigationGroups.map((group) => {
+  const representativeHref = group.href.includes("#")
+    ? group.links[0]?.href ?? "/industries"
+    : group.href;
+
+  return {
+    ...group,
+    representativeHref,
+    visual: getIndustryLinkVisual(representativeHref),
+  };
+});
+
 export default function HomePage() {
   const featuredMailer = products.find(
     (product) => product.slug === "custom-mailer-boxes"
   );
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${SITE_URL}/#webpage`,
+        url: SITE_URL,
+        name: "Custom Packaging Manufacturer: Boxes & Mylar Bags",
+        description:
+          "Custom printed tuck boxes, corrugated ear-lock mailers, magnetic boxes, collapsible magnetic boxes, and Mylar bags manufactured for brands worldwide.",
+        dateModified: siteConfig.contentReviewedAt,
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": `${SITE_URL}/#organization` },
+        primaryImageOfPage: featuredMailer
+          ? {
+              "@type": "ImageObject",
+              url: `${SITE_URL}${featuredMailer.heroImage}`,
+              caption: "Custom corrugated ear-lock mailer boxes",
+            }
+          : undefined,
+        mainEntity: [
+          { "@id": `${SITE_URL}/#product-families` },
+          { "@id": `${SITE_URL}/#industry-paths` },
+        ],
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${SITE_URL}/#product-families`,
+        name: "UPG custom packaging product families",
+        numberOfItems: products.length,
+        itemListElement: products.map((product, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "Service",
+            "@id": `${SITE_URL}/products/${product.slug}#service`,
+            name: product.name,
+            url: `${SITE_URL}/products/${product.slug}`,
+            image: `${SITE_URL}${product.heroImage}`,
+            provider: { "@id": `${SITE_URL}/#organization` },
+            areaServed: siteConfig.market,
+            additionalProperty: {
+              "@type": "PropertyValue",
+              name: "Planning MOQ",
+              value: product.moq,
+            },
+          },
+        })),
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${SITE_URL}/#industry-paths`,
+        name: "UPG custom packaging industry paths",
+        numberOfItems: homepageIndustryPaths.length,
+        itemListElement: homepageIndustryPaths.map((group, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "WebPage",
+            name: `${group.label} Packaging`,
+            url: `${SITE_URL}${group.representativeHref}`,
+            description: group.description,
+            image: `${SITE_URL}${group.visual.src}`,
+          },
+        })),
+      },
+    ],
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       <section className="overflow-hidden bg-background">
         <div className="container-editorial py-10 md:py-14 lg:py-16">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
@@ -116,6 +203,7 @@ export default function HomePage() {
                     alt="Custom corrugated ear-lock mailer boxes"
                     fill
                     priority
+                    fetchPriority="high"
                     className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
@@ -195,6 +283,63 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section id="industry-paths" className="border-y border-border bg-stone py-16 md:py-20">
+        <div className="container-editorial">
+          <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <SectionHeading
+              eyebrow="Packaging by market"
+              title="Start from your industry, then choose the format."
+              intro="Each market path connects the buyer to current UPG products, visual format guides, planning questions, and a project-specific quote."
+              headingClassName="text-4xl font-light tracking-[-0.03em] text-balance md:text-5xl"
+            />
+            <Link
+              href="/industries"
+              className="inline-flex w-fit border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+            >
+              Browse every industry guide →
+            </Link>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {homepageIndustryPaths.map((group) => (
+              <Link
+                key={group.id}
+                href={group.href}
+                className="surface-card group flex min-h-[23rem] flex-col overflow-hidden hover:-translate-y-1 hover:shadow-card"
+              >
+                <span className="relative aspect-[16/10] overflow-hidden bg-cream">
+                  <Image
+                    src={group.visual.src}
+                    alt={group.visual.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </span>
+                <span className="flex flex-1 flex-col p-6">
+                  <span className="eyebrow">Industry path</span>
+                  <h2 className="mt-4 font-serif text-2xl text-foreground">
+                    {group.label}
+                  </h2>
+                  <span className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {group.description}
+                  </span>
+                  <span className="mt-auto pt-6 text-sm text-foreground">
+                    Explore products and guides →
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          <p className="mt-7 text-xs leading-relaxed text-muted-foreground">
+            Industry guidance was reviewed {siteConfig.contentReviewedAt}. Final
+            structure, materials, compatibility, pricing, production timing, and
+            delivery terms remain project specific.
+          </p>
         </div>
       </section>
 

@@ -35,7 +35,9 @@ Cloudflare's Email Address Obfuscation feature previously rewrote public HTML em
 
 The operator network also produced intermittent TLS failures and 12-second timeouts for product-page requests using OAI, Claude, Perplexity, Bing, and Google user agents. This does not prove a worldwide origin or crawler failure. Re-test with PageSpeed and independent regions before changing caching or CDN behavior.
 
-An external search result checked on 2026-08-12 still showed an older homepage snapshot with retired products, old MOQs, and old geographic wording. Faster change notification and recrawl monitoring are therefore required.
+External search results rechecked on 2026-09-01 still showed older homepage and MOQ wording. Current live product and pricing sources publish a 250-unit planning MOQ, and the `www` host permanently redirects to the canonical apex host. The search results are therefore stale copies rather than current live-page truth. Faster change notification and recrawl monitoring are required, but neither guarantees a refreshed snippet, indexing, ranking, citation, or lead.
+
+The homepage release candidate also advertises `llms.txt`, `llms-full.txt`, `agents.md`, and `product-catalog.json` through HTTP `Link` headers. These headers improve source discovery but remain supplementary to visible crawlable pages.
 
 ## IndexNow
 
