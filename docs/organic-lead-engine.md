@@ -1,6 +1,6 @@
 # UPG Organic Lead Engine
 
-Last reviewed: 2026-08-31
+Last reviewed: 2026-09-01
 
 ## Business objective
 
@@ -175,6 +175,23 @@ The gate checks rendered pages for required and unique titles and descriptions, 
 - Backlink distribution has started: 50 researched prospects, 13 still marked ready for a personalized pitch, and 2 individually approved editorial emails sent and awaiting response (FDPP and Packaging World). Further outreach is on hold.
 
 The immediate constraints are non-brand click-through, authority, two confirmed Google indexing gaps plus the new tool awaiting later inspection, incomplete lead qualification, and live physical-fulfillment readiness. Crawlability and the protected sandbox payment pipeline are healthy, but indexing is not described as complete without URL Inspection proof. While outreach is paused, the active lane is measurement, query-led content improvement, useful planning tools, and conversion-path verification.
+
+### Sitewide organic and AI readiness — production release, 2026-09-01
+
+Commits `7ad3009` and `5282fa9` strengthen the owned website rather than treating Merchant Center as the organic strategy:
+
+- the MOQ and corrugated-versus-magnetic guides now give direct answers, comparison tables, planning boundaries, required buyer inputs, visible editorial responsibility, BlogPosting and breadcrumb schema, and reciprocal guide links;
+- the blog hub routes buyers into pricing, comparison, and planning-tool sources;
+- cosmetics pages and the pricing page add reciprocal contextual routes for previously weak internal-link targets without rewriting the recently changed zero-click target copy;
+- About and Contact publish truthful AboutPage, ContactPage, and breadcrumb schema, while the organization graph names the two visible legal entities without inventing social profiles, ratings, reviews, or credentials;
+- quote and contact forms now retain native same-origin HTML POST actions when JavaScript is unavailable, accept JSON or URL-encoded input, reject foreign browser origins, and keep all pricing and follow-up human reviewed;
+- `/agents.md` and product catalog schema `2.7` document the quote and contact action contracts, required fields, encodings, and non-autonomous success meaning;
+- the pricing source advertises its Markdown alternate through an HTTP `Link` header;
+- Cloudflare email obfuscation is narrowly disabled around UPG's public email in rendered HTML using Cloudflare's documented `email_off` comments. Live pages retain direct `mailto:` links and no longer expose `data-cfemail` or `/cdn-cgi/l/email-protection` links to crawlers.
+
+Release proof passed for exact remote-main commit `5282fa9f007b521483f41ee5d6afe2cd205e3911`: Vercel production status `READY`, ESLint, TypeScript, 16 regression tests, a 107-page Next.js build, the expanded 84-page rendered SEO audit, 87/87 production sitemap URLs with HTTP 200, exactly one H1, matching canonical URLs, JSON-LD, AI action discovery, native-form and origin-protection checks, Markdown discovery, and the crawler-readable email contract. IndexNow accepted all 87 canonical URLs with HTTP 200.
+
+Fresh Search Console URL Inspection on 2026-09-01 reports both former gaps—`/industries/beauty-personal-care-packaging` and `/industries/supplement-packaging`—as indexed. `/tools/packing-cbm-weight-calculator` is still unknown to Google, and `/custom-packaging-pricing` is discovered but currently not indexed. No manual indexing request was submitted during this release without the required action-time confirmation. Rankings, AI citations, recommendations, and leads remain measurement outcomes rather than release claims.
 
 ### Site-first pricing and MOQ authority page — production release, 2026-08-31
 
