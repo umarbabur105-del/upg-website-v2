@@ -1,10 +1,10 @@
 # UPG Backlink Outreach Drafts
 
-Last reviewed: 2026-08-13
+Last reviewed: 2026-09-01
 
 These are approval-gated drafts. They must be personalized from the prospect's current editorial or membership rules. Do not send them in bulk, request an optimized anchor, offer payment for a ranking link, or claim results UPG cannot prove.
 
-Five researched, publication-specific drafts and human-author briefs are maintained in `docs/backlink-personalized-drafts.md`. They remain unsent until Umar approves each exact email.
+The current researched campaign, exact draft messages, human-author brief, and evidence-based holds are maintained in `docs/authority-outreach-campaign-2026-09.md`. The older `docs/backlink-personalized-drafts.md` file is historical and includes retired-tool references that must not be sent. No external message is approved until Umar approves its exact recipient, subject, body, and URLs immediately before sending.
 
 ## Draft 1: useful tool for a packaging resource
 

@@ -5,7 +5,8 @@ Last researched: 2026-08-13
 > **Archived asset notice — 2026-09-01:** Any draft below that references the
 > Packaging Spec & MOQ Builder or Packaging Artwork Preflight Checker is cancelled
 > and must not be sent. Both tools are retired from production. This file preserves
-> historical draft work only; outreach remains paused by owner instruction.
+> historical draft work only. The current approval-gated campaign is maintained in
+> `docs/authority-outreach-campaign-2026-09.md` and must be used instead.
 
 These drafts are prepared but not approved to send. Each recipient, route, subject, source rule, and tracked UPG URL has been matched to the publication. No draft requests a backlink, paid placement, or preferred anchor text.
 
