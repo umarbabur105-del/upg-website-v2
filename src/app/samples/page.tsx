@@ -186,6 +186,26 @@ export default function SamplesPage() {
         </div>
       </section>
 
+      <section className="border-y border-border bg-cream">
+        <div className="container-editorial grid gap-7 py-10 md:grid-cols-[1fr_auto] md:items-center">
+          <div>
+            <div className="eyebrow mb-3">Before you treat a sample as approval</div>
+            <h2 className="font-serif text-3xl text-foreground">
+              Know what a proof, sample kit, and project-specific sample can confirm.
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+              The buyer guide keeps representative finished samples separate from artwork review and project-specific production approval.
+            </p>
+          </div>
+          <Link
+            href="/blog/packaging-proof-vs-sample"
+            className="inline-flex rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:border-gold"
+          >
+            Compare proof vs. sample →
+          </Link>
+        </div>
+      </section>
+
       <section className="section-shell bg-stone">
         <div className="container-editorial grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">

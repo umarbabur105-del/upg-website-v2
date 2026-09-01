@@ -35,7 +35,7 @@ export const siteConfig = {
     { label: "About", href: "/about" },
   ],
   utilityNavigation: [
-    { label: "Blog", href: "/blog" },
+    { label: "Buyer Guides", href: "/blog" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
   ],

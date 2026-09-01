@@ -140,6 +140,43 @@ export default function CustomPackagingPricingPage() {
         </div>
       </section>
 
+      <section className="border-y border-border bg-background">
+        <div className="container-editorial grid gap-8 py-12 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-5">
+            <div className="eyebrow mb-3">Prepare before you enquire</div>
+            <h2 className="font-serif text-3xl text-foreground">
+              Two buyer guides turn the pricing inputs into a usable brief.
+            </h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+            <Link
+              href="/blog/custom-packaging-quote-checklist"
+              className="border border-border bg-cream p-5 hover:border-gold"
+            >
+              <div className="eyebrow">Quote checklist</div>
+              <h3 className="mt-3 font-serif text-xl text-foreground">
+                What to send for a useful first review
+              </h3>
+              <span className="mt-4 inline-flex text-sm font-semibold text-gold-dark">
+                Open checklist →
+              </span>
+            </Link>
+            <Link
+              href="/blog/how-to-measure-product-for-custom-packaging"
+              className="border border-border bg-cream p-5 hover:border-gold"
+            >
+              <div className="eyebrow">Dimension guide</div>
+              <h3 className="mt-3 font-serif text-xl text-foreground">
+                Measure the packed product before assuming the box
+              </h3>
+              <span className="mt-4 inline-flex text-sm font-semibold text-gold-dark">
+                Open measurement guide →
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="border-y border-border bg-cream">
         <div className="container-editorial grid gap-6 py-7 sm:grid-cols-3">
           <div>

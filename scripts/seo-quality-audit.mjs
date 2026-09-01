@@ -236,6 +236,33 @@ for (const route of contextualInboundContracts) {
 const blogRoutes = [...sitemapPaths].filter((route) =>
   /^\/blog\/[^/]+$/.test(route)
 );
+const blogHub = pages.find((page) => page.route === "/blog");
+
+if (blogRoutes.length < 10) {
+  failures.push(
+    `Buyer-guide cluster has ${blogRoutes.length} route(s); expected at least 10`
+  );
+}
+
+if (!blogHub) {
+  failures.push("/blog: missing rendered buyer-guide hub");
+} else {
+  for (const schemaType of ["CollectionPage", "ItemList", "BreadcrumbList"]) {
+    if (!blogHub.html.includes(`\"@type\":\"${schemaType}\"`)) {
+      failures.push(`/blog: missing ${schemaType} JSON-LD`);
+    }
+  }
+  if (blogHub.imageCount < blogRoutes.length) {
+    failures.push(
+      `/blog: only ${blogHub.imageCount} rendered image(s); expected at least one visual per buyer guide`
+    );
+  }
+  for (const route of blogRoutes) {
+    if (!blogHub.html.includes(`href=\"${route}\"`)) {
+      failures.push(`/blog: missing internal link to ${route}`);
+    }
+  }
+}
 
 for (const route of blogRoutes) {
   const page = pages.find((candidate) => candidate.route === route);
@@ -243,7 +270,7 @@ for (const route of blogRoutes) {
     failures.push(`${route}: missing rendered blog page`);
     continue;
   }
-  for (const schemaType of ["BlogPosting", "BreadcrumbList"]) {
+  for (const schemaType of ["BlogPosting", "FAQPage", "BreadcrumbList"]) {
     if (!page.html.includes(`"@type":"${schemaType}"`)) {
       failures.push(`${route}: missing ${schemaType} JSON-LD`);
     }
@@ -253,6 +280,30 @@ for (const route of blogRoutes) {
   }
   if (!page.html.includes(">Related packaging guides</h2>")) {
     failures.push(`${route}: missing related-guide section`);
+  }
+  if (!page.html.includes("Direct answer")) {
+    failures.push(`${route}: missing visible direct-answer block`);
+  }
+  if (!page.html.includes("Representative packaging concept or capability reference")) {
+    failures.push(`${route}: missing visible concept-image disclosure`);
+  }
+  if (page.imageCount < 4) {
+    failures.push(
+      `${route}: only ${page.imageCount} rendered image(s); expected visual hero plus related guides`
+    );
+  }
+}
+
+const colorGuide = pages.find(
+  (page) => page.route === "/blog/cmyk-vs-pantone-packaging-printing"
+);
+if (!colorGuide) {
+  failures.push("CMYK vs Pantone buyer guide is missing");
+} else {
+  for (const source of ["pantone.com", "helpx.adobe.com"]) {
+    if (!colorGuide.html.includes(source)) {
+      failures.push(`/blog/cmyk-vs-pantone-packaging-printing: missing primary source ${source}`);
+    }
   }
 }
 
@@ -638,6 +689,16 @@ for (const route of retiredToolRoutes) {
 }
 
 for (const page of pages) {
+  for (const unsupportedSchemaMarker of [
+    '\"@type\":\"Review\"',
+    '\"aggregateRating\"',
+  ]) {
+    if (page.html.includes(unsupportedSchemaMarker)) {
+      failures.push(
+        `${page.route}: unsupported review or rating schema marker ${unsupportedSchemaMarker}`
+      );
+    }
+  }
   if (page.route === "/") continue;
   const inboundPageCount = pages.filter(
     (candidate) =>
@@ -648,6 +709,20 @@ for (const page of pages) {
     failures.push(
       `${page.route}: only ${inboundPageCount} inbound sitemap page(s); expected at least 2`
     );
+  }
+}
+
+const aiDiscoverySource = await readFile(
+  path.resolve("src/lib/ai-discovery.ts"),
+  "utf8"
+);
+for (const marker of [
+  'schemaVersion: "2.8"',
+  "buyerGuides: blogPosts.map",
+  "## Packaging buyer guides",
+]) {
+  if (!aiDiscoverySource.includes(marker)) {
+    failures.push(`AI discovery source is missing buyer-guide marker ${marker}`);
   }
 }
 

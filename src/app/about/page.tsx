@@ -150,6 +150,14 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
+        <div className="mt-10 border-t border-charcoal/10 pt-7">
+          <Link
+            href="/blog/custom-packaging-production-process"
+            className="inline-flex rounded-full border border-charcoal/15 bg-cream px-6 py-3 text-sm font-semibold text-charcoal hover:border-gold"
+          >
+            Read the full production-process guide →
+          </Link>
+        </div>
       </Section>
 
       {/* Who we work with */}

@@ -22,6 +22,7 @@ import {
   commercialPricingFaqs,
   commercialTerms,
 } from "@/data/commercial-terms";
+import { blogPosts, type BlogPost } from "@/data/blog-posts";
 import { boxSampleKit, sampleKits } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
 
@@ -33,6 +34,7 @@ const toolsUrl = `${siteConfig.url}/tools`;
 const styleLibraryUrl = `${siteConfig.url}/packaging-styles`;
 const comparisonLibraryUrl = `${siteConfig.url}/compare`;
 const industriesUrl = `${siteConfig.url}/industries`;
+const guidesUrl = `${siteConfig.url}/blog`;
 const commercialTermsUrl = `${siteConfig.url}${commercialTerms.path}`;
 const commercialTermsMarkdownUrl = `${siteConfig.url}${commercialTerms.markdownPath}`;
 const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
@@ -60,6 +62,10 @@ function industryHubUrl(hub: IndustryHub) {
 
 function comparisonUrl(guide: ComparisonGuide) {
   return `${comparisonLibraryUrl}/${guide.slug}`;
+}
+
+function blogUrl(post: BlogPost) {
+  return `${guidesUrl}/${post.slug}`;
 }
 
 function intentRouteUrl(path: string) {
@@ -206,6 +212,13 @@ export function buildLlmsText() {
     )
     .join("\n");
 
+  const buyerGuideLines = blogPosts
+    .map(
+      (post) =>
+        `- [${post.title}](${blogUrl(post)}): ${post.quickAnswer}`
+    )
+    .join("\n");
+
   const intentRouteLines = organicIntentRoutes
     .map(
       (route) =>
@@ -243,6 +256,7 @@ export function buildLlmsText() {
 - Packaging Style Library: ${styleLibraryUrl}
 - Packaging Comparison Library: ${comparisonLibraryUrl}
 - Industry and application guides: ${industriesUrl}
+- Packaging buyer guides: ${guidesUrl}
 
 ## Approved product range
 
@@ -267,6 +281,10 @@ ${industryLines}
 ## Packaging comparison guides
 
 ${comparisonLines}
+
+## Packaging buyer guides
+
+${buyerGuideLines}
 
 ## Qualified buyer-intent routes
 
@@ -297,6 +315,7 @@ Final dimensions remain subject to structural feasibility. Product compatibility
 - Product catalog: ${siteConfig.url}/products
 - Packaging style library: ${styleLibraryUrl}
 - Packaging comparison library: ${comparisonLibraryUrl}
+- Packaging buyer guides: ${guidesUrl}
 - Packaging planning tools: ${toolsUrl}
 - Packaging Format Finder: ${formatFinderUrl}
 - Start a project: ${quoteUrl}
@@ -435,6 +454,22 @@ Content reviewed: ${guide.reviewedAt}
     )
     .join("\n");
 
+  const buyerGuideSections = blogPosts
+    .map(
+      (post) => `### ${post.title}
+
+Canonical page: ${blogUrl(post)}
+Category: ${post.category}
+Direct answer: ${post.quickAnswer}
+Buyer decisions: ${post.keyDecisions
+        .map((decision) => `${decision.title}: ${decision.description}`)
+        .join("; ")}
+Questions answered: ${post.faqs.map((item) => item.question).join("; ")}
+Content reviewed: ${post.updatedAt ?? post.date}
+`
+    )
+    .join("\n");
+
   const intentRouteSections = organicIntentRoutes
     .map(
       (route) => `### ${route.title}
@@ -524,6 +559,11 @@ ${industrySections}
 These pages answer side-by-side buyer decisions using approved UPG product facts, clear quote inputs, and explicit scope boundaries.
 
 ${comparisonSections}
+## Packaging buyer guides
+
+These visual, people-first guides answer common planning questions without publishing generic dielines, fabricated reviews, customer stories, or instant custom-production claims.
+
+${buyerGuideSections}
 ## Qualified buyer-intent routes
 
 These routes separate products UPG manufactures from adjacent components, machinery, logistics, or fulfillment searches that are outside the current offer.
@@ -561,6 +601,7 @@ UPG uses the broad term corrugated boxes because buyers use it when researching 
 - Packaging Format Finder: ${formatFinderUrl}
 - Packaging Style Library: ${styleLibraryUrl}
 - Packaging Comparison Library: ${comparisonLibraryUrl}
+- Packaging buyer guides: ${guidesUrl}
 - Industry and application guides: ${industriesUrl}
 - Cosmetics outer-packaging hub: ${siteConfig.url}/cosmetics
 - Sitemap: ${siteConfig.url}/sitemap.xml
@@ -614,6 +655,13 @@ export function buildAgentsMarkdown() {
     )
     .join("\n");
 
+  const buyerGuideLines = blogPosts
+    .map(
+      (post) =>
+        `- ${post.title}: ${post.quickAnswer} Source: ${blogUrl(post)}`
+    )
+    .join("\n");
+
   const intentRouteLines = organicIntentRoutes
     .map(
       (route) =>
@@ -661,6 +709,10 @@ ${industryLines}
 
 ${comparisonLines}
 
+## Packaging buyer guides
+
+${buyerGuideLines}
+
 ## Qualified buyer-intent routes
 
 ${intentRouteLines}
@@ -684,6 +736,7 @@ ${sampleKitLines}
 - Browse real packaging styles: ${styleLibraryUrl}
 - Compare packaging formats and buying paths: ${comparisonLibraryUrl}
 - Browse industry and product application guides: ${industriesUrl}
+- Read packaging buyer guides: ${guidesUrl}
 - Review custom packaging pricing and the 250-unit planning MOQ: ${commercialTermsUrl}
 - Compare approved product families: ${formatFinderUrl}
 - Explore custom cosmetic boxes and outer packaging: ${siteConfig.url}/cosmetics
@@ -725,7 +778,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "2.7",
+    schemaVersion: "2.8",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -925,6 +978,23 @@ export function buildProductCatalog() {
       scopeNote: guide.scopeNote,
       contentReviewed: guide.reviewedAt,
       url: comparisonUrl(guide),
+    })),
+    buyerGuides: blogPosts.map((post) => ({
+      slug: post.slug,
+      name: post.title,
+      category: post.category,
+      summary: post.quickAnswer,
+      searchTerms: post.keywords,
+      buyerDecisions: post.keyDecisions,
+      questionsAnswered: post.faqs.map((item) => item.question),
+      contentReviewed: post.updatedAt ?? post.date,
+      url: blogUrl(post),
+      nextSources: post.resources.map((resource) => ({
+        name: resource.title,
+        url: resource.href.startsWith("/")
+          ? `${siteConfig.url}${resource.href}`
+          : resource.href,
+      })),
     })),
     buyerIntentRoutes: organicIntentRoutes.map((route) => ({
       path: route.path,

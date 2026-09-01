@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { finishFeatures, materialsHighlights } from "@/data/catalog";
@@ -141,6 +142,64 @@ export default function MaterialsFinishesPage() {
                 {item}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell border-y border-border bg-cream">
+        <div className="container-editorial">
+          <SectionHeading
+            eyebrow="Buyer guides"
+            title="Turn material and finish options into a focused decision."
+            intro="Use the visual guides for surface hierarchy and print-color planning, then confirm the final combination against the selected structure and production method."
+          />
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <Link
+              href="/blog/packaging-finishes-guide"
+              className="group grid overflow-hidden border border-border bg-surface sm:grid-cols-[0.85fr_1.15fr]"
+            >
+              <div className="relative min-h-56">
+                <Image
+                  src="/images/redesign/finishes/finish-spotuv.jpg"
+                  alt="Selective spot UV finish on printed packaging"
+                  fill
+                  className="object-cover transition duration-500 group-hover:scale-[1.025]"
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+              </div>
+              <div className="p-6">
+                <div className="eyebrow">Finish decision</div>
+                <h2 className="mt-3 font-serif text-2xl text-foreground">
+                  Compare matte, gloss, foil, spot UV, and tactile detail.
+                </h2>
+                <span className="mt-5 inline-flex text-sm font-semibold text-gold-dark">
+                  Open finish guide →
+                </span>
+              </div>
+            </Link>
+            <Link
+              href="/blog/cmyk-vs-pantone-packaging-printing"
+              className="group grid overflow-hidden border border-border bg-surface sm:grid-cols-[0.85fr_1.15fr]"
+            >
+              <div className="relative min-h-56">
+                <Image
+                  src="/images/redesign/finishes/finish-foil.jpg"
+                  alt="Controlled printed color and metallic detail on packaging"
+                  fill
+                  className="object-cover transition duration-500 group-hover:scale-[1.025]"
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+              </div>
+              <div className="p-6">
+                <div className="eyebrow">Print-color decision</div>
+                <h2 className="mt-3 font-serif text-2xl text-foreground">
+                  Understand CMYK process color and Pantone spot color.
+                </h2>
+                <span className="mt-5 inline-flex text-sm font-semibold text-gold-dark">
+                  Open color guide →
+                </span>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
