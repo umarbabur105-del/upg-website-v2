@@ -85,8 +85,9 @@ Next checks:
 3. `/tools`, `/tools/packing-cbm-weight-calculator`, `/industries/beauty-personal-care-packaging`, and `/industries/supplement-packaging` were accepted by IndexNow with HTTP 200 after production verification on 2026-08-30.
 4. `/custom-packaging-pricing` and the five core product pages were accepted by IndexNow with HTTP 200 after exact-SHA production verification on 2026-08-31.
 5. All 87 canonical sitemap URLs were accepted by IndexNow with HTTP 200 after the 2026-09-01 sitewide organic and AI-readiness release.
-6. Re-check URL Inspection, Site Explorer, Search Performance, Backlinks, Recommendations, and AI Performance after Bing processes the submission.
-7. Use the cited-page and grounding-query reports to choose content improvements when Bing exposes a sufficient sample.
+6. Search Console accepted a manual indexing request for `/custom-packaging-pricing` after owner confirmation. Two controlled requests for `/tools/packing-cbm-weight-calculator` returned Google's temporary submission error; the calculator is not claimed as manually queued or indexed.
+7. Re-check URL Inspection, Site Explorer, Search Performance, Backlinks, Recommendations, and AI Performance after Bing processes the submission.
+8. Use the cited-page and grounding-query reports to choose content improvements when Bing exposes a sufficient sample.
 
 ## ChatGPT product discovery
 
