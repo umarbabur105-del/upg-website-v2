@@ -1,9 +1,37 @@
 export class FormRequestError extends Error {
+  public readonly status: number;
+
   constructor(
     message: string,
-    public readonly status = 400
+    status = 400
   ) {
     super(message);
+    this.status = status;
+  }
+}
+
+function hasAllowedRequestOrigin(request: Request): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+
+  try {
+    const originUrl = new URL(origin);
+    const requestUrl = new URL(request.url);
+    const forwardedHost =
+      request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+
+    if (originUrl.host === requestUrl.host) return true;
+    if (forwardedHost && originUrl.host === forwardedHost) return true;
+
+    const loopbackHosts = new Set(["localhost", "127.0.0.1", "[::1]"]);
+    return (
+      process.env.VERCEL_ENV !== "production" &&
+      loopbackHosts.has(originUrl.hostname) &&
+      loopbackHosts.has(requestUrl.hostname) &&
+      originUrl.port === requestUrl.port
+    );
+  } catch {
+    return false;
   }
 }
 
@@ -11,10 +39,14 @@ export async function parseFormRequest(
   request: Request,
   maxBytes = 25_000
 ): Promise<Record<string, unknown>> {
-  const contentType = request.headers.get("content-type") ?? "";
-  if (!contentType.toLowerCase().includes("application/json")) {
-    throw new FormRequestError("Content-Type must be application/json", 415);
+  if (!hasAllowedRequestOrigin(request)) {
+    throw new FormRequestError("Invalid request origin", 403);
   }
+
+  const contentType = (request.headers.get("content-type") ?? "")
+    .split(";", 1)[0]
+    .trim()
+    .toLowerCase();
 
   const declaredLength = Number(request.headers.get("content-length") ?? "0");
   if (Number.isFinite(declaredLength) && declaredLength > maxBytes) {
@@ -26,18 +58,29 @@ export async function parseFormRequest(
     throw new FormRequestError("Request is too large", 413);
   }
 
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw);
-  } catch {
-    throw new FormRequestError("Invalid JSON");
+  if (contentType === "application/x-www-form-urlencoded") {
+    return Object.fromEntries(new URLSearchParams(raw));
   }
 
-  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
-    throw new FormRequestError("Invalid request body");
+  if (contentType === "application/json") {
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      throw new FormRequestError("Invalid JSON");
+    }
+
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      throw new FormRequestError("Invalid request body");
+    }
+
+    return parsed as Record<string, unknown>;
   }
 
-  return parsed as Record<string, unknown>;
+  throw new FormRequestError(
+    "Content-Type must be application/json or application/x-www-form-urlencoded",
+    415
+  );
 }
 
 export function cleanText(

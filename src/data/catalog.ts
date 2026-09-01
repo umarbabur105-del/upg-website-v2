@@ -244,6 +244,8 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    relatedSlugs: ["serum-boxes", "cream-boxes", "lotion-boxes"],
+    reviewedAt: "2026-09-01",
   },
   {
     slug: "serum-boxes",
@@ -345,6 +347,8 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    relatedSlugs: ["lotion-boxes", "serum-boxes", "skincare-boxes"],
+    reviewedAt: "2026-09-01",
   },
   {
     slug: "lotion-boxes",
@@ -373,6 +377,8 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    relatedSlugs: ["cream-boxes", "skincare-boxes", "serum-boxes"],
+    reviewedAt: "2026-09-01",
   },
   {
     slug: "lipstick-boxes",
@@ -497,6 +503,8 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    relatedSlugs: ["lipstick-boxes", "mascara-boxes", "cosmetic-subscription-boxes"],
+    reviewedAt: "2026-09-01",
   },
   {
     slug: "mascara-boxes",
@@ -521,6 +529,8 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    relatedSlugs: ["lipstick-boxes", "lip-gloss-boxes", "serum-boxes"],
+    reviewedAt: "2026-09-01",
   },
   {
     slug: "perfume-boxes",
@@ -585,6 +595,8 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    relatedSlugs: ["lipstick-boxes", "pr-boxes", "skincare-boxes"],
+    reviewedAt: "2026-09-01",
   },
   {
     slug: "pr-boxes",

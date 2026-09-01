@@ -42,6 +42,34 @@ const nextConfig: NextConfig = {
           { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive, nosnippet" },
         ],
       },
+      {
+        source: "/custom-packaging-pricing",
+        headers: [
+          {
+            key: "Link",
+            value:
+              '</custom-packaging-pricing.md>; rel="alternate"; type="text/markdown"',
+          },
+        ],
+      },
+      {
+        source: "/api/quote",
+        headers: [
+          {
+            key: "Accept-Post",
+            value: "application/json, application/x-www-form-urlencoded",
+          },
+        ],
+      },
+      {
+        source: "/api/contact",
+        headers: [
+          {
+            key: "Accept-Post",
+            value: "application/json, application/x-www-form-urlencoded",
+          },
+        ],
+      },
     ];
   },
   async redirects() {

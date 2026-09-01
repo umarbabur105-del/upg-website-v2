@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Section, SectionHeading, SectionSubheading } from "@/components/section";
 import { CtaBanner } from "@/components/cta-banner";
-import { createPageMetadata } from "@/lib/seo";
+import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "About Universal Packaging Group",
@@ -11,6 +11,34 @@ export const metadata: Metadata = createPageMetadata({
   path: "/about",
   keywords: ["custom packaging manufacturer", "custom packaging manufacturing"],
 });
+
+const aboutPageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": `${SITE_URL}/about#webpage`,
+      url: `${SITE_URL}/about`,
+      name: "About Universal Packaging Group",
+      description:
+        "How UPG develops custom boxes and flexible packaging from a project brief through production and delivery planning.",
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      mainEntity: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "About",
+          item: `${SITE_URL}/about`,
+        },
+      ],
+    },
+  ],
+};
 
 const differentiators = [
   {
@@ -54,6 +82,10 @@ const whatToExpect = [
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
       {/* Hero — brand statement */}
       <section className="bg-olive px-6 pt-32 pb-20 lg:px-8 lg:pb-28">
         <div className="mx-auto max-w-3xl">

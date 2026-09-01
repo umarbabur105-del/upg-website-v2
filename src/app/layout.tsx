@@ -103,6 +103,16 @@ const structuredData = {
         areaServed: siteConfig.market,
         availableLanguage: ["English"],
       },
+      subOrganization: [
+        {
+          "@type": "Organization",
+          name: siteConfig.legalEntities.uk,
+        },
+        {
+          "@type": "Organization",
+          name: siteConfig.legalEntities.us,
+        },
+      ],
       hasMerchantReturnPolicy: {
         "@id": siteConfig.merchantReturnPolicyId,
       },

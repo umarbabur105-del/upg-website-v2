@@ -91,7 +91,14 @@ export function ContactForm() {
   const labelClass = "mb-1.5 block text-sm font-medium text-charcoal";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form
+      action="/api/contact"
+      method="post"
+      acceptCharset="UTF-8"
+      onSubmit={handleSubmit}
+      className="space-y-5"
+    >
+      <input type="hidden" name="landing_page" value="/contact" />
       <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
         <label htmlFor="contact-fax-number">Fax number</label>
         <input

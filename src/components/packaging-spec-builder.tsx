@@ -602,7 +602,7 @@ export function PackagingSpecBuilder({
       <section className="print-spec-sheet" aria-label="Printable packaging specification">
         <div className="border-b-2 border-moss pb-6">
           <div className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">UPG</div>
-          <h1 className="mt-3 text-4xl font-semibold text-foreground">Packaging specification</h1>
+          <h2 className="mt-3 text-4xl font-semibold text-foreground">Packaging specification</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             Prepared with the Universal Packaging Group Spec &amp; MOQ Builder
           </p>

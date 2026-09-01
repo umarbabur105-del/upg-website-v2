@@ -31,7 +31,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, accepted: true });
     }
 
-    const attribution = cleanAttribution(input.attribution);
+    const attribution = cleanAttribution(
+      input.attribution ?? { landing_page: input.landing_page }
+    );
     const submissionId = cleanSubmissionId(input.submission_id);
     const data = {
       product_family: cleanText(input.product_family, { max: 80, singleLine: true }),

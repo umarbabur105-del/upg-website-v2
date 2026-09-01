@@ -234,7 +234,14 @@ export function QuoteForm({ prefill }: QuoteFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto max-w-4xl">
+    <form
+      action="/api/quote"
+      method="post"
+      acceptCharset="UTF-8"
+      onSubmit={handleSubmit}
+      className="mx-auto max-w-4xl"
+    >
+      <input type="hidden" name="landing_page" value="/get-a-quote" />
       <div
         className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden"
         aria-hidden="true"

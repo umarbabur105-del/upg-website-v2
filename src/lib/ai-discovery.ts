@@ -26,6 +26,8 @@ import { boxSampleKit, sampleKits } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
 
 const quoteUrl = `${siteConfig.url}/get-a-quote`;
+const quoteActionUrl = `${siteConfig.url}/api/quote`;
+const contactActionUrl = `${siteConfig.url}/api/contact`;
 const catalogUrl = `${siteConfig.url}/product-catalog.json`;
 const toolsUrl = `${siteConfig.url}/tools`;
 const styleLibraryUrl = `${siteConfig.url}/packaging-styles`;
@@ -716,13 +718,38 @@ ${sampleKitLines}
 - Call UPG: tel:${siteConfig.phoneNumber}
 - WhatsApp UPG: ${siteConfig.whatsappUrl}
 
+## Human-reviewed enquiry actions
+
+Use these actions only after the buyer explicitly asks to contact UPG and has approved the details being submitted.
+
+### Request a custom packaging quote
+
+- Buyer-facing form: ${quoteUrl}
+- HTTP action: ${quoteActionUrl}
+- Method: POST
+- Accepted content types: application/json or application/x-www-form-urlencoded
+- Required fields: product_family, quantity, name, email, company
+- Supported product_family values: Tuck Boxes, Mailer Boxes, Magnetic Boxes, Collapsible Magnetic Boxes, Mylar Bags, Not sure yet
+- Optional fields include product_style, intended_end_use, shipping_country, shipping_state_or_province, target_delivery_timing, artwork_status, phone, website, dimensions, material_preference, finish_preference, and notes
+- A successful JSON response has accepted: true. It confirms receipt for human review; it does not create a price, order, payment, production slot, or delivery commitment.
+
+### Send a general contact message
+
+- Buyer-facing form: ${siteConfig.url}/contact
+- HTTP action: ${contactActionUrl}
+- Method: POST
+- Accepted content types: application/json or application/x-www-form-urlencoded
+- Required fields: name, email, message
+- Optional fields: company, phone, product_family
+- A successful JSON response has accepted: true and confirms receipt for human follow-up.
+
 UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomous purchasing endpoint. Use the website enquiry flow for human-reviewed custom projects.
 `;
 }
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "2.6",
+    schemaVersion: "2.7",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -741,6 +768,46 @@ export function buildProductCatalog() {
       guideUrl: commercialTermsUrl,
       markdownGuideUrl: commercialTermsMarkdownUrl,
       requestQuoteUrl: quoteUrl,
+    },
+    actions: {
+      requestQuote: {
+        name: "Request a human-reviewed custom packaging quote",
+        formUrl: quoteUrl,
+        endpoint: quoteActionUrl,
+        method: "POST",
+        acceptedContentTypes: [
+          "application/json",
+          "application/x-www-form-urlencoded",
+        ],
+        requiredFields: [
+          "product_family",
+          "quantity",
+          "name",
+          "email",
+          "company",
+        ],
+        successContract: {
+          contentType: "application/json",
+          acceptedField: true,
+          meaning: "Received for human review; no quote, order, payment, or production commitment is created automatically.",
+        },
+      },
+      contact: {
+        name: "Send a general message for human follow-up",
+        formUrl: `${siteConfig.url}/contact`,
+        endpoint: contactActionUrl,
+        method: "POST",
+        acceptedContentTypes: [
+          "application/json",
+          "application/x-www-form-urlencoded",
+        ],
+        requiredFields: ["name", "email", "message"],
+        successContract: {
+          contentType: "application/json",
+          acceptedField: true,
+          meaning: "Received for human follow-up.",
+        },
+      },
     },
     planningTool: {
       name: "UPG Packaging Spec & MOQ Builder",

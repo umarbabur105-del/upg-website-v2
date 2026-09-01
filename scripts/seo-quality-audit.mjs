@@ -97,6 +97,7 @@ for (const file of htmlFiles) {
       /<[^>]+>/g,
       ""
     ),
+    h1Count: (html.match(/<h1\b/gi) ?? []).length,
     canonical: firstMatch(html, [
       /<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']*)/i,
       /<link[^>]+href=["']([^"']*)["'][^>]+rel=["']canonical["']/i,
@@ -110,6 +111,9 @@ for (const page of pages) {
   if (!page.title) failures.push(`${page.route}: missing title`);
   if (!page.description) failures.push(`${page.route}: missing meta description`);
   if (!page.h1) failures.push(`${page.route}: missing H1`);
+  if (page.h1Count !== 1) {
+    failures.push(`${page.route}: expected exactly one H1, found ${page.h1Count}`);
+  }
   if (!page.canonical) failures.push(`${page.route}: missing canonical URL`);
   if (
     page.canonical &&
@@ -135,6 +139,114 @@ for (const page of pages) {
 
 addDuplicateFailures(pages, "title", "Title", failures);
 addDuplicateFailures(pages, "description", "Meta description", failures);
+
+const semanticPageContracts = new Map([
+  [
+    "/contact",
+    [
+      ">Send a message</h2>",
+      ">Contact our sales team directly</h2>",
+      ">Ready to start a project?</h2>",
+    ],
+  ],
+]);
+
+for (const [route, markers] of semanticPageContracts) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered semantic contract page`);
+    continue;
+  }
+  for (const marker of markers) {
+    if (!page.html.includes(marker)) {
+      failures.push(`${route}: missing semantic heading marker ${marker}`);
+    }
+  }
+}
+
+const nativeFormContracts = new Map([
+  ["/contact", "/api/contact"],
+]);
+
+for (const [route, action] of nativeFormContracts) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered native-form contract page`);
+    continue;
+  }
+  if (!page.html.includes(`action="${action}"`)) {
+    failures.push(`${route}: missing native form action ${action}`);
+  }
+  if (!page.html.includes('method="post"')) {
+    failures.push(`${route}: missing native POST form method`);
+  }
+}
+
+const sourceContracts = [
+  {
+    file: "src/components/packaging-spec-builder.tsx",
+    label: "/tools/packaging-spec-builder semantic heading",
+    markers: ["<h2", "Packaging specification", "</h2>"],
+  },
+  {
+    file: "src/components/quote-form.tsx",
+    label: "/get-a-quote native form",
+    markers: ['action="/api/quote"', 'method="post"'],
+  },
+];
+
+for (const contract of sourceContracts) {
+  const source = await readFile(path.resolve(contract.file), "utf8");
+  for (const marker of contract.markers) {
+    if (!source.includes(marker)) {
+      failures.push(`${contract.label}: missing source marker ${marker}`);
+    }
+  }
+}
+
+const contextualInboundContracts = [
+  "/tools/packing-cbm-weight-calculator",
+  "/cosmetics/serum-boxes",
+  "/cosmetics/lotion-boxes",
+  "/cosmetics/lipstick-boxes",
+  "/blog/what-is-moq-custom-packaging",
+  "/blog/corrugated-vs-rigid-boxes",
+];
+
+for (const route of contextualInboundContracts) {
+  const inboundPageCount = pages.filter(
+    (candidate) =>
+      candidate.route !== route && candidate.html.includes(`href="${route}"`)
+  ).length;
+  if (inboundPageCount < 2) {
+    failures.push(
+      `${route}: only ${inboundPageCount} inbound sitemap page(s); expected at least 2`
+    );
+  }
+}
+
+const blogRoutes = [...sitemapPaths].filter((route) =>
+  /^\/blog\/[^/]+$/.test(route)
+);
+
+for (const route of blogRoutes) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered blog page`);
+    continue;
+  }
+  for (const schemaType of ["BlogPosting", "BreadcrumbList"]) {
+    if (!page.html.includes(`"@type":"${schemaType}"`)) {
+      failures.push(`${route}: missing ${schemaType} JSON-LD`);
+    }
+  }
+  if (!page.html.includes("Prepared by Universal Packaging Group")) {
+    failures.push(`${route}: missing visible editorial responsibility`);
+  }
+  if (!page.html.includes(">Related packaging guides</h2>")) {
+    failures.push(`${route}: missing related-guide section`);
+  }
+}
 
 const comparisonRoutes = [...sitemapPaths].filter((route) =>
   /^\/compare\/[^/]+$/.test(route)
@@ -432,5 +544,5 @@ if (failures.length) {
 }
 
 console.log(
-  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, H1, canonical URLs, JSON-LD, length limits, uniqueness, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, ${industryHubRoutes.length} commercial industry-hub contracts, ${planningToolContracts.size} planning-tool contract, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
+  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, exactly one H1, canonical URLs, JSON-LD, length limits, uniqueness, semantic headings, native form actions, contextual inbound links, ${blogRoutes.length} blog contracts, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, ${industryHubRoutes.length} commercial industry-hub contracts, ${planningToolContracts.size} planning-tool contract, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
 );

@@ -12,6 +12,27 @@ export const metadata: Metadata = createPageMetadata({
   keywords: ["custom packaging guide", "packaging MOQ", "packaging artwork guide"],
 });
 
+const resourcePaths = [
+  {
+    title: "Check pricing and the 250-unit MOQ",
+    description:
+      "Use the commercial guide for the current planning minimum, quote inputs, price factors, and written-term boundaries.",
+    href: "/custom-packaging-pricing",
+  },
+  {
+    title: "Compare packaging formats",
+    description:
+      "Review side-by-side guides for box structures, tuck directions, pouches, rollstock, and the corrugated-mailer boundary.",
+    href: "/compare",
+  },
+  {
+    title: "Prepare a clearer project brief",
+    description:
+      "Use the format, specification, artwork, and packing tools before sending the known details for human review.",
+    href: "/tools",
+  },
+];
+
 function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString("en-US", {
     year: "numeric",
@@ -36,6 +57,41 @@ export default function BlogPage() {
             Practical guides on custom packaging — what to expect, how to
             prepare, and how to make better packaging decisions.
           </p>
+        </div>
+      </section>
+
+      <section className="border-b border-charcoal/8 bg-cream px-6 py-14 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <div className="text-xs font-semibold uppercase tracking-widest text-gold">
+              Start with a buyer decision
+            </div>
+            <h2 className="mt-3 font-serif text-3xl font-semibold text-charcoal">
+              Use the source that matches the question in front of you.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-charcoal/65">
+              These guides separate general planning information from project-specific decisions. Final structure, pricing, production timing, and delivery terms are confirmed during review.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {resourcePaths.map((resource) => (
+              <Link
+                key={resource.href}
+                href={resource.href}
+                className="rounded-sm border border-charcoal/8 bg-surface p-6 hover:-translate-y-0.5 hover:shadow-card"
+              >
+                <h3 className="font-serif text-xl font-semibold text-charcoal">
+                  {resource.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-charcoal/60">
+                  {resource.description}
+                </p>
+                <span className="mt-5 inline-flex text-sm font-semibold text-gold-dark">
+                  Open resource →
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -65,7 +121,7 @@ export default function BlogPage() {
                     href={`/blog/${post.slug}`}
                     className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-gold transition-colors hover:text-gold-dark"
                   >
-                    Read more
+                    Read {post.title}
                     <svg
                       className="h-4 w-4"
                       fill="none"

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPostBySlug } from "@/data/blog-posts";
-import { createPageMetadata, SITE_URL } from "@/lib/seo";
+import { createPageMetadata, DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -33,6 +33,40 @@ function formatDate(dateStr: string): string {
     day: "numeric",
   });
 }
+
+const articleResources: Record<
+  string,
+  Array<{ title: string; description: string; href: string }>
+> = {
+  "what-is-moq-custom-packaging": [
+    {
+      title: "Custom packaging pricing and MOQ guide",
+      description:
+        "Review the current 250-unit planning MOQ, quote inputs, price factors, and the terms controlled by the final written quote.",
+      href: "/custom-packaging-pricing",
+    },
+    {
+      title: "Packaging Spec & MOQ Builder",
+      description:
+        "Choose the product family, add known dimensions and requirements, and prepare a brief for project review.",
+      href: "/tools/packaging-spec-builder",
+    },
+  ],
+  "corrugated-vs-rigid-boxes": [
+    {
+      title: "Corrugated mailer vs magnetic box comparison",
+      description:
+        "Use the full side-by-side guide for construction, presentation, packing, project inputs, and scope boundaries.",
+      href: "/compare/mailer-boxes-vs-magnetic-boxes",
+    },
+    {
+      title: "Compare all packaging buyer decisions",
+      description:
+        "Browse the comparison library for box structures, tuck directions, flexible formats, and rollstock decisions.",
+      href: "/compare",
+    },
+  ],
+};
 
 /** Render plain markdown subset: ## headings, **bold**, bullet lists, tables, paragraphs */
 function renderContent(content: string) {
@@ -157,25 +191,41 @@ export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = getBlogPostBySlug(slug);
   if (!post) notFound();
+  const relatedPosts = blogPosts.filter((candidate) => candidate.slug !== post.slug);
+  const resources = articleResources[post.slug] ?? [];
+  const postUrl = `${SITE_URL}/blog/${post.slug}`;
 
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.date,
-    dateModified: post.updatedAt ?? post.date,
-    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
-    author: {
-      "@type": "Organization",
-      name: "Universal Packaging Group",
-      url: SITE_URL,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Universal Packaging Group",
-      url: SITE_URL,
-    },
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${postUrl}#article`,
+        headline: post.title,
+        description: post.excerpt,
+        image: [DEFAULT_OG_IMAGE.url],
+        datePublished: post.date,
+        dateModified: post.updatedAt ?? post.date,
+        inLanguage: "en-US",
+        mainEntityOfPage: { "@id": postUrl },
+        author: { "@id": `${SITE_URL}/#organization` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Packaging Guides",
+            item: `${SITE_URL}/blog`,
+          },
+          { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
+        ],
+      },
+    ],
   };
 
   return (
@@ -218,6 +268,12 @@ export default async function BlogPostPage({ params }: PageProps) {
           <p className="mt-6 text-lg leading-relaxed text-offwhite/70">
             {post.excerpt}
           </p>
+          <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-xs text-offwhite/65">
+            <span>Prepared by Universal Packaging Group</span>
+            <span>
+              Last reviewed {formatDate(post.updatedAt ?? post.date)}
+            </span>
+          </div>
         </div>
       </section>
 
@@ -225,6 +281,36 @@ export default async function BlogPostPage({ params }: PageProps) {
       <section className="bg-surface px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <div className="prose-custom">{renderContent(post.content)}</div>
+
+          {resources.length > 0 ? (
+            <section className="mt-10 border-t border-charcoal/10 pt-8" aria-labelledby="article-resources-heading">
+              <h2
+                id="article-resources-heading"
+                className="font-serif text-2xl font-semibold text-charcoal"
+              >
+                Continue with the matching planning source.
+              </h2>
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                {resources.map((resource) => (
+                  <Link
+                    key={resource.href}
+                    href={resource.href}
+                    className="border border-charcoal/10 bg-cream p-5 hover:border-gold/50"
+                  >
+                    <h3 className="font-serif text-lg font-semibold text-charcoal">
+                      {resource.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-charcoal/65">
+                      {resource.description}
+                    </p>
+                    <span className="mt-4 inline-flex text-sm font-semibold text-gold-dark">
+                      Open source →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           {post.slug === "how-to-prepare-artwork-for-custom-packaging" ? (
             <div className="mt-10 border border-charcoal/10 bg-cream p-6 md:p-8">
@@ -245,6 +331,31 @@ export default async function BlogPostPage({ params }: PageProps) {
               </Link>
             </div>
           ) : null}
+
+          <section className="mt-12 border-t border-charcoal/10 pt-8" aria-labelledby="related-articles-heading">
+            <h2
+              id="related-articles-heading"
+              className="font-serif text-2xl font-semibold text-charcoal"
+            >
+              Related packaging guides
+            </h2>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              {relatedPosts.map((relatedPost) => (
+                <Link
+                  key={relatedPost.slug}
+                  href={`/blog/${relatedPost.slug}`}
+                  className="border border-charcoal/10 bg-surface p-5 hover:border-gold/50"
+                >
+                  <h3 className="font-serif text-lg font-semibold text-charcoal">
+                    {relatedPost.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-charcoal/60">
+                    {relatedPost.excerpt}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </section>
 
           {/* Back link */}
           <div className="mt-16 border-t border-charcoal/10 pt-8">
