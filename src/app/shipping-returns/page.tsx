@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import { PublicEmail } from "@/components/public-email";
 import { Section, SectionHeading, SectionSubheading } from "@/components/section";
 import {
   sampleKitDeliveryEstimate,
   sampleKitShippingCountries,
 } from "@/data/sample-kit";
-import { siteConfig } from "@/data/site";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -115,9 +115,7 @@ export default function ShippingReturnsPage() {
             <h2 className="font-serif text-2xl text-charcoal">Contact</h2>
             <p className="mt-3">
               Email{" "}
-              <a className="underline" href={`mailto:${siteConfig.email}`}>
-                {siteConfig.email}
-              </a>{" "}
+              <PublicEmail className="underline" />{" "}
               and include the checkout email and order reference.
             </p>
           </div>

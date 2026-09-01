@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PublicEmail } from "@/components/public-email";
 import { Section, SectionHeading, SectionSubheading } from "@/components/section";
 import { siteConfig } from "@/data/site";
 import { createPageMetadata } from "@/lib/seo";
@@ -46,7 +47,7 @@ export default function TermsPage() {
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Questions</h2>
-            <p className="mt-3">Questions about these terms may be sent to <a className="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
+            <p className="mt-3">Questions about these terms may be sent to <PublicEmail className="underline" />.</p>
           </div>
         </div>
       </Section>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Section, SectionHeading, SectionSubheading } from "@/components/section";
 import { ContactForm } from "@/components/contact-form";
+import { PublicEmail } from "@/components/public-email";
 import { siteConfig } from "@/data/site";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
@@ -85,12 +86,10 @@ export default function ContactPage() {
                 initial response within one business day.
               </p>
               <div className="mt-5 flex flex-col items-start gap-3 text-sm font-semibold">
-                <a
-                  href={`mailto:${siteConfig.email}`}
+                <PublicEmail
                   className="text-gold hover:text-gold-dark"
-                >
-                  {siteConfig.email} →
-                </a>
+                  suffix=" →"
+                />
                 <a
                   href={`tel:${siteConfig.phoneNumber}`}
                   className="text-gold hover:text-gold-dark"

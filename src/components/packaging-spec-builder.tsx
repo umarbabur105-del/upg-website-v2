@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { PublicEmail } from "@/components/public-email";
 import {
   finishOptions,
   formatFinishedDimensions,
@@ -609,7 +610,7 @@ export function PackagingSpecBuilder({
         </div>
         <pre className="mt-8 whitespace-pre-wrap font-sans text-sm leading-7 text-foreground">{summary}</pre>
         <div className="mt-10 border-t border-border pt-5 text-xs leading-6 text-muted-foreground">
-          universalpackaginggroup.com • quotes@universalpackaginggroup.com • +1 786 885 8825
+          universalpackaginggroup.com • <PublicEmail link={false} /> • +1 786 885 8825
         </div>
       </section>
     </div>

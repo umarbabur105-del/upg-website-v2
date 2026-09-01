@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AnalyticsPreferencesButton } from "@/components/analytics-runtime";
 import { Wordmark } from "@/components/layout/wordmark";
+import { PublicEmail } from "@/components/public-email";
 import { industryNavigationGroups } from "@/data/navigation";
 import { siteConfig } from "@/data/site";
 
@@ -26,9 +27,7 @@ export function Footer() {
               {siteConfig.description}
             </p>
             <div className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
-              <a href={`mailto:${siteConfig.email}`} className="hover:text-foreground">
-                {siteConfig.email}
-              </a>
+              <PublicEmail className="hover:text-foreground" />
               <a href={`tel:${siteConfig.phoneNumber}`} className="hover:text-foreground">
                 {siteConfig.phoneDisplay}
               </a>

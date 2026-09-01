@@ -125,6 +125,9 @@ for (const page of pages) {
     );
   }
   if (!page.jsonLdCount) failures.push(`${page.route}: missing JSON-LD`);
+  if (!page.html.includes("<!--email_off-->")) {
+    failures.push(`${page.route}: missing Cloudflare email-obfuscation exemption`);
+  }
   if (page.title.length > titleLimit) {
     failures.push(
       `${page.route}: title is ${page.title.length} characters (limit ${titleLimit})`

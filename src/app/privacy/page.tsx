@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { PublicEmail } from "@/components/public-email";
 import { Section, SectionHeading, SectionSubheading } from "@/components/section";
-import { siteConfig } from "@/data/site";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Your choices</h2>
-            <p className="mt-3">You may ask us to access, correct, or delete information associated with your request, subject to applicable legal and recordkeeping requirements. Email <a className="underline" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
+            <p className="mt-3">You may ask us to access, correct, or delete information associated with your request, subject to applicable legal and recordkeeping requirements. Email <PublicEmail className="underline" />.</p>
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Updates</h2>
