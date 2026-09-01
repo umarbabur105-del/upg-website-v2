@@ -271,7 +271,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                   href="#approved-formats"
                   className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
                 >
-                  Compare formats
+                  Compare source styles
                 </Link>
               </div>
             </div>
@@ -354,7 +354,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
           </div>
 
           <aside className="surface-card p-5 lg:col-span-5 lg:p-7">
-            <div className="eyebrow mb-5">Approved starting formats</div>
+            <div className="eyebrow mb-5">Canonical product sources</div>
             <div className="space-y-4">
               {products.map((product) => (
                 <Link
@@ -393,9 +393,9 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
         <section className="section-shell bg-cream">
           <div className="container-editorial">
             <SectionHeading
-              eyebrow="Relevant formats"
-              title={`Compare real formats for ${guide.shortName.toLowerCase()}.`}
-              intro={`These links lead to formats inside UPG's current ${guide.primaryFamily.toLowerCase()} offer. They are buying paths, not automatic suitability claims; the final specification remains subject to project review.`}
+              eyebrow="Source-of-truth styles"
+              title={`Compare approved styles for ${guide.shortName.toLowerCase()}.`}
+              intro={`These styles come from UPG's current ${guide.primaryFamily.toLowerCase()} library. This industry page adds buyer context and industry keyword relevance; it does not create a separate structure or automatic suitability claim.`}
             />
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {formatGuides.map((format) => (

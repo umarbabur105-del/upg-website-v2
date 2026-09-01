@@ -4,7 +4,7 @@ Last reviewed: 2026-09-01
 
 ## Objective
 
-Turn UPG's reviewed industry content into a visual, commercially useful hub-and-spoke system without changing product URLs, inventing product styles, publishing thin keyword variants, or adding unsupported technical claims.
+Turn UPG's reviewed styles into visual, commercially useful industry clusters without changing product URLs, inventing product styles, publishing thin keyword variants, or adding unsupported technical claims. Product and style pages remain the manufacturing source of truth; industry pages provide market-specific buying context and keyword ownership around them.
 
 ## Evidence and restraint
 
@@ -23,7 +23,7 @@ Turn UPG's reviewed industry content into a visual, commercially useful hub-and-
 | Specific cosmetic pack | Cosmetic detail | `/cosmetics/lipstick-boxes` | Owns the exact product intent; it does not duplicate the broad industry hub. |
 | Structural format | Product or style page | `/products/custom-tuck-boxes` | Owns format specifications, selection guidance, and quote inputs across industries. |
 
-The hierarchy is `/industries` → industry hub → application guide → current product or style page. Every application guide must receive a contextual link from both the directory and its parent hub. Existing canonical product and style URLs remain the source of truth.
+The source hierarchy is product family → packaging style → industry hub or detail → supporting buyer guide. Navigation is reciprocal: `/industries` still lets a buyer browse by market, but every application resolves to a current product or style source, and every nested style links back to its approved industry uses. Existing canonical product and style URLs remain the source of truth.
 
 ## Visual-first page standard
 
@@ -78,6 +78,14 @@ Every published application guide must also have:
 - at least two inbound sitemap-page links;
 - a human-readable content review date;
 - a prefilled quote route and no fake instant-pricing promise.
+
+Every nested packaging-style page must also have:
+
+- a visible style-led industry section;
+- at least one reciprocal link from an approved industry page;
+- ItemList structured data for its approved industry applications;
+- AI-readable industry relationships generated from the same mapping;
+- no industry keyword that replaces the style page's structural keyword owner.
 
 ## Release gate
 

@@ -1,9 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { getComparisonGuidesByStyle } from "@/data/comparison-guides";
+import { getIndustryGuidesByStyleSlug } from "@/data/industry-guides";
 import {
   getRelatedProductStyles,
   type ProductStyleGuide,
@@ -11,6 +13,7 @@ import {
 import { getProductBySlug } from "@/data/products";
 import { getOrganicIntentRoute } from "@/data/organic-intent-routes";
 import { siteConfig } from "@/data/site";
+import { getIndustryLinkVisual } from "@/lib/industry-visuals";
 import { SITE_URL } from "@/lib/seo";
 
 interface ProductStyleGuidePageProps {
@@ -26,6 +29,7 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
 
   const related = getRelatedProductStyles(guide);
   const comparisonGuides = getComparisonGuidesByStyle(guide.slug);
+  const industryApplications = getIndustryGuidesByStyleSlug(guide.slug);
   const pageUrl = `${SITE_URL}/packaging-styles/${guide.slug}`;
   const intentRoute = getOrganicIntentRoute(`/packaging-styles/${guide.slug}`);
   const sampleKit =
@@ -103,6 +107,22 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
         provider: { "@id": `${SITE_URL}/#organization` },
         areaServed: siteConfig.market,
       },
+      ...(industryApplications.length > 0
+        ? [
+            {
+              "@type": "ItemList",
+              "@id": `${pageUrl}#industry-applications`,
+              name: `Industry applications using ${guide.shortName}`,
+              numberOfItems: industryApplications.length,
+              itemListElement: industryApplications.map((application, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: application.name,
+                url: `${SITE_URL}/industries/${application.slug}`,
+              })),
+            },
+          ]
+        : []),
       {
         "@type": "BreadcrumbList",
         itemListElement: [
@@ -396,6 +416,65 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
           </div>
         </div>
       </section>
+
+      {industryApplications.length > 0 ? (
+        <section
+          id="industry-applications"
+          className="section-shell scroll-mt-24 bg-stone"
+        >
+          <div className="container-editorial">
+            <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <SectionHeading
+                eyebrow="Style-led industry paths"
+                title={`See where ${guide.shortName.toLowerCase()} is used.`}
+                intro="The style page remains the structural source of truth. These industry pages apply that approved format to a specific buyer need and keyword theme without creating a different product specification."
+              />
+              <Link
+                href="/industries"
+                className="inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+              >
+                Browse all industries →
+              </Link>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {industryApplications.map((application) => {
+                const href = `/industries/${application.slug}`;
+                const visual = getIndustryLinkVisual(href);
+
+                return (
+                  <Link
+                    key={application.slug}
+                    href={href}
+                    className="surface-card group flex min-h-[24rem] flex-col overflow-hidden hover:-translate-y-1 hover:shadow-card"
+                  >
+                    <span className="relative aspect-[16/10] overflow-hidden bg-stone">
+                      <Image
+                        src={visual.src}
+                        alt={visual.alt}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </span>
+                    <span className="flex flex-1 flex-col p-6">
+                      <span className="eyebrow">Industry application</span>
+                      <span className="mt-4 font-serif text-2xl text-foreground">
+                        {application.shortName}
+                      </span>
+                      <span className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                        {application.metaDescription}
+                      </span>
+                      <span className="mt-auto pt-6 text-sm text-foreground">
+                        Review this industry path →
+                      </span>
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-shell">
         <div className="container-editorial">

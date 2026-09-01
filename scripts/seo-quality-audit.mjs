@@ -473,6 +473,44 @@ for (const route of coreProductContracts.keys()) {
   }
 }
 
+const packagingStyleRoutes = [...sitemapPaths].filter((route) =>
+  /^\/packaging-styles\/[^/]+$/.test(route)
+);
+
+if (packagingStyleRoutes.length < 12) {
+  failures.push(
+    `Packaging style library has ${packagingStyleRoutes.length} route(s); expected at least 12`
+  );
+}
+
+for (const route of packagingStyleRoutes) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing rendered packaging style page`);
+    continue;
+  }
+  if (!page.html.includes('id="industry-applications"')) {
+    failures.push(`${route}: missing reciprocal industry-application section`);
+  }
+  if (!page.html.includes(`${route}#industry-applications`)) {
+    failures.push(`${route}: missing industry-application ItemList JSON-LD`);
+  }
+  if (!page.html.includes('href="/industries"')) {
+    failures.push(`${route}: missing industries directory link`);
+  }
+
+  const industryInboundCount = pages.filter(
+    (candidate) =>
+      /^\/industries\/[^/]+$/.test(candidate.route) &&
+      candidate.html.includes(`href="${route}"`)
+  ).length;
+  if (industryInboundCount < 1) {
+    failures.push(
+      `${route}: no industry page links back to this source-of-truth style`
+    );
+  }
+}
+
 const industryHubRoutes = [...sitemapPaths].filter((route) =>
   /^\/industries\/(?:food-beverage|beauty-personal-care|supplement|fashion-jewelry-luxury|electronics-consumer-goods|home-candle-gift)-packaging$/.test(
     route
@@ -717,9 +755,11 @@ const aiDiscoverySource = await readFile(
   "utf8"
 );
 for (const marker of [
-  'schemaVersion: "2.8"',
+  'schemaVersion: "2.9"',
   "buyerGuides: blogPosts.map",
   "## Packaging buyer guides",
+  "industryApplications: industryApplicationsForStyle",
+  "approvedStyleUrls: (guide.formatSlugs ?? []).map",
 ]) {
   if (!aiDiscoverySource.includes(marker)) {
     failures.push(`AI discovery source is missing buyer-guide marker ${marker}`);
@@ -790,5 +830,5 @@ if (failures.length) {
 }
 
 console.log(
-  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, exactly one H1, canonical URLs, JSON-LD, image alt attributes, length limits, uniqueness, semantic headings, native form actions, sitewide inbound-link coverage, homepage industry discovery, ${blogRoutes.length} blog contracts, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, ${industryHubRoutes.length} commercial industry-hub contracts, ${planningToolContracts.size} planning-tool contract, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
+  `SEO quality audit passed for ${pages.length} canonical rendered sitemap pages: required metadata, exactly one H1, canonical URLs, JSON-LD, image alt attributes, length limits, uniqueness, semantic headings, native form actions, sitewide inbound-link coverage, homepage industry discovery, ${blogRoutes.length} blog contracts, ${comparisonRoutes.length} comparison-guide contracts, ${coreProductContracts.size} core-product contracts, ${packagingStyleRoutes.length} reciprocal style-industry contracts, ${industryHubRoutes.length} commercial industry-hub contracts, ${planningToolContracts.size} planning-tool contract, and ${organicIntentContracts.size} organic-intent contracts. ${sitemapPaths.size - pages.length} dynamic sitemap page(s) require runtime crawl verification.`
 );

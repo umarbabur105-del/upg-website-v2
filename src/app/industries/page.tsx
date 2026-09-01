@@ -180,6 +180,40 @@ export default function IndustriesPage() {
         </div>
       </section>
 
+      <section className="border-y border-border bg-moss text-primary-foreground">
+        <div className="container-editorial grid gap-px bg-white/15 md:grid-cols-3">
+          {[
+            [
+              "01",
+              "Styles define the offer",
+              "Product and style pages control the available structure, format, MOQ, and specification boundaries.",
+            ],
+            [
+              "02",
+              "Industries define the use",
+              "Industry pages show where those approved styles fit a buyer need without inventing a new product.",
+            ],
+            [
+              "03",
+              "Keywords follow intent",
+              "Style pages own format terms; industry pages own market and application terms; quote review confirms final fit.",
+            ],
+          ].map(([number, title, description]) => (
+            <div key={number} className="bg-moss px-6 py-8 md:px-8">
+              <div className="text-xs font-semibold tracking-[0.14em] text-primary-foreground/75 uppercase">
+                {number} / Source rule
+              </div>
+              <h2 className="mt-4 font-serif text-2xl text-primary-foreground">
+                {title}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-primary-foreground/80">
+                {description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="border-y border-border bg-cream">
         <div className="container-editorial">
           {industryNavigationGroups.map((group, groupIndex) => (

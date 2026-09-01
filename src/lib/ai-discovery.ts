@@ -7,6 +7,7 @@ import {
   type ComparisonGuide,
 } from "@/data/comparison-guides";
 import {
+  getIndustryGuidesByStyleSlug,
   industryGuides,
   type IndustryGuide,
 } from "@/data/industry-guides";
@@ -58,6 +59,13 @@ function industryUrl(guide: IndustryGuide) {
 
 function industryHubUrl(hub: IndustryHub) {
   return `${industriesUrl}/${hub.slug}`;
+}
+
+function industryApplicationsForStyle(styleSlug: string) {
+  return getIndustryGuidesByStyleSlug(styleSlug).map((guide) => ({
+    name: guide.name,
+    url: industryUrl(guide),
+  }));
 }
 
 function comparisonUrl(guide: ComparisonGuide) {
@@ -187,7 +195,11 @@ export function buildLlmsText() {
   const styleLines = productStyleGuides
     .map(
       (guide) =>
-        `- [${guide.name}](${styleUrl(guide)}): ${guide.quickAnswer}`
+        `- [${guide.name}](${styleUrl(guide)}): ${guide.quickAnswer} Industry applications: ${industryApplicationsForStyle(
+          guide.slug
+        )
+          .map((application) => application.name)
+          .join(", ")}.`
     )
     .join("\n");
 
@@ -384,6 +396,9 @@ Quick answer: ${guide.quickAnswer}
 Selection note: ${guide.selectionNote}
 Project inputs: ${guide.projectInputs.join("; ")}
 Compliance or compatibility note: ${guide.complianceNote ?? "Final structure and specification require project review."}
+Industry applications: ${industryApplicationsForStyle(guide.slug)
+        .map((application) => `${application.name}: ${application.url}`)
+        .join("; ")}
 Content reviewed: ${guide.reviewedAt}
 `
     )
@@ -398,6 +413,13 @@ Primary product family: ${guide.primaryFamily}
 Approved product pages: ${guide.productSlugs
         .map((slug) => `${siteConfig.url}/products/${slug}`)
         .join("; ")}
+Approved style pages: ${
+        guide.formatSlugs?.length
+          ? guide.formatSlugs
+              .map((slug) => `${styleLibraryUrl}/${slug}`)
+              .join("; ")
+          : "Use the approved product pages above; the exact nested style remains subject to project review."
+      }
 Search terms: ${guide.keywords.join("; ")}
 Quick answer: ${guide.quickAnswer}
 Best for: ${guide.bestFor.join("; ")}
@@ -630,7 +652,11 @@ export function buildAgentsMarkdown() {
   const styleLines = productStyleGuides
     .map(
       (guide) =>
-        `- ${guide.name}: ${guide.quickAnswer} Source: ${styleUrl(guide)}`
+        `- ${guide.name}: ${guide.quickAnswer} Industry applications: ${industryApplicationsForStyle(
+          guide.slug
+        )
+          .map((application) => application.name)
+          .join(", ")}. Source: ${styleUrl(guide)}`
     )
     .join("\n");
 
@@ -778,7 +804,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "2.8",
+    schemaVersion: "2.9",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -894,6 +920,7 @@ export function buildProductCatalog() {
       selectionNote: guide.selectionNote,
       projectInputs: guide.projectInputs,
       complianceOrCompatibilityNote: guide.complianceNote ?? null,
+      industryApplications: industryApplicationsForStyle(guide.slug),
       contentReviewed: guide.reviewedAt,
       url: styleUrl(guide),
       requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent(
@@ -919,6 +946,9 @@ export function buildProductCatalog() {
       primaryProductFamily: guide.primaryFamily,
       approvedProductUrls: guide.productSlugs.map(
         (slug) => `${siteConfig.url}/products/${slug}`
+      ),
+      approvedStyleUrls: (guide.formatSlugs ?? []).map(
+        (slug) => `${styleLibraryUrl}/${slug}`
       ),
       summary: guide.quickAnswer,
       searchTerms: guide.keywords,

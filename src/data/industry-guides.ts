@@ -1,4 +1,5 @@
 import type { ProductFamily } from "@/data/products";
+import { productStyleGuides } from "@/data/product-styles";
 
 export interface IndustryGuide {
   slug: string;
@@ -635,6 +636,7 @@ export const industryGuides: IndustryGuide[] = [
     shortName: "Beverage Pouches",
     primaryFamily: "Mylar Bags",
     productSlugs: ["custom-mylar-bags"],
+    formatSlugs: ["spout-pouches"],
     heroTitle: "Custom beverage pouches developed around the contents and filling process.",
     heroDescription:
       "Plan a spout or other approved flexible format around the beverage contents, fill volume, spout, film and barrier brief, process, artwork, quantity, intended market, and destination.",
@@ -953,10 +955,50 @@ export const industryGuides: IndustryGuide[] = [
   },
 ];
 
+const productStyleBySlug = new Map(
+  productStyleGuides.map((style) => [style.slug, style])
+);
+
+for (const guide of industryGuides) {
+  for (const formatSlug of guide.formatSlugs ?? []) {
+    const style = productStyleBySlug.get(formatSlug);
+
+    if (!style) {
+      throw new Error(
+        `Industry guide ${guide.slug} references unknown packaging style ${formatSlug}.`
+      );
+    }
+
+    if (!guide.productSlugs.includes(style.parentProductSlug)) {
+      throw new Error(
+        `Industry guide ${guide.slug} must include parent product ${style.parentProductSlug} for packaging style ${formatSlug}.`
+      );
+    }
+  }
+}
+
+for (const style of productStyleGuides) {
+  const hasIndustryApplication = industryGuides.some((guide) =>
+    guide.formatSlugs?.includes(style.slug)
+  );
+
+  if (!hasIndustryApplication) {
+    throw new Error(
+      `Packaging style ${style.slug} has no approved industry application.`
+    );
+  }
+}
+
 export function getIndustryGuideBySlug(slug: string) {
   return industryGuides.find((guide) => guide.slug === slug);
 }
 
 export function getIndustryGuidesByProduct(productSlug: string) {
   return industryGuides.filter((guide) => guide.productSlugs.includes(productSlug));
+}
+
+export function getIndustryGuidesByStyleSlug(styleSlug: string) {
+  return industryGuides.filter((guide) =>
+    guide.formatSlugs?.includes(styleSlug)
+  );
 }
