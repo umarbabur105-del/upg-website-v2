@@ -142,9 +142,15 @@ This follows the earlier competitor-coverage proxy for gift, candle, jewelry, re
 
 Commit `ee942ce` released the three hubs with exact-SHA Vercel success and 85/85 live sitemap URLs returning HTTP 200. Fresh Search Console URL Inspection on 2026-08-30 reports 83 of 85 indexed. `/industries/beauty-personal-care-packaging` remains unknown to Google and `/industries/supplement-packaging` is discovered but not indexed; neither URL is treated as indexed until the API confirms it.
 
-## Packing calculator authority asset — production release, 2026-08-30
+## Packing calculator authority asset — released 2026-08-30, archived 2026-09-01
 
-The Packing CBM & Weight Calculator targets practical planning intent with one canonical tool instead of publishing keyword-variant articles. It calculates carton count, estimated outer-carton dimensions, CBM, dimensional weight, and optional net and gross weight from user-entered dimensions, quantity, manual layout, allowance, and measured weights. The page explicitly separates a planning estimate from a freight quote, final carton specification, material recommendation, or carrier approval. Commit `daa69df` is live with exact-SHA Vercel success, 86/86 runtime sitemap proof, AI-discovery and product-catalog coverage, complete quote-prefill browser proof, and IndexNow HTTP 200 acceptance. Search and conversion measurement begins from this production baseline; no traffic, indexing, or ranking outcome is claimed from the release itself.
+The calculator was released as a practical planning asset, then archived after
+review showed that its assembled-item and master-carton model did not reliably
+represent UPG products commonly shipped flat, folded, collapsed, or nested. The
+former route now permanently redirects to the tools hub and is excluded from
+active sitemap and discovery surfaces. Historical release proof remains in Git
+history and `docs/archived-tools.md`; the tool must not be treated as a current
+keyword target.
 
 ## Monthly volume completion path
 

@@ -9,7 +9,6 @@
     "lint": "eslint",
     "audit:seo": "node scripts/seo-quality-audit.mjs",
     "test:moq": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/packaging-spec.test.mjs",
-    "test:packing": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/packing-cbm.test.mjs",
     "test:forms": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/form-validation.test.mjs",
     "test:organic-report": "python3 scripts/test_organic_weekly_report.py",
     "indexnow:submit": "node scripts/indexnow-submit.mjs",

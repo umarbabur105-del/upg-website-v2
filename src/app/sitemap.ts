@@ -78,12 +78,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${SITE_URL}/tools/packing-cbm-weight-calculator`,
-      lastModified: new Date("2026-08-30T00:00:00.000Z"),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
       url: `${SITE_URL}/cosmetics`,
       lastModified: COSMETICS_UPDATED_AT,
       changeFrequency: "weekly",

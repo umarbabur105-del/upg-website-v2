@@ -192,6 +192,24 @@ const sourceContracts = [
     markers: ["<h2", "Packaging specification", "</h2>"],
   },
   {
+    file: "src/app/tools/packaging-spec-builder/page.tsx",
+    label: "/tools/packaging-spec-builder dynamic-page contract",
+    markers: [
+      '"@type": "WebApplication"',
+      '"@type": "FAQPage"',
+      "This tool does not estimate price",
+    ],
+  },
+  {
+    file: "src/app/tools/packaging-artwork-preflight/page.tsx",
+    label: "/tools/packaging-artwork-preflight dynamic-page contract",
+    markers: [
+      '"@type": "WebApplication"',
+      '"@type": "FAQPage"',
+      "No file is uploaded or automatically approved",
+    ],
+  },
+  {
     file: "src/components/quote-form.tsx",
     label: "/get-a-quote native form",
     markers: ['action="/api/quote"', 'method="post"'],
@@ -208,7 +226,6 @@ for (const contract of sourceContracts) {
 }
 
 const contextualInboundContracts = [
-  "/tools/packing-cbm-weight-calculator",
   "/cosmetics/serum-boxes",
   "/cosmetics/lotion-boxes",
   "/cosmetics/lipstick-boxes",
@@ -466,10 +483,10 @@ for (const route of industryHubRoutes) {
 
 const planningToolContracts = new Map([
   [
-    "/tools/packing-cbm-weight-calculator",
+    "/tools/packaging-format-finder",
     {
       schemaTypes: ["WebApplication", "FAQPage", "BreadcrumbList"],
-      scopeMarkers: ["not a freight quote", "planning estimate"],
+      scopeMarkers: ["planning guidance", "not structural approval"],
     },
   ],
 ]);
@@ -498,8 +515,16 @@ for (const [route, contract] of planningToolContracts) {
       failures.push(`${route}: missing scope marker "${marker}"`);
     }
   }
-  if (!page.html.includes('href="/get-a-quote')) {
-    failures.push(`${route}: missing project-enquiry handoff`);
+}
+
+const retiredToolRoutes = ["/tools/packing-cbm-weight-calculator"];
+
+for (const route of retiredToolRoutes) {
+  if (pages.some((candidate) => candidate.route === route)) {
+    failures.push(`${route}: retired tool remains in the canonical sitemap`);
+  }
+  if (toolsHub?.html.includes(`href="${route}"`)) {
+    failures.push(`/tools: retired tool remains linked from the tools hub: ${route}`);
   }
 }
 

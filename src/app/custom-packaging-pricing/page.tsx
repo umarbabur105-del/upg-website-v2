@@ -202,20 +202,6 @@ export default function CustomPackagingPricingPage() {
                 </li>
               ))}
             </ol>
-            <div className="mt-6 border border-border bg-surface p-5">
-              <h2 className="text-lg font-semibold text-foreground">
-                Need to organize packing and shipment inputs?
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Estimate carton count, packed dimensions, CBM, measured weight, and dimensional weight before project review. The result is a planning estimate, not a freight quote or final carton specification.
-              </p>
-              <Link
-                href="/tools/packing-cbm-weight-calculator"
-                className="mt-4 inline-flex border-b border-foreground/20 pb-0.5 text-sm font-semibold text-foreground"
-              >
-                Open the Packing CBM &amp; Weight Calculator →
-              </Link>
-            </div>
           </div>
         </div>
       </section>

@@ -75,6 +75,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/tools/packing-cbm-weight-calculator",
+        destination: "/tools",
+        permanent: true,
+      },
+      {
         source: "/privacy-policy",
         destination: "/privacy",
         permanent: true,

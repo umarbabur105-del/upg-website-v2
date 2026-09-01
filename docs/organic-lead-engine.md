@@ -80,7 +80,6 @@ UPG should earn links and AI-search citations through practical resources rather
 - Packaging Format Finder
 - Packaging Spec & MOQ Builder using UPG's approved MOQ rules
 - Packaging Artwork Preflight Checker
-- Packing CBM & Weight Calculator using buyer-entered dimensions, layout, quantity, and optional measured weights
 - Packaging Style Library
 - Future: dieline briefing tool, landed-project checklist, print-finish decision tool, and anonymized packaging-planning benchmarks after enough first-party enquiries exist
 
@@ -159,14 +158,14 @@ The gate checks rendered pages for required and unique titles and descriptions, 
 - Phase 2 first commercial cluster: implemented with 12 visible industry and product-application guides.
 - Demand evidence: Search Console baseline and Teal public-coverage proxy recorded in `docs/keyword-demand-map.md`.
 - Exact monthly volume: pending a real Google Ads account, developer token, customer ID, and OAuth `adwords` scope. The Google Ads API service itself is enabled.
-- Phase 3 authority assets: the Packaging Spec & MOQ Builder creates shareable, downloadable, and print-ready planning briefs. The live Packing CBM & Weight Calculator calculates carton count, estimated outer-carton size, CBM, dimensional weight, and optional net and gross weight from buyer-entered values without presenting a freight quote or inventing a carton specification.
+- Phase 3 authority assets: the Packaging Spec & MOQ Builder creates shareable, downloadable, and print-ready planning briefs. The Packing CBM & Weight Calculator was archived on 2026-09-01 because its assembled packing model did not reliably represent products supplied flat, folded, collapsed, or nested.
 - Phase 3 prospecting: 50 prospects and approval-gated outreach drafts recorded in `docs/backlink-prospects.csv`, `docs/backlink-outreach-drafts.md`, and `docs/backlink-personalized-drafts.md`; two individually approved editorial emails were sent on 2026-08-21. Further outreach is paused by owner instruction.
 - Measurement: aggregate-only Search Console, GA4, and CRM report available through `npm run report:organic`; it includes form starts, successful lead submissions, sample-kit checkout starts, purchases, and authority-tool events. Brand filtering now treats `universal packing` as a UPG brand variant, and the action queue excludes known similarly named packaging companies without removing valid commercial packaging queries from the raw evidence.
 
 ### Current acquisition evidence — 2026-08-30
 
 - Google operator OAuth was reauthorized after an `invalid_rapt` reauthentication failure; all core Google API probes passed afterwards.
-- The current live sitemap contains 86 canonical URLs and every URL returns HTTP 200. Fresh Search Console URL Inspection immediately before the calculator release reported 83 of the prior 85 URLs indexed; `/industries/beauty-personal-care-packaging` was unknown to Google and `/industries/supplement-packaging` was discovered but not indexed. The new calculator is live and submitted to IndexNow but is not claimed as Google-indexed without a later URL Inspection result.
+- The 2026-08-30 release snapshot contained 86 canonical URLs and every URL returned HTTP 200. Fresh Search Console URL Inspection at that time reported 83 of the prior 85 URLs indexed; `/industries/beauty-personal-care-packaging` was unknown to Google and `/industries/supplement-packaging` was discovered but not indexed. The calculator added in that snapshot was later archived on 2026-09-01.
 - The latest 90-day report contains 1,125 Search Console impressions, 580 correctly filtered non-brand impressions, 0 non-brand clicks, and 12 queries observed in positions 1-20. GA4 recorded 8 Organic Search sessions and 2 Organic Shopping sessions in the corresponding operating window.
 - GA4 recorded 4 enquiry-form starts and 2 successful lead submissions. Sample-kit checkout starts and purchases were 0 in this window.
 - The CRM contains 3 genuine leads in the period, all still New; 2 did not record a product family. Qualified and won counts remain 0.
@@ -174,7 +173,7 @@ The gate checks rendered pages for required and unique titles and descriptions, 
 - The protected Stripe sandbox lane is proven end to end without charging real money: a US$19.99 test payment completed with `livemode=false`, and the hardened deployment's next event returned HTTP 200 on its first delivery. CRM stored the record as `Stripe Test Order` / `Spam` / `System Test`, and the clearly labeled no-real-payment notification reached the UPG inbox. Live payment and physical fulfillment remain approval-gated. Sandbox analytics uses `stripe_test_purchase`, not the real `purchase` event; GA4 receipt still needs confirmation after reporting latency.
 - Backlink distribution has started: 50 researched prospects, 13 still marked ready for a personalized pitch, and 2 individually approved editorial emails sent and awaiting response (FDPP and Packaging World). Further outreach is on hold.
 
-The immediate constraints are non-brand click-through, authority, two confirmed Google indexing gaps plus the new tool awaiting later inspection, incomplete lead qualification, and live physical-fulfillment readiness. Crawlability and the protected sandbox payment pipeline are healthy, but indexing is not described as complete without URL Inspection proof. While outreach is paused, the active lane is measurement, query-led content improvement, useful planning tools, and conversion-path verification.
+The immediate constraints are non-brand click-through, authority, incomplete lead qualification, and live physical-fulfillment readiness. Crawlability and the protected sandbox payment pipeline are healthy, but indexing is not described as complete without URL Inspection proof. While outreach is paused, the active lane is measurement, query-led content improvement, accurate planning tools, and conversion-path verification.
 
 ### Sitewide organic and AI readiness — production release, 2026-09-01
 
@@ -191,7 +190,7 @@ Commits `7ad3009` and `5282fa9` strengthen the owned website rather than treatin
 
 Release proof passed for exact remote-main commit `5282fa9f007b521483f41ee5d6afe2cd205e3911`: Vercel production status `READY`, ESLint, TypeScript, 16 regression tests, a 107-page Next.js build, the expanded 84-page rendered SEO audit, 87/87 production sitemap URLs with HTTP 200, exactly one H1, matching canonical URLs, JSON-LD, AI action discovery, native-form and origin-protection checks, Markdown discovery, and the crawler-readable email contract. IndexNow accepted all 87 canonical URLs with HTTP 200.
 
-Fresh Search Console URL Inspection on 2026-09-01 reports both former gaps—`/industries/beauty-personal-care-packaging` and `/industries/supplement-packaging`—as indexed. `/tools/packing-cbm-weight-calculator` is still unknown to Google, and `/custom-packaging-pricing` is discovered but currently not indexed. After fresh owner confirmation, Search Console accepted the pricing page into its priority crawl queue. The calculator request returned Google's temporary submission error on two controlled attempts, so it is not recorded as manually queued; sitemap discovery and the successful 87-URL IndexNow notification remain active. Rankings, AI citations, recommendations, and leads remain measurement outcomes rather than release claims.
+Fresh Search Console URL Inspection on 2026-09-01 reports both former gaps—`/industries/beauty-personal-care-packaging` and `/industries/supplement-packaging`—as indexed. `/custom-packaging-pricing` is discovered but currently not indexed, and Search Console accepted it into the priority crawl queue after fresh owner confirmation. The calculator request returned Google's temporary submission error on two controlled attempts before the tool was archived later that day. Rankings, AI citations, recommendations, and leads remain measurement outcomes rather than release claims.
 
 ### Site-first pricing and MOQ authority page — production release, 2026-08-31
 
@@ -269,9 +268,16 @@ Fresh Search Console evidence for 2026-07-25 through 2026-08-21 contains 408 imp
 
 Commit `ee942ce` released the hubs with exact-SHA Vercel success and 85/85 live sitemap URLs returning HTTP 200. Fresh URL Inspection on 2026-08-30 reports 83 of those 85 URLs indexed; the beauty and supplement industry hubs remain the two explicit indexing follow-ups.
 
-### Packing CBM & Weight Calculator — production release, 2026-08-30
+### Packing CBM & Weight Calculator — released 2026-08-30, archived 2026-09-01
 
-The calculator adds one useful planning route at `/tools/packing-cbm-weight-calculator` and a visible discovery card on `/tools`. It uses only buyer-entered packed-unit dimensions, manual carton layout, quantity, allowance, dimensional-weight divisor, and optional measured weights. It does not guess material, board grade, carrier approval, freight price, or final carton construction.
+The calculator was removed from the active site because UPG packaging products
+are commonly supplied flat, folded, collapsed, or nested. Its assembled-item and
+manual master-carton assumptions could therefore produce a shipping estimate
+that did not match the actual supplied form. The old route permanently redirects
+to `/tools`; active discovery and sitemap references were removed. See
+`docs/archived-tools.md`.
+
+The original release added one planning route at `/tools/packing-cbm-weight-calculator` and a visible discovery card on `/tools`. It used only buyer-entered packed-unit dimensions, manual carton layout, quantity, allowance, dimensional-weight divisor, and optional measured weights. It did not guess material, board grade, carrier approval, freight price, or final carton construction.
 
 Commit `daa69df` released WebApplication, FAQPage, and BreadcrumbList structured data; sitemap and AI-discovery coverage; copy and complete prefilled quote handoffs; unit conversion; a pure calculation library; four deterministic calculation tests; and a rendered SEO contract. Production proof passed with exact-SHA Vercel success, 4/4 calculation tests, 3/3 organic-report regression tests, ESLint, TypeScript, a 105-page Next.js build, 83 canonical rendered audit pages plus 3 dynamic runtime pages, 86/86 live sitemap URLs returning HTTP 200, all four AI-discovery endpoints, product catalog schema 2.6, desktop and mobile browser verification, zero horizontal overflow at 375px, and HTTP 200 IndexNow acceptance for four changed or pending URLs.
 

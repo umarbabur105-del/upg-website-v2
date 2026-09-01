@@ -99,8 +99,14 @@ Official reference: [OpenAI Agentic Commerce onboarding](https://developers.open
 
 ## Remaining citation work
 
-1. The UPG Packaging Spec and MOQ Builder, Packing CBM & Weight Calculator, and answer-first pricing/MOQ source are live; measure their discovery, engagement, and quote-handoff events before expanding them.
+1. The UPG Packaging Spec and MOQ Builder and answer-first pricing/MOQ source are live; measure their discovery, engagement, and quote-handoff events before expanding them.
 2. Add expert-reviewed, answer-first technical pages using UPG-approved product knowledge and measured query gaps.
 3. Publish original structure diagrams, comparison tables, and downloadable specification templates after product-structure approval.
 4. Third-party citation outreach is paused by owner instruction; preserve the researched queue without sending or submitting anything.
 5. Maintain a fixed monthly prompt set for ChatGPT, Claude, Perplexity, Copilot, and Google AI; record mentions, citations, cited URLs, accuracy, referrals, and qualified leads.
+
+The Packing CBM & Weight Calculator was archived on 2026-09-01 because its
+assembled-item and master-carton assumptions did not reliably represent UPG
+products commonly supplied flat, folded, collapsed, or nested. Historical
+submission records above remain evidence of the earlier release; the route is no
+longer an active discovery asset.
