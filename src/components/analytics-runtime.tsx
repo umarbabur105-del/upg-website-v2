@@ -90,7 +90,7 @@ export function AnalyticsRuntime() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-x-3 bottom-3 z-[70] mx-auto max-w-2xl sm:inset-x-4 sm:bottom-4">
+    <div className="fixed inset-x-3 bottom-3 z-[70] mx-auto max-w-2xl sm:inset-x-4 sm:bottom-4 lg:left-4 lg:right-auto lg:mx-0 lg:w-[min(28rem,calc(100vw-2rem))]">
       <div
         role="dialog"
         aria-labelledby="analytics-consent-title"

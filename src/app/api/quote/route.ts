@@ -14,6 +14,7 @@ import {
   prepareGoogleSheetsAuth,
 } from "@/lib/google-sheets";
 import { validatePlanningQuantity } from "@/data/packaging-spec";
+import { combineQuoteNotes } from "@/lib/quote-form-ux";
 
 const allowedFamilies = new Set([
   "Tuck Boxes",
@@ -53,7 +54,9 @@ export async function POST(request: Request) {
       dimensions: cleanText(input.dimensions, { max: 160, singleLine: true }),
       material_preference: cleanText(input.material_preference, { max: 160, singleLine: true }),
       finish_preference: cleanText(input.finish_preference, { max: 160, singleLine: true }),
-      notes: cleanText(input.notes, { max: 4_000 }),
+      notes: cleanText(combineQuoteNotes(input.notes, input.customer_notes), {
+        max: 4_000,
+      }),
     };
 
     const requiredFields: Array<keyof typeof data> = [
