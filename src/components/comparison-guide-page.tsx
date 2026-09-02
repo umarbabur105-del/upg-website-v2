@@ -244,7 +244,28 @@ export function ComparisonGuidePage({ guide }: ComparisonGuidePageProps) {
             title="The factors that change the brief."
             intro="Use this table to organize the first decision. It is not a substitute for a dieline, compatibility review, or written production quote."
           />
-          <div className="mt-10 overflow-x-auto border border-border bg-surface">
+          <div className="mt-10 grid gap-4 md:hidden">
+            {guide.rows.map((row) => (
+              <article key={row.criterion} className="border border-border bg-surface">
+                <h3 className="bg-moss px-5 py-4 text-sm font-semibold text-primary-foreground">
+                  {row.criterion}
+                </h3>
+                <div className="p-5">
+                  <div className="eyebrow mb-2">{guide.first.title}</div>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {row.first}
+                  </p>
+                </div>
+                <div className="border-t border-border p-5">
+                  <div className="eyebrow mb-2">{guide.second.title}</div>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {row.second}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="mt-10 hidden overflow-x-auto border border-border bg-surface md:block">
             <table className="w-full min-w-[840px] border-collapse text-left text-sm">
               <thead className="bg-moss text-primary-foreground">
                 <tr>

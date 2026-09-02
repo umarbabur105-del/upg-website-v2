@@ -250,7 +250,30 @@ export default function CustomPackagingPricingPage() {
             title="250 units across all five custom product families."
             intro="The planning MOQ is consistent. Final feasibility, specification, and pricing are still reviewed for the selected format and project."
           />
-          <div className="mt-10 overflow-x-auto border border-border bg-surface">
+          <div className="mt-10 grid gap-4 md:hidden">
+            {products.map((product) => (
+              <article key={product.slug} className="border border-border bg-surface p-5">
+                <h3 className="font-serif text-2xl text-foreground">{product.name}</h3>
+                <dl className="mt-5 grid gap-4 border-t border-border pt-5 text-sm">
+                  <div>
+                    <dt className="eyebrow mb-1">Planning MOQ</dt>
+                    <dd className="text-foreground">{product.moq}</dd>
+                  </div>
+                  <div>
+                    <dt className="eyebrow mb-1">Best for</dt>
+                    <dd className="leading-relaxed text-muted-foreground">{product.bestFor}</dd>
+                  </div>
+                </dl>
+                <Link
+                  href={`/products/${product.slug}`}
+                  className="mt-5 inline-flex border-b border-foreground/20 pb-0.5 text-sm text-foreground"
+                >
+                  Product details →
+                </Link>
+              </article>
+            ))}
+          </div>
+          <div className="mt-10 hidden overflow-x-auto border border-border bg-surface md:block">
             <table className="w-full min-w-[680px] border-collapse text-left text-sm">
               <thead className="bg-stone text-foreground">
                 <tr>

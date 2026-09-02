@@ -74,30 +74,57 @@ function renderContent(content: string) {
         .split("|")
         .filter((cell) => cell.trim() !== "")
         .map((cell) => cell.trim());
+      const rows = bodyRows.map((row) =>
+        row
+          .split("|")
+          .filter((cell) => cell.trim() !== "")
+          .map((cell) => cell.trim())
+      );
 
       elements.push(
-        <div key={key++} className="my-7 overflow-x-auto border border-charcoal/10 bg-cream">
-          <table className="w-full min-w-[640px] text-sm">
-            <thead className="bg-olive text-offwhite">
-              <tr>
-                {headers.map((header) => (
-                  <th
-                    key={header}
-                    scope="col"
-                    className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-widest"
-                  >
-                    <span dangerouslySetInnerHTML={{ __html: parseBold(header) }} />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {bodyRows.map((row, rowIndex) => {
-                const cells = row
-                  .split("|")
-                  .filter((cell) => cell.trim() !== "")
-                  .map((cell) => cell.trim());
-                return (
+        <div key={key++} className="my-7">
+          <div className="grid gap-4 md:hidden">
+            {rows.map((cells, rowIndex) => (
+              <article key={rowIndex} className="border border-charcoal/10 bg-cream">
+                <div className="bg-olive px-5 py-4 text-sm font-semibold text-offwhite">
+                  <span dangerouslySetInnerHTML={{ __html: parseBold(cells[0] ?? "") }} />
+                </div>
+                <dl className="divide-y divide-charcoal/10 px-5">
+                  {cells.slice(1).map((cell, cellIndex) => (
+                    <div key={cellIndex} className="py-4">
+                      <dt className="text-xs font-semibold uppercase tracking-widest text-gold-dark">
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: parseBold(headers[cellIndex + 1] ?? "Details"),
+                          }}
+                        />
+                      </dt>
+                      <dd className="mt-2 text-sm leading-relaxed text-charcoal/72">
+                        <span dangerouslySetInnerHTML={{ __html: parseBold(cell) }} />
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </article>
+            ))}
+          </div>
+          <div className="hidden overflow-x-auto border border-charcoal/10 bg-cream md:block">
+            <table className="w-full min-w-[640px] text-sm">
+              <thead className="bg-olive text-offwhite">
+                <tr>
+                  {headers.map((header) => (
+                    <th
+                      key={header}
+                      scope="col"
+                      className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-widest"
+                    >
+                      <span dangerouslySetInnerHTML={{ __html: parseBold(header) }} />
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((cells, rowIndex) => (
                   <tr key={rowIndex} className="border-t border-charcoal/10 align-top">
                     {cells.map((cell, cellIndex) => (
                       <td
@@ -108,10 +135,10 @@ function renderContent(content: string) {
                       </td>
                     ))}
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       );
       continue;

@@ -365,12 +365,12 @@ export default function CosmeticsPage() {
               <Link
                 key={path.href}
                 href={path.href}
-                className="surface-card group block p-6 hover:-translate-y-1 hover:shadow-card"
+                className="surface-card group flex h-full flex-col p-6 hover:-translate-y-1 hover:shadow-card"
               >
                 <h3 className="font-serif text-2xl text-foreground">
                   {path.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {path.note}
                 </p>
                 <span className="mt-6 inline-flex items-center gap-1 text-sm text-foreground">

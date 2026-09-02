@@ -10,7 +10,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="group block overflow-hidden border border-border bg-surface transition-transform hover:-translate-y-0.5 hover:shadow-card"
+      className="group flex h-full flex-col overflow-hidden border border-border bg-surface transition-transform hover:-translate-y-0.5 hover:shadow-card"
     >
       <div className="relative aspect-[5/4] overflow-hidden bg-stone">
         <Image
@@ -21,13 +21,13 @@ export function ProductCard({ product }: ProductCardProps) {
           sizes="(max-width: 1024px) 100vw, 33vw"
         />
       </div>
-      <div className="p-6">
+      <div className="flex flex-1 flex-col p-6">
         <div className="eyebrow mb-3">{product.category}</div>
         <h3 className="font-serif text-2xl text-foreground">{product.name}</h3>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
           {product.summary}
         </p>
-        <div className="mt-5 grid grid-cols-2 gap-4 border-t border-border pt-5 text-sm text-foreground/80">
+        <div className="mt-5 grid grid-cols-2 gap-4 border-t border-border pt-5 text-sm text-foreground/80 sm:min-h-28">
           <div>
             <div className="eyebrow mb-1">MOQ</div>
             <div>{product.moq}</div>
