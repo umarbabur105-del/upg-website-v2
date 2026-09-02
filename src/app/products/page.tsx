@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { products } from "@/data/products";
+import { siteConfig } from "@/data/site";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -28,7 +29,7 @@ const productsCollectionSchema = {
       name: "Custom Packaging Products",
       description:
         "Five made-to-spec custom packaging product families manufactured for brands worldwide.",
-      dateModified: "2026-08-23",
+      dateModified: siteConfig.contentReviewedAt,
       mainEntity: { "@id": `${SITE_URL}/products#core-product-catalog` },
     },
     {
@@ -130,12 +131,6 @@ export default function ProductsPage() {
                 className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
               >
                 Explore cosmetics
-              </Link>
-              <Link
-                href="/get-a-quote"
-                className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
-              >
-                Start Your Project
               </Link>
             </div>
           </div>

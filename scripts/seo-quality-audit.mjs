@@ -200,7 +200,18 @@ const sourceContracts = [
   {
     file: "src/components/quote-form.tsx",
     label: "/get-a-quote native form",
-    markers: ['action="/api/quote"', 'method="post"'],
+    markers: [
+      'action="/api/quote"',
+      'method="post"',
+      'type="number"',
+      "min={PLANNING_MOQ_UNITS}",
+      "250 units or more",
+    ],
+  },
+  {
+    file: "src/app/api/quote/route.ts",
+    label: "/api/quote quantity qualification",
+    markers: ["validatePlanningQuantity", "quantityValidation.label"],
   },
 ];
 
@@ -400,6 +411,9 @@ for (const [route, requiredPrefixes] of coreProductContracts) {
       failures.push(`${route}: missing contextual link to ${prefix}`);
     }
   }
+  if (!page.title.includes("250-Unit MOQ")) {
+    failures.push(`${route}: title is missing the 250-Unit MOQ click signal`);
+  }
 }
 
 const moqContractRoutes = [
@@ -584,6 +598,12 @@ const homepage = pages.find((page) => page.route === "/");
 if (!homepage) {
   failures.push("/: missing rendered homepage");
 } else {
+  if (!homepage.html.includes('id="buyer-proof"')) {
+    failures.push("/: missing visible buyer-proof section");
+  }
+  if (!homepage.html.includes('href="/custom-packaging-pricing"')) {
+    failures.push("/: missing contextual pricing and MOQ link");
+  }
   if (!homepage.html.includes('id="industry-paths"')) {
     failures.push("/: missing visible industry-path section");
   }
@@ -755,7 +775,8 @@ const aiDiscoverySource = await readFile(
   "utf8"
 );
 for (const marker of [
-  'schemaVersion: "2.9"',
+  'schemaVersion: "3.0"',
+  "minimumQuantityUnits: 250",
   "buyerGuides: blogPosts.map",
   "## Packaging buyer guides",
   "industryApplications: industryApplicationsForStyle",

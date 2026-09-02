@@ -784,6 +784,7 @@ Use these actions only after the buyer explicitly asks to contact UPG and has ap
 - Method: POST
 - Accepted content types: application/json or application/x-www-form-urlencoded
 - Required fields: product_family, quantity, name, email, company
+- Quantity must be one whole-number production quantity of 250 units or more; put requested quantity breaks in notes
 - Supported product_family values: Tuck Boxes, Mailer Boxes, Magnetic Boxes, Collapsible Magnetic Boxes, Mylar Bags, Not sure yet
 - Optional fields include product_style, intended_end_use, shipping_country, shipping_state_or_province, target_delivery_timing, artwork_status, phone, website, dimensions, material_preference, finish_preference, and notes
 - A successful JSON response has accepted: true. It confirms receipt for human review; it does not create a price, order, payment, production slot, or delivery commitment.
@@ -804,7 +805,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "2.9",
+    schemaVersion: "3.0",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -841,6 +842,9 @@ export function buildProductCatalog() {
           "email",
           "company",
         ],
+        minimumQuantityUnits: 250,
+        quantityFormat:
+          "One whole-number production quantity; put quantity breaks in notes",
         successContract: {
           contentType: "application/json",
           acceptedField: true,

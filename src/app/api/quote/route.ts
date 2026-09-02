@@ -13,6 +13,7 @@ import {
   appendLeadToGoogleSheet,
   prepareGoogleSheetsAuth,
 } from "@/lib/google-sheets";
+import { validatePlanningQuantity } from "@/data/packaging-spec";
 
 const allowedFamilies = new Set([
   "Tuck Boxes",
@@ -77,6 +78,14 @@ export async function POST(request: Request) {
     if (!allowedFamilies.has(data.product_family)) {
       return NextResponse.json({ error: "Invalid product family" }, { status: 400 });
     }
+    const quantityValidation = validatePlanningQuantity(data.quantity);
+    if (!quantityValidation.valid) {
+      return NextResponse.json(
+        { error: quantityValidation.error },
+        { status: 422 }
+      );
+    }
+    data.quantity = quantityValidation.label;
     if (
       data.product_family === "Mailer Boxes" &&
       data.product_style === excludedMailerStyle

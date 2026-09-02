@@ -3,7 +3,9 @@ import test from "node:test";
 import {
   formatFinishedDimensions,
   getPlanningMoq,
+  PLANNING_MOQ_UNITS,
   productFamilies,
+  validatePlanningQuantity,
 } from "../src/data/packaging-spec.ts";
 import { products } from "../src/data/products.ts";
 
@@ -40,4 +42,28 @@ test("keeps valid dimensions in the planning brief", () => {
     formatFinishedDimensions({ length: 0, width: 8, height: 3 }, "in"),
     ""
   );
+});
+
+test("accepts and normalizes quote quantities at or above the planning MOQ", () => {
+  assert.deepEqual(validatePlanningQuantity("250"), {
+    valid: true,
+    units: PLANNING_MOQ_UNITS,
+    label: "250 units",
+  });
+  assert.deepEqual(validatePlanningQuantity("1,000 units"), {
+    valid: true,
+    units: 1000,
+    label: "1,000 units",
+  });
+  assert.deepEqual(validatePlanningQuantity("250+"), {
+    valid: true,
+    units: PLANNING_MOQ_UNITS,
+    label: "250 units",
+  });
+});
+
+test("rejects below-MOQ or ambiguous quote quantities", () => {
+  assert.equal(validatePlanningQuantity("249").valid, false);
+  assert.equal(validatePlanningQuantity("250 / 500").valid, false);
+  assert.equal(validatePlanningQuantity("two hundred fifty").valid, false);
 });

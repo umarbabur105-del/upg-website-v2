@@ -126,10 +126,10 @@ export default function CustomPackagingPricingPage() {
                 Request a Custom Quote
               </Link>
               <Link
-                href="/get-a-quote"
+                href="#quote-inputs"
                 className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
               >
-                Send Your Project Details
+                Review Quote Inputs
               </Link>
             </div>
             <p className="mt-5 text-xs text-muted-foreground">
@@ -216,7 +216,7 @@ export default function CustomPackagingPricingPage() {
         </div>
       </section>
 
-      <section className="section-shell bg-cream">
+      <section id="quote-inputs" className="section-shell scroll-mt-28 bg-cream">
         <div className="container-editorial grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <SectionHeading

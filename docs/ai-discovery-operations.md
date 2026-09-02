@@ -108,6 +108,12 @@ Official reference: [OpenAI Agentic Commerce onboarding](https://developers.open
 4. Third-party citation outreach is paused by owner instruction; preserve the researched queue without sending or submitting anything.
 5. Maintain a fixed monthly prompt set for ChatGPT, Claude, Perplexity, Copilot, and Google AI; record mentions, citations, cited URLs, accuracy, referrals, and qualified leads.
 
+The fixed 20-query operating set is stored in
+`docs/ai-visibility-scorecard.csv`. Record only observed results with the check
+date and cited URL. An empty cell means untested, not absent. A citation is not
+recorded as a recommendation, and neither is recorded as a lead without the
+matching referral and CRM outcome.
+
 The Packing CBM & Weight Calculator was archived on 2026-09-01 because its
 assembled-item and master-carton assumptions did not reliably represent UPG
 products commonly supplied flat, folded, collapsed, or nested. Historical

@@ -23,8 +23,12 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 const buyerProof = [
-  { value: "5", label: "focused product families" },
-  { value: "250 units", label: "planning MOQ for every product family" },
+  { value: "5", label: "focused product families", href: "/products" },
+  {
+    value: "250 units",
+    label: "planning MOQ for every product family",
+    href: "/custom-packaging-pricing",
+  },
   { value: "Worldwide", label: "production and delivery" },
   { value: "1 business day", label: "target for an initial reply" },
 ];
@@ -223,7 +227,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-cream">
+      <section id="buyer-proof" className="border-y border-border bg-cream">
         <div className="container-editorial grid grid-cols-2 gap-x-6 gap-y-7 py-7 lg:grid-cols-4">
           {buyerProof.map((item) => (
             <div key={item.label}>
@@ -231,6 +235,14 @@ export default function HomePage() {
               <div className="mt-1 text-xs leading-relaxed text-muted-foreground">
                 {item.label}
               </div>
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  className="mt-2 inline-flex border-b border-foreground/20 pb-0.5 text-xs text-foreground"
+                >
+                  View details →
+                </Link>
+              ) : null}
             </div>
           ))}
         </div>

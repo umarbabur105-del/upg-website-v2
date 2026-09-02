@@ -6,7 +6,9 @@ import { siteConfig } from "@/data/site";
 import {
   finishOptions,
   materialOptions,
+  PLANNING_MOQ_UNITS,
   productStyles,
+  validatePlanningQuantity,
 } from "@/data/packaging-spec";
 import { trackGenerateLead } from "@/lib/analytics";
 import { getLeadAttribution } from "@/lib/lead-attribution";
@@ -102,6 +104,9 @@ const textareaClass =
 
 export function QuoteForm({ prefill }: QuoteFormProps) {
   const hasWhatsApp = Boolean(siteConfig.whatsappUrl);
+  const prefillQuantity = prefill?.quantity
+    ? validatePlanningQuantity(prefill.quantity)
+    : undefined;
   const validPrefillFamily =
     prefill?.productFamily && prefill.productFamily in productStyles
       ? prefill.productFamily
@@ -121,7 +126,7 @@ export function QuoteForm({ prefill }: QuoteFormProps) {
     ...initialState,
     product_family: validPrefillFamily,
     product_style: validPrefillStyle,
-    quantity: prefill?.quantity ?? "",
+    quantity: prefillQuantity?.valid ? String(prefillQuantity.units) : "",
     intended_end_use: prefill?.intendedEndUse ?? "",
     shipping_country: prefill?.shippingCountry ?? "",
     dimensions: prefill?.dimensions ?? "",
@@ -303,11 +308,23 @@ export function QuoteForm({ prefill }: QuoteFormProps) {
               id="quantity"
               name="quantity"
               required
+              type="number"
+              inputMode="numeric"
+              min={PLANNING_MOQ_UNITS}
+              step={1}
+              aria-describedby="quantity-help"
               value={form.quantity}
               onChange={(event) => update("quantity", event.target.value)}
               className={inputClass}
-              placeholder="e.g. 250 units"
+              placeholder="250"
             />
+            <p
+              id="quantity-help"
+              className="text-xs leading-relaxed text-muted-foreground"
+            >
+              Start with one quantity of 250 units or more. Add quantity breaks
+              in the optional project notes.
+            </p>
           </Field>
 
           <Field label="Full name" htmlFor="name" required>

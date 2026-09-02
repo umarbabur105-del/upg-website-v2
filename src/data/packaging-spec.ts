@@ -3,6 +3,8 @@ import type { ProductFamily } from "@/data/products";
 export type PackagingFamilyOrUnknown = ProductFamily | "Not sure yet";
 export type MeasurementUnit = "in" | "cm" | "mm";
 
+export const PLANNING_MOQ_UNITS = 250;
+
 export const productFamilies: ProductFamily[] = [
   "Tuck Boxes",
   "Mailer Boxes",
@@ -94,6 +96,10 @@ export interface PlanningMoqResult {
   needsDimensions: boolean;
 }
 
+export type PlanningQuantityValidation =
+  | { valid: true; units: number; label: string }
+  | { valid: false; error: string };
+
 function dimensionsAreValid(dimensions?: FinishedDimensions) {
   if (!dimensions) return false;
   return [dimensions.length, dimensions.width, dimensions.height].every(
@@ -114,10 +120,40 @@ export function getPlanningMoq(
   }
 
   return {
-    units: 250,
-    label: "250 units",
+    units: PLANNING_MOQ_UNITS,
+    label: `${PLANNING_MOQ_UNITS} units`,
     note: "Planning MOQ for every UPG custom product family, regardless of finished size.",
     needsDimensions: false,
+  };
+}
+
+export function validatePlanningQuantity(
+  value: string
+): PlanningQuantityValidation {
+  const normalized = value.trim().toLowerCase().replaceAll(",", "");
+  const match = normalized.match(
+    /^(\d+)\s*\+?\s*(?:units?|pcs?|pieces?)?$/
+  );
+  const units = match ? Number(match[1]) : Number.NaN;
+
+  if (!Number.isSafeInteger(units)) {
+    return {
+      valid: false,
+      error: `Enter one whole-number quantity of ${PLANNING_MOQ_UNITS} units or more. Add quantity breaks in the project notes.`,
+    };
+  }
+
+  if (units < PLANNING_MOQ_UNITS) {
+    return {
+      valid: false,
+      error: `UPG's planning MOQ is ${PLANNING_MOQ_UNITS} units for every custom product family.`,
+    };
+  }
+
+  return {
+    valid: true,
+    units,
+    label: `${units.toLocaleString("en-US")} units`,
   };
 }
 
