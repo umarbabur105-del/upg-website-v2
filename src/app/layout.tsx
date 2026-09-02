@@ -30,7 +30,7 @@ const analyticsConsentBootstrap = `
     ad_storage: "denied",
     ad_user_data: "denied",
     ad_personalization: "denied",
-    wait_for_update: 500
+    wait_for_update: 1500
   });
   window.gtag("set", "ads_data_redaction", true);
 `;

@@ -12,6 +12,7 @@
     "test:forms": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/form-validation.test.mjs",
     "test:format-finder": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/packaging-format-finder.test.mjs",
     "test:quote-form-ux": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/quote-form-ux.test.mjs",
+    "test:analytics-consent": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/analytics-consent.test.mjs",
     "test:organic-report": "python3 scripts/test_organic_weekly_report.py",
     "indexnow:submit": "node scripts/indexnow-submit.mjs",
     "report:organic": "python3 scripts/organic-weekly-report.py --format markdown"

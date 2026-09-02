@@ -23,23 +23,64 @@ export function AnalyticsRuntime() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+    let active = true;
     let savedChoice: string | null = null;
     try {
       savedChoice = window.localStorage.getItem(ANALYTICS_CONSENT_STORAGE_KEY);
     } catch {
-      // When storage is unavailable, ask again without blocking the website.
+      // When storage is unavailable, fall back to the regional check.
     }
 
-    const openTimer =
-      savedChoice !== "granted" && savedChoice !== "denied"
-        ? window.setTimeout(() => setIsOpen(true), 0)
-        : undefined;
+    if (savedChoice === "granted" || savedChoice === "denied") {
+      updateGoogleConsent(savedChoice);
+    } else {
+      void fetch("/api/analytics-consent-region", {
+        cache: "no-store",
+        credentials: "same-origin",
+        headers: { Accept: "application/json" },
+        signal: controller.signal,
+      })
+        .then(async (response) => {
+          if (!response.ok) throw new Error("Analytics region lookup failed");
+          return (await response.json()) as unknown;
+        })
+        .then((region) => {
+          if (!active) return;
+
+          if (
+            !region ||
+            typeof region !== "object" ||
+            !("resolved" in region) ||
+            !("requiresConsent" in region) ||
+            typeof region.resolved !== "boolean" ||
+            typeof region.requiresConsent !== "boolean"
+          ) {
+            setIsOpen(true);
+            return;
+          }
+
+          if (!region.resolved || region.requiresConsent) {
+            setIsOpen(true);
+            return;
+          }
+
+          updateGoogleConsent("granted");
+        })
+        .catch((error: unknown) => {
+          if (!active || (error instanceof DOMException && error.name === "AbortError")) {
+            return;
+          }
+          setIsOpen(true);
+        });
+    }
 
     const openPreferences = () => setIsOpen(true);
     window.addEventListener(ANALYTICS_CONSENT_EVENT, openPreferences);
 
     return () => {
-      if (openTimer !== undefined) window.clearTimeout(openTimer);
+      active = false;
+      controller.abort();
       window.removeEventListener(ANALYTICS_CONSENT_EVENT, openPreferences);
     };
   }, []);
