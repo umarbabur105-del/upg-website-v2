@@ -21,7 +21,7 @@ const tools = [
     number: "01",
     title: "Packaging Format Finder",
     description:
-      "Answer four short questions to identify the closest starting format among tuck boxes, corrugated mailers, magnetic boxes, collapsible magnetic boxes, and Mylar bags.",
+      "Make two simple visual choices to identify the closest starting format among tuck boxes, mailers, magnetic boxes, collapsible magnetic boxes, and Mylar bags.",
     href: "/tools/packaging-format-finder",
     cta: "Find the right format",
     details: [
@@ -89,7 +89,7 @@ export default function ToolsPage() {
             as="h1"
             eyebrow="Free packaging planning tool"
             title="Choose a starting format before project review."
-            intro="Answer four short questions in the approved Format Finder, then send the known details to UPG for a human manufacturing review."
+            intro="Make two visual choices in the Format Finder, then send the known details to UPG for a human manufacturing review."
             className="max-w-5xl"
           />
         </div>

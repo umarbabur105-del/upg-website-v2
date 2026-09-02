@@ -1,232 +1,398 @@
-import { productFamilies } from "@/data/packaging-spec";
 import type { ProductFamily } from "@/data/products";
 
-export interface FormatFinderOption {
+export type FormatFinderGoalId =
+  | "one-product"
+  | "kit-or-unboxing"
+  | "premium-presentation"
+  | "flexible-packaging"
+  | "not-sure";
+
+export type FormatFinderResultType = "clear" | "comparison" | "human-review";
+
+export interface FormatFinderGoal {
+  id: FormatFinderGoalId;
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+export interface FormatFinderFollowUpOption {
   id: string;
   label: string;
   description: string;
-  weights: Partial<Record<ProductFamily, number>>;
+  previewFamily?: ProductFamily;
+  recommendation: FormatFinderRecommendation;
 }
 
-export interface FormatFinderQuestion {
-  id: string;
+export interface FormatFinderFollowUp {
   title: string;
   helpText: string;
-  options: FormatFinderOption[];
+  options: FormatFinderFollowUpOption[];
 }
 
-export type FormatFinderAnswers = Record<string, string>;
-
-export interface FormatFinderRank {
-  family: ProductFamily;
-  score: number;
-  matchedAnswers: string[];
+export interface FormatFinderRecommendation {
+  primaryFamily: ProductFamily | null;
+  alternateFamily?: ProductFamily;
+  resultType: FormatFinderResultType;
+  reasons: string[];
+  alternateComparison?: string;
 }
 
-export const formatFinderQuestions: FormatFinderQuestion[] = [
+export interface FormatFamilyGuidance {
+  plainDescription: string;
+  goodFit: string;
+  notTheFit: string;
+}
+
+export const formatFinderGoals: FormatFinderGoal[] = [
   {
-    id: "contents",
-    title: "What needs packaging?",
-    helpText: "Choose the option closest to the product or set you want to present.",
-    options: [
-      {
-        id: "single-retail-product",
-        label: "One retail product",
-        description: "An individual item that needs a printed secondary carton.",
-        weights: { "Tuck Boxes": 5 },
-      },
-      {
-        id: "multi-item-set",
-        label: "Several items or a product set",
-        description: "A grouped presentation, launch, subscription, or gifting set.",
-        weights: {
-          "Mailer Boxes": 3,
-          "Magnetic Boxes": 3,
-          "Collapsible Magnetic Boxes": 3,
-        },
-      },
-      {
-        id: "premium-gift",
-        label: "A premium gift or launch collection",
-        description: "A presentation-led box for a premium unboxing experience.",
-        weights: {
-          "Magnetic Boxes": 5,
-          "Collapsible Magnetic Boxes": 4,
-        },
-      },
-      {
-        id: "flexible-product",
-        label: "A bag, pouch, or rollstock product",
-        description: "A flexible format such as a pouch, coffee bag, spout bag, or film on roll.",
-        weights: { "Mylar Bags": 6 },
-      },
-      {
-        id: "contents-unsure",
-        label: "Not sure yet",
-        description: "Continue and compare the format choices through the next questions.",
-        weights: {},
-      },
-    ],
+    id: "one-product",
+    title: "A box around one product",
+    description: "For a cosmetic, food, supplement, retail, or similar individual item.",
+    image: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
+    imageAlt: "Printed tuck boxes for individual products",
   },
   {
-    id: "opening",
-    title: "How should the packaging open or arrive?",
-    helpText: "Choose the structural experience closest to what you have in mind.",
-    options: [
-      {
-        id: "folded-carton",
-        label: "A folded carton around the product",
-        description: "A straight tuck, reverse tuck, auto-lock, interlock, or seal-end format.",
-        weights: { "Tuck Boxes": 6 },
-      },
-      {
-        id: "ear-lock-unboxing",
-        label: "A corrugated ear-lock unboxing box",
-        description: "A mailer-style structure for PR, subscription, ecommerce, or presentation.",
-        weights: { "Mailer Boxes": 6 },
-      },
-      {
-        id: "assembled-magnetic",
-        label: "An assembled rigid magnetic box",
-        description: "A premium magnetic presentation box supplied in its assembled form.",
-        weights: { "Magnetic Boxes": 6 },
-      },
-      {
-        id: "flat-pack-magnetic",
-        label: "A magnetic box that ships flat",
-        description: "A collapsible premium structure assembled before presentation.",
-        weights: { "Collapsible Magnetic Boxes": 7 },
-      },
-      {
-        id: "flexible-opening",
-        label: "A flexible bag, pouch, spout, or rollstock format",
-        description: "A non-box flexible packaging format from the approved Mylar bag range.",
-        weights: { "Mylar Bags": 7 },
-      },
-      {
-        id: "opening-unsure",
-        label: "Not sure — compare for me",
-        description: "Use the remaining answers to identify the closest starting format.",
-        weights: {},
-      },
-    ],
+    id: "kit-or-unboxing",
+    title: "A box for a kit or unboxing",
+    description: "For several items, PR kits, subscriptions, launches, or ecommerce presentation.",
+    image: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
+    imageAlt: "Printed mailer box for kits and branded unboxing",
   },
   {
-    id: "program",
-    title: "What is the main use?",
-    helpText: "Select the customer experience or program this packaging needs to support.",
-    options: [
-      {
-        id: "retail-shelf",
-        label: "Retail shelf or individual product carton",
-        description: "Printed secondary packaging for an individual product.",
-        weights: { "Tuck Boxes": 5 },
-      },
-      {
-        id: "pr-subscription-ecommerce",
-        label: "PR kit, subscription, ecommerce, or launch mailer",
-        description: "A branded corrugated presentation and unboxing format.",
-        weights: { "Mailer Boxes": 5 },
-      },
-      {
-        id: "premium-presentation",
-        label: "Premium gifting or presentation",
-        description: "A rigid magnetic format for gifts, sets, and launch collections.",
-        weights: {
-          "Magnetic Boxes": 4,
-          "Collapsible Magnetic Boxes": 3,
-        },
-      },
-      {
-        id: "flexible-program",
-        label: "Coffee, packaged goods, liquid-product, or flexible program",
-        description: "A flexible packaging program using a bag, pouch, spout, or rollstock format.",
-        weights: { "Mylar Bags": 5 },
-      },
-      {
-        id: "program-unsure",
-        label: "Still exploring",
-        description: "Keep the intended use open for UPG review.",
-        weights: {},
-      },
-    ],
+    id: "premium-presentation",
+    title: "A premium gift or presentation box",
+    description: "For a firm luxury feel, gift set, launch collection, or high-end presentation.",
+    image: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
+    imageAlt: "Premium magnetic presentation box",
   },
   {
-    id: "priority",
-    title: "Which practical priority matters most?",
-    helpText: "This helps separate formats that can serve a similar presentation goal.",
-    options: [
-      {
-        id: "compact-secondary-carton",
-        label: "Compact secondary packaging for individual products",
-        description: "A printed folding-carton format around one product.",
-        weights: { "Tuck Boxes": 4 },
-      },
-      {
-        id: "corrugated-presentation",
-        label: "Corrugated structure with branded presentation",
-        description: "An ear-lock mailer with exterior, interior, or insert options.",
-        weights: { "Mailer Boxes": 4 },
-      },
-      {
-        id: "assembled-rigid-priority",
-        label: "An assembled premium rigid presentation",
-        description: "A standard rigid magnetic box with presentation-led finish options.",
-        weights: { "Magnetic Boxes": 4 },
-      },
-      {
-        id: "flat-storage-priority",
-        label: "Lower freight and storage volume through flat packing",
-        description: "A collapsible magnetic structure that folds flat before assembly.",
-        weights: { "Collapsible Magnetic Boxes": 6 },
-      },
-      {
-        id: "flexible-priority",
-        label: "A flexible bag, pouch, or rollstock format",
-        description: "Flexible packaging rather than a folding, corrugated, or rigid box.",
-        weights: { "Mylar Bags": 5 },
-      },
-      {
-        id: "priority-unsure",
-        label: "No fixed priority yet",
-        description: "Keep the practical priority open for project review.",
-        weights: {},
-      },
-    ],
+    id: "flexible-packaging",
+    title: "A printed bag, pouch, or film",
+    description: "For coffee, food, supplements, liquids, or another flexible-packaging project.",
+    image: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
+    imageAlt: "Printed flexible bags and pouches",
+  },
+  {
+    id: "not-sure",
+    title: "I am not sure yet",
+    description: "Show me one simple question to narrow it down.",
   },
 ];
 
-function findOption(questionId: string, optionId: string) {
-  return formatFinderQuestions
-    .find((question) => question.id === questionId)
-    ?.options.find((option) => option.id === optionId);
+const tuckRecommendation: FormatFinderRecommendation = {
+  primaryFamily: "Tuck Boxes",
+  resultType: "clear",
+  reasons: [
+    "One product needs its own printed outer carton.",
+    "You are not asking for a multi-item unboxing box, rigid gift box, or flexible pouch.",
+  ],
+};
+
+const mailerRecommendation: FormatFinderRecommendation = {
+  primaryFamily: "Mailer Boxes",
+  resultType: "clear",
+  reasons: [
+    "Several items need to sit together in one branded presentation.",
+    "The opening and unboxing experience matters more than a small retail carton.",
+  ],
+};
+
+const magneticRecommendation: FormatFinderRecommendation = {
+  primaryFamily: "Magnetic Boxes",
+  resultType: "clear",
+  reasons: [
+    "You want a firm, premium presentation with a magnetic closure.",
+    "Having the box arrive in its assembled rigid form suits your preference.",
+  ],
+};
+
+const collapsibleRecommendation: FormatFinderRecommendation = {
+  primaryFamily: "Collapsible Magnetic Boxes",
+  resultType: "clear",
+  reasons: [
+    "You want a premium magnetic presentation.",
+    "Flat storage before setup is important to the project.",
+  ],
+};
+
+const mylarRecommendation: FormatFinderRecommendation = {
+  primaryFamily: "Mylar Bags",
+  resultType: "clear",
+  reasons: [
+    "Your brief is for a bag, pouch, or printed film rather than a box.",
+    "UPG can review the exact flexible structure after the product details are shared.",
+  ],
+};
+
+export const formatFinderFollowUps: Record<FormatFinderGoalId, FormatFinderFollowUp> = {
+  "one-product": {
+    title: "Which picture is closer to the job?",
+    helpText: "This separates a carton around one item from a box that holds a set.",
+    options: [
+      {
+        id: "individual-carton",
+        label: "One printed box around one product",
+        description: "The product gets its own folding carton.",
+        previewFamily: "Tuck Boxes",
+        recommendation: tuckRecommendation,
+      },
+      {
+        id: "several-items",
+        label: "Several items together in one box",
+        description: "The box is part of a kit, launch, subscription, or unboxing.",
+        previewFamily: "Mailer Boxes",
+        recommendation: mailerRecommendation,
+      },
+      {
+        id: "one-product-unsure",
+        label: "I cannot tell yet",
+        description: "Start with a tuck box, but compare a mailer before approving the structure.",
+        recommendation: {
+          primaryFamily: "Tuck Boxes",
+          alternateFamily: "Mailer Boxes",
+          resultType: "comparison",
+          reasons: [
+            "Your first answer points to packaging around one product.",
+            "The final choice depends on whether it is an individual carton or a multi-item presentation.",
+          ],
+          alternateComparison:
+            "Choose a mailer instead if several items need to sit together in one branded unboxing box.",
+        },
+      },
+    ],
+  },
+  "kit-or-unboxing": {
+    title: "What should the box feel like?",
+    helpText: "Choose the experience you want when the customer opens it.",
+    options: [
+      {
+        id: "corrugated-unboxing",
+        label: "A branded box that opens like a mailer",
+        description: "A practical unboxing format for kits, subscriptions, launches, or ecommerce.",
+        previewFamily: "Mailer Boxes",
+        recommendation: mailerRecommendation,
+      },
+      {
+        id: "premium-rigid-feel",
+        label: "A firm, luxury gift-box feel",
+        description: "A premium rigid presentation with a magnetic closure.",
+        previewFamily: "Magnetic Boxes",
+        recommendation: {
+          primaryFamily: "Magnetic Boxes",
+          alternateFamily: "Collapsible Magnetic Boxes",
+          resultType: "comparison",
+          reasons: [
+            "Several items need a premium presentation rather than a corrugated unboxing box.",
+            "A magnetic closure matches the firm, gift-box experience you selected.",
+          ],
+          alternateComparison:
+            "Compare the collapsible version if the same premium look should fold flat before setup.",
+        },
+      },
+      {
+        id: "kit-unsure",
+        label: "I am not sure which feel is right",
+        description: "Start with the mailer and compare a magnetic box before approval.",
+        recommendation: {
+          primaryFamily: "Mailer Boxes",
+          alternateFamily: "Magnetic Boxes",
+          resultType: "comparison",
+          reasons: [
+            "Your project is built around a kit, set, or unboxing experience.",
+            "A corrugated mailer is the more practical starting point while the desired feel is still open.",
+          ],
+          alternateComparison:
+            "Choose a magnetic box instead if a firm, luxury gift-box feel matters more than a corrugated unboxing format.",
+        },
+      },
+    ],
+  },
+  "premium-presentation": {
+    title: "How should the premium box arrive or store?",
+    helpText: "This is the main difference between UPG's two magnetic-box families.",
+    options: [
+      {
+        id: "assembled-rigid",
+        label: "Ready in its rigid shape",
+        description: "The firm presentation is more important than flat storage.",
+        previewFamily: "Magnetic Boxes",
+        recommendation: magneticRecommendation,
+      },
+      {
+        id: "stores-flat",
+        label: "Folds flat before setup",
+        description: "Flat storage matters, and the box can be assembled before presentation.",
+        previewFamily: "Collapsible Magnetic Boxes",
+        recommendation: collapsibleRecommendation,
+      },
+      {
+        id: "premium-unsure",
+        label: "I need to compare both",
+        description: "See the assembled and collapsible options side by side.",
+        recommendation: {
+          primaryFamily: "Magnetic Boxes",
+          alternateFamily: "Collapsible Magnetic Boxes",
+          resultType: "comparison",
+          reasons: [
+            "Your project needs a premium magnetic presentation.",
+            "You have not yet decided between an assembled structure and flat storage.",
+          ],
+          alternateComparison:
+            "The collapsible version folds flat before setup; the standard magnetic box keeps its assembled rigid form.",
+        },
+      },
+    ],
+  },
+  "flexible-packaging": {
+    title: "Which flexible format is closest?",
+    helpText: "Both choices stay in the Mylar Bags family; UPG confirms the exact structure after review.",
+    options: [
+      {
+        id: "finished-pouch",
+        label: "A finished bag or pouch",
+        description: "For example a stand-up pouch, coffee bag, spout bag, or another approved format.",
+        previewFamily: "Mylar Bags",
+        recommendation: mylarRecommendation,
+      },
+      {
+        id: "printed-rollstock",
+        label: "Printed film on a roll",
+        description: "Rollstock film for a packing process that will be reviewed with the project details.",
+        previewFamily: "Mylar Bags",
+        recommendation: {
+          ...mylarRecommendation,
+          reasons: [
+            "Your brief is for printed film on a roll rather than a box or finished pouch.",
+            "UPG will review the product, packing process, and exact film specification before approval.",
+          ],
+        },
+      },
+      {
+        id: "flexible-unsure",
+        label: "I do not know the exact flexible format",
+        description: "UPG can help narrow the bag, pouch, or rollstock route after product review.",
+        recommendation: mylarRecommendation,
+      },
+    ],
+  },
+  "not-sure": {
+    title: "What should the packaging do?",
+    helpText: "Choose the closest real-life outcome. You do not need to know packaging terms.",
+    options: [
+      {
+        id: "protect-one-product",
+        label: "Sit around one product",
+        description: "Like a printed carton around a cosmetic, food, supplement, or retail item.",
+        previewFamily: "Tuck Boxes",
+        recommendation: tuckRecommendation,
+      },
+      {
+        id: "present-a-set",
+        label: "Hold a kit or several items",
+        description: "For an unboxing, launch, subscription, PR, or ecommerce presentation.",
+        previewFamily: "Mailer Boxes",
+        recommendation: mailerRecommendation,
+      },
+      {
+        id: "feel-like-a-gift-box",
+        label: "Feel like a premium gift box",
+        description: "A firm magnetic presentation; assembled and flat-pack versions can be compared.",
+        previewFamily: "Magnetic Boxes",
+        recommendation: {
+          primaryFamily: "Magnetic Boxes",
+          alternateFamily: "Collapsible Magnetic Boxes",
+          resultType: "comparison",
+          reasons: [
+            "The experience you described is a premium gift or presentation box.",
+            "A magnetic closure is the closest starting family while storage preference is still open.",
+          ],
+          alternateComparison:
+            "Compare the collapsible version if the box should fold flat before setup.",
+        },
+      },
+      {
+        id: "be-a-pouch",
+        label: "Be a bag, pouch, or printed film",
+        description: "A flexible format rather than a folding, corrugated, or rigid box.",
+        previewFamily: "Mylar Bags",
+        recommendation: mylarRecommendation,
+      },
+      {
+        id: "still-unsure",
+        label: "I still cannot tell",
+        description: "Send the product and intended use for a human recommendation.",
+        recommendation: {
+          primaryFamily: null,
+          resultType: "human-review",
+          reasons: [
+            "There is not enough information to recommend one family honestly.",
+            "A product photo, dimensions, quantity, and intended use will help UPG narrow the route.",
+          ],
+        },
+      },
+    ],
+  },
+};
+
+export const formatFamilyGuidance: Record<ProductFamily, FormatFamilyGuidance> = {
+  "Tuck Boxes": {
+    plainDescription: "A printed folding carton made to sit around one product.",
+    goodFit: "One product needs its own retail or secondary carton.",
+    notTheFit: "You need a multi-item kit, rigid gift box, or flexible pouch.",
+  },
+  "Mailer Boxes": {
+    plainDescription: "A corrugated ear-lock box for kits, launches, and branded unboxing.",
+    goodFit: "Several items need one presentation or unboxing box.",
+    notTheFit: "You need a standard shipping or master carton, which UPG does not supply.",
+  },
+  "Magnetic Boxes": {
+    plainDescription: "An assembled rigid box with a magnetic closure for premium presentation.",
+    goodFit: "A firm, premium gift-box feel matters most.",
+    notTheFit: "The box needs to fold flat before setup.",
+  },
+  "Collapsible Magnetic Boxes": {
+    plainDescription: "A premium magnetic presentation box that folds flat before setup.",
+    goodFit: "You want premium presentation with more efficient flat storage.",
+    notTheFit: "You want the box supplied in a fixed assembled rigid form.",
+  },
+  "Mylar Bags": {
+    plainDescription: "Printed flexible packaging supplied as an approved bag, pouch, or rollstock format.",
+    goodFit: "Your project needs flexible packaging rather than a box.",
+    notTheFit: "You need a folding carton, corrugated mailer, or rigid presentation box.",
+  },
+};
+
+function findGoal(goalId: string | null | undefined) {
+  return formatFinderGoals.find((goal) => goal.id === goalId);
 }
 
-export function rankPackagingFormats(answers: FormatFinderAnswers) {
-  const scores = new Map<ProductFamily, number>(
-    productFamilies.map((family) => [family, 0])
+function findFollowUpOption(
+  goalId: FormatFinderGoalId,
+  followUpId: string | null | undefined
+) {
+  return formatFinderFollowUps[goalId].options.find(
+    (option) => option.id === followUpId
   );
-  const matches = new Map<ProductFamily, string[]>(
-    productFamilies.map((family) => [family, []])
-  );
+}
 
-  for (const [questionId, optionId] of Object.entries(answers)) {
-    const option = findOption(questionId, optionId);
-    if (!option) continue;
+export function getFormatFinderRecommendation(
+  goalId: FormatFinderGoalId | null | undefined,
+  followUpId: string | null | undefined
+) {
+  if (!goalId || !findGoal(goalId)) return null;
+  return findFollowUpOption(goalId, followUpId)?.recommendation ?? null;
+}
 
-    for (const family of productFamilies) {
-      const weight = option.weights[family] ?? 0;
-      if (weight <= 0) continue;
-      scores.set(family, (scores.get(family) ?? 0) + weight);
-      matches.get(family)?.push(option.label);
-    }
-  }
+export function buildFormatFinderQuoteNote(
+  goalId: FormatFinderGoalId,
+  followUpId: string,
+  recommendation: FormatFinderRecommendation
+) {
+  const goal = findGoal(goalId);
+  const followUp = findFollowUpOption(goalId, followUpId);
+  const suggestedFamily = recommendation.primaryFamily ?? "Human recommendation requested";
 
-  return productFamilies
-    .map<FormatFinderRank>((family) => ({
-      family,
-      score: scores.get(family) ?? 0,
-      matchedAnswers: matches.get(family) ?? [],
-    }))
-    .sort((first, second) => second.score - first.score);
+  return `Packaging picker answers: ${goal?.title}; ${followUp?.label}. Suggested starting point: ${suggestedFamily}.`;
 }

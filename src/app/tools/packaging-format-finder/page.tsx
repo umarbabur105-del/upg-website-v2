@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { PackagingFormatFinder } from "@/components/packaging-format-finder";
@@ -12,7 +13,7 @@ const toolUrl = `${SITE_URL}${toolPath}`;
 export const metadata: Metadata = createPageMetadata({
   title: "Custom Packaging Format Finder",
   description:
-    "Answer four questions to compare custom tuck boxes, corrugated mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar bags for your project.",
+    "Use two simple visual choices to compare custom tuck boxes, mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar bags.",
   path: toolPath,
   keywords: [
     "packaging format finder",
@@ -27,27 +28,22 @@ const faqItems = [
   {
     question: "Which custom packaging format should I choose?",
     answer:
-      "Start with how the packaging should work. Tuck boxes are folded secondary cartons for individual products. Corrugated ear-lock mailers suit branded presentation and unboxing programs. Magnetic boxes and collapsible magnetic boxes support premium rigid presentation, while Mylar bags cover the approved flexible bag, pouch, spout, coffee-bag, and rollstock range.",
+      "Start with what the packaging must do. Use a tuck box around one product, a corrugated mailer for a kit or branded unboxing, a magnetic box for premium presentation, or the Mylar family for an approved bag, pouch, or rollstock project.",
   },
   {
     question: "Does the Format Finder replace structural review?",
     answer:
-      "No. It identifies a planning starting point from the five approved UPG product families. Final dimensions, construction, materials, artwork, finishes, and production feasibility require project review.",
+      "No. It gives a plain-language starting point. Final dimensions, construction, materials, artwork, finishes, and production feasibility still require project review.",
   },
   {
     question: "Does the Format Finder calculate a price?",
     answer:
-      "No. Custom packaging pricing depends on the approved structure, dimensions, material, print, finishes, quantity, and delivery destination. The next step is to organize the known details and submit them for human review.",
+      "No. Pricing depends on the approved structure, dimensions, material, print, finishes, quantity, and destination. The result can be passed into the quote form for human review.",
   },
   {
     question: "Can the finder recommend standard shipping or master cartons?",
     answer:
       "No. UPG supplies corrugated ear-lock mailer boxes for branded presentation, PR kits, subscriptions, and ecommerce programs. Regular slotted shipping cartons, master cartons, and RSC cases are outside the product range.",
-  },
-  {
-    question: "What should I do after receiving a recommendation?",
-    answer:
-      "Continue to the UPG project enquiry form with the recommended family preselected. Add the known dimensions, quantity, material, finishes, intended use, and destination for human review.",
   },
 ];
 
@@ -67,7 +63,7 @@ const structuredData = {
       isAccessibleForFree: true,
       provider: { "@id": `${SITE_URL}/#organization` },
       featureList: [
-        "Four-question packaging format assessment",
+        "Two-step visual packaging format assessment",
         "Primary packaging family recommendation",
         "Alternate format comparison when relevant",
         "Handoff to the human-reviewed project enquiry",
@@ -123,13 +119,13 @@ export default function PackagingFormatFinderPage() {
           <div className="max-w-5xl">
             <div className="eyebrow mb-5">Free custom packaging format finder</div>
             <h1 className="display-1 text-balance">
-              Find the right starting format for your packaging project.
+              Show us what you need. We will narrow the format.
             </h1>
             <p className="mt-7 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              Answer four short questions to compare UPG&apos;s five focused product families. You will receive a primary recommendation and an alternate when two formats deserve comparison.
+              Make two simple visual choices. The picker will show the closest UPG packaging family, when it fits, and what to compare before you request a quote.
             </p>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-              The result is planning guidance, not structural approval or instant pricing. UPG confirms the final specification for each project.
+              No packaging vocabulary needed. The result is planning guidance, not structural approval or instant pricing; UPG still confirms the final specification.
             </p>
           </div>
         </div>
@@ -144,33 +140,39 @@ export default function PackagingFormatFinderPage() {
       <section className="section-shell bg-cream">
         <div className="container-editorial">
           <SectionHeading
-            eyebrow="Five approved product families"
-            title="What the finder compares."
-            intro="Each recommendation stays inside UPG's current product range and uses the same approved product and MOQ information shown across the website."
+            eyebrow="See the difference"
+            title="Five formats. Five different jobs."
+            intro="The picker only recommends product families UPG currently offers. Every family has a 250-unit planning MOQ."
           />
-          <div className="mt-10 overflow-x-auto border border-border bg-surface">
-            <table className="w-full min-w-[760px] border-collapse text-left text-sm">
-              <thead className="bg-moss text-primary-foreground">
-                <tr>
-                  <th className="px-5 py-4 font-semibold">Product family</th>
-                  <th className="px-5 py-4 font-semibold">Common starting use</th>
-                  <th className="px-5 py-4 font-semibold">Planning MOQ</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product) => (
-                  <tr key={product.slug} className="border-t border-border first:border-t-0">
-                    <td className="px-5 py-4 font-semibold text-foreground">
-                      <Link href={`/products/${product.slug}`} className="hover:text-gold">
-                        {product.shortName}
-                      </Link>
-                    </td>
-                    <td className="px-5 py-4 text-muted-foreground">{product.bestFor}</td>
-                    <td className="px-5 py-4 text-foreground">{product.moq}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {products.map((product) => (
+              <Link
+                key={product.slug}
+                href={`/products/${product.slug}`}
+                className="group overflow-hidden rounded-2xl border border-border bg-surface hover:-translate-y-0.5 hover:shadow-card"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-stone">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
+                  />
+                </div>
+                <div className="p-5">
+                  <h3 className="font-serif text-xl text-foreground">
+                    {product.shortName}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                    {product.bestFor}
+                  </p>
+                  <div className="mt-4 text-xs font-semibold text-foreground">
+                    MOQ {product.moq} <span aria-hidden="true">→</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -179,8 +181,8 @@ export default function PackagingFormatFinderPage() {
         <div className="container-editorial grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <SectionHeading
-              eyebrow="Questions"
-              title="Format selection answers."
+              eyebrow="Quick answers"
+              title="What the picker does—and does not do."
             />
             <Link
               href="/get-a-quote"
