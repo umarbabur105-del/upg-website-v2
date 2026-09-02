@@ -1,6 +1,6 @@
 # Google API Inventory
 
-Last verified: 2026-08-30
+Last verified: 2026-09-02
 
 This inventory describes the Google access used to operate the UPG website and its connected business tools. It intentionally contains no credential values, refresh tokens, client secrets, or API key strings.
 
@@ -67,13 +67,13 @@ Its key string exists only in `~/.config/gcloud/upg-automation/web_data_api_key.
 | API | Service name | Latest recorded proof |
 | --- | --- | --- |
 | Merchant API | `merchantapi.googleapis.com` | Project registered to Merchant account; account read succeeded; 2 processed products returned and both are approved for Free Listings in all 32 configured countries; GA4 property `548846712` is linked as an active conversion source |
-| Search Console API | `searchconsole.googleapis.com` | Domain property returned with `siteOwner` permission; fresh URL Inspection on 2026-08-30 reported 83 of the pre-calculator sitemap's 85 URLs indexed. `/industries/beauty-personal-care-packaging` was unknown to Google and `/industries/supplement-packaging` was discovered but not indexed; both live URLs returned HTTP 200 and were allowed for indexing. The calculator later expanded the live sitemap to 86 URLs and is not claimed as Google-indexed without a subsequent inspection. |
+| Search Console API | `searchconsole.googleapis.com` | Domain property returned with `siteOwner` permission. Fresh API inspection on 2026-09-02 returned `PASS`, `Submitted and indexed`, successful fetch, allowed robots/indexing, and matching Google/user canonicals for all 11 priority commercial URLs. The set includes the homepage, Products, pricing, quote, all five core product pages, and the Beauty and Supplement industry hubs. |
 | Google Analytics Data API | `analyticsdata.googleapis.com` | GA4 channel and event-funnel reports read succeeded; the aggregate report now includes form starts, submitted leads, checkout starts, purchases, and tool handoffs |
 | Google Analytics Admin API | `analyticsadmin.googleapis.com` | Target account and property both returned |
 | Google Drive API | `drive.googleapis.com` | Workspace account and CRM spreadsheet search succeeded |
 | Gmail API | `gmail.googleapis.com` | Workspace mailbox profile read succeeded |
 | Google Sheets API | `sheets.googleapis.com` | CRM title and all seven tabs returned |
-| PageSpeed Insights API | `pagespeedonline.googleapis.com` | Credential accepted and the 2026-08-21 mobile diagnostic completed with a performance score of 83. Earlier successful snapshots included 84 and 97. |
+| PageSpeed Insights API | `pagespeedonline.googleapis.com` | Credential accepted and the 2026-09-02 mobile diagnostic completed with a performance score of 99. Earlier successful snapshots included 83, 84, and 97. |
 | Chrome UX Report API | `chromeuxreport.googleapis.com` | Authenticated API-key request reached CrUX; Google returned `data not found` for the UPG origin |
 | API Keys API | `apikeys.googleapis.com` | Restricted PageSpeed/CrUX key created and recovered through API |
 
@@ -81,7 +81,9 @@ The CrUX `data not found` response means the origin does not currently meet Goog
 
 Merchant BusinessInfo also returned the configured customer-service URL, email, and phone. Its separate business `phone` is absent and `phoneVerificationState` is `UNVERIFIED`; Google documents that field as output-only, so that final verification remains a Merchant Center UI task rather than an API write.
 
-The desktop OAuth refresh token required interactive reauthentication on 2026-08-21 after Google returned `invalid_grant` with an `invalid_rapt` reauthentication reason. The credential was renewed through the existing local OAuth flow, and the subsequent core health check passed for Cloud, Merchant, Search Console, Analytics, Drive, Gmail, and Sheets.
+The desktop OAuth refresh token required interactive reauthentication again on 2026-09-02 after its refresh request returned HTTP 400. The credential was renewed through the existing local OAuth flow using `umar@universalpackaginggroup.com`, remained owner-only with mode `0600`, and the subsequent core and diagnostic health checks passed for Cloud, Merchant, Search Console, Analytics, Drive, Gmail, Sheets, PageSpeed, and CrUX access. CrUX continues to return `data not found`, which is an origin data-availability result rather than an authentication failure.
+
+Search Console accepted a fresh submission of the 91-URL live sitemap on 2026-09-02. Its visible report still showed the prior 2026-09-01 read with 87 discovered pages, so the new crawl is not claimed as processed yet. URL Inspection confirmed the 11 priority URLs are already indexed. Google accepted the Beauty industry URL into its priority crawl queue; subsequent controlled refresh attempts returned Google's temporary submission error, so no repeated request loop was used. Sitemap processing, recrawling, ranking, and traffic remain Google-controlled outcomes.
 
 ## Health check
 

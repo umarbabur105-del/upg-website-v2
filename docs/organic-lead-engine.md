@@ -173,6 +173,15 @@ The gate checks rendered pages for required and unique titles and descriptions, 
 
 The immediate constraints are non-brand click-through, authority, incomplete lead qualification, and live physical-fulfillment readiness. Crawlability and the protected sandbox payment pipeline are healthy, but indexing is not described as complete without URL Inspection proof. The active lane combines approval-gated authority outreach, measurement, query-led content improvement, accurate planning tools, and conversion-path verification.
 
+### Google search closure — 2026-09-02
+
+- The UPG operator OAuth credential was renewed through the existing owner-approved local flow. The follow-up health check passed all core and diagnostic connections, including Search Console owner access, Analytics, Merchant, Drive, Gmail, Sheets, PageSpeed, and CrUX access. The credential remains outside the repository with owner-only file permissions.
+- Search Console's 28-day report for 2026-08-03 through 2026-08-30 records 742 impressions, 7 clicks, 0.9% CTR, and average position 44.4. Its separate Generative AI features report records 30 impressions in the same window. These are visibility observations, not leads or recommendations.
+- The Page indexing report last updated on 2026-08-28 shows 84 indexed and 46 not-indexed known URLs. Of the 46, 36 are alternate canonical URLs, 4 are redirects, 2 are historical 404s, 2 are the favicon and `llms.txt`, and the two previously pending industry hubs are now confirmed indexed by fresh URL Inspection.
+- Fresh API inspection returned `PASS`, `Submitted and indexed`, successful fetch, allowed robots/indexing, and matching canonicals for all 11 priority commercial URLs: the homepage, Products, pricing, quote, all five core product pages, and the Beauty and Supplement industry hubs.
+- The 91-URL sitemap was successfully resubmitted on 2026-09-02. Search Console had not yet reread it and still displayed the prior 87-page discovery count, so processing is pending rather than claimed complete. Google accepted the Beauty industry page into its priority crawl queue; two later controlled requests returned a temporary submission error and were not repeated further.
+- Search Console reports no manual actions and no security issues. Its Links report currently shows four external links, all from one linking domain, so earned authority remains the largest external SEO gap and stays exact-message approval gated.
+
 ### Homepage industry discovery and agent-readable routing — production release, 2026-09-01
 
 This owned-site batch makes the homepage a visual discovery layer for all seven industry markets without creating duplicate keyword pages or depending on Merchant Center:
