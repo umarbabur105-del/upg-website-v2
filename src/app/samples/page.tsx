@@ -127,8 +127,8 @@ export default function SamplesPage() {
       <section className="section-shell bg-background">
         <div className="container-editorial grid gap-8 lg:grid-cols-2">
           {sampleKits.map((kit) => (
-            <article key={kit.sku} className="overflow-hidden border border-border bg-surface shadow-card">
-              <Link href={kit.path} className="group block">
+            <article key={kit.sku} className="flex h-full flex-col overflow-hidden border border-border bg-surface shadow-card">
+              <Link href={kit.path} className="group block shrink-0">
                 <div className="relative aspect-[4/3] overflow-hidden bg-stone">
                   <Image
                     src={kit.image}
@@ -139,15 +139,15 @@ export default function SamplesPage() {
                   />
                 </div>
               </Link>
-              <div className="p-7 md:p-9">
-                <div className="flex flex-wrap items-start justify-between gap-4">
+              <div className="flex flex-1 flex-col p-7 md:p-9">
+                <div>
                   <div>
                     <div className="eyebrow">{kit.heroEyebrow}</div>
                     <h2 className="mt-3 font-serif text-3xl text-foreground md:text-4xl">
                       {kit.shortName}
                     </h2>
                   </div>
-                  <div className="text-right">
+                  <div className="mt-5 text-right">
                     <div className="text-2xl font-semibold text-foreground">
                       ${kit.price.toFixed(2)} USD
                     </div>
@@ -159,7 +159,7 @@ export default function SamplesPage() {
                 <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
                   {kit.description}
                 </p>
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-auto flex flex-wrap gap-3 pt-6">
                   <Link
                     href={kit.path}
                     className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
