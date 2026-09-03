@@ -225,9 +225,12 @@ for (const contract of sourceContracts) {
 }
 
 const contextualInboundContracts = [
+  "/cosmetics/skincare-boxes",
   "/cosmetics/serum-boxes",
   "/cosmetics/lotion-boxes",
   "/cosmetics/lipstick-boxes",
+  "/cosmetics/perfume-boxes",
+  "/blog/cosmetic-outer-packaging-guide",
   "/blog/what-is-moq-custom-packaging",
   "/blog/corrugated-vs-rigid-boxes",
 ];
@@ -863,7 +866,9 @@ const organicIntentContracts = new Map([
   ["/products/custom-mylar-bags", { scopeMarker: "packing or converting machinery", statusMarker: "Outside current offer" }],
   ["/cosmetics", { scopeMarker: "primary cosmetic packaging", statusMarker: "Outside current offer" }],
   ["/cosmetics/lipstick-boxes", { scopeMarker: "lipstick tube, casing", statusMarker: "Outside current offer" }],
+  ["/cosmetics/skincare-boxes", { scopeMarker: "overwrapping, repacking", statusMarker: "Outside current offer" }],
   ["/cosmetics/serum-boxes", { scopeMarker: "bottle, jar, dropper", statusMarker: "Outside current offer" }],
+  ["/cosmetics/perfume-boxes", { scopeMarker: "bottle, fragrance, filling", statusMarker: "Outside current offer" }],
   ["/applications/influencer-kits", { scopeMarker: "campaign fulfillment", statusMarker: "Outside current offer" }],
   ["/packaging-styles/printed-rollstock-film", { scopeMarker: "packing and converting machinery", statusMarker: "Outside current offer" }],
   ["/samples/box-sample-kit", { scopeMarker: "$19.99 finished box sample kit", statusMarker: "Related route" }],
@@ -898,6 +903,9 @@ const visualIntentRoutes = [
   "/packaging-styles/printed-rollstock-film",
   "/cosmetics",
   "/cosmetics/lipstick-boxes",
+  "/cosmetics/skincare-boxes",
+  "/cosmetics/serum-boxes",
+  "/cosmetics/perfume-boxes",
   "/applications/influencer-kits",
 ];
 
@@ -916,6 +924,48 @@ if (cosmeticsPage) {
   }
   if (!cosmeticsPage.html.includes('"@type":"FAQPage"')) {
     failures.push("/cosmetics: missing FAQPage JSON-LD");
+  }
+}
+
+const beautyHub = pages.find(
+  (candidate) => candidate.route === "/industries/beauty-personal-care-packaging"
+);
+const cosmeticOuterGuide = pages.find(
+  (candidate) => candidate.route === "/blog/cosmetic-outer-packaging-guide"
+);
+
+if (!beautyHub) {
+  failures.push("/industries/beauty-personal-care-packaging: missing beauty cluster hub");
+} else {
+  for (const route of [
+    "/cosmetics/skincare-boxes",
+    "/cosmetics/serum-boxes",
+    "/cosmetics/lipstick-boxes",
+    "/cosmetics/perfume-boxes",
+    "/blog/cosmetic-outer-packaging-guide",
+  ]) {
+    if (!beautyHub.html.includes(`href="${route}"`)) {
+      failures.push(
+        `/industries/beauty-personal-care-packaging: missing beauty-cluster link to ${route}`
+      );
+    }
+  }
+}
+
+if (!cosmeticOuterGuide) {
+  failures.push("/blog/cosmetic-outer-packaging-guide: missing authority guide");
+} else {
+  for (const marker of [
+    "Cosmetic outer packaging is the printed box around a finished beauty product.",
+    'href="/packaging-styles/straight-tuck-end-boxes"',
+    'href="/industries/beauty-personal-care-packaging"',
+    "https://www.fda.gov/cosmetics/cosmetics-labeling-regulations/cosmetics-labeling-guide",
+  ]) {
+    if (!cosmeticOuterGuide.html.includes(marker)) {
+      failures.push(
+        `/blog/cosmetic-outer-packaging-guide: missing authority marker ${marker}`
+      );
+    }
   }
 }
 

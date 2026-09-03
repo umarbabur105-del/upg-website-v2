@@ -215,12 +215,17 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "skincare-boxes",
     title: "Skincare Boxes",
+    metaTitle: "Custom Skincare Packaging Boxes & Outer Cartons",
+    metaDescription:
+      "Custom skincare packaging boxes and printed outer cartons from 250 units. Compare tuck cartons and magnetic boxes for finished products and sets.",
     quoteFamily: "Tuck Boxes",
-    heroTitle: "Custom skincare boxes for retail presentation and branded unboxing.",
+    heroTitle: "Custom skincare packaging boxes and printed outer cartons.",
     heroDescription:
-      "Custom printed outer cartons and premium rigid presentations for cleansers, moisturizers, masks, and treatment lines.",
+      "Tuck cartons and premium presentation boxes manufactured around finished cleansers, moisturizers, masks, treatment bottles, and skincare sets.",
+    quickAnswer:
+      "UPG manufactures the custom printed outer box around a finished skincare product. Use a tuck carton for one jar, pump, bottle, tube, or sachet; review a magnetic box when several products need one premium set. Final structure depends on the product dimensions, packed arrangement, quantity, artwork, and delivery destination.",
     intro:
-      "Skincare packaging needs a structure, panel layout, and finish plan suited to jars, pumps, and bottle formats.",
+      "Skincare outer packaging needs a structure, panel layout, and finish plan developed around the finished jar, pump, bottle, tube, or product set.",
     recommended: [
       {
         productSlug: "custom-tuck-boxes",
@@ -228,10 +233,15 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       },
       {
         productSlug: "custom-magnetic-boxes",
-        note: "Gift sets, launch kits, and premium hero products.",
+        note: "Magnetic presentation option for skincare sets, launch kits, and premium hero products.",
       },
     ],
-    materials: ["Materials confirmed from the selected product family"],
+    materials: [
+      "SBS C1S or C2S for tuck cartons",
+      "Brown, white, or black kraft for tuck cartons",
+      "CCNB or chipboard for folding cartons",
+      "Rigid greyboard construction for magnetic presentation boxes",
+    ],
     finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
     inserts: ["Custom inserts where required"],
     idealFor: [
@@ -244,8 +254,63 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    decisionGuidance: [
+      {
+        title: "Measure the finished product",
+        description:
+          "Share the jar, pump, bottle, tube, or packed-set dimensions, weight, and orientation. Final box dimensions should not be guessed from a generic skincare format.",
+      },
+      {
+        title: "Choose an individual outer carton",
+        description:
+          "Start with the tuck-box family for one finished skincare product, then compare the flap direction and panel layout before artwork is placed.",
+        href: "/packaging-styles/straight-tuck-end-boxes",
+        linkLabel: "Review straight tuck end boxes",
+      },
+      {
+        title: "Plan a premium skincare set",
+        description:
+          "Use a magnetic presentation box when several products need one premium opening experience and a reviewed insert arrangement.",
+        href: "/products/custom-magnetic-boxes",
+        linkLabel: "Review magnetic boxes",
+      },
+      {
+        title: "Separate outer packaging from the product",
+        description:
+          "UPG supplies the printed outer box. Cosmetic containers, formulas, filling, overwrapping, bundling, repacking, and fulfillment are outside this offer.",
+        href: "/industries/beauty-personal-care-packaging",
+        linkLabel: "Review the beauty packaging hub",
+      },
+    ],
+    faqs: [
+      {
+        question: "What does UPG manufacture for skincare packaging?",
+        answer:
+          "UPG manufactures custom printed outer cartons and presentation boxes around finished skincare products. Jars, bottles, pumps, tubes, formulas, filling, overwrapping, repacking, and fulfillment are outside the current offer.",
+      },
+      {
+        question: "Which box format should I use for a skincare product?",
+        answer:
+          "A tuck carton is the usual starting point for one finished product. A magnetic presentation box can be reviewed for a premium set after the product arrangement, dimensions, and insert needs are confirmed.",
+      },
+      {
+        question: "What is the minimum order for custom skincare boxes?",
+        answer:
+          "UPG uses a 250-unit planning MOQ for every current custom product family. Final specifications, pricing, and production terms remain subject to project review.",
+      },
+      {
+        question: "What should I send for a skincare-box quote?",
+        answer:
+          "Send the finished-product dimensions, weight and orientation when relevant, required quantity, intended box format, delivery destination, target timing, and any available artwork or reference images.",
+      },
+      {
+        question: "Can UPG approve cosmetic label claims or regulatory copy?",
+        answer:
+          "No. The buyer supplies and approves product claims, ingredients, warnings, and market-specific panel content. UPG uses the approved content when preparing the outer-packaging artwork and production specification.",
+      },
+    ],
     relatedSlugs: ["serum-boxes", "cream-boxes", "lotion-boxes"],
-    reviewedAt: "2026-09-01",
+    reviewedAt: "2026-09-03",
   },
   {
     slug: "serum-boxes",
@@ -290,6 +355,34 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    decisionGuidance: [
+      {
+        title: "Measure the finished serum bottle",
+        description:
+          "Share the bottle or dropper dimensions, weight, orientation, and any protective fit requirement before final carton dimensions are developed.",
+      },
+      {
+        title: "Start with the tuck-box structure",
+        description:
+          "An individual serum bottle usually begins in the tuck-box family. Compare the flap direction and usable panels before artwork is adapted.",
+        href: "/packaging-styles/straight-tuck-end-boxes",
+        linkLabel: "Review straight tuck end boxes",
+      },
+      {
+        title: "Use a presentation box for a set",
+        description:
+          "A magnetic box can be reviewed when multiple serum or skincare products need one premium presentation and a fitted insert plan.",
+        href: "/products/custom-magnetic-boxes",
+        linkLabel: "Review magnetic boxes",
+      },
+      {
+        title: "Keep product and packaging scope separate",
+        description:
+          "UPG manufactures the printed outer box, not bottles, droppers, formulas, filling, overwrapping, repacking, or fulfillment.",
+        href: "/industries/beauty-personal-care-packaging",
+        linkLabel: "Review the beauty packaging hub",
+      },
+    ],
     faqs: [
       {
         question: "What does UPG manufacture for serum packaging?",
@@ -318,7 +411,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       },
     ],
     relatedSlugs: ["skincare-boxes", "cream-boxes", "perfume-boxes"],
-    reviewedAt: "2026-08-31",
+    reviewedAt: "2026-09-03",
   },
   {
     slug: "cream-boxes",
@@ -535,10 +628,15 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
   {
     slug: "perfume-boxes",
     title: "Perfume Boxes",
+    metaTitle: "Custom Perfume Boxes & Fragrance Outer Packaging",
+    metaDescription:
+      "Custom perfume boxes from 250 units. Compare printed tuck cartons and magnetic presentation boxes developed around finished fragrance bottles and sets.",
     quoteFamily: "Magnetic Boxes",
-    heroTitle: "Custom perfume boxes for fragrance launches, gifting, and premium presentation.",
+    heroTitle: "Custom perfume boxes and fragrance outer packaging.",
     heroDescription:
-      "Rigid structures and secondary cartons developed around the bottle dimensions, insert plan, and presentation requirements.",
+      "Printed tuck cartons and magnetic presentation boxes developed around the finished fragrance bottle, packed arrangement, insert plan, and opening experience.",
+    quickAnswer:
+      "UPG manufactures the custom printed outer box around a finished perfume or fragrance product. Use a tuck carton for an individual bottle and review a magnetic box for a premium hero product, discovery collection, or gift set. Bottle dimensions, weight, orientation, insert needs, artwork, quantity, and destination define the final structure.",
     intro:
       "Perfume packaging may use a magnetic presentation box or a printed tuck carton, depending on the bottle, insert, quantity, and presentation requirements.",
     recommended: [
@@ -548,10 +646,15 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       },
       {
         productSlug: "custom-tuck-boxes",
-        note: "Useful for discovery sets or travel-size fragrance packaging.",
+        note: "Folding-carton option for individual full-size, travel-size, or discovery fragrance products.",
       },
     ],
-    materials: ["Materials confirmed from the selected product family"],
+    materials: [
+      "SBS C1S or C2S for printed tuck cartons",
+      "Brown, white, or black kraft for folding cartons",
+      "CCNB or chipboard for folding cartons",
+      "Rigid greyboard construction for magnetic presentation boxes",
+    ],
     finishes: ["Matte or gloss", "Foil", "Spot UV", "Emboss or deboss"],
     inserts: ["Custom inserts where required"],
     idealFor: ["Fragrance launches", "Premium bottles", "Discovery sets", "Gift formats"],
@@ -559,6 +662,63 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
     leadTimeNote: "Production timing is confirmed after structure and specification review.",
     artworkNote:
       "Final artwork is prepared on the approved dieline for the selected structure.",
+    decisionGuidance: [
+      {
+        title: "Measure the finished bottle",
+        description:
+          "Share the bottle dimensions, weight, orientation, cap profile, and any known protective-fit need before the outer structure is finalized.",
+      },
+      {
+        title: "Choose an individual fragrance carton",
+        description:
+          "Start with a tuck box for one finished bottle and compare the flap direction and panel layout before the artwork dieline is approved.",
+        href: "/packaging-styles/straight-tuck-end-boxes",
+        linkLabel: "Review straight tuck end boxes",
+      },
+      {
+        title: "Plan a premium fragrance presentation",
+        description:
+          "Use a magnetic box for a premium hero product, discovery collection, or gift set when the bottle arrangement and insert plan are confirmed.",
+        href: "/products/custom-magnetic-boxes",
+        linkLabel: "Review magnetic boxes",
+      },
+      {
+        title: "Keep bottle services outside the brief",
+        description:
+          "UPG supplies the printed outer box, not perfume bottles, fragrance, filling, overwrapping, bundling, repacking, or fulfillment.",
+        href: "/industries/beauty-personal-care-packaging",
+        linkLabel: "Review the beauty packaging hub",
+      },
+    ],
+    faqs: [
+      {
+        question: "What perfume packaging does UPG manufacture?",
+        answer:
+          "UPG manufactures custom printed outer cartons and magnetic presentation boxes around finished perfume or fragrance products. Bottles, fragrance, filling, overwrapping, repacking, and fulfillment are outside the current offer.",
+      },
+      {
+        question: "Should a perfume bottle use a tuck carton or a magnetic box?",
+        answer:
+          "A tuck carton is a practical starting point for one finished bottle. A magnetic box can be reviewed for a premium hero product, discovery collection, or gift set after the arrangement and insert needs are confirmed.",
+      },
+      {
+        question: "What is the minimum order for custom perfume boxes?",
+        answer:
+          "UPG uses a 250-unit planning MOQ for every current custom product family. Final specifications, pricing, and production terms remain subject to project review.",
+      },
+      {
+        question: "What should I send for a perfume-box quote?",
+        answer:
+          "Send the finished bottle dimensions, weight and orientation, quantity, intended outer-box format, delivery destination, target timing, and available artwork or reference images.",
+      },
+      {
+        question: "Does UPG supply perfume bottles or fill fragrance?",
+        answer:
+          "No. UPG's current offer covers the custom printed outer box. Perfume bottles, closures, fragrance, filling, overwrapping, bundling, repacking, and fulfillment are outside scope.",
+      },
+    ],
+    relatedSlugs: ["serum-boxes", "skincare-boxes", "pr-boxes"],
+    reviewedAt: "2026-09-03",
   },
   {
     slug: "cosmetic-subscription-boxes",

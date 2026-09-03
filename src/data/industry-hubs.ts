@@ -199,6 +199,18 @@ export const industryHubs: IndustryHub[] = [
           "Review outer-carton and presentation-box paths around the finished skincare product.",
       },
       {
+        label: "Serum Boxes",
+        href: "/cosmetics/serum-boxes",
+        description:
+          "Plan a fitted outer carton around a finished serum bottle or compare a premium multi-product set.",
+      },
+      {
+        label: "Lipstick Boxes",
+        href: "/cosmetics/lipstick-boxes",
+        description:
+          "Connect slim lipstick and lip-product cartons to the straight-tuck structure and approved dieline.",
+      },
+      {
         label: "Perfume Boxes",
         href: "/cosmetics/perfume-boxes",
         description:
@@ -209,6 +221,12 @@ export const industryHubs: IndustryHub[] = [
         href: "/cosmetics/pr-boxes",
         description:
           "Plan branded ear-lock mailers and premium presentation formats for product launches.",
+      },
+      {
+        label: "Cosmetic Outer Packaging Guide",
+        href: "/blog/cosmetic-outer-packaging-guide",
+        description:
+          "Match single products, premium sets, and PR presentations to the canonical UPG structure.",
       },
       {
         label: "Soap Boxes",

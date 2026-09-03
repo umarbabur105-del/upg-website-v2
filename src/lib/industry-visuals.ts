@@ -25,6 +25,14 @@ const cosmeticsVisuals: Record<string, IndustryVisual> = {
     src: "/images/redesign/samples/sample-skincare.jpg",
     alt: "Representative cream and lotion outer packaging concept",
   },
+  "lipstick-boxes": {
+    src: "/images/redesign/hero/hero-cosmetics.jpg",
+    alt: "Representative lipstick and beauty product outer packaging",
+  },
+  "perfume-boxes": {
+    src: "/images/generated/magnetic-boxes/magnetic-boxes-open-v1.png",
+    alt: "Representative magnetic presentation box for a fragrance project",
+  },
   "pr-boxes": {
     src: "/images/redesign/samples/sample-pr-kit.jpg",
     alt: "Representative custom cosmetics PR kit presentation",
@@ -95,6 +103,13 @@ export function getIndustryLinkVisual(href: string): IndustryVisual {
       const visual = productVisual(product.slug, pathname);
       if (visual) return visual;
     }
+  }
+
+  if (pathname === "/blog/cosmetic-outer-packaging-guide") {
+    return {
+      src: "/images/redesign/hero/hero-cosmetics.jpg",
+      alt: "Representative cosmetic outer cartons and beauty presentation packaging",
+    };
   }
 
   return {

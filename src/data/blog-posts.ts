@@ -42,6 +42,144 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "cosmetic-outer-packaging-guide",
+    title: "Cosmetic Outer Packaging Guide: Cartons, Sets & Mailers",
+    metaTitle: "Cosmetic Outer Packaging Guide: Boxes & Sets",
+    date: "2026-09-03",
+    category: "Project Planning",
+    readTime: "7 min read",
+    excerpt:
+      "Choose an outer carton, presentation box, or ear-lock mailer around a finished cosmetic product. Covers 250-unit MOQ, scope, and quote inputs.",
+    quickAnswer:
+      "Cosmetic outer packaging is the printed box around a finished beauty product. Use a tuck carton for one retail jar, bottle, tube, or lipstick product; a magnetic box for a premium product or set; and a corrugated ear-lock mailer for a branded PR or ecommerce presentation. Final structure starts with product dimensions, arrangement, quantity, artwork, and destination.",
+    heroImage: "/images/redesign/hero/hero-cosmetics.jpg",
+    heroAlt: "Representative cosmetic outer cartons and premium beauty packaging formats",
+    keyDecisions: [
+      {
+        label: "Single product",
+        title: "Start with the finished item",
+        description:
+          "Measure the jar, bottle, tube, compact, or lipstick product before choosing the outer-carton dimensions.",
+      },
+      {
+        label: "Set or presentation",
+        title: "Map the complete arrangement",
+        description:
+          "Confirm every product position, orientation, weight, and insert need before selecting a presentation box.",
+      },
+      {
+        label: "Artwork responsibility",
+        title: "Supply approved panel content",
+        description:
+          "The buyer supplies and approves claims, ingredients, warnings, and market-specific copy for the final dieline.",
+      },
+    ],
+    content: `
+## What cosmetic outer packaging includes
+
+UPG's current beauty offer covers the custom printed outer box around a finished cosmetic or personal-care product. That can be a folding carton for one retail item, a magnetic presentation box for a premium product or set, or a corrugated ear-lock mailer for a branded PR or ecommerce presentation.
+
+## Match the need to the canonical structure
+
+| Packaging need | Start with | Confirm before artwork |
+| --- | --- | --- |
+| **One finished retail product** | Straight or reverse tuck outer carton | Product dimensions, weight, orientation, flap direction, and required panels |
+| **Premium hero product or set** | Magnetic presentation box | Complete product arrangement, opening experience, insert, and packed weight |
+| **PR or ecommerce presentation** | Corrugated ear-lock mailer | Product layout, transit expectation, insert, and presentation goal |
+
+The structure page remains the source for available materials, construction, print, finishes, and the project brief. An industry page explains where that structure may fit; it does not create a different product specification.
+
+## What is outside the current offer
+
+UPG does not supply cosmetic bottles, jars, tubes, lipstick mechanisms, applicators, formulas, product filling, overwrapping, bundling, repacking, campaign fulfillment, or regulatory approval. Do not add those services to a quote brief unless a written UPG offer specifically confirms them.
+
+## The six inputs for a useful beauty-packaging brief
+
+- The finished product or complete set arrangement
+- Exact product dimensions, weight, and orientation
+- Required quantity, starting from the 250-unit planning MOQ
+- Intended use: retail, gifting, PR presentation, or ecommerce
+- Artwork status plus buyer-approved panel content
+- Delivery country, region, and target timing
+
+## Plan the panel layout before design lock
+
+An outer carton is more than a front-facing graphic. Opening direction, usable panels, structural lines, product identity, quantity statements, ingredients, warnings, and other buyer-supplied content can affect the layout. Final artwork belongs on the approved project dieline—not on a generic template found online.
+
+For products marketed in the United States, the FDA Cosmetics Labeling Guide is a primary planning reference for required cosmetic label information. The brand remains responsible for its claims, classification, legal review, and approved copy; UPG does not provide regulatory approval.
+
+## Use the planning MOQ correctly
+
+Every current UPG custom product family uses a 250-unit planning MOQ. It applies to one reviewed project specification, not an assumed mix of unrelated sizes, structures, or artworks. Final price, production timing, and delivery terms are confirmed only after the complete project is reviewed.
+    `.trim(),
+    faqs: [
+      {
+        question: "What is cosmetic outer packaging?",
+        answer:
+          "It is the printed box around a finished cosmetic or personal-care product. Examples include folding cartons for individual products, magnetic presentation boxes for premium sets, and corrugated ear-lock mailers for branded presentations.",
+      },
+      {
+        question: "Does UPG supply cosmetic bottles, formulas, or filling?",
+        answer:
+          "No. UPG's current offer covers the custom printed outer box. Bottles, jars, tubes, lipstick components, formulas, filling, overwrapping, repacking, and fulfillment are outside scope.",
+      },
+      {
+        question: "What is the minimum order for cosmetic boxes?",
+        answer:
+          "UPG uses a 250-unit planning MOQ for every current custom product family. It applies to one reviewed project specification; final commercial and production terms remain subject to review.",
+      },
+      {
+        question: "What should I send for a cosmetic packaging quote?",
+        answer:
+          "Send the finished product dimensions, weight and orientation when relevant, quantity, intended use, delivery destination, target timing, artwork status, and a reference image if the structure is still open.",
+      },
+    ],
+    resources: [
+      {
+        title: "Beauty and personal care packaging hub",
+        description:
+          "Compare tuck, ear-lock mailer, magnetic, and collapsible magnetic starting routes.",
+        href: "/industries/beauty-personal-care-packaging",
+      },
+      {
+        title: "Cosmetics packaging by finished product",
+        description:
+          "Open the detailed skincare, serum, lipstick, perfume, PR, and subscription-box guides.",
+        href: "/cosmetics",
+      },
+      {
+        title: "Straight tuck end boxes",
+        description:
+          "Review a canonical folding-carton structure for an individual finished beauty product.",
+        href: "/packaging-styles/straight-tuck-end-boxes",
+      },
+      {
+        title: "Start a human-reviewed beauty project",
+        description:
+          "Send the real product, arrangement, quantity, artwork status, and delivery destination.",
+        href: "/get-a-quote?builder_note=I%20reviewed%20the%20cosmetic%20outer%20packaging%20guide.",
+      },
+    ],
+    sources: [
+      {
+        name: "U.S. FDA Cosmetics Labeling Guide",
+        href: "https://www.fda.gov/cosmetics/cosmetics-labeling-regulations/cosmetics-labeling-guide",
+        note: "Primary U.S. reference for cosmetic labeling concepts and required information. The buyer remains responsible for approved claims and market compliance.",
+      },
+    ],
+    relatedSlugs: [
+      "custom-packaging-quote-checklist",
+      "how-to-measure-product-for-custom-packaging",
+      "how-to-prepare-artwork-for-custom-packaging",
+    ],
+    keywords: [
+      "cosmetic outer packaging",
+      "custom cosmetic boxes",
+      "beauty packaging boxes",
+      "skincare outer cartons",
+    ],
+  },
+  {
     slug: "custom-packaging-quote-checklist",
     title: "Custom Packaging Quote Checklist: What to Send",
     date: "2026-09-01",

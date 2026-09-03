@@ -442,11 +442,67 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
     reviewedAt: "2026-09-03",
   },
   {
+    path: "/cosmetics/skincare-boxes",
+    eyebrow: "Skincare outer-packaging scope",
+    title: "Choose the right outer box for one skincare product or a set.",
+    intro:
+      "UPG manufactures custom printed outer packaging around the finished skincare product. Start with the actual jar, pump, bottle, tube, or packed arrangement instead of a generic skincare-box size.",
+    visual: {
+      src: "/images/redesign/samples/sample-skincare.jpg",
+      alt: "Representative custom skincare outer packaging and presentation set",
+      caption:
+        "Individual skincare products can begin with a fitted folding carton; multi-product sets need the complete arrangement before a presentation box and insert are developed.",
+    },
+    options: [
+      {
+        label: "One finished skincare product",
+        title: "Custom skincare outer carton",
+        description:
+          "Start with a tuck carton around one finished jar, pump, bottle, tube, or sachet and share dimensions, quantity, artwork, and destination.",
+        status: "Available",
+        href: "/get-a-quote?product=Tuck%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Buyer%20intent%3A%20custom%20skincare%20packaging%20box.",
+        linkLabel: "Start a skincare-box brief",
+      },
+      {
+        label: "Premium skincare set",
+        title: "Magnetic skincare presentation box",
+        description:
+          "Review a magnetic format when several finished products need one premium presentation and a fitted insert plan.",
+        status: "Related route",
+        href: "/products/custom-magnetic-boxes",
+        linkLabel: "Review magnetic boxes",
+      },
+      {
+        label: "Structure still open",
+        title: "Beauty packaging selection guide",
+        description:
+          "Compare the available tuck, ear-lock mailer, magnetic, and collapsible magnetic families before preparing artwork.",
+        status: "Related route",
+        href: "/industries/beauty-personal-care-packaging",
+        linkLabel: "Review beauty packaging",
+      },
+      {
+        label: "Product and packing services",
+        title: "Containers, formulas, filling, overwrapping, repacking, or fulfillment",
+        description:
+          "These products and services are outside UPG's current outer-packaging manufacturing offer.",
+        status: "Outside current offer",
+      },
+    ],
+    reviewedAt: "2026-09-03",
+  },
+  {
     path: "/cosmetics/serum-boxes",
     eyebrow: "Serum packaging scope",
     title: "Choose the right outer packaging for a serum product or set.",
     intro:
       "UPG manufactures custom printed outer packaging around the finished serum product. Bottle dimensions and the intended presentation define the correct starting route.",
+    visual: {
+      src: "/images/redesign/samples/sample-skincare.jpg",
+      alt: "Representative custom serum outer carton and skincare presentation packaging",
+      caption:
+        "The finished serum bottle defines the carton proportions; a multi-product presentation needs a separate arrangement and insert review.",
+    },
     options: [
       {
         label: "Individual serum bottle",
@@ -474,7 +530,57 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
         status: "Outside current offer",
       },
     ],
-    reviewedAt,
+    reviewedAt: "2026-09-03",
+  },
+  {
+    path: "/cosmetics/perfume-boxes",
+    eyebrow: "Perfume outer-packaging scope",
+    title: "Choose an individual fragrance carton or a premium presentation box.",
+    intro:
+      "UPG manufactures custom printed outer packaging around the finished perfume product. Bottle dimensions, weight, orientation, and the intended opening experience define the starting route.",
+    visual: {
+      src: "/images/generated/magnetic-boxes/magnetic-boxes-open-v1.png",
+      alt: "Representative open magnetic presentation box for a premium fragrance project",
+      caption:
+        "A premium presentation format is developed around the actual bottle arrangement and insert plan; one retail bottle can start with a fitted folding carton.",
+    },
+    options: [
+      {
+        label: "One finished fragrance bottle",
+        title: "Custom perfume outer carton",
+        description:
+          "Start with a tuck carton around one finished bottle and share dimensions, weight, orientation, quantity, artwork, and destination.",
+        status: "Available",
+        href: "/get-a-quote?product=Tuck%20Boxes&style=Not%20sure%20%E2%80%94%20recommend&builder_note=Buyer%20intent%3A%20custom%20perfume%20outer%20box.",
+        linkLabel: "Start a perfume-box brief",
+      },
+      {
+        label: "Premium fragrance presentation",
+        title: "Magnetic perfume presentation box",
+        description:
+          "Review a magnetic box for a hero bottle, discovery collection, or gift set after the complete arrangement and insert needs are confirmed.",
+        status: "Related route",
+        href: "/products/custom-magnetic-boxes",
+        linkLabel: "Review magnetic boxes",
+      },
+      {
+        label: "Individual carton structure",
+        title: "Straight tuck end outer box",
+        description:
+          "Compare the straight-tuck flap direction and usable panels when a folding carton is the intended structure for one finished fragrance product.",
+        status: "Related route",
+        href: "/packaging-styles/straight-tuck-end-boxes",
+        linkLabel: "Review straight tuck end boxes",
+      },
+      {
+        label: "Primary product and packing",
+        title: "Bottle, fragrance, filling, overwrapping, repacking, or fulfillment",
+        description:
+          "These products and services are outside UPG's current outer-packaging manufacturing offer.",
+        status: "Outside current offer",
+      },
+    ],
+    reviewedAt: "2026-09-03",
   },
   {
     path: "/applications/influencer-kits",
