@@ -456,6 +456,9 @@ if (!commercialTermsPage) {
   }
   for (const marker of [
     "250 units",
+    "Low-MOQ custom packaging",
+    "One reviewed specification",
+    "Can different sizes or artworks be combined to reach 250 units?",
     "Structure and dimensions",
     "Delivery destination",
     "final written quote",
@@ -590,6 +593,47 @@ for (const route of industryHubRoutes) {
     failures.push(
       `${route}: only ${page.imageCount} rendered image(s); expected at least 6 for a visual-first industry hub`
     );
+  }
+}
+
+const priorityIndustryContracts = new Map([
+  [
+    "/industries/beauty-personal-care-packaging",
+    {
+      titleMarker: "Custom Beauty Packaging Boxes | 250-Unit MOQ",
+      contentMarkers: [
+        "Custom beauty packaging boxes for retail, PR kits, and premium sets.",
+        "FDA Cosmetics Labeling Guide",
+        "https://www.fda.gov/cosmetics/cosmetics-labeling-regulations/cosmetics-labeling-guide",
+      ],
+    },
+  ],
+  [
+    "/industries/supplement-packaging",
+    {
+      titleMarker: "Custom Supplement Boxes &amp; Pouches | 250 MOQ",
+      contentMarkers: [
+        "Custom supplement boxes, pouches, and printed rollstock.",
+        "FDA Dietary Supplement Labeling Guide",
+        "https://www.fda.gov/food/dietary-supplements-guidance-documents-regulatory-information/dietary-supplement-labeling-guide",
+      ],
+    },
+  ],
+]);
+
+for (const [route, contract] of priorityIndustryContracts) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) {
+    failures.push(`${route}: missing priority industry page`);
+    continue;
+  }
+  if (!page.html.includes(contract.titleMarker)) {
+    failures.push(`${route}: missing priority title marker ${contract.titleMarker}`);
+  }
+  for (const marker of contract.contentMarkers) {
+    if (!page.html.includes(marker)) {
+      failures.push(`${route}: missing priority content marker ${marker}`);
+    }
   }
 }
 
@@ -775,8 +819,10 @@ const aiDiscoverySource = await readFile(
   "utf8"
 );
 for (const marker of [
-  'schemaVersion: "3.0"',
+  'schemaVersion: "3.1"',
   "minimumQuantityUnits: 250",
+  "moqClarifications: commercialTerms.moqAnswers.map",
+  "officialReferences: (hub.officialResources ?? []).map",
   "buyerGuides: blogPosts.map",
   "## Packaging buyer guides",
   "industryApplications: industryApplicationsForStyle",

@@ -7,6 +7,7 @@ export interface IndustryHubLink {
 export interface IndustryHub {
   slug: string;
   name: string;
+  metaTitle?: string;
   shortName: string;
   heroTitle: string;
   heroDescription: string;
@@ -26,6 +27,11 @@ export interface IndustryHub {
   projectInputs: string[];
   scopeNote: string;
   compatibilityNote: string;
+  officialResources?: Array<{
+    label: string;
+    href: string;
+    description: string;
+  }>;
   faqs: Array<{ question: string; answer: string }>;
   reviewedAt: string;
 }
@@ -154,13 +160,14 @@ export const industryHubs: IndustryHub[] = [
   {
     slug: "beauty-personal-care-packaging",
     name: "Custom Beauty & Personal Care Packaging",
+    metaTitle: "Custom Beauty Packaging Boxes | 250-Unit MOQ",
     shortName: "Beauty & Personal Care",
     heroTitle:
-      "Custom beauty and personal care packaging from retail cartons to presentation boxes.",
+      "Custom beauty packaging boxes for retail, PR kits, and premium sets.",
     heroDescription:
       "Compare UPG tuck, ear-lock mailer, magnetic, and collapsible magnetic boxes around the product, presentation goal, quantity, artwork, and destination.",
     metaDescription:
-      "Compare custom beauty and personal care packaging across tuck boxes, PR mailers, magnetic boxes, collapsible magnetic boxes, cosmetics, and soap packaging.",
+      "Custom beauty packaging boxes from 250 units. Compare tuck, mailer, magnetic, and collapsible formats for retail products, PR kits, and premium sets.",
     keywords: [
       "custom beauty packaging",
       "custom personal care packaging",
@@ -255,6 +262,14 @@ export const industryHubs: IndustryHub[] = [
       "This hub covers custom printed outer cartons and presentation boxes. Cosmetic containers, formulas, product filling, labeling, campaign assembly, and fulfillment are outside the standard offer.",
     compatibilityNote:
       "The buyer confirms product fit, container dimensions, required panel content, product-specific handling, and intended-market requirements before final approval.",
+    officialResources: [
+      {
+        label: "FDA Cosmetics Labeling Guide",
+        href: "https://www.fda.gov/cosmetics/cosmetics-labeling-regulations/cosmetics-labeling-guide",
+        description:
+          "Official U.S. labeling reference for buyers planning required content and panel space. UPG does not create or approve regulatory copy.",
+      },
+    ],
     faqs: [
       {
         question: "Is cosmetics packaging still available as its own section?",
@@ -267,18 +282,19 @@ export const industryHubs: IndustryHub[] = [
           "No. UPG's current offer covers custom printed outer packaging and presentation boxes. Containers, formulas, filling, and label application are outside the standard offer.",
       },
     ],
-    reviewedAt,
+    reviewedAt: "2026-09-03",
   },
   {
     slug: "supplement-packaging",
     name: "Custom Supplement Packaging",
+    metaTitle: "Custom Supplement Boxes & Pouches | 250 MOQ",
     shortName: "Supplements & Wellness",
     heroTitle:
-      "Custom supplement packaging across printed outer cartons and flexible packs.",
+      "Custom supplement boxes, pouches, and printed rollstock.",
     heroDescription:
       "Compare UPG tuck boxes and Mylar bag formats around the actual container or contents, packed dimensions or target fill, required panel content, quantity, and destination.",
     metaDescription:
-      "Compare custom supplement packaging across printed boxes, stand-up pouches, flat-bottom bags, three-side seal bags, child-resistant bags, and rollstock.",
+      "Custom supplement boxes and pouches from 250 units. Compare printed cartons, stand-up and flat-bottom bags, child-resistant bags, and rollstock.",
     keywords: [
       "custom supplement packaging",
       "custom supplement boxes and pouches",
@@ -362,6 +378,14 @@ export const industryHubs: IndustryHub[] = [
       "This hub covers custom printed outer cartons and flexible packaging. Supplement production, containers, filling, regulatory-copy creation, and market approval are outside the standard offer.",
     compatibilityNote:
       "Container fit, contents, film structure, filling process, closure, barrier, storage, regulatory content, and destination-market requirements must be supplied and reviewed when they apply.",
+    officialResources: [
+      {
+        label: "FDA Dietary Supplement Labeling Guide",
+        href: "https://www.fda.gov/food/dietary-supplements-guidance-documents-regulatory-information/dietary-supplement-labeling-guide",
+        description:
+          "Official U.S. reference for buyers planning supplement label content and panel space. UPG does not create or approve regulatory copy.",
+      },
+    ],
     faqs: [
       {
         question: "Should I request a supplement box or a supplement pouch?",
@@ -374,7 +398,7 @@ export const industryHubs: IndustryHub[] = [
           "No. The buyer supplies and approves the panel content and intended-market requirements. UPG reviews the packaging project around the approved brief.",
       },
     ],
-    reviewedAt,
+    reviewedAt: "2026-09-03",
   },
   {
     slug: "fashion-jewelry-luxury-packaging",

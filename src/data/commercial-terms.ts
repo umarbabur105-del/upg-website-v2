@@ -1,12 +1,37 @@
 import type { FaqItem } from "@/data/faq";
-import { siteConfig } from "@/data/site";
 
 export const commercialTerms = {
   path: "/custom-packaging-pricing",
   markdownPath: "/custom-packaging-pricing.md",
-  reviewedAt: siteConfig.contentReviewedAt,
+  reviewedAt: "2026-09-03",
   quickAnswer:
-    "UPG custom-production pricing is quote-based because structure, dimensions, material, print, finish, quantity, and delivery destination change the manufacturing plan. The planning MOQ is 250 units for every custom product family. The final written quote confirms price, scope, freight, duties, taxes, payment, production timing, and delivery terms.",
+    "UPG's low-MOQ custom packaging starts with a 250-unit planning minimum for every current product family. Custom-production pricing remains quote-based because structure, dimensions, material, print, finish, quantity, and delivery destination change the manufacturing plan. The final written quote confirms price, scope, freight, duties, taxes, payment, production timing, and delivery terms.",
+  moqAnswers: [
+    {
+      label: "Starting quantity",
+      title: "250 units",
+      description:
+        "The same planning minimum applies to tuck, mailer, magnetic, collapsible magnetic, and Mylar bag projects.",
+    },
+    {
+      label: "What it covers",
+      title: "One reviewed specification",
+      description:
+        "The quantity is evaluated against the approved structure, size, material, print, finish, and artwork for that project.",
+    },
+    {
+      label: "Sizes and artworks",
+      title: "Confirm every variant",
+      description:
+        "Do not assume different sizes, structures, or artworks can be combined to reach 250 units. Ask UPG to review the proposed mix.",
+    },
+    {
+      label: "Pricing",
+      title: "Written project quote",
+      description:
+        "The 250-unit minimum is not an instant unit price. The accepted quote confirms the exact quantity and commercial terms.",
+    },
+  ],
   pricingFactors: [
     {
       title: "Structure and dimensions",
@@ -62,6 +87,16 @@ export const commercialPricingFaqs: FaqItem[] = [
     question: "What is the minimum order quantity for UPG custom packaging?",
     answer:
       "The planning MOQ is 250 units for every UPG custom product family, regardless of finished size. Final structure, dimensions, materials, and specifications remain subject to project review.",
+  },
+  {
+    question: "Can I order 250 custom boxes or bags?",
+    answer:
+      "Yes. UPG uses a 250-unit planning MOQ for each current custom product family. The structure, dimensions, material or film, printing, finishes, artwork, intended use, and delivery destination still require review before pricing is confirmed.",
+  },
+  {
+    question: "Can different sizes or artworks be combined to reach 250 units?",
+    answer:
+      "Do not assume that separate sizes, structures, or artworks can be combined into one minimum. Share the proposed variants with UPG so the production setup, feasibility, quantity, and pricing can be reviewed for the project.",
   },
   {
     question: "Why does UPG not publish instant custom-packaging prices?",

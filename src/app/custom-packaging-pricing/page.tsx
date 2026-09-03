@@ -13,15 +13,17 @@ import { siteConfig } from "@/data/site";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 const baseMetadata = createPageMetadata({
-  title: "Custom Packaging Pricing & MOQ",
+  title: "Low-MOQ Custom Packaging Boxes: 250 Units",
   description:
-    "Learn how UPG prices custom packaging, the 250-unit planning MOQ, quote inputs, price factors, sample-kit pricing, and what written quotes control.",
+    "Low-MOQ custom packaging starts at 250 units across tuck, mailer, magnetic, collapsible magnetic, and Mylar bag families. Review quote factors.",
   path: commercialTerms.path,
   keywords: [
     "custom packaging pricing",
     "custom packaging MOQ",
     "custom box pricing",
     "custom packaging quote",
+    "low MOQ custom packaging",
+    "custom boxes minimum order 250",
   ],
 });
 
@@ -113,7 +115,7 @@ export default function CustomPackagingPricingPage() {
           <div className="max-w-4xl">
             <div className="eyebrow mb-5">Commercial guide</div>
             <h1 className="display-1 text-balance">
-              Custom packaging pricing, MOQ, and quote process.
+              Low-MOQ custom packaging with a 250-unit planning minimum.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty">
               {commercialTerms.quickAnswer}
@@ -136,6 +138,40 @@ export default function CustomPackagingPricingPage() {
               Commercial facts reviewed {commercialTerms.reviewedAt}. A final
               written quote or agreement controls each custom-production project.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-cream">
+        <div className="container-editorial py-12 md:py-16">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-5">
+              <div className="eyebrow mb-3">What 250 units means</div>
+              <h2 className="font-serif text-3xl text-foreground md:text-4xl">
+                A clear starting quantity, with every project detail reviewed.
+              </h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground lg:col-span-7">
+              The planning MOQ gives buyers a real starting point without
+              pretending that every structure, size, artwork, or delivery plan
+              has the same production cost.
+            </p>
+          </div>
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {commercialTerms.moqAnswers.map((item) => (
+              <article
+                key={item.label}
+                className="flex h-full flex-col border border-border bg-surface p-5"
+              >
+                <div className="eyebrow">{item.label}</div>
+                <h3 className="mt-3 font-serif text-2xl text-foreground">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

@@ -394,6 +394,28 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
               <strong className="block text-foreground">Required project check</strong>
               <span className="mt-2 block">{hub.compatibilityNote}</span>
             </div>
+            {hub.officialResources?.length ? (
+              <aside className="mt-5 border border-border bg-surface p-6">
+                <div className="eyebrow mb-3">Official buyer reference</div>
+                <div className="space-y-4">
+                  {hub.officialResources.map((resource) => (
+                    <div key={resource.href}>
+                      <a
+                        href={resource.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-foreground underline decoration-foreground/25 underline-offset-4 hover:decoration-foreground"
+                      >
+                        {resource.label} ↗
+                      </a>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {resource.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </aside>
+            ) : null}
           </div>
           <div className="surface-card p-6 md:p-8 lg:col-span-7">
             <ol className="space-y-5">

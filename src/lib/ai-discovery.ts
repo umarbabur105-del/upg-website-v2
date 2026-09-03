@@ -116,6 +116,12 @@ export function buildCommercialTermsMarkdown() {
   const factorLines = commercialTerms.pricingFactors
     .map((factor) => `- **${factor.title}:** ${factor.description}`)
     .join("\n");
+  const moqAnswerLines = commercialTerms.moqAnswers
+    .map(
+      (item) =>
+        `- **${item.label} — ${item.title}:** ${item.description}`
+    )
+    .join("\n");
   const inputLines = commercialTerms.quoteInputs
     .map((input, index) => `${index + 1}. ${input}`)
     .join("\n");
@@ -142,6 +148,10 @@ Market: ${siteConfig.market}
 ## Direct answer
 
 ${commercialTerms.quickAnswer}
+
+## What the 250-unit planning minimum means
+
+${moqAnswerLines}
 
 ## What changes a custom-packaging quote
 
@@ -211,10 +221,15 @@ export function buildLlmsText() {
     .join("\n");
 
   const industryHubLines = industryHubs
-    .map(
-      (hub) =>
-        `- [${hub.name}](${industryHubUrl(hub)}): ${hub.quickAnswer}`
-    )
+    .map((hub) => {
+      const references = (hub.officialResources ?? [])
+        .map((resource) => `${resource.label}: ${resource.href}`)
+        .join("; ");
+
+      return `- [${hub.name}](${industryHubUrl(hub)}): ${hub.quickAnswer}${
+        references ? ` Official buyer references: ${references}.` : ""
+      }`;
+    })
     .join("\n");
 
   const comparisonLines = comparisonGuides
@@ -450,7 +465,16 @@ Specific buyer paths: ${hub.guideLinks
 Project inputs: ${hub.projectInputs.join("; ")}
 Scope note: ${hub.scopeNote}
 Compatibility or market note: ${hub.compatibilityNote}
-Content reviewed: ${hub.reviewedAt}
+${
+  hub.officialResources?.length
+    ? `Official buyer references: ${hub.officialResources
+        .map(
+          (resource) =>
+            `${resource.label}: ${resource.href}. ${resource.description}`
+        )
+        .join("; ")}\n`
+    : ""
+}Content reviewed: ${hub.reviewedAt}
 `
     )
     .join("\n");
@@ -668,10 +692,15 @@ export function buildAgentsMarkdown() {
     .join("\n");
 
   const industryHubLines = industryHubs
-    .map(
-      (hub) =>
-        `- ${hub.name}: ${hub.quickAnswer} Source: ${industryHubUrl(hub)}`
-    )
+    .map((hub) => {
+      const references = (hub.officialResources ?? [])
+        .map((resource) => `${resource.label}: ${resource.href}`)
+        .join("; ");
+
+      return `- ${hub.name}: ${hub.quickAnswer} Source: ${industryHubUrl(hub)}${
+        references ? ` Official buyer references: ${references}.` : ""
+      }`;
+    })
     .join("\n");
 
   const comparisonLines = comparisonGuides
@@ -805,7 +834,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "3.0",
+    schemaVersion: "3.1",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -821,6 +850,11 @@ export function buildProductCatalog() {
       pricing: siteConfig.pricingModel,
       responseTarget: siteConfig.responseTarget,
       planningMoq: "250 units for every custom product family",
+      moqClarifications: commercialTerms.moqAnswers.map((item) => ({
+        label: item.label,
+        title: item.title,
+        description: item.description,
+      })),
       guideUrl: commercialTermsUrl,
       markdownGuideUrl: commercialTermsMarkdownUrl,
       requestQuoteUrl: quoteUrl,
@@ -980,6 +1014,11 @@ export function buildProductCatalog() {
         name: item.label,
         description: item.description,
         url: `${siteConfig.url}${item.href}`,
+      })),
+      officialReferences: (hub.officialResources ?? []).map((resource) => ({
+        name: resource.label,
+        description: resource.description,
+        url: resource.href,
       })),
       projectInputs: hub.projectInputs,
       scopeNote: hub.scopeNote,

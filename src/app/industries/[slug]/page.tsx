@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (hub) {
     return createPageMetadata({
-      title: hub.name,
+      title: hub.metaTitle ?? hub.name,
       description: hub.metaDescription,
       path: `/industries/${hub.slug}`,
       keywords: hub.keywords,
