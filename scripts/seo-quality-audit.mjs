@@ -854,6 +854,8 @@ for (const file of [
 }
 
 const organicIntentContracts = new Map([
+  ["/packaging-styles/seal-end-boxes", { scopeMarker: "regular shipping carton", statusMarker: "Outside current offer" }],
+  ["/packaging-styles/straight-tuck-end-boxes", { scopeMarker: "regular shipping carton", statusMarker: "Outside current offer" }],
   ["/products/custom-tuck-boxes", { scopeMarker: "regular shipping carton", statusMarker: "Outside current offer" }],
   ["/products/custom-mailer-boxes", { scopeMarker: "master carton", statusMarker: "Outside current offer" }],
   ["/products/custom-magnetic-boxes", { scopeMarker: "fold-flat", statusMarker: "Related route" }],
@@ -887,6 +889,33 @@ for (const [route, { scopeMarker, statusMarker }] of organicIntentContracts) {
   }
   if (!page.html.toLowerCase().includes(scopeMarker)) {
     failures.push(`${route}: missing scope marker "${scopeMarker}"`);
+  }
+}
+
+const visualIntentRoutes = [
+  "/packaging-styles/seal-end-boxes",
+  "/packaging-styles/straight-tuck-end-boxes",
+  "/packaging-styles/printed-rollstock-film",
+  "/cosmetics",
+  "/cosmetics/lipstick-boxes",
+  "/applications/influencer-kits",
+];
+
+for (const route of visualIntentRoutes) {
+  const page = pages.find((candidate) => candidate.route === route);
+  if (!page) continue;
+  if (!page.html.includes('data-seo-visual="search-intent"')) {
+    failures.push(`${route}: missing visual search-intent module`);
+  }
+}
+
+const cosmeticsPage = pages.find((candidate) => candidate.route === "/cosmetics");
+if (cosmeticsPage) {
+  if (!cosmeticsPage.html.includes("Common cosmetic packaging questions")) {
+    failures.push("/cosmetics: missing visible buyer FAQ section");
+  }
+  if (!cosmeticsPage.html.includes('"@type":"FAQPage"')) {
+    failures.push("/cosmetics: missing FAQPage JSON-LD");
   }
 }
 

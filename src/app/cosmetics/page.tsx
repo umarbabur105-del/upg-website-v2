@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
@@ -29,6 +30,29 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
+const cosmeticsPageFaqs = [
+  {
+    question: "What cosmetic packaging does UPG manufacture?",
+    answer:
+      "UPG manufactures custom printed outer packaging for finished beauty products, including tuck cartons, magnetic and collapsible magnetic presentation boxes, corrugated ear-lock mailers, PR kits, and approved inserts.",
+  },
+  {
+    question: "Which box style should I start with for one cosmetic product?",
+    answer:
+      "An individual lipstick, serum, skincare, mascara, cream, lotion, or related product normally begins with a folding-carton review. The final tuck style is confirmed from the finished product dimensions, filling method, artwork, and presentation goal.",
+  },
+  {
+    question: "What is the planning MOQ for custom cosmetic boxes?",
+    answer:
+      "Every UPG custom product family uses a 250-unit planning MOQ. Final pricing and production requirements are confirmed after the dimensions, structure, material, printing, finishes, quantity, and destination are reviewed.",
+  },
+  {
+    question: "Does UPG supply cosmetic bottles, jars, tubes, or filling?",
+    answer:
+      "No. Bottles, jars, tubes, mechanisms, applicators, cosmetic formulas, filling, and fulfillment are outside UPG's current standard offer. UPG's cosmetic pages cover the custom printed outer box and approved insert.",
+  },
+];
+
 const cosmeticsPageSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -39,7 +63,7 @@ const cosmeticsPageSchema = {
       name: "Custom Cosmetic Boxes & Beauty Packaging",
       description:
         "Custom printed outer packaging for beauty, skincare, cosmetics, fragrance, and personal-care brands worldwide.",
-      dateModified: "2026-08-23",
+      dateModified: "2026-09-03",
       mainEntity: { "@id": `${SITE_URL}/cosmetics#services` },
     },
     {
@@ -83,6 +107,18 @@ const cosmeticsPageSchema = {
           item: `${SITE_URL}/cosmetics`,
         },
       ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/cosmetics#faq`,
+      mainEntity: cosmeticsPageFaqs.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
     },
   ],
 };
@@ -438,6 +474,27 @@ export default function CosmeticsPage() {
             {cosmeticFriendlyProducts.map((product) => (
               <ProductCard key={product.slug} product={product} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell" aria-labelledby="cosmetics-faq-heading">
+        <div className="container-editorial grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <div className="eyebrow mb-5">Buyer questions</div>
+            <h2
+              id="cosmetics-faq-heading"
+              className="font-serif text-3xl leading-tight text-foreground md:text-4xl"
+            >
+              Common cosmetic packaging questions.
+            </h2>
+            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              Short answers on UPG&apos;s manufacturing scope, starting formats,
+              and 250-unit planning MOQ.
+            </p>
+          </div>
+          <div className="lg:col-span-8">
+            <FaqAccordion items={cosmeticsPageFaqs} />
           </div>
         </div>
       </section>

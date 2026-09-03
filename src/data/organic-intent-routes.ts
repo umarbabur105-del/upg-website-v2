@@ -14,6 +14,11 @@ export interface OrganicIntentRoute {
   eyebrow: string;
   title: string;
   intro: string;
+  visual?: {
+    src: string;
+    alt: string;
+    caption: string;
+  };
   options: OrganicIntentOption[];
   reviewedAt: string;
 }
@@ -21,6 +26,106 @@ export interface OrganicIntentRoute {
 const reviewedAt = "2026-08-23";
 
 export const organicIntentRoutes: OrganicIntentRoute[] = [
+  {
+    path: "/packaging-styles/seal-end-boxes",
+    eyebrow: "Seal-end carton buying routes",
+    title: "Choose seal-end tuck packaging or compare another carton structure.",
+    intro:
+      "A seal-end box is a folding carton with an end designed to be glued or sealed during packing. Use this route when that closing method fits the product and production plan.",
+    visual: {
+      src: "/images/generated/tuck-boxes/tuck-boxes-seal-end-v1.png",
+      alt: "Custom printed seal-end folding carton shown as a finished packaging format",
+      caption:
+        "Seal-end structure shown as a planning reference; final panels and closure are confirmed from the product and packing method.",
+    },
+    options: [
+      {
+        label: "Direct seal-end project",
+        title: "Custom seal-end folding carton",
+        description:
+          "Start here for seal-end tuck packaging and share the product dimensions, filling and sealing method, quantity, board, print, finish, and destination.",
+        status: "Available",
+        href: "/get-a-quote?product=Tuck%20Boxes&style=Seal-End%20Box&builder_note=Buyer%20intent%3A%20custom%20seal-end%20folding%20carton.",
+        linkLabel: "Start a seal-end brief",
+      },
+      {
+        label: "Closure still undecided",
+        title: "Seal end or straight tuck end?",
+        description:
+          "Compare a glued or sealed closure with a straight tuck opening before the structure and artwork dieline are approved.",
+        status: "Related route",
+        href: "/packaging-styles/straight-tuck-end-boxes",
+        linkLabel: "Compare straight tuck end",
+      },
+      {
+        label: "Food and snack use",
+        title: "Cartons for snack and confectionery products",
+        description:
+          "Review the industry route when a seal-end or other folding-carton structure will hold a finished snack or confectionery product.",
+        status: "Related route",
+        href: "/industries/custom-snack-packaging",
+        linkLabel: "Review snack packaging",
+      },
+      {
+        label: "Transit case",
+        title: "Regular shipping carton, master carton, or RSC case",
+        description:
+          "These standard transit cartons are outside UPG's current offer. Custom printed seal-end folding cartons remain available for reviewed projects.",
+        status: "Outside current offer",
+      },
+    ],
+    reviewedAt: "2026-09-03",
+  },
+  {
+    path: "/packaging-styles/straight-tuck-end-boxes",
+    eyebrow: "Straight tuck end buying routes",
+    title: "Choose a straight tuck end box or compare the flap direction.",
+    intro:
+      "A straight tuck end box is a folding carton whose top and bottom tuck flaps close in the same direction. Use the style as a starting point, then confirm the final panels from the product and packing brief.",
+    visual: {
+      src: "/images/generated/tuck-boxes/tuck-boxes-straight-reverse-v1.png",
+      alt: "Straight tuck end and reverse tuck end folding cartons displayed for comparison",
+      caption:
+        "Straight and reverse tuck structures share a carton family but use different flap orientations and panel layouts.",
+    },
+    options: [
+      {
+        label: "Direct straight-tuck project",
+        title: "Custom straight tuck end box",
+        description:
+          "Start here when straight tuck end is the intended structure and share dimensions, filling method, quantity, board, print, finish, and destination.",
+        status: "Available",
+        href: "/get-a-quote?product=Tuck%20Boxes&style=Straight%20Tuck%20End&builder_note=Buyer%20intent%3A%20custom%20straight-tuck-end%20box.",
+        linkLabel: "Start a straight-tuck brief",
+      },
+      {
+        label: "Flap direction decision",
+        title: "Straight tuck end or reverse tuck end?",
+        description:
+          "Compare the alternate flap orientation and panel layout before artwork is placed on an approved production dieline.",
+        status: "Related route",
+        href: "/packaging-styles/reverse-tuck-end-boxes",
+        linkLabel: "Compare reverse tuck end",
+      },
+      {
+        label: "Slim beauty carton",
+        title: "Lipstick and cosmetic outer boxes",
+        description:
+          "Review the lipstick route when a straight tuck end carton is being considered for an individual finished beauty product.",
+        status: "Related route",
+        href: "/cosmetics/lipstick-boxes",
+        linkLabel: "Review lipstick outer boxes",
+      },
+      {
+        label: "Transit case",
+        title: "Regular shipping carton, master carton, or RSC case",
+        description:
+          "These standard transit cartons are outside UPG's current offer. Custom printed straight tuck end folding cartons remain available.",
+        status: "Outside current offer",
+      },
+    ],
+    reviewedAt: "2026-09-03",
+  },
   {
     path: "/products/custom-tuck-boxes",
     eyebrow: "Tuck-box buying routes",
@@ -251,6 +356,12 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
     title: "Choose the custom outer-packaging route that fits your project.",
     intro:
       "UPG manufactures custom printed outer boxes and presentation packaging for finished beauty products. Start with the route closest to the product or campaign you need to package.",
+    visual: {
+      src: "/images/redesign/hero/cosmetics-hub.jpg",
+      alt: "Custom printed cosmetic outer boxes for finished beauty products",
+      caption:
+        "Outer cartons, presentation boxes, and mailers are selected around the finished beauty product and program.",
+    },
     options: [
       {
         label: "Individual retail product",
@@ -287,7 +398,7 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
         status: "Outside current offer",
       },
     ],
-    reviewedAt,
+    reviewedAt: "2026-09-03",
   },
   {
     path: "/cosmetics/lipstick-boxes",
@@ -295,6 +406,12 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
     title: "Choose the right lipstick outer-packaging route.",
     intro:
       "UPG supplies the custom printed outer packaging around the finished lip product. The route changes between an individual retail carton and a premium multi-product set.",
+    visual: {
+      src: "/images/redesign/hero/hero-cosmetics.jpg",
+      alt: "Custom lipstick and beauty product outer packaging",
+      caption:
+        "Individual lip products typically begin with a fitted folding carton; collections can move into a presentation box.",
+    },
     options: [
       {
         label: "Individual lipstick product",
@@ -322,7 +439,7 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
         status: "Outside current offer",
       },
     ],
-    reviewedAt,
+    reviewedAt: "2026-09-03",
   },
   {
     path: "/cosmetics/serum-boxes",
@@ -365,6 +482,12 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
     title: "Choose the right influencer-kit packaging route.",
     intro:
       "UPG manufactures the custom corrugated ear-lock mailer and approved insert. Use the route that matches the presentation program before artwork and quantity are finalized.",
+    visual: {
+      src: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
+      alt: "Custom printed influencer mailer box with a fitted product insert",
+      caption:
+        "Mailer structure and insert planning begin with the approved product arrangement, not a generic campaign-kit size.",
+    },
     options: [
       {
         label: "Creator seeding packaging",
@@ -385,6 +508,15 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
         linkLabel: "Compare the PR-box route",
       },
       {
+        label: "Canonical product family",
+        title: "Custom corrugated mailer boxes",
+        description:
+          "Review the full ear-lock mailer family when the program type is not limited to influencer seeding.",
+        status: "Related route",
+        href: "/products/custom-mailer-boxes",
+        linkLabel: "Review custom mailer boxes",
+      },
+      {
         label: "Campaign operations",
         title: "Product sourcing, assembly, warehousing, creator lists, or individual fulfillment",
         description:
@@ -392,7 +524,7 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
         status: "Outside current offer",
       },
     ],
-    reviewedAt,
+    reviewedAt: "2026-09-03",
   },
   {
     path: "/packaging-styles/printed-rollstock-film",
@@ -400,6 +532,12 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
     title: "Choose printed film on roll or a finished pouch.",
     intro:
       "Both routes sit inside UPG's flexible-packaging range, but they require different project inputs. Start with the physical format the packing plan needs.",
+    visual: {
+      src: "/images/generated/mylar-bags/mylar-bags-spout-rollstock-v1.png",
+      alt: "Custom printed rollstock film displayed beside finished flexible packaging formats",
+      caption:
+        "Printed rollstock is supplied on roll for compatible packing equipment; a finished pouch is a separate sourcing route.",
+    },
     options: [
       {
         label: "Film supplied on roll",
@@ -420,6 +558,15 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
         linkLabel: "Compare rollstock and pouches",
       },
       {
+        label: "Food packaging application",
+        title: "Custom food pouches and flexible film",
+        description:
+          "Use the food-pouch guide when product contents, barrier needs, closure, or the finished-format decision needs review.",
+        status: "Related route",
+        href: "/industries/custom-food-pouches",
+        linkLabel: "Review food-pouch packaging",
+      },
+      {
         label: "Packing equipment",
         title: "Filling, sealing, or pouch-making machinery",
         description:
@@ -427,7 +574,7 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
         status: "Outside current offer",
       },
     ],
-    reviewedAt,
+    reviewedAt: "2026-09-03",
   },
   {
     path: "/samples/box-sample-kit",

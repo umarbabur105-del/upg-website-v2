@@ -38,6 +38,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
   {
     slug: "straight-tuck-end-boxes",
     name: "Custom Straight Tuck End Boxes",
+    metaTitle: "Straight Tuck End Boxes & Custom Cartons",
     shortName: "Straight Tuck End Boxes",
     quoteStyle: "Straight Tuck End",
     family: "Tuck Boxes",
@@ -45,10 +46,15 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Tuck Boxes",
     category: "Tuck box style",
     metaDescription:
-      "Plan custom straight tuck end boxes with UPG's 250-unit planning MOQ, board options, printing, finishes, and human-reviewed quote process.",
-    searchTerms: ["straight tuck end boxes", "custom straight tuck boxes", "STE boxes"],
+      "Custom straight tuck end boxes and folding cartons with a 250-unit planning MOQ. Compare flap direction, board, printing, and finishes with UPG.",
+    searchTerms: [
+      "straight tuck end boxes",
+      "custom straight tuck boxes",
+      "straight tuck end box packaging",
+      "STE boxes",
+    ],
     quickAnswer:
-      "Straight tuck end is one of the folding-carton structures available within UPG's custom tuck box family. The final flap orientation, panel layout, dimensions, board, printing, and finishes are confirmed for the specific product and packing process.",
+      "A straight tuck end box is a folding carton whose top and bottom tuck flaps close in the same direction. UPG confirms the final flap orientation, panel layout, dimensions, board, printing, and finishes for the specific product and packing process.",
     selectionNote:
       "Compare straight tuck end with reverse tuck end when the opening direction and panel layout are still undecided.",
     projectInputs: [
@@ -88,7 +94,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
         },
       ],
     },
-    reviewedAt,
+    reviewedAt: "2026-09-03",
   },
   {
     slug: "reverse-tuck-end-boxes",
@@ -198,6 +204,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
   {
     slug: "seal-end-boxes",
     name: "Custom Seal End Boxes",
+    metaTitle: "Seal End Tuck Packaging & Custom Cartons",
     shortName: "Seal End Boxes",
     quoteStyle: "Seal-End Box",
     family: "Tuck Boxes",
@@ -205,10 +212,17 @@ export const productStyleGuides: ProductStyleGuide[] = [
     parentProductName: "Custom Tuck Boxes",
     category: "Tuck box style",
     metaDescription:
-      "Plan custom seal end boxes, including cereal-style cartons, with UPG's approved materials, finishes, 250-unit planning MOQ, and quote process.",
-    searchTerms: ["seal end boxes", "custom seal end cartons", "cereal box packaging"],
+      "Seal end tuck packaging and custom folding cartons with a 250-unit planning MOQ. Review filling, sealing, board, printing, and finishes with UPG.",
+    searchTerms: [
+      "seal end tuck packaging",
+      "seal end boxes",
+      "custom seal end cartons",
+      "glued end cartons",
+      "seal end folding cartons",
+      "cereal box packaging",
+    ],
     quickAnswer:
-      "Seal end boxes, including cereal-style cartons, are available within UPG's custom tuck box family. The sealing method, dimensions, board, print, and finish specification are confirmed from the product and production plan.",
+      "A seal-end box is a folding carton with an end designed to be glued or sealed during packing. UPG confirms the closure, dimensions, board, print, and finish specification from the product, filling method, and production plan.",
     selectionNote:
       "State whether the enquiry is for a cereal-style carton or another seal-end format so the structural brief begins in the right place.",
     projectInputs: [
@@ -218,7 +232,7 @@ export const productStyleGuides: ProductStyleGuide[] = [
       "Board, print coverage, finishes, artwork, and reference packaging",
     ],
     relatedSlugs: ["straight-tuck-end-boxes", "auto-lock-bottom-boxes", "reverse-tuck-end-boxes"],
-    reviewedAt,
+    reviewedAt: "2026-09-03",
   },
   {
     slug: "stand-up-pouches",

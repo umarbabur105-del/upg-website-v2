@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SectionHeading } from "@/components/section-heading";
 import type {
@@ -124,38 +125,71 @@ export function OrganicIntentBridge({
             intro={route.intro}
           />
         </div>
-        <div className={`mt-10 grid gap-5 md:grid-cols-2 ${gridClassName}`}>
-          {route.options.map((option) => (
-            <article
-              key={option.title}
-              className="surface-card flex min-h-72 flex-col p-6"
+        <div
+          className={
+            route.visual
+              ? "mt-10 grid gap-5 lg:grid-cols-12 lg:items-stretch"
+              : `mt-10 grid gap-5 md:grid-cols-2 ${gridClassName}`
+          }
+        >
+          {route.visual ? (
+            <figure
+              data-seo-visual="search-intent"
+              className="surface-card relative min-h-96 overflow-hidden lg:col-span-5 lg:min-h-[36rem]"
             >
-              <div className="eyebrow">{option.label}</div>
-              <div className="mt-4">
-                <span
-                  className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold ${statusClassNames[option.status]}`}
-                >
-                  {option.status}
-                </span>
+              <Image
+                src={route.visual.src}
+                alt={route.visual.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/45 to-transparent px-6 pt-20 pb-6">
+                <figcaption className="max-w-md text-sm leading-relaxed text-white/90">
+                  {route.visual.caption}
+                </figcaption>
               </div>
-              <h2 className="mt-5 font-serif text-2xl text-foreground">
-                {option.title}
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {option.description}
-              </p>
-              {option.href && option.linkLabel ? (
-                <Link
-                  href={option.href}
-                  className="mt-auto pt-6 text-sm text-foreground"
-                >
-                  <span className="border-b border-foreground/20 pb-0.5">
-                    {option.linkLabel} →
+            </figure>
+          ) : null}
+          <div
+            className={
+              route.visual
+                ? "grid gap-5 md:grid-cols-2 lg:col-span-7"
+                : "contents"
+            }
+          >
+            {route.options.map((option) => (
+              <article
+                key={option.title}
+                className="surface-card flex min-h-64 flex-col p-6"
+              >
+                <div className="eyebrow">{option.label}</div>
+                <div className="mt-4">
+                  <span
+                    className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold ${statusClassNames[option.status]}`}
+                  >
+                    {option.status}
                   </span>
-                </Link>
-              ) : null}
-            </article>
-          ))}
+                </div>
+                <h3 className="mt-5 font-serif text-2xl text-foreground">
+                  {option.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {option.description}
+                </p>
+                {option.href && option.linkLabel ? (
+                  <Link
+                    href={option.href}
+                    className="mt-auto pt-6 text-sm text-foreground"
+                  >
+                    <span className="border-b border-foreground/20 pb-0.5">
+                      {option.linkLabel} →
+                    </span>
+                  </Link>
+                ) : null}
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

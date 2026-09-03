@@ -206,6 +206,9 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
                 View {guide.parentProductName}
               </Link>
             </div>
+            <p className="mt-5 text-xs text-muted-foreground">
+              Style guidance reviewed <time dateTime={guide.reviewedAt}>{guide.reviewedAt}</time>.
+            </p>
           </div>
         </div>
       </section>

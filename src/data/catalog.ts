@@ -428,8 +428,8 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
         title: "Choose an individual carton or a presentation set",
         description:
           "A tuck box is the starting format for an individual retail unit. A magnetic presentation box can be reviewed for a collection or multi-product set after the arrangement is confirmed.",
-        href: "/products/custom-tuck-boxes",
-        linkLabel: "Review custom tuck boxes",
+        href: "/packaging-styles/straight-tuck-end-boxes",
+        linkLabel: "Review straight tuck end boxes",
       },
       {
         title: "Match the board to the print plan",
@@ -474,7 +474,7 @@ export const cosmeticsSubcategories: CosmeticSubcategory[] = [
       },
     ],
     relatedSlugs: ["lip-gloss-boxes", "mascara-boxes", "cosmetic-subscription-boxes"],
-    reviewedAt: "2026-08-31",
+    reviewedAt: "2026-09-03",
   },
   {
     slug: "lip-gloss-boxes",
