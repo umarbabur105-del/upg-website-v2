@@ -87,7 +87,7 @@ const structuredData = {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
       name: siteConfig.name,
-      alternateName: siteConfig.shortName,
+      alternateName: siteConfig.brandAliases,
       url: SITE_URL,
       email: siteConfig.email,
       telephone: siteConfig.phoneNumber,

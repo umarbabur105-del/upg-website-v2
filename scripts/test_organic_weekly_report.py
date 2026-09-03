@@ -51,6 +51,29 @@ class OrganicReportClassificationTests(unittest.TestCase):
 
         self.assertTrue(REPORT.is_commercial_packaging_query("custom packaging boxes"))
 
+    def test_withupg_campaign_is_classified_as_brand_alias(self) -> None:
+        self.assertEqual(
+            REPORT.classify_lead(
+                {
+                    "UTM Source": "withupg",
+                    "UTM Medium": "vanity_url",
+                    "UTM Campaign": "brand_alias",
+                }
+            ),
+            "brand_alias",
+        )
+
+        self.assertEqual(
+            REPORT.classify_lead(
+                {
+                    "UTM Source": "qr_code",
+                    "UTM Medium": "vanity_url",
+                    "UTM Campaign": "trade_show",
+                }
+            ),
+            "brand_alias",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

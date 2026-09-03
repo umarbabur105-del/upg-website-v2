@@ -83,6 +83,7 @@ AI_SOURCES = (
     "you.com",
 )
 SEARCH_SOURCES = ("google.", "bing.", "search.yahoo.", "duckduckgo.")
+BRAND_ALIAS_UTM_SOURCE = "withupg"
 FUNNEL_EVENT_NAMES = (
     "form_start",
     "generate_lead",
@@ -441,6 +442,51 @@ def ga4_report(token: str, start_date: date, end_date: date) -> dict[str, Any]:
                 "total_users": metrics[1],
             }
 
+    brand_alias_payload = request_json(
+        f"https://analyticsdata.googleapis.com/v1beta/properties/{GA4_PROPERTY_ID}:runReport",
+        token,
+        method="POST",
+        body={
+            "dateRanges": [
+                {"startDate": start_date.isoformat(), "endDate": end_date.isoformat()}
+            ],
+            "dimensions": [
+                {"name": "sessionSource"},
+                {"name": "sessionMedium"},
+                {"name": "sessionCampaignName"},
+            ],
+            "metrics": [
+                {"name": "sessions"},
+                {"name": "activeUsers"},
+                {"name": "keyEvents"},
+            ],
+            "dimensionFilter": {
+                "filter": {
+                    "fieldName": "sessionSource",
+                    "stringFilter": {
+                        "matchType": "EXACT",
+                        "value": BRAND_ALIAS_UTM_SOURCE,
+                        "caseSensitive": False,
+                    },
+                }
+            },
+        },
+    )
+    brand_alias_rows = []
+    for row in brand_alias_payload.get("rows", []):
+        dimensions = [value["value"] for value in row["dimensionValues"]]
+        metrics = [float(value["value"]) for value in row["metricValues"]]
+        brand_alias_rows.append(
+            {
+                "source": dimensions[0],
+                "medium": dimensions[1],
+                "campaign": dimensions[2],
+                "sessions": metrics[0],
+                "active_users": metrics[1],
+                "key_events": metrics[2],
+            }
+        )
+
     return {
         "sessions": round(sum(item["sessions"] for item in channels.values()), 2),
         "active_users": round(
@@ -456,6 +502,16 @@ def ga4_report(token: str, start_date: date, end_date: date) -> dict[str, Any]:
         "referral_sessions": round(
             channels.get("Referral", {}).get("sessions", 0), 2
         ),
+        "brand_alias_sessions": round(
+            sum(item["sessions"] for item in brand_alias_rows), 2
+        ),
+        "brand_alias_active_users": round(
+            sum(item["active_users"] for item in brand_alias_rows), 2
+        ),
+        "brand_alias_key_events": round(
+            sum(item["key_events"] for item in brand_alias_rows), 2
+        ),
+        "brand_alias_breakdown": brand_alias_rows,
         "channels": channels,
         "events": events,
     }
@@ -481,6 +537,8 @@ def classify_lead(row: dict[str, str]) -> str:
     utm_medium = row.get("UTM Medium", "").casefold()
     referrer = row.get("Referrer", "").casefold()
     combined = " ".join((utm_source, utm_medium, referrer))
+    if utm_source == BRAND_ALIAS_UTM_SOURCE or "vanity_url" in utm_medium:
+        return "brand_alias"
     if "organic_shopping" in utm_medium or "merchant" in combined:
         return "merchant_free_listing"
     if "ai_referral" in utm_medium or any(source in combined for source in AI_SOURCES):
@@ -621,6 +679,7 @@ def markdown_report(report: dict[str, Any]) -> str:
         f"- Non-brand queries in positions 1–20: {current['search_console']['queries_in_positions_1_20']}",
         f"- Organic Search sessions: {comparisons['organic_search_sessions']['current']} (previous {comparisons['organic_search_sessions']['previous']})",
         f"- Organic Shopping sessions: {comparisons['organic_shopping_sessions']['current']} (previous {comparisons['organic_shopping_sessions']['previous']})",
+        f"- WithUPG brand-alias sessions: {comparisons['brand_alias_sessions']['current']} (previous {comparisons['brand_alias_sessions']['previous']})",
         f"- Lead form starts: {comparisons['form_starts']['current']} (previous {comparisons['form_starts']['previous']})",
         f"- Successful lead submissions: {comparisons['generated_leads']['current']} (previous {comparisons['generated_leads']['previous']})",
         f"- Sample-kit checkout starts: {comparisons['checkout_starts']['current']} (previous {comparisons['checkout_starts']['previous']})",
@@ -816,6 +875,10 @@ def main() -> None:
             "organic_shopping_sessions": compare(
                 current["ga4"]["organic_shopping_sessions"],
                 previous["ga4"]["organic_shopping_sessions"],
+            ),
+            "brand_alias_sessions": compare(
+                current["ga4"]["brand_alias_sessions"],
+                previous["ga4"]["brand_alias_sessions"],
             ),
             "form_starts": compare(
                 ga4_event_count(current, "form_start"),

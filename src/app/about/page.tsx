@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Section, SectionHeading, SectionSubheading } from "@/components/section";
 import { CtaBanner } from "@/components/cta-banner";
+import { siteConfig } from "@/data/site";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -103,6 +104,15 @@ export default function AboutPage() {
             mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar
             bags. Cosmetics is a dedicated industry specialization across these
             packaging formats.
+          </p>
+          <p className="mt-5 border-l border-gold/50 pl-4 text-sm leading-relaxed text-offwhite/70">
+            <strong className="font-semibold text-offwhite">
+              {siteConfig.shortDomain}
+            </strong>{" "}
+            is our short, easy-to-share web address. It brings visitors to this
+            official Universal Packaging Group website, keeping product
+            information, quote requests, policies, and contact details under one
+            canonical home.
           </p>
           <div className="mt-10">
             <Link

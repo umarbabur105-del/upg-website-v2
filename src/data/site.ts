@@ -1,6 +1,8 @@
 export const siteConfig = {
   name: "Universal Packaging Group",
   shortName: "UPG",
+  brandAliases: ["UPG", "With UPG"],
+  shortDomain: "WithUPG.com",
   description:
     "Custom boxes and flexible packaging manufactured for brands worldwide.",
   url: "https://universalpackaginggroup.com",
