@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
-import type { IndustryHub } from "@/data/industry-hubs";
+import type { IndustryHub, IndustryHubVisual } from "@/data/industry-hubs";
 import { getProductBySlug } from "@/data/products";
 import { siteConfig } from "@/data/site";
 import { getIndustryLinkVisual } from "@/lib/industry-visuals";
@@ -14,23 +14,26 @@ interface IndustryHubPageProps {
 }
 
 export function IndustryHubPage({ hub }: IndustryHubPageProps) {
+  const isLandscapeHero = hub.heroLayout === "landscape";
   const products = hub.productSlugs
     .map((slug) => getProductBySlug(slug))
     .filter((product) => product !== undefined);
-  const heroCompanionVisuals = products
-    .flatMap((product) => [
-      {
-        src: product.heroImage,
-        alt: `${product.shortName} packaging concept for ${hub.shortName.toLowerCase()} projects`,
-      },
-      ...product.galleryImages.slice(0, 1),
-    ])
-    .filter(
-      (visual, index, visuals) =>
-        visual.src !== hub.image.src &&
-        visuals.findIndex((candidate) => candidate.src === visual.src) === index
-    )
-    .slice(0, 2);
+  const heroCompanionVisuals: IndustryHubVisual[] = (
+    hub.heroCompanionImages ??
+    products
+      .flatMap((product) => [
+        {
+          src: product.heroImage,
+          alt: `${product.shortName} packaging concept for ${hub.shortName.toLowerCase()} projects`,
+        },
+        ...product.galleryImages.slice(0, 1),
+      ])
+      .filter(
+        (visual, index, visuals) =>
+          visual.src !== hub.image.src &&
+          visuals.findIndex((candidate) => candidate.src === visual.src) === index
+      )
+  ).slice(0, 2);
   const pageUrl = `${SITE_URL}/industries/${hub.slug}`;
   const quoteHref = `/get-a-quote?builder_note=${encodeURIComponent(
     `Industry: ${hub.shortName}. Please recommend the right packaging format.`
@@ -184,28 +187,43 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
             </div>
 
             <figure className="lg:col-span-6">
-              <div className="grid grid-cols-5 gap-3">
-                <div className="relative col-span-5 aspect-[16/10] overflow-hidden bg-stone shadow-lift sm:col-span-4 sm:row-span-2 sm:aspect-auto sm:min-h-[31rem]">
+              <div className={isLandscapeHero ? "grid grid-cols-2 gap-3" : "grid grid-cols-5 gap-3"}>
+                <div
+                  className={isLandscapeHero
+                    ? "relative col-span-2 aspect-[3/2] overflow-hidden bg-stone shadow-lift"
+                    : "relative col-span-5 aspect-[16/10] overflow-hidden bg-stone shadow-lift sm:col-span-4 sm:row-span-2 sm:aspect-auto sm:min-h-[31rem]"}
+                >
                   <Image
                     src={hub.image.src}
                     alt={hub.image.alt}
                     fill
                     priority
                     className="object-cover transition-transform duration-700 hover:scale-[1.02]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 40vw"
+                    sizes={isLandscapeHero
+                      ? "(max-width: 1023px) 100vw, 50vw"
+                      : "(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 40vw"}
                   />
                 </div>
-                {heroCompanionVisuals.map((visual) => (
+                {heroCompanionVisuals.map((visual, index) => (
                   <div
-                    key={visual.src}
-                    className="relative col-span-1 hidden min-h-60 overflow-hidden bg-stone sm:block"
+                    key={`${visual.src}-${index}`}
+                    className={isLandscapeHero
+                      ? "relative col-span-1 aspect-[3/2] overflow-hidden bg-stone"
+                      : "relative col-span-1 hidden min-h-60 overflow-hidden bg-stone sm:block"}
                   >
                     <Image
                       src={visual.src}
                       alt={visual.alt}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 1024px) 20vw, 10vw"
+                      style={{
+                        objectPosition: visual.objectPosition,
+                        transform: visual.zoom ? `scale(${visual.zoom})` : undefined,
+                        transformOrigin: visual.objectPosition,
+                      }}
+                      sizes={isLandscapeHero
+                        ? "(max-width: 1023px) 50vw, 25vw"
+                        : "(max-width: 1024px) 20vw, 10vw"}
                     />
                   </div>
                 ))}

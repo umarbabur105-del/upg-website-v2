@@ -4,6 +4,13 @@ export interface IndustryHubLink {
   description: string;
 }
 
+export interface IndustryHubVisual {
+  src: string;
+  alt: string;
+  objectPosition?: string;
+  zoom?: number;
+}
+
 export interface IndustryHub {
   slug: string;
   name: string;
@@ -14,6 +21,8 @@ export interface IndustryHub {
   metaDescription: string;
   keywords: string[];
   image: { src: string; alt: string };
+  heroLayout?: "landscape";
+  heroCompanionImages?: IndustryHubVisual[];
   productSlugs: string[];
   guideLinks: IndustryHubLink[];
   childGuideSlugs: string[];
@@ -321,9 +330,23 @@ export const industryHubs: IndustryHub[] = [
       "supplement packaging manufacturer",
     ],
     image: {
-      src: "/images/generated/mylar-bags/mylar-bags-flat-bottom-v1.png",
+      src: "/images/generated/industry-guides/custom-supplement-pouches-theme-v1.webp",
       alt: "Representative custom printed flexible bag for supplement packaging",
     },
+    heroLayout: "landscape",
+    heroCompanionImages: [
+      {
+        src: "/images/generated/industry-guides/custom-supplement-boxes-theme-v1.webp",
+        alt: "Open supplement outer carton showing its tuck flap and ivory and olive print",
+        objectPosition: "76% 25%",
+      },
+      {
+        src: "/images/generated/industry-guides/custom-supplement-boxes-theme-v1.webp",
+        alt: "Closed supplement outer carton with ivory, olive, and charcoal geometric artwork",
+        objectPosition: "20% 55%",
+        zoom: 1.4,
+      },
+    ],
     productSlugs: ["custom-tuck-boxes", "custom-mylar-bags"],
     guideLinks: [
       {
