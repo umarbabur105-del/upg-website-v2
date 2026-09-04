@@ -1,6 +1,6 @@
 # Google API Inventory
 
-Last verified: 2026-09-02
+Last verified: 2026-09-04
 
 This inventory describes the Google access used to operate the UPG website and its connected business tools. It intentionally contains no credential values, refresh tokens, client secrets, or API key strings.
 
@@ -28,6 +28,7 @@ The desktop OAuth credential is for private operator automation on Umar's Mac. I
 - Google Drive: `drive`
 - Gmail: `https://mail.google.com/`
 - Google Sheets: `spreadsheets`
+- Google Ads: `https://www.googleapis.com/auth/adwords`
 
 Local credential files are stored under `~/.config/gcloud/upg-automation/` with owner-only permissions. They must never be copied into this repository, committed to Git, exposed in browser code, or uploaded to Vercel.
 
@@ -60,12 +61,14 @@ Its key string exists only in `~/.config/gcloud/upg-automation/web_data_api_key.
 | Merchant Center | Account `5837241168` (`Universal Packaging Group`) |
 | Google Analytics | Account `403775469`; GA4 property `548846712`; measurement ID `G-G1L3B11JX5` |
 | Search Console | `sc-domain:universalpackaginggroup.com` |
+| Google Ads | Manager account `610-366-4960`; Basic Access |
 | Google Sheets CRM | `UPG Leads CRM`; tabs: Dashboard, Leads, Activity Log, Lists, Guide, Organic Weekly, Backlink Outreach |
 
 ## Enabled and verified APIs
 
 | API | Service name | Latest recorded proof |
 | --- | --- | --- |
+| Google Ads API | `googleads.googleapis.com` | Google approved and activated Basic Access on 2026-09-04. A production `KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics` request returned HTTP 200 with US English metrics. The local health probe now verifies the real method instead of inferring readiness from a saved access-level label. Basic Access is capped at 15,000 operations per day. |
 | Merchant API | `merchantapi.googleapis.com` | Project registered to Merchant account; account read succeeded; 2 processed products returned and both are approved for Free Listings in all 32 configured countries; GA4 property `548846712` is linked as an active conversion source |
 | Search Console API | `searchconsole.googleapis.com` | Domain property returned with `siteOwner` permission. Fresh API inspection on 2026-09-02 returned `PASS`, `Submitted and indexed`, successful fetch, allowed robots/indexing, and matching Google/user canonicals for all 11 priority commercial URLs. The set includes the homepage, Products, pricing, quote, all five core product pages, and the Beauty and Supplement industry hubs. |
 | Google Analytics Data API | `analyticsdata.googleapis.com` | GA4 channel and event-funnel reports read succeeded; the aggregate report now includes form starts, submitted leads, checkout starts, purchases, and tool handoffs |
@@ -93,7 +96,15 @@ Run the repository wrapper:
 ./scripts/google-api-health
 ```
 
-The wrapper calls the owner-only local health script. Its default mode is read-only. It refreshes the OAuth access token and probes Cloud API enablement, Merchant, Search Console, Analytics, Drive, Gmail, Sheets, PageSpeed, and CrUX.
+The wrapper calls the owner-only local health script. Its default mode is read-only. It refreshes the OAuth access token and probes Cloud API enablement, Google Ads and Keyword Planner, Merchant, Search Console, Analytics, Drive, Gmail, Sheets, PageSpeed, and CrUX. The Keyword Planner probe consumes one Google Ads API operation per health run and does not create or change a campaign.
+
+Run the reusable US demand snapshot separately when keyword evidence needs refreshing:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 scripts/google-keyword-demand.py --market US --format markdown
+```
+
+The demand script reads `docs/google-keyword-planner-seeds.csv`, prints aggregate non-PII evidence, and makes no Google Ads account changes.
 
 The local script also has a `--register-merchant` option. That option changes Merchant developer registration and is not part of normal health checks.
 

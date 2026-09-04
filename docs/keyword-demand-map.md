@@ -1,22 +1,85 @@
 # UPG Keyword Demand and Competitor Gap Map
 
-Last reviewed: 2026-08-30
+Last reviewed: 2026-09-04
 
 ## Evidence boundary
 
-This map does not invent monthly search volume. It combines three currently verifiable signals:
+This map combines four currently verifiable signals:
 
-1. UPG Search Console query evidence from 2026-05-01 through 2026-08-10.
-2. Public Teal Packaging sitemap coverage captured on 2026-08-13.
-3. Commercial intent and exact fit with UPG's five approved product families.
+1. A live Google Ads Keyword Planner US English historical-metrics snapshot from 2026-09-04.
+2. UPG Search Console query and page evidence through 2026-09-01.
+3. Public Teal Packaging sitemap coverage captured on 2026-08-13.
+4. Commercial intent and exact fit with UPG's five approved product families.
 
-Google Ads API is now enabled on the `upg-leads-crm` Cloud project. Exact Keyword Planner historical metrics remain blocked because the signed-in Google account does not yet have a Google Ads account, developer token, customer ID, or OAuth `adwords` scope. The monthly-volume field must remain pending until that access exists.
+Google approved and activated Basic Access for the UPG developer token on 2026-09-04. The OAuth `adwords` scope, Ads customer, manager login, API service, and developer token are configured. A production `GenerateKeywordHistoricalMetrics` request returned HTTP 200 with metrics, so the former monthly-volume blocker is closed.
+
+Keyword Planner values are rounded planning estimates, not exact market size. Closely related keywords can overlap and must not be added together as unique demand. Google Ads competition and bid estimates describe paid-ad auctions; they are not organic-ranking difficulty scores.
 
 ## Current UPG search baseline
 
-The latest aggregate 90-day report covers Search Console data through 2026-08-27. It contains 1,125 total impressions, 580 correctly filtered non-brand impressions, 0 non-brand clicks, and 12 queries with observed average positions from 1 through 20. GA4 recorded 8 Organic Search sessions and 2 Organic Shopping sessions in the corresponding operating window. The brand filter now includes the `universal packing` variant, which removed 29 misclassified brand impressions from the non-brand total.
+The fresh aggregate 90-day report covers Search Console data through 2026-09-01. It contains 1,129 total impressions, 597 correctly filtered non-brand impressions, 0 non-brand clicks, and 13 queries with observed average positions from 1 through 20. GA4 recorded 10 Organic Search sessions and 5 Organic Shopping sessions in the corresponding operating window. Four form starts and two `generate_lead` events were recorded across all channels; those events are not attributed to organic search without row-level attribution proof.
 
 This confirms that discovery is expanding, but commercial non-brand click-through remains the immediate constraint. New comparison pages are therefore treated as buyer-decision assets and internal-link bridges, not as an instant traffic claim.
+
+## Live US keyword demand snapshot
+
+The approved seed set now contains 84 commercially relevant terms. Google returned non-zero average monthly search estimates for 72 terms. The table below records the highest-value existing-page mappings; it is intentionally not a recommendation to create one page per keyword.
+
+| Keyword | Avg monthly searches | Ad competition | Existing target | Decision |
+| --- | ---: | --- | --- | --- |
+| custom boxes | 8,100 | High | `/` and `/products` | Strengthen the existing umbrella route; do not create a duplicate generic page |
+| custom mylar bags | 3,600 | High | `/products/custom-mylar-bags` | P0 exact product-family opportunity |
+| custom mailer boxes | 2,900 | High | `/products/custom-mailer-boxes` | P0 exact product-family opportunity |
+| custom jewelry boxes | 2,900 | High | `/industries/custom-jewelry-boxes` | Use branded presentation-packaging qualifiers to filter consumer storage-box intent |
+| custom packaging boxes | 2,400 | High | `/` and `/products` | P0 umbrella intent; improve existing routes only |
+| cosmetic packaging | 1,900 | High | `/cosmetics` | P0 cluster opportunity with visible outer-packaging scope |
+| custom printed boxes | 1,600 | High | `/` and `/products` | Support umbrella messaging without keyword stuffing |
+| custom subscription boxes | 1,600 | High | `/applications/custom-subscription-boxes` | Keep mailer-manufacturing scope visible; exclude subscription-service intent |
+| custom rigid boxes | 1,600 | Low | Magnetic and collapsible magnetic product pages | Use as a qualified parent term, not a promise that every rigid-box construction is offered |
+| custom pouches | 1,000 | High | `/products/custom-mylar-bags` | Route broad flexible-packaging intent into finished-bag choices |
+| custom product boxes | 1,000 | High | `/products` | Existing catalog hub, not a new thin page |
+| custom soap boxes | 1,000 | Medium | `/industries/custom-soap-boxes` | P1 exact industry guide |
+| custom candle boxes | 1,000 | Low | `/industries/custom-candle-boxes` | P1 exact industry guide |
+| custom coffee bags | 880 | High | `/packaging-styles/coffee-bags` | Strengthen existing style page; do not create another coffee page |
+| custom cereal boxes | 880 | High | `/industries/custom-cereal-boxes` | Strengthen existing seal-end application guide |
+| custom packaging for small business | 720 | High | `/custom-packaging-pricing` | Address MOQ, artwork, sampling, and landed-quote expectations |
+| custom perfume boxes | 480 | High | `/cosmetics/perfume-boxes` | Existing cosmetics subcategory |
+| custom stand up pouches | 480 | High | `/packaging-styles/stand-up-pouches` | Existing style route; preserve finished-pouch scope |
+| custom tuck boxes | 390 | Medium | `/products/custom-tuck-boxes` | P0 exact product-family opportunity |
+| custom PR boxes | 320 | High | `/applications/custom-pr-boxes` | High commercial CPC; keep manufacturing separate from fulfillment |
+| custom cosmetic boxes | 320 | Low | `/cosmetics` | Consolidate into the existing cosmetics hub |
+| custom magnetic boxes | 260 | High | `/products/custom-magnetic-boxes` | P1 exact product-family opportunity |
+
+High bid estimates reinforce commercial intent on several exact-fit terms: custom PR boxes averaged $28.04 CPC, custom influencer boxes $29.27, custom mailer boxes $21.96, custom printed boxes $20.40, custom packaging company $20.17, and custom rigid boxes $18.43. These figures do not justify paid spend by themselves; conversion measurement and landing-page fit remain required.
+
+## Search Console and demand intersection
+
+| Existing route | Fresh 90-day GSC evidence | Keyword Planner evidence | Priority decision |
+| --- | --- | --- | --- |
+| `/` and `/products` | Homepage: 64 non-brand impressions, position 45.6, 0 clicks | `custom boxes` 8,100; `custom packaging boxes` 2,400; `custom printed boxes` 1,600 | P0 improve umbrella relevance and buyer routing; no new generic page |
+| `/products/custom-mylar-bags` | 0 measured impressions | `custom mylar bags` 3,600; `custom printed mylar bags` 320 | P0 diagnose discovery/internal relevance before adding content |
+| `/products/custom-mailer-boxes` | 13 impressions, position 67.6, 0 clicks | `custom mailer boxes` 2,900 | P0 improve the existing money page and supporting application links |
+| `/cosmetics` | 68 impressions, position 56.5, 0 clicks | `cosmetic packaging` 1,900; `custom cosmetic boxes` 320 | P0 strengthen outer-packaging clarity and commercial snippet language |
+| `/cosmetics/lipstick-boxes` | 247 impressions, position 63.5, 0 clicks | `custom lipstick boxes` 140; `lipstick packaging` 110 | P0 preserve the existing route and filter primary-container/casing intent |
+| `/products/custom-tuck-boxes` | 8 impressions, position 81.4, 0 clicks | `custom tuck boxes` 390 | P0 improve the existing exact product page |
+| `/products/custom-magnetic-boxes` | 0 measured impressions | `custom magnetic boxes` 260; qualified parent `custom rigid boxes` 1,600 | P1 strengthen exact construction and presentation use cases |
+| `/industries/custom-jewelry-boxes` | No measured top-page evidence | `custom jewelry boxes` 2,900 | P1 investigate intent and SERP composition before changing copy |
+
+## Intent and scope safeguards
+
+- `custom bags with logo` has 1,600 estimated searches but mixes totes, shopping bags, poly bags, and other products outside the approved Mylar scope. Do not target it as a core page.
+- `custom jewelry boxes` and `custom subscription boxes` have substantial demand but mixed consumer/service intent. Existing pages must qualify manufacturing, branding, order quantity, and packaging construction.
+- `lipstick packaging` includes primary containers, mechanisms, and casing intent. The existing page must remain explicitly about printed outer cartons.
+- Zero-volume exact modifiers do not prove zero market demand. They should be consolidated under stronger parent pages rather than deleted or expanded into thin pages.
+- Broad generic terms are highly competitive and expensive. They belong on the homepage or catalog hub, not on a network of near-duplicate landing pages.
+
+## Approved next execution queue
+
+1. Keep this phase read-only for the website: retain the current URL architecture and do not launch campaigns.
+2. Prepare page-specific briefs for the six P0 targets above, using the existing title, H1, copy, internal links, schema, and quote routing as the starting point.
+3. Review SERP intent for the mixed jewelry, subscription, rigid-box, and broad generic terms before any copy change.
+4. After approval, update existing pages in one bounded batch and verify rendered metadata, schema, links, build, and live URLs.
+5. Measure a clean 28-day Search Console and GA4 window; judge progress by qualified clicks, form starts, submitted leads, and CRM outcomes, not impressions alone.
 
 Search Console query clusters, 2026-05-01 to 2026-08-10:
 
@@ -152,16 +215,15 @@ active sitemap and discovery surfaces. Historical release proof remains in Git
 history and `docs/archived-tools.md`; the tool must not be treated as a current
 keyword target.
 
-## Monthly volume completion path
+## Monthly volume refresh path
 
-When a Google Ads account is available:
+The former access blocker is complete. Refresh US evidence with:
 
-1. Obtain the developer token from a Google Ads manager account.
-2. Add OAuth scope `https://www.googleapis.com/auth/adwords` to the UPG automation credential.
-3. Configure the Ads customer ID and, where required, manager login customer ID.
-4. Call `KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics` for the seed file in `docs/google-keyword-planner-seeds.csv`.
-5. Record US, Canada, UK, and selected European markets separately instead of blending them into one misleading number.
-6. Re-score the queue using average monthly searches, competition, and bid ranges without treating ad competition as organic-ranking difficulty.
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 scripts/google-keyword-demand.py --market US --format markdown
+```
+
+Canada and the United Kingdom are supported as separate runs with `--market CA` and `--market GB`. Do not blend countries into one market-size number. Re-score decisions using average monthly searches, commercial fit, Search Console evidence, and conversion outcomes without treating ad competition as organic-ranking difficulty.
 
 Official references:
 
