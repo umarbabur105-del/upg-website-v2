@@ -185,9 +185,23 @@ export const industryGuides: IndustryGuide[] = [
       "soap boxes wholesale",
     ],
     image: {
-      src: "/images/generated/tuck-boxes/tuck-boxes-straight-reverse-v1.png",
+      src: "/images/generated/industry-guides/custom-soap-boxes-theme-v1.webp",
       alt: "Representative custom printed tuck boxes for soap outer packaging",
     },
+    heroCompanionImages: [
+      {
+        src: "/images/generated/industry-guides/custom-soap-boxes-theme-v1.webp",
+        alt: "Representative closed soap outer carton with ivory, olive, and charcoal artwork",
+        objectPosition: "32% 66%",
+        zoom: 1.8,
+      },
+      {
+        src: "/images/generated/industry-guides/custom-soap-boxes-theme-v1.webp",
+        alt: "Representative open soap outer carton showing its tuck flap and printed panels",
+        objectPosition: "64% 50%",
+        zoom: 1.8,
+      },
+    ],
     quickAnswer:
       "UPG manufactures custom tuck boxes that can be developed around a finished soap product and its inner wrap. Pricing depends on the approved structure, dimensions, board, printing, finishes, quantity, and delivery destination.",
     bestFor: [
