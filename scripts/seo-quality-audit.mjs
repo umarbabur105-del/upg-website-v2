@@ -385,6 +385,15 @@ const productsHub = pages.find((page) => page.route === "/products");
 if (!productsHub) {
   failures.push("/products: missing rendered product hub");
 } else {
+  if (!productsHub.title.includes("Custom Packaging Boxes")) {
+    failures.push("/products: missing distinct custom-packaging-boxes title ownership");
+  }
+  if (!productsHub.html.includes('id="packaging-format-decisions"')) {
+    failures.push("/products: missing visible packaging-format decision guide");
+  }
+  if (!productsHub.html.includes("Custom Mylar bags and printed pouches")) {
+    failures.push("/products: missing printed-pouch decision route");
+  }
   if (!productsHub.html.includes('id="core-product-catalog"')) {
     failures.push("/products: missing core product catalog anchor");
   }

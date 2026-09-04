@@ -390,23 +390,25 @@ export const products: Product[] = [
     sku: "UPG-MYLAR",
     bestFor: "Coffee, packaged food, supplements, liquid-product formats, child-resistant options, and flexible packaging",
     summary:
-      "Custom printed Mylar bags, pouches, and rollstock film across UPG's current flexible-packaging formats.",
+      "Custom printed Mylar bags and pouches, plus rollstock film, across UPG's current flexible-packaging formats.",
     longSummary:
-      "Custom printed Mylar bags include three-side seal bags, flat-bottom bags, stand-up pouches, spout bags, child-resistant bags, coffee bags, and printed rollstock film. Depending on the format, options can include zippers, valves, windows, and matte, gloss, or metallic finishes.",
-    metaTitle: "Custom Mylar Bags & Pouches | 250-Unit MOQ",
+      "Custom Mylar bags and printed pouches include three-side seal bags, flat-bottom bags, stand-up pouches, spout bags, child-resistant bags, and coffee bags. Printed rollstock film is a separate format for compatible packing plans. Depending on the selected format, options can include zippers, valves, windows, and matte, gloss, or metallic finishes.",
+    metaTitle: "Custom Mylar Bags & Printed Pouches | 250-Unit MOQ",
     metaDescription:
       "Custom printed Mylar bags, pouches and rollstock in seven formats. Planning MOQ 250 units, with compatibility and specifications reviewed per project.",
     searchTerms: [
       "custom Mylar bags",
       "custom printed Mylar bags",
+      "custom pouches",
       "custom printed pouches",
+      "custom flexible packaging",
       "custom stand up pouches",
       "custom coffee bags",
       "custom spout pouches",
       "printed rollstock film",
       "flexible packaging rollstock",
     ],
-    reviewedAt: "2026-09-02",
+    reviewedAt: "2026-09-04",
     buyerDecisionFaq: {
       question: "Should I request finished pouches or printed rollstock film?",
       answer:

@@ -4,20 +4,24 @@ import { ProductCard } from "@/components/product-card";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { products } from "@/data/products";
-import { siteConfig } from "@/data/site";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Custom Packaging Products | Boxes, Mailers & Mylar",
+  title: "Custom Packaging Boxes, Mailers & Mylar Bags",
   description:
-    "Compare custom tuck boxes, corrugated mailers, magnetic and collapsible magnetic boxes, plus printed Mylar bags. Worldwide made-to-spec manufacturing.",
+    "Compare custom printed boxes, corrugated mailers, magnetic rigid boxes, and Mylar pouches. 250-unit planning MOQ with worldwide delivery.",
   path: "/products",
   keywords: [
     "custom packaging products",
     "custom packaging boxes",
+    "custom boxes",
+    "custom printed boxes",
+    "custom product boxes",
     "custom printed packaging",
   ],
 });
+
+const PRODUCTS_REVIEWED_AT = "2026-09-04";
 
 const productsCollectionSchema = {
   "@context": "https://schema.org",
@@ -26,10 +30,10 @@ const productsCollectionSchema = {
       "@type": "CollectionPage",
       "@id": `${SITE_URL}/products#collection`,
       url: `${SITE_URL}/products`,
-      name: "Custom Packaging Products",
+      name: "Custom Packaging Boxes, Mailers, and Mylar Bags",
       description:
-        "Five made-to-spec custom packaging product families manufactured for brands worldwide.",
-      dateModified: siteConfig.contentReviewedAt,
+        "Five made-to-spec custom packaging families covering printed boxes, corrugated mailers, magnetic rigid boxes, and Mylar bags and pouches.",
+      dateModified: PRODUCTS_REVIEWED_AT,
       mainEntity: { "@id": `${SITE_URL}/products#core-product-catalog` },
     },
     {
@@ -54,6 +58,44 @@ const productsCollectionSchema = {
   ],
 };
 
+const formatDecisionRows = [
+  {
+    name: "Custom tuck boxes",
+    structure: "Printed folding carton",
+    description:
+      "Choose for individual retail products, cosmetics, supplements, soap, food cartons, and other secondary packaging.",
+    href: "/products/custom-tuck-boxes",
+  },
+  {
+    name: "Custom mailer boxes",
+    structure: "Corrugated ear-lock mailer",
+    description:
+      "Choose for PR kits, subscription programs, ecommerce presentation, influencer mailers, and product launches.",
+    href: "/products/custom-mailer-boxes",
+  },
+  {
+    name: "Custom magnetic boxes",
+    structure: "Assembled rigid presentation box",
+    description:
+      "Choose when a premium gift, beauty, apparel, electronics, or launch set needs an assembled rigid structure.",
+    href: "/products/custom-magnetic-boxes",
+  },
+  {
+    name: "Collapsible magnetic boxes",
+    structure: "Fold-flat rigid presentation box",
+    description:
+      "Compare this route when premium presentation is required with a structure that ships or stores flat before assembly.",
+    href: "/products/custom-collapsible-magnetic-boxes",
+  },
+  {
+    name: "Custom Mylar bags and printed pouches",
+    structure: "Flexible packaging",
+    description:
+      "Choose for finished stand-up, flat-bottom, three-side-seal, spout, coffee, or child-resistant bags, or review printed rollstock separately.",
+    href: "/products/custom-mylar-bags",
+  },
+] as const;
+
 export default function ProductsPage() {
   return (
     <>
@@ -65,12 +107,15 @@ export default function ProductsPage() {
         <div className="container-editorial pt-12 pb-8 md:pt-16 md:pb-10">
           <div className="max-w-4xl">
             <div className="eyebrow mb-5">Five core product families</div>
-            <h1 className="display-1 text-balance">Custom packaging manufactured around the product.</h1>
+            <h1 className="display-1 text-balance">
+              Compare custom packaging boxes and Mylar bags.
+            </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty">
-              Compare custom tuck boxes, corrugated ear-lock mailers, magnetic
-              boxes, collapsible magnetic boxes, and Mylar bags. Every project
-              is reviewed around the structure, dimensions, material, print,
-              finish, quantity, intended use, and delivery destination.
+              Review custom printed tuck boxes, corrugated ear-lock mailers,
+              magnetic rigid boxes, collapsible magnetic boxes, and custom
+              Mylar bags and pouches. Every project is reviewed around the
+              structure, dimensions, material, print, finish, quantity,
+              intended use, and delivery destination.
             </p>
           </div>
         </div>
@@ -88,6 +133,40 @@ export default function ProductsPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
               <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="packaging-format-decisions"
+        className="border-y border-border bg-cream py-16 md:py-20"
+      >
+        <div className="container-editorial">
+          <div className="mb-10 max-w-4xl">
+            <SectionHeading
+              eyebrow="Custom boxes by format"
+              title="Match the packaging structure to the product and program."
+              intro="The same artwork can require a different physical format depending on the product, packing method, presentation, order quantity, and delivery plan. Start with the closest construction, then confirm the specification with UPG."
+            />
+          </div>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {formatDecisionRows.map((item) => (
+              <article key={item.href} className="surface-card flex h-full flex-col p-6">
+                <div className="eyebrow mb-3">{item.structure}</div>
+                <h3 className="font-serif text-2xl leading-tight text-foreground">
+                  {item.name}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
+                <Link
+                  href={item.href}
+                  className="mt-5 inline-flex w-fit border-b border-foreground/20 pb-0.5 text-sm font-semibold text-foreground"
+                >
+                  Review this format →
+                </Link>
+              </article>
             ))}
           </div>
         </div>

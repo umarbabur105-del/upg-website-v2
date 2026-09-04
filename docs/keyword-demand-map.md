@@ -81,6 +81,29 @@ High bid estimates reinforce commercial intent on several exact-fit terms: custo
 4. After approval, update existing pages in one bounded batch and verify rendered metadata, schema, links, build, and live URLs.
 5. Measure a clean 28-day Search Console and GA4 window; judge progress by qualified clicks, form starts, submitted leads, and CRM outcomes, not impressions alone.
 
+## Bounded website integration — 2026-09-04
+
+The source and rendered review found that the homepage, Mailer, Cosmetics, Lipstick, and Tuck pages already own their intended queries with one H1, indexable self-canonicals, visible scope boundaries, contextual links, and rendered JSON-LD. Those recently reviewed pages are not rewritten again from same-week data.
+
+The bounded integration changes only two justified surfaces:
+
+1. `/products` becomes the distinct catalog owner for `custom packaging boxes`, `custom printed boxes`, and product-format comparison intent. Its title, description, H1, CollectionPage description, and visible five-format decision guide now separate the catalog role from the manufacturer-led homepage.
+2. `/products/custom-mylar-bags` retains the exact `custom Mylar bags` H1 while its title and opening product description add the broader `printed pouches` parent intent. The page still separates finished bags from printed rollstock and does not imply compatibility or regulatory approval.
+
+No URL, product family, planning MOQ, quote route, analytics event, Merchant configuration, WithUPG attribution, or product/offer schema is changed in this batch. The rendered SEO gate now protects the Products catalog ownership and format-decision module.
+
+### Local production-candidate proof
+
+- ESLint and TypeScript passed.
+- All 32 focused Python and Node regression checks passed.
+- The Next.js production build compiled and generated 112 pages.
+- The rendered SEO audit passed 91 canonical static sitemap pages; one dynamic sitemap page remains a runtime-only check.
+- Local browser verification confirmed the Products title is 50 characters, its description is 137 characters, it has one H1, five visible format-decision cards, CollectionPage and ItemList JSON-LD, a production canonical, and no horizontal overflow at desktop or 390-pixel mobile viewports.
+- Local mobile verification confirmed the Mylar title is 56 characters, its description is 150 characters, it has one H1, Service, BreadcrumbList, FAQPage, and ItemList JSON-LD, the intended production canonical, and no horizontal overflow.
+- The checked local pages produced no browser-console warnings or errors.
+
+This proof applies only to the isolated local production candidate. No push, deployment, recrawl request, indexing change, ranking, traffic, or lead is claimed.
+
 Search Console query clusters, 2026-05-01 to 2026-08-10:
 
 | Query cluster | Clicks | Impressions | Weighted position |
