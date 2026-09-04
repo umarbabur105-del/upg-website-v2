@@ -3,8 +3,8 @@ import "server-only";
 import type Stripe from "stripe";
 import type { SampleKit } from "@/data/sample-kit";
 import {
-  appendLeadToGoogleSheet,
   prepareGoogleSheetsAuth,
+  storeLeadInGoogleSheet,
 } from "@/lib/google-sheets";
 import { renderFieldRows, sendNotification } from "@/lib/mailer";
 
@@ -98,7 +98,7 @@ export async function recordPaidSampleKitOrder({
   }
 
   if (!sheetAlreadyStored && sheetsAuth) {
-    const saved = await appendLeadToGoogleSheet(
+    const saved = await storeLeadInGoogleSheet(
       {
         submissionId: session.id,
         receivedAt: new Date(session.created * 1_000),
@@ -129,6 +129,7 @@ export async function recordPaidSampleKitOrder({
         utmContent: session.metadata?.utm_content || null,
         utmTerm: session.metadata?.utm_term || null,
       },
+      request,
       sheetsAuth
     );
     sheetStored = saved.stored;

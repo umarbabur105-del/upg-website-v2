@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { renderFieldRows, sendNotification } from "@/lib/mailer";
+import {
+  renderFieldRows,
+  sendLeadStorageAlert,
+  sendNotification,
+} from "@/lib/mailer";
 import {
   cleanAttribution,
   cleanSubmissionId,
@@ -10,9 +14,10 @@ import {
   parseFormRequest,
 } from "@/lib/form-validation";
 import {
-  appendLeadToGoogleSheet,
   prepareGoogleSheetsAuth,
+  storeLeadInGoogleSheet,
 } from "@/lib/google-sheets";
+import { classifyLeadDelivery } from "@/lib/lead-delivery";
 
 const allowedFamilies = new Set([
   "Tuck Boxes",
@@ -27,7 +32,10 @@ export async function POST(request: Request) {
   try {
     const input = await parseFormRequest(request, 12_000);
     if (isHoneypotFilled(input)) {
-      return NextResponse.json({ success: true, accepted: true });
+      return NextResponse.json({
+        success: true,
+        ...classifyLeadDelivery({ stored: false, delivered: false, ignored: true }),
+      });
     }
 
     const attribution = cleanAttribution(
@@ -69,6 +77,7 @@ export async function POST(request: Request) {
     const subject = `[UPG Contact] ${subjectName}`;
 
     const fields = renderFieldRows([
+      { label: "Submission ID", value: submissionId },
       { label: "Name", value: data.name },
       { label: "Email", value: data.email },
       { label: "Company", value: data.company },
@@ -91,9 +100,15 @@ export async function POST(request: Request) {
     const receivedAt = new Date();
     const [sheetsAuth, mail] = await Promise.all([
       prepareGoogleSheetsAuth(request),
-      sendNotification({ subject, html, text, replyTo }),
+      sendNotification({
+        subject,
+        html,
+        text,
+        replyTo,
+        idempotencyKey: `contact-form/${submissionId}`,
+      }),
     ]);
-    const saved = await appendLeadToGoogleSheet(
+    const saved = await storeLeadInGoogleSheet(
       {
         submissionId,
         receivedAt,
@@ -113,12 +128,19 @@ export async function POST(request: Request) {
         utmContent: attribution.utm_content,
         utmTerm: attribution.utm_term,
       },
+      request,
       sheetsAuth
     );
 
-    if (!saved.stored && !mail.delivered) {
+    const delivery = classifyLeadDelivery({
+      stored: saved.stored,
+      delivered: mail.delivered,
+    });
+
+    if (!delivery.accepted) {
       console.error(JSON.stringify({
         type: "contact_delivery_failed",
+        submissionId,
         mailVia: mail.via,
         sheetsReason: saved.reason,
       }));
@@ -128,19 +150,40 @@ export async function POST(request: Request) {
       );
     }
 
+    let storageAlertDelivered: boolean | undefined;
+    if (!saved.stored && mail.delivered) {
+      const storageAlert = await sendLeadStorageAlert({
+        submissionId,
+        formName: "contact form",
+        reason: saved.reason,
+      });
+      storageAlertDelivered = storageAlert.delivered;
+      console.error(JSON.stringify({
+        type: "contact_crm_reconciliation_required",
+        submissionId,
+        sheetsReason: saved.reason,
+        alertDelivered: storageAlert.delivered,
+      }));
+    }
+
     console.log(JSON.stringify({
       type: "contact_accepted",
+      submissionId,
       stored: saved.stored,
       notified: mail.delivered,
+      sheetsReason: saved.reason,
+      sheetRow: saved.rowNumber,
+      sheetDeduplicated: saved.deduplicated,
+      sheetAttempts: saved.attempts,
+      storageAlertDelivered,
       receivedAt: new Date().toISOString(),
     }));
 
     return NextResponse.json({
       success: true,
-      accepted: true,
+      ...delivery,
       message: "Message received. We target an initial response within one business day.",
-      stored: saved.stored,
-      delivered: mail.delivered,
+      submissionId,
     });
   } catch (error) {
     if (error instanceof FormRequestError) {

@@ -5,6 +5,10 @@ const GOOGLE_IAM_CREDENTIALS_ENDPOINT = "https://iamcredentials.googleapis.com/v
 const GOOGLE_CLOUD_SCOPE = "https://www.googleapis.com/auth/cloud-platform";
 const GOOGLE_SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets";
 const REQUEST_TIMEOUT_MS = 6_000;
+const AUTH_MAX_ATTEMPTS = 2;
+const LOOKUP_MAX_ATTEMPTS = 2;
+const APPEND_MAX_ATTEMPTS = 3;
+const RETRY_DELAY_MS = 250;
 
 export type LeadSheetInput = {
   submissionId: string;
@@ -56,6 +60,8 @@ export type GoogleSheetsAuthResult =
 export type AppendLeadResult = {
   stored: boolean;
   rowNumber?: number;
+  deduplicated?: boolean;
+  attempts?: number;
   reason?:
     | "not_configured"
     | "invalid_configuration"
@@ -65,6 +71,20 @@ export type AppendLeadResult = {
 };
 
 let cachedAccessToken: { token: string; expiresAt: number } | null = null;
+
+function isTransientStatus(status: number) {
+  return status === 408
+    || status === 409
+    || status === 425
+    || status === 429
+    || status >= 500;
+}
+
+function waitBeforeRetry(attempt: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, RETRY_DELAY_MS * attempt);
+  });
+}
 
 function getSpreadsheetId() {
   const id = process.env.GOOGLE_SHEETS_SPREADSHEET_ID?.trim();
@@ -90,60 +110,94 @@ function getVercelOidcToken(request?: Request) {
 }
 
 async function exchangeVercelOidcToken(oidcToken: string, audience: string) {
-  const response = await fetch(GOOGLE_STS_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      audience,
-      grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
-      requested_token_type: "urn:ietf:params:oauth:token-type:access_token",
-      scope: GOOGLE_CLOUD_SCOPE,
-      subject_token_type: "urn:ietf:params:oauth:token-type:jwt",
-      subject_token: oidcToken,
-    }),
-    cache: "no-store",
-    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-  });
+  for (let attempt = 1; attempt <= AUTH_MAX_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await fetch(GOOGLE_STS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          audience,
+          grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
+          requested_token_type: "urn:ietf:params:oauth:token-type:access_token",
+          scope: GOOGLE_CLOUD_SCOPE,
+          subject_token_type: "urn:ietf:params:oauth:token-type:jwt",
+          subject_token: oidcToken,
+        }),
+        cache: "no-store",
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      });
 
-  if (!response.ok) {
-    console.error(JSON.stringify({ type: "sheets_sts_failed", status: response.status }));
-    return null;
+      if (response.ok) {
+        const result = await response.json() as { access_token?: string };
+        return result.access_token ?? null;
+      }
+
+      console.error(JSON.stringify({
+        type: "sheets_sts_failed",
+        status: response.status,
+        attempt,
+      }));
+      if (!isTransientStatus(response.status) || attempt === AUTH_MAX_ATTEMPTS) {
+        return null;
+      }
+    } catch {
+      console.error(JSON.stringify({ type: "sheets_sts_exception", attempt }));
+      if (attempt === AUTH_MAX_ATTEMPTS) return null;
+    }
+
+    await waitBeforeRetry(attempt);
   }
 
-  const result = await response.json() as { access_token?: string };
-  return result.access_token ?? null;
+  return null;
 }
 
 async function impersonateServiceAccount(federatedToken: string, serviceAccountEmail: string) {
   const encodedEmail = encodeURIComponent(serviceAccountEmail);
   const endpoint = `${GOOGLE_IAM_CREDENTIALS_ENDPOINT}/projects/-/serviceAccounts/${encodedEmail}:generateAccessToken`;
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${federatedToken}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      scope: [GOOGLE_SHEETS_SCOPE],
-      lifetime: "3600s",
-    }),
-    cache: "no-store",
-    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-  });
+  for (let attempt = 1; attempt <= AUTH_MAX_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${federatedToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          scope: [GOOGLE_SHEETS_SCOPE],
+          lifetime: "3600s",
+        }),
+        cache: "no-store",
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      });
 
-  if (!response.ok) {
-    console.error(JSON.stringify({ type: "sheets_impersonation_failed", status: response.status }));
-    return null;
+      if (response.ok) {
+        const result = await response.json() as { accessToken?: string; expireTime?: string };
+        if (!result.accessToken) return null;
+
+        const parsedExpiry = result.expireTime ? Date.parse(result.expireTime) : Number.NaN;
+        return {
+          token: result.accessToken,
+          expiresAt: Number.isFinite(parsedExpiry) ? parsedExpiry : Date.now() + 3_600_000,
+        };
+      }
+
+      console.error(JSON.stringify({
+        type: "sheets_impersonation_failed",
+        status: response.status,
+        attempt,
+      }));
+      if (!isTransientStatus(response.status) || attempt === AUTH_MAX_ATTEMPTS) {
+        return null;
+      }
+    } catch {
+      console.error(JSON.stringify({ type: "sheets_impersonation_exception", attempt }));
+      if (attempt === AUTH_MAX_ATTEMPTS) return null;
+    }
+
+    await waitBeforeRetry(attempt);
   }
 
-  const result = await response.json() as { accessToken?: string; expireTime?: string };
-  if (!result.accessToken) return null;
-
-  const parsedExpiry = result.expireTime ? Date.parse(result.expireTime) : Number.NaN;
-  return {
-    token: result.accessToken,
-    expiresAt: Number.isFinite(parsedExpiry) ? parsedExpiry : Date.now() + 3_600_000,
-  };
+  return null;
 }
 
 export async function prepareGoogleSheetsAuth(request?: Request): Promise<GoogleSheetsAuthResult> {
@@ -235,6 +289,61 @@ function buildLeadRow(input: LeadSheetInput) {
   ];
 }
 
+type SubmissionLookupResult =
+  | { checked: true; rowNumber?: number }
+  | { checked: false; reason: "auth_error" | "sheets_error" };
+
+async function findSubmissionRow(
+  spreadsheetId: string,
+  accessToken: string,
+  submissionId: string
+): Promise<SubmissionLookupResult> {
+  const range = encodeURIComponent("'Leads'!A:A");
+  const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?majorDimension=ROWS&valueRenderOption=UNFORMATTED_VALUE`;
+
+  for (let attempt = 1; attempt <= LOOKUP_MAX_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await fetch(endpoint, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+        cache: "no-store",
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      });
+
+      if (response.ok) {
+        const result = await response.json() as { values?: unknown[][] };
+        const rowIndex = (result.values ?? []).findIndex(
+          (row) => String(row[0] ?? "") === submissionId
+        );
+        return {
+          checked: true,
+          rowNumber: rowIndex >= 0 ? rowIndex + 1 : undefined,
+        };
+      }
+
+      console.error(JSON.stringify({
+        type: "sheets_submission_lookup_failed",
+        status: response.status,
+        attempt,
+      }));
+      if (response.status === 401 || response.status === 403) {
+        return { checked: false, reason: "auth_error" };
+      }
+      if (!isTransientStatus(response.status) || attempt === LOOKUP_MAX_ATTEMPTS) {
+        return { checked: false, reason: "sheets_error" };
+      }
+    } catch {
+      console.error(JSON.stringify({ type: "sheets_submission_lookup_exception", attempt }));
+      if (attempt === LOOKUP_MAX_ATTEMPTS) {
+        return { checked: false, reason: "sheets_error" };
+      }
+    }
+
+    await waitBeforeRetry(attempt);
+  }
+
+  return { checked: false, reason: "sheets_error" };
+}
+
 export async function appendLeadToGoogleSheet(
   input: LeadSheetInput,
   auth: GoogleSheetsAuthResult
@@ -243,38 +352,112 @@ export async function appendLeadToGoogleSheet(
   if (!spreadsheetId) return { stored: false, reason: "not_configured" };
   if (!auth.configured) return { stored: false, reason: auth.reason };
 
+  const existing = await findSubmissionRow(
+    spreadsheetId,
+    auth.accessToken,
+    input.submissionId
+  );
+  if (!existing.checked) {
+    return { stored: false, reason: existing.reason };
+  }
+  if (existing.rowNumber) {
+    return {
+      stored: true,
+      rowNumber: existing.rowNumber,
+      deduplicated: true,
+      attempts: 0,
+    };
+  }
+
   const range = encodeURIComponent("'Leads'!A:AH");
   const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS&includeValuesInResponse=false`;
 
-  try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${auth.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        majorDimension: "ROWS",
-        values: [buildLeadRow(input)],
-      }),
-      cache: "no-store",
-      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-    });
+  for (let attempt = 1; attempt <= APPEND_MAX_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${auth.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          majorDimension: "ROWS",
+          values: [buildLeadRow(input)],
+        }),
+        cache: "no-store",
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      });
 
-    if (!response.ok) {
-      console.error(JSON.stringify({ type: "sheets_append_failed", status: response.status }));
-      return { stored: false, reason: "sheets_error" };
+      if (response.ok) {
+        const result = await response.json() as { updates?: { updatedRange?: string } };
+        const rowMatch = result.updates?.updatedRange?.match(/![A-Z]+(\d+):/);
+        return {
+          stored: true,
+          rowNumber: rowMatch ? Number(rowMatch[1]) : undefined,
+          attempts: attempt,
+        };
+      }
+
+      console.error(JSON.stringify({
+        type: "sheets_append_failed",
+        status: response.status,
+        attempt,
+      }));
+      if (response.status === 401 || response.status === 403) {
+        return { stored: false, reason: "auth_error", attempts: attempt };
+      }
+      if (!isTransientStatus(response.status)) {
+        return { stored: false, reason: "sheets_error", attempts: attempt };
+      }
+    } catch {
+      console.error(JSON.stringify({ type: "sheets_append_exception", attempt }));
     }
 
-    const result = await response.json() as { updates?: { updatedRange?: string } };
-    const rowMatch = result.updates?.updatedRange?.match(/![A-Z]+(\d+):/);
+    const recoveryLookup = await findSubmissionRow(
+      spreadsheetId,
+      auth.accessToken,
+      input.submissionId
+    );
+    if (!recoveryLookup.checked) {
+      return { stored: false, reason: recoveryLookup.reason, attempts: attempt };
+    }
+    if (recoveryLookup.rowNumber) {
+      return {
+        stored: true,
+        rowNumber: recoveryLookup.rowNumber,
+        deduplicated: true,
+        attempts: attempt,
+      };
+    }
 
-    return {
-      stored: true,
-      rowNumber: rowMatch ? Number(rowMatch[1]) : undefined,
-    };
-  } catch {
-    console.error(JSON.stringify({ type: "sheets_append_exception" }));
-    return { stored: false, reason: "sheets_error" };
+    if (attempt === APPEND_MAX_ATTEMPTS) {
+      return { stored: false, reason: "sheets_error", attempts: attempt };
+    }
+
+    await waitBeforeRetry(attempt);
   }
+
+  return { stored: false, reason: "sheets_error", attempts: APPEND_MAX_ATTEMPTS };
+}
+
+export async function storeLeadInGoogleSheet(
+  input: LeadSheetInput,
+  request?: Request,
+  initialAuth?: GoogleSheetsAuthResult
+): Promise<AppendLeadResult> {
+  for (let attempt = 1; attempt <= AUTH_MAX_ATTEMPTS; attempt += 1) {
+    const auth = attempt === 1 && initialAuth
+      ? initialAuth
+      : await prepareGoogleSheetsAuth(request);
+    const saved = await appendLeadToGoogleSheet(input, auth);
+
+    if (saved.reason !== "auth_error" || attempt === AUTH_MAX_ATTEMPTS) {
+      return saved;
+    }
+
+    cachedAccessToken = null;
+    await waitBeforeRetry(attempt);
+  }
+
+  return { stored: false, reason: "auth_error" };
 }

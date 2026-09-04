@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import {
-  appendLeadToGoogleSheet,
   prepareGoogleSheetsAuth,
+  storeLeadInGoogleSheet,
 } from "@/lib/google-sheets";
+import { classifyLeadDelivery } from "@/lib/lead-delivery";
 import {
   cleanAttribution,
   cleanSubmissionId,
@@ -12,7 +13,11 @@ import {
   isValidEmail,
   parseFormRequest,
 } from "@/lib/form-validation";
-import { renderFieldRows, sendNotification } from "@/lib/mailer";
+import {
+  renderFieldRows,
+  sendLeadStorageAlert,
+  sendNotification,
+} from "@/lib/mailer";
 
 const allowedProductInterests = new Set([
   "Tuck Boxes",
@@ -28,7 +33,10 @@ export async function POST(request: Request) {
   try {
     const input = await parseFormRequest(request, 14_000);
     if (isHoneypotFilled(input)) {
-      return NextResponse.json({ success: true, accepted: true });
+      return NextResponse.json({
+        success: true,
+        ...classifyLeadDelivery({ stored: false, delivered: false, ignored: true }),
+      });
     }
 
     const attribution = cleanAttribution(input.attribution);
@@ -70,6 +78,7 @@ export async function POST(request: Request) {
 
     const subject = `[UPG Sample Request] ${data.name} — ${data.company} — ${data.productInterest}`;
     const fields = renderFieldRows([
+      { label: "Submission ID", value: submissionId },
       { label: "Name", value: data.name },
       { label: "Company", value: data.company },
       { label: "Email", value: data.email },
@@ -94,9 +103,10 @@ export async function POST(request: Request) {
         html,
         text,
         replyTo: data.email,
+        idempotencyKey: `sample-request/${submissionId}`,
       }),
     ]);
-    const saved = await appendLeadToGoogleSheet(
+    const saved = await storeLeadInGoogleSheet(
       {
         submissionId,
         receivedAt,
@@ -120,12 +130,19 @@ export async function POST(request: Request) {
         utmContent: attribution.utm_content,
         utmTerm: attribution.utm_term,
       },
+      request,
       sheetsAuth
     );
 
-    if (!saved.stored && !mail.delivered) {
+    const delivery = classifyLeadDelivery({
+      stored: saved.stored,
+      delivered: mail.delivered,
+    });
+
+    if (!delivery.accepted) {
       console.error(JSON.stringify({
         type: "sample_request_delivery_failed",
+        submissionId,
         mailVia: mail.via,
         sheetsReason: saved.reason,
       }));
@@ -135,14 +152,40 @@ export async function POST(request: Request) {
       );
     }
 
+    let storageAlertDelivered: boolean | undefined;
+    if (!saved.stored && mail.delivered) {
+      const storageAlert = await sendLeadStorageAlert({
+        submissionId,
+        formName: "sample request",
+        reason: saved.reason,
+      });
+      storageAlertDelivered = storageAlert.delivered;
+      console.error(JSON.stringify({
+        type: "sample_request_crm_reconciliation_required",
+        submissionId,
+        sheetsReason: saved.reason,
+        alertDelivered: storageAlert.delivered,
+      }));
+    }
+
     console.log(JSON.stringify({
       type: "sample_request_accepted",
+      submissionId,
       stored: saved.stored,
       notified: mail.delivered,
+      sheetsReason: saved.reason,
+      sheetRow: saved.rowNumber,
+      sheetDeduplicated: saved.deduplicated,
+      sheetAttempts: saved.attempts,
+      storageAlertDelivered,
       receivedAt: receivedAt.toISOString(),
     }));
 
-    return NextResponse.json({ success: true, accepted: true });
+    return NextResponse.json({
+      success: true,
+      ...delivery,
+      submissionId,
+    });
   } catch (error) {
     if (error instanceof FormRequestError) {
       return NextResponse.json({ error: error.message }, { status: error.status });

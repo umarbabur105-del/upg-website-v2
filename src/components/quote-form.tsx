@@ -14,6 +14,7 @@ import {
 import { products, type ProductFamily } from "@/data/products";
 import { trackAnalyticsEvent, trackGenerateLead } from "@/lib/analytics";
 import { getLeadAttribution } from "@/lib/lead-attribution";
+import { shouldTrackGenerateLead } from "@/lib/lead-delivery";
 import {
   formatQuoteContext,
   QUICK_QUANTITIES,
@@ -323,10 +324,12 @@ export function QuoteForm({ prefill }: QuoteFormProps) {
         throw new Error(data.error ?? "Project enquiry submission failed");
       }
 
-      trackGenerateLead("quote_form", {
-        product_family: form.product_family,
-        product_style: form.product_style,
-      });
+      if (shouldTrackGenerateLead(data)) {
+        trackGenerateLead("quote_form", {
+          product_family: form.product_family,
+          product_style: form.product_style,
+        });
+      }
       setSubmitted(true);
     } catch (submissionError) {
       setError(

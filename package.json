@@ -10,6 +10,7 @@
     "audit:seo": "node scripts/seo-quality-audit.mjs",
     "test:moq": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/packaging-spec.test.mjs",
     "test:forms": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/form-validation.test.mjs",
+    "test:lead-delivery": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/lead-delivery.test.mjs",
     "test:format-finder": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/packaging-format-finder.test.mjs",
     "test:quote-form-ux": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/quote-form-ux.test.mjs",
     "test:analytics-consent": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/analytics-consent.test.mjs",

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { trackGenerateLead } from "@/lib/analytics";
 import { getLeadAttribution } from "@/lib/lead-attribution";
+import { shouldTrackGenerateLead } from "@/lib/lead-delivery";
 
 const productFamilies = [
   "Tuck Boxes",
@@ -57,7 +58,9 @@ export function ContactForm() {
       if (!res.ok || data.accepted !== true) {
         throw new Error(data.error ?? "Submission failed");
       }
-      trackGenerateLead("contact_form", { product_family: productFamily });
+      if (shouldTrackGenerateLead(data)) {
+        trackGenerateLead("contact_form", { product_family: productFamily });
+      }
       setSubmitted(true);
     } catch (submissionError) {
       setError(

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { trackGenerateLead } from "@/lib/analytics";
 import { getLeadAttribution } from "@/lib/lead-attribution";
+import { shouldTrackGenerateLead } from "@/lib/lead-delivery";
 
 const productInterests = [
   "Tuck Boxes",
@@ -70,6 +71,8 @@ export function SampleRequestForm() {
       });
       const result = (await response.json()) as {
         accepted?: boolean;
+        recorded?: boolean;
+        ignored?: boolean;
         error?: string;
       };
 
@@ -77,10 +80,12 @@ export function SampleRequestForm() {
         throw new Error(result.error ?? "Sample request could not be sent.");
       }
 
-      trackGenerateLead("sample_request_form", {
-        product_interest: productInterest,
-        shipping_country: shippingCountry,
-      });
+      if (shouldTrackGenerateLead(result)) {
+        trackGenerateLead("sample_request_form", {
+          product_interest: productInterest,
+          shipping_country: shippingCountry,
+        });
+      }
       setSubmitted(true);
     } catch (submissionError) {
       setError(
