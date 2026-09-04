@@ -137,6 +137,7 @@ export async function POST(request: Request) {
     const delivery = classifyLeadDelivery({
       stored: saved.stored,
       delivered: mail.delivered,
+      deduplicated: saved.deduplicated,
     });
 
     if (!delivery.accepted) {

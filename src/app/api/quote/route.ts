@@ -141,12 +141,11 @@ export async function POST(request: Request) {
 
     const html = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:640px;">
   <h2 style="font-size:18px;color:#111;margin:0 0 4px;">New UPG Project Enquiry</h2>
-  <p style="font-size:13px;color:#666;margin:0 0 16px;">Received ${new Date().toUTCString()}</p>
   <table style="border-collapse:collapse;width:100%;border:1px solid #eee;">${fields.html}</table>
   <p style="font-size:12px;color:#999;margin:16px 0 0;">Reply directly to this email to respond to ${data.name}.</p>
 </div>`;
 
-    const text = `New UPG Project Enquiry\nReceived ${new Date().toUTCString()}\n\n${fields.text}\n`;
+    const text = `New UPG Project Enquiry\n\n${fields.text}\n`;
 
     const replyTo = String(data.email).trim() || undefined;
 
@@ -199,6 +198,7 @@ export async function POST(request: Request) {
     const delivery = classifyLeadDelivery({
       stored: saved.stored,
       delivered: mail.delivered,
+      deduplicated: saved.deduplicated,
     });
 
     if (!delivery.accepted) {

@@ -14,6 +14,7 @@ test("tracks a lead only after the CRM record and notification both succeed", ()
     delivered: true,
     recorded: true,
     ignored: false,
+    deduplicated: false,
     partialFailure: false,
   });
   assert.equal(shouldTrackGenerateLead(delivery), true);
@@ -63,4 +64,17 @@ test("requires the explicit recorded flag from the server", () => {
     shouldTrackGenerateLead({ accepted: true, stored: true, ignored: false }),
     false
   );
+});
+
+test("does not count an idempotent retry as another conversion", () => {
+  const delivery = classifyLeadDelivery({
+    stored: true,
+    delivered: true,
+    deduplicated: true,
+  });
+
+  assert.equal(delivery.accepted, true);
+  assert.equal(delivery.recorded, true);
+  assert.equal(delivery.deduplicated, true);
+  assert.equal(shouldTrackGenerateLead(delivery), false);
 });

@@ -4,6 +4,7 @@ export type LeadDeliveryState = {
   delivered: boolean;
   recorded: boolean;
   ignored: boolean;
+  deduplicated: boolean;
   partialFailure: boolean;
 };
 
@@ -11,10 +12,12 @@ export function classifyLeadDelivery({
   stored,
   delivered,
   ignored = false,
+  deduplicated = false,
 }: {
   stored: boolean;
   delivered: boolean;
   ignored?: boolean;
+  deduplicated?: boolean;
 }): LeadDeliveryState {
   if (ignored) {
     return {
@@ -23,6 +26,7 @@ export function classifyLeadDelivery({
       delivered: false,
       recorded: false,
       ignored: true,
+      deduplicated: false,
       partialFailure: false,
     };
   }
@@ -35,6 +39,7 @@ export function classifyLeadDelivery({
     delivered,
     recorded: stored,
     ignored: false,
+    deduplicated,
     partialFailure: accepted && (!stored || !delivered),
   };
 }
@@ -44,5 +49,6 @@ export function shouldTrackGenerateLead(
 ): boolean {
   return response.accepted === true
     && response.recorded === true
-    && response.ignored !== true;
+    && response.ignored !== true
+    && response.deduplicated !== true;
 }

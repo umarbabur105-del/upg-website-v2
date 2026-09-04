@@ -73,6 +73,7 @@ export function SampleRequestForm() {
         accepted?: boolean;
         recorded?: boolean;
         ignored?: boolean;
+        deduplicated?: boolean;
         error?: string;
       };
 
