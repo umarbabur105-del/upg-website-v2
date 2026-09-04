@@ -521,8 +521,8 @@ export const industryGuides: IndustryGuide[] = [
       "flexible food packaging",
     ],
     image: {
-      src: "/images/generated/mylar-bags/mylar-bags-pouch-formats-v1.png",
-      alt: "Representative custom printed flexible pouch formats",
+      src: "/images/generated/industry-guides/custom-food-pouches-theme-v1.webp",
+      alt: "Stand-up, flat-bottom, and three-side-seal custom food pouch formats in the UPG visual theme",
     },
     quickAnswer:
       "UPG offers custom printed flexible packaging in stand-up, flat-bottom, three-side seal, spout, coffee bag, and rollstock formats. The contents, fill, intended market, film and barrier requirements, closure, dimensions, printing, quantity, and destination must be reviewed before the final specification is approved.",
