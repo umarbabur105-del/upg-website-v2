@@ -1,6 +1,13 @@
 import type { ProductFamily } from "@/data/products";
 import { productStyleGuides } from "@/data/product-styles";
 
+export interface IndustryGuideVisual {
+  src: string;
+  alt: string;
+  objectPosition?: string;
+  zoom?: number;
+}
+
 export interface IndustryGuide {
   slug: string;
   name: string;
@@ -13,7 +20,8 @@ export interface IndustryGuide {
   metaDescription: string;
   keywords: string[];
   image: { src: string; alt: string };
-  heroCompanionImages?: Array<{ src: string; alt: string }>;
+  heroMobileImage?: string;
+  heroCompanionImages?: IndustryGuideVisual[];
   quickAnswer: string;
   bestFor: string[];
   planningQuestions: Array<{ title: string; description: string }>;
@@ -104,9 +112,23 @@ export const industryGuides: IndustryGuide[] = [
       "custom supplement cartons",
     ],
     image: {
-      src: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
+      src: "/images/generated/industry-guides/custom-supplement-boxes-theme-v1.webp",
       alt: "Representative custom printed tuck box concept for a supplement outer carton",
     },
+    heroMobileImage: "/images/generated/industry-guides/custom-supplement-boxes-mobile-v1.webp",
+    heroCompanionImages: [
+      {
+        src: "/images/generated/industry-guides/custom-supplement-boxes-theme-v1.webp",
+        alt: "Open supplement outer carton showing its tuck flap and ivory and olive print",
+        objectPosition: "76% 50%",
+      },
+      {
+        src: "/images/generated/industry-guides/custom-supplement-boxes-theme-v1.webp",
+        alt: "Closed supplement outer carton with ivory, olive, and charcoal geometric artwork",
+        objectPosition: "20% 75%",
+        zoom: 1.4,
+      },
+    ],
     quickAnswer:
       "UPG can manufacture custom printed tuck boxes for supplement outer packaging. The container dimensions, carton style, quantity, required panel content, artwork status, intended market, and destination are reviewed before pricing and production details are confirmed.",
     bestFor: [

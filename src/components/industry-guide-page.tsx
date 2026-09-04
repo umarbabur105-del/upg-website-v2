@@ -7,6 +7,7 @@ import { getIndustryHubForGuideSlug } from "@/data/industry-hubs";
 import {
   industryGuides,
   type IndustryGuide,
+  type IndustryGuideVisual,
 } from "@/data/industry-guides";
 import { getProductStyleGuide } from "@/data/product-styles";
 import { getProductBySlug } from "@/data/products";
@@ -41,7 +42,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
             )
         )
         .slice(0, 3);
-  const heroCompanionVisuals = (
+  const heroCompanionVisuals: IndustryGuideVisual[] = (
     guide.heroCompanionImages ?? [
       ...products.flatMap((product) => [
         {
@@ -54,14 +55,12 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
         getIndustryLinkVisual(`/packaging-styles/${format.slug}`)
       ),
       ...related.map((item) => item.image),
-    ]
-  )
-    .filter(
+    ].filter(
       (visual, index, visuals) =>
         visual.src !== guide.image.src &&
         visuals.findIndex((candidate) => candidate.src === visual.src) === index
     )
-    .slice(0, 2);
+  ).slice(0, 2);
   const pageUrl = `${SITE_URL}/industries/${guide.slug}`;
   const quoteNote = `Industry or application: ${guide.shortName}.`;
   const quoteHref = `/get-a-quote?product=${encodeURIComponent(
@@ -281,18 +280,25 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
             <figure className="lg:col-span-6">
               <div className="grid grid-cols-5 gap-3">
                 <div className="relative col-span-5 aspect-[16/10] overflow-hidden bg-stone shadow-lift sm:col-span-4 sm:row-span-2 sm:aspect-auto sm:min-h-[31rem]">
-                  <Image
-                    src={guide.image.src}
-                    alt={guide.image.alt}
-                    fill
-                    priority
-                    className="object-cover transition-transform duration-700 hover:scale-[1.02]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 40vw"
-                  />
+                  <picture className="absolute inset-0">
+                    {guide.heroMobileImage && (
+                      <source media="(max-width: 639px)" srcSet={guide.heroMobileImage} />
+                    )}
+                    <Image
+                      src={guide.image.src}
+                      alt={guide.image.alt}
+                      fill
+                      priority={!guide.heroMobileImage}
+                      loading={guide.heroMobileImage ? "eager" : undefined}
+                      fetchPriority={guide.heroMobileImage ? "high" : undefined}
+                      className="object-cover transition-transform duration-700 hover:scale-[1.02]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 40vw"
+                    />
+                  </picture>
                 </div>
-                {heroCompanionVisuals.map((visual) => (
+                {heroCompanionVisuals.map((visual, index) => (
                   <div
-                    key={visual.src}
+                    key={`${visual.src}-${index}`}
                     className="relative col-span-1 hidden min-h-60 overflow-hidden bg-stone sm:block"
                   >
                     <Image
@@ -300,6 +306,11 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                       alt={visual.alt}
                       fill
                       className="object-cover"
+                      style={{
+                        objectPosition: visual.objectPosition,
+                        transform: visual.zoom ? `scale(${visual.zoom})` : undefined,
+                        transformOrigin: visual.objectPosition,
+                      }}
                       sizes="(max-width: 1024px) 20vw, 10vw"
                     />
                   </div>
