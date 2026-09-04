@@ -588,8 +588,8 @@ export const industryGuides: IndustryGuide[] = [
       "printed supplement bags",
     ],
     image: {
-      src: "/images/generated/mylar-bags/mylar-bags-flat-bottom-v1.png",
-      alt: "Representative custom printed flat-bottom flexible bag",
+      src: "/images/generated/industry-guides/custom-supplement-pouches-theme-v1.webp",
+      alt: "Custom supplement pouches with capsule and powder props",
     },
     quickAnswer:
       "UPG can develop custom printed flexible packaging for supplement projects in approved pouch or rollstock formats. Product contents, fill, intended market, film and barrier requirements, closure, dimensions, artwork, quantity, and destination require review before final approval.",
