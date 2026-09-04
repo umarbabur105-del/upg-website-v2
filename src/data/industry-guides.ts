@@ -13,6 +13,7 @@ export interface IndustryGuide {
   metaDescription: string;
   keywords: string[];
   image: { src: string; alt: string };
+  heroCompanionImages?: Array<{ src: string; alt: string }>;
   quickAnswer: string;
   bestFor: string[];
   planningQuestions: Array<{ title: string; description: string }>;
@@ -591,6 +592,16 @@ export const industryGuides: IndustryGuide[] = [
       src: "/images/generated/industry-guides/custom-supplement-pouches-theme-v1.webp",
       alt: "Custom supplement pouches with capsule and powder props",
     },
+    heroCompanionImages: [
+      {
+        src: "/images/generated/industry-guides/custom-supplement-pouches-detail-flat-bottom-v1.webp",
+        alt: "Close-up of an ivory, olive, and charcoal flat-bottom supplement pouch",
+      },
+      {
+        src: "/images/generated/industry-guides/custom-supplement-pouches-detail-props-v1.webp",
+        alt: "Supplement pouch beside a capsule dish and powder scoop",
+      },
+    ],
     quickAnswer:
       "UPG can develop custom printed flexible packaging for supplement projects in approved pouch or rollstock formats. Product contents, fill, intended market, film and barrier requirements, closure, dimensions, artwork, quantity, and destination require review before final approval.",
     bestFor: [

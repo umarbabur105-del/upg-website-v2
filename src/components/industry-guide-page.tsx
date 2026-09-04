@@ -41,19 +41,21 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
             )
         )
         .slice(0, 3);
-  const heroCompanionVisuals = [
-    ...products.flatMap((product) => [
-      {
-        src: product.heroImage,
-        alt: `${product.shortName} packaging concept for ${guide.shortName.toLowerCase()}`,
-      },
-      ...product.galleryImages,
-    ]),
-    ...formatGuides.map((format) =>
-      getIndustryLinkVisual(`/packaging-styles/${format.slug}`)
-    ),
-    ...related.map((item) => item.image),
-  ]
+  const heroCompanionVisuals = (
+    guide.heroCompanionImages ?? [
+      ...products.flatMap((product) => [
+        {
+          src: product.heroImage,
+          alt: `${product.shortName} packaging concept for ${guide.shortName.toLowerCase()}`,
+        },
+        ...product.galleryImages,
+      ]),
+      ...formatGuides.map((format) =>
+        getIndustryLinkVisual(`/packaging-styles/${format.slug}`)
+      ),
+      ...related.map((item) => item.image),
+    ]
+  )
     .filter(
       (visual, index, visuals) =>
         visual.src !== guide.image.src &&
