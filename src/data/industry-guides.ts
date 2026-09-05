@@ -19,7 +19,8 @@ export interface IndustryGuide {
   heroDescription: string;
   metaDescription: string;
   keywords: string[];
-  image: { src: string; alt: string };
+  image: { src: string; alt: string; objectFit?: "contain" };
+  heroLayout?: "full-scene";
   heroMobileImage?: string;
   heroCompanionImages?: IndustryGuideVisual[];
   quickAnswer: string;
@@ -256,9 +257,25 @@ export const industryGuides: IndustryGuide[] = [
       "candle gift boxes",
     ],
     image: {
-      src: "/images/generated/magnetic-boxes/magnetic-boxes-insert-v1.png",
-      alt: "Representative premium magnetic presentation box with a fitted insert",
+      src: "/images/generated/industry-guides/custom-candle-boxes-theme-v1.webp",
+      alt: "Representative candle tuck carton and magnetic presentation box with candle jar props",
+      objectFit: "contain",
     },
+    heroLayout: "full-scene",
+    heroCompanionImages: [
+      {
+        src: "/images/generated/industry-guides/custom-candle-boxes-theme-v1.webp",
+        alt: "Detail of the representative candle tuck carton and its folded top closure",
+        objectPosition: "10% 20%",
+        zoom: 1.7,
+      },
+      {
+        src: "/images/generated/industry-guides/custom-candle-boxes-theme-v1.webp",
+        alt: "Detail of candle jar props in the representative magnetic box insert",
+        objectPosition: "85% 75%",
+        zoom: 1.5,
+      },
+    ],
     quickAnswer:
       "UPG can develop a tuck box for an individual retail candle or a magnetic box for premium presentation. The final recommendation depends on the candle container, product arrangement, desired opening experience, insert plan, quantity, artwork, and destination.",
     bestFor: [

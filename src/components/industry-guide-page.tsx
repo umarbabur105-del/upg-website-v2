@@ -61,6 +61,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
         visuals.findIndex((candidate) => candidate.src === visual.src) === index
     )
   ).slice(0, 2);
+  const isFullSceneHero = guide.heroLayout === "full-scene";
   const pageUrl = `${SITE_URL}/industries/${guide.slug}`;
   const quoteNote = `Industry or application: ${guide.shortName}.`;
   const quoteHref = `/get-a-quote?product=${encodeURIComponent(
@@ -278,8 +279,10 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
             </div>
 
             <figure className="lg:col-span-6">
-              <div className="grid grid-cols-5 gap-3">
-                <div className="relative col-span-5 aspect-[16/10] overflow-hidden bg-stone shadow-lift sm:col-span-4 sm:row-span-2 sm:aspect-auto sm:min-h-[31rem]">
+              <div className={isFullSceneHero ? "grid grid-cols-2 gap-3" : "grid grid-cols-5 gap-3"}>
+                <div className={isFullSceneHero
+                  ? "relative col-span-2 aspect-square overflow-hidden bg-stone shadow-lift"
+                  : "relative col-span-5 aspect-[16/10] overflow-hidden bg-stone shadow-lift sm:col-span-4 sm:row-span-2 sm:aspect-auto sm:min-h-[31rem]"}>
                   <picture className="absolute inset-0">
                     {guide.heroMobileImage && (
                       <source media="(max-width: 639px)" srcSet={guide.heroMobileImage} />
@@ -292,14 +295,18 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                       loading={guide.heroMobileImage ? "eager" : undefined}
                       fetchPriority={guide.heroMobileImage ? "high" : undefined}
                       className="object-cover transition-transform duration-700 hover:scale-[1.02]"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 40vw"
+                      sizes={isFullSceneHero
+                        ? "(max-width: 1024px) 100vw, 50vw"
+                        : "(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 40vw"}
                     />
                   </picture>
                 </div>
                 {heroCompanionVisuals.map((visual, index) => (
                   <div
                     key={`${visual.src}-${index}`}
-                    className="relative col-span-1 hidden min-h-60 overflow-hidden bg-stone sm:block"
+                    className={isFullSceneHero
+                      ? "relative col-span-1 hidden aspect-[3/2] overflow-hidden bg-stone sm:block"
+                      : "relative col-span-1 hidden min-h-60 overflow-hidden bg-stone sm:block"}
                   >
                     <Image
                       src={visual.src}
@@ -311,7 +318,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                         transform: visual.zoom ? `scale(${visual.zoom})` : undefined,
                         transformOrigin: visual.objectPosition,
                       }}
-                      sizes="(max-width: 1024px) 20vw, 10vw"
+                      sizes={isFullSceneHero ? "(max-width: 1024px) 50vw, 25vw" : "(max-width: 1024px) 20vw, 10vw"}
                     />
                   </div>
                 ))}
@@ -578,6 +585,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                       alt={item.image.alt}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      style={{ objectFit: item.image.objectFit }}
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </span>

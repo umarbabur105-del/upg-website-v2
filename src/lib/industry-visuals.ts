@@ -6,6 +6,7 @@ import { getProductBySlug, products } from "@/data/products";
 export interface IndustryVisual {
   src: string;
   alt: string;
+  objectFit?: "contain";
 }
 
 const cosmeticsVisuals: Record<string, IndustryVisual> = {

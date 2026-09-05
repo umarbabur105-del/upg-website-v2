@@ -277,6 +277,7 @@ export default function IndustriesPage() {
                           alt={getIndustryLinkVisual(item.href).alt}
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                          style={{ objectFit: getIndustryLinkVisual(item.href).objectFit }}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                       </span>
