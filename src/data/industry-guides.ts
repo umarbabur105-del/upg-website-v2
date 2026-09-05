@@ -330,9 +330,25 @@ export const industryGuides: IndustryGuide[] = [
       "magnetic apparel boxes",
     ],
     image: {
-      src: "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-hero-v1.png",
-      alt: "Representative custom collapsible magnetic apparel presentation box",
+      src: "/images/generated/industry-guides/custom-apparel-boxes-theme-v1.webp",
+      alt: "Representative olive apparel presentation box with a folded ivory shirt and matching hang-tag",
+      objectFit: "contain",
     },
+    heroLayout: "full-scene",
+    heroCompanionImages: [
+      {
+        src: "/images/generated/industry-guides/custom-apparel-boxes-theme-v1.webp",
+        alt: "Detail of the folded shirt collar and matching olive hang-tag inside the apparel box",
+        objectPosition: "55% 68%",
+        zoom: 1.55,
+      },
+      {
+        src: "/images/generated/industry-guides/custom-apparel-boxes-theme-v1.webp",
+        alt: "Detail of the olive apparel box front panel and fitted shirt presentation",
+        objectPosition: "70% 95%",
+        zoom: 1.6,
+      },
+    ],
     quickAnswer:
       "UPG manufactures custom magnetic and collapsible magnetic boxes for apparel presentation. The box is developed around the folded product size, arrangement, opening experience, insert or tissue plan, quantity, artwork, and delivery destination.",
     bestFor: [
