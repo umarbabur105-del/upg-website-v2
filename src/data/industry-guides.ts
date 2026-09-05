@@ -403,9 +403,25 @@ export const industryGuides: IndustryGuide[] = [
       "magnetic jewelry boxes",
     ],
     image: {
-      src: "/images/generated/magnetic-boxes/magnetic-boxes-open-v1.png",
-      alt: "Representative open custom magnetic presentation box",
+      src: "/images/generated/industry-guides/custom-jewelry-boxes-theme-v1.webp",
+      alt: "Representative botanical magnetic jewelry box with an ivory insert, pearl pendant necklace, and matching earrings",
+      objectFit: "contain",
     },
+    heroLayout: "full-scene",
+    heroCompanionImages: [
+      {
+        src: "/images/generated/industry-guides/custom-jewelry-boxes-theme-v1.webp",
+        alt: "Detail of the pearl pendant necklace and matching earrings arranged in the ivory jewelry insert",
+        objectPosition: "62% 70%",
+        zoom: 1.8,
+      },
+      {
+        src: "/images/generated/industry-guides/custom-jewelry-boxes-theme-v1.webp",
+        alt: "Detail of the olive and ivory botanical print on the magnetic jewelry box front panel",
+        objectPosition: "60% 96%",
+        zoom: 1.6,
+      },
+    ],
     quickAnswer:
       "UPG manufactures magnetic and collapsible magnetic presentation boxes that can be planned around a jewelry product or set. Final dimensions, closure, insert layout, wraps, artwork, finishes, quantity, and destination require project review.",
     bestFor: [
