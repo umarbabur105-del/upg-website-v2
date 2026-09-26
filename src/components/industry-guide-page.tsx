@@ -47,7 +47,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
       ...products.flatMap((product) => [
         {
           src: product.heroImage,
-          alt: `${product.shortName} packaging concept for ${guide.shortName.toLowerCase()}`,
+          alt: `${product.shortName} packaging for ${guide.shortName.toLowerCase()}`,
         },
         ...product.galleryImages,
       ]),
@@ -325,9 +325,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
               </div>
               <figcaption className="mt-3 flex flex-col gap-1 text-xs leading-relaxed text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
                 <span>
-                  Representative packaging concepts. Final construction,
-                  dimensions, color, print, insert, and finish are confirmed for
-                  each project.
+                  Custom sizes, branded printing and finishing options for your products.
                 </span>
                 <span className="shrink-0">Reviewed {guide.reviewedAt}</span>
               </figcaption>
@@ -385,7 +383,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
                   <span className="relative min-h-32 overflow-hidden bg-stone">
                     <Image
                       src={product.heroImage}
-                      alt={`${product.shortName} representative packaging concept`}
+                      alt={`${product.shortName} packaging`}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                       sizes="96px"

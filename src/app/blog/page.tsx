@@ -119,9 +119,6 @@ export default function BlogPage() {
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-charcoal/35 via-transparent to-transparent" />
-            <p className="absolute right-4 bottom-4 left-4 text-xs leading-relaxed text-offwhite/82">
-              Representative packaging concepts and capability references, not customer work.
-            </p>
           </div>
         </div>
       </section>

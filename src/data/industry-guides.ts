@@ -55,7 +55,7 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/tuck-boxes/tuck-boxes-seal-end-v1.png",
-      alt: "Representative custom seal-end cereal-style carton concept",
+      alt: "Custom seal-end cereal-style carton",
     },
     quickAnswer:
       "UPG manufactures custom cereal boxes as part of its seal-end tuck box range. A useful quote requires the finished dimensions, quantity, intended packing and sealing method, board and print direction, artwork status, and delivery destination.",
@@ -114,7 +114,7 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/industry-guides/custom-supplement-boxes-theme-v1.webp",
-      alt: "Representative custom printed tuck box concept for a supplement outer carton",
+      alt: "Custom printed tuck box for a supplement outer carton",
     },
     heroMobileImage: "/images/generated/industry-guides/custom-supplement-boxes-mobile-v1.webp",
     heroCompanionImages: [
@@ -187,18 +187,18 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/industry-guides/custom-soap-boxes-theme-v1.webp",
-      alt: "Representative custom printed tuck boxes for soap outer packaging",
+      alt: "Custom printed tuck boxes for soap outer packaging",
     },
     heroCompanionImages: [
       {
         src: "/images/generated/industry-guides/custom-soap-boxes-theme-v1.webp",
-        alt: "Representative closed soap outer carton with ivory, olive, and charcoal artwork",
+        alt: "Closed soap outer carton with ivory, olive, and charcoal artwork",
         objectPosition: "32% 66%",
         zoom: 1.8,
       },
       {
         src: "/images/generated/industry-guides/custom-soap-boxes-theme-v1.webp",
-        alt: "Representative open soap outer carton showing its tuck flap and printed panels",
+        alt: "Open soap outer carton showing its tuck flap and printed panels",
         objectPosition: "64% 50%",
         zoom: 1.8,
       },
@@ -258,20 +258,20 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/industry-guides/custom-candle-boxes-theme-v1.webp",
-      alt: "Representative candle tuck carton and magnetic presentation box with candle jar props",
+      alt: "Candle tuck carton and magnetic presentation box with candle jar props",
       objectFit: "contain",
     },
     heroLayout: "full-scene",
     heroCompanionImages: [
       {
         src: "/images/generated/industry-guides/custom-candle-boxes-theme-v1.webp",
-        alt: "Detail of the representative candle tuck carton and its folded top closure",
+        alt: "Detail of the candle tuck carton and its folded top closure",
         objectPosition: "10% 20%",
         zoom: 1.7,
       },
       {
         src: "/images/generated/industry-guides/custom-candle-boxes-theme-v1.webp",
-        alt: "Detail of candle jar props in the representative magnetic box insert",
+        alt: "Detail of candle jar props in the magnetic box insert",
         objectPosition: "85% 75%",
         zoom: 1.5,
       },
@@ -331,7 +331,7 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/industry-guides/custom-apparel-boxes-theme-v1.webp",
-      alt: "Representative olive apparel presentation box with a folded ivory shirt and matching hang-tag",
+      alt: "Olive apparel presentation box with a folded ivory shirt and matching hang-tag",
       objectFit: "contain",
     },
     heroLayout: "full-scene",
@@ -404,7 +404,7 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/industry-guides/custom-jewelry-boxes-theme-v1.webp",
-      alt: "Representative botanical magnetic jewelry box with an ivory insert, pearl pendant necklace, and matching earrings",
+      alt: "Botanical magnetic jewelry box with an ivory insert, pearl pendant necklace, and matching earrings",
       objectFit: "contain",
     },
     heroLayout: "full-scene",
@@ -477,7 +477,7 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/magnetic-boxes/magnetic-boxes-sizes-v1.png",
-      alt: "Representative custom magnetic presentation boxes in multiple sizes",
+      alt: "Custom magnetic presentation boxes in multiple sizes",
     },
     quickAnswer:
       "UPG can manufacture magnetic and collapsible magnetic presentation boxes for electronics projects. The device, accessories, arrangement, insert, closure, dimensions, artwork, quantity, and destination are reviewed before the structure and pricing are confirmed.",
@@ -543,7 +543,7 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
-      alt: "Representative custom printed retail tuck boxes",
+      alt: "Custom printed retail tuck boxes",
     },
     quickAnswer:
       "UPG manufactures custom printed retail boxes across straight tuck, reverse tuck, auto-lock, interlock, and seal-end structures. The right starting structure depends on the product, dimensions, packing method, panel layout, quantity, artwork, and destination.",
@@ -746,14 +746,14 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/mylar-bags/mylar-bags-spout-rollstock-v1.png",
-      alt: "Representative custom spout pouch and printed flexible rollstock",
+      alt: "Custom spout pouch and printed flexible rollstock",
     },
     quickAnswer:
       "UPG offers custom spout pouches and other approved flexible formats for beverage projects after the contents, fill volume, filling process, spout, film and barrier requirements, seals, printing, quantity, intended market, and destination are reviewed.",
     bestFor: [
       "Custom spout pouch projects",
       "Printed flexible beverage packs",
-      "Single-serve or multi-serve concepts",
+      "Single-serve or multi-serve formats",
       "Projects requiring a reviewed fill and closure brief",
     ],
     planningQuestions: [
@@ -806,7 +806,7 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
-      alt: "Representative custom premium magnetic gift box",
+      alt: "Custom premium magnetic gift box",
     },
     quickAnswer:
       "UPG manufactures custom magnetic and collapsible magnetic gift boxes with approved branding, insert, and premium finish options. The final structure is developed around the products, arrangement, presentation goal, quantity, artwork, and destination.",
@@ -869,13 +869,13 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
-      alt: "Representative custom printed flexible pouch concepts",
+      alt: "Custom printed flexible pouch",
     },
     quickAnswer:
       "UPG can develop custom printed Mylar bags for pet food and treat projects in its current stand-up, flat-bottom, three-side seal, and rollstock formats. The contents, fill, closure, film brief, process, artwork, quantity, intended market, and destination must be reviewed before the final specification is approved.",
     bestFor: [
       "Printed pet treat pouches",
-      "Stand-up and flat-bottom pack concepts",
+      "Stand-up and flat-bottom pouch formats",
       "Three-side seal projects",
       "Printed rollstock requirements",
     ],
@@ -936,13 +936,13 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/mylar-bags/mylar-bags-pouch-formats-v1.png",
-      alt: "Representative custom printed flexible pouch formats",
+      alt: "Custom printed flexible pouch formats",
     },
     quickAnswer:
       "UPG can quote current Mylar bag formats for snack and confectionery projects and can also review a custom seal-end outer carton when that structure fits the brief. Contents, fill, packing process, film or board specification, closure, artwork, quantity, intended market, and destination require review before approval.",
     bestFor: [
       "Printed snack and candy pouches",
-      "Stand-up and flat-bottom pack concepts",
+      "Stand-up and flat-bottom pouch formats",
       "Three-side seal and rollstock projects",
       "Seal-end retail outer cartons",
     ],
@@ -1008,7 +1008,7 @@ export const industryGuides: IndustryGuide[] = [
     ],
     image: {
       src: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
-      alt: "Representative corrugated ear-lock presentation mailer with a custom insert",
+      alt: "Corrugated ear-lock presentation mailer with a custom insert",
     },
     quickAnswer:
       "UPG can review tuck boxes for individual retail products, corrugated ear-lock mailers for branded presentation, and fixed or collapsible magnetic boxes for premium sets. The complete product arrangement, dimensions, weights, insert plan, opening sequence, artwork, quantity, and destination determine the correct starting structure.",

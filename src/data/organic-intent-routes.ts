@@ -449,7 +449,7 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
       "UPG manufactures custom printed outer packaging around the finished skincare product. Start with the actual jar, pump, bottle, tube, or packed arrangement instead of a generic skincare-box size.",
     visual: {
       src: "/images/redesign/samples/sample-skincare.jpg",
-      alt: "Representative custom skincare outer packaging and presentation set",
+      alt: "Custom skincare outer packaging and presentation set",
       caption:
         "Individual skincare products can begin with a fitted folding carton; multi-product sets need the complete arrangement before a presentation box and insert are developed.",
     },
@@ -499,7 +499,7 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
       "UPG manufactures custom printed outer packaging around the finished serum product. Bottle dimensions and the intended presentation define the correct starting route.",
     visual: {
       src: "/images/redesign/samples/sample-skincare.jpg",
-      alt: "Representative custom serum outer carton and skincare presentation packaging",
+      alt: "Custom serum outer carton and skincare presentation packaging",
       caption:
         "The finished serum bottle defines the carton proportions; a multi-product presentation needs a separate arrangement and insert review.",
     },
@@ -540,7 +540,7 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
       "UPG manufactures custom printed outer packaging around the finished perfume product. Bottle dimensions, weight, orientation, and the intended opening experience define the starting route.",
     visual: {
       src: "/images/generated/magnetic-boxes/magnetic-boxes-open-v1.png",
-      alt: "Representative open magnetic presentation box for a premium fragrance project",
+      alt: "Open magnetic presentation box for a premium fragrance project",
       caption:
         "A premium presentation format is developed around the actual bottle arrangement and insert plan; one retail bottle can start with a fitted folding carton.",
     },

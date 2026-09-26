@@ -97,13 +97,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
               </div>
               {buyerGuide ? (
                 <p className="mt-4 text-sm text-muted-foreground">
-                  Priced for your specification. Compare quantities, print and insert options in a written project quote.
-                </p>
-              ) : null}
-              {product.reviewedAt ? (
-                <p className="mt-5 text-xs text-muted-foreground">
-                  Product facts reviewed {product.reviewedAt}. Final written
-                  project terms control pricing and production.
+                  Choose your quantity and share your product details for a tailored quote.
                 </p>
               ) : null}
             </div>
@@ -119,11 +113,6 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
-              {buyerGuide ? (
-                <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                  Illustrative concept, not a customer order or production sample.
-                </p>
-              ) : null}
             </div>
           </div>
         </div>
@@ -197,15 +186,13 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
         <div className="container-editorial">
           <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <div className="eyebrow mb-3">Product views</div>
+              <div className="eyebrow mb-3">Design options</div>
               <h2 className="text-3xl font-light tracking-[-0.025em] text-foreground sm:text-4xl">
-                {buyerGuide ? "Turn a packaging idea into a useful brief." : "See the format from more than one angle."}
+                {buyerGuide ? "Printing, inserts & finishes." : "Explore your packaging options."}
               </h2>
             </div>
             <p className="max-w-xl text-xs leading-relaxed text-muted-foreground">
-              {buyerGuide
-                ? "Illustrative packaging concepts, not photographs of customer orders or production samples. Final construction, color, print and finish are confirmed for your project."
-                : "Representative concepts. Final construction, color, print, and finish are confirmed for each project."}
+              Choose the size, printing and finishing details that bring your brand to life.
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
@@ -225,15 +212,14 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                 <figcaption className="border-t border-border px-4 py-4 text-sm leading-relaxed text-muted-foreground">
                   {example ? (
                     <>
-                      <div className="text-xs">Illustrative concept</div>
-                      <h3 className="mt-2 text-lg font-semibold text-foreground">{example.title}</h3>
+                      <h3 className="text-lg font-semibold text-foreground">{example.title}</h3>
                       <p className="mt-2">{example.description}</p>
                       <Link
                         href={productBriefHref(product.family, example.quoteNote)}
                         className="mt-3 inline-flex min-h-11 items-center border-b border-foreground/20 text-sm font-semibold text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-                        aria-label={`Start a brief: ${example.title}`}
+                        aria-label={`Get a quote: ${example.title}`}
                       >
-                        Start a similar brief →
+                        Get a quote for this style →
                       </Link>
                     </>
                   ) : image.alt}
@@ -249,8 +235,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
         <div className="container-editorial max-w-5xl">
           <SectionHeading
             eyebrow="More guidance, when you need it"
-            title="Open only the details relevant to your project."
-            intro="Structure guides, applications, comparisons, and artwork notes stay available without blocking the quote path."
+            title="Find the right fit for your product."
+            intro="Compare structures, explore packaging for your industry, and get your artwork ready."
             headingClassName="text-4xl font-light tracking-[-0.03em] text-balance md:text-5xl"
           />
 

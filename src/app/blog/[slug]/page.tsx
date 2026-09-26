@@ -290,9 +290,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent" />
-                <p className="absolute right-4 bottom-4 left-4 text-xs leading-relaxed text-offwhite/82">
-                  Representative packaging concept or capability reference, not completed customer work.
-                </p>
               </div>
             </div>
           </div>

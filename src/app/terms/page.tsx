@@ -27,7 +27,7 @@ export default function TermsPage() {
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Website information</h2>
-            <p className="mt-3">Website content, representative images, planning MOQs, materials, finishes, and production information are general guidance, not a binding offer or guarantee. Final appearance, construction, suitability, availability, pricing, and timing depend on the confirmed specification and production review.</p>
+            <p className="mt-3">Website content, product images, planning MOQs, materials, finishes, and production information are general guidance, not a binding offer or guarantee. Final appearance, construction, suitability, availability, pricing, and timing depend on the confirmed specification and production review.</p>
           </div>
           <div>
             <h2 className="font-serif text-2xl text-charcoal">Quotes and projects</h2>

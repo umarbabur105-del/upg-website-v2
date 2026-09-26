@@ -203,12 +203,12 @@ export const products: Product[] = [
       {
         question: "Can I compare prices for 250, 500 and 1,000 custom mailer boxes?",
         answer:
-          "Yes. Request those quantity breaks on the same box dimensions, corrugated construction, artwork, printing and insert specification. They are comparison quantities, not published price tiers. Other quantities from the 250-unit planning minimum can also be reviewed. Different sizes or artworks are not automatically combined to meet the minimum.",
+          "Yes. Ask for quotes at 250, 500 and 1,000 units with the same box dimensions, corrugated construction, printing and inserts. We can also quote other quantities from 250 units. For multiple sizes or artwork versions, share your planned mix so we can confirm the minimum for each.",
       },
       {
         question: "Does a custom mailer quote include shipping and taxes?",
         answer:
-          "Only the written project quote confirms what is included. Share the delivery country, city and postal code, then check freight, duties, taxes and delivery terms alongside the manufacturing price. A unit price alone is not the total delivered order cost.",
+          "Share your delivery country, city and postal code so we can plan the delivery with your order. Your written quote confirms the manufacturing price and which freight, duties and taxes are included, giving you a clear basis for comparing the total cost.",
       },
       {
         question: "Is an ear-lock presentation mailer the same as a shipping carton?",
@@ -363,22 +363,22 @@ export const products: Product[] = [
       {
         question: "Are collapsible magnetic boxes always cheaper to ship?",
         answer:
-          "No fixed saving is promised. The box folds flat before assembly, but the complete packing configuration, inserts, quantity, destination and freight service determine the delivery plan. Compare the total written quotes for collapsible and assembled magnetic boxes on the same project brief.",
+          "Fold-flat boxes take up less space before assembly. The delivery cost depends on the packing configuration, inserts, quantity, destination and freight service. Ask us to compare collapsible and assembled magnetic boxes for your project.",
       },
       {
         question: "Can I compare 250, 500 and 1,000 collapsible magnetic boxes?",
         answer:
-          "Yes. Ask for quantity breaks while keeping size, folding construction, wrap, printing, inserts and finishes consistent. Other quantities from the 250-unit planning minimum can be reviewed. Separate dimensions or artworks are not automatically combined into one minimum, and no fixed unit price is implied by these quantities.",
+          "Yes. Compare quotes at 250, 500 and 1,000 units with the same size, folding construction, wrap, printing, inserts and finishes. Other quantities from 250 units are welcome. Share any different sizes or artwork versions so we can confirm the minimum for each.",
       },
       {
         question: "Who assembles the fold-flat boxes and fits the inserts?",
         answer:
-          "Include the assembly and packing owner in the brief. UPG reviews the folding method, magnetic closure, insert plan and how the components should be supplied before final approval. Do not assume assembly or packing services are included unless the written quote confirms them.",
+          "Tell us who will assemble the boxes and pack the products. We will plan the folding method, magnetic closure, insert layout and how the components are supplied around that process. Your written quote sets out the agreed scope, including any assembly or packing services.",
       },
       {
         question: "Can I check the structure before committing to production?",
         answer:
-          "Ask about the sample and proofing options for your proposed structure. Availability, cost, timing and approval requirements are confirmed for the project. The images on this page are illustrative concepts, not production samples or proof that a particular construction has been tested.",
+          "Yes. Share your box dimensions and design direction to discuss sample and proofing options. We will confirm the available options, cost and timing before you choose how to proceed.",
       },
     ],
     buyerDecisionFaq: {

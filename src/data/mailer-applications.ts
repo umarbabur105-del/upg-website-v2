@@ -88,7 +88,7 @@ export const mailerApplications: MailerApplication[] = [
     },
     image: {
       src: "/images/generated/mailer-boxes/mailer-boxes-inside-print-v1.png",
-      alt: "Representative custom PR mailer box concept with interior printing",
+      alt: "Custom PR mailer box with interior printing",
     },
     quickAnswer:
       "A custom PR box is a branded ear-lock corrugated mailer planned for product launches, press outreach, media kits, gifting, or event presentation. The box can combine exterior and interior print with a custom insert after the product arrangement and dimensions are reviewed.",
@@ -179,7 +179,7 @@ export const mailerApplications: MailerApplication[] = [
       "Choose this route when creator seeding, campaign drops, or branded social outreach define the program.",
     image: {
       src: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
-      alt: "Representative custom influencer kit concept with a fitted product insert",
+      alt: "Custom influencer kit with a fitted product insert",
     },
     quickAnswer:
       "An influencer mailer box is an ear-lock corrugated presentation box made for creator seeding, campaign launches, or branded social outreach. It can organize one or several products with coordinated print and a custom insert after the product arrangement is reviewed.",
@@ -311,7 +311,7 @@ export const mailerApplications: MailerApplication[] = [
     },
     image: {
       src: "/images/generated/mailer-boxes/mailer-boxes-sizes-v1.png",
-      alt: "Representative custom subscription mailer box concepts in multiple sizes",
+      alt: "Custom subscription mailer box in multiple sizes",
     },
     quickAnswer:
       "A custom subscription box is a branded ear-lock corrugated mailer planned for a recurring program. The structure should reflect the typical product range, intended presentation, quantity, and delivery requirements, with any changing assortment reviewed before final specifications are approved.",
@@ -431,7 +431,7 @@ export const mailerApplications: MailerApplication[] = [
     },
     image: {
       src: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
-      alt: "Representative branded ecommerce ear-lock mailer box concept",
+      alt: "Branded ecommerce ear-lock mailer box",
     },
     quickAnswer:
       "A branded ecommerce mailer is an ear-lock corrugated presentation box developed around the product, artwork, and intended unboxing experience. UPG's offer is custom mailer packaging—not regular shipping cartons, master cartons, or RSC cases—and delivery requirements are reviewed per project.",
