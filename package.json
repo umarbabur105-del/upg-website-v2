@@ -11,6 +11,8 @@
     "test:moq": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/packaging-spec.test.mjs",
     "test:forms": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/form-validation.test.mjs",
     "test:lead-delivery": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/lead-delivery.test.mjs",
+    "test:google-sheets": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/google-sheets.test.mjs",
+    "test:analytics-config": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/analytics-config.test.mjs",
     "test:format-finder": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/packaging-format-finder.test.mjs",
     "test:quote-form-ux": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/quote-form-ux.test.mjs",
     "test:analytics-consent": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/analytics-consent.test.mjs",
@@ -28,7 +30,7 @@
     "@stripe/stripe-js": "^9.13.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.36.0",
-    "next": "^16.2.12",
+    "next": "^16.3.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "stripe": "^22.4.0"
@@ -39,13 +41,13 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^16.2.12",
+    "eslint-config-next": "^16.3.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
   "overrides": {
     "nanoid": "3.3.18",
     "postcss": "8.5.25",
-    "sharp": "0.35.3"
+    "sharp": "0.35.4"
   }
 }

@@ -20,6 +20,7 @@ from collections import Counter
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 
 DEFAULT_CREDENTIAL = (
@@ -32,6 +33,10 @@ SEARCH_CONSOLE_SITE = os.getenv(
 )
 LEADS_SHEET_ID = os.getenv(
     "UPG_LEADS_SPREADSHEET_ID", "1nIMeqtTF9mv0gYxbI83GbgTatY0WdnSlfm3d009hxqQ"
+)
+GA4_REPORTING_TIMEZONE = os.getenv("UPG_GA4_REPORTING_TIMEZONE", "America/New_York")
+SEARCH_CONSOLE_REPORTING_TIMEZONE = os.getenv(
+    "UPG_SEARCH_CONSOLE_REPORTING_TIMEZONE", "America/Los_Angeles"
 )
 BRAND_TERMS = (
     "universal packaging",
@@ -85,10 +90,25 @@ AI_SOURCES = (
 SEARCH_SOURCES = ("google.", "bing.", "search.yahoo.", "duckduckgo.")
 BRAND_ALIAS_UTM_SOURCE = "withupg"
 FUNNEL_EVENT_NAMES = (
+    "quote_form_start",
     "form_start",
     "generate_lead",
     "begin_checkout",
     "purchase",
+)
+QA_MARKERS = frozenset(
+    {
+        "codex-verification",
+        "codex_integration_test",
+        "production_delivery_verification",
+    }
+)
+QA_MARKER_FIELDS = (
+    "UTM Source",
+    "UTM Medium",
+    "UTM Campaign",
+    "UTM Content",
+    "UTM Term",
 )
 TOOL_EVENT_NAMES = (
     "packaging_format_finder_result",
@@ -182,6 +202,16 @@ def previous_period(start_date: date, days: int) -> tuple[date, date]:
     return period_ending(previous_end, days)
 
 
+def reporting_today(now: datetime | None = None) -> tuple[date, date]:
+    current_time = now or datetime.now(timezone.utc)
+    if current_time.tzinfo is None:
+        raise ValueError("reporting_today requires a timezone-aware datetime")
+    return (
+        current_time.astimezone(ZoneInfo(GA4_REPORTING_TIMEZONE)).date(),
+        current_time.astimezone(ZoneInfo(SEARCH_CONSOLE_REPORTING_TIMEZONE)).date(),
+    )
+
+
 def is_brand_query(query: str) -> bool:
     lowered = query.casefold()
     return any(term in lowered for term in BRAND_TERMS)
@@ -207,7 +237,19 @@ def search_console_report(
     token: str, start_date: date, end_date: date
 ) -> dict[str, Any]:
     encoded_site = urllib.parse.quote(SEARCH_CONSOLE_SITE, safe="")
-    payload = request_json(
+    total_payload = request_json(
+        f"https://www.googleapis.com/webmasters/v3/sites/{encoded_site}/searchAnalytics/query",
+        token,
+        method="POST",
+        body={
+            "startDate": start_date.isoformat(),
+            "endDate": end_date.isoformat(),
+            "dataState": "all",
+        },
+    )
+    total_rows = total_payload.get("rows", [])
+    total = total_rows[0] if total_rows else {}
+    query_page_payload = request_json(
         f"https://www.googleapis.com/webmasters/v3/sites/{encoded_site}/searchAnalytics/query",
         token,
         method="POST",
@@ -219,7 +261,7 @@ def search_console_report(
             "dataState": "all",
         },
     )
-    rows = payload.get("rows", [])
+    rows = query_page_payload.get("rows", [])
     non_brand = [row for row in rows if not is_brand_query(row["keys"][0])]
     query_totals: dict[str, dict[str, float]] = {}
     for row in non_brand:
@@ -353,16 +395,21 @@ def search_console_report(
     ]
 
     return {
-        "clicks": round(sum(float(row.get("clicks", 0)) for row in rows), 2),
-        "impressions": round(
-            sum(float(row.get("impressions", 0)) for row in rows), 2
-        ),
-        "non_brand_clicks": round(
-            sum(float(row.get("clicks", 0)) for row in non_brand), 2
-        ),
-        "non_brand_impressions": round(
-            sum(float(row.get("impressions", 0)) for row in non_brand), 2
-        ),
+        "clicks": round(float(total.get("clicks", 0)), 2),
+        "impressions": round(float(total.get("impressions", 0)), 2),
+        "query_page_subset": {
+            "rows": len(rows),
+            "clicks": round(sum(float(row.get("clicks", 0)) for row in rows), 2),
+            "impressions": round(
+                sum(float(row.get("impressions", 0)) for row in rows), 2
+            ),
+            "non_brand_clicks": round(
+                sum(float(row.get("clicks", 0)) for row in non_brand), 2
+            ),
+            "non_brand_impressions": round(
+                sum(float(row.get("impressions", 0)) for row in non_brand), 2
+            ),
+        },
         "queries_in_positions_1_20": sum(
             1
             for values in query_totals.values()
@@ -379,6 +426,27 @@ def search_console_report(
 
 
 def ga4_report(token: str, start_date: date, end_date: date) -> dict[str, Any]:
+    aggregate_payload = request_json(
+        f"https://analyticsdata.googleapis.com/v1beta/properties/{GA4_PROPERTY_ID}:runReport",
+        token,
+        method="POST",
+        body={
+            "dateRanges": [
+                {"startDate": start_date.isoformat(), "endDate": end_date.isoformat()}
+            ],
+            "metrics": [
+                {"name": "sessions"},
+                {"name": "activeUsers"},
+                {"name": "totalUsers"},
+                {"name": "keyEvents"},
+            ],
+        },
+    )
+    aggregate_metrics = [
+        float(value["value"])
+        for value in (aggregate_payload.get("rows") or [{}])[0].get("metricValues", [])
+    ]
+    aggregate = dict(zip(("sessions", "active_users", "total_users", "key_events"), aggregate_metrics))
     payload = request_json(
         f"https://analyticsdata.googleapis.com/v1beta/properties/{GA4_PROPERTY_ID}:runReport",
         token,
@@ -442,7 +510,42 @@ def ga4_report(token: str, start_date: date, end_date: date) -> dict[str, Any]:
                 "total_users": metrics[1],
             }
 
+    brand_alias_filter = {
+        "filter": {
+            "fieldName": "sessionSource",
+            "stringFilter": {
+                "matchType": "EXACT",
+                "value": BRAND_ALIAS_UTM_SOURCE,
+                "caseSensitive": False,
+            },
+        }
+    }
     brand_alias_payload = request_json(
+        f"https://analyticsdata.googleapis.com/v1beta/properties/{GA4_PROPERTY_ID}:runReport",
+        token,
+        method="POST",
+        body={
+            "dateRanges": [
+                {"startDate": start_date.isoformat(), "endDate": end_date.isoformat()}
+            ],
+            "metrics": [
+                {"name": "sessions"},
+                {"name": "activeUsers"},
+                {"name": "totalUsers"},
+                {"name": "keyEvents"},
+            ],
+            "dimensionFilter": brand_alias_filter,
+        },
+    )
+    brand_alias_metrics = [
+        float(value["value"])
+        for value in (brand_alias_payload.get("rows") or [{}])[0].get("metricValues", [])
+    ]
+    brand_alias = dict(
+        zip(("sessions", "active_users", "total_users", "key_events"), brand_alias_metrics)
+    )
+
+    brand_alias_breakdown_payload = request_json(
         f"https://analyticsdata.googleapis.com/v1beta/properties/{GA4_PROPERTY_ID}:runReport",
         token,
         method="POST",
@@ -455,25 +558,12 @@ def ga4_report(token: str, start_date: date, end_date: date) -> dict[str, Any]:
                 {"name": "sessionMedium"},
                 {"name": "sessionCampaignName"},
             ],
-            "metrics": [
-                {"name": "sessions"},
-                {"name": "activeUsers"},
-                {"name": "keyEvents"},
-            ],
-            "dimensionFilter": {
-                "filter": {
-                    "fieldName": "sessionSource",
-                    "stringFilter": {
-                        "matchType": "EXACT",
-                        "value": BRAND_ALIAS_UTM_SOURCE,
-                        "caseSensitive": False,
-                    },
-                }
-            },
+            "metrics": [{"name": "sessions"}, {"name": "keyEvents"}],
+            "dimensionFilter": brand_alias_filter,
         },
     )
     brand_alias_rows = []
-    for row in brand_alias_payload.get("rows", []):
+    for row in brand_alias_breakdown_payload.get("rows", []):
         dimensions = [value["value"] for value in row["dimensionValues"]]
         metrics = [float(value["value"]) for value in row["metricValues"]]
         brand_alias_rows.append(
@@ -482,17 +572,42 @@ def ga4_report(token: str, start_date: date, end_date: date) -> dict[str, Any]:
                 "medium": dimensions[1],
                 "campaign": dimensions[2],
                 "sessions": metrics[0],
-                "active_users": metrics[1],
-                "key_events": metrics[2],
+                "key_events": metrics[1],
             }
         )
 
+    stripe_referral_payload = request_json(
+        f"https://analyticsdata.googleapis.com/v1beta/properties/{GA4_PROPERTY_ID}:runReport",
+        token,
+        method="POST",
+        body={
+            "dateRanges": [
+                {"startDate": start_date.isoformat(), "endDate": end_date.isoformat()}
+            ],
+            "metrics": [{"name": "sessions"}, {"name": "activeUsers"}],
+            "dimensionFilter": {
+                "filter": {
+                    "fieldName": "sessionSource",
+                    "stringFilter": {
+                        "matchType": "EXACT",
+                        "value": "checkout.stripe.com",
+                        "caseSensitive": False,
+                    },
+                }
+            },
+        },
+    )
+    stripe_referral_metrics = [
+        float(value["value"])
+        for value in (stripe_referral_payload.get("rows") or [{}])[0].get("metricValues", [])
+    ]
+    stripe_referral = dict(zip(("sessions", "active_users"), stripe_referral_metrics))
+
     return {
-        "sessions": round(sum(item["sessions"] for item in channels.values()), 2),
-        "active_users": round(
-            sum(item["active_users"] for item in channels.values()), 2
-        ),
-        "key_events": round(sum(item["key_events"] for item in channels.values()), 2),
+        "sessions": round(aggregate.get("sessions", 0), 2),
+        "active_users": round(aggregate.get("active_users", 0), 2),
+        "total_users": round(aggregate.get("total_users", 0), 2),
+        "key_events": round(aggregate.get("key_events", 0), 2),
         "organic_search_sessions": round(
             channels.get("Organic Search", {}).get("sessions", 0), 2
         ),
@@ -502,16 +617,15 @@ def ga4_report(token: str, start_date: date, end_date: date) -> dict[str, Any]:
         "referral_sessions": round(
             channels.get("Referral", {}).get("sessions", 0), 2
         ),
-        "brand_alias_sessions": round(
-            sum(item["sessions"] for item in brand_alias_rows), 2
-        ),
-        "brand_alias_active_users": round(
-            sum(item["active_users"] for item in brand_alias_rows), 2
-        ),
-        "brand_alias_key_events": round(
-            sum(item["key_events"] for item in brand_alias_rows), 2
-        ),
+        "brand_alias_sessions": round(brand_alias.get("sessions", 0), 2),
+        "brand_alias_active_users": round(brand_alias.get("active_users", 0), 2),
+        "brand_alias_total_users": round(brand_alias.get("total_users", 0), 2),
+        "brand_alias_key_events": round(brand_alias.get("key_events", 0), 2),
         "brand_alias_breakdown": brand_alias_rows,
+        "stripe_payment_provider_referrals": {
+            "sessions": round(stripe_referral.get("sessions", 0), 2),
+            "active_users": round(stripe_referral.get("active_users", 0), 2),
+        },
         "channels": channels,
         "events": events,
     }
@@ -526,10 +640,14 @@ def google_serial_to_date(value: str) -> date | None:
         serial = float(value)
     except (TypeError, ValueError):
         try:
-            return datetime.fromisoformat(value.replace("Z", "+00:00")).date()
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
         except (TypeError, ValueError):
             return None
-    return (datetime(1899, 12, 30, tzinfo=timezone.utc) + timedelta(days=serial)).date()
+        if parsed.tzinfo is None:
+            return parsed.date()
+        return parsed.astimezone(ZoneInfo(GA4_REPORTING_TIMEZONE)).date()
+    parsed = datetime(1899, 12, 30, tzinfo=timezone.utc) + timedelta(days=serial)
+    return parsed.astimezone(ZoneInfo(GA4_REPORTING_TIMEZONE)).date()
 
 
 def classify_lead(row: dict[str, str]) -> str:
@@ -550,18 +668,34 @@ def classify_lead(row: dict[str, str]) -> str:
     return "other"
 
 
+def is_explicit_qa_row(row: dict[str, str]) -> bool:
+    marker_values = {
+        row.get(field, "").strip().casefold() for field in QA_MARKER_FIELDS
+    }
+    if marker_values & QA_MARKERS:
+        return True
+    return (
+        row.get("UTM Source", "").strip().casefold() == "stripe_test_mode"
+        or row.get("Source", "").strip().casefold() == "stripe test order"
+        or row.get("Owner", "").strip().casefold() == "system test"
+    )
+
+
 def sheet_rows(token: str) -> list[dict[str, str]]:
     encoded_range = urllib.parse.quote("Leads!A1:AH", safe="")
     payload = request_json(
-        f"https://sheets.googleapis.com/v4/spreadsheets/{LEADS_SHEET_ID}/values/{encoded_range}",
+        f"https://sheets.googleapis.com/v4/spreadsheets/{LEADS_SHEET_ID}/values/{encoded_range}?valueRenderOption=UNFORMATTED_VALUE",
         token,
     )
     values = payload.get("values", [])
     if not values:
         return []
-    headers = values[0]
+    headers = ["" if value is None else str(value) for value in values[0]]
     return [
-        {header: row[index] if index < len(row) else "" for index, header in enumerate(headers)}
+        {
+            header: "" if index >= len(row) or row[index] is None else str(row[index])
+            for index, header in enumerate(headers)
+        }
         for row in values[1:]
         if row
     ]
@@ -578,7 +712,7 @@ def crm_report(rows: list[dict[str, str]], start_date: date, end_date: date) -> 
         row
         for row in period_rows
         if row.get("Status", "").casefold() != "spam"
-        and row.get("UTM Source", "").casefold() != "codex-verification"
+        and not is_explicit_qa_row(row)
     ]
     acquisition = Counter(classify_lead(row) for row in real_rows)
     statuses = Counter(row.get("Status") or "Unspecified" for row in real_rows)
@@ -645,7 +779,7 @@ def crm_report(rows: list[dict[str, str]], start_date: date, end_date: date) -> 
         "statuses": dict(sorted(statuses.items())),
         "product_families": dict(products.most_common()),
         "landing_page_outcomes": landing_page_outcomes,
-        "excluded_spam_or_verification": len(period_rows) - len(real_rows),
+        "excluded_spam_or_qa": len(period_rows) - len(real_rows),
     }
 
 
@@ -668,19 +802,25 @@ def markdown_report(report: dict[str, Any]) -> str:
         "# UPG Weekly Organic Acquisition Report",
         "",
         f"Generated: {report['generated_at']}",
-        f"GA4 and CRM period: {periods['current']['start']} to {periods['current']['end']}",
-        f"Search Console period: {periods['search_console_current']['start']} to {periods['search_console_current']['end']} (lag-adjusted)",
+        f"GA4 and CRM period: {periods['current']['start']} to {periods['current']['end']} ({report['reporting_timezones']['ga4_and_crm']})",
+        f"Search Console period: {periods['search_console_current']['start']} to {periods['search_console_current']['end']} ({report['reporting_timezones']['search_console']}, lag-adjusted)",
         "",
         "## Decision metrics",
         "",
+        f"- Search clicks: {comparisons['search_clicks']['current']} (previous {comparisons['search_clicks']['previous']})",
         f"- Search impressions: {comparisons['search_impressions']['current']} (previous {comparisons['search_impressions']['previous']})",
-        f"- Non-brand search impressions: {comparisons['non_brand_impressions']['current']} (previous {comparisons['non_brand_impressions']['previous']})",
-        f"- Non-brand clicks: {comparisons['non_brand_clicks']['current']} (previous {comparisons['non_brand_clicks']['previous']})",
+        f"- Query-page subset non-brand impressions: {comparisons['non_brand_query_page_subset_impressions']['current']} (previous {comparisons['non_brand_query_page_subset_impressions']['previous']})",
+        f"- Query-page subset non-brand clicks: {comparisons['non_brand_query_page_subset_clicks']['current']} (previous {comparisons['non_brand_query_page_subset_clicks']['previous']})",
         f"- Non-brand queries in positions 1–20: {current['search_console']['queries_in_positions_1_20']}",
         f"- Organic Search sessions: {comparisons['organic_search_sessions']['current']} (previous {comparisons['organic_search_sessions']['previous']})",
-        f"- Organic Shopping sessions: {comparisons['organic_shopping_sessions']['current']} (previous {comparisons['organic_shopping_sessions']['previous']})",
+        f"- Organic Shopping sessions (Google default channel group): {comparisons['organic_shopping_sessions']['current']} (previous {comparisons['organic_shopping_sessions']['previous']})",
+        f"- GA active users (unique, ungrouped): {comparisons['ga_active_users']['current']} (previous {comparisons['ga_active_users']['previous']})",
+        f"- GA total users (unique, ungrouped): {comparisons['ga_total_users']['current']} (previous {comparisons['ga_total_users']['previous']})",
         f"- WithUPG brand-alias sessions: {comparisons['brand_alias_sessions']['current']} (previous {comparisons['brand_alias_sessions']['previous']})",
-        f"- Lead form starts: {comparisons['form_starts']['current']} (previous {comparisons['form_starts']['previous']})",
+        f"- WithUPG brand-alias active users (unique): {comparisons['brand_alias_active_users']['current']} (previous {comparisons['brand_alias_active_users']['previous']})",
+        f"- Stripe checkout payment-provider referral sessions (not acquisition): {comparisons['stripe_payment_provider_referral_sessions']['current']} (previous {comparisons['stripe_payment_provider_referral_sessions']['previous']})",
+        f"- Quote form starts (custom event): {comparisons['quote_form_starts']['current']} (previous {comparisons['quote_form_starts']['previous']})",
+        f"- Generic form starts (GA event, not combined with quote form starts): {comparisons['generic_form_starts']['current']} (previous {comparisons['generic_form_starts']['previous']})",
         f"- Successful lead submissions: {comparisons['generated_leads']['current']} (previous {comparisons['generated_leads']['previous']})",
         f"- Sample-kit checkout starts: {comparisons['checkout_starts']['current']} (previous {comparisons['checkout_starts']['previous']})",
         f"- Sample-kit purchases: {comparisons['purchases']['current']} (previous {comparisons['purchases']['previous']})",
@@ -715,7 +855,7 @@ def markdown_report(report: dict[str, Any]) -> str:
             "",
             "## CRM exclusions",
             "",
-            f"- Spam or verification rows excluded: {current['crm']['excluded_spam_or_verification']}",
+            f"- Spam or explicit QA rows excluded: {current['crm']['excluded_spam_or_qa']}",
         ]
     )
     lines.extend(["", "## Lead outcomes by landing page", ""])
@@ -803,6 +943,9 @@ def markdown_report(report: dict[str, Any]) -> str:
             "## Privacy and interpretation",
             "",
             "- This report is aggregate-only and does not print lead identity or project notes.",
+            "- Search Console totals are ungrouped aggregates. Query-page and non-brand values are an explicitly disclosed subset, not totals.",
+            "- GA active and total users are ungrouped unique-user aggregates; they are not summed from channel or campaign rows.",
+            "- WithUPG is reported separately. Stripe checkout referrals are payment-provider traffic, not new acquisition.",
             "- Search Console is lag-adjusted and should not be compared to same-day GA4 activity.",
             "- Zero leads or sessions means no measured evidence in the selected period; it is not proof that a channel can never work.",
         ]
@@ -813,12 +956,12 @@ def markdown_report(report: dict[str, Any]) -> str:
 def main() -> None:
     args = parse_args()
     token = refresh_access_token(args.credential)
-    today = date.today()
+    ga_today, search_console_today = reporting_today()
 
-    current_start, current_end = period_ending(today - timedelta(days=1), args.days)
+    current_start, current_end = period_ending(ga_today - timedelta(days=1), args.days)
     previous_start, previous_end = previous_period(current_start, args.days)
     sc_current_start, sc_current_end = period_ending(
-        today - timedelta(days=3), args.days
+        search_console_today - timedelta(days=3), args.days
     )
     sc_previous_start, sc_previous_end = previous_period(sc_current_start, args.days)
 
@@ -835,6 +978,10 @@ def main() -> None:
     }
     report = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
+        "reporting_timezones": {
+            "ga4_and_crm": GA4_REPORTING_TIMEZONE,
+            "search_console": SEARCH_CONSOLE_REPORTING_TIMEZONE,
+        },
         "periods": {
             "current": {
                 "start": current_start.isoformat(),
@@ -856,17 +1003,21 @@ def main() -> None:
         "current": current,
         "previous": previous,
         "comparisons": {
+            "search_clicks": compare(
+                current["search_console"]["clicks"],
+                previous["search_console"]["clicks"],
+            ),
             "search_impressions": compare(
                 current["search_console"]["impressions"],
                 previous["search_console"]["impressions"],
             ),
-            "non_brand_impressions": compare(
-                current["search_console"]["non_brand_impressions"],
-                previous["search_console"]["non_brand_impressions"],
+            "non_brand_query_page_subset_impressions": compare(
+                current["search_console"]["query_page_subset"]["non_brand_impressions"],
+                previous["search_console"]["query_page_subset"]["non_brand_impressions"],
             ),
-            "non_brand_clicks": compare(
-                current["search_console"]["non_brand_clicks"],
-                previous["search_console"]["non_brand_clicks"],
+            "non_brand_query_page_subset_clicks": compare(
+                current["search_console"]["query_page_subset"]["non_brand_clicks"],
+                previous["search_console"]["query_page_subset"]["non_brand_clicks"],
             ),
             "organic_search_sessions": compare(
                 current["ga4"]["organic_search_sessions"],
@@ -876,11 +1027,31 @@ def main() -> None:
                 current["ga4"]["organic_shopping_sessions"],
                 previous["ga4"]["organic_shopping_sessions"],
             ),
+            "ga_active_users": compare(
+                current["ga4"]["active_users"],
+                previous["ga4"]["active_users"],
+            ),
+            "ga_total_users": compare(
+                current["ga4"]["total_users"],
+                previous["ga4"]["total_users"],
+            ),
             "brand_alias_sessions": compare(
                 current["ga4"]["brand_alias_sessions"],
                 previous["ga4"]["brand_alias_sessions"],
             ),
-            "form_starts": compare(
+            "brand_alias_active_users": compare(
+                current["ga4"]["brand_alias_active_users"],
+                previous["ga4"]["brand_alias_active_users"],
+            ),
+            "stripe_payment_provider_referral_sessions": compare(
+                current["ga4"]["stripe_payment_provider_referrals"]["sessions"],
+                previous["ga4"]["stripe_payment_provider_referrals"]["sessions"],
+            ),
+            "quote_form_starts": compare(
+                ga4_event_count(current, "quote_form_start"),
+                ga4_event_count(previous, "quote_form_start"),
+            ),
+            "generic_form_starts": compare(
                 ga4_event_count(current, "form_start"),
                 ga4_event_count(previous, "form_start"),
             ),
