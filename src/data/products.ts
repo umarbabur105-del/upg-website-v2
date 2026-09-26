@@ -25,6 +25,7 @@ export interface Product {
   metaDescription: string;
   searchTerms?: string[];
   reviewedAt?: string;
+  buyerFaqs?: ProductFaq[];
   buyerDecisionFaq?: {
     question: string;
     answer: string;
@@ -184,9 +185,9 @@ export const products: Product[] = [
       "Custom printed corrugated ear-lock mailer boxes for branded unboxing, product presentation, and repeat programs.",
     longSummary:
       "UPG's custom corrugated mailer boxes use an ear-lock structure for PR kits, influencer campaigns, subscription programs, ecommerce presentation, and branded product launches. Exterior printing, interior printing, custom inserts, and specialty finishes are available.",
-    metaTitle: "Custom Mailer Boxes | 250-Unit MOQ",
+    metaTitle: "Custom Mailer Boxes: Print, Inserts & 250-Unit MOQ",
     metaDescription:
-      "Custom printed corrugated ear-lock mailer boxes for PR kits, subscriptions and branded ecommerce. Planning MOQ 250 units; worldwide delivery.",
+      "Custom printed ear-lock mailer boxes from 250 units. Compare inside print, inserts and quantity options, then request a project-specific quote.",
     searchTerms: [
       "custom corrugated mailer boxes",
       "custom mailer boxes",
@@ -197,7 +198,29 @@ export const products: Product[] = [
       "custom subscription boxes",
       "branded ecommerce mailer boxes",
     ],
-    reviewedAt: "2026-09-02",
+    reviewedAt: "2026-09-27",
+    buyerFaqs: [
+      {
+        question: "Can I compare prices for 250, 500 and 1,000 custom mailer boxes?",
+        answer:
+          "Yes. Request those quantity breaks on the same box dimensions, corrugated construction, artwork, printing and insert specification. They are comparison quantities, not published price tiers. Other quantities from the 250-unit planning minimum can also be reviewed. Different sizes or artworks are not automatically combined to meet the minimum.",
+      },
+      {
+        question: "Does a custom mailer quote include shipping and taxes?",
+        answer:
+          "Only the written project quote confirms what is included. Share the delivery country, city and postal code, then check freight, duties, taxes and delivery terms alongside the manufacturing price. A unit price alone is not the total delivered order cost.",
+      },
+      {
+        question: "Is an ear-lock presentation mailer the same as a shipping carton?",
+        answer:
+          "UPG supplies custom ear-lock corrugated mailers for branded presentation, PR kits, subscriptions and ecommerce packaging. Standard shipping cartons, master cartons and RSC cases are not supplied. Share the packed product and shipping method so the mailer construction and any separate transit protection can be reviewed; the images do not establish shipping performance.",
+      },
+      {
+        question: "Can I start without a dieline or finished artwork?",
+        answer:
+          "Yes. Product family, quantity and contact details are enough to start the enquiry. Send product dimensions, an arrangement or a reference when available. Final artwork is prepared on the approved mailer and insert dielines; pricing and production timing are confirmed after specification review.",
+      },
+    ],
     buyerDecisionFaq: {
       question: "Which corrugated mailer box path should I use?",
       answer:
@@ -325,9 +348,9 @@ export const products: Product[] = [
       "A premium magnetic rigid box that folds flat to reduce freight and storage space.",
     longSummary:
       "Custom collapsible magnetic boxes deliver the premium presentation of a magnetic box while folding flat for more efficient freight and storage. Custom inserts and premium finishes are available.",
-    metaTitle: "Collapsible Magnetic Boxes | 250-Unit MOQ",
+    metaTitle: "Custom Collapsible Magnetic Boxes | 250-Unit MOQ",
     metaDescription:
-      "Custom collapsible magnetic boxes that fold flat for efficient storage and freight. Worldwide manufacturing with a 250-unit minimum order.",
+      "Custom fold-flat magnetic boxes from 250 units. Review inserts, assembly, finishes and pricing factors for gift sets; request a written quote.",
     searchTerms: [
       "custom collapsible magnetic boxes",
       "fold flat magnetic boxes",
@@ -335,7 +358,29 @@ export const products: Product[] = [
       "collapsible rigid boxes",
       "collapsible magnetic closure boxes",
     ],
-    reviewedAt: "2026-09-02",
+    reviewedAt: "2026-09-27",
+    buyerFaqs: [
+      {
+        question: "Are collapsible magnetic boxes always cheaper to ship?",
+        answer:
+          "No fixed saving is promised. The box folds flat before assembly, but the complete packing configuration, inserts, quantity, destination and freight service determine the delivery plan. Compare the total written quotes for collapsible and assembled magnetic boxes on the same project brief.",
+      },
+      {
+        question: "Can I compare 250, 500 and 1,000 collapsible magnetic boxes?",
+        answer:
+          "Yes. Ask for quantity breaks while keeping size, folding construction, wrap, printing, inserts and finishes consistent. Other quantities from the 250-unit planning minimum can be reviewed. Separate dimensions or artworks are not automatically combined into one minimum, and no fixed unit price is implied by these quantities.",
+      },
+      {
+        question: "Who assembles the fold-flat boxes and fits the inserts?",
+        answer:
+          "Include the assembly and packing owner in the brief. UPG reviews the folding method, magnetic closure, insert plan and how the components should be supplied before final approval. Do not assume assembly or packing services are included unless the written quote confirms them.",
+      },
+      {
+        question: "Can I check the structure before committing to production?",
+        answer:
+          "Ask about the sample and proofing options for your proposed structure. Availability, cost, timing and approval requirements are confirmed for the project. The images on this page are illustrative concepts, not production samples or proof that a particular construction has been tested.",
+      },
+    ],
     buyerDecisionFaq: {
       question: "When should I compare a collapsible magnetic box?",
       answer:
@@ -507,6 +552,8 @@ export function getProductFaqs(product: Product): ProductFaq[] {
   if (product.buyerDecisionFaq) {
     faqs.push(product.buyerDecisionFaq);
   }
+
+  faqs.push(...(product.buyerFaqs ?? []));
 
   return faqs;
 }
