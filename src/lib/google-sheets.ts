@@ -1,4 +1,5 @@
 import "server-only";
+import { createHash } from "node:crypto";
 
 const GOOGLE_STS_ENDPOINT = "https://sts.googleapis.com/v1/token";
 const GOOGLE_IAM_CREDENTIALS_ENDPOINT = "https://iamcredentials.googleapis.com/v1";
@@ -251,6 +252,17 @@ function toGoogleSheetsSerial(date: Date) {
 function buildLeadRow(input: LeadSheetInput) {
   const timestamp = toGoogleSheetsSerial(input.receivedAt);
 
+  // The CRM uses America/Los_Angeles. Store a real date, not a free-text task.
+  const localDate = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit",
+  }).format(input.receivedAt);
+  const followUp = new Date(`${localDate}T00:00:00.000Z`);
+  do {
+    followUp.setUTCDate(followUp.getUTCDate() + 1);
+  } while (followUp.getUTCDay() === 0 || followUp.getUTCDay() === 6);
+  const isTest = input.status === "Spam" || input.source === "Stripe Test Order"
+    || input.owner === "System Test";
+
   return [
     input.submissionId,
     timestamp,
@@ -258,7 +270,7 @@ function buildLeadRow(input: LeadSheetInput) {
     input.status ?? "New",
     input.priority ?? "Normal",
     input.owner ?? "Umar",
-    "",
+    isTest ? "" : toGoogleSheetsSerial(followUp),
     input.name,
     input.email,
     input.phone ?? "",
@@ -344,6 +356,38 @@ async function findSubmissionRow(
   return { checked: false, reason: "sheets_error" };
 }
 
+async function resolveLeadsSheetId(
+  spreadsheetId: string,
+  accessToken: string
+): Promise<{ checked: true; sheetId: number } | { checked: false; reason: "auth_error" | "sheets_error" }> {
+  const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}?fields=sheets.properties(sheetId,title)`;
+  for (let attempt = 1; attempt <= LOOKUP_MAX_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await fetch(endpoint, {
+        headers: { Authorization: `Bearer ${accessToken}` }, cache: "no-store",
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      });
+      if (response.ok) {
+        const result = await response.json() as {
+          sheets?: { properties?: { sheetId?: number; title?: string } }[];
+        };
+        const matches = result.sheets?.filter((sheet) => sheet.properties?.title === "Leads") ?? [];
+        const id = matches[0]?.properties?.sheetId;
+        return matches.length === 1 && typeof id === "number" && Number.isInteger(id) && id >= 0
+          ? { checked: true, sheetId: id } : { checked: false, reason: "sheets_error" };
+      }
+      if (response.status === 401 || response.status === 403) {
+        return { checked: false, reason: "auth_error" };
+      }
+      if (!isTransientStatus(response.status)) break;
+    } catch {
+      console.error(JSON.stringify({ type: "sheets_metadata_exception", attempt }));
+    }
+    if (attempt < LOOKUP_MAX_ATTEMPTS) await waitBeforeRetry(attempt);
+  }
+  return { checked: false, reason: "sheets_error" };
+}
+
 export async function appendLeadToGoogleSheet(
   input: LeadSheetInput,
   auth: GoogleSheetsAuthResult
@@ -369,10 +413,38 @@ export async function appendLeadToGoogleSheet(
     };
   }
 
-  const range = encodeURIComponent("'Leads'!A:AH");
-  const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS&includeValuesInResponse=false`;
+  const sheet = await resolveLeadsSheetId(spreadsheetId, auth.accessToken);
+  if (!sheet.checked) return { stored: false, reason: sheet.reason };
+
+  // Google rejects an existing namedRangeId and applies the entire batch atomically.
+  // A permanent marker protects across serverless instances and ambiguous retries.
+  // Never delete markers or fall back to values.append after a batch failure.
+  const marker = `upg_lead_v1_${createHash("sha256").update(input.submissionId).digest("hex")}`;
+  const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}:batchUpdate`;
+  const body = JSON.stringify({
+    requests: [
+      { addNamedRange: { namedRange: {
+        namedRangeId: marker, name: marker,
+        range: { sheetId: sheet.sheetId, startRowIndex: 0, endRowIndex: 1,
+          startColumnIndex: 0, endColumnIndex: 1 },
+      } } },
+      { appendCells: {
+        sheetId: sheet.sheetId,
+        rows: [{ values: buildLeadRow(input).map((value, index) => ({
+          userEnteredValue: typeof value === "number"
+            ? { numberValue: value } : { stringValue: value },
+          ...([1, 6, 33].includes(index) ? { userEnteredFormat: { numberFormat: {
+            type: index === 6 ? "DATE" : "DATE_TIME",
+            pattern: index === 6 ? "mmm d, yyyy" : "yyyy-mm-dd hh:mm",
+          } } } : {}),
+        })) }],
+        fields: "userEnteredValue,userEnteredFormat.numberFormat",
+      } },
+    ],
+  });
 
   for (let attempt = 1; attempt <= APPEND_MAX_ATTEMPTS; attempt += 1) {
+    let failureStatus: number | undefined;
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -380,20 +452,16 @@ export async function appendLeadToGoogleSheet(
           Authorization: `Bearer ${auth.accessToken}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          majorDimension: "ROWS",
-          values: [buildLeadRow(input)],
-        }),
+        body,
         cache: "no-store",
         signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       });
 
       if (response.ok) {
-        const result = await response.json() as { updates?: { updatedRange?: string } };
-        const rowMatch = result.updates?.updatedRange?.match(/![A-Z]+(\d+):/);
+        // AppendCells has no row-location reply. HTTP success proves the commit;
+        // don't turn a missing diagnostic row number into another write.
         return {
           stored: true,
-          rowNumber: rowMatch ? Number(rowMatch[1]) : undefined,
           attempts: attempt,
         };
       }
@@ -403,12 +471,7 @@ export async function appendLeadToGoogleSheet(
         status: response.status,
         attempt,
       }));
-      if (response.status === 401 || response.status === 403) {
-        return { stored: false, reason: "auth_error", attempts: attempt };
-      }
-      if (!isTransientStatus(response.status)) {
-        return { stored: false, reason: "sheets_error", attempts: attempt };
-      }
+      failureStatus = response.status;
     } catch {
       console.error(JSON.stringify({ type: "sheets_append_exception", attempt }));
     }
@@ -430,7 +493,12 @@ export async function appendLeadToGoogleSheet(
       };
     }
 
-    if (attempt === APPEND_MAX_ATTEMPTS) {
+    if (failureStatus === 401 || failureStatus === 403) {
+      return { stored: false, reason: "auth_error", attempts: attempt };
+    }
+    // A duplicate-marker 400 is success only if the exact lead row was recovered.
+    if ((failureStatus !== undefined && !isTransientStatus(failureStatus))
+      || attempt === APPEND_MAX_ATTEMPTS) {
       return { stored: false, reason: "sheets_error", attempts: attempt };
     }
 

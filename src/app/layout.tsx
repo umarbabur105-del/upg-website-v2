@@ -8,6 +8,7 @@ import { LeadAttributionCapture } from "@/components/lead-attribution-capture";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
 import { CORE_KEYWORDS, DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo";
+import { buildGoogleAnalyticsConfigScript } from "@/lib/analytics-config";
 import "@fontsource-variable/inter";
 import "./globals.css";
 
@@ -221,13 +222,7 @@ export default function RootLayout({
               strategy="afterInteractive"
             />
             <Script id="google-analytics-config" strategy="afterInteractive">
-              {`
-                window.gtag("js", new Date());
-                window.gtag("config", "${gaMeasurementId}", {
-                  allow_google_signals: false,
-                  allow_ad_personalization_signals: false
-                });
-              `}
+              {buildGoogleAnalyticsConfigScript(gaMeasurementId)}
             </Script>
             <AnalyticsRuntime />
           </>
