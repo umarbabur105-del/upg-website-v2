@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
+import { ProductBuyingGuide } from "@/components/product-buying-guide";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { getComparisonGuidesByProduct } from "@/data/comparison-guides";
@@ -10,6 +11,7 @@ import { getIndustryGuidesByProduct } from "@/data/industry-guides";
 import { mailerApplications } from "@/data/mailer-applications";
 import { getOrganicIntentRoute } from "@/data/organic-intent-routes";
 import { getProductStylesByParent } from "@/data/product-styles";
+import { getProductBuyerGuide, productBriefHref } from "@/data/product-buyer-guides";
 import {
   getProductFaqs,
   getRelatedProducts,
@@ -43,6 +45,10 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
     product.slug === "custom-mailer-boxes" ? mailerApplications : [];
   const comparisonGuides = getComparisonGuidesByProduct(product.slug);
   const intentRoute = getOrganicIntentRoute(`/products/${product.slug}`);
+  const buyerGuide = getProductBuyerGuide(product.slug);
+  const quoteHref = buyerGuide
+    ? productBriefHref(product.family, buyerGuide.quoteNote)
+    : `/get-a-quote?product=${encodeURIComponent(product.family)}`;
 
   return (
     <>
@@ -71,7 +77,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
-                  href={`/get-a-quote?product=${encodeURIComponent(product.family)}`}
+                  href={quoteHref}
                   className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
                 >
                   Get a Quote
@@ -83,12 +89,17 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                   See Options
                 </Link>
                 <Link
-                  href="/custom-packaging-pricing"
+                  href={buyerGuide ? "#pricing-and-moq" : "/custom-packaging-pricing"}
                   className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
                 >
                   Pricing &amp; MOQ Guide
                 </Link>
               </div>
+              {buyerGuide ? (
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Priced for your specification. Compare quantities, print and insert options in a written project quote.
+                </p>
+              ) : null}
               {product.reviewedAt ? (
                 <p className="mt-5 text-xs text-muted-foreground">
                   Product facts reviewed {product.reviewedAt}. Final written
@@ -108,6 +119,11 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
+              {buyerGuide ? (
+                <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                  Illustrative concept, not a customer order or production sample.
+                </p>
+              ) : null}
             </div>
           </div>
         </div>
@@ -129,6 +145,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           </div>
         </div>
       </section>
+
+      {buyerGuide ? <ProductBuyingGuide product={product} guide={buyerGuide} /> : null}
 
       <section id="product-options" className="scroll-mt-24 py-16 md:py-20">
         <div className="container-editorial">
@@ -181,16 +199,19 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
             <div>
               <div className="eyebrow mb-3">Product views</div>
               <h2 className="text-3xl font-light tracking-[-0.025em] text-foreground sm:text-4xl">
-                See the format from more than one angle.
+                {buyerGuide ? "Turn a packaging idea into a useful brief." : "See the format from more than one angle."}
               </h2>
             </div>
             <p className="max-w-xl text-xs leading-relaxed text-muted-foreground">
-              Representative concepts. Final construction, color, print, and
-              finish are confirmed for each project.
+              {buyerGuide
+                ? "Illustrative packaging concepts, not photographs of customer orders or production samples. Final construction, color, print and finish are confirmed for your project."
+                : "Representative concepts. Final construction, color, print, and finish are confirmed for each project."}
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
-            {product.galleryImages.map((image) => (
+            {product.galleryImages.map((image) => {
+              const example = buyerGuide?.examples.find((item) => item.image === image.src);
+              return (
               <figure key={image.src} className="overflow-hidden border border-border bg-surface">
                 <div className="relative aspect-[5/4] overflow-hidden">
                   <Image
@@ -201,11 +222,25 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
-                <figcaption className="border-t border-border px-4 py-3 text-xs leading-relaxed text-muted-foreground">
-                  {image.alt}
+                <figcaption className="border-t border-border px-4 py-4 text-sm leading-relaxed text-muted-foreground">
+                  {example ? (
+                    <>
+                      <div className="text-xs">Illustrative concept</div>
+                      <h3 className="mt-2 text-lg font-semibold text-foreground">{example.title}</h3>
+                      <p className="mt-2">{example.description}</p>
+                      <Link
+                        href={productBriefHref(product.family, example.quoteNote)}
+                        className="mt-3 inline-flex min-h-11 items-center border-b border-foreground/20 text-sm font-semibold text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                        aria-label={`Start a brief: ${example.title}`}
+                      >
+                        Start a similar brief →
+                      </Link>
+                    </>
+                  ) : image.alt}
                 </figcaption>
               </figure>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -439,7 +474,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
       <QuoteCta
         title={`Request a quote for ${product.name.toLowerCase()}.`}
         intro="Start with the product family, quantity, and your contact details. Technical specifications can follow after the first review."
-        href={`/get-a-quote?product=${encodeURIComponent(product.family)}`}
+        href={quoteHref}
       />
     </>
   );
