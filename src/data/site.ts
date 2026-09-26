@@ -31,7 +31,7 @@ export const siteConfig = {
   scopeBoundary:
     "UPG supplies corrugated ear-lock mailer boxes, not regular slotted shipping cartons, master cartons, or RSC cases.",
   imagePolicy:
-    "AI-generated packaging images are representative concepts, not completed customer work. Final construction, color, print, and finish are confirmed for each project.",
+    "Explore packaging structures, printing, inserts and finishes. Each design is tailored to the product, brand and project specifications.",
   navigation: [
     { label: "Samples", href: "/samples" },
     { label: "About", href: "/about" },

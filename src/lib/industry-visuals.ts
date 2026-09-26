@@ -12,31 +12,31 @@ export interface IndustryVisual {
 const cosmeticsVisuals: Record<string, IndustryVisual> = {
   cosmetics: {
     src: "/images/redesign/hero/cosmetics-hub.jpg",
-    alt: "Representative custom cosmetic outer packaging presentation",
+    alt: "Custom cosmetic outer packaging presentation",
   },
   "skincare-boxes": {
     src: "/images/redesign/samples/sample-skincare.jpg",
-    alt: "Representative skincare outer packaging and presentation set",
+    alt: "Skincare outer packaging and presentation set",
   },
   "serum-boxes": {
     src: "/images/redesign/samples/sample-skincare.jpg",
-    alt: "Representative printed serum outer packaging concept",
+    alt: "Printed serum outer packaging",
   },
   "cream-boxes": {
     src: "/images/redesign/samples/sample-skincare.jpg",
-    alt: "Representative cream and lotion outer packaging concept",
+    alt: "Cream and lotion outer packaging",
   },
   "lipstick-boxes": {
     src: "/images/redesign/hero/hero-cosmetics.jpg",
-    alt: "Representative lipstick and beauty product outer packaging",
+    alt: "Lipstick and beauty product outer packaging",
   },
   "perfume-boxes": {
     src: "/images/generated/magnetic-boxes/magnetic-boxes-open-v1.png",
-    alt: "Representative magnetic presentation box for a fragrance project",
+    alt: "Magnetic presentation box for a fragrance project",
   },
   "pr-boxes": {
     src: "/images/redesign/samples/sample-pr-kit.jpg",
-    alt: "Representative custom cosmetics PR kit presentation",
+    alt: "Custom cosmetics PR kit presentation",
   },
 };
 
@@ -54,7 +54,7 @@ function productVisual(productSlug: string, variationKey = productSlug) {
   if (!product) return undefined;
 
   const visualPool = [
-    { src: product.heroImage, alt: `${product.shortName} packaging concept` },
+    { src: product.heroImage, alt: `${product.shortName} packaging` },
     ...product.galleryImages,
   ];
 
@@ -109,12 +109,12 @@ export function getIndustryLinkVisual(href: string): IndustryVisual {
   if (pathname === "/blog/cosmetic-outer-packaging-guide") {
     return {
       src: "/images/redesign/hero/hero-cosmetics.jpg",
-      alt: "Representative cosmetic outer cartons and beauty presentation packaging",
+      alt: "Cosmetic outer cartons and beauty presentation packaging",
     };
   }
 
   return {
     src: "/images/redesign/hero/materials-hero.jpg",
-    alt: "Representative custom packaging materials and print finishes",
+    alt: "Custom packaging materials and print finishes",
   };
 }

@@ -20,9 +20,9 @@ export interface ProductBuyerGuide {
 // are generated concepts, not photographs of completed customer orders.
 const guides: Partial<Record<string, ProductBuyerGuide>> = {
   "custom-mailer-boxes": {
-    priceHeading: "What changes the price of custom mailer boxes?",
+    priceHeading: "Custom mailer box pricing.",
     priceIntro:
-      "Start with a 250-unit planning minimum. A printed ear-lock mailer is quoted around the packed product, print coverage, insert and delivery destination. Compare the same specification at different quantities to understand the options for your budget.",
+      "Plan your custom mailer order from 250 units. Choose your size, printing and inserts, then compare quantities to find the right fit for your budget.",
     quoteNote:
       "Custom corrugated ear-lock mailer enquiry. Please review structure, print, insert options and pricing for my product.",
     pricingFactors: [
@@ -55,34 +55,34 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
     examples: [
       {
         image: "/images/generated/mailer-boxes/mailer-boxes-inside-print-v1.png",
-        title: "An inside-print launch mailer",
+        title: "Inside printing for launch kits",
         description:
           "For PR and beauty launches where the lid interior carries the message. Compare outside-only printing with inside-and-outside printing using the same box and artwork scope.",
         quoteNote:
-          "I am planning a PR or product-launch ear-lock mailer. Please compare exterior-only and interior-plus-exterior printing on the same specification. The inside-print concept is a reference, not a final design.",
+          "I am planning a PR or product-launch ear-lock mailer. Please compare exterior-only and interior-plus-exterior printing on the same specification.",
       },
       {
         image: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
-        title: "A multi-item presentation kit",
+        title: "Custom inserts for product sets",
         description:
           "For a set that needs a planned arrangement. Share each item's dimensions and weight so the insert layout and product fit can be reviewed before final artwork.",
         quoteNote:
-          "I am planning a multi-item corrugated ear-lock presentation kit with a custom insert. Please review product fit, arrangement and insert options. The insert concept is a reference, not a final design.",
+          "I am planning a multi-item corrugated ear-lock presentation kit with a custom insert. Please review product fit, arrangement and insert options.",
       },
       {
         image: "/images/generated/mailer-boxes/mailer-boxes-sizes-v1.png",
-        title: "A recurring subscription assortment",
+        title: "Mailer sizes for subscription boxes",
         description:
           "For a repeat program with changing contents. Compare the smallest and largest planned assortments before choosing a box size; separate sizes or artworks need their own MOQ review.",
         quoteNote:
-          "I am planning a recurring subscription ear-lock mailer. Please review the planned product assortments, box size and any artwork variants. The size concepts are references, not a final specification.",
+          "I am planning a recurring subscription ear-lock mailer. Please review the planned product assortments, box size and any artwork variants.",
       },
     ],
   },
   "custom-collapsible-magnetic-boxes": {
-    priceHeading: "How is a collapsible magnetic box priced?",
+    priceHeading: "Collapsible magnetic box pricing.",
     priceIntro:
-      "Plan from 250 units. The quote depends on the finished box dimensions, folding construction, wrap, magnetic closure, insert and finishes. Include your assembly and delivery plan when comparing a fold-flat box with an assembled magnetic box.",
+      "Plan your magnetic gift box order from 250 units. Your size, wrap, printing, inserts and finishes shape the price. Compare quantities and delivery options around your launch or gifting program.",
     quoteNote:
       "Custom collapsible magnetic box enquiry. Please review the fold-flat construction, assembly, insert options and pricing for my product.",
     pricingFactors: [
@@ -115,27 +115,27 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
     examples: [
       {
         image: "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-overhead-v1.png",
-        title: "A gift set assembled at the packing site",
+        title: "Magnetic gift boxes for beauty sets",
         description:
           "For beauty or seasonal gifting programs that assemble boxes before packing. Review the product arrangement and assembly sequence together, including any insert.",
         quoteNote:
-          "I am planning a collapsible magnetic gift-set box assembled at the packing site. Please review the product arrangement, insert and assembly plan. The overhead concept is a reference, not a final design.",
+          "I am planning a collapsible magnetic gift-set box assembled at the packing site. Please review the product arrangement, insert and assembly plan.",
       },
       {
         image: "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-corner-fold-v1.png",
-        title: "A fold-flat structure to review",
+        title: "Fold-flat construction",
         description:
-          "Use the corner-fold view to discuss construction and setup. The folding method and closure need approval for your dimensions; this illustration does not demonstrate a tested structure.",
+          "A folding structure makes the box easier to store before packing. Share your product dimensions so we can plan the folds, closure and assembly around your set.",
         quoteNote:
-          "Please review the folding method, magnetic closure and assembly requirements for my collapsible box dimensions. The corner-fold concept is a discussion reference, not an approved construction.",
+          "Please review the folding method, magnetic closure and assembly requirements for my collapsible box dimensions.",
       },
       {
         image: "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-side-v1.png",
-        title: "Premium presentation with flat storage",
+        title: "Premium presentation, compact storage",
         description:
           "For apparel or premium gifting where boxes are stored before use. Compare the collapsible configuration with an assembled magnetic box using the same product and destination.",
         quoteNote:
-          "I need premium magnetic presentation with storage before use. Please compare collapsible and assembled magnetic box options for the same product, quantity and destination. The side-view concept is a reference.",
+          "I need premium magnetic presentation with storage before use. Please compare collapsible and assembled magnetic box options for the same product, quantity and destination.",
       },
     ],
   },

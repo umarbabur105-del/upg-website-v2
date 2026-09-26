@@ -67,7 +67,7 @@ export const industryHubs: IndustryHub[] = [
     ],
     image: {
       src: "/images/generated/mylar-bags/mylar-bags-pouch-formats-v1.png",
-      alt: "Representative custom printed pouch formats for food and beverage packaging",
+      alt: "Custom printed pouch formats for food and beverage packaging",
     },
     productSlugs: ["custom-tuck-boxes", "custom-mylar-bags"],
     guideLinks: [
@@ -186,7 +186,7 @@ export const industryHubs: IndustryHub[] = [
     ],
     image: {
       src: "/images/generated/tuck-boxes/tuck-boxes-straight-reverse-v1.png",
-      alt: "Representative custom printed folding cartons for beauty and personal care products",
+      alt: "Custom printed folding cartons for beauty and personal care products",
     },
     productSlugs: [
       "custom-tuck-boxes",
@@ -331,7 +331,7 @@ export const industryHubs: IndustryHub[] = [
     ],
     image: {
       src: "/images/generated/industry-guides/custom-supplement-pouches-theme-v1.webp",
-      alt: "Representative custom printed flexible bag for supplement packaging",
+      alt: "Custom printed flexible bag for supplement packaging",
     },
     heroLayout: "landscape",
     heroCompanionImages: [
@@ -460,7 +460,7 @@ export const industryHubs: IndustryHub[] = [
     ],
     image: {
       src: "/images/generated/collapsible-magnetic-boxes/collapsible-magnetic-boxes-hero-v1.png",
-      alt: "Representative custom collapsible magnetic presentation box for fashion and luxury products",
+      alt: "Custom collapsible magnetic presentation box for fashion and luxury products",
     },
     productSlugs: [
       "custom-magnetic-boxes",
@@ -570,7 +570,7 @@ export const industryHubs: IndustryHub[] = [
     ],
     image: {
       src: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
-      alt: "Representative corrugated ear-lock presentation mailer with a custom product insert",
+      alt: "Corrugated ear-lock presentation mailer with a custom product insert",
     },
     productSlugs: [
       "custom-tuck-boxes",
@@ -686,7 +686,7 @@ export const industryHubs: IndustryHub[] = [
     ],
     image: {
       src: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
-      alt: "Representative custom magnetic gift box for home, candle, and gift products",
+      alt: "Custom magnetic gift box for home, candle, and gift products",
     },
     productSlugs: [
       "custom-tuck-boxes",

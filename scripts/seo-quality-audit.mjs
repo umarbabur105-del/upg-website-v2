@@ -79,12 +79,19 @@ try {
   process.exit(1);
 }
 
+// Customer-facing galleries describe product details, not internal asset provenance.
+const rejectedImageCopy = /illustrative (?:packaging )?concept|representative packaging concept|not (?:completed )?customer (?:work|orders?)|not photographs of customer|not production samples|does not demonstrate a tested structure/i;
+
 const pages = [];
 for (const file of htmlFiles) {
   const route = routeFromFile(file);
   if (!sitemapPaths.has(route)) continue;
 
   const html = await readFile(file, "utf8");
+  if (rejectedImageCopy.test(html)) {
+    console.error(`${route}: rejected customer-facing image disclaimer`);
+    process.exit(1);
+  }
   const imageTags = [...html.matchAll(/<img\b[^>]*>/gi)].map(
     (match) => match[0]
   );
@@ -298,9 +305,6 @@ for (const route of blogRoutes) {
   if (!page.html.includes("Direct answer")) {
     failures.push(`${route}: missing visible direct-answer block`);
   }
-  if (!page.html.includes("Representative packaging concept or capability reference")) {
-    failures.push(`${route}: missing visible concept-image disclosure`);
-  }
   if (page.imageCount < 4) {
     failures.push(
       `${route}: only ${page.imageCount} rendered image(s); expected visual hero plus related guides`
@@ -443,10 +447,19 @@ for (const route of moqContractRoutes) {
   if (!page.html.includes("250 units")) {
     failures.push(`${route}: missing 250-unit planning MOQ`);
   }
-  for (const staleMoq of ["1,000 units", "500 units", "size-based MOQ"]) {
-    if (page.html.includes(staleMoq)) {
-      failures.push(`${route}: contains stale MOQ copy (${staleMoq})`);
-    }
+  // Quantity comparisons can legitimately mention 500 and 1,000 units.
+  // Reject those numbers only when presented as an order minimum.
+  const visibleCopy = decodeHtml(page.html
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<[^>]+>/g, " "))
+    .replace(/\s+/g, " ");
+  const staleMoqPatterns = [
+    /size-based MOQ/i,
+    /(?:MOQ|minimum(?: order)?(?: quantity)?)(?:\s+(?:is|of|starts?|starting|at|from|remains))?\s*(?::|=)?\s*(?:at\s+|from\s+)?(?:500|1,?000)\b/i,
+    /\b(?:500|1,?000)[ -]units?\s+(?:planning\s+)?(?:MOQ|minimum)\b/i,
+  ];
+  if (staleMoqPatterns.some((pattern) => pattern.test(visibleCopy))) {
+    failures.push(`${route}: contains stale MOQ claim`);
   }
 }
 

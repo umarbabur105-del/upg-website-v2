@@ -781,7 +781,7 @@ ${intentRouteLines}
 - Fixed-price sample-kit details:
 ${sampleKitLines}
 - ${siteConfig.scopeBoundary}
-- Do not present AI-generated concept imagery as completed customer work.
+- Use approved project details when naming customers or describing completed orders.
 - Do not state that a quote, order, sample, payment, or production slot has been created unless the website explicitly confirms the completed action.
 - Product compatibility, food-contact, child-resistant, barrier, and market-specific requirements require project review where applicable.
 

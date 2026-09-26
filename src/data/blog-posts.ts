@@ -53,7 +53,7 @@ export const blogPosts: BlogPost[] = [
     quickAnswer:
       "Cosmetic outer packaging is the printed box around a finished beauty product. Use a tuck carton for one retail jar, bottle, tube, or lipstick product; a magnetic box for a premium product or set; and a corrugated ear-lock mailer for a branded PR or ecommerce presentation. Final structure starts with product dimensions, arrangement, quantity, artwork, and destination.",
     heroImage: "/images/redesign/hero/hero-cosmetics.jpg",
-    heroAlt: "Representative cosmetic outer cartons and premium beauty packaging formats",
+    heroAlt: "Cosmetic outer cartons and premium beauty packaging formats",
     keyDecisions: [
       {
         label: "Single product",
@@ -425,7 +425,7 @@ UPG uses the measurements as project inputs. The applicable structure, clearance
     quickAnswer:
       "A made-to-spec packaging project moves from brief and qualification into structure, materials, artwork, proofing, commercial approval, manufacturing, quality review, packing, and delivery. The exact sequence can vary by format, and production timing is confirmed only after the required project specifications and approvals are clear.",
     heroImage: "/images/redesign/hero/hero-cosmetics.jpg",
-    heroAlt: "Custom packaging production concepts for branded products",
+    heroAlt: "Custom packaging production for branded products",
     heroPosition: "center 44%",
     keyDecisions: [
       {
@@ -834,9 +834,9 @@ The same finish can look and behave differently across paperboard, kraft, wrappe
 
 If the finish direction is unclear, request one or two purposeful options. Compare how each supports the brand, material, budget, product position, and required production method. Avoid asking for every available finish when the actual decision is between two surface systems.
 
-## What the website images represent
+## Bring your finish ideas to the brief
 
-UPG's packaging visuals are representative concepts and capability references, not completed customer projects. Final construction, color, print, and finish are confirmed for each project.
+Share the colors, textures and finishing details you like, along with your packaging format and quantity. We can then compare the finish options that suit your product, artwork and budget.
     `.trim(),
     faqs: [
       {

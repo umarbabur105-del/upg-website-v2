@@ -198,8 +198,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
                 />
               </div>
               <figcaption className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                Representative packaging concept. Final construction, color, print,
-                and finish are confirmed for each project.
+                Custom mailers with branded printing and inserts tailored to your product arrangement.
               </figcaption>
             </figure>
           </div>

@@ -22,7 +22,7 @@ export function ProductBuyingGuide({
             <div className="mt-6 border-t border-border pt-5">
               <h3 className="text-base font-semibold">Choose a starting quantity</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                These open a prefilled enquiry. Request other quantities or a comparison in your brief; prices are confirmed in a written quote.
+                Select a quantity for your custom quote, or compare all three with the same design and specifications.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {[250, 500, 1000].map((quantity) => (
@@ -43,10 +43,10 @@ export function ProductBuyingGuide({
                 )}
                 className="mt-3 inline-flex min-h-11 items-center border-b border-foreground/20 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
               >
-                Compare all three quantities in one enquiry →
+                Compare 250, 500 &amp; 1,000 units →
               </Link>
               <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                Different sizes or artworks need individual review; do not assume they can be combined to reach {product.moq}.
+                Planning multiple sizes or designs? Share the mix and we will confirm the minimum for each.
               </p>
             </div>
           </div>
@@ -61,14 +61,14 @@ export function ProductBuyingGuide({
         </div>
         <div className="mt-9 grid gap-5 border-t border-border pt-6 md:grid-cols-2">
           <div>
-            <h3 className="text-base font-semibold">For a more useful first quote</h3>
+            <h3 className="text-base font-semibold">Tell us about your project</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
               {guide.briefChecklist.map((item) => <li key={item}>{item}</li>)}
             </ul>
           </div>
           <div className="md:pl-8">
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Start with what you know. Technical details can follow. The accepted written quote confirms manufacturing price, freight, duties, taxes, proofing, production timing and delivery terms.
+              Have a product or an idea? Start there. We will help you choose the packaging details and confirm pricing, delivery and next steps in your quote.
             </p>
             <Link href="/custom-packaging-pricing" className="mt-4 inline-flex min-h-11 items-center border-b border-foreground/20 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
               Read the full pricing &amp; MOQ guide →

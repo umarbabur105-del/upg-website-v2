@@ -14,7 +14,7 @@ Pricing follows the existing commercial terms. Different sizes or artworks canno
 
 Mailer scope remains custom corrugated ear-lock presentation packaging. Standard shipping cartons, master cartons and RSC cases remain excluded. Collapsible boxes carry no fixed freight-saving or assembly-service promise.
 
-Current gallery assets are generated concepts, not customer case studies or production photographs. Hero and gallery disclosures make that distinction visible. Rights-cleared production photographs and verified project facts remain needed for genuine case studies.
+Current gallery assets are generated concepts, not customer case studies or production photographs. The owner subsequently requested neutral, product-focused customer copy without image-provenance disclaimers. Gallery captions now describe configuration options; no customer-project claims are attached to those visuals. Rights-cleared production photographs and verified project facts remain needed before naming genuine case studies.
 
 ## Verification
 
