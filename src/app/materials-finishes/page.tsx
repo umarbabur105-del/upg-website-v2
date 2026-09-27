@@ -71,6 +71,41 @@ export default function MaterialsFinishesPage() {
         </div>
       </section>
 
+      <section className="section-shell border-y border-border bg-cream">
+        <div className="container-editorial grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          <div>
+            <div className="eyebrow">Material thickness guide</div>
+            <h2 className="mt-4 font-serif text-3xl leading-tight text-foreground md:text-4xl">
+              How thick should your packaging be?
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+              Compare carton board, printed wraps, rigid board, and corrugated
+              flutes. See what GSM, millimetres, and points mean before choosing
+              a starting material for retail, cosmetics, food cartons, or shipping.
+            </p>
+            <Link
+              href="/blog/packaging-material-thickness-guide"
+              className="mt-6 inline-flex min-h-11 items-center font-semibold text-gold-dark underline decoration-gold/50 underline-offset-4 hover:text-foreground"
+            >
+              Compare thicknesses and uses →
+            </Link>
+          </div>
+          <dl className="grid gap-3 sm:grid-cols-3">
+            {[
+              { unit: "GSM", label: "Weight per area", detail: "How much one square metre of the stock weighs." },
+              { unit: "mm", label: "Actual thickness", detail: "The distance between the two faces of the stock." },
+              { unit: "PT", label: "Another thickness unit", detail: "One paperboard point equals 0.0254 mm." },
+            ].map((item) => (
+              <div key={item.unit} className="border border-border bg-surface p-5">
+                <dt className="font-serif text-3xl text-olive">{item.unit}</dt>
+                <dd className="mt-4 text-sm font-semibold text-foreground">{item.label}</dd>
+                <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.detail}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
       <section className="section-shell">
         <div className="container-editorial grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">

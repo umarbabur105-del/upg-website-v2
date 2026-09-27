@@ -47,6 +47,115 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "packaging-material-thickness-guide",
+    title: "Packaging Material Thickness: GSM, mm & PT Guide",
+    date: "2026-09-27",
+    category: "Materials & Finishes",
+    readTime: "8 min read",
+    excerpt:
+      "Compare common carton-board thicknesses, rigid board, and corrugated flutes. Understand GSM, mm, and PT for retail, cosmetics, food cartons, and shipping.",
+    quickAnswer:
+      "Choose the material family before comparing thickness. GSM measures weight per square metre; millimetres and paperboard points measure thickness. For a folding carton, compare the selected board grade and caliper. For a rigid box, specify the core and wrap separately. For shipping, review the complete corrugated construction, packed weight, and transit conditions.",
+    heroImage: "/images/redesign/hero/materials-hero.jpg",
+    heroAlt: "Paperboard, packaging surfaces, and material finish details",
+    keyDecisions: [
+      { label: "GSM · g/m²", title: "Weight per area", description: "300 GSM means one square metre of that stock weighs 300 grams. It does not define a fixed thickness." },
+      { label: "mm · microns", title: "Measured thickness", description: "0.40 mm equals 400 microns. Ask for the caliper of the selected board grade, including any required tolerance." },
+      { label: "PT · points", title: "The same thickness, another unit", description: "One paperboard point is 0.001 inch, or 0.0254 mm. Convert points to millimetres, not directly to GSM." },
+    ],
+    content: `
+## Common white carton-board thicknesses
+
+Start here for printed folding cartons around retail and cosmetic products. These selected UPG supplier-reference values describe white carton board before additional lamination. Actual caliper varies with the mill grade, fibre construction, coating, and manufacturing tolerance. The suggested uses are starting points for review, not product-weight ratings.
+
+| White carton board | Approx. thickness | Equivalent PT | When to consider it |
+| --- | --- | --- | --- |
+| **250 GSM** | 0.33 mm | 13.0 pt | Compact cartons or sleeves around small, light retail products |
+| **300 GSM** | 0.40–0.41 mm | 15.7–16.1 pt | Individual cosmetic, personal-care, or other retail outer cartons |
+| **350 GSM** | 0.47–0.48 mm | 18.5–18.9 pt | A firmer folding-carton feel for beauty and retail presentation |
+| **400 GSM** | 0.55 mm | 21.7 pt | Projects needing a heavier carton stock, with crease and closure checks |
+
+The PT values above are calculated from the listed millimetres and rounded to one decimal place. A 350 GSM board is still a folding-carton material; choosing it does not turn a retail carton into a parcel-shipping box.
+
+## Other useful material families
+
+| Material | Thickness reference | Where it fits | What to check |
+| --- | --- | --- | --- |
+| **Grey-backed duplex board** | UPG references: 300 GSM ≈ 0.37 mm; 350 GSM ≈ 0.44–0.45 mm; 400 GSM ≈ 0.49 mm | Printed secondary cartons where a grey reverse is acceptable | Surface, fibre grade, reverse-side appearance, and finished carton performance |
+| **Coated art-paper wrap** | UPG reference: 157 GSM ≈ 0.12 mm | Printed outer covering for a rigid presentation box | Wrap paper and structural core are separate specifications |
+| **Rigid greyboard core** | 1.5 mm or 2.0 mm are useful thickness options to discuss | Magnetic, lid-and-base, and premium presentation boxes | Box dimensions, product arrangement, core grade, wrap, and insert support |
+
+The duplex and wrap figures come from UPG's production-supplier reference. The rigid-core thickness options are also present in ESKA's published solid-board range; the chosen project stock is confirmed separately. A grey-backed folding board and a thick rigid greyboard core are different constructions.
+
+For scale, a 2.0 mm core is five times the thickness of a 0.40 mm sheet. That comparison describes thickness only: it does not mean five times the strength or five times the load capacity. Wrapping and lining add to the finished wall thickness.
+
+## Why 300 GSM does not have one thickness
+
+Paperboard can contain different fibres, layers, coatings, and amounts of bulk. Published mill specifications demonstrate the difference: Holmen Invercote G at 300 GSM is 0.395 mm, while Holmen Incada Exel at 300 GSM is 0.540 mm. Neither value replaces the selected stock specification for your order.
+
+**C1S** means coated one side and **C2S** means coated two sides. These terms describe coated faces, not a fibre grade or a universal GSM-to-PT conversion. White board should not automatically be called SBS, and a grey-backed board should not automatically be treated as a particular CCNB grade. Confirm the actual material in the written specification.
+
+## E, B, or C flute for corrugated packaging?
+
+Corrugated board combines liners with a fluted middle layer. Its thickness and performance cannot be read from the GSM of one liner. The examples below use DS Smith's published Lithuania product range for thickness and its sheetfeeding guidance for common roles; other board constructions can differ.
+
+| Flute | Published thickness reference | Starting use |
+| --- | --- | --- |
+| **E flute** | 1.2–1.8 mm | Compact corrugated cartons, fitments, and presentation packaging where print surface and space matter |
+| **B flute** | Up to 3.2 mm in the referenced range | Outer cases and shipping packs where the full board grade supports the job |
+| **C flute** | Up to 4.5 mm in the referenced range | Larger-profile outer cases, reviewed for compression, cushioning, and the distribution route |
+
+Do not select E flute only because the box is small, or C flute only because the product is heavy. Liner and fluting grades, wall construction, box dimensions, inserts, stacking, moisture, and handling all affect the result. The finished pack may need a different flute, double-wall board, or an outer shipper after review.
+
+## Choose by the job the packaging must do
+
+| Your product or route | A useful starting discussion | What changes the choice |
+| --- | --- | --- |
+| **Retail and cosmetics** | Compare 300 and 350 GSM white carton-board references for an individual outer box; consider 250 GSM for a compact light product | Bottle or jar weight, panel size, window cut-outs, closure, inserts, and desired feel |
+| **Dry packaged food** | Discuss 250–350 GSM carton board for a secondary carton around an already packed product | Product weight, inner pack, grease or moisture exposure, and storage conditions |
+| **Beverages and chilled products** | Start with load, condensation, and the actual packaging format rather than a generic GSM number | A carrier, outer case, cup, and liquid-contact pack have different material and barrier needs |
+| **Ecommerce and shipping** | Compare corrugated board constructions; E, B, and C are different starting profiles | Packed weight, fragility, stacking, transit route, and protection inside the box |
+| **Premium gifts and cosmetic sets** | Compare a 1.5 or 2.0 mm rigid core plus the selected wrap and insert | Box span, product arrangement, opening style, and protection during delivery |
+
+For food contact, thickness alone cannot establish suitability. Identify the food, whether contact is direct, temperature, storage time, and any grease or moisture exposure. The chosen board, barrier, inks, and adhesive need to suit that application. FDA's food-type and condition-of-use references distinguish these conditions; there is no single food-safe GSM. Cups, pouches, and liquid-contact packaging need their own material specification.
+
+## Thickness is different from box size
+
+Board caliper is the thickness of the material wall. Finished box size is length × width × height. A thicker wall, wrap, or insert can change the usable space inside the same external dimensions. Confirm internal dimensions on the approved dieline using the <a href="/blog/how-to-measure-product-for-custom-packaging" class="font-semibold text-gold-dark underline">product measurement guide</a>.
+
+Raw sheet sizes also vary by mill, press, and cutting layout. You do not need to choose a sheet size to start a quote: send the product or desired finished box dimensions and we can review the material and layout together.
+
+## Start a quote even if the material is undecided
+
+Send what you know about the product, quantity, dimensions, and intended use. A product photo or an existing pack reference can help. If the GSM or flute is undecided, leave the choice open for our review. You can <a href="/get-a-quote?builder_note=Please%20help%20me%20choose%20the%20material%20and%20thickness%20for%20my%20packaging." class="font-semibold text-gold-dark underline">request a quick quote</a> without turning this guide into a technical checklist.
+    `.trim(),
+    faqs: [
+      { question: "Is GSM the same as thickness?", answer: "No. GSM is grams per square metre, a measure of weight per area. Thickness is measured in millimetres, microns, or paperboard points. Different board grades can have the same GSM and different thicknesses." },
+      { question: "How thick is 300 GSM packaging board?", answer: "UPG's white carton-board reference is approximately 0.40–0.41 mm at 300 GSM. This is grade-specific: Holmen publishes 0.395 mm for 300 GSM Invercote G and 0.540 mm for 300 GSM Incada Exel. Confirm the selected stock rather than treating GSM as a fixed thickness." },
+      { question: "How do I convert paperboard points to millimetres?", answer: "Multiply paperboard points by 0.0254. For example, 16 pt is 0.4064 mm, 20 pt is 0.508 mm, and 24 pt is 0.6096 mm. There is no equivalent fixed conversion from points to GSM without knowing the board grade." },
+      { question: "What thickness should I choose for cosmetic boxes?", answer: "For an individual cosmetic outer carton, 300 or 350 GSM white board is a useful starting comparison: UPG's reference calipers are about 0.40–0.41 mm and 0.47–0.48 mm. Product weight, carton dimensions, inserts, windows, and closures determine the final choice. A rigid gift set uses a separate core-and-wrap construction." },
+      { question: "Is a thicker material always better for shipping?", answer: "No. Shipping performance depends on the complete board construction, box dimensions, packed weight, inserts, stacking, moisture, and handling. Flute letter or caliper alone cannot establish a safe load or guarantee transit performance." },
+      { question: "Which GSM is suitable for food and beverage packaging?", answer: "There is no universal food-and-beverage GSM. A secondary carton around packed food, a beverage carrier, a cup, and liquid-contact packaging have different requirements. Identify the food, contact conditions, temperature, moisture, and load before selecting the substrate and any barrier." },
+      { question: "Do I need to choose GSM or a raw sheet size before requesting a quote?", answer: "No. Start with what you know about the product, quantity, dimensions, and intended use. UPG can help select the material, thickness, and production layout during review; the quick quote does not require a completed material specification." },
+    ],
+    resources: [
+      { title: "Materials and finishes", description: "Match the board family with printing, surface, and finish options.", href: "/materials-finishes" },
+      { title: "Custom tuck boxes", description: "Explore a folding-carton structure for retail and cosmetic outer packaging.", href: "/products/custom-tuck-boxes" },
+      { title: "Corrugated mailer boxes", description: "Review the format alongside the product and delivery requirements.", href: "/products/custom-mailer-boxes" },
+      { title: "Get help choosing a material", description: "Send the product and intended use, even when the material is still open.", href: "/get-a-quote?builder_note=Please%20help%20me%20choose%20the%20material%20and%20thickness%20for%20my%20packaging." },
+    ],
+    sources: [
+      { name: "Holmen Invercote G", href: "https://www.holmen.com/en/board-and-paper/products/paperboard/invercote/invercote-g/", note: "Mill data pairs grammage with measured caliper for this specific solid bleached board grade." },
+      { name: "Holmen Incada Exel", href: "https://www.holmen.com/en/board-and-paper/products/paperboard/incada/incada-exel/", note: "A different board construction demonstrates why matching GSM does not mean matching thickness." },
+      { name: "ESKA board specifications", href: "https://eska.com/products/eska-board/", note: "Producer data lists solid-board thicknesses including 1.5 and 2.0 mm; the finished box also includes its wrap and lining." },
+      { name: "DS Smith corrugated board range", href: "https://www.dssmith.com/lt/produktai-paslaugos/produktai/gofruotas-kartonas", note: "The Lithuania product range supplies the E, B, and C thickness examples used here." },
+      { name: "DS Smith flute selection and construction", href: "https://www.dssmith.com/sheetfeeding/insights/about-fluting/flutes", note: "Flute profiles serve different packaging roles; the full construction matters when choosing a shipping pack." },
+      { name: "FDA food types and conditions of use", href: "https://www.fda.gov/food/packaging-food-contact-substances-fcs/food-types-conditions-use-food-contact-substances", note: "Food type and contact conditions matter when reviewing packaging materials for food use." },
+    ],
+    relatedSlugs: ["how-to-measure-product-for-custom-packaging", "cosmetic-outer-packaging-guide", "packaging-proof-vs-sample"],
+    keywords: ["packaging material thickness", "GSM vs thickness", "300 gsm thickness in mm", "paperboard pt to mm", "cosmetic box material thickness", "E B C flute thickness"],
+  },
+  {
     slug: "cosmetic-outer-packaging-guide",
     title: "Cosmetic Outer Packaging Guide: Cartons, Sets & Mailers",
     metaTitle: "Cosmetic Outer Packaging Guide: Boxes & Sets",
