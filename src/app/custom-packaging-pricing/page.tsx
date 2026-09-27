@@ -152,9 +152,8 @@ export default function CustomPackagingPricingPage() {
               </h2>
             </div>
             <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground lg:col-span-7">
-              The planning MOQ gives buyers a real starting point without
-              pretending that every structure, size, artwork, or delivery plan
-              has the same production cost.
+              Start with a planning quantity, then compare the structure, size,
+              artwork, and delivery requirements that shape your project price.
             </p>
           </div>
           <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -249,6 +248,39 @@ export default function CustomPackagingPricingPage() {
               </article>
             ))}
           </div>
+          <article id="compare-quotes" className="mt-8 scroll-mt-28 border border-border bg-cream p-6 md:p-8">
+            <div className="eyebrow mb-3">Like-for-like review</div>
+            <h2 className="font-serif text-3xl text-foreground">
+              {commercialTerms.quoteComparison.title}
+            </h2>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+              {commercialTerms.quoteComparison.intro}
+            </p>
+            <ul className="mt-6 grid gap-3 md:grid-cols-2">
+              {commercialTerms.quoteComparison.checklist.map((item) => (
+                <li
+                  key={item}
+                  className="border border-border bg-surface px-4 py-3 text-sm leading-relaxed text-foreground"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href={commercialTerms.quoteComparison.specificationHref}
+                className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
+              >
+                I have the specification
+              </Link>
+              <Link
+                href={commercialTerms.quoteComparison.checklistHref}
+                className="rounded-full border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-foreground hover:bg-stone"
+              >
+                I still need to define the specification
+              </Link>
+            </div>
+          </article>
         </div>
       </section>
 

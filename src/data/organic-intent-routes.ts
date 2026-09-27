@@ -601,7 +601,7 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
         description:
           "Start here for a branded creator-seeding or campaign-drop mailer built around the approved product arrangement.",
         status: "Available",
-        href: "/get-a-quote?product=Mailer%20Boxes&style=Influencer%20Mailer&builder_note=Buyer%20intent%3A%20custom%20influencer%20mailer%20box.",
+        href: "/get-a-quote?product=Mailer%20Boxes&style=PR%20%2F%20Presentation%20Mailer&builder_note=Buyer%20intent%3A%20custom%20influencer%20mailer%20box.",
         linkLabel: "Start an influencer-mailer brief",
       },
       {
@@ -630,7 +630,7 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
         status: "Outside current offer",
       },
     ],
-    reviewedAt: "2026-09-03",
+    reviewedAt: "2026-09-27",
   },
   {
     path: "/packaging-styles/printed-rollstock-film",

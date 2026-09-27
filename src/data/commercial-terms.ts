@@ -3,7 +3,7 @@ import type { FaqItem } from "@/data/faq";
 export const commercialTerms = {
   path: "/custom-packaging-pricing",
   markdownPath: "/custom-packaging-pricing.md",
-  reviewedAt: "2026-09-03",
+  reviewedAt: "2026-09-27",
   quickAnswer:
     "UPG's low-MOQ custom packaging starts with a 250-unit planning minimum for every current product family. Custom-production pricing remains quote-based because structure, dimensions, material, print, finish, quantity, and delivery destination change the manufacturing plan. The final written quote confirms price, scope, freight, duties, taxes, payment, production timing, and delivery terms.",
   moqAnswers: [
@@ -64,6 +64,22 @@ export const commercialTerms = {
         "Artwork readiness, samples, proofing, compatibility, compliance, and market-specific requirements are reviewed where applicable.",
     },
   ],
+  quoteComparison: {
+    title: "Compare quotes on one specification.",
+    intro:
+      "Use the same project brief for every quotation so the next review can identify what is included, still open, or needs to be confirmed.",
+    checklist: [
+      "Structure and finished dimensions",
+      "Material plus print and finish requirements",
+      "One quantity or the requested quantity breaks",
+      "Insert and closure requirements",
+      "Delivery destination and the requested freight, duties, and taxes scope",
+      "Proof or sample status",
+    ],
+    specificationHref:
+      "/get-a-quote?builder_note=I%20am%20requesting%20a%20like-for-like%20comparison%20against%20one%20specified%20packaging%20brief.",
+    checklistHref: "/blog/custom-packaging-quote-checklist",
+  },
   quoteInputs: [
     "Packaging type or the product that needs packaging",
     "Finished dimensions, or product dimensions if the box size is not known",
