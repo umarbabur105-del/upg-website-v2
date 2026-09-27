@@ -48,129 +48,200 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: "packaging-material-thickness-guide",
-    title: "Paperboard Thickness Guide: 16 PT, 18 PT & More",
+    title: "Paperboard Thickness Guide: 8 PT to 28 PT",
     date: "2026-09-27",
     category: "Materials & Finishes",
-    readTime: "8 min read",
+    readTime: "6 min read",
     excerpt:
-      "Compare 14, 16, 18, 20, and 24 PT paperboard for custom boxes, with exact mm thickness, grade-specific GSM references, and practical packaging uses.",
+      "Compare 8 PT to 28 PT paperboard with exact nominal millimeters, published GSM examples, and clear starting uses for printed packaging.",
     quickAnswer:
-      "Paperboard thickness is measured in points (PT). Compare 16 PT and 18 PT for product cartons, with 14, 20, and 24 PT offering lighter or more substantial options. One point equals 0.001 inch. GSM measures weight per square meter and varies with the board grade.",
+      "PT measures nominal paperboard thickness: one point is 0.001 inch, or 0.0254 mm. GSM measures weight per square meter, so it is not a fixed PT conversion. Compare 8–14 PT for light printed components, 16–18 PT for retail cartons, and 20–28 PT where folding and structure need closer review.",
     heroImage: "/images/redesign/hero/materials-hero.jpg",
     heroAlt: "Paperboard, packaging surfaces, and material finish details",
     keyDecisions: [
-      { label: "16 PT · 0.016 inch", title: "Compact retail cartons", description: "A useful starting point for smaller folding cartons. Nominal thickness: 0.4064 mm. Match the grade and structure to the finished product." },
-      { label: "18 PT · 0.018 inch", title: "More thickness for presentation", description: "Compare with 16 PT when you want a thicker carton wall. Nominal thickness: 0.4572 mm. Box size, inserts, and closures still matter." },
-      { label: "24 PT · 0.024 inch", title: "Substantial folding cartons", description: "An option to review for larger cartons or a more substantial feel. Nominal thickness: 0.6096 mm. Confirm creasing, folding, and product support." },
+      {
+        label: "8–14 PT",
+        title: "Light printed components",
+        description:
+          "Compare these lower calipers for cards, tags, insert cards, sleeves, and light cartons—not loaded or shipping cartons.",
+      },
+      {
+        label: "16–18 PT",
+        title: "Retail cartons",
+        description:
+          "A practical comparison range for product cartons. Board grade, panel size, insert, closure, and product weight still decide the final specification.",
+      },
+      {
+        label: "20–28 PT",
+        title: "Thicker folding board",
+        description:
+          "Use a more substantial caliper only with crease, fold, closure, and structural review.",
+      },
     ],
     content: `
-## Paperboard thickness chart: 14, 16, 18, 20, and 24 PT
+## Paperboard thickness chart: 8 PT to 28 PT
 
-Choose paperboard thickness to suit your product, box structure, and presentation. **16 PT and 18 PT** are common options for product cartons; compare them with 14, 20, and 24 PT below. A paperboard point equals 0.001 inch, so 16 PT describes a nominal 0.016-inch sheet.
+Paperboard points measure nominal thickness: **1 PT = 0.001 inch = 0.0254 mm**. GSM measures weight per square meter. They are related by the board’s construction, but one is not a fixed conversion of the other.
 
-| Paperboard thickness | Nominal thickness in mm | Packaging applications | GSM reference span* |
+| Caliper | Nominal thickness | Published GSM examples | Starting use |
 | --- | --- | --- | --- |
-| **14 PT** | 0.3556 mm | Compact cartons or sleeves around small, light retail products | 255–257 GSM |
-| **16 PT** | 0.4064 mm | Individual cosmetic, personal-care, and small retail outer cartons | 284–288 GSM |
-| **18 PT** | 0.4572 mm | Compare with 16 PT for a thicker carton wall and more substantial presentation | 311–314 GSM |
-| **20 PT** | 0.5080 mm | Thicker retail cartons where the crease and closure design supports the board | 335–345 GSM |
-| **24 PT** | 0.6096 mm | Larger folding cartons or a more substantial feel, with product support and folding reviewed | 396–407 GSM |
+| **8 PT** | 0.2032 mm | 177 GSM | Light printed cards, tags, insert cards, or sleeves |
+| **10 PT** | 0.2540 mm | 195–202 GSM | Light printed cards, tags, insert cards, or sleeves |
+| **12 PT** | 0.3048 mm | 227–250 GSM | Light cartons or sleeves |
+| **14 PT** | 0.3556 mm | 255–275 GSM | Light cartons or sleeves |
+| **16 PT** | 0.4064 mm | 284–300 GSM | Retail product cartons |
+| **18 PT** | 0.4572 mm | 311–350 GSM | Retail product cartons |
+| **20 PT** | 0.5080 mm | 335–345 GSM | Thicker folding board; review creases and structure |
+| **24 PT** | 0.6096 mm | 396–407 GSM | Thicker folding board; review creases and structure |
+| **28 PT** | 0.7112 mm | 462–527 GSM | Thicker folding board; review creases and structure |
 
-*GSM ranges shown compare **Sappi Spectro C1S** and **Smurfit Westrock PrintKote**, two white SBS board grades. Other grades can fall outside these ranges because GSM varies with construction and density. Your quote confirms the selected stock and its thickness tolerance; lamination adds to the finished thickness.
+*These are published stock examples from Sappi Spectro C1S, Smurfit Westrock PrintKote, and PakFactory’s nominal stock guide. GSM varies by board grade; confirm the selected stock with your quote.*
 
-These uses are starting points, not product-weight ratings. A folding carton may still need inserts and a corrugated outer shipper for parcel delivery.
+## How to use the chart
 
-## 16 PT vs 18 PT: which should you choose?
+Lower calipers can suit light printed components, but are not a recommendation for shipping or loaded cartons. **12 PT and 14 PT** are useful comparisons for light cartons and sleeves. **16 PT and 18 PT** are a useful retail-carton comparison. At **20 PT, 24 PT, and 28 PT**, creasing, folding, closure, panel size, and product support deserve closer review.
 
-For a small retail carton, **16 PT** is a useful starting comparison. Review **18 PT** when you want a thicker wall or a more substantial feel. Nominally, 18 PT is 12.5% thicker than 16 PT; that is a thickness comparison, not a strength or load rating. Large panels, heavy glass jars, windows, inserts, grain direction, and the board grade can change the right choice.
+The table gives a starting point, not a payload rating. Windows, inserts, grain direction, board grade, moisture, and the final structure can all change the right selection.
 
-Consider 14 PT for a lighter compact carton, or compare 20 and 24 PT for a step up in caliper. A physical sample is useful when the feel, fit, or folding performance will decide the order.
+## C1S, C2S, rigid board, and corrugated board
 
-## How PT, millimeters, and GSM relate
+**C1S** means coated one side; **C2S** means coated two sides. Those terms describe the printing surface, not a universal strength or weight. A rigid presentation box uses a separate core plus wrap; 1.5 mm and 2.0 mm cores are useful project references. Corrugated board uses liners and a fluted medium, so its formation and flute profile need review separately from paperboard PT.
 
-**PT measures thickness. GSM measures weight per square meter.** Multiply PT by 0.0254 to get the exact nominal thickness in millimeters. For example, 18 × 0.0254 = 0.4572 mm. Paperboard points are not typographic points used for font sizes.
+## Formation is not flute
 
-There is no fixed PT-to-GSM formula. At 16 PT, the published references above list 288 GSM for Spectro C1S and 284 GSM for PrintKote. Fiber mix, density, coating, and construction affect weight at the same thickness. The reverse is also true: Holmen publishes 0.395 mm for 300 GSM Invercote G and 0.540 mm for 300 GSM Incada Exel.
+Single face board has one liner and one flute. Single wall has two liners and one flute. Double wall has three liners and two flutes; triple wall has four liners and three flutes. F, E, B, C, and A are flute profiles, ordered from thinner to deeper. A deeper flute is not automatically a double-wall board.
 
-**C1S** means coated one side and **C2S** means coated two sides. These terms describe coated faces, not a fiber grade or a universal conversion. Confirm the board grade as well as the PT in the written specification.
+Use the complete pack, dimensions, fragility, handling, and transit conditions to choose corrugated board. Generic caliper and flute letters do not establish a safe load rating.
 
-## Other useful material families
+## Match the material to the packaging job
 
-The PT chart above covers folding-carton paperboard. Rigid-box cores are usually easier to compare in millimeters, while corrugated packaging needs its flute and full board construction reviewed.
-
-| Material | Thickness reference | Where it fits | What to check |
-| --- | --- | --- | --- |
-| **Grey-backed duplex board** | Approx. 14.6 PT (0.37 mm) at 300 GSM; 17.3–17.7 PT (0.44–0.45 mm) at 350 GSM; 19.3 PT (0.49 mm) at 400 GSM | Printed secondary cartons where a grey reverse is acceptable | Surface, fiber grade, reverse-side appearance, and finished carton performance |
-| **Coated art-paper wrap** | Approx. 4.7 PT (0.12 mm) at 157 GSM | Printed outer covering for a rigid presentation box | Wrap paper and structural core are separate specifications |
-| **Rigid greyboard core** | 1.5 mm or 2.0 mm are useful thickness options to discuss | Magnetic, lid-and-base, and premium presentation boxes | Box dimensions, product arrangement, core grade, wrap, and insert support |
-
-The duplex and wrap figures come from UPG's production-supplier reference; their approximate PT equivalents are calculated from millimeters and rounded to one decimal place. The rigid-core thickness options are also present in ESKA's published solid-board range. A grey-backed folding board and a thick rigid greyboard core are different constructions.
-
-For scale, a 2.0 mm core is five times the thickness of a 0.40 mm sheet. That comparison describes thickness only: it does not mean five times the strength or five times the load capacity. Wrapping and lining add to the finished wall thickness.
-
-## E, B, or C flute for corrugated packaging?
-
-Corrugated board combines liners with a fluted middle layer. Compare the flute profile, then check the complete board construction against the packed product and delivery conditions. The thickness examples below come from DS Smith's corrugated-board specifications; available constructions vary by supplier.
-
-| Flute | Published thickness reference | Starting use |
+| Packaging need | Starting comparison | Review before choosing |
 | --- | --- | --- |
-| **E flute** | 1.2–1.8 mm | Compact corrugated cartons, fitments, and presentation packaging where print surface and space matter |
-| **B flute** | Up to 3.2 mm in the referenced range | Outer cases and shipping packs where the full board grade supports the job |
-| **C flute** | Up to 4.5 mm in the referenced range | Larger-profile outer cases, reviewed for compression, cushioning, and the distribution route |
+| **Retail and cosmetics** | 16 PT or 18 PT folding board for an individual outer carton | Product weight, panel size, window, closure, insert, and intended feel |
+| **Light cartons and sleeves** | 12 PT or 14 PT paperboard | Product support, folding, print surface, and the final structure |
+| **Food or beverage secondary packs** | Folding board around an already packed product | Contact, barrier, grease, moisture, temperature, and storage conditions |
+| **Ecommerce presentations** | Corrugated ear-lock mailer board with a selected formation and flute | Packed product, insert, handling, and delivery conditions |
+| **Premium sets and gifts** | 1.5 mm or 2.0 mm rigid core plus wrap and insert | Product arrangement, box span, opening style, and finished presentation |
 
-Do not select E flute only because the box is small, or C flute only because the product is heavy. Liner and fluting grades, wall construction, box dimensions, inserts, stacking, moisture, and handling all affect the result. The finished pack may need a different flute, double-wall board, or an outer shipper after review.
+Rigid-core thickness is separate from folding-board PT, and its wrap and lining add to the finished wall. Food-contact, liquid-contact, and barrier requirements need their own material review.
 
-## Choose by the job the packaging must do
+## Start with the product and structure
 
-| Packaging application | Material options to compare | What changes the choice |
-| --- | --- | --- |
-| **Retail and cosmetics** | Compare 16 PT and 18 PT for an individual outer carton; review 14 PT for a smaller, lighter pack | Bottle or jar weight, panel size, window cut-outs, closure, inserts, and desired feel |
-| **Dry packaged food** | Discuss 14–18 PT folding board for a secondary carton around an already packed product | Product weight, inner pack, grease or moisture exposure, and storage conditions |
-| **Beverages and chilled products** | Start with load, condensation, and the actual packaging format rather than a generic PT or GSM number | A carrier, outer case, cup, and liquid-contact pack have different material and barrier needs |
-| **Ecommerce and shipping** | Compare corrugated board constructions; E, B, and C are different starting profiles | Packed weight, fragility, stacking, transit route, and protection inside the box |
-| **Premium gifts and cosmetic sets** | Compare a 1.5 or 2.0 mm rigid core plus the selected wrap and insert | Box span, product arrangement, opening style, and protection during delivery |
-
-For food contact, thickness alone cannot establish suitability. Identify the food, whether contact is direct, temperature, storage time, and any grease or moisture exposure. The chosen board, barrier, inks, and adhesive need to suit that application. FDA's food-type and condition-of-use references distinguish these conditions; there is no single food-safe PT or GSM. Cups, pouches, and liquid-contact packaging need their own material specification.
-
-## Thickness is different from box size
-
-Board caliper is the thickness of the material wall. Finished box size is length × width × height. A thicker wall, wrap, or insert can change the usable space inside the same external dimensions. Confirm internal dimensions on the approved dieline using the <a href="/blog/how-to-measure-product-for-custom-packaging" class="font-semibold text-gold-dark underline">product measurement guide</a>.
-
-Raw sheet sizes also vary by mill, press, and cutting layout. You do not need to choose a sheet size to start a quote: send the product or desired finished box dimensions and we can review the material and layout together.
-
-## Start a quote even if the material is undecided
-
-Send what you know about the product, quantity, dimensions, and intended use. A product photo or an existing pack reference can help. If the PT or flute is undecided, leave the choice open for our review. You can <a href="/get-a-quote?builder_note=Please%20help%20me%20choose%20the%20material%20and%20thickness%20for%20my%20packaging." class="font-semibold text-gold-dark underline">request a quick quote</a> while the final material choice is still open.
+Send the product, dimensions, quantity, target look, and intended use. If PT, board family, or flute is undecided, leave it open for review. You can <a href="/get-a-quote?builder_note=Please%20help%20me%20choose%20the%20material%20and%20thickness%20for%20my%20packaging." class="font-semibold text-gold-dark underline">request a quick quote</a> with the details you have.
     `.trim(),
     faqs: [
-      { question: "What are common paperboard PT options for custom boxes?", answer: "Common options include 14, 16, 18, and 24 PT, with 20 PT available in the mill grades compared here. Compare 16 PT and 18 PT for individual product cartons. Choose the board grade and thickness to suit the product weight, box dimensions, and structure." },
-      { question: "What is the difference between 16 PT and 18 PT?", answer: "16 PT is nominally 0.4064 mm thick, while 18 PT is 0.4572 mm. That makes 18 PT 12.5% thicker, but not automatically 12.5% stronger. Review the board grade, panel size, product weight, inserts, and closures before choosing." },
-      { question: "How do I convert paperboard points to millimeters?", answer: "One paperboard point is 0.001 inch. Multiply PT by 0.0254: 14 PT is 0.3556 mm, 16 PT is 0.4064 mm, 18 PT is 0.4572 mm, 20 PT is 0.5080 mm, and 24 PT is 0.6096 mm. Actual stock has a manufacturing tolerance." },
-      { question: "How many GSM is 16 PT or 18 PT paperboard?", answer: "There is no universal conversion. In the Sappi Spectro C1S and Smurfit Westrock PrintKote references used here, 16 PT spans 284–288 GSM and 18 PT spans 311–314 GSM. These are examples from two grades, not the full market range; other grades can differ. Specify the board grade as well as the PT." },
-      { question: "What PT should I choose for cosmetic boxes?", answer: "Compare 16 PT and 18 PT for an individual cosmetic outer carton. Their nominal thicknesses are 0.4064 mm and 0.4572 mm. Product weight, carton dimensions, inserts, windows, and closures determine the final board grade and structure. A rigid gift set uses a separate core-and-wrap construction." },
-      { question: "Is a thicker material always better for shipping?", answer: "No. Shipping performance depends on the complete board construction, box dimensions, packed weight, inserts, stacking, moisture, and handling. Flute letter or caliper alone cannot establish a safe load or guarantee transit performance." },
-      { question: "Which PT is suitable for food and beverage packaging?", answer: "There is no universal food-and-beverage PT or GSM. A secondary carton around packed food, a beverage carrier, a cup, and liquid-contact packaging have different requirements. Identify the food, contact conditions, temperature, moisture, and load before selecting the substrate and any barrier." },
-      { question: "Do I need to choose PT, GSM, or a raw sheet size before requesting a quote?", answer: "No. Start with what you know about the product, quantity, dimensions, and intended use. UPG can help select the material, thickness, and production layout during review; the quick quote does not require a completed material specification." },
+      {
+        question: "What is the lowest paperboard PT option?",
+        answer:
+          "8 PT appears in the published Sappi Spectro C1S table used here, but it is not a market-wide minimum. Light 8 PT and 10 PT stocks are starting points for printed cards, tags, insert cards, and sleeves, not loaded or shipping cartons.",
+      },
+      {
+        question: "How do I convert paperboard points to millimeters?",
+        answer:
+          "One paperboard point is 0.001 inch, or 0.0254 mm. Multiply PT by 0.0254: 8 PT is 0.2032 mm, 16 PT is 0.4064 mm, and 28 PT is 0.7112 mm.",
+      },
+      {
+        question: "How many GSM is paperboard?",
+        answer:
+          "There is no universal PT-to-GSM conversion. In the published stock examples here, 10 PT spans 195–202 GSM, 16 PT spans 284–300 GSM, and 28 PT spans 462–527 GSM. Specify the grade as well as the PT.",
+      },
+      {
+        question: "What is the difference between C1S and C2S board?",
+        answer:
+          "C1S is coated on one side; C2S is coated on two sides. The terms describe coated surfaces, so the final specification should also name the board grade, caliper, print requirements, and structure.",
+      },
+      {
+        question: "What is the difference between corrugated layers and flute?",
+        answer:
+          "Formation counts liners and fluted layers: single wall uses two liners and one flute, while double wall uses three liners and two flutes. Flute letters describe profile depth; a larger flute does not mean a double-wall board.",
+      },
+      {
+        question: "Should I choose 16 PT or 18 PT for a retail carton?",
+        answer:
+          "Compare both around the product, carton dimensions, panel size, insert, window, closure, and desired feel. 16 PT is nominally 0.4064 mm and 18 PT is 0.4572 mm, but the thicker board is not automatically the right structure.",
+      },
+      {
+        question: "Do I need PT and GSM before requesting a quote?",
+        answer:
+          "No. Start with the product, dimensions, quantity, intended use, and target look. The project review can identify the material and structure that fit the brief.",
+      },
     ],
     resources: [
-      { title: "Materials and finishes", description: "Match the board family with printing, surface, and finish options.", href: "/materials-finishes" },
-      { title: "Custom tuck boxes", description: "Explore a folding-carton structure for retail and cosmetic outer packaging.", href: "/products/custom-tuck-boxes" },
-      { title: "Corrugated mailer boxes", description: "Review the format alongside the product and delivery requirements.", href: "/products/custom-mailer-boxes" },
-      { title: "Get help choosing a material", description: "Send the product and intended use, even when the material is still open.", href: "/get-a-quote?builder_note=Please%20help%20me%20choose%20the%20material%20and%20thickness%20for%20my%20packaging." },
+      {
+        title: "Materials and finishes",
+        description:
+          "Match the board family with printing, surface, and finish options.",
+        href: "/materials-finishes",
+      },
+      {
+        title: "Custom tuck boxes",
+        description:
+          "Explore a folding-carton structure for retail and cosmetic outer packaging.",
+        href: "/products/custom-tuck-boxes",
+      },
+      {
+        title: "Corrugated mailer boxes",
+        description:
+          "Review the format alongside the product and delivery requirements.",
+        href: "/products/custom-mailer-boxes",
+      },
+      {
+        title: "Get help choosing a material",
+        description:
+          "Send the product and intended use, even when the material is still open.",
+        href: "/get-a-quote?builder_note=Please%20help%20me%20choose%20the%20material%20and%20thickness%20for%20my%20packaging.",
+      },
     ],
     sources: [
-      { name: "Sappi Spectro C1S specifications", href: "https://cdn-s3.sappi.com/s3fs-public/Sappi_SpectroC1S_Sellsheet_02.22.pdf", note: "The grade-properties table pairs caliper with GSM for this SBS grade; one mil is one paperboard point." },
-      { name: "Smurfit Westrock PrintKote specifications", href: "https://files.smurfitwestrock.com/m/397e51417075f51c/original/PrintKote_Product-Guide_NA.pdf", note: "North American grade specifications list nominal thickness and GSM for PrintKote paperboard." },
-      { name: "Neenah folding board guide", href: "https://www.neenahpaper.com/-/media/files/storefront/sell-sheets/neenah_folding_board_sell_sheet_2021.pdf", note: "The producer presents 16, 18, and 24 PT folding-board options and shows how weight changes across finishes and grades." },
-      { name: "Holmen Invercote G", href: "https://www.holmen.com/en/board-and-paper/products/paperboard/invercote/invercote-g/", note: "Mill data pairs grammage with measured caliper for this specific solid bleached board grade." },
-      { name: "Holmen Incada Exel", href: "https://www.holmen.com/en/board-and-paper/products/paperboard/incada/incada-exel/", note: "A different board construction demonstrates why matching GSM does not mean matching thickness." },
-      { name: "ESKA board specifications", href: "https://eska.com/products/eska-board/", note: "Producer data lists solid-board thicknesses including 1.5 and 2.0 mm; the finished box also includes its wrap and lining." },
-      { name: "DS Smith corrugated board range", href: "https://www.dssmith.com/lt/produktai-paslaugos/produktai/gofruotas-kartonas", note: "The Lithuania product range supplies the E, B, and C thickness examples used here." },
-      { name: "DS Smith flute selection and construction", href: "https://www.dssmith.com/sheetfeeding/insights/about-fluting/flutes", note: "Flute profiles serve different packaging roles; the full construction matters when choosing a shipping pack." },
-      { name: "FDA food types and conditions of use", href: "https://www.fda.gov/food/packaging-food-contact-substances-fcs/food-types-conditions-use-food-contact-substances", note: "Food type and contact conditions matter when reviewing packaging materials for food use." },
+      {
+        name: "Sappi Spectro C1S specifications",
+        href: "https://cdn-s3.sappi.com/s3fs-public/12.22_Sappi_SpectroC1S.pdf",
+        note: "The grade-properties table pairs caliper with GSM for this SBS grade; one mil is one paperboard point.",
+      },
+      {
+        name: "Smurfit Westrock PrintKote specifications",
+        href: "https://files.smurfitwestrock.com/m/397e51417075f51c/original/PrintKote_Product-Guide_NA.pdf",
+        note: "North American grade specifications list nominal thickness and GSM for PrintKote paperboard.",
+      },
+      {
+        name: "PakFactory paperboard guide",
+        href: "https://pakfactory.com/solid-bleached-board-c1s.html",
+        note: "Its nominal stock table provides the 12, 14, 16, 18, 24, and 28 PT published examples used for the upper span.",
+      },
+      {
+        name: "PakFactory corrugated board explainer",
+        href: "https://pakfactory.com/what-is-corrugated-cardboard",
+        note: "Reference for corrugated liner-and-flute formation and approximate common flute profiles.",
+      },
+      {
+        name: "ESKA board specifications",
+        href: "https://eska.com/products/eska-board/",
+        note: "Producer data lists solid-board thicknesses including 1.5 and 2.0 mm; a finished rigid box also includes its wrap and lining.",
+      },
+      {
+        name: "DS Smith fluting guide",
+        href: "https://www.dssmith.com/sheetfeeding/insights/about-fluting/flutes",
+        note: "Reference explaining how flute profiles and complete corrugated construction affect packaging choices.",
+      },
+      {
+        name: "Fibre Box Association corrugated guide",
+        href: "https://www.fibrebox.org/what-is-corrugated",
+        note: "Independent industry reference for single-face, single-wall, double-wall, and triple-wall layer counts; flute profiles vary by design.",
+      },
     ],
-    relatedSlugs: ["how-to-measure-product-for-custom-packaging", "cosmetic-outer-packaging-guide", "packaging-proof-vs-sample"],
-    keywords: ["16 pt vs 18 pt packaging", "paperboard thickness chart", "14 16 18 20 24 pt paperboard", "paperboard pt to gsm", "paperboard pt to mm", "cosmetic box material thickness", "E B C flute thickness"],
+    relatedSlugs: [
+      "how-to-measure-product-for-custom-packaging",
+      "cosmetic-outer-packaging-guide",
+      "packaging-proof-vs-sample",
+    ],
+    keywords: [
+      "8 pt to 28 pt paperboard",
+      "paperboard thickness chart",
+      "paperboard pt to gsm",
+      "paperboard pt to mm",
+      "C1S vs C2S board",
+      "corrugated layers vs flute",
+    ],
   },
   {
     slug: "cosmetic-outer-packaging-guide",
@@ -1030,7 +1101,8 @@ Pantone **C** and **U** refer to coated and uncoated paper reference stocks in t
     quickAnswer:
       "Choose packaging finishes by job: matte, gloss, or soft-touch shapes the broader surface; foil and spot UV create selective contrast; embossing or debossing adds tactile relief; and a window reveals the product where the structure supports it. Final availability and suitability depend on material, print, structure, artwork, and production review.",
     heroImage: "/images/redesign/hero/materials-hero.jpg",
-    heroAlt: "Custom packaging materials with contrasting printed and tactile finishes",
+    heroAlt:
+      "Custom packaging materials with contrasting printed and tactile finishes",
     heroPosition: "center 55%",
     keyDecisions: [
       {
@@ -1055,15 +1127,19 @@ Pantone **C** and **U** refer to coated and uncoated paper reference stocks in t
     content: `
 ## Start with the purpose of the finish
 
-| Finish family | Visual or tactile role | Planning question |
+| Finish family | What it is | Where it helps |
 | --- | --- | --- |
-| **Matte** | Lower-sheen overall surface | Does a quieter surface support the brand and artwork? |
-| **Gloss** | Higher-sheen overall surface | Should color and reflection feel more pronounced? |
-| **Soft-touch** | Tactile overall surface | Is the touch experience important enough to include in the approved specification? |
-| **Foil stamping** | Metallic or pigmented selective accent | Which exact elements need the foil callout? |
-| **Spot UV** | Selective gloss contrast | Does the artwork provide enough contrast and space for the effect? |
-| **Emboss or deboss** | Raised or recessed relief | Is the element suitable for the panel, board, and structure? |
-| **Window** | Product visibility | Does the format support the proposed window and product presentation? |
+| **Matte** | A lower-sheen surface treatment | A calm overall surface and restrained print treatment |
+| **Gloss** | A higher-sheen surface treatment | More reflection and a sharper visual contrast |
+| **Soft-touch** | A tactile matte surface treatment | Presentation-led packs where the hand feel matters |
+| **Foil stamping** | Metallic foil transferred to selected artwork | Logos, borders, and controlled premium accents |
+| **Spot UV** | Gloss coating applied only to selected artwork | Contrast over a matte or lower-sheen printed surface |
+| **Emboss or deboss** | Raised or recessed detail made with a die | Tactile logo marks and simple decorative forms |
+| **Window** | A die-cut opening that reveals the product | Product visibility where the selected structure supports it |
+
+## Coating and lamination are different
+
+A coating is a liquid finish applied and cured on the printed surface. Lamination bonds a thin film to that surface. Matte, gloss, and soft-touch looks can use different coating or film systems; spot UV is a coating applied to selected areas. Confirm the treatment with the board, artwork, folds, and handling needs.
 
 ## Build a hierarchy instead of a finish list
 
