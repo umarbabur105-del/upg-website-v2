@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-labelledby="title description">
+  <title id="title">Upright carton measurement diagram</title>
+  <desc id="description">A rectangular front-facing carton with its top opening behind it. Arrows label length across the front, width from front to back, and height from base to top.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#8a6b28"/>
+    </marker>
+  </defs>
+  <rect width="640" height="520" fill="#f8f5ed"/>
+  <g fill="none" stroke="#26362e" stroke-linejoin="round" stroke-width="4">
+    <path d="M120 180 220 100H490L390 180Z" fill="#e6e1d3"/>
+    <path d="M390 180 490 100V320L390 400Z" fill="#ddd6c4"/>
+    <rect x="120" y="180" width="270" height="220" fill="#f4efe2"/>
+    <path d="M164 172 238 126H446L374 172Z" stroke="#8a6b28" stroke-width="3" stroke-dasharray="8 7"/>
+  </g>
+  <g fill="none" stroke="#8a6b28" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)">
+    <path d="M120 445H390"/>
+    <path d="M535 180V400"/>
+    <path d="M406 168 506 88"/>
+  </g>
+  <g fill="#26362e" font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="255" y="436" font-size="34" font-weight="700">L</text>
+    <text x="255" y="467" font-size="20">left to right</text>
+    <text x="570" y="300" font-size="34" font-weight="700">H</text>
+    <text x="570" y="330" font-size="20">base to top</text>
+    <text x="550" y="45" font-size="34" font-weight="700">W</text>
+    <text x="550" y="70" font-size="20">front to back</text>
+    <text x="255" y="300" font-size="27" font-weight="700">Front panel</text>
+    <text x="330" y="77" font-size="25" font-weight="700">Opening at top</text>
+  </g>
+  <text x="320" y="503" fill="#5c665e" font-family="Arial, sans-serif" font-size="15" text-anchor="middle">Upright rectangular carton example — confirm final dimensions from the approved dieline.</text>
+</svg>

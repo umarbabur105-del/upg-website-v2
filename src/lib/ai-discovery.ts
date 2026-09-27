@@ -602,6 +602,14 @@ Buyer decisions: ${post.keyDecisions
         .join("; ")}
 Questions answered: ${post.faqs.map((item) => item.question).join("; ")}
 Content reviewed: ${post.updatedAt ?? post.date}
+
+Guide content:
+
+${post.content}
+
+Buyer questions and answers:
+
+${post.faqs.map((item) => `Q: ${item.question}\nA: ${item.answer}`).join("\n\n")}
 `
     )
     .join("\n");
@@ -924,7 +932,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "3.2",
+    schemaVersion: "3.3",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -1158,6 +1166,7 @@ export function buildProductCatalog() {
       searchTerms: post.keywords,
       buyerDecisions: post.keyDecisions,
       questionsAnswered: post.faqs.map((item) => item.question),
+      faq: post.faqs,
       contentReviewed: post.updatedAt ?? post.date,
       url: blogUrl(post),
       nextSources: post.resources.map((resource) => ({

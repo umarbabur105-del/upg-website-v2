@@ -46,7 +46,7 @@ export const commercialTerms = {
     {
       title: "Print and finishes",
       description:
-        "Print coverage, interior printing, foil, spot UV, embossing, debossing, windows, and other details can change production requirements.",
+        "Print coverage, color route, interior printing, foil, spot UV, embossing, debossing, windows, and other details can change production requirements. For UPG quotation purposes, on an otherwise unchanged specification, a CMYK process print basis is treated as equivalent to two PMS colors; four PMS colors, CMYK plus spot color(s), or a revised print specification require written price confirmation.",
     },
     {
       title: "Production quantity",
@@ -118,6 +118,16 @@ export const commercialPricingFaqs: FaqItem[] = [
     question: "Why does UPG not publish instant custom-packaging prices?",
     answer:
       "Custom packaging is made to specification. Structure, dimensions, material, print, finish, quantity, intended use, and delivery destination can change the production and delivery plan, so a human-reviewed written quote is required.",
+  },
+  {
+    question: "Does UPG price CMYK the same as PMS?",
+    answer:
+      "For UPG quotation purposes, on an otherwise unchanged specification, a CMYK process print basis is treated as equivalent to two PMS colors. Four PMS colors, CMYK plus spot color(s), or a revised print specification require written price confirmation. This is a UPG commercial quoting policy; four CMYK process inks are not technically the same as four PMS spot inks.",
+  },
+  {
+    question: "Does a small artwork text change count as another design?",
+    answer:
+      "Yes. A changed word, punctuation mark, SKU, language version, barcode, or other artwork change is a different artwork version, even where the dieline is unchanged. List every version and its quantity per design. In offset production, a changed version can change color separations and affected plates may need revision; setup or run planning may also change. UPG confirms the exact production route, run plan, and written price after review.",
   },
   {
     question: "Can I request a quote before every specification is final?",

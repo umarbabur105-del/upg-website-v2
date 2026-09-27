@@ -323,6 +323,22 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         <section className="bg-surface px-6 py-14 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-4xl">
+            {post.diagram ? (
+              <figure className="my-10 border border-charcoal/10 bg-cream p-4 sm:p-6">
+                <Image
+                  src={post.diagram.src}
+                  alt={post.diagram.alt}
+                  width={640}
+                  height={520}
+                  className="h-auto w-full"
+                  sizes="(max-width: 1024px) 100vw, 896px"
+                />
+                <figcaption className="mt-4 text-sm leading-relaxed text-charcoal/65">
+                  {post.diagram.caption}
+                </figcaption>
+              </figure>
+            ) : null}
+
             <div className="prose-custom">{renderContent(post.content)}</div>
 
             <section className="mt-14 border-t border-charcoal/10 pt-10" aria-labelledby="guide-faq-heading">

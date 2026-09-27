@@ -27,6 +27,11 @@ export interface BlogPost {
   heroImage: string;
   heroAlt: string;
   heroPosition?: string;
+  diagram?: {
+    src: string;
+    alt: string;
+    caption: string;
+  };
   keyDecisions: Array<{
     label: string;
     title: string;
@@ -316,6 +321,12 @@ Paste the completed lines into the project enquiry. Empty lines can remain open 
       "Start by measuring the product that will actually be packed and record length, width, and height in one consistent unit. For sets, map the full arrangement and note the weight, orientation, accessories, and insert needs. Product measurements are planning inputs; final packaging dimensions require structural review.",
     heroImage: "/images/generated/tuck-boxes/tuck-boxes-straight-reverse-v1.png",
     heroAlt: "Custom tuck boxes shown in different proportions and structures",
+    diagram: {
+      src: "/images/guides/upright-carton-measurement-diagram.svg",
+      alt: "Upright rectangular carton with a front panel, top opening, and labelled length, width, and height arrows.",
+      caption:
+        "UPG first-brief convention for an upright rectangular carton: front panel facing you, opening upward. Final dimensions follow the approved structure and dieline.",
+    },
     keyDecisions: [
       {
         label: "Measure",
@@ -341,17 +352,26 @@ Paste the completed lines into the project enquiry. Empty lines can remain open 
 
 The safest starting point is the item or complete set that will go inside the packaging. A guessed box size can hide whether the product, closure, insert, or opening sequence has actually been considered.
 
-## Record length, width, and height consistently
+## Use one clear orientation for an upright rectangular carton
+
+For a fast first brief, place an **upright rectangular carton** with its front panel facing you and its opening upward. In that example, **L** runs left to right across the front panel, **W** runs from front to back, and **H** runs from base to top. This is an oriented carton example, not a universal rule for every packaging structure.
+
+For mailers, irregular packs, and other structures, use the labels shown on the agreed project dieline. Before final artwork, UPG confirms the applicable dimension basis and structural orientation.
+
+## Record length, width, height, and basis consistently
 
 | Field | What to record | Common mistake to avoid |
 | --- | --- | --- |
-| **Length** | The longest face of the packed item or planned arrangement | Switching orientation halfway through the brief |
-| **Width** | The second horizontal dimension | Omitting protruding parts such as pumps or closures |
-| **Height** | The remaining dimension in the intended packed orientation | Measuring only the main body of the product |
+| **Length (L)** | Left to right across the front panel in the upright-carton example | Assuming the longest face is always L for every structure |
+| **Width (W)** | Front to back in the upright-carton example | Omitting protruding parts such as pumps or closures |
+| **Height (H)** | Base to top in the intended packed orientation | Measuring only the main body of the product |
+| **Measurement basis** | Product, required internal pack, or required external shipping dimensions | Leaving the basis unstated |
 | **Unit** | Inches or millimeters, used consistently | Mixing inches and millimeters in one set of values |
 | **Weight** | Product or complete set weight where relevant | Treating weight as optional for an insert-led or presentation project |
 
-The dimension order above is a communication convention for the enquiry, not approval of a final structure.
+Measure internal dimensions between the inside faces of the erected box, and external dimensions from outside edge to outside edge. An insert can reduce the space available for the product, so identify it separately. Send actual measurements instead of subtracting an assumed board thickness.
+
+The labels above are a communication convention for the enquiry, not approval of a final structure or tolerance.
 
 ## Prevent a size or structure mismatch
 
@@ -390,9 +410,19 @@ UPG uses the measurements as project inputs. The applicable structure, clearance
     `.trim(),
     faqs: [
       {
+        question: "What is the difference between internal and external box dimensions?",
+        answer:
+          "Internal dimensions are measured between the inside faces of the erected box. External dimensions are measured from outside edge to outside edge. Label the basis and unit, identify any insert, and send the product measurements separately when fit needs review. Do not estimate internal space by subtracting an assumed board thickness.",
+      },
+      {
         question: "Should I send product dimensions or final box dimensions?",
         answer:
-          "Send product dimensions first when the final structure has not been confirmed. If you also have a target box size, label it as a target rather than an approved production dimension.",
+          "Send product dimensions first when the final structure has not been confirmed. Label every figure as product, required internal pack, or required external shipping dimensions, and include the unit. If you also have a target box size, label it as a target rather than an approved production dimension.",
+      },
+      {
+        question: "Which way should I measure an upright rectangular carton?",
+        answer:
+          "For UPG's first-brief example, face the front panel toward you with the opening upward: L is left to right across the front, W is front to back, and H is base to top. This example does not replace the agreed dieline labels for mailers or other structures.",
       },
       {
         question: "Can I combine several products in one measurement?",
@@ -420,6 +450,11 @@ UPG uses the measurements as project inputs. The applicable structure, clearance
       },
     ],
     sources: [
+      {
+        name: "FEFCO/ESBO Code of Designs",
+        href: "https://www.fefco.org/sites/default/files/files/FEFCO_ESBO_code_of_designs.pdf",
+        note: "Primary corrugated-packaging reference for stated internal dimensions and opening-based orientation; final project conventions remain structure specific.",
+      },
       {
         name: "Fibre Box Association — What is Corrugated",
         href: "https://www.fibrebox.org/what-is-corrugated",
@@ -708,6 +743,7 @@ Use clear wording such as **artwork content approved**, **structure approved**, 
     slug: "cmyk-vs-pantone-packaging-printing",
     title: "CMYK vs. Pantone for Custom Packaging Printing",
     date: "2026-09-01",
+    updatedAt: "2026-09-27",
     category: "Artwork & Print",
     readTime: "7 min read",
     excerpt:
@@ -746,7 +782,7 @@ Use clear wording such as **artwork content approved**, **structure approved**, 
 | **Artwork setup** | Process-color values and separations | Named spot-color swatches and separate production callouts |
 | **Important limit** | Some spot colors cannot be closely simulated inside a four-color process gamut | The printed result still depends on substrate, ink, process, coating, and viewing conditions |
 
-Pantone and Adobe both distinguish process color from spot color. Pantone's Color Bridge exists specifically to compare a Pantone spot color with a process-color simulation.
+CMYK means four process inks: cyan, magenta, yellow, and black. It does **not** mean four PMS spot inks. A Pantone/PMS spot color is a separately premixed ink. On a conventional plate-based offset job, each spot-color separation uses its own plate; digital printing uses a different setup. A project can also use CMYK imagery plus one or more spot colors.
 
 ## Use CMYK as a starting discussion when
 
@@ -762,15 +798,19 @@ Pantone and Adobe both distinguish process color from spot color. Pantone's Colo
 - A particular color sits outside an acceptable CMYK simulation.
 - A metallic, fluorescent, or other specially specified ink is being considered.
 
-Availability, cost, and suitability still depend on the selected packaging format and production method.
+## UPG quotation policy for CMYK and PMS
+
+For UPG quotation purposes, on an otherwise unchanged specification, a CMYK process print basis is treated as equivalent to **two PMS colors**. This is a UPG commercial quoting policy, not a statement that four CMYK process inks and four PMS spot inks are technically the same.
+
+If the requested artwork needs four PMS colors, CMYK plus spot color(s), or a revised print specification, UPG confirms the available print route and price in the written quote. Do not infer a fee or numeric price from this policy; structure, substrate, size, quantity, finishing, proofing, and the production method still need project review.
 
 ## Why an RGB screen is not the final print target
 
-Screens display RGB light, while printed packaging uses inks on a physical material. If artwork begins in RGB, its appearance can change when converted for print. Supply the original artwork, identify critical brand colors, and review the approved production values rather than relying on how one monitor displays the file.
+Screens display RGB light, while printed packaging uses inks on a physical material. If artwork begins in RGB, its appearance can change when converted for print because some screen colors fall outside a CMYK print gamut. Supply editable artwork, identify critical brand colors, and review approved production values rather than relying on one monitor display.
 
-## Substrate and finish matter
+## Pantone C and U identify the reference paper stock
 
-Coated and uncoated stocks, kraft tones, films, white ink, laminations, varnishes, foil, and selective finishes can change how color is perceived. The color plan should be reviewed together with the approved material, print process, and finish system.
+Pantone **C** and **U** refer to coated and uncoated paper reference stocks in the Pantone guide. They are not simply lamination or finish labels. Stock absorption can change the appearance of the same named color, so include the complete Pantone reference and confirm the production substrate, ink system, press process, coating, and proof path for the project.
 
 ## A practical artwork handoff
 
@@ -778,7 +818,10 @@ Coated and uncoated stocks, kraft tones, films, white ink, laminations, varnishe
 - Identify every named spot color clearly.
 - Keep process colors defined in the approved color mode.
 - Flag colors that are brand critical.
+- State whether the artwork is RGB, CMYK, PMS/spot, or CMYK plus spot colors.
+- Include the full Pantone reference, including C or U where applicable.
 - Record whether the reference is a physical standard, a prior printed sample, or an on-screen approximation.
+- Ask UPG to confirm the print route and written price when four PMS colors, CMYK plus spot colors, or a revised print specification is requested.
 - Approve the applicable proof within the project criteria.
     `.trim(),
     faqs: [
@@ -795,7 +838,17 @@ Coated and uncoated stocks, kraft tones, films, white ink, laminations, varnishe
       {
         question: "Should packaging artwork be sent in RGB?",
         answer:
-          "Send editable source files and identify the intended print colors. RGB artwork normally requires conversion for print, and the final separation or spot-color setup should follow the approved production specification.",
+          "Send editable source files and identify the intended print colors. RGB is a screen color model and some RGB colors cannot reproduce exactly in CMYK print, so the final separation or spot-color setup follows the approved production specification.",
+      },
+      {
+        question: "Is Pantone C or U just a finish choice?",
+        answer:
+          "No. C and U identify coated and uncoated paper reference stocks in Pantone guides. Stock affects ink absorption and appearance, so include the complete Pantone reference and ask UPG to confirm the production substrate and proof path.",
+      },
+      {
+        question: "Does UPG price CMYK the same as PMS?",
+        answer:
+          "For UPG quotation purposes, on an otherwise unchanged specification, a CMYK process print basis is treated as equivalent to two PMS colors. Four PMS colors, CMYK plus spot color(s), or a revised print specification require written price confirmation. This is UPG's commercial quoting policy; it does not make four CMYK process inks technically equivalent to four PMS spot inks.",
       },
     ],
     resources: [
@@ -814,14 +867,19 @@ Coated and uncoated stocks, kraft tones, films, white ink, laminations, varnishe
     ],
     sources: [
       {
-        name: "Pantone: Spot vs. Process Color",
-        href: "https://www.pantone.com/uk/en-gb/articles/technical/spot-vs-process-color",
-        note: "Primary reference for spot-color and process-color definitions.",
+        name: "Adobe: Photoshop color modes",
+        href: "https://helpx.adobe.com/photoshop/using/color-modes.html",
+        note: "Primary reference for RGB screen work, CMYK print work, and the effect of print conditions on CMYK range.",
       },
       {
         name: "Adobe: Spot and Process Colors",
         href: "https://helpx.adobe.com/creative-cloud/apps/colors/spot-and-process-colors.html",
         note: "Primary software reference for how commercial print colors are specified.",
+      },
+      {
+        name: "Pantone: Coated and Uncoated",
+        href: "https://support.pantone.com/en/what-does-the-terms-coated-and-uncoated-mean-in-the-pantone-graphics-system",
+        note: "Primary reference explaining that C and U identify Pantone reference paper stocks and can produce different visual appearance.",
       },
     ],
     relatedSlugs: [
@@ -1297,7 +1355,7 @@ Neither format is automatically better for every product. Product weight, dimens
     slug: "how-to-prepare-artwork-for-custom-packaging",
     title: "How to Prepare Artwork for Custom Packaging",
     date: "2026-08-04",
-    updatedAt: "2026-09-01",
+    updatedAt: "2026-09-27",
     category: "Artwork & Print",
     readTime: "6 min read",
     excerpt:
@@ -1349,6 +1407,8 @@ Final artwork should be prepared on the approved project dieline. Keep structura
 
 Identify spot colors, white ink, foil, spot UV, embossing, debossing, windows, and other production layers clearly where they apply. Use consistent names across the artwork, proof, and written specification.
 
+For RGB, CMYK, Pantone/PMS, and CMYK-plus-spot choices, use the <a href="/blog/cmyk-vs-pantone-packaging-printing" class="font-semibold text-gold-dark underline">CMYK vs. Pantone packaging printing guide</a> before finalizing color callouts. For dimensions and structure orientation, use the <a href="/blog/how-to-measure-product-for-custom-packaging" class="font-semibold text-gold-dark underline">product measurement guide</a> before placing artwork on the approved dieline.
+
 ## Check every panel before approval
 
 - Product name, claims, ingredients, warnings, and required market copy supplied by the buyer
@@ -1357,6 +1417,12 @@ Identify spot colors, white ink, foil, spot UV, embossing, debossing, windows, a
 - Correct language, SKU, and artwork version
 - Color intent and physical reference where one exists
 - Finish and structural callouts
+
+## Does a small text change count as another design?
+
+Yes. A changed word, punctuation mark, SKU, language version, barcode, or other artwork change creates a different artwork version, even when the dieline, size, and shape stay the same. List every artwork version and the quantity required for each one when requesting a quote.
+
+The same dieline does not automatically mean one print setup. In offset production, a changed version can change color separations, and affected plates may need revision. Setup or run planning may also change. UPG confirms the exact production route, run plan, and written price after reviewing the artwork versions, quantities, and specification.
 
 ## Ask before rebuilding files
 
@@ -1377,6 +1443,11 @@ If artwork is still in progress, state that in your project enquiry. It is bette
         question: "Should foil and spot UV be shown in the artwork?",
         answer:
           "Yes. Selective finishes should be clearly identified in the production artwork and use consistent callout names across the proof and written specification.",
+      },
+      {
+        question: "Does a small text change count as another packaging design?",
+        answer:
+          "Yes. A changed word, punctuation mark, SKU, language version, barcode, or other artwork change is a different artwork version even if the dieline is unchanged. List every version and quantity per design. In offset production, a changed version can change color separations and affected plates may need revision; setup or run planning may also change. UPG confirms the exact production route, run plan, and written price after review.",
       },
     ],
     resources: [
