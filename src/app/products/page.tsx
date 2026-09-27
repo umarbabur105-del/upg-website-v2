@@ -7,9 +7,9 @@ import { products } from "@/data/products";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Custom Packaging Boxes, Mailers & Mylar Bags",
+  title: "Custom Packaging Boxes: Mailers, Retail & Mylar Bags",
   description:
-    "Compare custom printed boxes, corrugated mailers, magnetic rigid boxes, and Mylar pouches. 250-unit planning MOQ with worldwide delivery.",
+    "Compare custom printed mailer boxes, retail cartons, magnetic rigid boxes, and Mylar pouches. Start with a 250-unit planning MOQ.",
   path: "/products",
   keywords: [
     "custom packaging products",
@@ -21,7 +21,7 @@ export const metadata: Metadata = createPageMetadata({
   ],
 });
 
-const PRODUCTS_REVIEWED_AT = "2026-09-04";
+const PRODUCTS_REVIEWED_AT = "2026-09-27";
 
 const productsCollectionSchema = {
   "@context": "https://schema.org",
@@ -30,9 +30,9 @@ const productsCollectionSchema = {
       "@type": "CollectionPage",
       "@id": `${SITE_URL}/products#collection`,
       url: `${SITE_URL}/products`,
-      name: "Custom Packaging Boxes, Mailers, and Mylar Bags",
+      name: "Custom Packaging Boxes: Mailers, Retail, and Mylar Bags",
       description:
-        "Five made-to-spec custom packaging families covering printed boxes, corrugated mailers, magnetic rigid boxes, and Mylar bags and pouches.",
+        "Five custom packaging families: corrugated mailer boxes, retail cartons, magnetic rigid boxes, and Mylar bags and pouches.",
       dateModified: PRODUCTS_REVIEWED_AT,
       mainEntity: { "@id": `${SITE_URL}/products#core-product-catalog` },
     },
@@ -60,18 +60,18 @@ const productsCollectionSchema = {
 
 const formatDecisionRows = [
   {
-    name: "Custom tuck boxes",
-    structure: "Printed folding carton",
-    description:
-      "Choose for individual retail products, cosmetics, supplements, soap, food cartons, and other secondary packaging.",
-    href: "/products/custom-tuck-boxes",
-  },
-  {
     name: "Custom mailer boxes",
     structure: "Corrugated ear-lock mailer",
     description:
       "Choose for PR kits, subscription programs, ecommerce presentation, influencer mailers, and product launches.",
     href: "/products/custom-mailer-boxes",
+  },
+  {
+    name: "Custom tuck boxes",
+    structure: "Printed folding carton",
+    description:
+      "Choose for individual retail products, cosmetics, supplements, soap, food cartons, and other secondary packaging.",
+    href: "/products/custom-tuck-boxes",
   },
   {
     name: "Custom magnetic boxes",

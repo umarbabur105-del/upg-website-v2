@@ -1,13 +1,13 @@
 export const styleNavigation = [
   {
-    label: "Tuck Boxes",
-    href: "/products/custom-tuck-boxes",
-    description: "Straight tuck, reverse tuck, auto-lock, interlock, and seal-end cartons.",
-  },
-  {
     label: "Mailer Boxes",
     href: "/products/custom-mailer-boxes",
     description: "Corrugated ear-lock mailers for branded presentation and unboxing.",
+  },
+  {
+    label: "Tuck Boxes",
+    href: "/products/custom-tuck-boxes",
+    description: "Straight tuck, reverse tuck, auto-lock, interlock, and seal-end cartons.",
   },
   {
     label: "Magnetic Boxes",

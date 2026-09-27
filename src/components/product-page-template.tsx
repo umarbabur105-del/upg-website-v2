@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { MailerBuyingGuide } from "@/components/mailer-buying-guide";
 import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { ProductBuyingGuide } from "@/components/product-buying-guide";
 import { QuoteCta } from "@/components/quote-cta";
@@ -134,6 +135,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
           </div>
         </div>
       </section>
+
+      {product.slug === "custom-mailer-boxes" ? <MailerBuyingGuide /> : null}
 
       {buyerGuide ? <ProductBuyingGuide product={product} guide={buyerGuide} /> : null}
 

@@ -1677,6 +1677,167 @@ If artwork is still in progress, state that in your project enquiry. It is bette
       "packaging artwork checklist",
     ],
   },
+  {
+    slug: "mailer-box-size-guide",
+    title: "Mailer Box Size Guide: Internal Dimensions and Product Fit",
+    metaTitle: "Mailer Box Size Guide: Internal Dimensions & Fit",
+    date: "2026-09-27",
+    category: "Structure & Delivery",
+    readTime: "5 min read",
+    excerpt:
+      "Choose a custom mailer size using packed product measurements, inside box dimensions, insert space, and the finished parcel's shipping requirements.",
+    quickAnswer:
+      "Measure the outside length, width, and height of the complete packed product first, including every item and protective layer. Then state the mailer's requested internal length, width, and height separately. Clearance, corrugated construction, and final outer parcel size require project review; a sample or approved fit review confirms the result.",
+    heroImage: "/images/generated/mailer-boxes/mailer-boxes-sizes-v1.png",
+    heroAlt: "Custom corrugated mailer boxes shown in several finished size comparisons",
+    keyDecisions: [
+      {
+        label: "Measure",
+        title: "The complete packed arrangement",
+        description:
+          "Include every item, accessory, protective layer, and component that will sit inside the mailer.",
+      },
+      {
+        label: "Specify",
+        title: "Internal dimensions first",
+        description:
+          "Label length, width, height, unit, and whether a figure describes usable inside space or the finished outer parcel.",
+      },
+      {
+        label: "Confirm",
+        title: "Fit and delivery conditions",
+        description:
+          "An insert, corrugated construction, and carrier service can all change the final decision.",
+      },
+    ],
+    content: `
+## Start with the packed product, not a guessed mailer size
+
+Custom corrugated mailer sizing starts with everything that must fit inside: the product, accessories, protective layer, literature, and any insert or divider. Measure the outside length, width, and height of that complete packed group. For a multi-item set, record each item and sketch the intended arrangement. A compact arrangement can need a different mailer than the same items stacked or positioned for a particular opening sequence.
+
+Measure in one unit and label the orientation you used. If an item has a cap, pump, handle, cable, or other part that extends beyond its main body, include it in the packed measurement. A product measurement is a useful first brief; it is not an approved mailer dieline or a guarantee of final fit.
+
+## Internal size and finished outer parcel answer different questions
+
+The packed product's outside length, width, and height describe what needs to fit. The mailer's requested internal length, width, and height describe the usable space between the erected box's inside faces. Finished outer dimensions describe the assembled parcel outside the corrugated construction. Keep all three bases separate when comparing an existing box, a shipping label, or a carrier's dimensional-billing calculation.
+
+Do not subtract an assumed board thickness from an external box measurement to calculate internal space. Corrugated formation, flute profile, folds, and the approved construction affect the final relationship. UPG reviews the construction around the complete packout, handling, and delivery plan.
+
+## Allow for an insert and confirm clearance with a sample
+
+An insert can hold a product in place, guide the opening reveal, or separate several items. It also takes up internal space. Send the product measurements and an insert reference separately, then show which surfaces should remain visible when the box opens. The right clearance depends on the product, arrangement, insert, corrugated construction, and intended handling.
+
+There is no universal clearance figure for every mailer. Confirm fit with the applicable sample or approved project review before treating a planned internal size as final. This is particularly important for fragile items, unusual shapes, and sets whose product mix may change.
+
+## Compare mailer box sizes to organize the brief
+
+Use these inside dimensions as a starting point, then confirm your packed product, insert, and clearance with the applicable sample or project review.
+
+| Inside dimensions | Possible layout to discuss | What to confirm |
+| --- | --- | --- |
+| **6 × 4 × 2 in** | Small single-product set or compact flat arrangement | Product orientation, protective layer, and opening direction |
+| **8 × 6 × 3 in** | Small multi-item set or product with a fitted insert | Usable space after the insert and complete packed arrangement |
+| **10 × 8 × 4 in** | Larger set, launch kit, or subscription assortment | Largest planned assortment, insert, and presentation sequence |
+| **12 × 10 × 5 in** | Broader presentation kit with several arranged items | Complete packout, handling, and delivery conditions |
+
+If your product falls between these comparisons, send its actual packed dimensions rather than rounding up to a listed example. A made-to-spec mailer can then be reviewed around the approved project brief.
+
+## Match corrugated strength to your product
+
+Corrugated board combines flat liners with a fluted paper layer. Fine flutes such as E provide a compact profile and a good printing surface. Larger flutes can add cushioning and compression resistance. The complete board grade, box dimensions, product weight, insert, and handling conditions determine which construction suits the project.
+
+Kraft or white presentation, exterior-only or inside-and-outside printing, and finish choices should be considered alongside the construction. If a particular transit requirement matters, state it in the enquiry so the full packaging and delivery conditions can be reviewed.
+
+## Check the finished parcel for shipping cost
+
+Carriers may charge for the space a parcel occupies as well as its actual weight. Extra empty space can therefore increase shipping cost. Compare the finished outer dimensions and packed weight with your carrier or fulfillment provider; the dimensional-weight calculation and billing rules depend on the service and destination.
+
+For UPG production planning, share the delivery country, city, and postal code with the packed-product brief. The written quote confirms the approved manufacturing scope and any freight, duties, or taxes included.
+
+## Send a clear mailer brief
+
+- Packed product dimensions, weight, unit, and every item in the set
+- Intended arrangement, opening sequence, protective layer, and insert or divider needs
+- Internal-size target if you have one, clearly labelled as a target
+- Kraft or white presentation, exterior or interior print, and artwork status
+- Quantity from 250 units, delivery destination, and target date
+
+UPG then reviews the ear-lock mailer construction, fit, print, insert, proof path, production timing, and delivery terms before the final specification is approved.
+    `.trim(),
+    faqs: [
+      {
+        question: "Should I give internal or external dimensions for a custom mailer box?",
+        answer:
+          "Give the packed product's outside dimensions first. If you have a box target, label its requested internal usable space separately from the finished external parcel dimensions. Internal dimensions help evaluate fit; external dimensions matter for the assembled parcel and may matter to a carrier.",
+      },
+      {
+        question: "How much clearance should I add around my product?",
+        answer:
+          "Clearance depends on the product, arrangement, protective layer, insert, corrugated construction, and handling plan. Do not apply one universal allowance. Confirm the applicable clearance with the approved sample or project review.",
+      },
+      {
+        question: "Can I choose a mailer from the size table alone?",
+        answer:
+          "Use the size table as a starting point, then send the actual packed product, arrangement, insert, and clearance requirements. The approved mailer is reviewed around that complete brief.",
+      },
+      {
+        question: "Will a larger mailer cost more to ship?",
+        answer:
+          "A larger outer parcel can affect carrier dimensional billing, but the result depends on the carrier, service, destination, actual outer dimensions, and weight. Confirm the billing basis with the actual carrier or fulfillment provider.",
+      },
+    ],
+    resources: [
+      {
+        title: "Custom corrugated mailer boxes",
+        description:
+          "Review ear-lock mailer print, insert, pricing, and application options before starting a project.",
+        href: "/products/custom-mailer-boxes",
+      },
+      {
+        title: "How to measure a product for custom packaging",
+        description:
+          "Use a consistent dimension basis before sharing a product or set for packaging review.",
+        href: "/blog/how-to-measure-product-for-custom-packaging",
+      },
+      {
+        title: "Materials and finishes",
+        description:
+          "Review material and finish considerations, including corrugated construction terminology.",
+        href: "/materials-finishes",
+      },
+      {
+        title: "Start a mailer box enquiry",
+        description:
+          "Send your packed product dimensions and mailer requirements for project review.",
+        href: "/get-a-quote?product=Mailer+Boxes&builder_note=Please+review+the+packed+product+dimensions%2C+mailer+fit%2C+insert%2C+and+printing+options.",
+      },
+    ],
+    sources: [
+      {
+        name: "Fibre Box Association — What is Corrugated",
+        href: "https://www.fibrebox.org/what-is-corrugated",
+        note: "Reference for corrugated liner-and-flute construction; final mailer selection remains project specific.",
+      },
+      {
+        name: "DS Smith fluting guide",
+        href: "https://www.dssmith.com/sheetfeeding/insights/about-fluting/flutes",
+        note: "Reference explaining that flute profile is one part of a complete corrugated packaging decision.",
+      },
+    ],
+    relatedSlugs: [
+      "how-to-measure-product-for-custom-packaging",
+      "packaging-proof-vs-sample",
+      "custom-packaging-quote-checklist",
+      "how-custom-packaging-ships",
+    ],
+    keywords: [
+      "mailer box size guide",
+      "custom mailer box dimensions",
+      "internal mailer box dimensions",
+      "corrugated mailer box size",
+      "how to size a mailer box",
+    ],
+  },
 ];
 
 export const blogCategories: BlogPost["category"][] = [

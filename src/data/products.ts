@@ -64,6 +64,124 @@ export interface Product {
 
 export const products: Product[] = [
   {
+    slug: "custom-mailer-boxes",
+    name: "Custom Printed Corrugated Mailer Boxes",
+    shortName: "Mailer Boxes",
+    family: "Mailer Boxes",
+    category: "Corrugated Mailers",
+    sku: "UPG-MAILER",
+    bestFor: "PR kits, subscription boxes, ecommerce packaging, and branded presentation",
+    summary:
+      "Custom printed corrugated ear-lock mailer boxes for branded unboxing, product presentation, and repeat programs.",
+    longSummary:
+      "UPG makes custom printed corrugated ear-lock mailer boxes for PR kits, influencer campaigns, subscription programs, ecommerce presentation, and branded product launches. Choose kraft or white surfaces, print your logo outside or add an inside reveal, and plan a fitted insert. We help match the size and corrugated construction to your product and delivery needs.",
+    metaTitle: "Custom Printed Corrugated Mailer Boxes | 250-Unit MOQ",
+    metaDescription:
+      "Custom printed corrugated mailer boxes from 250 units. Compare sizes, board, inside printing and inserts, with proofing and delivery planned for your project.",
+    searchTerms: [
+      "custom corrugated mailer boxes",
+      "custom printed mailer boxes",
+      "custom mailer boxes",
+      "ear lock mailer boxes",
+      "printed corrugated mailer boxes",
+      "custom ecommerce mailer boxes",
+      "custom subscription mailer boxes",
+      "custom PR boxes",
+      "mailer box inserts",
+    ],
+    reviewedAt: "2026-09-27",
+    buyerFaqs: [
+      {
+        question: "Can I compare prices for 250, 500 and 1,000 custom mailer boxes?",
+        answer:
+          "Yes. Ask for 250, 500 and 1,000 units using the same dimensions, corrugated construction, print scope, and inserts. Different sizes or artwork versions need their own minimum review. The written quote confirms the approved specification and price factors.",
+      },
+      {
+        question: "How do I choose the right custom mailer box size?",
+        answer:
+          "Start with the outside length, width, and height of the packed product or full group, including any protective layer. Then state the mailer's requested inside length, width, and height separately. Clearance depends on the arrangement, insert, and construction, so confirm fit with the applicable sample or approved project review.",
+      },
+      {
+        question: "Should I choose kraft or white for a printed mailer box?",
+        answer:
+          "Brown kraft gives a natural paper look and changes how printed colors appear. White provides a lighter base for color artwork. Compare the artwork on your chosen surface, and use a physical print sample when color matching is critical.",
+      },
+      {
+        question: "Can I print the inside of a corrugated mailer box?",
+        answer:
+          "Yes. Exterior-only printing and coordinated exterior and interior printing can be compared on the same mailer brief. Share the intended artwork scope, product arrangement, and quantity so the production specification can be reviewed.",
+      },
+      {
+        question: "Which corrugated board and flute should I use?",
+        answer:
+          "Fine flutes such as E provide a compact board and a smooth surface for print. Larger flute profiles can add cushioning and compression resistance, but the liner grades, box size, product weight, insert, and shipping conditions also affect performance. Share those details so we can recommend the complete board specification.",
+      },
+      {
+        question: "Does a custom mailer quote include shipping and taxes?",
+        answer:
+          "Share the delivery country, city, and postal code. The written quote confirms the manufacturing price and any freight, duties, or taxes included, giving you a clear basis for comparing total cost.",
+      },
+      {
+        question: "Is an ear-lock presentation mailer the same as a shipping carton?",
+        answer:
+          "UPG supplies custom ear-lock corrugated mailers for branded presentation, PR kits, subscriptions, and ecommerce packaging. Standard shipping cartons, master cartons, and RSC cases are not supplied. Share the packed product and shipping method so the mailer construction and any separate transit protection can be reviewed.",
+      },
+      {
+        question: "Can I start without a dieline or finished artwork?",
+        answer:
+          "Yes. Start with the product, dimensions, quantity, delivery destination, and an artwork reference if available. Final artwork is prepared on the approved mailer and insert dielines; the proof, sample path, production timing, and delivery terms are confirmed after specification review.",
+      },
+    ],
+    buyerDecisionFaq: {
+      question: "Which corrugated mailer box path should I use?",
+      answer:
+        "Use the PR box guide for launches, press, media kits, events, or broad brand presentations; the influencer guide for creator seeding; the subscription guide for recurring assortments; and the ecommerce guide for branded online-order presentation. Every path stays inside UPG's custom ear-lock corrugated mailer offer. Standard shipping cartons, master cartons, and RSC cases are not supplied.",
+    },
+    moq: "250 units",
+    leadTime: "Confirmed after specification review",
+    image: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
+    heroImage: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
+    galleryImages: [
+      {
+        src: "/images/generated/mailer-boxes/mailer-boxes-inside-print-v1.png",
+        alt: "Corrugated ear-lock mailer box with inside print",
+      },
+      {
+        src: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
+        alt: "Corrugated ear-lock mailer box with custom insert",
+      },
+      {
+        src: "/images/generated/mailer-boxes/mailer-boxes-sizes-v1.png",
+        alt: "Custom corrugated mailer boxes in multiple sizes",
+      },
+    ],
+    materials: ["Corrugated board", "Kraft or white surfaces", "Exterior or interior printing", "Custom inserts"],
+    prints: ["Exterior print", "Interior and exterior print"],
+    finishes: ["Matte or gloss", "Foil stamping", "Spot UV", "Custom inserts"],
+    sizes:
+      "Custom sizes with a 250-unit planning MOQ; final dimensions remain subject to structural feasibility review.",
+    sizeFlexibility:
+      "The packed product's outside dimensions, requested internal mailer dimensions, ear-lock structure, and any insert are confirmed for fit, feasibility, and pricing; the planning MOQ remains 250 units.",
+    useCases: [
+      "PR and influencer kits",
+      "Subscription mailers",
+      "Branded ecommerce packaging",
+      "Product launch and presentation boxes",
+    ],
+    industries: ["Ecommerce", "Cosmetics", "Subscription", "Gifting", "Consumer Products"],
+    materialOptions:
+      "Corrugated construction, material presentation, board formation, flute profile, print, and insert options are reviewed around the complete packout and delivery plan.",
+    printOptions:
+      "Exterior-only printing or exterior and interior printing can be reviewed for the approved structure and artwork scope.",
+    finishOptions:
+      "Matte, gloss, foil, spot UV, and custom inserts are available for the approved structure.",
+    artworkRequirements:
+      "Final artwork is prepared on the approved mailer dieline. Insert artwork is coordinated with the planned product arrangement, and the applicable proof path is confirmed for the project.",
+    screeningNote:
+      "UPG supplies ear-lock mailer boxes, not regular slotted shipping cartons, master cartons, or RSC cases. Production timing and delivery terms are confirmed after specification review.",
+    quoteCta: "Start a mailer box project",
+  },
+  {
     slug: "custom-tuck-boxes",
     name: "Custom Tuck Boxes",
     shortName: "Tuck Boxes",
@@ -189,103 +307,6 @@ export const products: Product[] = [
     screeningNote:
       "Additional materials, calipers, and finishes can be reviewed for the specific project.",
     quoteCta: "Start a tuck box project",
-  },
-  {
-    slug: "custom-mailer-boxes",
-    name: "Custom Corrugated Mailer Boxes",
-    shortName: "Mailer Boxes",
-    family: "Mailer Boxes",
-    category: "Corrugated Mailers",
-    sku: "UPG-MAILER",
-    bestFor: "PR kits, subscription boxes, ecommerce packaging, and branded presentation",
-    summary:
-      "Custom printed corrugated ear-lock mailer boxes for branded unboxing, product presentation, and repeat programs.",
-    longSummary:
-      "UPG's custom corrugated mailer boxes use an ear-lock structure for PR kits, influencer campaigns, subscription programs, ecommerce presentation, and branded product launches. Exterior printing, interior printing, custom inserts, and specialty finishes are available.",
-    metaTitle: "Custom Mailer Boxes: Print, Inserts & 250-Unit MOQ",
-    metaDescription:
-      "Custom printed ear-lock mailer boxes from 250 units. Compare inside print, inserts and quantity options, then request a project-specific quote.",
-    searchTerms: [
-      "custom corrugated mailer boxes",
-      "custom mailer boxes",
-      "custom printed mailer boxes",
-      "ear lock mailer boxes",
-      "corrugated boxes",
-      "custom PR boxes",
-      "custom subscription boxes",
-      "branded ecommerce mailer boxes",
-    ],
-    reviewedAt: "2026-09-27",
-    buyerFaqs: [
-      {
-        question: "Can I compare prices for 250, 500 and 1,000 custom mailer boxes?",
-        answer:
-          "Yes. Ask for quotes at 250, 500 and 1,000 units with the same box dimensions, corrugated construction, printing and inserts. We can also quote other quantities from 250 units. For multiple sizes or artwork versions, share your planned mix so we can confirm the minimum for each.",
-      },
-      {
-        question: "Does a custom mailer quote include shipping and taxes?",
-        answer:
-          "Share your delivery country, city and postal code so we can plan the delivery with your order. Your written quote confirms the manufacturing price and which freight, duties and taxes are included, giving you a clear basis for comparing the total cost.",
-      },
-      {
-        question: "Is an ear-lock presentation mailer the same as a shipping carton?",
-        answer:
-          "UPG supplies custom ear-lock corrugated mailers for branded presentation, PR kits, subscriptions and ecommerce packaging. Standard shipping cartons, master cartons and RSC cases are not supplied. Share the packed product and shipping method so the mailer construction and any separate transit protection can be reviewed; the images do not establish shipping performance.",
-      },
-      {
-        question: "Can I start without a dieline or finished artwork?",
-        answer:
-          "Yes. Product family, quantity and contact details are enough to start the enquiry. Send product dimensions, an arrangement or a reference when available. Final artwork is prepared on the approved mailer and insert dielines; pricing and production timing are confirmed after specification review.",
-      },
-    ],
-    buyerDecisionFaq: {
-      question: "Which corrugated mailer box path should I use?",
-      answer:
-        "Use the PR box guide for launches, press, media kits, events, or broad brand presentations; the influencer guide for creator seeding; the subscription guide for recurring assortments; and the ecommerce guide for branded online-order presentation. Every path stays inside UPG's custom ear-lock corrugated mailer offer. Standard shipping cartons, master cartons, and RSC cases are not supplied.",
-    },
-    moq: "250 units",
-    leadTime: "Confirmed after specification review",
-    image: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
-    heroImage: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
-    galleryImages: [
-      {
-        src: "/images/generated/mailer-boxes/mailer-boxes-inside-print-v1.png",
-        alt: "Corrugated ear-lock mailer box with inside print",
-      },
-      {
-        src: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
-        alt: "Corrugated ear-lock mailer box with custom insert",
-      },
-      {
-        src: "/images/generated/mailer-boxes/mailer-boxes-sizes-v1.png",
-        alt: "Custom corrugated mailer boxes in multiple sizes",
-      },
-    ],
-    materials: ["Corrugated board", "Exterior printing", "Interior printing", "Custom inserts"],
-    prints: ["Exterior print", "Interior and exterior print"],
-    finishes: ["Matte or gloss", "Foil stamping", "Spot UV", "Custom inserts"],
-    sizes:
-      "Custom sizes with a 250-unit planning MOQ; final dimensions remain subject to structural feasibility review.",
-    sizeFlexibility:
-      "Dimensions and the ear-lock structure are confirmed for feasibility and pricing; the planning MOQ remains 250 units.",
-    useCases: [
-      "PR and influencer kits",
-      "Subscription mailers",
-      "Branded ecommerce packaging",
-      "Product launch and presentation boxes",
-    ],
-    industries: ["Ecommerce", "Cosmetics", "Subscription", "Gifting", "Consumer Products"],
-    materialOptions:
-      "Corrugated construction with print and insert options planned around the product and presentation goal.",
-    printOptions:
-      "Exterior-only printing or exterior and interior printing for a branded unboxing experience.",
-    finishOptions:
-      "Matte, gloss, foil, spot UV, and custom inserts are available for the approved structure.",
-    artworkRequirements:
-      "Final artwork is prepared on the approved mailer dieline. Insert artwork is coordinated with the planned product arrangement.",
-    screeningNote:
-      "UPG supplies ear-lock mailer boxes, not regular slotted shipping cartons, master cartons, or RSC cases.",
-    quoteCta: "Start a mailer box project",
   },
   {
     slug: "custom-magnetic-boxes",

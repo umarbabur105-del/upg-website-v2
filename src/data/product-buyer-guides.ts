@@ -83,42 +83,42 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
   "custom-mailer-boxes": {
     priceHeading: "Custom mailer box pricing.",
     priceIntro:
-      "Plan your custom mailer order from 250 units. Choose your size, printing and inserts, then compare quantities to find the right fit for your budget.",
+      "Plan your custom corrugated mailer order from 250 units. Review internal size, packed product, corrugated construction, printing, inserts, and delivery details together, then compare quantities on one specification.",
     quoteNote:
       "Custom corrugated ear-lock mailer enquiry. Please review structure, print, insert options and pricing for my product.",
     pricingFactors: [
       {
         title: "Box size and product arrangement",
         description:
-          "Send the product dimensions, weight and how the items should sit together. The box and corrugated construction are reviewed around that arrangement; a larger box or a different layout changes the specification.",
+          "Send the packed product's outside length, width, and height, plus weight and arrangement. State any requested internal mailer dimensions separately. A larger box or different layout changes the specification.",
       },
       {
         title: "Outside print or inside and outside",
         description:
-          "Exterior-only artwork and a printed interior are different production briefs. Ask for both on the same box size if you want to compare an unboxing feature against your budget.",
+          "Exterior-only artwork and a printed interior are different production briefs. Ask for both on the same box size when you want to compare an unboxing feature against your budget. CMYK and spot-color routing is confirmed in the written specification.",
       },
       {
         title: "Insert and finish choices",
         description:
-          "A custom insert, foil or spot UV changes the production requirements. Identify which details are essential, and ask for an alternative without optional finishes for a useful comparison.",
+          "A custom insert, foil, or spot UV changes fit and production requirements. Identify essential details, and request an alternative without optional finishes for a useful comparison. Confirm product fit with the applicable sample path.",
       },
       {
         title: "Order quantity and delivery",
         description:
-          "Request quantity breaks on one specification and supply the delivery country and postal code. Check the total order price and exactly which freight, duties and taxes the written quote includes.",
+          "Request quantity breaks on one specification and supply the delivery country and postal code. The written quote confirms price, production timing, and which freight, duties, and taxes are included. Carrier billing depends on the actual parcel and service.",
       },
     ],
     briefChecklist: [
-      "What goes in the box: product dimensions, weight and item count, if known.",
-      "PR launch, subscription or ecommerce use; inside print and insert preferences.",
-      "Quantity, destination and target delivery date. Artwork or a reference can follow.",
+      "Packed product outside dimensions, weight, item count, arrangement, and any protective layer or insert; requested internal mailer dimensions if known.",
+      "PR launch, subscription, or ecommerce use; kraft or white presentation, inside print, flute, and insert preferences where known.",
+      "Quantity, destination, and target delivery date. Artwork, a proof reference, or an existing sample can follow.",
     ],
     examples: [
       {
         image: "/images/generated/mailer-boxes/mailer-boxes-inside-print-v1.png",
         title: "Inside printing for launch kits",
         description:
-          "For PR and beauty launches where the lid interior carries the message. Compare outside-only printing with inside-and-outside printing using the same box and artwork scope.",
+          "For PR and beauty launches where the lid interior carries the message. Compare exterior-only and inside-and-outside printing using the same box, artwork scope, and quantity.",
         quoteNote:
           "I am planning a PR or product-launch ear-lock mailer. Please compare exterior-only and interior-plus-exterior printing on the same specification.",
       },
@@ -126,7 +126,7 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
         image: "/images/generated/mailer-boxes/mailer-boxes-insert-v1.png",
         title: "Custom inserts for product sets",
         description:
-          "For a set that needs a planned arrangement. Share each item's dimensions and weight so the insert layout and product fit can be reviewed before final artwork.",
+          "For a set that needs a planned arrangement. Share each item's packed dimensions and weight so the insert layout and product fit can be reviewed before final artwork.",
         quoteNote:
           "I am planning a multi-item corrugated ear-lock presentation kit with a custom insert. Please review product fit, arrangement and insert options.",
       },
@@ -134,7 +134,7 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
         image: "/images/generated/mailer-boxes/mailer-boxes-sizes-v1.png",
         title: "Mailer sizes for subscription boxes",
         description:
-          "For a repeat program with changing contents. Compare the smallest and largest planned assortments before choosing a box size; separate sizes or artworks need their own MOQ review.",
+          "For a repeat program with changing contents. Compare the smallest and largest planned assortments before choosing an internal size; separate sizes or artworks need their own MOQ review.",
         quoteNote:
           "I am planning a recurring subscription ear-lock mailer. Please review the planned product assortments, box size and any artwork variants.",
       },
