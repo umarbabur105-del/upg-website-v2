@@ -81,7 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/materials-finishes`,
-      lastModified: CONTENT_UPDATED_AT,
+      lastModified: new Date("2026-09-27T00:00:00.000Z"),
       changeFrequency: "monthly",
       priority: 0.85,
     },
@@ -111,7 +111,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/blog`,
-      lastModified: CONTENT_UPDATED_AT,
+      lastModified: new Date("2026-09-27T00:00:00.000Z"),
       changeFrequency: "weekly",
       priority: 0.78,
     },
