@@ -79,12 +79,12 @@ export default function PackagingStylesPage() {
           <div className="max-w-5xl">
             <div className="eyebrow mb-5">Custom packaging style library</div>
             <h1 className="display-1 text-balance">
-              Start with a real format, then send the known details.
+              Find the right style for your packaging.
             </h1>
             <p className="mt-7 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              Explore the tuck box styles and Mylar bag formats inside UPG&apos;s
-              current product range. Each page carries the approved MOQ, project
-              inputs, production boundaries, and a prefilled quote path.
+              Compare tuck box styles and Mylar bag formats by shape, opening,
+              and intended use. Explore materials, printing options, and minimum
+              quantities, then request a quote for your design.
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-4">

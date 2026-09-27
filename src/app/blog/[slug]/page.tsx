@@ -387,10 +387,10 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             <section className="mt-14 border-t border-charcoal/10 pt-10" aria-labelledby="next-source-heading">
               <div className="text-xs font-semibold uppercase tracking-widest text-gold-dark">
-                Next useful source
+                Next steps
               </div>
               <h2 id="next-source-heading" className="mt-3 font-serif text-3xl font-semibold text-charcoal">
-                Continue with the matching planning path
+                Plan your packaging project
               </h2>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {post.resources.map((resource) => (
@@ -406,7 +406,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                       {resource.description}
                     </p>
                     <span className="mt-4 inline-flex text-sm font-semibold text-gold-dark">
-                      Open source →
+                      Explore details →
                     </span>
                   </Link>
                 ))}

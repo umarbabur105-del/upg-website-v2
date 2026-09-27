@@ -111,8 +111,8 @@ export default function AboutPage() {
             </strong>{" "}
             is our short, easy-to-share web address. It brings visitors to this
             official Universal Packaging Group website, keeping product
-            information, quote requests, policies, and contact details under one
-            canonical home.
+            information, quote requests, policies, and contact details in one
+            place.
           </p>
           <div className="mt-10">
             <Link

@@ -79,9 +79,9 @@ export default function MaterialsFinishesPage() {
               How thick should your packaging be?
             </h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Start with paperboard points (PT), including 16 PT and 18 PT for
-              retail cartons. Compare other thicknesses, practical uses, and
-              grade-specific GSM references, then explore rigid and corrugated board.
+              Compare 16 PT and 18 PT paperboard for product cartons, explore
+              lighter and thicker options, and find materials suited to your
+              packaging. The guide covers thickness, GSM, rigid board, and corrugated flutes.
             </p>
             <Link
               href="/blog/packaging-material-thickness-guide"
@@ -92,9 +92,9 @@ export default function MaterialsFinishesPage() {
           </div>
           <dl className="grid gap-3 sm:grid-cols-3">
             {[
-              { unit: "PT", label: "Start with thickness", detail: "Compare familiar paperboard options such as 16 PT and 18 PT." },
+              { unit: "PT", label: "Paperboard thickness", detail: "Compare carton-board thicknesses, including 16 PT and 18 PT." },
               { unit: "mm", label: "Metric thickness", detail: "16 PT equals 0.4064 mm. One point is 0.0254 mm." },
-              { unit: "GSM", label: "Secondary weight reference", detail: "Weight per square metre varies with the selected mill grade, even at the same PT." },
+              { unit: "GSM", label: "Paperboard weight", detail: "Weight per square meter varies with the board grade, even at the same PT." },
             ].map((item) => (
               <div key={item.unit} className="border border-border bg-surface p-5">
                 <dt className="font-serif text-3xl text-olive">{item.unit}</dt>

@@ -614,7 +614,7 @@ export const organicIntentRoutes: OrganicIntentRoute[] = [
         linkLabel: "Compare the PR-box route",
       },
       {
-        label: "Canonical product family",
+        label: "Product family",
         title: "Custom corrugated mailer boxes",
         description:
           "Review the full ear-lock mailer family when the program type is not limited to influencer seeding.",

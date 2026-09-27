@@ -372,7 +372,7 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
           </div>
 
           <aside className="surface-card p-5 lg:col-span-5 lg:p-7">
-            <div className="eyebrow mb-5">Canonical product sources</div>
+            <div className="eyebrow mb-5">UPG product options</div>
             <div className="space-y-4">
               {products.map((product) => (
                 <Link
@@ -411,9 +411,9 @@ export function IndustryGuidePage({ guide }: IndustryGuidePageProps) {
         <section className="section-shell bg-cream">
           <div className="container-editorial">
             <SectionHeading
-              eyebrow="Source-of-truth styles"
+              eyebrow="Compare packaging styles"
               title={`Compare approved styles for ${guide.shortName.toLowerCase()}.`}
-              intro={`These styles come from UPG's current ${guide.primaryFamily.toLowerCase()} library. This industry page adds buyer context and industry keyword relevance; it does not create a separate structure or automatic suitability claim.`}
+              intro={`Explore ${guide.primaryFamily.toLowerCase()} styles for your product. Compare the opening, shape, and presentation, then choose the structure with our team based on your project requirements.`}
             />
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {formatGuides.map((format) => (

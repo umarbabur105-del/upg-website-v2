@@ -116,7 +116,7 @@ function getLinkDescription(href: string) {
   }
 
   if (href === "/packaging-styles/coffee-bags") {
-    return "Review UPG's current coffee-bag format, planning inputs, MOQ, and project boundaries.";
+    return "Explore coffee-bag formats, material options, and minimum quantities for your packaging project.";
   }
 
   const slug = href.split("/").at(-1);
@@ -137,12 +137,12 @@ export default function IndustriesPage() {
             <div className="lg:col-span-7">
               <div className="eyebrow mb-5">By industry</div>
               <h1 className="text-balance font-serif text-[clamp(2.8rem,5.4vw,5.2rem)] leading-[0.98] font-light tracking-[-0.035em]">
-                Find the right packaging path for your market.
+                Custom packaging for your industry.
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-                Explore packaging for beauty, food, supplements, fashion,
-                electronics, gifts, and pet products. Every path connects to a
-                current UPG box or bag format.
+                Explore boxes and bags for beauty, food, supplements, fashion,
+                electronics, gifts, and pet products. Compare formats and materials
+                to suit your product and brand.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 {industryNavigationGroups.map((group) => (
@@ -185,23 +185,23 @@ export default function IndustriesPage() {
           {[
             [
               "01",
-              "Styles define the offer",
-              "Product and style pages control the available structure, format, MOQ, and specification boundaries.",
+              "Find your packaging format",
+              "Compare box and bag styles, materials, and minimum quantities to find the right starting point for your product.",
             ],
             [
               "02",
-              "Industries define the use",
-              "Industry pages show where those approved styles fit a buyer need without inventing a new product.",
+              "Plan around your product",
+              "Explore packaging for retail, gifting, and ecommerce, with practical guidance on fit, presentation, and protection.",
             ],
             [
               "03",
-              "Keywords follow intent",
-              "Style pages own format terms; industry pages own market and application terms; quote review confirms final fit.",
+              "Build your project with us",
+              "Share your product and quantity. We help you confirm the structure, artwork, pricing, and delivery details.",
             ],
           ].map(([number, title, description]) => (
             <div key={number} className="bg-moss px-6 py-8 md:px-8">
               <div className="text-xs font-semibold tracking-[0.14em] text-primary-foreground/75 uppercase">
-                {number} / Source rule
+                {number} / Your packaging project
               </div>
               <h2 className="mt-4 font-serif text-2xl text-primary-foreground">
                 {title}
