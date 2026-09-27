@@ -308,9 +308,9 @@ export function IndustryHubPage({ hub }: IndustryHubPageProps) {
       <section className="section-shell bg-cream">
         <div className="container-editorial">
           <SectionHeading
-            eyebrow="Current UPG range"
+            eyebrow="Explore our packaging"
             title={`Product families used for ${hub.shortName.toLowerCase()} projects.`}
-            intro="These are current UPG product families, not extra styles created for SEO. The final structure is selected from the actual project brief."
+            intro="Compare packaging formats for your products. We help you select the structure around your product, quantity, artwork, and delivery requirements."
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((product) => (

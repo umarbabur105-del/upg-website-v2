@@ -302,9 +302,9 @@ export default function HomePage() {
         <div className="container-editorial">
           <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow="Packaging by market"
+              eyebrow="Packaging by industry"
               title="Start from your industry, then choose the format."
-              intro="Each market path connects the buyer to current UPG products, visual format guides, planning questions, and a project-specific quote."
+              intro="Explore packaging options for your industry, compare formats, and find practical guidance for your next project."
               headingClassName="text-4xl font-light tracking-[-0.03em] text-balance md:text-5xl"
             />
             <Link

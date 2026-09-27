@@ -428,9 +428,9 @@ export function ProductStyleGuidePage({ guide }: ProductStyleGuidePageProps) {
           <div className="container-editorial">
             <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
               <SectionHeading
-                eyebrow="Style-led industry paths"
+                eyebrow="Packaging applications"
                 title={`See where ${guide.shortName.toLowerCase()} is used.`}
-                intro="The style page remains the structural source of truth. These industry pages apply that approved format to a specific buyer need and keyword theme without creating a different product specification."
+                intro="Explore how this format can support different products and industry applications. We help you match the structure, material, and finish to your packaging requirements."
               />
               <Link
                 href="/industries"
