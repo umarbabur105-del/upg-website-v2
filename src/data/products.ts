@@ -1,14 +1,14 @@
-// Mailer commercial terms adopted by Umar on 2026-09-27 from the Teal benchmark.
-// Keep final schedules tied to the approved specification; production excludes transit.
+// Mailer commercial terms clarified by Umar on 2026-09-27.
+// Shipping is included in the quoted cost; production starts after design-file approval.
 export const mailerCommercialTerms = {
   production:
-    "Eligible standard mailer orders start at approximately 7 business days of production after proof approval and order confirmation. Complex structures, specialty finishes and larger runs can take longer; your quote confirms the schedule.",
+    "Standard mailer production takes approximately 7 business days, starting after you approve the final design file. Complex structures, specialty finishes and larger runs can take longer; your quote confirms the schedule. Shipping time is separate.",
   rush:
-    "A 4–7 business-day production window may be available for ready-to-print mailer orders. We review artwork, size, quantity, materials and capacity before confirming availability and any rush charge. Transit time is separate.",
+    "Rush mailer production may be available in 4–7 business days after you approve the final design file. We review artwork, size, quantity, materials and capacity before confirming availability and any rush charge. Shipping time is separate.",
   artwork:
-    "Mailer orders include a custom dieline, basic artwork preparation and checking, a digital proof and two revision rounds at no extra charge. You can request a quote before your print files are ready. Printing begins only after your approval.",
+    "Mailer orders include a custom dieline, basic artwork preparation and checking, a digital proof file and two rounds of design-file revisions at no extra charge. You can request a quote before your print files are ready. Printing begins only after you approve the final design file.",
   shipping:
-    "Standard shipping to US destinations is included with custom mailer orders. Allow approximately 2–5 business days in transit after dispatch, subject to the confirmed destination and service. Your quote identifies any expedited service, international freight, duties or taxes separately.",
+    "Shipping costs are included in your quoted total for the agreed destination and service. Standard US transit is estimated at 2–5 business days after dispatch, subject to the confirmed destination and service. Your quote states whether duties and taxes are included and identifies any additional charges.",
 } as const;
 
 export type ProductFamily =
