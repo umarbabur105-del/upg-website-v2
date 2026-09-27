@@ -188,7 +188,7 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
             <div>
               <div className="eyebrow mb-3">Design options</div>
               <h2 className="text-3xl font-light tracking-[-0.025em] text-foreground sm:text-4xl">
-                {buyerGuide ? "Printing, inserts & finishes." : "Explore your packaging options."}
+                {buyerGuide?.galleryHeading ?? "Explore your packaging options."}
               </h2>
             </div>
             <p className="max-w-xl text-xs leading-relaxed text-muted-foreground">

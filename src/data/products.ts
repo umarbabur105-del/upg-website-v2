@@ -88,7 +88,7 @@ export const products: Product[] = [
       "auto-lock bottom boxes",
       "seal end boxes",
     ],
-    reviewedAt: "2026-09-02",
+    reviewedAt: "2026-09-27",
     styleDecisionGuide: {
       eyebrow: "Tuck box structure comparison",
       title: "Compare five real structures before final artwork begins.",
@@ -117,6 +117,23 @@ export const products: Product[] = [
         },
       ],
     },
+    buyerFaqs: [
+      {
+        question: "Can I compare 250, 500 and 1,000 custom tuck boxes?",
+        answer:
+          "Yes. Request 250, 500 and 1,000 units using the same carton structure, dimensions, board, printing and finish. If the project includes multiple sizes or artwork versions, share the planned mix so the minimum for each can be reviewed.",
+      },
+      {
+        question: "Can my tuck box be printed on both sides?",
+        answer:
+          "One-sided and two-sided printing can be planned around the selected board and carton structure. Describe the exterior and interior artwork scope in the enquiry so the production specification can be reviewed.",
+      },
+      {
+        question: "Can I compare a window or premium finish with a simpler tuck box?",
+        answer:
+          "Yes. Identify the window, foil, spot UV, embossing, debossing or other preferred feature, and ask for a comparison using the same carton size, structure, board and quantity. The written quote confirms each reviewed option.",
+      },
+    ],
     moq: "250 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/tuck-boxes/tuck-boxes-hero-v1.png",
@@ -292,12 +309,29 @@ export const products: Product[] = [
       "magnetic gift boxes",
       "premium magnetic boxes",
     ],
-    reviewedAt: "2026-09-02",
+    reviewedAt: "2026-09-27",
     buyerDecisionFaq: {
       question: "Should I choose a standard or collapsible magnetic box?",
       answer:
         "A standard magnetic box uses an assembled rigid presentation structure. A collapsible magnetic box folds flat before assembly for more efficient freight and storage. Compare both routes from the product arrangement, dimensions, insert, quantity, finish, destination, and preferred packing method before the structure is approved.",
     },
+    buyerFaqs: [
+      {
+        question: "Can I request a magnetic box quote before final artwork is ready?",
+        answer:
+          "Yes. Start with the product arrangement, dimensions, quantity, destination and intended wrap, insert or finish options. Existing artwork or a reference can follow; final artwork is prepared on the approved wrapped-box and insert dielines.",
+      },
+      {
+        question: "What should I provide for a magnetic box insert?",
+        answer:
+          "Send the dimensions, weight and intended arrangement of every item in the set. A reference image can help explain the presentation, while the final insert layout is confirmed for the approved box structure.",
+      },
+      {
+        question: "Can I request interior branding and premium finishes on a magnetic box?",
+        answer:
+          "Exterior, interior and insert branding can be planned with foil, embossing, debossing, spot UV or soft-touch options. List the artwork and finish preferences so they can be reviewed with the rigid-box specification.",
+      },
+    ],
     moq: "250 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/magnetic-boxes/magnetic-boxes-hero-v1.png",
@@ -453,12 +487,34 @@ export const products: Product[] = [
       "printed rollstock film",
       "flexible packaging rollstock",
     ],
-    reviewedAt: "2026-09-04",
+    reviewedAt: "2026-09-27",
     buyerDecisionFaq: {
       question: "Should I request finished pouches or printed rollstock film?",
       answer:
         "Choose a finished pouch route when the required format is a stand-up, flat-bottom, three-side-seal, spout, coffee, or child-resistant bag. Choose printed rollstock when the packing plan requires custom film on roll. Film structure, product compatibility, machine, web, repeat, sealing, quantity, print, and destination details require project review.",
     },
+    buyerFaqs: [
+      {
+        question: "What should I include in a printed rollstock enquiry?",
+        answer:
+          "Include the product, packing machine, web, repeat, sealing requirements, order quantity or unit, print details and delivery destination. Printed rollstock is reviewed as its own project specification.",
+      },
+      {
+        question: "Can I choose a zipper, valve, window or spout for a custom Mylar bag?",
+        answer:
+          "Zippers, valves, windows and spouts can be specified where the selected bag format supports them. Include the product, finished format and required feature in the brief so the specification can be reviewed.",
+      },
+      {
+        question: "What product and market details should I include in a Mylar bag enquiry?",
+        answer:
+          "Share the product, intended use, delivery market and any product-compatibility, barrier, food-contact, child-resistant or market-specific requirements. These details are reviewed before the final film and pouch specification is approved.",
+      },
+      {
+        question: "What information helps choose between a finished pouch and rollstock?",
+        answer:
+          "For finished pouches, share the product, pouch format, dimensions, fill or closure details and quantity. For rollstock, also provide the packing machine, web, repeat, sealing and order quantity or unit so it can be reviewed separately.",
+      },
+    ],
     moq: "250 units",
     leadTime: "Confirmed after specification review",
     image: "/images/generated/mylar-bags/mylar-bags-hero-v1.png",
