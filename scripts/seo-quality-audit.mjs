@@ -844,7 +844,7 @@ const aiDiscoverySource = await readFile(
   "utf8"
 );
 for (const marker of [
-  'schemaVersion: "3.2"',
+  'schemaVersion: "3.3"',
   "minimumQuantityUnits: 250",
   "moqClarifications: commercialTerms.moqAnswers.map",
   "officialReferences: (hub.officialResources ?? []).map",
