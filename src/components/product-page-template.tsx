@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { MailerBuyingGuide } from "@/components/mailer-buying-guide";
+import { MailerOfferSummary } from "@/components/mailer-offer-summary";
 import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { ProductBuyingGuide } from "@/components/product-buying-guide";
 import { QuoteCta } from "@/components/quote-cta";
@@ -119,22 +120,26 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
         </div>
       </section>
 
-      <section className="border-y border-border bg-cream">
-        <div className="container-editorial grid gap-6 py-6 sm:grid-cols-3">
-          <div>
-            <div className="eyebrow mb-2">Custom made</div>
-            <p className="text-sm text-foreground">Sizes and specifications reviewed per project</p>
+      {product.slug === "custom-mailer-boxes" ? (
+        <MailerOfferSummary />
+      ) : (
+        <section className="border-y border-border bg-cream">
+          <div className="container-editorial grid gap-6 py-6 sm:grid-cols-3">
+            <div>
+              <div className="eyebrow mb-2">Custom made</div>
+              <p className="text-sm text-foreground">Sizes and specifications reviewed per project</p>
+            </div>
+            <div>
+              <div className="eyebrow mb-2">Worldwide</div>
+              <p className="text-sm text-foreground">Production and delivery planning</p>
+            </div>
+            <div>
+              <div className="eyebrow mb-2">You can start early</div>
+              <p className="text-sm text-foreground">Incomplete briefs are welcome</p>
+            </div>
           </div>
-          <div>
-            <div className="eyebrow mb-2">Worldwide</div>
-            <p className="text-sm text-foreground">Production and delivery planning</p>
-          </div>
-          <div>
-            <div className="eyebrow mb-2">You can start early</div>
-            <p className="text-sm text-foreground">Incomplete briefs are welcome</p>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {product.slug === "custom-mailer-boxes" ? <MailerBuyingGuide /> : null}
 

@@ -33,6 +33,7 @@ import { getProductFaqs } from "@/data/products";
 import { blogPosts, type BlogPost } from "@/data/blog-posts";
 import { boxSampleKit, sampleKits } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
+import { buildMailerOfferCatalog, buildMailerOfferMarkdown, mailerOffer } from "@/data/mailer-offer";
 
 const quoteUrl = `${siteConfig.url}/get-a-quote`;
 const quoteActionUrl = `${siteConfig.url}/api/quote`;
@@ -202,6 +203,8 @@ Market: ${siteConfig.market}
 
 ${commercialTerms.quickAnswer}
 
+${buildMailerOfferMarkdown()}
+
 ## What the 250-unit planning minimum means
 
 ${moqAnswerLines}
@@ -351,6 +354,8 @@ export function buildLlmsText() {
 
 ${productLines}
 
+${buildMailerOfferMarkdown()}
+
 ## Available tuck box and Mylar bag styles
 
 ${styleLines}
@@ -466,6 +471,7 @@ Materials: ${product.materials.join("; ")}
 Print options: ${product.prints.join("; ")}
 Finish options: ${product.finishes.join("; ")}
 Qualification note: ${product.screeningNote}
+${product.slug === mailerOffer.productSlug ? buildMailerOfferMarkdown(4) : ""}
 ${buyerGuideSection}
 `
     })
@@ -870,6 +876,8 @@ ${buyerGuideLines}
 
 ${intentRouteLines}
 
+${buildMailerOfferMarkdown()}
+
 ## Important operating rules
 
 - UPG serves brands worldwide.
@@ -1049,6 +1057,9 @@ export function buildProductCatalog() {
         image: `${siteConfig.url}${product.heroImage}`,
         requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent(product.family)}`,
         buyerGuide,
+        ...(product.slug === mailerOffer.productSlug
+          ? { commercialOffer: buildMailerOfferCatalog() }
+          : {}),
       };
     }),
     productStyleGuides: productStyleGuides.map((guide) => ({
@@ -1230,6 +1241,10 @@ export function buildProductCatalogTsv() {
     "url",
     "image_url",
     "request_quote_url",
+    "price_status",
+    "production_timing",
+    "response_target",
+    "ordering_details",
   ];
 
   const rows = products.map((product) => [
@@ -1246,6 +1261,12 @@ export function buildProductCatalogTsv() {
     productUrl(product),
     `${siteConfig.url}${product.heroImage}`,
     `${quoteUrl}?product=${encodeURIComponent(product.family)}`,
+    "project_quote_required",
+    product.leadTime,
+    siteConfig.responseTarget,
+    product.slug === mailerOffer.productSlug
+      ? mailerOffer.facts.map((fact) => `${fact.label}: ${fact.detail}`)
+      : [],
   ]);
 
   return [header, ...rows]

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { MailerOfferSummary } from "@/components/mailer-offer-summary";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import {
@@ -141,6 +142,8 @@ export default function CustomPackagingPricingPage() {
           </div>
         </div>
       </section>
+
+      <MailerOfferSummary />
 
       <section className="border-b border-border bg-cream">
         <div className="container-editorial py-12 md:py-16">

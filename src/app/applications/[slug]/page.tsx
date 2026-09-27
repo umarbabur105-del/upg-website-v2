@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { MailerOfferSummary } from "@/components/mailer-offer-summary";
 import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
@@ -199,6 +200,8 @@ export default async function MailerApplicationPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      <MailerOfferSummary compact />
 
       {application.scopeCallout ? (
         <section className="border-y border-border bg-cream">

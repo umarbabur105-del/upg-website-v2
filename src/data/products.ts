@@ -1,3 +1,16 @@
+// Mailer commercial terms adopted by Umar on 2026-09-27 from the Teal benchmark.
+// Keep final schedules tied to the approved specification; production excludes transit.
+export const mailerCommercialTerms = {
+  production:
+    "Eligible standard mailer orders start at approximately 7 business days of production after proof approval and order confirmation. Complex structures, specialty finishes and larger runs can take longer; your quote confirms the schedule.",
+  rush:
+    "A 4–7 business-day production window may be available for ready-to-print mailer orders. We review artwork, size, quantity, materials and capacity before confirming availability and any rush charge. Transit time is separate.",
+  artwork:
+    "Mailer orders include a custom dieline, basic artwork preparation and checking, a digital proof and two revision rounds at no extra charge. You can request a quote before your print files are ready. Printing begins only after your approval.",
+  shipping:
+    "Standard shipping to US destinations is included with custom mailer orders. Allow approximately 2–5 business days in transit after dispatch, subject to the confirmed destination and service. Your quote identifies any expedited service, international freight, duties or taxes separately.",
+} as const;
+
 export type ProductFamily =
   | "Tuck Boxes"
   | "Mailer Boxes"
@@ -118,8 +131,15 @@ export const products: Product[] = [
       },
       {
         question: "Does a custom mailer quote include shipping and taxes?",
-        answer:
-          "Share the delivery country, city, and postal code. The written quote confirms the manufacturing price and any freight, duties, or taxes included, giving you a clear basis for comparing total cost.",
+        answer: mailerCommercialTerms.shipping,
+      },
+      {
+        question: "How long does custom mailer box production take?",
+        answer: mailerCommercialTerms.production,
+      },
+      {
+        question: "Can I request rush production for custom mailer boxes?",
+        answer: mailerCommercialTerms.rush,
       },
       {
         question: "Is an ear-lock presentation mailer the same as a shipping carton?",
@@ -128,8 +148,7 @@ export const products: Product[] = [
       },
       {
         question: "Can I start without a dieline or finished artwork?",
-        answer:
-          "Yes. Start with the product, dimensions, quantity, delivery destination, and an artwork reference if available. Final artwork is prepared on the approved mailer and insert dielines; the proof, sample path, production timing, and delivery terms are confirmed after specification review.",
+        answer: `Yes. ${mailerCommercialTerms.artwork}`,
       },
     ],
     buyerDecisionFaq: {
@@ -138,7 +157,7 @@ export const products: Product[] = [
         "Use the PR box guide for launches, press, media kits, events, or broad brand presentations; the influencer guide for creator seeding; the subscription guide for recurring assortments; and the ecommerce guide for branded online-order presentation. Every path stays inside UPG's custom ear-lock corrugated mailer offer. Standard shipping cartons, master cartons, and RSC cases are not supplied.",
     },
     moq: "250 units",
-    leadTime: "Confirmed after specification review",
+    leadTime: mailerCommercialTerms.production,
     image: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
     heroImage: "/images/generated/mailer-boxes/mailer-boxes-hero-v1.png",
     galleryImages: [
