@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ProductPageTemplate } from "@/components/product-page-template";
 import { getProductBySlug, getProductFaqs, products } from "@/data/products";
 import { siteConfig } from "@/data/site";
+import { mailerOffer } from "@/data/mailer-offer";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 interface PageProps {
@@ -60,6 +61,13 @@ export default async function ProductPage({ params }: PageProps) {
       audienceType: product.industries.join(", "),
     },
     additionalProperty: [
+      ...(slug === mailerOffer.productSlug
+        ? mailerOffer.facts.map((fact) => ({
+            "@type": "PropertyValue",
+            name: fact.label,
+            value: fact.detail,
+          }))
+        : []),
       {
         "@type": "PropertyValue",
         name: "Available materials",

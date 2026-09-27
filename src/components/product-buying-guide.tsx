@@ -5,6 +5,7 @@ import {
   type ProductBuyerGuide,
 } from "@/data/product-buyer-guides";
 import type { Product } from "@/data/products";
+import { mailerOffer } from "@/data/mailer-offer";
 
 export function ProductBuyingGuide({
   product,
@@ -68,6 +69,22 @@ export function ProductBuyingGuide({
             ))}
           </dl>
         </div>
+        {product.slug === mailerOffer.productSlug ? (
+          <div className="mt-9 border-t border-border pt-6">
+            <h3 className="text-lg font-semibold">Three ways to compare your mailer cost</h3>
+            <div className="mt-5 grid gap-6 md:grid-cols-3">
+              {mailerOffer.comparisons.map((comparison) => (
+                <article key={comparison.title} className="border-t border-border pt-4">
+                  <h4 className="text-base font-semibold">{comparison.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{comparison.description}</p>
+                  <Link href={productBriefHref(product.family, comparison.quoteNote)} className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold underline underline-offset-4">
+                    Request this comparison →
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        ) : null}
         <div className="mt-9 grid gap-5 border-t border-border pt-6 md:grid-cols-2">
           <div>
             <h3 className="text-base font-semibold">Tell us about your project</h3>
