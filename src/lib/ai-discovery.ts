@@ -23,6 +23,12 @@ import {
   commercialPricingFaqs,
   commercialTerms,
 } from "@/data/commercial-terms";
+import {
+  getProductBuyerGuide,
+  productBriefComparisonNote,
+  productBriefHref,
+} from "@/data/product-buyer-guides";
+import { getProductFaqs } from "@/data/products";
 import { blogPosts, type BlogPost } from "@/data/blog-posts";
 import { boxSampleKit, sampleKits } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
@@ -39,10 +45,56 @@ const guidesUrl = `${siteConfig.url}/blog`;
 const commercialTermsUrl = `${siteConfig.url}${commercialTerms.path}`;
 const commercialTermsMarkdownUrl = `${siteConfig.url}${commercialTerms.markdownPath}`;
 const formatFinderUrl = `${siteConfig.url}/tools/packaging-format-finder`;
-const catalogUpdatedAt = siteConfig.contentReviewedAt;
+const catalogUpdatedAt = products.reduce<string>(
+  (latestReviewedAt, product) =>
+    product.reviewedAt && product.reviewedAt > latestReviewedAt
+      ? product.reviewedAt
+      : latestReviewedAt,
+  siteConfig.contentReviewedAt,
+);
 
 function productUrl(product: Product) {
   return `${siteConfig.url}/products/${product.slug}`;
+}
+
+function buyerGuideQuoteUrl(product: Product, note: string) {
+  return new URL(productBriefHref(product.family, note), siteConfig.url).toString();
+}
+
+function buyerGuideDiscovery(product: Product) {
+  const guide = getProductBuyerGuide(product.slug);
+  if (!guide) return null;
+
+  return {
+    pricingHeading: guide.priceHeading,
+    pricingIntro: guide.priceIntro,
+    quantityLabel: guide.quantityLabel ?? null,
+    pricingFactors: guide.pricingFactors,
+    quoteInputs: guide.briefChecklist,
+    faq: getProductFaqs(product),
+    examples: guide.examples.map((example) => ({
+      title: example.title,
+      description: example.description,
+      image: `${siteConfig.url}${example.image}`,
+      requestQuoteUrl: buyerGuideQuoteUrl(product, example.quoteNote),
+    })),
+    quantityOptions: [250, 500, 1000].map((quantity) => ({
+      quantity,
+      requestQuoteUrl: new URL(
+        productBriefHref(product.family, guide.quoteNote, quantity),
+        siteConfig.url,
+      ).toString(),
+    })),
+    compareQuoteUrl: new URL(
+      productBriefHref(
+        product.family,
+        productBriefComparisonNote(guide.quoteNote),
+        250,
+      ),
+      siteConfig.url,
+    ).toString(),
+    requestQuoteUrl: buyerGuideQuoteUrl(product, guide.quoteNote),
+  };
 }
 
 function styleUrl(guide: ProductStyleGuide) {
@@ -271,7 +323,7 @@ export function buildLlmsText() {
 - Sales phone: ${siteConfig.phoneNumber}
 - WhatsApp: ${siteConfig.whatsappUrl}
 - Markets served: ${siteConfig.market}
-- Content reviewed: ${siteConfig.contentReviewedAt}
+- Content reviewed: ${catalogUpdatedAt}
 - Full reference: ${siteConfig.url}/llms-full.txt
 - Product catalog JSON: ${catalogUrl}
 - Product catalog TSV: ${siteConfig.url}/feeds/products.tsv
@@ -363,8 +415,34 @@ ${siteConfig.imagePolicy}
 
 export function buildLlmsFullText() {
   const productSections = products
-    .map(
-      (product) => `### ${product.name}
+    .map((product) => {
+      const guide = buyerGuideDiscovery(product);
+      const buyerGuideSection = guide
+        ? `
+Buyer pricing guide: ${guide.pricingHeading}
+Pricing overview: ${guide.pricingIntro}
+Quantity guidance: ${guide.quantityLabel ?? "Use the product family planning MOQ and written-quote process."}
+Pricing factors: ${guide.pricingFactors
+            .map((factor) => `${factor.title}: ${factor.description}`)
+            .join("; ")}
+Quote inputs: ${guide.quoteInputs.join("; ")}
+Buyer FAQs: ${guide.faq
+            .map((item) => `${item.question}: ${item.answer}`)
+            .join("; ")}
+Gallery examples: ${guide.examples
+            .map(
+              (example) => `${example.title}: ${example.description} Image: ${example.image} Quote: ${example.requestQuoteUrl}`,
+            )
+            .join("; ")}
+Quantity options: ${guide.quantityOptions
+            .map((option) => `${option.quantity}: ${option.requestQuoteUrl}`)
+            .join("; ")}
+Compare quantity options: ${guide.compareQuoteUrl}
+Start this product enquiry: ${guide.requestQuoteUrl}
+`
+        : "";
+
+      return `### ${product.name}
 
 Canonical page: ${productUrl(product)}
 SKU: ${product.sku}
@@ -378,8 +456,9 @@ Materials: ${product.materials.join("; ")}
 Print options: ${product.prints.join("; ")}
 Finish options: ${product.finishes.join("; ")}
 Qualification note: ${product.screeningNote}
+${buyerGuideSection}
 `
-    )
+    })
     .join("\n");
 
   const applicationSections = mailerApplications
@@ -561,7 +640,7 @@ WhatsApp: ${siteConfig.whatsappUrl}
 Markets served: ${siteConfig.market}
 Business model: ${siteConfig.businessModel}
 Pricing model: ${siteConfig.pricingModel}
-Content reviewed: ${siteConfig.contentReviewedAt}
+Content reviewed: ${catalogUpdatedAt}
 
 ## What UPG does
 
@@ -735,7 +814,7 @@ export function buildAgentsMarkdown() {
 
   return `# Agent guidance for ${siteConfig.name}
 
-Last reviewed: ${siteConfig.contentReviewedAt}
+Last reviewed: ${catalogUpdatedAt}
 Canonical entity: ${siteConfig.url}
 
 ## Supported discovery
@@ -834,7 +913,7 @@ UPG does not currently advertise a public MCP, A2A, agent checkout, or autonomou
 
 export function buildProductCatalog() {
   return {
-    schemaVersion: "3.1",
+    schemaVersion: "3.2",
     updatedAt: catalogUpdatedAt,
     entity: {
       name: siteConfig.name,
@@ -926,28 +1005,33 @@ export function buildProductCatalog() {
     scopeBoundary: siteConfig.scopeBoundary,
     cosmeticsPackagingScope,
     imagePolicy: siteConfig.imagePolicy,
-    products: products.map((product) => ({
-      id: product.sku,
-      slug: product.slug,
-      name: product.name,
-      productFamily: product.family,
-      category: product.category,
-      summary: product.summary,
-      description: product.longSummary,
-      planningMoq: product.moq,
-      productionTiming: product.leadTime,
-      bestFor: product.bestFor,
-      stylesAndApplications: product.useCases,
-      industries: product.industries,
-      materials: product.materials,
-      printOptions: product.prints,
-      finishOptions: product.finishes,
-      sizeGuidance: product.sizes,
-      qualificationNote: product.screeningNote,
-      url: productUrl(product),
-      image: `${siteConfig.url}${product.heroImage}`,
-      requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent(product.family)}`,
-    })),
+    products: products.map((product) => {
+      const buyerGuide = buyerGuideDiscovery(product);
+      return {
+        id: product.sku,
+        slug: product.slug,
+        name: product.name,
+        productFamily: product.family,
+        category: product.category,
+        summary: product.summary,
+        description: product.longSummary,
+        planningMoq: product.moq,
+        productionTiming: product.leadTime,
+        bestFor: product.bestFor,
+        stylesAndApplications: product.useCases,
+        industries: product.industries,
+        materials: product.materials,
+        printOptions: product.prints,
+        finishOptions: product.finishes,
+        sizeGuidance: product.sizes,
+        qualificationNote: product.screeningNote,
+        contentReviewed: product.reviewedAt ?? siteConfig.contentReviewedAt,
+        url: productUrl(product),
+        image: `${siteConfig.url}${product.heroImage}`,
+        requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent(product.family)}`,
+        buyerGuide,
+      };
+    }),
     productStyleGuides: productStyleGuides.map((guide) => ({
       slug: guide.slug,
       name: guide.name,

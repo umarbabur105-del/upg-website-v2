@@ -1,5 +1,9 @@
 import Link from "next/link";
-import { productBriefHref, type ProductBuyerGuide } from "@/data/product-buyer-guides";
+import {
+  productBriefComparisonNote,
+  productBriefHref,
+  type ProductBuyerGuide,
+} from "@/data/product-buyer-guides";
 import type { Product } from "@/data/products";
 
 export function ProductBuyingGuide({
@@ -21,6 +25,11 @@ export function ProductBuyingGuide({
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{guide.priceIntro}</p>
             <div className="mt-6 border-t border-border pt-5">
               <h3 className="text-base font-semibold">Choose a starting quantity</h3>
+              {guide.quantityLabel ? (
+                <p className="mt-1 text-sm font-medium text-foreground">
+                  {guide.quantityLabel}
+                </p>
+              ) : null}
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 Select a quantity for your custom quote, or compare all three with the same design and specifications.
               </p>
@@ -38,7 +47,7 @@ export function ProductBuyingGuide({
               <Link
                 href={productBriefHref(
                   product.family,
-                  `${guide.quoteNote} Start with 250 units and also quote 500 and 1,000 units on the same specification. Please identify freight and other charges for each quantity.`,
+                  productBriefComparisonNote(guide.quoteNote),
                   250,
                 )}
                 className="mt-3 inline-flex min-h-11 items-center border-b border-foreground/20 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
