@@ -79,22 +79,22 @@ export default function MaterialsFinishesPage() {
               How thick should your packaging be?
             </h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Compare carton board, printed wraps, rigid board, and corrugated
-              flutes. See what GSM, millimetres, and points mean before choosing
-              a starting material for retail, cosmetics, food cartons, or shipping.
+              Start with paperboard points (PT), including 16 PT and 18 PT for
+              retail cartons. Compare other thicknesses, practical uses, and
+              grade-specific GSM references, then explore rigid and corrugated board.
             </p>
             <Link
               href="/blog/packaging-material-thickness-guide"
               className="mt-6 inline-flex min-h-11 items-center font-semibold text-gold-dark underline decoration-gold/50 underline-offset-4 hover:text-foreground"
             >
-              Compare thicknesses and uses →
+              Compare 14–24 PT paperboard and uses →
             </Link>
           </div>
           <dl className="grid gap-3 sm:grid-cols-3">
             {[
-              { unit: "GSM", label: "Weight per area", detail: "How much one square metre of the stock weighs." },
-              { unit: "mm", label: "Actual thickness", detail: "The distance between the two faces of the stock." },
-              { unit: "PT", label: "Another thickness unit", detail: "One paperboard point equals 0.0254 mm." },
+              { unit: "PT", label: "Start with thickness", detail: "Compare familiar paperboard options such as 16 PT and 18 PT." },
+              { unit: "mm", label: "Metric thickness", detail: "16 PT equals 0.4064 mm. One point is 0.0254 mm." },
+              { unit: "GSM", label: "Secondary weight reference", detail: "Weight per square metre varies with the selected mill grade, even at the same PT." },
             ].map((item) => (
               <div key={item.unit} className="border border-border bg-surface p-5">
                 <dt className="font-serif text-3xl text-olive">{item.unit}</dt>
