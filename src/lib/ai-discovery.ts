@@ -68,6 +68,19 @@ function buyerGuideDiscovery(product: Product) {
   if (!guide) return null;
 
   return {
+    selectionGuide: guide.selectionGuide ? {
+      heading: guide.selectionGuide.heading,
+      intro: guide.selectionGuide.intro,
+      decisions: guide.selectionGuide.decisions.map((decision) => ({
+        title: decision.title,
+        description: decision.description,
+        requestQuoteUrl: buyerGuideQuoteUrl(product, decision.quoteNote),
+      })),
+      resources: guide.selectionGuide.resources.map((resource) => ({
+        label: resource.label,
+        url: new URL(resource.href, siteConfig.url).toString(),
+      })),
+    } : null,
     pricingHeading: guide.priceHeading,
     pricingIntro: guide.priceIntro,
     quantityLabel: guide.quantityLabel ?? null,
@@ -435,6 +448,10 @@ export function buildLlmsFullText() {
       const buyerGuideSection = guide
         ? `
 Buyer pricing guide: ${guide.pricingHeading}
+${guide.selectionGuide ? `Selection guide: ${guide.selectionGuide.heading}
+${guide.selectionGuide.intro}
+${guide.selectionGuide.decisions.map((decision) => `${decision.title}: ${decision.description} Quote: ${decision.requestQuoteUrl}`).join("\n")}
+Related resources: ${guide.selectionGuide.resources.map((resource) => `${resource.label}: ${resource.url}`).join("; ")}` : ""}
 Pricing overview: ${guide.pricingIntro}
 Quantity guidance: ${guide.quantityLabel ?? "Use the product family planning MOQ and written-quote process."}
 Pricing factors: ${guide.pricingFactors

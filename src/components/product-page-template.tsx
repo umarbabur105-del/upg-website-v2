@@ -5,6 +5,7 @@ import { MailerBuyingGuide } from "@/components/mailer-buying-guide";
 import { MailerOfferSummary } from "@/components/mailer-offer-summary";
 import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { ProductBuyingGuide } from "@/components/product-buying-guide";
+import { ProductSelectionGuide } from "@/components/product-selection-guide";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import { getComparisonGuidesByProduct } from "@/data/comparison-guides";
@@ -122,6 +123,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
 
       {product.slug === "custom-mailer-boxes" ? (
         <MailerOfferSummary />
+      ) : buyerGuide?.selectionGuide ? (
+        <ProductSelectionGuide guide={buyerGuide.selectionGuide} family={product.family} />
       ) : (
         <section className="border-y border-border bg-cream">
           <div className="container-editorial grid gap-6 py-6 sm:grid-cols-3">

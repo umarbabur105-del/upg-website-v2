@@ -8,6 +8,12 @@ interface BuyerExample {
 }
 
 export interface ProductBuyerGuide {
+  selectionGuide?: {
+    heading: string;
+    intro: string;
+    decisions: Array<{ title: string; description: string; quoteNote: string }>;
+    resources: Array<{ label: string; href: string }>;
+  };
   galleryHeading?: string;
   quantityLabel?: string;
   priceHeading: string;
@@ -20,6 +26,32 @@ export interface ProductBuyerGuide {
 
 const guides: Partial<Record<string, ProductBuyerGuide>> = {
   "custom-tuck-boxes": {
+    selectionGuide: {
+      heading: "Choose a folding carton that fits your product.",
+      intro: "Compare the opening, packing method and print surface before choosing a custom printed tuck box.",
+      decisions: [
+        {
+          title: "Straight tuck or reverse tuck?",
+          description: "Straight tuck end cartons have top and bottom closures that tuck in the same direction. Reverse tuck end cartons tuck in opposite directions. Match the opening to the front panel and how customers will remove the product.",
+          quoteNote: "Please compare straight and reverse tuck end boxes for the same product, size, print and quantity. Help me choose the opening direction and front panel.",
+        },
+        {
+          title: "Auto-lock or manual locking base?",
+          description: "An auto-lock bottom has a pre-glued base that opens into position as the carton is erected. An interlock base is folded and locked by hand. Choose around the packing workflow, then check the board and base against the product weight.",
+          quoteNote: "Please compare auto-lock and interlock carton bases for my product weight and packing workflow, keeping size, printing and quantity consistent.",
+        },
+        {
+          title: "White SBS or brown kraft?",
+          description: "White SBS gives full-color graphics a light printing surface. Brown kraft adds its own color and texture to the design. Compare the artwork on the intended stock before approving brand colors, especially light colors and fine detail.",
+          quoteNote: "Please compare white SBS and brown kraft tuck boxes for the same product, size and quantity. Review how my artwork and brand colors will appear on each stock.",
+        },
+      ],
+      resources: [
+        { label: "Compare carton structures", href: "/packaging-styles/straight-tuck-end-boxes" },
+        { label: "Cardstock thickness & finishes", href: "/materials-finishes" },
+        { label: "Measure your product", href: "/blog/how-to-measure-product-for-custom-packaging" },
+      ],
+    },
     galleryHeading: "Explore tuck box structures.",
     priceHeading: "Custom tuck box pricing.",
     priceIntro:
@@ -45,7 +77,7 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
       {
         title: "Quantity and delivery destination",
         description:
-          "Compare quantity breaks on one approved specification and provide the delivery country and postal code. The written quote confirms the manufacturing scope and any freight, duties or taxes included.",
+          "Compare quantity breaks on one specification and provide the delivery country and postal code. Shipping costs are included in the quoted total for the agreed destination and service; the quote states how duties and taxes are handled.",
       },
     ],
     briefChecklist: [
@@ -66,7 +98,7 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
         image: "/images/generated/tuck-boxes/tuck-boxes-autolock-v1.png",
         title: "Auto-lock bottom cartons",
         description:
-          "For a tuck box brief that already calls for an auto-lock base. Include the product weight and how the carton will be packed so the construction can be assessed.",
+          "A pre-glued bottom opens into position when the carton is erected. Compare this packing method with a manual locking base, then choose the board and construction for the product weight.",
         quoteNote:
           "I am planning an auto-lock bottom tuck box. Please review the product dimensions, weight, packing method, board and print requirements.",
       },
@@ -141,6 +173,32 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
     ],
   },
   "custom-collapsible-magnetic-boxes": {
+    selectionGuide: {
+      heading: "Plan your fold-flat magnetic gift box.",
+      intro: "Collapsible rigid boxes combine magnetic presentation with flat storage before assembly. Plan the packing steps alongside the design.",
+      decisions: [
+        {
+          title: "Fold-flat or assembled rigid?",
+          description: "Choose fold-flat boxes when space before packing matters and your team can erect the boxes. Compare an assembled magnetic box when the presentation structure needs to arrive ready for product packing.",
+          quoteNote: "Please compare collapsible and assembled magnetic boxes for the same product arrangement, print, quantity and destination. Include the supply configuration and assembly requirements.",
+        },
+        {
+          title: "Box and insert packing plan",
+          description: "A box that folds flat does not mean its insert does too. Check how the insert is supplied, where it is stored and when it is fitted. Compare the complete packed shipment, including inserts, when evaluating freight.",
+          quoteNote: "Please review a collapsible magnetic box with an insert, including how each component is supplied, stored and assembled. Include shipping costs for the complete configuration.",
+        },
+        {
+          title: "Printed wrap or added finishes?",
+          description: "Custom printing carries the main artwork; foil, embossing and spot UV add separate production steps. Compare a printed version with one accent finish while keeping the box size, insert and quantity the same.",
+          quoteNote: "Please compare a printed collapsible magnetic box with and without my preferred accent finish, using the same size, insert and quantity.",
+        },
+      ],
+      resources: [
+        { label: "Compare assembled magnetic boxes", href: "/products/custom-magnetic-boxes" },
+        { label: "Explore materials & finishes", href: "/materials-finishes" },
+        { label: "Digital proofs & physical samples", href: "/blog/packaging-proof-vs-sample" },
+      ],
+    },
     priceHeading: "Collapsible magnetic box pricing.",
     priceIntro:
       "Plan your magnetic gift box order from 250 units. Your size, wrap, printing, inserts and finishes shape the price. Compare quantities and delivery options around your launch or gifting program.",
@@ -165,7 +223,7 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
       {
         title: "Quantity, packed volume and freight",
         description:
-          "Compare quantities on one specification. Fold-flat construction can reduce box storage volume before assembly, but freight savings depend on the full packing configuration, destination and delivery terms.",
+          "Fold-flat construction reduces box storage volume before assembly. Compare the full packing configuration, including inserts. Shipping costs are included in the quoted total for the agreed destination and service; savings depend on the shipment.",
       },
     ],
     briefChecklist: [
@@ -201,6 +259,32 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
     ],
   },
   "custom-magnetic-boxes": {
+    selectionGuide: {
+      heading: "Build your magnetic box around the presentation.",
+      intro: "Choose the structure, product arrangement and branding for a custom rigid gift box that works at the packing table and when opened.",
+      decisions: [
+        {
+          title: "Assembled rigid or fold-flat?",
+          description: "A standard magnetic box keeps its assembled shape before packing. A collapsible magnetic box stores flat and needs assembly. Compare the formats using the same contents and quantity, with storage space and packing labor in mind.",
+          quoteNote: "Please compare assembled and collapsible magnetic boxes for the same contents, quantity, print and destination. Review storage space and packing requirements.",
+        },
+        {
+          title: "One product or a fitted set?",
+          description: "For a beauty kit, gift set or electronics bundle, plan each item's position before sizing the box. An insert takes up space of its own. Product dimensions, access for removal and the insert layout determine the usable interior.",
+          quoteNote: "Please review a custom magnetic box and fitted insert for my product arrangement. Account for item dimensions, weight, removal space and the finished internal size.",
+        },
+        {
+          title: "Outside branding or inside too?",
+          description: "Exterior branding introduces the product; inside-lid printing can carry instructions or a gift message. Compare exterior-only printing with an interior design on the same structure before adding foil or other accent finishes.",
+          quoteNote: "Please compare exterior-only and interior-plus-exterior branding for the same magnetic box size, insert and quantity. Price any accent finish separately in the comparison.",
+        },
+      ],
+      resources: [
+        { label: "Explore fold-flat magnetic boxes", href: "/products/custom-collapsible-magnetic-boxes" },
+        { label: "Measure your product", href: "/blog/how-to-measure-product-for-custom-packaging" },
+        { label: "Compare printing & finishes", href: "/materials-finishes" },
+      ],
+    },
     galleryHeading: "Explore magnetic box presentation options.",
     priceHeading: "Custom magnetic box pricing.",
     priceIntro:
@@ -226,7 +310,7 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
       {
         title: "Quantity and delivery destination",
         description:
-          "Request quantity breaks using the same approved configuration, then provide the delivery country and postal code. The written quote confirms the production scope and included delivery terms.",
+          "Request quantity breaks using the same configuration and delivery postal code. Shipping costs are included in the quoted total for the agreed destination and service; the quote confirms production timing and how duties and taxes are handled.",
       },
     ],
     briefChecklist: [
@@ -262,11 +346,37 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
     ],
   },
   "custom-mylar-bags": {
+    selectionGuide: {
+      heading: "Choose a pouch around how you fill and sell it.",
+      intro: "Match the format, usable capacity, film and closure to the product before preparing the pouch artwork.",
+      decisions: [
+        {
+          title: "Stand-up, flat-bottom or flat pouch?",
+          description: "Stand-up pouches use an expanding bottom gusset for upright display. Flat-bottom bags have a defined base and additional panels. Three-side-seal pouches offer a flat format. Compare shelf presentation, filling method and usable capacity together.",
+          quoteNote: "Please compare stand-up, flat-bottom and three-side-seal pouch options for my product and fill amount. Review shelf presentation, dimensions, closure and quantity.",
+        },
+        {
+          title: "Fill weight is only the starting point",
+          description: "The same weight of coffee beans and powder can occupy different volumes. Pouch width, height, gusset, seals and closure all affect usable space. Check a fill sample with the actual product before settling on the finished dimensions.",
+          quoteNote: "Please help size a custom pouch for my product and target fill weight or volume, allowing for the gusset, seals and closure. Review suitable sample options before final approval.",
+        },
+        {
+          title: "Finished pouches or printed rollstock?",
+          description: "Finished pouches arrive formed for filling and sealing. Printed rollstock is film supplied on a roll for compatible form-fill-seal equipment. Choose around your packing line; rollstock needs its own web width, print repeat, sealing and quantity review.",
+          quoteNote: "Please help choose between finished pouches and printed rollstock for my product and packing method. Review the film, dimensions, sealing and appropriate order quantity for each format.",
+        },
+      ],
+      resources: [
+        { label: "Explore stand-up pouches", href: "/packaging-styles/stand-up-pouches" },
+        { label: "Coffee bag options", href: "/packaging-styles/coffee-bags" },
+        { label: "Printed rollstock requirements", href: "/packaging-styles/printed-rollstock-film" },
+      ],
+    },
     galleryHeading: "Explore flexible packaging formats.",
     quantityLabel: "For finished bag and pouch enquiries",
     priceHeading: "Custom Mylar bag pricing.",
     priceIntro:
-      "Plan your finished custom pouch or bag order from 250 units. Bag format, dimensions, film, product compatibility, print, features and destination shape the written quote. Printed rollstock is reviewed separately for the packing plan.",
+      "Finished custom pouch orders start at 250 units. Format, size, film, print and features shape the price, with shipping costs included for the agreed destination and service. Your quote states how duties and taxes are handled. Printed rollstock is quoted separately for your packing plan.",
     quoteNote:
       "Custom Mylar bag or pouch enquiry. Please review the finished bag format, dimensions, film, print, features and pricing for my product.",
     pricingFactors: [
@@ -315,7 +425,7 @@ const guides: Partial<Record<string, ProductBuyerGuide>> = {
       },
       {
         image: "/images/generated/mylar-bags/mylar-bags-spout-rollstock-v1.png",
-        title: "Spout pouches and rollstock planning",
+        title: "Spout pouches for liquid products",
         description:
           "For a finished spout pouch where the product, fill format and closure guide the brief. Share the product and dimensions so the pouch specification can be reviewed.",
         quoteNote:
