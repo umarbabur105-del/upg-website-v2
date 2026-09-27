@@ -9,6 +9,7 @@ export interface MailerApplication {
   keywords: string[];
   selectionNote: string;
   quoteStyle?: string;
+  quoteUse?: string;
   decisionGuide?: {
     eyebrow: string;
     title: string;
@@ -18,6 +19,7 @@ export interface MailerApplication {
       title: string;
       description: string;
       href: string;
+      useApplicationQuoteHref?: boolean;
       linkLabel: string;
     }>;
   };
@@ -56,6 +58,8 @@ export const mailerApplications: MailerApplication[] = [
     selectionNote:
       "Choose this route for launches, press, editorial, media kits, events, or broad branded gifting and presentation.",
     quoteStyle: "PR / Presentation Mailer",
+    quoteUse:
+      "Launch, press/editorial, media kit, event, or branded gifting presentation",
     decisionGuide: {
       eyebrow: "PR or influencer mailer?",
       title: "Choose the program before the insert is finalized.",
@@ -67,7 +71,8 @@ export const mailerApplications: MailerApplication[] = [
           title: "PR box",
           description:
             "Use this path for a launch, media kit, press or editorial presentation, event, or branded gifting program.",
-          href: "/get-a-quote?product=Mailer%20Boxes&style=PR%20%2F%20Presentation%20Mailer&builder_note=Mailer%20application%3A%20PR%20Boxes.",
+          href: "/get-a-quote",
+          useApplicationQuoteHref: true,
           linkLabel: "Start a PR box enquiry",
         },
         {
@@ -154,7 +159,7 @@ export const mailerApplications: MailerApplication[] = [
       label: "Explore the beauty-specific PR box guide",
       href: "/cosmetics/pr-boxes",
     },
-    reviewedAt: "2026-08-31",
+    reviewedAt: "2026-09-27",
   },
   {
     slug: "influencer-kits",
@@ -255,7 +260,7 @@ export const mailerApplications: MailerApplication[] = [
       label: "Explore the beauty-specific PR box guide",
       href: "/cosmetics/pr-boxes",
     },
-    reviewedAt: "2026-08-31",
+    reviewedAt: "2026-09-27",
   },
   {
     slug: "custom-subscription-boxes",
@@ -279,6 +284,8 @@ export const mailerApplications: MailerApplication[] = [
     selectionNote:
       "Choose this route for recurring assortments, memberships, discovery programs, or repeat branded deliveries.",
     quoteStyle: "Subscription Mailer",
+    quoteUse:
+      "Recurring assortment, membership, discovery program, or repeat branded delivery",
     decisionGuide: {
       eyebrow: "Subscription or ecommerce mailer?",
       title: "Separate the recurring program from a general online-order brief.",
@@ -290,7 +297,8 @@ export const mailerApplications: MailerApplication[] = [
           title: "Subscription mailer",
           description:
             "Use this path for a recurring assortment, membership, discovery program, or repeat branded delivery cycle.",
-          href: "/get-a-quote?product=Mailer%20Boxes&style=Subscription%20Mailer&builder_note=Mailer%20application%3A%20Subscription%20Boxes.",
+          href: "/get-a-quote",
+          useApplicationQuoteHref: true,
           linkLabel: "Start a subscription enquiry",
         },
         {
@@ -377,7 +385,7 @@ export const mailerApplications: MailerApplication[] = [
       label: "Explore the beauty-specific subscription guide",
       href: "/cosmetics/cosmetic-subscription-boxes",
     },
-    reviewedAt: "2026-08-31",
+    reviewedAt: "2026-09-27",
   },
   {
     slug: "branded-ecommerce-mailer-boxes",
@@ -499,4 +507,21 @@ export const mailerApplications: MailerApplication[] = [
 
 export function getMailerApplicationBySlug(slug: string) {
   return mailerApplications.find((application) => application.slug === slug);
+}
+
+export function getMailerApplicationQuoteHref(application: MailerApplication) {
+  const parameters = new URLSearchParams({
+    product: "Mailer Boxes",
+    builder_note: `Mailer application: ${application.shortName}.`,
+  });
+
+  if (application.quoteStyle) {
+    parameters.set("style", application.quoteStyle);
+  }
+
+  if (application.quoteUse) {
+    parameters.set("use", application.quoteUse);
+  }
+
+  return `/get-a-quote?${parameters.toString()}`;
 }

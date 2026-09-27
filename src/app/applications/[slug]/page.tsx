@@ -8,6 +8,7 @@ import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
 import {
   getMailerApplicationBySlug,
+  getMailerApplicationQuoteHref,
   mailerApplications,
 } from "@/data/mailer-applications";
 import { siteConfig } from "@/data/site";
@@ -51,13 +52,7 @@ export default async function MailerApplicationPage({ params }: PageProps) {
 
   const pageUrl = `${SITE_URL}/applications/${application.slug}`;
   const intentRoute = getOrganicIntentRoute(`/applications/${application.slug}`);
-  const quoteHref = `/get-a-quote?product=${encodeURIComponent("Mailer Boxes")}${
-    application.quoteStyle
-      ? `&style=${encodeURIComponent(application.quoteStyle)}`
-      : ""
-  }&builder_note=${encodeURIComponent(
-    `Mailer application: ${application.shortName}.`
-  )}`;
+  const quoteHref = getMailerApplicationQuoteHref(application);
   const relatedApplications = mailerApplications
     .filter((item) => item.slug !== application.slug)
     .slice(0, 3);
@@ -242,7 +237,9 @@ export default async function MailerApplicationPage({ params }: PageProps) {
                     {option.description}
                   </p>
                   <Link
-                    href={option.href}
+                    href={
+                      option.useApplicationQuoteHref ? quoteHref : option.href
+                    }
                     className="mt-auto pt-7 text-sm text-foreground"
                   >
                     <span className="border-b border-foreground/20 pb-0.5">

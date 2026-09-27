@@ -1,4 +1,5 @@
 import {
+  getMailerApplicationQuoteHref,
   mailerApplications,
   type MailerApplication,
 } from "@/data/mailer-applications";
@@ -208,6 +209,15 @@ ${moqAnswerLines}
 ## What changes a custom-packaging quote
 
 ${factorLines}
+
+## ${commercialTerms.quoteComparison.title}
+
+${commercialTerms.quoteComparison.intro}
+
+${commercialTerms.quoteComparison.checklist.map((item) => `- ${item}`).join("\n")}
+
+- I have the specification: ${new URL(commercialTerms.quoteComparison.specificationHref, siteConfig.url).toString()}
+- I still need to define the specification: ${new URL(commercialTerms.quoteComparison.checklistHref, siteConfig.url).toString()}
 
 ## What to send for quote review
 
@@ -473,6 +483,7 @@ Planning priorities: ${application.planningPriorities
         .map((item) => `${item.title}: ${item.description}`)
         .join("; ")}
 Project inputs: ${application.projectInputs.join("; ")}
+Request a quote: ${new URL(getMailerApplicationQuoteHref(application), siteConfig.url).toString()}
 Content reviewed: ${application.reviewedAt}
 `
     )
@@ -1060,7 +1071,10 @@ export function buildProductCatalog() {
       projectInputs: application.projectInputs,
       contentReviewed: application.reviewedAt,
       url: applicationUrl(application),
-      requestQuoteUrl: `${quoteUrl}?product=${encodeURIComponent("Mailer Boxes")}`,
+      requestQuoteUrl: new URL(
+        getMailerApplicationQuoteHref(application),
+        siteConfig.url,
+      ).toString(),
     })),
     industryGuides: industryGuides.map((guide) => ({
       slug: guide.slug,

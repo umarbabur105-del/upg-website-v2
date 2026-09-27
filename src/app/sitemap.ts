@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog-posts";
 import { comparisonGuides } from "@/data/comparison-guides";
+import { commercialTerms } from "@/data/commercial-terms";
 import { cosmeticsSubcategories } from "@/data/catalog";
 import { industryHubs } from "@/data/industry-hubs";
 import { industryGuides } from "@/data/industry-guides";
@@ -38,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/custom-packaging-pricing`,
-      lastModified: CONTENT_UPDATED_AT,
+      lastModified: new Date(`${commercialTerms.reviewedAt}T00:00:00.000Z`),
       changeFrequency: "monthly",
       priority: 0.92,
     },

@@ -307,6 +307,7 @@ Paste the completed lines into the project enquiry. Empty lines can remain open 
     slug: "how-to-measure-product-for-custom-packaging",
     title: "How to Measure a Product for Custom Packaging",
     date: "2026-09-01",
+    updatedAt: "2026-09-27",
     category: "Project Planning",
     readTime: "6 min read",
     excerpt:
@@ -351,6 +352,21 @@ The safest starting point is the item or complete set that will go inside the pa
 | **Weight** | Product or complete set weight where relevant | Treating weight as optional for an insert-led or presentation project |
 
 The dimension order above is a communication convention for the enquiry, not approval of a final structure.
+
+## Prevent a size or structure mismatch
+
+A box can match the stated dimensions and still be wrong for the product if those measurements describe the outside of an old box instead of the space the contents need. Label each measurement before the structure is reviewed.
+
+| Situation | What to check before the quote |
+| --- | --- |
+| **You measured an existing box** | Say whether the dimensions are internal or external, and send the product measurements separately. |
+| **A pump, cap, handle, or accessory projects beyond the main body** | Measure the complete item in its packed orientation, including every protruding part. |
+| **Several products share one box** | Send each item's dimensions and weight, a layout sketch, and the insert or divider requirement. |
+| **The contents are heavy or fragile** | Share the full packed weight, product type, arrangement, expected handling and delivery route. Ask for the board and interior packaging to be reviewed together. |
+
+## E-flute or C-flute: start with the complete packout
+
+Weight alone does not decide the flute. Board construction and grade, box dimensions, inserts, stacking, and the distribution route all affect the review. A larger flute can offer different cushioning and compression characteristics, but changing from E-flute to C-flute is not an automatic fix for a heavy product. Ask which construction and any relevant performance testing fit the complete packout before approving the structure.
 
 ## For a multi-product set
 
@@ -403,6 +419,18 @@ UPG uses the measurements as project inputs. The applicable structure, clearance
         href: "/packaging-styles",
       },
     ],
+    sources: [
+      {
+        name: "Fibre Box Association — What is Corrugated",
+        href: "https://www.fibrebox.org/what-is-corrugated",
+        note: "Flute profiles, combined board construction, and interior packaging affect structural selection.",
+      },
+      {
+        name: "ISTA — Selecting and Using Test Procedures",
+        href: "https://ista.org/docs/2018_ISTA_Guidelines.pdf",
+        note: "Product weight, dimensions, materials, interior packaging, closures, and the distribution route affect package-performance review.",
+      },
+    ],
     relatedSlugs: [
       "custom-packaging-quote-checklist",
       "how-to-prepare-artwork-for-custom-packaging",
@@ -418,6 +446,7 @@ UPG uses the measurements as project inputs. The applicable structure, clearance
     slug: "custom-packaging-production-process",
     title: "Custom Packaging Production Process, Step by Step",
     date: "2026-09-01",
+    updatedAt: "2026-09-27",
     category: "Project Planning",
     readTime: "7 min read",
     excerpt:
@@ -463,6 +492,17 @@ The written quote records the project-specific commercial terms. It can include 
 ## 4. Dieline and artwork development
 
 Final artwork belongs on the approved project dieline. Panel orientation, print areas, structural lines, finishes, required copy, and any variable information should be checked against the reviewed structure rather than a generic template.
+
+## Avoid late artwork changes
+
+A practical lesson from our founder's six years of packaging experience: even a small copy change needs a clear handover when a project is close to production. A revised label, panel, size, or finish can require another artwork or proof review and affect the production plan.
+
+- **One approval owner:** Name one person to collect the final changes and approve the file.
+- **One current version:** Send one clearly dated replacement file with a short list of what changed.
+- **Review the impact:** Ask which approvals and timing assumptions need to be checked again.
+- **Approve the revised proof:** Review it against the change list before approving that version.
+
+If the delivery date is fixed, share it with the destination and artwork status at the start. Ask for feasibility to be reviewed whenever the specification or approval date changes.
 
 ## 5. Proofing and required approvals
 
@@ -516,6 +556,12 @@ The packaging may be supplied flat, folded, collapsed, nested, or assembled depe
           "Separate a reference sample kit, artwork proof, and project approval decision.",
         href: "/blog/packaging-proof-vs-sample",
       },
+      {
+        title: "Review a fixed target date",
+        description:
+          "Share the project facts already known so UPG can review feasibility and timing for the requested date.",
+        href: "/get-a-quote?builder_note=I%20need%20project-specific%20feasibility%20and%20timing%20review%20for%20a%20fixed%20target%20date.",
+      },
     ],
     relatedSlugs: [
       "custom-packaging-quote-checklist",
@@ -532,6 +578,7 @@ The packaging may be supplied flat, folded, collapsed, nested, or assembled depe
     slug: "packaging-proof-vs-sample",
     title: "Packaging Proof vs. Sample: What Each One Confirms",
     date: "2026-09-01",
+    updatedAt: "2026-09-27",
     category: "Artwork & Print",
     readTime: "6 min read",
     excerpt:
@@ -579,6 +626,20 @@ The packaging may be supplied flat, folded, collapsed, nested, or assembled depe
 
 An on-screen file is affected by the display and viewing setup. Treat it as the review record described in the project process, not as a universal physical color standard.
 
+## A final check before you approve
+
+When a launch is urgent, it is easy to approve the familiar front panel and miss a change elsewhere. Open the exact approval file and check every panel against the project brief.
+
+| Check | What you are confirming |
+| --- | --- |
+| **File and version** | Correct product, SKU, language, dated file, and latest requested changes. |
+| **Copy and codes** | Spelling, quantities, buyer-supplied required text, barcode or QR content, and variable-data areas. |
+| **Structure and orientation** | Approved dieline, opening direction, front/back placement, folds, and any insert relationship. |
+| **Print and finishes** | Color references and the intended locations of foil, coating, embossing, or other specified effects. |
+| **Approval scope** | Which artwork, structure, color, or sample decision this approval covers, and what still needs review. |
+
+Record the approved version and any remaining questions explicitly. If a detail is uncertain, identify it before approving the next production step.
+
 ## What a finished sample kit is useful for
 
 A finished kit can help buyers handle representative packaging, compare broad structures, and discuss material or finish direction. UPG's Box Sample Kit and Mylar Bag Sample Kit are separate fixed-price products. Their assortment is curated and can vary; neither kit is a custom proof of the buyer's project.
@@ -624,6 +685,12 @@ Use clear wording such as **artwork content approved**, **structure approved**, 
         description:
           "Use the approved project structure before locking the final artwork file.",
         href: "/blog/how-to-prepare-artwork-for-custom-packaging",
+      },
+      {
+        title: "Confirm the proof or sample path",
+        description:
+          "Request project-specific review of the applicable proof or sample decision before the next approval.",
+        href: "/get-a-quote?builder_note=I%20need%20the%20project-specific%20proof%20or%20sample%20path%20confirmed%20before%20the%20next%20approval.",
       },
     ],
     relatedSlugs: [
