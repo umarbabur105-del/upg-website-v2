@@ -209,12 +209,12 @@ export const products: Product[] = [
     sku: "UPG-TUCK",
     bestFor: "Retail products, cosmetics, food cartons, and everyday secondary packaging",
     summary:
-      "Custom printed tuck boxes and folding cartons across the core structures, materials, and premium finish options.",
+      "Custom printed tuck boxes and folding cartons for cosmetics, supplements, food cartons and retail products, with a choice of closures, board and finishes.",
     longSummary:
-      "Custom tuck boxes are printed folding cartons available in straight tuck end, reverse tuck end, auto-lock, interlock, and seal-end structures. Cereal-style seal-end boxes are included in this family.",
+      "Custom printed tuck boxes give cosmetics, supplements and retail products a fitted folding carton with space for branding and product information. Choose straight tuck, reverse tuck, auto-lock, interlock or seal-end construction, with custom sizing, board, printing and finishes from 250 units.",
     metaTitle: "Custom Tuck Boxes & Cartons | 250-Unit MOQ",
     metaDescription:
-      "Custom printed tuck boxes and folding cartons in five structures. Planning MOQ 250 units, with made-to-spec manufacturing and worldwide delivery.",
+      "Custom printed tuck boxes from 250 units. Compare straight tuck, reverse tuck and auto-lock cartons, cardstock, kraft, windows and finishes for your product.",
     searchTerms: [
       "custom tuck boxes",
       "custom printed tuck boxes",
@@ -224,6 +224,8 @@ export const products: Product[] = [
       "reverse tuck end boxes",
       "auto-lock bottom boxes",
       "seal end boxes",
+      "custom cardstock boxes",
+      "kraft tuck boxes",
     ],
     reviewedAt: "2026-09-27",
     styleDecisionGuide: {
@@ -237,13 +239,13 @@ export const products: Product[] = [
         {
           title: "Straight or reverse tuck end",
           description:
-            "Start here when opening direction and panel layout are the main comparison. Final flap orientation is confirmed before artwork is placed on the approved dieline.",
+            "Straight tuck closes in the same direction at both ends; reverse tuck closes in opposite directions. Check the front panel and opening before placing artwork on the dieline.",
           styleSlugs: ["straight-tuck-end-boxes", "reverse-tuck-end-boxes"],
         },
         {
           title: "Auto-lock or interlock brief",
           description:
-            "Start here when one of these locking structures is already in the brief. Share product dimensions and weight, packing method, or a reference structure for review.",
+            "An auto-lock base is pre-glued and opens into position during assembly. An interlock base is folded and locked by hand. Compare the packing method and product weight before choosing the board and base.",
           styleSlugs: ["auto-lock-bottom-boxes", "interlock-boxes"],
         },
         {
@@ -255,6 +257,16 @@ export const products: Product[] = [
       ],
     },
     buyerFaqs: [
+      {
+        question: "Which cardstock thickness should I choose for a tuck box?",
+        answer:
+          "Specify cardstock thickness in points (PT); GSM describes its weight per area, so it is not a fixed conversion. A small, light product and a tall or heavy product can need different board and base combinations. Compare thickness alongside the board grade, product weight, panel size and a structural sample rather than choosing by PT alone.",
+      },
+      {
+        question: "Can different artwork versions share one tuck box order?",
+        answer:
+          "You can request multiple versions, but list the quantity for each design. In offset printing, even a small text change changes the artwork and requires new plates for the affected colors, with separate print setup. The same box size and shape do not make different designs one printing run; pricing and minimums are reviewed by version.",
+      },
       {
         question: "Can I compare 250, 500 and 1,000 custom tuck boxes?",
         answer:
@@ -336,26 +348,38 @@ export const products: Product[] = [
     sku: "UPG-MAGNETIC",
     bestFor: "Premium gifts, beauty, apparel, electronics, and launch collections",
     summary:
-      "Premium rigid boxes with a magnetic closure, custom inserts, and presentation-led finishes.",
+      "Custom rigid magnetic closure boxes for beauty sets, apparel, electronics and premium gifts, with fitted inserts and interior or exterior branding.",
     longSummary:
-      "Custom magnetic boxes create a premium presentation for gifts, beauty products, apparel, electronics, and launch collections. The structure can be paired with custom inserts and premium finish options.",
-    metaTitle: "Custom Magnetic Boxes | 250-Unit MOQ",
+      "Custom magnetic closure boxes pair an assembled rigid structure with a magnetic lid for beauty sets, apparel, electronics and premium gifts. Build the presentation around your product with fitted inserts, inside or outside printing, foil and other finishes. Orders start at 250 units.",
+    metaTitle: "Custom Magnetic Closure Boxes | 250-Unit MOQ",
     metaDescription:
-      "Custom magnetic rigid boxes with premium finishes and inserts for brands worldwide. Minimum order 250 units; specifications are confirmed per project.",
+      "Custom magnetic closure boxes from 250 units. Explore rigid gift boxes with fitted inserts, inside printing, foil and finishes for beauty, apparel and gifts.",
     searchTerms: [
       "custom magnetic boxes",
       "custom magnetic closure boxes",
       "custom rigid magnetic boxes",
       "magnetic gift boxes",
       "premium magnetic boxes",
+      "magnetic boxes with inserts",
+      "custom rigid gift boxes",
     ],
     reviewedAt: "2026-09-27",
     buyerDecisionFaq: {
       question: "Should I choose a standard or collapsible magnetic box?",
       answer:
-        "A standard magnetic box uses an assembled rigid presentation structure. A collapsible magnetic box folds flat before assembly for more efficient freight and storage. Compare both routes from the product arrangement, dimensions, insert, quantity, finish, destination, and preferred packing method before the structure is approved.",
+        "A standard magnetic box keeps its assembled rigid shape before packing. A collapsible magnetic box folds flat for storage and needs assembly before use. Compare storage space, packing labor and the complete shipping configuration, including inserts, for the same product arrangement and quantity.",
     },
     buyerFaqs: [
+      {
+        question: "Are magnetic gift boxes suitable for shipping on their own?",
+        answer:
+          "A rigid presentation box is not automatically a parcel shipping box. A magnetic lid, decorative wrap and fitted insert should be considered as part of the complete packing system. Plan suitable outer transit protection and evaluate it with the actual product, weight and delivery conditions.",
+      },
+      {
+        question: "Should I use internal or external dimensions for a magnetic box?",
+        answer:
+          "Use the product's outside dimensions to start the brief, then identify the usable internal space required for the product and insert. External box dimensions also include the board, wrap and construction. Label any existing box measurements as internal or external so the two are not confused.",
+      },
       {
         question: "Can I request a magnetic box quote before final artwork is ready?",
         answer:
@@ -417,14 +441,14 @@ export const products: Product[] = [
     family: "Collapsible Magnetic Boxes",
     category: "Rigid Boxes",
     sku: "UPG-COLLAPSIBLE-MAGNETIC",
-    bestFor: "Premium gifting and branded presentation with lower freight and storage volume",
+    bestFor: "Apparel, beauty sets and premium gifts with flat storage before packing",
     summary:
-      "A premium magnetic rigid box that folds flat to reduce freight and storage space.",
+      "Custom fold-flat magnetic gift boxes for apparel, beauty sets and branded gifting, with inserts, printing and presentation finishes.",
     longSummary:
-      "Custom collapsible magnetic boxes deliver the premium presentation of a magnetic box while folding flat for more efficient freight and storage. Custom inserts and premium finishes are available.",
+      "Custom collapsible magnetic boxes fold flat before assembly, then form a rigid gift box with a magnetic closure. Plan apparel, beauty or seasonal gift sets with custom printing, inserts and finishes from 250 units, with the assembly and packing method agreed for your project.",
     metaTitle: "Custom Collapsible Magnetic Boxes | 250-Unit MOQ",
     metaDescription:
-      "Custom fold-flat magnetic boxes from 250 units. Review inserts, assembly, finishes and pricing factors for gift sets; request a written quote.",
+      "Custom collapsible magnetic boxes from 250 units. Compare fold-flat gift boxes, inserts, assembly, printing and finishes for apparel, beauty and gifting.",
     searchTerms: [
       "custom collapsible magnetic boxes",
       "fold flat magnetic boxes",
@@ -434,6 +458,16 @@ export const products: Product[] = [
     ],
     reviewedAt: "2026-09-27",
     buyerFaqs: [
+      {
+        question: "Does a collapsible magnetic box have the same fit as an assembled rigid box?",
+        answer:
+          "Do not assume two boxes with the same outside dimensions have identical usable space. Folds, corners, board and inserts affect the interior. Compare both structures around the same product arrangement, then check fit, lid closure and product removal in an assembled structural sample.",
+      },
+      {
+        question: "Does the insert fold flat with the box?",
+        answer:
+          "That depends on the insert design. The box and insert may need different packing and storage arrangements. Confirm whether the insert is supplied flat or assembled, who fits it and how both components are packed for delivery before comparing freight costs.",
+      },
       {
         question: "Are collapsible magnetic boxes always cheaper to ship?",
         answer:
@@ -509,12 +543,12 @@ export const products: Product[] = [
     sku: "UPG-MYLAR",
     bestFor: "Coffee, packaged food, supplements, liquid-product formats, child-resistant options, and flexible packaging",
     summary:
-      "Custom printed Mylar bags and pouches, plus rollstock film, across UPG's current flexible-packaging formats.",
+      "Custom printed Mylar bags, stand-up pouches, flat-bottom coffee bags and spout pouches, with film and closures matched to the product and packing method.",
     longSummary:
-      "Custom Mylar bags and printed pouches include three-side seal bags, flat-bottom bags, stand-up pouches, spout bags, child-resistant bags, and coffee bags. Printed rollstock film is a separate format for compatible packing plans. Depending on the selected format, options can include zippers, valves, windows, and matte, gloss, or metallic finishes.",
+      "Custom printed Mylar bags and pouches bring your branding to coffee, packaged food, supplements and personal care products. Compare stand-up, flat-bottom, three-side-seal and spout formats, with film and closure options matched to the contents. Finished pouch orders start at 250 units; printed rollstock is quoted separately for your packing line.",
     metaTitle: "Custom Mylar Bags & Printed Pouches | 250-Unit MOQ",
     metaDescription:
-      "Custom printed Mylar bags, pouches and rollstock in seven formats. Planning MOQ 250 units, with compatibility and specifications reviewed per project.",
+      "Custom printed Mylar bags and pouches from 250 units. Compare stand-up, flat-bottom and spout formats, sizes, closures and film for your product.",
     searchTerms: [
       "custom Mylar bags",
       "custom printed Mylar bags",
@@ -523,6 +557,8 @@ export const products: Product[] = [
       "custom flexible packaging",
       "custom stand up pouches",
       "custom coffee bags",
+      "custom flat bottom bags",
+      "custom resealable pouches",
       "custom spout pouches",
       "printed rollstock film",
       "flexible packaging rollstock",
@@ -534,6 +570,16 @@ export const products: Product[] = [
         "Choose a finished pouch route when the required format is a stand-up, flat-bottom, three-side-seal, spout, coffee, or child-resistant bag. Choose printed rollstock when the packing plan requires custom film on roll. Film structure, product compatibility, machine, web, repeat, sealing, quantity, print, and destination details require project review.",
     },
     buyerFaqs: [
+      {
+        question: "How do I choose a Mylar bag size for a specific fill weight?",
+        answer:
+          "Start with the actual product and target fill weight or volume. Coffee beans, powders and snacks occupy different amounts of space at the same weight. Width, height, gusset, seal areas and closure position affect usable capacity. Check a fill sample with your product before approving the final size.",
+      },
+      {
+        question: "Does a resealable zipper replace the pouch's heat seal?",
+        answer:
+          "A zipper allows the customer to reclose the pouch after opening. The initial heat seal is a separate part of the filling and sealing process. Confirm the film, fill opening, seal area and equipment settings with the packing team; a zipper alone should not be treated as proof of a sealed pack.",
+      },
       {
         question: "What should I include in a printed rollstock enquiry?",
         answer:
@@ -550,9 +596,9 @@ export const products: Product[] = [
           "Share the product, intended use, delivery market and any product-compatibility, barrier, food-contact, child-resistant or market-specific requirements. These details are reviewed before the final film and pouch specification is approved.",
       },
       {
-        question: "What information helps choose between a finished pouch and rollstock?",
+        question: "Does the name Mylar guarantee a particular barrier or shelf life?",
         answer:
-          "For finished pouches, share the product, pouch format, dimensions, fill or closure details and quantity. For rollstock, also provide the packing machine, web, repeat, sealing and order quantity or unit so it can be reviewed separately.",
+          "No. The complete film structure, seals, closure, product and storage conditions determine performance. State your moisture, oxygen, light and shelf-life requirements so the material can be specified and supporting information reviewed. Food-contact suitability and any child-resistant requirements are confirmed for the actual packaging specification.",
       },
     ],
     moq: "250 units",
