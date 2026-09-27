@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     template: "%s | UPG",
   },
   description:
-    "Custom tuck boxes, corrugated mailer boxes, magnetic boxes, collapsible magnetic boxes, and Mylar bags manufactured for brands worldwide.",
+    "Custom corrugated mailer boxes, tuck cartons, magnetic boxes, collapsible magnetic boxes, and Mylar bags made to your specifications.",
   alternates: { canonical: SITE_URL },
   robots: {
     index: true,
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: "Custom Packaging Manufacturer | UPG",
     description:
-      "Custom boxes and flexible packaging manufactured for brands worldwide.",
+      "Custom printed corrugated mailer boxes, retail cartons, rigid boxes, and Mylar bags.",
     url: SITE_URL,
     images: [DEFAULT_OG_IMAGE],
   },
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Custom Packaging Manufacturer | UPG",
     description:
-      "Tuck boxes, corrugated mailers, magnetic boxes, collapsible magnetic boxes, and Mylar bags.",
+      "Corrugated mailer boxes, tuck cartons, magnetic boxes, collapsible magnetic boxes, and Mylar bags.",
     images: [DEFAULT_OG_IMAGE.url],
   },
 };

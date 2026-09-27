@@ -12,7 +12,7 @@ import { siteConfig } from "@/data/site";
 import { SITE_URL } from "@/lib/seo";
 
 const CONTENT_UPDATED_AT = new Date(`${siteConfig.contentReviewedAt}T00:00:00.000Z`);
-const PRODUCTS_UPDATED_AT = new Date("2026-09-04T00:00:00.000Z");
+const PRODUCTS_UPDATED_AT = new Date("2026-09-27T00:00:00.000Z");
 const COSMETICS_UPDATED_AT = new Date("2026-08-31T00:00:00.000Z");
 const STYLE_LIBRARY_UPDATED_AT = new Date("2026-08-31T00:00:00.000Z");
 const SAMPLES_UPDATED_AT = new Date("2026-08-23T00:00:00.000Z");
@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: SITE_URL,
-      lastModified: CONTENT_UPDATED_AT,
+      lastModified: new Date("2026-09-27T00:00:00.000Z"),
       changeFrequency: "weekly",
       priority: 1,
     },

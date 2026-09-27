@@ -6,8 +6,8 @@ export type MeasurementUnit = "in" | "cm" | "mm";
 export const PLANNING_MOQ_UNITS = 250;
 
 export const productFamilies: ProductFamily[] = [
-  "Tuck Boxes",
   "Mailer Boxes",
+  "Tuck Boxes",
   "Magnetic Boxes",
   "Collapsible Magnetic Boxes",
   "Mylar Bags",

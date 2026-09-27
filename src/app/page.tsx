@@ -10,11 +10,13 @@ import { getIndustryLinkVisual } from "@/lib/industry-visuals";
 import { SITE_URL, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Custom Packaging Manufacturer: Boxes & Mylar Bags",
+  title: "Custom Mailer Boxes & Printed Packaging",
   description:
-    "Custom printed tuck boxes, corrugated ear-lock mailers, magnetic boxes, collapsible magnetic boxes, and Mylar bags manufactured for brands worldwide.",
+    "Custom printed corrugated mailer boxes for ecommerce, subscriptions and product launches. Explore inserts, inside printing and a 250-unit planning MOQ.",
   path: "/",
   keywords: [
+    "custom mailer boxes",
+    "custom printed mailer boxes",
     "custom packaging manufacturer",
     "custom printed cardboard boxes",
     "custom boxes manufacturer",
@@ -86,10 +88,10 @@ export default function HomePage() {
         "@type": "WebPage",
         "@id": `${SITE_URL}/#webpage`,
         url: SITE_URL,
-        name: "Custom Packaging Manufacturer: Boxes & Mylar Bags",
+        name: "Custom Mailer Boxes & Printed Packaging",
         description:
-          "Custom printed tuck boxes, corrugated ear-lock mailers, magnetic boxes, collapsible magnetic boxes, and Mylar bags manufactured for brands worldwide.",
-        dateModified: siteConfig.contentReviewedAt,
+          "Custom printed corrugated mailer boxes for ecommerce, subscriptions and product launches. Explore inserts, inside printing and a 250-unit planning MOQ.",
+        dateModified: "2026-09-27",
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: { "@id": `${SITE_URL}/#organization` },
         primaryImageOfPage: featuredMailer
@@ -163,25 +165,25 @@ export default function HomePage() {
                 Custom packaging manufacturer • Worldwide delivery
               </div>
               <h1 className="max-w-3xl text-5xl leading-[0.98] font-light tracking-[-0.035em] text-balance sm:text-6xl lg:text-7xl">
-                Custom boxes and Mylar bags, made to your specifications.
+                Custom mailer boxes, made for your brand.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg">
-                Tuck boxes, corrugated ear-lock mailer boxes, magnetic boxes,
-                collapsible magnetic boxes, and printed Mylar bags for brands
-                worldwide.
+                Printed corrugated mailers for ecommerce orders, subscription
+                boxes, and product launches. Choose your size, inside and outside
+                printing, and custom inserts. Projects start from 250 units.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
-                  href="/get-a-quote"
+                  href="/get-a-quote?product=Mailer%20Boxes"
                   className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-moss-deep"
                 >
-                  Get a Quote
+                  Get a Mailer Quote
                 </Link>
                 <Link
-                  href="#products"
+                  href="/products/custom-mailer-boxes"
                   className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:bg-stone"
                 >
-                  View 5 Products
+                  Explore Mailer Boxes
                 </Link>
               </div>
               {siteConfig.whatsappUrl ? (

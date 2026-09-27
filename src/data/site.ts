@@ -4,7 +4,7 @@ export const siteConfig = {
   brandAliases: ["UPG", "With UPG"],
   shortDomain: "WithUPG.com",
   description:
-    "Custom boxes and flexible packaging manufactured for brands worldwide.",
+    "Custom printed corrugated mailer boxes, retail cartons, rigid boxes, and Mylar bags.",
   url: "https://universalpackaginggroup.com",
   email: "quotes@universalpackaginggroup.com",
   phoneNumber: "+17868858825",
@@ -49,8 +49,8 @@ export const siteConfig = {
       { label: "Packaging Comparisons", href: "/compare" },
       { label: "Materials & Finishes", href: "/materials-finishes" },
       { label: "Packaging Tools", href: "/tools" },
+      { label: "Custom Mailer Boxes", href: "/products/custom-mailer-boxes" },
       { label: "Custom Tuck Boxes", href: "/products/custom-tuck-boxes" },
-      { label: "Corrugated Mailer Boxes", href: "/products/custom-mailer-boxes" },
       { label: "Custom Magnetic Boxes", href: "/products/custom-magnetic-boxes" },
       { label: "Collapsible Magnetic Boxes", href: "/products/custom-collapsible-magnetic-boxes" },
       { label: "Custom Mylar Bags", href: "/products/custom-mylar-bags" },
