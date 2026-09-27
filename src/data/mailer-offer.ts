@@ -2,7 +2,7 @@ import { getProductBySlug, mailerCommercialTerms } from "@/data/products";
 import { siteConfig } from "@/data/site";
 
 // Keep the visible offer and the agent/catalog descriptions on the same facts.
-// Commercial terms follow Umar's 2026-09-27 instruction to adopt the benchmark offer.
+// Commercial terms follow Umar's 2026-09-27 clarification of the mailer offer.
 // The existing 250-unit minimum remains; unit prices require a defined specification.
 export const mailerOffer = {
   reviewedAt: "2026-09-27",
@@ -24,7 +24,7 @@ export const mailerOffer = {
     {
       key: "artwork",
       label: "Artwork support",
-      value: "Free dieline, proof & two revisions",
+      value: "Free dieline & two design revisions",
       detail: mailerCommercialTerms.artwork,
     },
     {
@@ -37,7 +37,7 @@ export const mailerOffer = {
     {
       key: "schedule",
       label: "Standard production",
-      value: "From about 7 business days",
+      value: "Approximately 7 business days",
       detail: mailerCommercialTerms.production,
     },
     {
@@ -49,7 +49,7 @@ export const mailerOffer = {
     {
       key: "shipping",
       label: "Shipping",
-      value: "Free standard US shipping",
+      value: "Shipping included in your quoted price",
       detail: mailerCommercialTerms.shipping,
     },
     {
