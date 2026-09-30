@@ -81,7 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/materials-finishes`,
-      lastModified: new Date("2026-09-30T00:00:00.000Z"),
+      lastModified: new Date("2026-10-01T00:00:00.000Z"),
       changeFrequency: "monthly",
       priority: 0.85,
     },

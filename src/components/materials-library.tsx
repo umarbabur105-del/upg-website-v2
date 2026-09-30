@@ -41,7 +41,7 @@ export function FinishLibrary() {
   return (
     <section id="finishes" className="section-shell scroll-mt-24">
       <div className="container-editorial">
-        <SectionHeading eyebrow="Finish library" title="See the difference. Choose the effect." intro="Gloss catches light. Foil adds reflection. Embossing changes the paper surface. Compare the effects below, then choose a combination around your material and box structure." />
+        <SectionHeading eyebrow="Finish library" title="See the difference. Choose the effect." intro="One card. The same artwork. Compare raised detail, metallic accents, and surface sheen, then choose the finish for your packaging." />
         <div className="mt-7 flex flex-wrap gap-2" aria-label="Jump to a finish">
           {finishGuides.map((finish) => <a key={finish.id} href={`#${finish.id}`} className="rounded-full border border-border bg-cream px-4 py-3 text-sm font-medium text-foreground hover:border-olive">{finish.name}</a>)}
         </div>
