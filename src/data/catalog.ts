@@ -125,7 +125,7 @@ export const finishFeatures: FinishFeature[] = [
   },
   {
     title: "Spot UV",
-    image: "/images/redesign/finishes/finish-spotuv.jpg",
+    image: "/images/materials-library/spot-uv-v1.webp",
     description: "Selective gloss contrast on matte surfaces for visual depth.",
   },
 ];
