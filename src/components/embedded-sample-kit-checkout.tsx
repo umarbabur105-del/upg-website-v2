@@ -1,17 +1,37 @@
 "use client";
 
-import { useState } from "react";
-import type { SampleKit } from "@/data/sample-kit";
+import { useEffect, useState } from "react";
+import {
+  sampleKitShippingCountries,
+  type SampleKit,
+  type SampleKitShippingCountryCode,
+} from "@/data/sample-kit";
 import { getLeadAttribution } from "@/lib/lead-attribution";
+import { defaultSampleKitShippingCountry } from "@/lib/sample-kit-checkout-country";
 
 type CheckoutResponse = {
   checkoutUrl?: string;
   error?: string;
 };
 
-export function EmbeddedSampleKitCheckout({ kit }: { kit: SampleKit }) {
+export function EmbeddedSampleKitCheckout({
+  kit,
+  initialShippingCountry = defaultSampleKitShippingCountry,
+}: {
+  kit: SampleKit;
+  initialShippingCountry?: SampleKitShippingCountryCode;
+}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [shippingCountry, setShippingCountry] = useState(initialShippingCountry);
+
+  useEffect(() => {
+    function restoreCheckout(event: PageTransitionEvent) {
+      if (event.persisted) setLoading(false);
+    }
+    window.addEventListener("pageshow", restoreCheckout);
+    return () => window.removeEventListener("pageshow", restoreCheckout);
+  }, []);
 
   async function continueToCheckout() {
     setLoading(true);
@@ -23,6 +43,7 @@ export function EmbeddedSampleKitCheckout({ kit }: { kit: SampleKit }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           sku: kit.sku,
+          shipping_country: shippingCountry,
           attribution: getLeadAttribution(),
         }),
       });
@@ -46,6 +67,9 @@ export function EmbeddedSampleKitCheckout({ kit }: { kit: SampleKit }) {
         throw new Error("Checkout returned an invalid secure-payment address.");
       }
 
+      const returnUrl = new URL(window.location.href);
+      returnUrl.searchParams.set("country", shippingCountry);
+      window.history.replaceState(window.history.state, "", returnUrl);
       window.location.assign(checkoutUrl.toString());
     } catch (checkoutError) {
       setError(
@@ -66,6 +90,32 @@ export function EmbeddedSampleKitCheckout({ kit }: { kit: SampleKit }) {
         Stripe will collect your payment and delivery details on its secure
         hosted checkout. UPG does not store your full card number.
       </p>
+      <div className="mx-auto mt-6 w-full max-w-xs text-left">
+        <label
+          htmlFor="sample-kit-delivery-country"
+          className="mb-2 block text-sm font-semibold text-foreground"
+        >
+          Deliver to
+        </label>
+        <select
+          id="sample-kit-delivery-country"
+          value={shippingCountry}
+          onChange={(event) => {
+            setShippingCountry(event.target.value as SampleKitShippingCountryCode);
+            setError(null);
+          }}
+          disabled={loading}
+          className="w-full rounded-lg border border-border bg-surface px-3 py-3 text-sm text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-70"
+        >
+          {sampleKitShippingCountries
+            .filter(({ code }) => kit.shippingCountries.includes(code))
+            .map(({ code, name }) => (
+              <option key={code} value={code}>
+                {name}
+              </option>
+            ))}
+        </select>
+      </div>
       <button
         type="button"
         onClick={continueToCheckout}

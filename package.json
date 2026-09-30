@@ -10,6 +10,7 @@
     "audit:seo": "node scripts/seo-quality-audit.mjs",
     "test:moq": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/packaging-spec.test.mjs",
     "test:forms": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/form-validation.test.mjs",
+    "test:sample-checkout": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/sample-kit-checkout-country.test.mjs scripts/sample-kit-checkout-route.test.mjs",
     "test:lead-delivery": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/lead-delivery.test.mjs",
     "test:google-sheets": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/google-sheets.test.mjs",
     "test:analytics-config": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test scripts/analytics-config.test.mjs",
