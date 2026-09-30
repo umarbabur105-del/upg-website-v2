@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSampleKitBySku } from "@/data/sample-kit";
 import { siteConfig } from "@/data/site";
+import { resolveSampleKitShippingCountry } from "@/lib/sample-kit-checkout-country";
 import {
   cleanAttribution,
   cleanText,
@@ -97,6 +98,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid sample kit" }, { status: 400 });
     }
 
+    const shippingCountry = resolveSampleKitShippingCountry(
+      input.shipping_country,
+      kit.shippingCountries
+    );
+    if (!shippingCountry) {
+      return NextResponse.json(
+        { error: "Please choose an available delivery country." },
+        { status: 400 }
+      );
+    }
+
     const stripe = getStripeClient(stripeMode);
     if (!stripe) {
       return NextResponse.json(
@@ -125,7 +137,9 @@ export async function POST(request: Request) {
       phone_number_collection: { enabled: true },
       billing_address_collection: "auto",
       shipping_address_collection: {
-        allowed_countries: [...kit.shippingCountries],
+        // Hosted Checkout has no default-country setting. The buyer chooses
+        // their destination on UPG before Stripe collects the full address.
+        allowed_countries: [shippingCountry],
       },
       shipping_options: [
         {
@@ -188,7 +202,10 @@ export async function POST(request: Request) {
         },
       },
       success_url: `${returnOrigin}/samples/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${returnOrigin}${kit.path}?checkout=cancelled`,
+      cancel_url: `${returnOrigin}/samples/checkout?${new URLSearchParams({
+        sku: kit.sku,
+        country: shippingCountry,
+      })}`,
     });
 
     if (!session.url) {

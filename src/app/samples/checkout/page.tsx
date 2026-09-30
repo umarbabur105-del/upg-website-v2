@@ -4,6 +4,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EmbeddedSampleKitCheckout } from "@/components/embedded-sample-kit-checkout";
 import {
+  defaultSampleKitShippingCountry,
+  resolveSampleKitShippingCountry,
+} from "@/lib/sample-kit-checkout-country";
+import {
   getSampleKitBySku,
   sampleKitDeliveryEstimate,
   sampleKitShippingRegionLabel,
@@ -19,12 +23,16 @@ export const metadata: Metadata = {
 export default async function SampleKitCheckoutPage({
   searchParams,
 }: {
-  searchParams: Promise<{ sku?: string }>;
+  searchParams: Promise<{ sku?: string; country?: string }>;
 }) {
-  const { sku } = await searchParams;
+  const { sku, country } = await searchParams;
   const kit = getSampleKitBySku(sku ?? "");
 
   if (!kit) notFound();
+
+  const shippingCountry =
+    resolveSampleKitShippingCountry(country, kit.shippingCountries) ??
+    defaultSampleKitShippingCountry;
 
   return (
     <section className="bg-cream">
@@ -78,7 +86,11 @@ export default async function SampleKitCheckoutPage({
             </p>
           </div>
           <div className="border border-border bg-surface p-4 shadow-soft md:p-6">
-            <EmbeddedSampleKitCheckout kit={kit} />
+            <EmbeddedSampleKitCheckout
+              key={`${kit.sku}:${shippingCountry}`}
+              kit={kit}
+              initialShippingCountry={shippingCountry}
+            />
           </div>
         </div>
       </div>
