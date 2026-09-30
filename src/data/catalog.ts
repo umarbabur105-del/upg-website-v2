@@ -115,17 +115,17 @@ export const cosmeticsSolutions: CosmeticSolution[] = [
 export const finishFeatures: FinishFeature[] = [
   {
     title: "Foil stamping",
-    image: "/images/redesign/finishes/finish-foil.jpg",
+    image: "/images/finish-cards/foil-stamping-v2.webp",
     description: "Metallic accents for logos, borders, and premium shelf appeal.",
   },
   {
     title: "Embossing",
-    image: "/images/redesign/finishes/finish-emboss.jpg",
+    image: "/images/finish-cards/embossing-v2.webp",
     description: "Raised detail that adds tactile structure and luxury presence.",
   },
   {
     title: "Spot UV",
-    image: "/images/materials-library/spot-uv-v1.webp",
+    image: "/images/finish-cards/spot-uv-v2.webp",
     description: "Selective gloss contrast on matte surfaces for visual depth.",
   },
 ];
