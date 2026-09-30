@@ -34,6 +34,7 @@ export const siteConfig = {
     "Explore packaging structures, printing, inserts and finishes. Each design is tailored to the product, brand and project specifications.",
   navigation: [
     { label: "Samples", href: "/samples" },
+    { label: "Materials", href: "/materials-finishes" },
     { label: "About", href: "/about" },
   ],
   utilityNavigation: [

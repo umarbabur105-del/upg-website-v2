@@ -3,19 +3,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { QuoteCta } from "@/components/quote-cta";
 import { SectionHeading } from "@/components/section-heading";
-import { finishFeatures } from "@/data/catalog";
+import { FinishLibrary, MaterialLibrary, MaterialsFaq } from "@/components/materials-library";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Custom Packaging Materials & Finishes",
   description:
-    "Compare paperboard, corrugated board, rigid-box cores, flexible packaging, and print finishes for custom packaging projects.",
+    "Compare packaging materials, embossing, debossing, spot UV, foil, and lamination with visual examples, artwork tips, and cost factors.",
   path: "/materials-finishes",
   keywords: [
     "custom packaging materials",
     "paperboard thickness guide",
     "corrugated flute guide",
     "packaging finishes",
+    "embossed packaging",
+    "spot UV packaging",
+    "foil stamping boxes",
+    "matte vs gloss lamination",
   ],
 });
 
@@ -53,25 +57,6 @@ const paperboardRows = [
     "0.7112 mm",
     "462–527 GSM",
     "Thicker folding board; review creases and structure",
-  ],
-] as const;
-
-const paperboardFamilies = [
-  [
-    "SBS C1S",
-    "Solid bleached board with one coated print face. Use it when the outside graphic needs a bright, crisp surface.",
-  ],
-  [
-    "SBS C2S",
-    "Solid bleached board coated on both faces. It suits projects that need a clean printed surface inside and out.",
-  ],
-  [
-    "CCNB / duplex",
-    "Clay-coated newsback has a white printing face and a gray or brown reverse. Compare it for retail cartons with an unprinted interior.",
-  ],
-  [
-    "Kraft board",
-    "Natural brown board that makes the paper color part of the design. Review a printed sample when color accuracy matters.",
   ],
 ] as const;
 
@@ -124,25 +109,6 @@ const flutes = [
     "Cushioning around fragile products, with room for a deeper wall.",
   ],
 ] as const;
-const finishDetails = [
-  [
-    "Matte, gloss & soft-touch",
-    "Matte reduces sheen; gloss adds reflection; soft-touch creates a velvety feel. These effects can use a coating or laminated film, depending on the project.",
-  ],
-  [
-    "Foil & spot UV",
-    "Foil adds a metallic decorative area. Spot UV adds selected gloss contrast, often over a matte surface.",
-  ],
-  [
-    "Emboss & deboss",
-    "Embossing raises a detail; debossing presses it inward. Board, artwork, panel position, and registration affect the result.",
-  ],
-  [
-    "Windows & inserts",
-    "A window reveals the product through a die-cut opening; an insert controls presentation and fit. Both depend on the selected structure.",
-  ],
-] as const;
-
 function CorrugatedDiagram() {
   return (
     <svg
@@ -206,20 +172,23 @@ export default function MaterialsFinishesPage() {
             <div className="lg:col-span-6">
               <div className="eyebrow mb-5">Materials library</div>
               <h1 className="display-1 text-balance">
-                Find the right material and finish.
+                Materials that protect. Finishes that stand out.
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Compare paperboard thicknesses, corrugated layers, and print
-                finishes to match your product, presentation, and delivery needs.
+                Explore the surfaces, structures, and finishing details behind
+                custom packaging. See what each option adds, where it works,
+                and what to consider before you choose.
               </p>
               <nav
                 aria-label="Materials guide sections"
                 className="mt-7 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-gold-dark underline decoration-gold/50 underline-offset-4"
               >
-                <a href="#paperboard">Paperboard</a>
-                <a href="#corrugated">Corrugated board</a>
-                <a href="#rigid-flexible">Rigid & flexible</a>
+                <a href="#materials">Materials</a>
                 <a href="#finishes">Finishes</a>
+                <a href="#paperboard">PT &amp; GSM</a>
+                <a href="#corrugated">Corrugated layers</a>
+                <a href="#packaging-features">Windows &amp; inserts</a>
+                <a href="#material-questions">Questions</a>
               </nav>
             </div>
             <div className="lg:col-span-6">
@@ -238,6 +207,9 @@ export default function MaterialsFinishesPage() {
         </div>
       </section>
 
+      <MaterialLibrary />
+      <FinishLibrary />
+
       <section
         id="paperboard"
         className="section-shell scroll-mt-24 border-y border-border bg-cream"
@@ -245,22 +217,9 @@ export default function MaterialsFinishesPage() {
         <div className="container-editorial">
           <SectionHeading
             eyebrow="Paperboard"
-            title="Choose the surface first, then the caliper."
-            intro="C1S and C2S describe coated faces; PT describes nominal thickness. Plan exterior, interior, or two-sided printing with the selected board and finish."
+            title="Compare paperboard thickness."
+            intro="PT describes thickness. GSM describes weight per area. Choose the board family first, then compare a caliper that suits the carton dimensions and contents."
           />
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {paperboardFamilies.map(([title, detail]) => (
-              <article
-                key={title}
-                className="border border-border bg-surface p-5"
-              >
-                <h2 className="font-serif text-2xl text-olive">{title}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {detail}
-                </p>
-              </article>
-            ))}
-          </div>
           <div className="mt-14 hidden overflow-x-auto border border-border bg-surface md:block">
             <table className="min-w-[700px] w-full text-left text-sm">
               <caption className="px-5 py-4 text-left font-semibold text-foreground">
@@ -380,86 +339,39 @@ export default function MaterialsFinishesPage() {
         </div>
       </section>
 
-      <section id="rigid-flexible" className="section-shell scroll-mt-24 bg-cream">
-        <div className="container-editorial grid gap-7 md:grid-cols-2">
-          <article>
-            <div className="eyebrow">Rigid structures</div>
-            <h2 className="mt-4 font-serif text-3xl text-foreground">
-              Core plus wrap
-            </h2>
-            <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
-              A rigid presentation box uses a structural grayboard core with a
-              separate printed or textured wrap. A 1.5 mm or 2.0 mm core is a
-              useful project discussion point; the finished wall also includes
-              the wrap and lining; an insert supports the product inside.
-            </p>
-          </article>
-          <article>
-            <div className="eyebrow">Flexible packaging</div>
-            <h2 className="mt-4 font-serif text-3xl text-foreground">
-              Format drives the material system
-            </h2>
-            <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
-              Mylar bags, pouches, coffee bags, spout bags, and rollstock film
-              each need their own barrier, seal, fill, and machine requirements
-              reviewed. Depending on the format, options include resealable
-              zippers, coffee degassing valves, and product windows.
-            </p>
-          </article>
+      <section id="packaging-features" className="section-shell scroll-mt-24 bg-cream">
+        <div id="rigid-flexible" className="container-editorial scroll-mt-24">
+          <SectionHeading eyebrow="Beyond the surface" title="Plan the view, the fit, and the opening." intro="Windows and inserts change how customers see and handle the product. Specify them with the material and structure, before the artwork is finalized." />
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <article className="border border-border bg-surface p-6 md:p-8">
+              <h3 className="font-serif text-3xl text-foreground">Windows &amp; cutouts</h3>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">A die-cut opening reveals part of the product. A film patch can cover a carton window; a clear area in a pouch is part of its film construction. These are different specifications.</p>
+              <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-muted-foreground">
+                <li>Choose the window position around the product and insert.</li>
+                <li>Keep enough material around edges, folds, and glue panels.</li>
+                <li>Review visibility alongside protection and barrier requirements.</li>
+              </ul>
+              <Link href="/products/custom-tuck-boxes" className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-gold-dark underline underline-offset-4">Explore carton options →</Link>
+            </article>
+            <article className="border border-border bg-surface p-6 md:p-8">
+              <h3 className="font-serif text-3xl text-foreground">Inserts &amp; interior fit</h3>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">An insert positions the product and helps control movement. Paperboard and corrugated inserts can divide sets or hold an item within a mailer or presentation box.</p>
+              <ul className="mt-5 list-disc space-y-3 pl-5 text-sm leading-relaxed text-muted-foreground">
+                <li>Share the product dimensions, weight, and fragile areas.</li>
+                <li>Allow space for easy removal as well as a secure fit.</li>
+                <li>Review the complete pack for transit; a snug fit alone is not a shipping test.</li>
+              </ul>
+              <Link href="/products/custom-mailer-boxes" className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-gold-dark underline underline-offset-4">Explore mailers with inserts →</Link>
+            </article>
+          </div>
+          <div className="mt-8 border-t border-border pt-6 text-sm leading-relaxed text-muted-foreground">
+            <strong className="text-foreground">For rigid boxes and pouches: </strong>
+            <a href="#rigid-grayboard" className="text-gold-dark underline underline-offset-4">compare core and wrap</a> for presentation boxes, or
+            {" "}<a href="#flexible-films" className="text-gold-dark underline underline-offset-4">review the film structure</a> for flexible packaging. Choose the decorative surface after the protective structure is clear.
+          </div>
         </div>
       </section>
-
-      <section id="finishes" className="section-shell scroll-mt-24">
-        <div className="container-editorial">
-          <SectionHeading
-            eyebrow="Finishes"
-            title="Choose the look and feel."
-            intro="Coatings and laminations change the overall surface. Foil, spot UV, embossing, and windows draw attention to selected details."
-          />
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {finishFeatures.map((finish) => (
-              <article
-                key={finish.title}
-                className="overflow-hidden border border-border bg-surface"
-              >
-                <div className="relative aspect-[5/4]">
-                  <Image
-                    src={finish.image}
-                    alt={finish.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                  />
-                </div>
-                <div className="p-6">
-                  <h2 className="font-serif text-2xl text-foreground">
-                    {finish.title}
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {finish.description}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {finishDetails.map(([title, detail]) => (
-              <article key={title} className="surface-card p-5">
-                <h2 className="font-serif text-2xl text-olive">{title}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {detail}
-                </p>
-              </article>
-            ))}
-          </div>
-          <Link
-            href="/blog/packaging-finishes-guide"
-            className="mt-7 inline-flex min-h-11 items-center font-semibold text-gold-dark underline decoration-gold/50 underline-offset-4 hover:text-foreground"
-          >
-            Read the packaging finishes guide →
-          </Link>
-        </div>
-      </section>
+      <MaterialsFaq />
 
       <section className="section-shell border-y border-border bg-cream">
         <div className="container-editorial grid gap-6 md:grid-cols-2">

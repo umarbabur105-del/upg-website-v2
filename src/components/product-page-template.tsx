@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { MailerBuyingGuide } from "@/components/mailer-buying-guide";
 import { MailerOfferSummary } from "@/components/mailer-offer-summary";
+import { ProductMaterialFinishLinks } from "@/components/materials-library";
 import { OrganicIntentBridge } from "@/components/organic-intent-bridge";
 import { ProductBuyingGuide } from "@/components/product-buying-guide";
 import { ProductSelectionGuide } from "@/components/product-selection-guide";
@@ -175,6 +176,8 @@ export function ProductPageTemplate({ product }: ProductPageTemplateProps) {
               </div>
             ))}
           </div>
+
+          <ProductMaterialFinishLinks slug={product.slug} />
 
           <div className="mt-10 border-t border-border pt-6">
             <div className="eyebrow mb-4">Common uses</div>
