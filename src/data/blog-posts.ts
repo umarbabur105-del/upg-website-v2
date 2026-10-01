@@ -947,8 +947,8 @@ Use clear wording such as **artwork content approved**, **structure approved**, 
       "Compare four-color process and spot-color printing for packaging artwork, brand colors, photography, substrates, and proof expectations.",
     quickAnswer:
       "CMYK combines cyan, magenta, yellow, and black process inks to reproduce many colors and is a natural starting point for photographs or complex artwork. Pantone spot colors use specifically identified premixed inks when a smaller set of brand-critical colors needs closer control. The final method depends on the print process and project specification.",
-    heroImage: "/images/finish-cards/foil-stamping-v2.webp",
-    heroAlt: "Green UPG print card with a crisp metallic gold foil wordmark",
+    heroImage: "/images/finish-cards/foil-stamping-v3.webp",
+    heroAlt: "Angled close-up of gold foil lettering on moss-green cardstock",
     keyDecisions: [
       {
         label: "Choose CMYK when",
