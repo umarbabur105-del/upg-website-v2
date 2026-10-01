@@ -120,7 +120,7 @@ export const finishFeatures: FinishFeature[] = [
   },
   {
     title: "Embossing",
-    image: "/images/finish-cards/embossing-v2.webp",
+    image: "/images/finish-cards/embossing-v3.webp",
     description: "Raised detail that adds tactile structure and luxury presence.",
   },
   {
