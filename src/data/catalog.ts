@@ -115,7 +115,7 @@ export const cosmeticsSolutions: CosmeticSolution[] = [
 export const finishFeatures: FinishFeature[] = [
   {
     title: "Foil stamping",
-    image: "/images/finish-cards/foil-stamping-v2.webp",
+    image: "/images/finish-cards/foil-stamping-v3.webp",
     description: "Metallic accents for logos, borders, and premium shelf appeal.",
   },
   {
